@@ -15,6 +15,7 @@ import site
 import time
 import io
 import datetime
+import base64
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
 import streamlit as st
@@ -141,7 +142,7 @@ def mask_name_gcash(full_name):
 def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=None):
     """
     Draw 1:1 pixel-perfect GCash 'Express Send' receipt image matching authentic screenshots (908x2048).
-    Dynamic tight card bottom calculation, solid bullet dots, Peso symbol, and vector leaf icon.
+    Includes vector bullet dots, double-bar Peso symbol, and vector leaf icon for cross-platform Linux servers.
     """
     W, H = 908, 2048
     GCASH_BLUE = (0, 110, 235)
@@ -185,18 +186,10 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     card_top = 260
     
     # Measure vertical positions for tight bottom calculation
-    y = card_top + 52 + 45 # Checkmark circle offset
-    
-    # Masked name with solid bullet dots
-    raw_name = receipt_data.get('recipient_name', 'Angel N. Soriano')
-    masked_name_str = mask_name_gcash(raw_name)
-    if add_artifacts and artifact_type == 'name_modification':
-        masked_name_str = "JU\u2022\u2022\u2022\u2022\u2022\u2022N R."
-        
+    y = card_top + 52 + 45
     name_y = y
     y += 75
     
-    # Phone pill
     phone_raw = receipt_data.get('recipient_phone', '+63 975 343 9451')
     if not str(phone_raw).startswith('+63'):
         phone_clean = str(phone_raw).replace(' ', '')
@@ -235,13 +228,11 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     date_y = y
     y += 75
     
-    # Green carbon card
     eco_x1 = card_x1 + 40
     eco_x2 = card_x2 - 40
     eco_y1 = y
     eco_h = 195
     
-    # Dynamic tight card bottom directly below green carbon card
     card_bottom = eco_y1 + eco_h + 15
     
     # 3. DRAW WHITE RECEIPT CARD TIGHTLY
@@ -255,13 +246,35 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([cx - 20, circle_cy + 2, cx - 4, circle_cy + 18], fill=GCASH_WHITE, width=7)
     draw.line([cx - 4, circle_cy + 18, cx + 22, circle_cy - 16], fill=GCASH_WHITE, width=7)
     
-    # 5. RECIPIENT MASKED NAME
-    try:
-        bbox = draw.textbbox((0, 0), masked_name_str, font=font_name_large)
-        tw = bbox[2] - bbox[0]
-        draw.text(((W - tw) // 2, name_y), masked_name_str, fill=(0, 65, 175), font=font_name_large)
-    except Exception:
-        draw.text((W // 4, name_y), masked_name_str, fill=(0, 65, 175), font=font_name_large)
+    # 5. RECIPIENT MASKED NAME (WITH CLEAN VECTOR BULLET DOTS)
+    raw_name = receipt_data.get('recipient_name', 'Angel N. Soriano')
+    parts = str(raw_name).strip().split()
+    if len(parts) >= 2:
+        prefix = parts[0][:2].upper()
+        suffix = f"{parts[0][-1].upper()} {parts[-1][0].upper()}."
+    else:
+        prefix = str(raw_name)[:2].upper()
+        suffix = str(raw_name)[-1].upper()
+        
+    if add_artifacts and artifact_type == 'name_modification':
+        prefix = 'JU'
+        suffix = 'N R.'
+
+    b_pre = draw.textbbox((0, 0), prefix, font=font_name_large)
+    w_pre = b_pre[2] - b_pre[0]
+    b_suf = draw.textbbox((0, 0), suffix, font=font_name_large)
+    w_suf = b_suf[2] - b_suf[0]
+    
+    dots_w = 6 * 18
+    total_name_w = w_pre + 10 + dots_w + 10 + w_suf
+    start_x = (W - total_name_w) // 2
+    
+    draw.text((start_x, name_y), prefix, fill=(0, 65, 175), font=font_name_large)
+    dot_cx = start_x + w_pre + 16
+    for _ in range(6):
+        draw.ellipse([dot_cx - 5, name_y + 24 - 5, dot_cx + 5, name_y + 24 + 5], fill=(0, 65, 175))
+        dot_cx += 18
+    draw.text((dot_cx + 8, name_y), suffix, fill=(0, 65, 175), font=font_name_large)
         
     # 6. PHONE NUMBER PILL
     bbox = draw.textbbox((0, 0), phone_str, font=font_phone)
@@ -290,15 +303,18 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     
     draw.line([left_m, amt_y + 75, right_m, amt_y + 75], fill=(230, 235, 242), width=2)
     
-    # 8. TOTAL AMOUNT SENT ROW WITH PESO SIGN
+    # 8. TOTAL AMOUNT SENT ROW WITH VECTOR DOUBLE-BAR PESO SIGN
     draw.text((left_m, total_y + 6), "Total Amount Sent", fill=(20, 25, 40), font=font_total_label)
-    total_str = f"\u20b1{amt_str}"
-    try:
-        bbox = draw.textbbox((0, 0), total_str, font=font_total_val)
-        tw = bbox[2] - bbox[0]
-        draw.text((right_m - tw, total_y), total_str, fill=(0, 65, 175), font=font_total_val)
-    except Exception:
-        draw.text((right_m - 220, total_y), f"P{amt_str}", fill=(0, 65, 175), font=font_total_val)
+    
+    amt_total_str = f"P{amt_str}"
+    bbox = draw.textbbox((0, 0), amt_total_str, font=font_total_val)
+    tw = bbox[2] - bbox[0]
+    total_x = right_m - tw
+    draw.text((total_x, total_y), amt_total_str, fill=(0, 65, 175), font=font_total_val)
+    
+    # Draw double horizontal bar over the letter P to guarantee Peso sign rendering
+    draw.line([total_x + 3, total_y + 24, total_x + 32, total_y + 24], fill=(0, 65, 175), width=4)
+    draw.line([total_x + 3, total_y + 32, total_x + 32, total_y + 32], fill=(0, 65, 175), width=4)
         
     # 9. REF NO & TIMESTAMP SECTION
     ref_str = f"Ref No. {ref_num}"
@@ -351,8 +367,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([tx + 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx - 14, ty + 16, tx + 14, ty + 16], fill=GCASH_WHITE, width=4)
     
-    down_str = "Download"
-    draw.text((btn_x1 + 105, btn_y + 18), down_str, fill=GCASH_WHITE, font=font_download)
+    draw.text((btn_x1 + 105, btn_y + 18), "Download", fill=GCASH_WHITE, font=font_download)
     
     # 13. ANDROID BOTTOM NAVIGATION BAR
     nav_y = H - 90
@@ -371,32 +386,147 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
     return draw_express_send_receipt(receipt_data, add_artifacts=add_artifacts, artifact_type=artifact_type)
 
 # ============================================================
-# STREAMLIT PAGE CONFIGURATION
+# PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="ForgeGuard — Digital Receipt Forgery Detector",
-    page_icon="🔒",
+    page_title="ForgeGuard — Digital Receipt Forgery Detection",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+def get_base64_image(image_path):
+    if os.path.exists(image_path):
+        try:
+            with open(image_path, "rb") as img_file:
+                return base64.b64encode(img_file.read()).decode()
+        except Exception:
+            pass
+    return ""
+
+bg_image_path = os.path.join(APP_DIR, "cyber_background.jpg")
+bg_b64 = get_base64_image(bg_image_path)
+
+if bg_b64:
+    bg_style_rule = f""".stApp {{
+        background: linear-gradient(135deg, rgba(6, 10, 18, 0.82) 0%, rgba(11, 19, 43, 0.88) 100%),
+                    url("data:image/jpeg;base64,{bg_b64}") no-repeat center center fixed !important;
+        background-size: cover !important;
+    }}"""
+else:
+    bg_style_rule = """.stApp {
+        background: radial-gradient(circle at 50% 0%, #1c2541 0%, #0b132b 75%) !important;
+    }"""
+
 # ============================================================
-# MODERN DARK THEME & RESPONSIVE MOBILE CSS SYSTEM
+# ADVANCED CSS OVERHAUL — ZERO STREAMLIT RED ACCENTS & NO TOASTS
 # ============================================================
-st.markdown("""
-<style>
-/* CORE COLOR PALETTE & TYPOGRAPHY */
+CUSTOM_CSS = "<style>\n" + bg_style_rule + """
+/* Import Inter & JetBrains Mono Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
+/* Global Theme Reset */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background-color: #0b132b !important;
-    color: #f8fafc !important;
+    background-color: #070a12 !important;
+    color: #f1f5f9 !important;
 }
 
-/* MAIN APP CONTAINER */
-.stApp {
-    background: radial-gradient(circle at 50% 0%, #1c2541 0%, #0b132b 75%) !important;
+/* HIDE ALL STREAMLIT SYSTEM ARTIFACTS, TOASTS, TOOLBARS & FOOTER */
+#MainMenu, footer, header, 
+[data-testid="stToolbar"], 
+div[data-testid="stToast"], 
+div[class*="stToast"], 
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+.stDeployButton {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Page container constraints */
+.block-container {
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 1400px !important;
+}
+
+/* SIDEBAR STYLING */
+section[data-testid="stSidebar"] {
+    background-color: #0b0f1a !important;
+    border-right: 1px solid rgba(56, 189, 248, 0.12) !important;
+}
+
+section[data-testid="stSidebar"] .block-container {
+    padding-top: 1.5rem !important;
+}
+
+/* OVERRIDE ALL STREAMLIT RED ACCENTS -> CYAN / SKY BLUE (#38bdf8) */
+:root {
+    --primary-color: #38bdf8 !important;
+}
+
+/* Force all red elements (#ff4b4b / rgb(255, 75, 75)) to Cyan */
+[style*="rgb(255, 75, 75)"], [style*="#ff4b4b"], [style*="RGB(255, 75, 75)"] {
+    background-color: #38bdf8 !important;
+    color: #38bdf8 !important;
+    border-color: #38bdf8 !important;
+}
+
+/* Fix Streamlit Sliders */
+div[data-baseweb="slider"] [role="slider"] {
+    background-color: #38bdf8 !important;
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5) !important;
+}
+
+div[data-baseweb="slider"] div {
+    background-color: #38bdf8 !important;
+}
+
+div[data-baseweb="slider"] div[style*="background"] {
+    background-color: #38bdf8 !important;
+}
+
+/* Fix Slider Value Label Text */
+div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
+div[data-baseweb="slider"] + div {
+    color: #38bdf8 !important;
+}
+
+/* Fix Streamlit Radio Buttons */
+div[data-testid="stRadio"] label span {
+    color: #cbd5e1 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
+    border-color: rgba(56, 189, 248, 0.3) !important;
+    background: rgba(30, 41, 59, 0.6) !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] {
+    background: rgba(56, 189, 248, 0.12) !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] span {
+    color: #38bdf8 !important;
+    font-weight: 700 !important;
+}
+
+/* Radio circle active dot color */
+div[data-testid="stRadio"] div[role="radiogroup"] div[style*="background"] {
+    background-color: #38bdf8 !important;
 }
 
 /* REMOVE DEFAULT STREAMLIT TOP PADDING */
@@ -614,8 +744,8 @@ div[data-testid="stImage"] img {
 }
 
 .stButton>button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5) !important;
 }
 
 /* BADGES */
@@ -639,10 +769,12 @@ div[data-testid="stImage"] img {
     font-weight: 700;
 }
 </style>
-""", unsafe_allow_html=True)
+"""
+
+st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 # ============================================================
-# SVG ICONS (STRICTLY EMOJI-FREE)
+# SVG ICONS
 # ============================================================
 SVG_SHIELD = """<svg class="icon-inline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>"""
 SVG_SHIELD_CHECK = """<svg class="icon-inline" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>"""
