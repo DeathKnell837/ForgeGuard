@@ -81,6 +81,13 @@ html, body, [class*="css"] {
     background: radial-gradient(circle at 50% 0%, #1c2541 0%, #0b132b 75%) !important;
 }
 
+/* REMOVE DEFAULT STREAMLIT TOP PADDING */
+.block-container {
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 1400px !important;
+}
+
 /* HIDE STREAMLIT FOOTER & HOSTED BADGES */
 #MainMenu {visibility: hidden !important;}
 footer {visibility: hidden !important;}
@@ -101,14 +108,14 @@ footer:after {content: "" !important; display: none !important;}
     justify-content: space-between;
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.8) 100%);
     border: 1px solid rgba(56, 189, 248, 0.22);
-    border-radius: 16px;
-    padding: 1.1rem 2rem;
-    margin-bottom: 1.25rem;
+    border-radius: 14px;
+    padding: 0.85rem 1.6rem;
+    margin-bottom: 1rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 .brand-text {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     font-weight: 800;
     letter-spacing: -0.5px;
     background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
@@ -123,54 +130,13 @@ footer:after {content: "" !important; display: none !important;}
     background: rgba(56, 189, 248, 0.12);
     color: #38bdf8;
     border: 1px solid rgba(56, 189, 248, 0.3);
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 30px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     white-space: nowrap;
-}
-
-/* HERO DASHBOARD BANNER */
-.hero-box {
-    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1) 0%, transparent 65%),
-                linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(20, 30, 55, 0.75) 100%);
-    border: 1px solid rgba(56, 189, 248, 0.22);
-    border-radius: 18px;
-    padding: 1.8rem 2.2rem;
-    margin-bottom: 1.75rem;
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
-}
-
-.hero-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #f8fafc;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-}
-
-.hero-subtitle {
-    font-size: 0.95rem;
-    color: #94a3b8;
-    line-height: 1.6;
-    margin-bottom: 1.1rem;
-    max-width: 900px;
-}
-
-.author-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 0.82rem;
-    color: #64748b;
-    font-weight: 500;
-}
-
-.author-meta strong {
-    color: #cbd5e1;
 }
 
 /* MOBILE RESPONSIVE MEDIA QUERIES */
@@ -188,25 +154,6 @@ footer:after {content: "" !important; display: none !important;}
     .badge-pill {
         font-size: 0.68rem;
         padding: 4px 10px;
-    }
-    .hero-box {
-        padding: 1.2rem 1.1rem;
-    }
-    .hero-title {
-        font-size: 1.35rem;
-    }
-    .hero-subtitle {
-        font-size: 0.84rem;
-        line-height: 1.45;
-    }
-    .author-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        font-size: 0.78rem;
-    }
-    .author-meta span:nth-child(2), .author-meta span:nth-child(4) {
-        display: none;
     }
 }
 
@@ -379,7 +326,7 @@ div[data-testid="stImage"] img {
 # ============================================================
 # SVG ICONS (STRICTLY EMOJI-FREE)
 # ============================================================
-SVG_SHIELD = """<svg class="icon-inline" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>"""
+SVG_SHIELD = """<svg class="icon-inline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>"""
 SVG_SHIELD_CHECK = """<svg class="icon-inline" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>"""
 SVG_SHIELD_ALERT = """<svg class="icon-inline" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fb7185" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>"""
 SVG_SCAN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>"""
@@ -393,30 +340,10 @@ st.markdown(f"""
 <div class="navbar-brand">
     <div class="brand-text">
         {SVG_SHIELD}
-        ForgeGuard <span style="font-weight: 300; font-size: 1.05rem; opacity: 0.7; color: #94a3b8;">v1.0</span>
+        ForgeGuard <span style="font-weight: 300; font-size: 0.95rem; color: #94a3b8; margin-left: 6px;">v1.0</span>
     </div>
     <div>
         <span class="badge-pill">NDMC BSCS THESIS</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# ============================================================
-# HERO DASHBOARD BANNER
-# ============================================================
-st.markdown(f"""
-<div class="hero-box">
-    <div class="hero-title">Digital Receipt Forgery Detection & Forensic Suite</div>
-    <div class="hero-subtitle">
-        Comparative evaluation of Convolutional Neural Network architectures (Basic CNN, ResNet50, MobileNetV2) 
-        using Error Level Analysis (ELA) to detect pixel-level tampering in mobile wallet receipts (GCash, Maya).
-    </div>
-    <div class="author-meta">
-        <span><strong>Authors:</strong> Rogie P. Bacanto & Daniela S. Ungab</span>
-        <span>•</span>
-        <span><strong>Adviser:</strong> Ms. Doris Ann Mariano</span>
-        <span>•</span>
-        <span><strong>Institution:</strong> Notre Dame of Midsayap College (CITE)</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
