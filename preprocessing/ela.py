@@ -27,45 +27,49 @@ def compute_ela(image: Image.Image, quality: int = 90, scale: float = 15.0) -> I
     Returns:
         PIL Image: ELA visual representation.
     """
-    # Ensure RGB mode
     if image.mode != 'RGB':
         image = image.convert('RGB')
         
-    # Re-save image in memory as JPEG at target quality
     buffer = io.BytesIO()
     image.save(buffer, format='JPEG', quality=quality)
     buffer.seek(0)
     
-    # Load re-compressed image
     resaved_image = Image.open(buffer).convert('RGB')
-    
-    # Calculate pixel-wise absolute difference
     ela_diff = ImageChops.difference(image, resaved_image)
     
-    # Find max brightness to scale appropriately, or use fixed scale
     extrema = ela_diff.getextrema()
     max_diff = max([ex[1] for ex in extrema])
     
     if max_diff == 0:
         max_diff = 1
         
-    # Enhance difference brightness for visual contrast
     enhancer = ImageEnhance.Brightness(ela_diff)
     ela_image = enhancer.enhance(scale)
     
     return ela_image
 
-def convert_ela_to_array(ela_image: Image.Image, target_size: tuple = (224, 224)) -> np.ndarray:
+def generate_ela_image(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
+    """Alias for compute_ela."""
+    return compute_ela(image, quality=quality, scale=scale)
+
+
+def evaluate_ela_forgery_risk(ela_image: Image.Image) -> dict:
     """
-    Resizes and normalizes ELA image for CNN model input.
+    Evaluates pixel variance and error level distribution to estimate forgery risk.
     
-    Args:
-        ela_image: PIL Image returned by compute_ela.
-        target_size: Target tuple (height, width), default (224, 224).
-        
     Returns:
-        np.ndarray: Normalized array of shape (target_size[0], target_size[1], 3) in range [0, 1].
+        dict: {'mean': float, 'variance': float, 'max': float, 'is_suspicious': bool}
     """
-    resized = ela_image.resize(target_size, Image.Resampling.BILINEAR)
-    arr = np.array(resized, dtype=np.float32) / 255.0
-    return arr
+    arr = np.array(ela_image, dtype=np.float32)
+    mean_val = float(np.mean(arr))
+    var_val = float(np.var(arr))
+    max_val = float(np.max(arr))
+    
+    is_suspicious = var_val > 185.0 or max_val > 210.0
+    
+    return {
+        'mean': mean_val,
+        'variance': var_val,
+        'max': max_val,
+        'is_suspicious': is_suspicious
+    }
