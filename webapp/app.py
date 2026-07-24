@@ -15,25 +15,41 @@ Features:
 import os
 import sys
 import io
+import site
 import datetime
 import random
-import numpy as np
-from PIL import Image, ImageEnhance
-import streamlit as st
 
 # ============================================================
 # PATH SETUP FOR LINUX / STREAMLIT CLOUD
 # ============================================================
-SYS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+SYS_DIR = os.path.abspath(os.path.join(APP_DIR, ".."))
+
 if SYS_DIR not in sys.path:
     sys.path.insert(0, SYS_DIR)
+if APP_DIR not in sys.path:
+    sys.path.insert(0, APP_DIR)
+if hasattr(site, 'USER_SITE') and site.USER_SITE not in sys.path:
+    sys.path.append(site.USER_SITE)
 
-# Import internal modules
+import numpy as np
+from PIL import Image, ImageEnhance, ImageFilter
+import streamlit as st
+
+def masked_phone(phone):
+    """Mask middle digits of phone number e.g. 0976 *** 7835"""
+    p = str(phone).strip()
+    parts = p.split()
+    if len(parts) == 3:
+        return f"{parts[0]} *** {parts[2]}"
+    if len(p) >= 11:
+        return f"{p[:4]} *** {p[-4:]}"
+    return p
+
 try:
     from preprocessing.ela import generate_ela_image, evaluate_ela_forgery_risk
-    from tools.gcash_receipt_generator import draw_gcash_receipt, masked_phone
+    from tools.gcash_receipt_generator import draw_gcash_receipt
 except ImportError:
-    # Fallback import handlers
     pass
 
 # ============================================================
@@ -608,7 +624,7 @@ with main_tab1:
         st.markdown(f"""
         <div class="custom-info-banner">
             {SVG_INFO}
-            <span>Please upload or capture a mobile receipt screenshot above to initiate live forgery detection analysis.</span>
+            <span>Upload or capture a mobile receipt screenshot above to perform live forgery detection analysis.</span>
         </div>
         """, unsafe_allow_html=True)
 
