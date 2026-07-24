@@ -603,44 +603,110 @@ footer:after {content: "" !important; display: none !important;}
         font-size: 0.68rem;
         padding: 4px 10px;
     }
+    .hero-box {
+        padding: 1.2rem 1.1rem;
+    }
+    .hero-title {
+        font-size: 1.35rem;
+    }
+    .hero-subtitle {
+        font-size: 0.84rem;
+        line-height: 1.45;
+    }
+    .author-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 0.78rem;
+    }
+    .author-meta span:nth-child(2), .author-meta span:nth-child(4) {
+        display: none;
+    }
 }
 
 /* GLASSMORPHISM PANELS */
 .glass-panel {
     background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.18);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.4rem;
     margin-bottom: 1.25rem;
-    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* STYLED DETECTOR TABS */
+/* STYLED DETECTOR & GENERATOR TABS */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 8px;
-    background-color: rgba(15, 23, 42, 0.6);
-    padding: 6px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 10px !important;
+    background: rgba(11, 19, 43, 0.75) !important;
+    padding: 8px !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(56, 189, 248, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
 .stTabs [data-baseweb="tab"] {
-    height: 44px;
-    border-radius: 10px;
+    height: 44px !important;
+    border-radius: 10px !important;
     color: #94a3b8 !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
-    padding: 0 18px !important;
+    padding: 0 20px !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: #38bdf8 !important;
+    background: rgba(56, 189, 248, 0.08) !important;
+    border-color: rgba(56, 189, 248, 0.2) !important;
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: #0284c7 !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(3, 105, 161, 0.4) 100%) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.55) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.3) !important;
 }
 
-/* DETECTOR VERDICT CARDS */
-.verdict-card-auth {
+/* Remove default Streamlit bottom underline bar on tabs */
+.stTabs [data-baseweb="tab-border"] {
+    display: none !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+    display: none !important;
+}
+
+/* STREAMLIT INPUT FIELDS (TEXT, NUMBER, SELECTBOX) */
+div[data-baseweb="input"] > div,
+div[data-baseweb="select"] > div {
+    background-color: rgba(15, 23, 42, 0.75) !important;
+    border: 1px solid rgba(56, 189, 248, 0.22) !important;
+    border-radius: 10px !important;
+    color: #f1f5f9 !important;
+    transition: all 0.2s ease !important;
+}
+
+div[data-baseweb="input"] > div:focus-within,
+div[data-baseweb="select"] > div:focus-within {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.35) !important;
+}
+
+div[data-baseweb="input"] input,
+div[data-baseweb="select"] input {
+    color: #f1f5f9 !important;
+}
+
+label[data-testid="stWidgetLabel"] p {
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+}
+
+/* VERDICT BANNERS */
+.banner-authentic {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(5, 150, 105, 0.05) 100%);
     border: 1.5px solid rgba(16, 185, 129, 0.45);
     border-radius: 16px;
@@ -652,7 +718,7 @@ footer:after {content: "" !important; display: none !important;}
     box-shadow: 0 0 25px rgba(16, 185, 129, 0.14);
 }
 
-.verdict-card-forged {
+.banner-forged {
     background: linear-gradient(135deg, rgba(244, 63, 94, 0.16) 0%, rgba(225, 29, 72, 0.05) 100%);
     border: 1.5px solid rgba(244, 63, 94, 0.45);
     border-radius: 16px;
