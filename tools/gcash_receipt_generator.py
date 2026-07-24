@@ -206,18 +206,18 @@ def format_time(dt):
 
 def mask_name_gcash(full_name):
     """
-    Format name in GCash Express Send style: GW••••••N D.
+    Format name in GCash Express Send style: GW******N D.
     """
     parts = full_name.split()
     if len(parts) >= 2:
         first = parts[0]
         last = parts[-1]
         if len(first) >= 2:
-            masked_first = first[:2] + "••••••" + first[-1]
+            masked_first = first[:2] + "******" + first[-1]
         else:
-            masked_first = first + "••••••"
+            masked_first = first + "******"
         return f"{masked_first.upper()} {last[0].upper()}."
-    return f"{full_name[:2].upper()}••••••{full_name[-1].upper()}"
+    return f"{full_name[:2].upper()}******{full_name[-1].upper()}"
 
 
 def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=None):
@@ -249,14 +249,14 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.rectangle([0, 0, RECEIPT_WIDTH, 80], fill=GCASH_BLUE)
     status_time = receipt_data['datetime'].strftime("%I:%M").lstrip('0')
     draw.text((50, 20), status_time, fill=GCASH_WHITE, font=get_font('segoe_bold', 32))
-    draw.text((RECEIPT_WIDTH - 240, 20), "86.5 KB/s 📶 4G  66%", fill=GCASH_WHITE, font=get_font('regular', 26))
+    draw.text((RECEIPT_WIDTH - 240, 20), "86.5 KB/s  4G  66%", fill=GCASH_WHITE, font=get_font('regular', 26))
     
     y = 80
     
     # --- HEADER BAR ---
     header_h = 130
     # Close icon X on left
-    draw.text((60, y + 25), "✕", fill=GCASH_WHITE, font=get_font('bold', 48))
+    draw.text((60, y + 25), "X", fill=GCASH_WHITE, font=get_font('bold', 44))
     # Title centered
     title = "Express Send"
     bbox = draw.textbbox((0, 0), title, font=font_header_title)
@@ -281,8 +281,9 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     circle_r = 65
     # Outer blue circle
     draw.ellipse([cx - circle_r, circle_y, cx + circle_r, circle_y + circle_r * 2], fill=(0, 105, 230))
-    # White check mark
-    draw.text((cx - 24, circle_y + 22), "✓", fill=GCASH_WHITE, font=get_font('bold', 70))
+    # White check mark vector lines
+    draw.line([cx - 25, circle_y + 65, cx - 5, circle_y + 85], fill=GCASH_WHITE, width=8)
+    draw.line([cx - 5, circle_y + 85, cx + 30, circle_y + 40], fill=GCASH_WHITE, width=8)
     
     y = circle_y + circle_r * 2 + 50
     
@@ -358,7 +359,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     # --- TOTAL AMOUNT SENT ROW ---
     draw.text((left_m, y + 8), "Total Amount Sent", fill=(20, 30, 55), font=font_total_label)
     
-    # Format amount with 'P' prefix safely to avoid missing glyph box [?] on Linux
+    # Format amount with 'P' prefix safely to avoid missing glyph box on Linux
     total_str = f"P{amt_str}"
     bbox = draw.textbbox((0, 0), total_str, font=font_total_val)
     tw = bbox[2] - bbox[0]
@@ -397,7 +398,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.rounded_rectangle([eco_x1, eco_y1, eco_x2, eco_y1 + eco_h], radius=24, fill=(162, 232, 206))
     
     # Eco text content
-    draw.text((eco_x1 + 40, eco_y1 + 30), "🍃 279g (gCO2e)", fill=(10, 80, 50), font=font_eco_bold)
+    draw.text((eco_x1 + 40, eco_y1 + 30), "279g (gCO2e)", fill=(10, 80, 50), font=font_eco_bold)
     
     eco_caption1 = "By going digital, you reduce your carbon footprint"
     eco_caption2 = "from transportation, paper, and plastic."
@@ -418,7 +419,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
         
     # --- DOWNLOAD BUTTON AT BOTTOM ---
     btn_y = card_bottom + 100
-    down_str = "⤓  Download"
+    down_str = "Download"
     bbox = draw.textbbox((0, 0), down_str, font=font_download)
     tw = bbox[2] - bbox[0]
     draw.text(((RECEIPT_WIDTH - tw) // 2, btn_y), down_str, fill=GCASH_WHITE, font=font_download)
@@ -432,188 +433,3 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None, st
     """
     if style == 'express_send' or True:
         return draw_express_send_receipt(receipt_data, add_artifacts=add_artifacts, artifact_type=artifact_type)
-
-
-def generate_receipt_data():
-    """Generate a random but realistic set of receipt data."""
-    amount = random_amount()
-    phone = random_phone()
-    balance = round(random.uniform(50, 50000), 2)
-    
-    return {
-        'amount': amount,
-        'recipient_name': random_name(),
-        'recipient_phone': phone,
-        'recipient_phone_masked': masked_phone(phone),
-        'ref_number': random_ref_number(),
-        'datetime': random_datetime(),
-        'balance': balance,
-        'service_fee': 0.0,
-    }
-
-
-def generate_forged_receipt_data(authentic_data, forgery_type):
-    """
-    Create a forged version of authentic receipt data.
-    
-    Args:
-        authentic_data: dict of original receipt data
-        forgery_type: str — 'amount', 'ref_number', 'name', 'full_template'
-    
-    Returns:
-        Modified receipt data dict
-    """
-    forged = authentic_data.copy()
-    
-    if forgery_type == 'amount':
-        # Change amount to a different value
-        original_amount = forged['amount']
-        while True:
-            new_amount = random_amount()
-            if new_amount != original_amount:
-                break
-        forged['amount'] = new_amount
-    
-    elif forgery_type == 'ref_number':
-        # Generate a completely fake reference number
-        forged['ref_number'] = random_ref_number()
-    
-    elif forgery_type == 'name':
-        # Change recipient name
-        original_name = forged['recipient_name']
-        while True:
-            new_name = random_name()
-            if new_name != original_name:
-                break
-        forged['recipient_name'] = new_name
-    
-    elif forgery_type == 'full_template':
-        # Completely new fake receipt
-        forged = generate_receipt_data()
-    
-    return forged
-
-
-# ============================================================
-# DATASET GENERATION
-# ============================================================
-
-def generate_dataset(output_dir, num_authentic=500, num_forged=500, 
-                     include_compressed=True, seed=42):
-    """
-    Generate a complete dataset of authentic and forged receipts.
-    """
-    random.seed(seed)
-    
-    forgery_types = ['amount', 'ref_number', 'name', 'full_template']
-    artifact_map = {
-        'amount': 'amount_alteration',
-        'ref_number': 'ref_fabrication',
-        'name': 'name_modification',
-        'full_template': 'full_template',
-    }
-    
-    dirs = [
-        os.path.join(output_dir, 'authentic', 'highres'),
-        os.path.join(output_dir, 'authentic', 'compressed'),
-    ]
-    for ft in artifact_map.values():
-        dirs.append(os.path.join(output_dir, 'forged', 'highres', ft))
-        dirs.append(os.path.join(output_dir, 'forged', 'compressed', ft))
-    
-    for d in dirs:
-        os.makedirs(d, exist_ok=True)
-    
-    metadata = {
-        'total_authentic': num_authentic,
-        'total_forged': num_forged,
-        'forgery_types': list(artifact_map.values()),
-        'includes_compressed': include_compressed,
-        'seed': seed,
-        'generated_at': datetime.now().isoformat(),
-        'images': []
-    }
-    
-    print(f"Generating {num_authentic} authentic receipts...")
-    for i in range(num_authentic):
-        data = generate_receipt_data()
-        img = draw_gcash_receipt(data, add_artifacts=False)
-        
-        fname = f"authentic_{i+1:04d}.png"
-        img.save(os.path.join(output_dir, 'authentic', 'highres', fname), 'PNG')
-        
-        if include_compressed:
-            comp_fname = f"authentic_{i+1:04d}.jpg"
-            quality = random.randint(25, 45)
-            img.save(os.path.join(output_dir, 'authentic', 'compressed', comp_fname),
-                    'JPEG', quality=quality)
-        
-        metadata['images'].append({
-            'filename': fname,
-            'class': 'authentic',
-            'amount': data['amount'],
-            'ref_number': data['ref_number'],
-            'recipient': data['recipient_name'],
-        })
-        
-    print(f"\nGenerating {num_forged} forged receipts...")
-    forged_per_type = num_forged // len(forgery_types)
-    remainder = num_forged % len(forgery_types)
-    
-    forged_count = 0
-    for ft_idx, ft in enumerate(forgery_types):
-        count = forged_per_type + (1 if ft_idx < remainder else 0)
-        artifact_name = artifact_map[ft]
-        artifact_type_map = {
-            'amount': 'amount_alteration',
-            'ref_number': 'ref_fabrication',
-            'name': 'name_modification',
-            'full_template': 'full_template',
-        }
-        
-        for j in range(count):
-            forged_count += 1
-            authentic_data = generate_receipt_data()
-            forged_data = generate_forged_receipt_data(authentic_data, ft)
-            img = draw_gcash_receipt(forged_data, add_artifacts=True,
-                                     artifact_type=artifact_type_map[ft])
-            
-            fname = f"forged_{artifact_name}_{j+1:04d}.png"
-            img.save(os.path.join(output_dir, 'forged', 'highres', artifact_name, fname), 'PNG')
-            
-            if include_compressed:
-                comp_fname = f"forged_{artifact_name}_{j+1:04d}.jpg"
-                quality = random.randint(25, 45)
-                img.save(os.path.join(output_dir, 'forged', 'compressed', artifact_name, comp_fname),
-                        'JPEG', quality=quality)
-            
-            metadata['images'].append({
-                'filename': fname,
-                'class': 'forged',
-                'forgery_type': artifact_name,
-                'amount': forged_data['amount'],
-                'ref_number': forged_data['ref_number'],
-                'recipient': forged_data['recipient_name'],
-            })
-            
-    meta_path = os.path.join(output_dir, 'metadata.json')
-    with open(meta_path, 'w', encoding='utf-8') as f:
-        json.dump(metadata, f, indent=2, ensure_ascii=False, default=str)
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Generate GCash Express Send receipt dataset')
-    parser.add_argument('--output', type=str, default='./dataset')
-    parser.add_argument('--authentic', type=int, default=500)
-    parser.add_argument('--forged', type=int, default=500)
-    parser.add_argument('--no-compressed', action='store_true')
-    parser.add_argument('--seed', type=int, default=42)
-    args = parser.parse_args()
-    
-    generate_dataset(
-        output_dir=args.output,
-        num_authentic=args.authentic,
-        num_forged=args.forged,
-        include_compressed=not args.no_compressed,
-        seed=args.seed,
-    )
