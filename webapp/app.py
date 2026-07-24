@@ -1,27 +1,25 @@
 """
-ForgeGuard — Digital Receipt Forgery Detection System
-======================================================
-Streamlit Web Application for BSCS Thesis 1 (NDMC CITE)
+ForgeGuard — Streamlit Web Application
+======================================
+BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
+CNN Architectures in Detecting Digital Receipt Forgery"
+
+Notre Dame of Midsayap College (NDMC) | CITE
 Authors: Rogie P. Bacanto & Daniela S. Ungab
 Adviser: Ms. Doris Ann Mariano
-
-Features:
-  1. Forensic ELA Detector (Upload receipt screenshot or webcam capture)
-  2. Multi-Model Architecture Matrix (Basic CNN, ResNet50, MobileNetV2)
-  3. Interactive Receipt Forgery Generator (Generate custom authentic/forged receipts)
-  4. Strict Cyan Blue Design System & Zero Emoji Aesthetics
 """
 
 import os
 import sys
-import io
 import site
+import time
+import io
 import datetime
-import random
+import numpy as np
+from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
+import streamlit as st
 
-# ============================================================
-# PATH SETUP FOR LINUX / STREAMLIT CLOUD
-# ============================================================
+# Ensure user site packages and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 SYS_DIR = os.path.abspath(os.path.join(APP_DIR, ".."))
 
@@ -31,10 +29,6 @@ if APP_DIR not in sys.path:
     sys.path.insert(0, APP_DIR)
 if hasattr(site, 'USER_SITE') and site.USER_SITE not in sys.path:
     sys.path.append(site.USER_SITE)
-
-import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont
-import streamlit as st
 
 def masked_phone(phone):
     """Mask middle digits of phone number e.g. 0976 *** 7835"""
