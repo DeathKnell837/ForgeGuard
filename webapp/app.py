@@ -1097,6 +1097,22 @@ components.html("""
                     || /open sidebar|expand sidebar/.test(text);
             });
         if (nativeToggle) nativeToggle.click();
+
+        // Some Streamlit Cloud builds do not render a public collapsed-toggle
+        // element. Their sidebar still uses aria-expanded for the visual state,
+        // so restore that state directly as a reliable fallback.
+        window.setTimeout(() => {
+            const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
+            if (sidebar && sidebar.getAttribute('aria-expanded') === 'false') {
+                sidebar.setAttribute('aria-expanded', 'true');
+                sidebar.style.setProperty('transform', 'translateX(0)', 'important');
+                sidebar.style.setProperty('left', '0', 'important');
+                sidebar.style.setProperty('margin-left', '0', 'important');
+                sidebar.style.setProperty('visibility', 'visible', 'important');
+                sidebar.style.setProperty('min-width', 'var(--sidebar-width, 21rem)', 'important');
+                sidebar.style.setProperty('max-width', 'var(--sidebar-width, 21rem)', 'important');
+            }
+        }, 50);
     };
     const wireControls = () => {
         let launcher = doc.getElementById('forgeguard-sidebar-launcher');
