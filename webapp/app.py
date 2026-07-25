@@ -434,42 +434,17 @@ html, body, [class*="css"] {
 header[data-testid="stHeader"] {
     background: transparent !important;
     background-color: transparent !important;
-    pointer-events: none !important;
+    pointer-events: auto !important;
     z-index: 99990 !important;
 }
-header[data-testid="stHeader"] * {
-    pointer-events: auto !important;
-}
 
-/* CRITICAL FIX: PROMINENT FLOATING GOLD RE-OPEN SIDEBAR BUTTON WHEN COLLAPSED */
-[data-testid="collapsedControl"],
+/* KEEP NATIVE SIDEBAR TOGGLE CONTROL VISIBLE & CLICKABLE */
 [data-testid="stSidebarCollapsedControl"],
-div[data-testid="collapsedControl"] button,
-button[aria-label*="Expand"],
-button[aria-label*="Open"],
-button[aria-label*="sidebar"],
-button[aria-label*="Sidebar"] {
-    position: fixed !important;
-    top: 14px !important;
-    left: 14px !important;
-    display: flex !important;
+[data-testid="collapsedControl"] {
+    display: block !important;
     visibility: visible !important;
-    opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 9999999 !important;
-    background: #141A24 !important;
-    border: 1.5px solid #C9A15F !important;
-    border-radius: 10px !important;
-    color: #F8FAFC !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 14px rgba(201, 161, 95, 0.4) !important;
-    padding: 6px 12px !important;
-}
-
-[data-testid="collapsedControl"]:hover,
-button[aria-label*="sidebar"]:hover {
-    background: #1B222D !important;
-    border-color: #F8FAFC !important;
-    transform: scale(1.05) !important;
+    z-index: 999999 !important;
 }
 
 /* STREAMLIT SIDEBAR SURFACE STYLING */
@@ -477,6 +452,7 @@ section[data-testid="stSidebar"] {
     background-color: #141A24 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 6px 0 25px rgba(0, 0, 0, 0.5) !important;
+    pointer-events: auto !important;
 }
 
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
@@ -999,54 +975,6 @@ div[data-testid="stImage"] img {
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-# GLOBAL JAVASCRIPT DELEGATION: MAKES NAVBAR "MODEL CONTROLS & SLIDERS" BUTTON TOGGLE SIDEBAR 100% RELIABLY
-st.markdown("""
-<script>
-(function() {
-    function setupSidebarToggle() {
-        document.addEventListener('click', function(e) {
-            var btn = e.target.closest('#toggle-sidebar-btn');
-            if (btn) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                var nativeExpandBtn = document.querySelector('[data-testid="collapsedControl"] button') ||
-                                      document.querySelector('[data-testid="collapsedControl"]') ||
-                                      document.querySelector('[data-testid="stSidebarCollapsedControl"]') ||
-                                      document.querySelector('button[aria-label*="sidebar"]') ||
-                                      document.querySelector('button[aria-label*="Sidebar"]');
-                                      
-                var nativeCollapseBtn = document.querySelector('[data-testid="stSidebarCollapseButton"] button') ||
-                                        document.querySelector('[data-testid="stSidebarCollapseButton"]');
-
-                if (nativeExpandBtn && getComputedStyle(nativeExpandBtn).display !== 'none') {
-                    nativeExpandBtn.click();
-                } else if (nativeCollapseBtn && getComputedStyle(nativeCollapseBtn).display !== 'none') {
-                    nativeCollapseBtn.click();
-                } else {
-                    var sidebar = document.querySelector('section[data-testid="stSidebar"]');
-                    if (sidebar) {
-                        if (sidebar.style.display === 'none' || getComputedStyle(sidebar).display === 'none') {
-                            sidebar.style.setProperty('display', 'block', 'important');
-                            sidebar.style.setProperty('visibility', 'visible', 'important');
-                        } else {
-                            sidebar.style.setProperty('display', 'none', 'important');
-                        }
-                    }
-                }
-            }
-        }, true);
-    }
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSidebarToggle);
-    } else {
-        setupSidebarToggle();
-    }
-})();
-</script>
-""", unsafe_allow_html=True)
-
 # ============================================================
 # SVG ICONS
 # ============================================================
@@ -1065,17 +993,19 @@ with st.sidebar:
     st.markdown("<h3 class='serif-header' style='font-size: 1.3rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Model & ELA Config</h3>", unsafe_allow_html=True)
     
     st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
-    selected_model_option = st.radio(
-        "Active Architecture Selection",
-        options=[
-            "MobileNetV2 (3.4M Params) — Recommended",
-            "ResNet50 (23.5M Params) — Deep Benchmark",
-            "Basic CNN (2.1M Params) — Baseline"
-        ],
+    model_options = [
+        "MobileNetV2 (3.4M Params) — Recommended",
+        "ResNet50 (23.5M Params) — Deep Benchmark",
+        "Basic CNN (2.1M Params) — Baseline"
+    ]
+    model_choice = st.radio(
+        "Active architecture",
+        options=model_options,
         index=0,
-        label_visibility="collapsed"
+        key="model_architecture"
     )
     
+    selected_model_option = st.session_state.get("model_architecture", model_choice)
     if "MobileNetV2" in selected_model_option:
         model_key = "mobilenetv2"
         model_display_name = "MobileNetV2"
@@ -1089,10 +1019,14 @@ with st.sidebar:
     st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
     st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
     
-    ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
-                            help="JPEG quality used to re-compress the image for Error Level Analysis.")
-    ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
-                          help="Multiplier scale factor to brighten compression error artifacts.")
+    ela_quality = st.slider(
+        "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
+        help="JPEG quality used to re-compress the image for Error Level Analysis."
+    )
+    ela_scale = st.slider(
+        "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
+        help="Multiplier scale factor to brighten compression error artifacts."
+    )
     
     st.markdown(f"""
     <div style="background: #1B222D; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.5; margin-top: 1.2rem;" class="mono-readout">
@@ -1101,7 +1035,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ============================================================
-# NAVBAR HEADER (WITH WORKING TOGGLE BUTTON)
+# NAVBAR HEADER
 # ============================================================
 st.markdown(f"""
 <div class="navbar-brand">
@@ -1109,11 +1043,9 @@ st.markdown(f"""
         {SVG_SHIELD}
         ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
     </div>
-    <div>
-        <button id="toggle-sidebar-btn" class="nav-toggle-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            <span>MODEL CONTROLS & SLIDERS</span>
-        </button>
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #C9A15F; background: rgba(201, 161, 95, 0.1); border: 1px solid rgba(201, 161, 95, 0.3); padding: 6px 14px; border-radius: 20px;" class="mono-readout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span>👈 USE SIDEBAR FOR MODEL CONTROLS & SLIDERS</span>
     </div>
     <div>
         <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
