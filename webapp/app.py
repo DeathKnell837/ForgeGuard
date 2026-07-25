@@ -378,7 +378,7 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
 st.set_page_config(
     page_title="ForgeGuard — Digital Receipt Forensic Suite",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 try:
@@ -429,28 +429,11 @@ html, body, [class*="css"] {
     font-family: 'IBM Plex Mono', monospace !important;
 }
 
-/* STREAMLIT HEADER & SIDEBAR TOGGLE CONTROL */
-header[data-testid="stHeader"],
-.stHeader,
-header {
-    background: transparent !important;
-    background-color: transparent !important;
-    pointer-events: none !important;
-    z-index: 99999 !important;
-}
-
-/* ENABLE POINTER EVENTS FOR HEADER BUTTONS & TOGGLE CONTROLS */
-header button,
-[data-testid="stHeader"] button,
+/* HIDE STREAMLIT CHROME & SIDEBAR ENTIRELY FOR PRO SAAS LOOK */
+#MainMenu, footer, header,
+section[data-testid="stSidebar"],
 [data-testid="collapsedControl"],
-[data-testid="collapsedControl"] button,
-[data-testid="stSidebarCollapseButton"] {
-    pointer-events: auto !important;
-    cursor: pointer !important;
-}
-
-/* HIDE STREAMLIT CHROME ARTIFACTS BUT KEEP SIDEBAR TOGGLE VISIBLE */
-#MainMenu, footer, 
+[data-testid="stSidebarCollapseButton"],
 [data-testid="stToolbar"], 
 div[data-testid="stToast"], 
 div[class*="stToast"], 
@@ -459,60 +442,14 @@ div[class*="stToast"],
 .stDeployButton {
     display: none !important;
     visibility: hidden !important;
-}
-
-/* STYLING FOR SIDEBAR EXPAND BUTTON (WHEN COLLAPSED) */
-[data-testid="collapsedControl"] {
-    pointer-events: auto !important;
-    z-index: 999999 !important;
-    background: #141A24 !important;
-    background-color: #141A24 !important;
-    border: 1.5px solid #8B5CF6 !important;
-    border-radius: 10px !important;
-    color: #8B5CF6 !important;
-    padding: 4px !important;
-    margin-top: 4px !important;
-    margin-left: 4px !important;
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.4) !important;
-    transition: all 0.2s ease !important;
-}
-
-[data-testid="collapsedControl"]:hover {
-    background: #1B222D !important;
-    border-color: #A78BFA !important;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.7) !important;
-}
-
-[data-testid="collapsedControl"] svg,
-[data-testid="stSidebarCollapseButton"] svg {
-    fill: #8B5CF6 !important;
-    stroke: #8B5CF6 !important;
-    color: #8B5CF6 !important;
-    width: 22px !important;
-    height: 22px !important;
-}
-
-[data-testid="stSidebarCollapseButton"],
-button[data-testid="stSidebarCollapseButton"] {
-    color: #8B5CF6 !important;
-    pointer-events: auto !important;
+    pointer-events: none !important;
 }
 
 /* Page Container Constraints */
 .block-container {
-    padding-top: 1rem !important;
+    padding-top: 1.25rem !important;
     padding-bottom: 2.5rem !important;
     max-width: 1400px !important;
-}
-
-/* SIDEBAR STYLING (LAYER 1 SURFACE: #141A24) */
-section[data-testid="stSidebar"] {
-    background-color: #141A24 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-section[data-testid="stSidebar"] .block-container {
-    padding-top: 1.4rem !important;
 }
 
 /* STREAMLIT PRIMARY ACCENT OVERRIDE -> FORENSIC VIOLET (#8B5CF6) */
@@ -545,7 +482,7 @@ div[data-baseweb="slider"] + div {
     font-size: 0.82rem !important;
 }
 
-/* SIDEBAR STACKED MODEL PICKER CARDS */
+/* STACKED MODEL PICKER CARDS */
 div[data-testid="stRadio"] label span {
     color: #E2E8F0 !important;
     font-size: 0.88rem !important;
@@ -1005,49 +942,11 @@ st.markdown(f"""
     <div class="brand-title">
         {SVG_SHIELD}
         ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
-        <button onclick="toggleSidebarMenu()" style="background: rgba(139, 92, 246, 0.16); color: #A78BFA; border: 1.5px solid #8B5CF6; border-radius: 10px; padding: 7px 16px; font-size: 0.82rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; cursor: pointer; margin-left: 16px; transition: all 0.2s ease; box-shadow: 0 0 14px rgba(139, 92, 246, 0.3);">
-            ☰ MODEL CONTROLS & SLIDERS
-        </button>
     </div>
     <div>
         <span class="badge-gold">NDMC CITE THESIS CREDENTIAL</span>
     </div>
 </div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<script>
-function toggleSidebarMenu() {
-    function isVisible(el) {
-        if (!el) return false;
-        const style = window.getComputedStyle(el);
-        return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
-    }
-
-    // 1. Check if the closed sidebar toggle arrow is present and visible
-    const collapsedControl = document.querySelector('[data-testid="collapsedControl"]');
-    if (collapsedControl && isVisible(collapsedControl)) {
-        const btn = collapsedControl.querySelector('button') || collapsedControl;
-        btn.click();
-        return;
-    }
-    
-    // 2. If sidebar is currently open, find the close button inside it
-    const collapseBtn = document.querySelector('[data-testid="stSidebarCollapseButton"]') || 
-                        document.querySelector('button[data-testid="stSidebarCollapseButton"]');
-    if (collapseBtn && isVisible(collapseBtn)) {
-        const btn = collapseBtn.querySelector('button') || collapseBtn;
-        btn.click();
-        return;
-    }
-
-    // 3. Fallback: manually toggle sidebar element display
-    const sidebar = document.querySelector('section[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.visibility === 'hidden') ? 'block' : 'none';
-    }
-}
-</script>
 """, unsafe_allow_html=True)
 
 # ============================================================
@@ -1074,51 +973,6 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ============================================================
-# SIDEBAR CONTROL PANEL (STACKED MODEL CARDS & PARAMETERS)
-# ============================================================
-with st.sidebar:
-    st.markdown(f"<div class='eyebrow-gold'>ARCHITECTURE SELECTION</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;'>Model Selector</h3>", unsafe_allow_html=True)
-    
-    selected_model_option = st.radio(
-        "Active Architecture",
-        options=[
-            "MobileNetV2 (3.4M Params) — Recommended",
-            "ResNet50 (23.5M Params) — Deep Benchmark",
-            "Basic CNN (2.1M Params) — Baseline"
-        ],
-        index=0,
-        label_visibility="collapsed"
-    )
-    
-    if "MobileNetV2" in selected_model_option:
-        model_key = "mobilenetv2"
-        model_display_name = "MobileNetV2"
-    elif "ResNet50" in selected_model_option:
-        model_key = "resnet50"
-        model_display_name = "ResNet50"
-    else:
-        model_key = "basic_cnn"
-        model_display_name = "Basic CNN"
-
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.4rem 0;'>", unsafe_allow_html=True)
-    
-    st.markdown(f"<div class='eyebrow-label'>FORENSIC PARAMETERS</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;'>ELA Configuration</h3>", unsafe_allow_html=True)
-    
-    ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
-                            help="JPEG quality used to re-compress the image for Error Level Analysis.")
-    ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
-                          help="Multiplier scale factor to brighten compression error artifacts.")
-    
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.4rem 0;'>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <div style="background: #1B222D; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.76rem; color: #94A3B8; line-height: 1.5;" class="mono-readout">
-        <strong style="color: #C9A15F;">SYSTEM STATUS:</strong> Live ELA compute active. Demonstrates heuristic evaluation mode when model weights (.h5) are loaded.
-    </div>
-    """, unsafe_allow_html=True)
-
-# ============================================================
 # MAIN APPLICATION MODE SELECTOR (01 DETECTOR vs 02 GENERATOR)
 # ============================================================
 main_tab1, main_tab2 = st.tabs(["Forensic ELA Detector", "Receipt Forgery Generator"])
@@ -1126,69 +980,123 @@ main_tab1, main_tab2 = st.tabs(["Forensic ELA Detector", "Receipt Forgery Genera
 uploaded_file = None
 
 # ============================================================
-# TAB 1: FORENSIC ELA DETECTOR
+# TAB 1: FORENSIC ELA DETECTOR (INTEGRATED DASHBOARD)
 # ============================================================
 with main_tab1:
-    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.75rem;'>Evidence Input & Image Upload</h3>", unsafe_allow_html=True)
+    ctrl_col, input_col = st.columns([1.05, 1.25], gap="large")
     
-    tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
-    
-    with tab_upload:
-        uploaded_file = st.file_uploader(
-            "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
-            type=["png", "jpg", "jpeg", "webp"],
-            key="file_uploader",
+    with ctrl_col:
+        st.markdown("<div class='eyebrow-label'>MODEL SELECTION</div>", unsafe_allow_html=True)
+        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Architecture & Parameters</h3>", unsafe_allow_html=True)
+        
+        selected_model_option = st.radio(
+            "Active Architecture Selection",
+            options=[
+                "MobileNetV2 (3.4M Params) — Recommended",
+                "ResNet50 (23.5M Params) — Deep Benchmark",
+                "Basic CNN (2.1M Params) — Baseline"
+            ],
+            index=0,
             label_visibility="collapsed"
         )
-    
-    with tab_camera:
-        # Aggressive WebRTC override forcing rear camera (facingMode: environment) across mobile browsers & Streamlit camera component
-        st.markdown("""
-        <script>
-        (function() {
-            function forceTrackRear(stream) {
-                if (stream && stream.getVideoTracks) {
-                    stream.getVideoTracks().forEach(function(track) {
-                        track.applyConstraints({ facingMode: { ideal: "environment" } }).catch(function() {
-                            track.applyConstraints({ facingMode: "environment" }).catch(function() {});
-                        });
-                    });
-                }
-            }
-
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                const origGUM = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
-                navigator.mediaDevices.getUserMedia = async function(constraints) {
-                    if (constraints && constraints.video) {
-                        if (typeof constraints.video === 'object') {
-                            constraints.video.facingMode = { ideal: "environment" };
-                        } else {
-                            constraints.video = { facingMode: { ideal: "environment" } };
-                        }
-                    }
-                    try {
-                        const stream = await origGUM(constraints);
-                        forceTrackRear(stream);
-                        return stream;
-                    } catch (err) {
-                        return origGUM(constraints);
-                    }
-                };
-            }
-        })();
-        </script>
-        """, unsafe_allow_html=True)
         
-        camera_file = st.camera_input("Capture mobile wallet receipt", key="live_rear_camera")
-        if camera_file is not None:
-            uploaded_file = camera_file
+        if "MobileNetV2" in selected_model_option:
+            model_key = "mobilenetv2"
+            model_display_name = "MobileNetV2"
+        elif "ResNet50" in selected_model_option:
+            model_key = "resnet50"
+            model_display_name = "ResNet50"
+        else:
+            model_key = "basic_cnn"
+            model_display_name = "Basic CNN"
 
+        st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.1rem 0 1rem 0;'>", unsafe_allow_html=True)
+        st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
+        
+        ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
+                                help="JPEG quality used to re-compress the image for Error Level Analysis.")
+        ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
+                              help="Multiplier scale factor to brighten compression error artifacts.")
+        
+        st.markdown(f"""
+        <div style="background: #1B222D; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.76rem; color: #94A3B8; line-height: 1.5; margin-top: 1rem;" class="mono-readout">
+            <strong style="color: #C9A15F;">STATUS:</strong> Ready for evidence evaluation using ELA heuristic calibration or custom weights (.h5).
+        </div>
+        """, unsafe_allow_html=True)
+
+    with input_col:
+        st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION</div>", unsafe_allow_html=True)
+        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
+        
+        tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
+        
+        with tab_upload:
+            uploaded_file = st.file_uploader(
+                "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
+                type=["png", "jpg", "jpeg", "webp"],
+                key="file_uploader",
+                label_visibility="collapsed"
+            )
+        
+        with tab_camera:
+            # Aggressive WebRTC override forcing rear camera (facingMode: environment) across mobile browsers & Streamlit camera component
+            st.markdown("""
+            <script>
+            (function() {
+                function forceTrackRear(stream) {
+                    if (stream && stream.getVideoTracks) {
+                        stream.getVideoTracks().forEach(function(track) {
+                            track.applyConstraints({ facingMode: { ideal: "environment" } }).catch(function() {
+                                track.applyConstraints({ facingMode: "environment" }).catch(function() {});
+                            });
+                        });
+                    }
+                }
+
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    const origGUM = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+                    navigator.mediaDevices.getUserMedia = async function(constraints) {
+                        if (constraints && constraints.video) {
+                            if (typeof constraints.video === 'object') {
+                                constraints.video.facingMode = { ideal: "environment" };
+                            } else {
+                                constraints.video = { facingMode: { ideal: "environment" } };
+                            }
+                        }
+                        try {
+                            const stream = await origGUM(constraints);
+                            forceTrackRear(stream);
+                            return stream;
+                        } catch (err) {
+                            return origGUM(constraints);
+                        }
+                    };
+                }
+            })();
+            </script>
+            """, unsafe_allow_html=True)
+            
+            camera_file = st.camera_input("Capture mobile wallet receipt", key="live_rear_camera")
+            if camera_file is not None:
+                uploaded_file = camera_file
+
+        if uploaded_file is None:
+            st.markdown(f"""
+            <div class="custom-info-banner">
+                {SVG_INFO}
+                <span>Upload or capture a receipt image to generate ELA heatmaps and evaluate forgery risk.</span>
+            </div>
+            """, unsafe_allow_html=True)
+
+    # EVIDENCE EVALUATION RESULTS BLOCK
     if uploaded_file is not None:
         try:
             image_bytes = uploaded_file.read() if hasattr(uploaded_file, 'read') else uploaded_file.getvalue()
             pil_img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
             
-            st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-top: 1.5rem; margin-bottom: 0.75rem;'>Forensic Evidence Analysis</h3>", unsafe_allow_html=True)
+            st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
+            st.markdown("<div class='eyebrow-gold'>EXPLICIT VERDICT & EXPLAINABLE AI</div>", unsafe_allow_html=True)
+            st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.75rem;'>Forensic Evidence Analysis</h3>", unsafe_allow_html=True)
             
             start_time = time.time()
             
@@ -1365,14 +1273,6 @@ with main_tab1:
 
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")
-
-    else:
-        st.markdown(f"""
-        <div class="custom-info-banner">
-            {SVG_INFO}
-            <span>Upload or capture a mobile receipt screenshot above to perform live ELA evidence analysis.</span>
-        </div>
-        """, unsafe_allow_html=True)
 
 # ============================================================
 # TAB 2: RECEIPT FORGERY GENERATOR TOOL
