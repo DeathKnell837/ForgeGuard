@@ -20,6 +20,7 @@ import base64
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Ensure user site packages and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -458,6 +459,30 @@ button[data-testid="stSidebarCollapsedControl"],
     align-items: center !important;
     justify-content: center !important;
     z-index: 1000000 !important;
+}
+
+/* The app-owned sidebar launcher is intentionally small and always visible. */
+.forgeguard-sidebar-launcher {
+    position: fixed !important;
+    top: 0.7rem !important;
+    left: 0.7rem !important;
+    z-index: 1000001 !important;
+    width: 2.35rem !important;
+    height: 2.35rem !important;
+    padding: 0 !important;
+    border: 1px solid rgba(139, 92, 246, 0.65) !important;
+    border-radius: 9px !important;
+    background: #141A24 !important;
+    color: #C4B5FD !important;
+    cursor: pointer !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+.forgeguard-sidebar-launcher:hover {
+    background: #232D3C !important;
+    color: #FFFFFF !important;
 }
 
 /* STREAMLIT SIDEBAR SURFACE STYLING */
@@ -1057,16 +1082,53 @@ with st.sidebar:
 # ============================================================
 # NAVBAR HEADER
 # ============================================================
+components.html("""
+<script>
+(() => {
+    const doc = window.parent.document;
+    const openSidebar = () => {
+        const nativeToggle = [...doc.querySelectorAll('[data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"], button')]
+            .find((element) => {
+                const label = (element.getAttribute('aria-label') || '').toLowerCase();
+                const text = (element.textContent || '').toLowerCase();
+                return element.dataset.testid === 'stSidebarCollapsedControl'
+                    || element.dataset.testid === 'collapsedControl'
+                    || /open sidebar|expand sidebar|show sidebar/.test(label)
+                    || /open sidebar|expand sidebar/.test(text);
+            });
+        if (nativeToggle) nativeToggle.click();
+    };
+    const wireControls = () => {
+        let launcher = doc.getElementById('forgeguard-sidebar-launcher');
+        if (!launcher) {
+            launcher = doc.createElement('button');
+            launcher.id = 'forgeguard-sidebar-launcher';
+            launcher.type = 'button';
+            launcher.className = 'forgeguard-sidebar-launcher';
+            launcher.title = 'Open model controls';
+            launcher.setAttribute('aria-label', 'Open model controls');
+            launcher.textContent = '☰';
+            doc.body.appendChild(launcher);
+        }
+        launcher.onclick = openSidebar;
+        const modelButton = doc.getElementById('forgeguard-model-controls');
+        if (modelButton) modelButton.onclick = openSidebar;
+    };
+    wireControls();
+    window.setInterval(wireControls, 500);
+})();
+</script>
+""", height=0, width=0)
+
 st.markdown(f"""
 <div class="navbar-brand">
     <div class="brand-title">
         {SVG_SHIELD}
         ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #C9A15F; background: rgba(201, 161, 95, 0.1); border: 1px solid rgba(201, 161, 95, 0.3); padding: 6px 14px; border-radius: 20px;" class="mono-readout">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        <span>👈 USE SIDEBAR FOR MODEL CONTROLS & SLIDERS</span>
-    </div>
+    <button id="forgeguard-model-controls" class="nav-toggle-btn" type="button" aria-label="Open model controls">
+        ☰&nbsp; MODEL CONTROLS &amp; SLIDERS
+    </button>
     <div>
         <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
     </div>
