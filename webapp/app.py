@@ -438,13 +438,26 @@ header[data-testid="stHeader"] {
     z-index: 99990 !important;
 }
 
-/* KEEP NATIVE SIDEBAR TOGGLE CONTROL VISIBLE & CLICKABLE */
+/*
+ * Keep Streamlit's native control available after the sidebar is collapsed.
+ * The control lives in the header when the sidebar is closed, so it needs an
+ * explicit fixed position instead of inheriting a hidden/zero-height layout.
+ */
+button[data-testid="stSidebarCollapsedControl"],
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"] {
-    display: block !important;
+    display: inline-flex !important;
     visibility: visible !important;
+    opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 999999 !important;
+    position: fixed !important;
+    top: 0.65rem !important;
+    left: 0.65rem !important;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000000 !important;
 }
 
 /* STREAMLIT SIDEBAR SURFACE STYLING */
@@ -457,6 +470,13 @@ section[data-testid="stSidebar"] {
 
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
     padding-top: 1.5rem !important;
+}
+
+/* Ensure the interactive BaseWeb slider layer remains above custom styling. */
+section[data-testid="stSidebar"] div[data-baseweb="slider"],
+section[data-testid="stSidebar"] div[data-baseweb="slider"] *,
+section[data-testid="stSidebar"] div[data-baseweb="slider"] [role="slider"] {
+    pointer-events: auto !important;
 }
 
 /* HIDE UNNECESSARY CHROME */
