@@ -1,5 +1,5 @@
 """
-ForgeGuard — Streamlit Web Application (v1.0.5)
+ForgeGuard — Streamlit Web Application (v1.0.6)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"

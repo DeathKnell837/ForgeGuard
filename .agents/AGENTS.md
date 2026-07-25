@@ -44,6 +44,12 @@ This workspace customizations file provides context and instructions to the Anti
 > **Rule 4: Algorithm-Focused Titles for 100% CS Alignment**
 > All thesis titles must contain the specific algorithms or mathematical models directly in the text (e.g., *Explainable Transfer Learning*, *Hybrid Neural Networks*, *Multi-Engine Neural Networks*, *Steganography*, *Genetic Algorithms*). This ensures that the topic is classified as **100% Computer Science** rather than Information Technology (IT) capstones. Avoid generic prefixes like "Automated System" or "Monitoring".
 
+> [!CRITICAL]
+> **Rule 5: Dual GitHub Repository Syncing & Streamlit Cloud Live Target**
+> * **Streamlit Cloud Deployment Repository:** `DeathKnell837/ForgeGuard` (`https://github.com/DeathKnell837/ForgeGuard.git`) — **THIS IS THE LIVE SERVER REPOSITORY!**
+> * **BSCS Thesis Prep Repository:** `DeathKnell837/NDMC-BSCS-THESIS-PREP` (`https://github.com/DeathKnell837/NDMC-BSCS-THESIS-PREP.git`)
+> * **MANDATORY PUSH DIRECTIVE:** Whenever making any changes to the web application (`webapp/app.py` or system code), ALWAYS push directly to `DeathKnell837/ForgeGuard` AND `DeathKnell837/NDMC-BSCS-THESIS-PREP` simultaneously! Never push to only one repository.
+
 ---
 
 ## 3. Currently Planned Thesis Titles
