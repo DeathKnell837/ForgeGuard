@@ -378,7 +378,7 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
 st.set_page_config(
     page_title="ForgeGuard — Digital Receipt Forensic Suite",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 try:
@@ -429,11 +429,49 @@ html, body, [class*="css"] {
     font-family: 'IBM Plex Mono', monospace !important;
 }
 
-/* HIDE STREAMLIT CHROME & SIDEBAR ENTIRELY FOR PRO SAAS LOOK */
-#MainMenu, footer, header,
-section[data-testid="stSidebar"],
+/* STREAMLIT HEADER & TRANSPARENT CONTAINER */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    pointer-events: none !important;
+    z-index: 99990 !important;
+}
+
+/* FORCE SIDEBAR TOGGLE CONTROL BUTTON TO BE VISIBLE, GOLD-BORDERED & CLICKABLE */
 [data-testid="collapsedControl"],
 [data-testid="stSidebarCollapseButton"],
+button[aria-label*="sidebar"],
+button[aria-label*="Sidebar"] {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+    background: #141A24 !important;
+    border: 1px solid rgba(201, 161, 95, 0.5) !important;
+    border-radius: 10px !important;
+    color: #F8FAFC !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+}
+
+[data-testid="collapsedControl"]:hover,
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: #1B222D !important;
+    border-color: #C9A15F !important;
+}
+
+/* STREAMLIT SIDEBAR SURFACE STYLING */
+section[data-testid="stSidebar"] {
+    background-color: #141A24 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    padding-top: 1.5rem !important;
+}
+
+/* HIDE UNNECESSARY CHROME */
+#MainMenu, footer, 
 [data-testid="stToolbar"], 
 div[data-testid="stToast"], 
 div[class*="stToast"], 
@@ -442,7 +480,6 @@ div[class*="stToast"],
 .stDeployButton {
     display: none !important;
     visibility: hidden !important;
-    pointer-events: none !important;
 }
 
 /* Page Container Constraints */
@@ -924,6 +961,8 @@ div[data-testid="stImage"] img {
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+
 # ============================================================
 # SVG ICONS
 # ============================================================
@@ -933,6 +972,49 @@ SVG_SHIELD_ALERT = """<svg class="icon-inline" width="28" height="28" viewBox="0
 SVG_SCAN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>"""
 SVG_BRAIN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>"""
 SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>"""
+
+# ============================================================
+# STREAMLIT SIDEBAR: MODEL & FORENSIC CONTROLS
+# ============================================================
+with st.sidebar:
+    st.markdown("<div class='eyebrow-gold'>FORENSIC CONTROL PANEL</div>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.3rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Model & ELA Config</h3>", unsafe_allow_html=True)
+    
+    st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
+    selected_model_option = st.radio(
+        "Active Architecture Selection",
+        options=[
+            "MobileNetV2 (3.4M Params) — Recommended",
+            "ResNet50 (23.5M Params) — Deep Benchmark",
+            "Basic CNN (2.1M Params) — Baseline"
+        ],
+        index=0,
+        label_visibility="collapsed"
+    )
+    
+    if "MobileNetV2" in selected_model_option:
+        model_key = "mobilenetv2"
+        model_display_name = "MobileNetV2"
+    elif "ResNet50" in selected_model_option:
+        model_key = "resnet50"
+        model_display_name = "ResNet50"
+    else:
+        model_key = "basic_cnn"
+        model_display_name = "Basic CNN"
+
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
+    
+    ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
+                            help="JPEG quality used to re-compress the image for Error Level Analysis.")
+    ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
+                          help="Multiplier scale factor to brighten compression error artifacts.")
+    
+    st.markdown(f"""
+    <div style="background: #1B222D; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.5; margin-top: 1.2rem;" class="mono-readout">
+        <strong style="color: #C9A15F;">STATUS:</strong> Live ELA compute active.<br>Model: <strong style="color: #A78BFA;">{model_display_name}</strong>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ============================================================
 # NAVBAR HEADER
@@ -980,113 +1062,71 @@ main_tab1, main_tab2 = st.tabs(["Forensic ELA Detector", "Receipt Forgery Genera
 uploaded_file = None
 
 # ============================================================
-# TAB 1: FORENSIC ELA DETECTOR (INTEGRATED DASHBOARD)
+# TAB 1: FORENSIC ELA DETECTOR
 # ============================================================
 with main_tab1:
-    ctrl_col, input_col = st.columns([1.05, 1.25], gap="large")
+    st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION</div>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
     
-    with ctrl_col:
-        st.markdown("<div class='eyebrow-label'>MODEL SELECTION</div>", unsafe_allow_html=True)
-        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Architecture & Parameters</h3>", unsafe_allow_html=True)
-        
-        selected_model_option = st.radio(
-            "Active Architecture Selection",
-            options=[
-                "MobileNetV2 (3.4M Params) — Recommended",
-                "ResNet50 (23.5M Params) — Deep Benchmark",
-                "Basic CNN (2.1M Params) — Baseline"
-            ],
-            index=0,
+    tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
+    
+    with tab_upload:
+        uploaded_file = st.file_uploader(
+            "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
+            type=["png", "jpg", "jpeg", "webp"],
+            key="file_uploader",
             label_visibility="collapsed"
         )
-        
-        if "MobileNetV2" in selected_model_option:
-            model_key = "mobilenetv2"
-            model_display_name = "MobileNetV2"
-        elif "ResNet50" in selected_model_option:
-            model_key = "resnet50"
-            model_display_name = "ResNet50"
-        else:
-            model_key = "basic_cnn"
-            model_display_name = "Basic CNN"
+    
+    with tab_camera:
+        # Aggressive WebRTC override forcing rear camera (facingMode: environment) across mobile browsers & Streamlit camera component
+        st.markdown("""
+        <script>
+        (function() {
+            function forceTrackRear(stream) {
+                if (stream && stream.getVideoTracks) {
+                    stream.getVideoTracks().forEach(function(track) {
+                        track.applyConstraints({ facingMode: { ideal: "environment" } }).catch(function() {
+                            track.applyConstraints({ facingMode: "environment" }).catch(function() {});
+                        });
+                    });
+                }
+            }
 
-        st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.1rem 0 1rem 0;'>", unsafe_allow_html=True)
-        st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                const origGUM = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+                navigator.mediaDevices.getUserMedia = async function(constraints) {
+                    if (constraints && constraints.video) {
+                        if (typeof constraints.video === 'object') {
+                            constraints.video.facingMode = { ideal: "environment" };
+                        } else {
+                            constraints.video = { facingMode: { ideal: "environment" } };
+                        }
+                    }
+                    try {
+                        const stream = await origGUM(constraints);
+                        forceTrackRear(stream);
+                        return stream;
+                    } catch (err) {
+                        return origGUM(constraints);
+                    }
+                };
+            }
+        })();
+        </script>
+        """, unsafe_allow_html=True)
         
-        ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
-                                help="JPEG quality used to re-compress the image for Error Level Analysis.")
-        ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
-                              help="Multiplier scale factor to brighten compression error artifacts.")
-        
+        camera_file = st.camera_input("Capture mobile wallet receipt", key="live_rear_camera")
+        if camera_file is not None:
+            uploaded_file = camera_file
+
+    if uploaded_file is None:
         st.markdown(f"""
-        <div style="background: #1B222D; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.76rem; color: #94A3B8; line-height: 1.5; margin-top: 1rem;" class="mono-readout">
-            <strong style="color: #C9A15F;">STATUS:</strong> Ready for evidence evaluation using ELA heuristic calibration or custom weights (.h5).
+        <div class="custom-info-banner">
+            {SVG_INFO}
+            <span>Upload or capture a receipt image above to generate ELA heatmaps and evaluate forgery risk. Adjust model and sliders in the left sidebar anytime.</span>
         </div>
         """, unsafe_allow_html=True)
-
-    with input_col:
-        st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION</div>", unsafe_allow_html=True)
-        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
-        
-        tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
-        
-        with tab_upload:
-            uploaded_file = st.file_uploader(
-                "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
-                type=["png", "jpg", "jpeg", "webp"],
-                key="file_uploader",
-                label_visibility="collapsed"
-            )
-        
-        with tab_camera:
-            # Aggressive WebRTC override forcing rear camera (facingMode: environment) across mobile browsers & Streamlit camera component
-            st.markdown("""
-            <script>
-            (function() {
-                function forceTrackRear(stream) {
-                    if (stream && stream.getVideoTracks) {
-                        stream.getVideoTracks().forEach(function(track) {
-                            track.applyConstraints({ facingMode: { ideal: "environment" } }).catch(function() {
-                                track.applyConstraints({ facingMode: "environment" }).catch(function() {});
-                            });
-                        });
-                    }
-                }
-
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    const origGUM = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
-                    navigator.mediaDevices.getUserMedia = async function(constraints) {
-                        if (constraints && constraints.video) {
-                            if (typeof constraints.video === 'object') {
-                                constraints.video.facingMode = { ideal: "environment" };
-                            } else {
-                                constraints.video = { facingMode: { ideal: "environment" } };
-                            }
-                        }
-                        try {
-                            const stream = await origGUM(constraints);
-                            forceTrackRear(stream);
-                            return stream;
-                        } catch (err) {
-                            return origGUM(constraints);
-                        }
-                    };
-                }
-            })();
-            </script>
-            """, unsafe_allow_html=True)
-            
-            camera_file = st.camera_input("Capture mobile wallet receipt", key="live_rear_camera")
-            if camera_file is not None:
-                uploaded_file = camera_file
-
-        if uploaded_file is None:
-            st.markdown(f"""
-            <div class="custom-info-banner">
-                {SVG_INFO}
-                <span>Upload or capture a receipt image to generate ELA heatmaps and evaluate forgery risk.</span>
-            </div>
-            """, unsafe_allow_html=True)
 
     # EVIDENCE EVALUATION RESULTS BLOCK
     if uploaded_file is not None:
