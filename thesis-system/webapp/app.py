@@ -1,5 +1,5 @@
 """
-ForgeGuard — Streamlit Web Application (v1.0.4)
+ForgeGuard — Streamlit Web Application (v1.0.5)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -378,7 +378,7 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
 st.set_page_config(
     page_title="ForgeGuard — Digital Receipt Forensic Suite",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 try:
@@ -429,11 +429,61 @@ html, body, [class*="css"] {
     font-family: 'IBM Plex Mono', monospace !important;
 }
 
-/* HIDE SIDEBAR ENTIRELY SINCE CONTROLS ARE EMBEDDED IN NATIVE ON-PAGE EXPANDER */
-#MainMenu, footer, header,
-section[data-testid="stSidebar"],
+/* STREAMLIT HEADER & TRANSPARENT CONTAINER */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    pointer-events: none !important;
+    z-index: 99990 !important;
+}
+header[data-testid="stHeader"] * {
+    pointer-events: auto !important;
+}
+
+/* CRITICAL FIX: PROMINENT FLOATING GOLD RE-OPEN SIDEBAR BUTTON WHEN COLLAPSED */
 [data-testid="collapsedControl"],
-[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+div[data-testid="collapsedControl"] button,
+button[aria-label*="Expand"],
+button[aria-label*="Open"],
+button[aria-label*="sidebar"],
+button[aria-label*="Sidebar"] {
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 9999999 !important;
+    background: #141A24 !important;
+    border: 1.5px solid #C9A15F !important;
+    border-radius: 10px !important;
+    color: #F8FAFC !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 14px rgba(201, 161, 95, 0.4) !important;
+    padding: 6px 12px !important;
+}
+
+[data-testid="collapsedControl"]:hover,
+button[aria-label*="sidebar"]:hover {
+    background: #1B222D !important;
+    border-color: #F8FAFC !important;
+    transform: scale(1.05) !important;
+}
+
+/* STREAMLIT SIDEBAR SURFACE STYLING */
+section[data-testid="stSidebar"] {
+    background-color: #141A24 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    padding-top: 1.5rem !important;
+}
+
+/* HIDE UNNECESSARY CHROME */
+#MainMenu, footer, 
 [data-testid="stToolbar"], 
 div[data-testid="stToast"], 
 div[class*="stToast"], 
@@ -442,34 +492,6 @@ div[class*="stToast"],
 .stDeployButton {
     display: none !important;
     visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-/* CUSTOM STYLING FOR NATIVE ST.EXPANDER CONTROL PANEL */
-div[data-testid="stExpander"] {
-    background: #141A24 !important;
-    border: 1px solid rgba(139, 92, 246, 0.3) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4) !important;
-    margin-bottom: 1.4rem !important;
-}
-
-div[data-testid="stExpander"] summary {
-    font-family: 'Spectral', Georgia, serif !important;
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-    color: #F8FAFC !important;
-    padding: 0.75rem 1rem !important;
-}
-
-div[data-testid="stExpander"] summary:hover {
-    color: #A78BFA !important;
-}
-
-div[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
-    padding: 1.25rem 1.4rem !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    background: #0F141D !important;
 }
 
 /* Page Container Constraints */
@@ -597,6 +619,29 @@ div[data-testid="stFileUploader"] section {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.nav-toggle-btn {
+    background: rgba(139, 92, 246, 0.12) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4) !important;
+    color: #F8FAFC !important;
+    padding: 7px 16px !important;
+    border-radius: 10px !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.nav-toggle-btn:hover {
+    background: rgba(139, 92, 246, 0.25) !important;
+    border-color: #8B5CF6 !important;
+    box-shadow: 0 0 14px rgba(139, 92, 246, 0.4) !important;
 }
 
 .badge-gold {
@@ -953,6 +998,54 @@ div[data-testid="stImage"] img {
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
+# GLOBAL JAVASCRIPT DELEGATION: MAKES NAVBAR "MODEL CONTROLS & SLIDERS" BUTTON TOGGLE SIDEBAR 100% RELIABLY
+st.markdown("""
+<script>
+(function() {
+    function setupSidebarToggle() {
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('#toggle-sidebar-btn');
+            if (btn) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var nativeExpandBtn = document.querySelector('[data-testid="collapsedControl"] button') ||
+                                      document.querySelector('[data-testid="collapsedControl"]') ||
+                                      document.querySelector('[data-testid="stSidebarCollapsedControl"]') ||
+                                      document.querySelector('button[aria-label*="sidebar"]') ||
+                                      document.querySelector('button[aria-label*="Sidebar"]');
+                                      
+                var nativeCollapseBtn = document.querySelector('[data-testid="stSidebarCollapseButton"] button') ||
+                                        document.querySelector('[data-testid="stSidebarCollapseButton"]');
+
+                if (nativeExpandBtn && getComputedStyle(nativeExpandBtn).display !== 'none') {
+                    nativeExpandBtn.click();
+                } else if (nativeCollapseBtn && getComputedStyle(nativeCollapseBtn).display !== 'none') {
+                    nativeCollapseBtn.click();
+                } else {
+                    var sidebar = document.querySelector('section[data-testid="stSidebar"]');
+                    if (sidebar) {
+                        if (sidebar.style.display === 'none' || getComputedStyle(sidebar).display === 'none') {
+                            sidebar.style.setProperty('display', 'block', 'important');
+                            sidebar.style.setProperty('visibility', 'visible', 'important');
+                        } else {
+                            sidebar.style.setProperty('display', 'none', 'important');
+                        }
+                    }
+                }
+            }
+        }, true);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupSidebarToggle);
+    } else {
+        setupSidebarToggle();
+    }
+})();
+</script>
+""", unsafe_allow_html=True)
+
 # ============================================================
 # SVG ICONS
 # ============================================================
@@ -964,13 +1057,62 @@ SVG_BRAIN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 2
 SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>"""
 
 # ============================================================
-# NAVBAR HEADER
+# STREAMLIT SIDEBAR: MODEL & FORENSIC CONTROLS
+# ============================================================
+with st.sidebar:
+    st.markdown("<div class='eyebrow-gold'>FORENSIC CONTROL PANEL</div>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.3rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Model & ELA Config</h3>", unsafe_allow_html=True)
+    
+    st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
+    selected_model_option = st.radio(
+        "Active Architecture Selection",
+        options=[
+            "MobileNetV2 (3.4M Params) — Recommended",
+            "ResNet50 (23.5M Params) — Deep Benchmark",
+            "Basic CNN (2.1M Params) — Baseline"
+        ],
+        index=0,
+        label_visibility="collapsed"
+    )
+    
+    if "MobileNetV2" in selected_model_option:
+        model_key = "mobilenetv2"
+        model_display_name = "MobileNetV2"
+    elif "ResNet50" in selected_model_option:
+        model_key = "resnet50"
+        model_display_name = "ResNet50"
+    else:
+        model_key = "basic_cnn"
+        model_display_name = "Basic CNN"
+
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
+    
+    ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
+                            help="JPEG quality used to re-compress the image for Error Level Analysis.")
+    ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
+                          help="Multiplier scale factor to brighten compression error artifacts.")
+    
+    st.markdown(f"""
+    <div style="background: #1B222D; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.5; margin-top: 1.2rem;" class="mono-readout">
+        <strong style="color: #C9A15F;">STATUS:</strong> Live ELA compute active.<br>Model: <strong style="color: #A78BFA;">{model_display_name}</strong>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ============================================================
+# NAVBAR HEADER (WITH WORKING TOGGLE BUTTON)
 # ============================================================
 st.markdown(f"""
 <div class="navbar-brand">
     <div class="brand-title">
         {SVG_SHIELD}
         ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
+    </div>
+    <div>
+        <button id="toggle-sidebar-btn" class="nav-toggle-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <span>MODEL CONTROLS & SLIDERS</span>
+        </button>
     </div>
     <div>
         <span class="badge-gold">NDMC CITE THESIS CREDENTIAL</span>
@@ -1012,46 +1154,6 @@ uploaded_file = None
 # TAB 1: FORENSIC ELA DETECTOR
 # ============================================================
 with main_tab1:
-    # ON-PAGE COLLAPSIBLE CONTROL PANEL (NATIVE ST.EXPANDER - 100% RELIABLE)
-    with st.expander("⚙️ MODEL ARCHITECTURE & FORENSIC ELA CALIBRATION PARAMETERS", expanded=True):
-        col_m, col_s = st.columns([1.15, 1], gap="large")
-        
-        with col_m:
-            st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
-            selected_model_option = st.radio(
-                "Active Architecture Selection",
-                options=[
-                    "MobileNetV2 (3.4M Params) — Recommended",
-                    "ResNet50 (23.5M Params) — Deep Benchmark",
-                    "Basic CNN (2.1M Params) — Baseline"
-                ],
-                index=0,
-                label_visibility="collapsed"
-            )
-            
-            if "MobileNetV2" in selected_model_option:
-                model_key = "mobilenetv2"
-                model_display_name = "MobileNetV2"
-            elif "ResNet50" in selected_model_option:
-                model_key = "resnet50"
-                model_display_name = "ResNet50"
-            else:
-                model_key = "basic_cnn"
-                model_display_name = "Basic CNN"
-
-        with col_s:
-            st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
-            ela_quality = st.slider("ELA JPEG Quality", min_value=50, max_value=98, value=90, step=1,
-                                    help="JPEG quality used to re-compress the image for Error Level Analysis.")
-            ela_scale = st.slider("ELA Difference Scale", min_value=5.0, max_value=30.0, value=15.0, step=1.0,
-                                  help="Multiplier scale factor to brighten compression error artifacts.")
-            
-            st.markdown(f"""
-            <div style="background: #1B222D; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.76rem; color: #94A3B8;" class="mono-readout">
-                <strong style="color: #C9A15F;">STATUS:</strong> Live compute ready | Model: <strong style="color: #A78BFA;">{model_display_name}</strong>
-            </div>
-            """, unsafe_allow_html=True)
-
     st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION</div>", unsafe_allow_html=True)
     st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
     
@@ -1111,7 +1213,7 @@ with main_tab1:
         st.markdown(f"""
         <div class="custom-info-banner">
             {SVG_INFO}
-            <span>Upload or capture a receipt image above to generate ELA heatmaps and evaluate forgery risk. You can adjust model parameters in the expander box above.</span>
+            <span>Upload or capture a receipt image above to generate ELA heatmaps and evaluate forgery risk. Click <strong>"MODEL CONTROLS & SLIDERS"</strong> or the top-left gold button anytime to adjust parameters.</span>
         </div>
         """, unsafe_allow_html=True)
 
