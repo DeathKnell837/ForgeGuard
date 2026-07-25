@@ -1116,7 +1116,7 @@ st.markdown(f"""
         </button>
     </div>
     <div>
-        <span class="badge-gold">NDMC CITE THESIS CREDENTIAL</span>
+        <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
