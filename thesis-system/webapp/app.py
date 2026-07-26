@@ -461,7 +461,18 @@ button[data-testid="stSidebarCollapsedControl"],
     z-index: 1000000 !important;
 }
 
-/* The app-owned sidebar launcher is intentionally small and always visible. */
+/* HIDE SIDEBAR << COLLAPSE ARROW BUTTON AS REQUESTED */
+[data-testid="stSidebarCollapseButton"],
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+button[aria-label*="Collapse"],
+button[aria-label*="collapse"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* The app-owned ☰ sidebar launcher is always visible in top-left */
 .forgeguard-sidebar-launcher {
     position: fixed !important;
     top: 0.7rem !important;
@@ -470,19 +481,25 @@ button[data-testid="stSidebarCollapsedControl"],
     width: 2.35rem !important;
     height: 2.35rem !important;
     padding: 0 !important;
-    border: 1px solid rgba(139, 92, 246, 0.65) !important;
+    border: 1.5px solid #C9A15F !important;
     border-radius: 9px !important;
     background: #141A24 !important;
-    color: #C4B5FD !important;
+    color: #C9A15F !important;
     cursor: pointer !important;
     font-size: 1.25rem !important;
     line-height: 1 !important;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
 }
 
 .forgeguard-sidebar-launcher:hover {
-    background: #232D3C !important;
+    background: #1B222D !important;
+    border-color: #F8FAFC !important;
     color: #FFFFFF !important;
+    transform: scale(1.05) !important;
 }
 
 /* STREAMLIT SIDEBAR SURFACE STYLING */
@@ -1086,34 +1103,47 @@ components.html("""
 <script>
 (() => {
     const doc = window.parent.document;
-    const openSidebar = () => {
-        const nativeToggle = [...doc.querySelectorAll('[data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"], button')]
-            .find((element) => {
-                const label = (element.getAttribute('aria-label') || '').toLowerCase();
-                const text = (element.textContent || '').toLowerCase();
-                return element.dataset.testid === 'stSidebarCollapsedControl'
-                    || element.dataset.testid === 'collapsedControl'
-                    || /open sidebar|expand sidebar|show sidebar/.test(label)
-                    || /open sidebar|expand sidebar/.test(text);
-            });
-        if (nativeToggle) nativeToggle.click();
+    const toggleSidebar = () => {
+        const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
+        if (!sidebar) return;
 
-        // Some Streamlit Cloud builds do not render a public collapsed-toggle
-        // element. Their sidebar still uses aria-expanded for the visual state,
-        // so restore that state directly as a reliable fallback.
-        window.setTimeout(() => {
-            const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
-            if (sidebar && sidebar.getAttribute('aria-expanded') === 'false') {
-                sidebar.setAttribute('aria-expanded', 'true');
-                sidebar.style.setProperty('transform', 'translateX(0)', 'important');
-                sidebar.style.setProperty('left', '0', 'important');
-                sidebar.style.setProperty('margin-left', '0', 'important');
-                sidebar.style.setProperty('visibility', 'visible', 'important');
-                sidebar.style.setProperty('min-width', 'var(--sidebar-width, 21rem)', 'important');
-                sidebar.style.setProperty('max-width', 'var(--sidebar-width, 21rem)', 'important');
+        const style = window.getComputedStyle(sidebar);
+        const transform = style.transform || style.webkitTransform || '';
+        
+        const isCollapsedByTransform = transform && transform !== 'none' && transform.includes('matrix') && parseFloat(transform.split(',')[4]) < -50;
+        const isCollapsedByDisplay = style.display === 'none' || style.visibility === 'hidden';
+        const isCollapsedByAttr = sidebar.getAttribute('aria-expanded') === 'false';
+        
+        const isClosed = isCollapsedByTransform || isCollapsedByDisplay || isCollapsedByAttr;
+
+        if (isClosed) {
+            const nativeExpand = doc.querySelector('[data-testid="stSidebarCollapsedControl"] button, [data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"]');
+            if (nativeExpand) {
+                nativeExpand.click();
             }
-        }, 50);
+            sidebar.setAttribute('aria-expanded', 'true');
+            sidebar.style.setProperty('transform', 'translateX(0)', 'important');
+            sidebar.style.setProperty('left', '0', 'important');
+            sidebar.style.setProperty('margin-left', '0', 'important');
+            sidebar.style.setProperty('visibility', 'visible', 'important');
+            sidebar.style.setProperty('display', 'block', 'important');
+            sidebar.style.setProperty('min-width', 'var(--sidebar-width, 21rem)', 'important');
+            sidebar.style.setProperty('max-width', 'var(--sidebar-width, 21rem)', 'important');
+            sidebar.style.setProperty('width', 'var(--sidebar-width, 21rem)', 'important');
+        } else {
+            const nativeCollapse = doc.querySelector('[data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapseButton"]');
+            if (nativeCollapse) {
+                nativeCollapse.click();
+            }
+            sidebar.setAttribute('aria-expanded', 'false');
+            sidebar.style.setProperty('transform', 'translateX(-100%)', 'important');
+            sidebar.style.setProperty('visibility', 'hidden', 'important');
+            sidebar.style.setProperty('min-width', '0px', 'important');
+            sidebar.style.setProperty('max-width', '0px', 'important');
+            sidebar.style.setProperty('width', '0px', 'important');
+        }
     };
+
     const wireControls = () => {
         let launcher = doc.getElementById('forgeguard-sidebar-launcher');
         if (!launcher) {
@@ -1121,15 +1151,18 @@ components.html("""
             launcher.id = 'forgeguard-sidebar-launcher';
             launcher.type = 'button';
             launcher.className = 'forgeguard-sidebar-launcher';
-            launcher.title = 'Open model controls';
-            launcher.setAttribute('aria-label', 'Open model controls');
+            launcher.title = 'Toggle sidebar controls';
+            launcher.setAttribute('aria-label', 'Toggle sidebar controls');
             launcher.textContent = '☰';
             doc.body.appendChild(launcher);
         }
-        launcher.onclick = openSidebar;
-        const modelButton = doc.getElementById('forgeguard-model-controls');
-        if (modelButton) modelButton.onclick = openSidebar;
+        launcher.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSidebar();
+        };
     };
+
     wireControls();
     window.setInterval(wireControls, 500);
 })();
@@ -1142,9 +1175,6 @@ st.markdown(f"""
         {SVG_SHIELD}
         ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
     </div>
-    <button id="forgeguard-model-controls" class="nav-toggle-btn" type="button" aria-label="Open model controls">
-        ☰&nbsp; MODEL CONTROLS &amp; SLIDERS
-    </button>
     <div>
         <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
     </div>
