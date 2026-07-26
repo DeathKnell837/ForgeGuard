@@ -546,13 +546,13 @@ div[class*="stToast"],
 }
 
 /* Force Streamlit Red accents to Violet */
-[style*="rgb(255, 75, 75)"], [style*="#ff4b4b"], [style*="RGB(255, 75, 75)"] {
+[style*="rgb(255, 75, 75)"], [style*="#ff4b4b"], [style*="#FF4B4B"], [style*="RGB(255, 75, 75)"] {
     background-color: #8B5CF6 !important;
     color: #8B5CF6 !important;
     border-color: #8B5CF6 !important;
 }
 
-/* VIOLET SLIDERS */
+/* VIOLET SLIDERS TRACK & THUMB */
 div[data-baseweb="slider"] [role="slider"] {
     background-color: #8B5CF6 !important;
     border-color: #8B5CF6 !important;
@@ -563,6 +563,10 @@ div[data-baseweb="slider"] div[style*="background"] {
     background-color: #8B5CF6 !important;
 }
 
+div[data-baseweb="slider"] > div > div > div {
+    background-color: #8B5CF6 !important;
+}
+
 div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
 div[data-baseweb="slider"] + div {
     color: #A78BFA !important;
@@ -570,7 +574,7 @@ div[data-baseweb="slider"] + div {
     font-size: 0.82rem !important;
 }
 
-/* STACKED MODEL PICKER CARDS */
+/* STACKED MODEL PICKER CARDS & RADIO DOT (VIOLET ACCENT) */
 div[data-testid="stRadio"] label span {
     color: #E2E8F0 !important;
     font-size: 0.88rem !important;
@@ -599,7 +603,7 @@ div[data-testid="stRadio"] div[data-testid="stMarkdownContainer"] p {
 }
 
 div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
-    border-color: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(139, 92, 246, 0.5) !important;
     background: #222B38 !important;
 }
 
@@ -614,14 +618,28 @@ div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] spa
     font-weight: 700 !important;
 }
 
+div[data-baseweb="radio"] div[aria-checked="true"] {
+    background-color: #8B5CF6 !important;
+    border-color: #8B5CF6 !important;
+}
+
+div[data-baseweb="radio"] input:checked + div {
+    background-color: #8B5CF6 !important;
+    border-color: #8B5CF6 !important;
+}
+
+div[data-baseweb="radio"] div[aria-checked="true"] > div {
+    background-color: #FFFFFF !important;
+}
+
 div[data-testid="stRadio"] div[role="radiogroup"] div[style*="background"] {
     background-color: #8B5CF6 !important;
 }
 
-/* FILE UPLOADER STYLING */
+/* FILE UPLOADER STYLING (UNIFORM VIOLET #8B5CF6 BORDER) */
 div[data-testid="stFileUploader"] {
     background: #1B222D !important;
-    border: 2px dashed rgba(139, 92, 246, 0.3) !important;
+    border: 2px dashed rgba(139, 92, 246, 0.4) !important;
     border-radius: 14px !important;
     padding: 1.2rem !important;
     transition: all 0.2s ease !important;
