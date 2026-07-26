@@ -1082,7 +1082,8 @@ with st.sidebar:
         "Active architecture",
         options=model_options,
         index=0,
-        key="model_architecture"
+        key="model_architecture",
+        help="This picks which AI model checks your receipt for fakes. MobileNetV2 is fast and works well even on basic phones, which is why it is recommended. ResNet50 is slower but more thorough. Basic CNN is a simple version used only for comparison."
     )
     
     selected_model_option = st.session_state.get("model_architecture", model_choice)
@@ -1101,11 +1102,11 @@ with st.sidebar:
     
     ela_quality = st.slider(
         "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
-        help="JPEG quality used to re-compress the image for Error Level Analysis."
+        help="This controls how closely the scan looks for hidden editing marks. Higher numbers catch smaller changes. 90 works well for most receipts."
     )
     ela_scale = st.slider(
         "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
-        help="Multiplier scale factor to brighten compression error artifacts."
+        help="This makes any editing marks the scan finds show up brighter and easier to see in the result. It does not change accuracy, only how visible the evidence looks."
     )
     
     st.markdown(f"""
@@ -1234,7 +1235,12 @@ uploaded_file = None
 # ============================================================
 with main_tab1:
     st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.4rem;'>Upload or Capture Receipt</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 0.9rem; line-height: 1.55;">
+        Upload a GCash or Maya receipt screenshot below to check if it looks real or edited. Hover any question mark icon for a simple explanation of what a setting does.
+    </div>
+    """, unsafe_allow_html=True)
     
     tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
     
@@ -1486,11 +1492,11 @@ with main_tab1:
 # TAB 2: RECEIPT FORGERY GENERATOR TOOL
 # ============================================================
 with main_tab2:
-    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.75rem;'>Generate Synthetic Evidence (GCash Receipt)</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.4rem;'>Generate Synthetic Evidence (GCash Receipt)</h3>", unsafe_allow_html=True)
     
     st.markdown("""
     <div style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 1.25rem; line-height: 1.55;">
-        Configure transaction parameters below to generate authentic or forged GCash mobile receipt screenshots. Introduced forgery artifacts (amount alteration, reference fabrication, name modification) serve as ground-truth test data for the ELA detector.
+        Fill in the details below to create a sample receipt for testing, you can generate a clean one or one with a specific kind of edit.
     </div>
     """, unsafe_allow_html=True)
     
