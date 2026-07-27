@@ -1,0 +1,23 @@
+{
+  "Basic_CNN": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "latency_ms": 12.4
+  },
+  "MobileNetV2": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "latency_ms": 28.5
+  },
+  "ResNet50": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "latency_ms": 95.2
+  }
+}
