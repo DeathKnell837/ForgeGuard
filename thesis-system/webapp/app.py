@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-27_23:48:00_UTC
+# FORCE_FRESH_BUILD: 2026-07-27_23:51:00_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.0.8-FRESH-BUILD)
+ForgeGuard — Streamlit Web Application (v1.0.9-DEFENSIVE-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -1305,9 +1305,46 @@ with main_tab1:
     # EVIDENCE EVALUATION RESULTS BLOCK
     if uploaded_file is not None:
         try:
+            from PIL import ImageOps
             image_bytes = uploaded_file.read() if hasattr(uploaded_file, 'read') else uploaded_file.getvalue()
             pil_img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
             
+            # Normalize EXIF orientation (fix mobile sideways photos)
+            try:
+                pil_img = ImageOps.exif_transpose(pil_img)
+            except Exception:
+                pass
+                
+            w, h = pil_img.size
+            arr = np.array(pil_img, dtype=np.float32)
+            std_dev = float(np.std(arr))
+            aspect_ratio = h / float(w)
+            
+            # ROBUST PRE-VALIDATION COUNTERS (Rejection of Non-Receipt / Blank / Low-Res Images)
+            if w < 180 or h < 240:
+                st.markdown(f"""
+                <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
+                    <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
+                    <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Please upload a clear, high-resolution mobile receipt screenshot (minimum 180x240px).</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.stop()
+            elif std_dev < 6.0:
+                st.markdown(f"""
+                <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
+                    <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
+                    <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">The uploaded image contains no readable visual variation or text. Please upload an official transaction receipt.</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.stop()
+            elif aspect_ratio < 0.65:
+                st.markdown(f"""
+                <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
+                    <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ NON-STANDARD LANDSCAPE FORMAT DETECTED</div>
+                    <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Mobile wallet receipts (GCash/Maya) are rendered in vertical portrait orientation. Processing evidence with structural layout notice...</div>
+                </div>
+                """, unsafe_allow_html=True)
+
             st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
             st.markdown("<div class='eyebrow-gold'>EXPLICIT VERDICT & EXPLAINABLE AI</div>", unsafe_allow_html=True)
             st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.75rem;'>Forensic Evidence Analysis</h3>", unsafe_allow_html=True)
