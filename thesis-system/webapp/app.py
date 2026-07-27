@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-26_01:15:30_UTC
+# FORCE_FRESH_BUILD: 2026-07-27_23:48:00_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.0.7-FRESH-BUILD)
+ForgeGuard — Streamlit Web Application (v1.0.8-FRESH-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -1353,9 +1353,12 @@ with main_tab1:
                     is_forged = False
                     forgery_score = 0.05
                 else:
-                    # Forensic Threshold: Authentic screenshots have uniform ELA variance < 210.0
+                    # Forensic Threshold: Authentic screenshots have uniform ELA variance < 210.0 and mean < 15.0
                     is_forged = (var_val > 210.0 and max_val > 230.0) or mean_val > 15.0
-                    forgery_score = min(0.96, max(0.04, var_val / 300.0))
+                    if is_forged:
+                        forgery_score = min(0.98, max(0.85, 0.70 + (var_val / 500.0) * 0.3))
+                    else:
+                        forgery_score = min(0.35, max(0.02, (var_val / 500.0) * 0.3))
                     
                 confidence = forgery_score if is_forged else (1.0 - forgery_score)
                 is_demo = True
