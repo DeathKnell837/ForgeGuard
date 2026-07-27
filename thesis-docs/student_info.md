@@ -18,7 +18,7 @@
 
 ---
 
-## Dataset Summary (v2.0.0)
-* **Authentic Receipts:** 104 samples (HighRes PNG + Compressed JPG)
-* **Forged Receipts:** 304 samples (Digitally edited in Photoshop/Gallery + Programmatically generated templates)
-* **Total Dataset Size:** 408 labeled images
+## Dataset Summary (v2.1.0)
+* **Authentic Receipts:** 153 samples (51 real original receipts + 102 augmented)
+* **Forged Receipts:** 165 samples (153 Photoshop/Gallery digitally edited + 12 full synthetic templates)
+* **Total Dataset Size:** 318 balanced labeled images
