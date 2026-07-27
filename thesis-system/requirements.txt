@@ -5,4 +5,5 @@ opencv-python-headless>=4.8.0
 scikit-learn>=1.3.0
 scipy>=1.11.0
 matplotlib>=3.7.0
-# Force container rebuild timestamp: 2026-07-26_01:17:30_UTC
+tensorflow-cpu>=2.13.0
+# Force container rebuild timestamp: 2026-07-27_23:44:00_UTC
