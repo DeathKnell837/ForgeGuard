@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-27_23:51:00_UTC
+# FORCE_FRESH_BUILD: 2026-07-27_23:55:30_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.0.9-DEFENSIVE-BUILD)
+ForgeGuard — Streamlit Web Application (v1.1.0-SMART-DOMAIN-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -834,6 +834,14 @@ div[data-testid="stFileUploader"] section {
     box-shadow: 0 0 25px rgba(52, 211, 153, 0.15), inset 0 0 15px rgba(52, 211, 153, 0.08);
 }
 
+.stamp-warning {
+    border: 3.5px double #EAB308;
+    background: rgba(234, 179, 8, 0.09);
+    color: #EAB308;
+    transform: rotate(-1.5deg);
+    box-shadow: 0 0 25px rgba(234, 179, 8, 0.15), inset 0 0 15px rgba(234, 179, 8, 0.08);
+}
+
 .stamp-title {
     font-family: 'Spectral', Georgia, serif;
     font-size: 1.7rem;
@@ -1337,11 +1345,14 @@ with main_tab1:
                 </div>
                 """, unsafe_allow_html=True)
                 st.stop()
-            elif aspect_ratio < 0.65:
+            # ROBUST DOMAIN CLASSIFIER: Non-Mobile-Receipt Screening
+            is_non_receipt = False
+            if aspect_ratio < 0.70 or aspect_ratio > 3.6:
+                is_non_receipt = True
                 st.markdown(f"""
-                <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                    <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ NON-STANDARD LANDSCAPE FORMAT DETECTED</div>
-                    <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Mobile wallet receipts (GCash/Maya) are rendered in vertical portrait orientation. Processing evidence with structural layout notice...</div>
+                <div style="background: rgba(234,179,8,0.14); border: 2px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
+                    <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE: NON-RECEIPT IMAGE DETECTED</div>
+                    <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.5;">The uploaded image is a general browser/desktop screenshot rather than a mobile wallet transaction slip. ForgeGuard CNN models are specialized for GCash and Maya receipt screenshots.</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -1360,7 +1371,7 @@ with main_tab1:
             weights_path = weights_keras if os.path.exists(weights_keras) else (weights_h5 if os.path.exists(weights_h5) else None)
             
             loaded_model_success = False
-            if weights_path is not None:
+            if not is_non_receipt and weights_path is not None:
                 try:
                     import tensorflow as tf
                     model = tf.keras.models.load_model(weights_path)
@@ -1402,10 +1413,25 @@ with main_tab1:
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.0 if model_key == "mobilenetv2" else (28.0 if model_key == "resnet50" else 42.0))
             
-            # INK STAMP CLASSIFICATION VERDICT
-            verdict_text = "DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED"
-            stamp_class = "stamp-forged" if is_forged else "stamp-auth"
-            sub_reason = "HIGH ELA COMPRESSION & PIXEL VARIANCE DETECTED" if is_forged else "ZERO TAMPERING OR ELA ANOMALIES DETECTED"
+            # INK STAMP CLASSIFICATION VERDICT (OFFICIAL EVIDENCE STAMP)
+            if is_non_receipt:
+                verdict_text = "NON-RECEIPT DOCUMENT DETECTED"
+                stamp_class = "stamp-warning"
+                sub_reason = "EVIDENCE OUT OF DOMAIN — UPLOAD GCASH / MAYA MOBILE WALLET RECEIPT"
+                verdict_color = "#EAB308"
+                verdict_label = "OUT OF DOMAIN"
+            elif is_forged:
+                verdict_text = "DIGITAL FORGERY DETECTED"
+                stamp_class = "stamp-forged"
+                sub_reason = "HIGH ELA COMPRESSION & PIXEL VARIANCE DETECTED"
+                verdict_color = "#F87171"
+                verdict_label = "FORGED"
+            else:
+                verdict_text = "AUTHENTIC RECEIPT VERIFIED"
+                stamp_class = "stamp-auth"
+                sub_reason = "ZERO TAMPERING OR ELA ANOMALIES DETECTED"
+                verdict_color = "#34D399"
+                verdict_label = "AUTHENTIC"
             
             st.markdown(f"""
             <div class="stamp-container">
@@ -1414,7 +1440,7 @@ with main_tab1:
                     <div class="stamp-sub">{sub_reason}</div>
                 </div>
                 <div class="stamp-meta-bar">
-                    <span>[VERDICT: <strong style="color: {'#F87171' if is_forged else '#34D399'};">{'FORGED' if is_forged else 'AUTHENTIC'}</strong>]</span>
+                    <span>[VERDICT: <strong style="color: {verdict_color};">{verdict_label}</strong>]</span>
                     <span>[CONFIDENCE: <strong style="color: #A78BFA;">{confidence * 100:.1f}%</strong>]</span>
                     <span>[ACTIVE MODEL: <strong style="color: #F8FAFC;">{model_display_name.upper()}</strong>]</span>
                     <span>[LATENCY: <strong style="color: #A78BFA;">{elapsed_ms:.1f}ms</strong>]</span>
