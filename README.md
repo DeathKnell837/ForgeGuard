@@ -4,6 +4,7 @@
 
 [![Live System Demo](https://img.shields.io/badge/Live_System-forgeguard.streamlit.app-8B5CF6?style=for-the-badge&logo=streamlit)](https://forgeguard.streamlit.app/)
 [![Title Defense](https://img.shields.io/badge/Title_Defense-PASSED-34D399?style=for-the-badge)](https://forgeguard.streamlit.app/)
+[![Chapters 1 & 2](https://img.shields.io/badge/Proposal-Chapters_1_%26_2_Completed-007ACC?style=for-the-badge)](https://forgeguard.streamlit.app/)
 
 📁 **Google Drive Folder:** [All Thesis Documents & Resources](https://drive.google.com/drive/folders/1bzRsI6Ywo2yRni5Ij7InCLh0CL0OO90_?usp=drive_link)
 
@@ -22,47 +23,56 @@
 
 ---
 
+## 📊 Empirical Model Training Results (Google Colab GPU)
+
+| CNN Architecture | Parameters | Accuracy | Precision | Recall | F1-Score | Latency (ms) | Training Time |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 🥇 **Basic CNN** | **~2.1M** | **100.00%** | **100.00%** | **100.00%** | **1.0000** | **8.61 ms** | 198.50 s |
+| 🥈 **MobileNetV2** | **~3.4M** | **95.74%** | **94.67%** | **100.00%** | **0.9726** | **28.04 ms** | **76.59 s** |
+| 🥉 **ResNet50** | **~23.5M** | **75.53%** | **75.53%** | **100.00%** | **0.8606** | **109.34 ms** | 413.11 s |
+
+---
+
+## 🖼️ Dataset v2.2.0 Summary (777 Labeled Images)
+
+* **Authentic Receipts:** **153 Images** (51 real original GCash/Maya screenshots + 102 clean augmented)
+* **Forged Receipts:** **624 Images**
+  * **`amount_alteration`:** 153 images (Flawless Karla-Bold digital edits in GCash `#1972F9` blue)
+  * **`ref_fabrication`:** 153 images (Flawless Karla-Regular 13-digit ref edits)
+  * **`name_modification`:** 153 images (Flawless Poppins-SemiBold name edits)
+  * **`ai_generated_template`:** 153 images (Full AI synthetic templates)
+  * **`full_template`:** 12 images (Legacy templates)
+
+---
+
 ## 📅 Timeline & Status
 
 | Milestone | Status | Details |
 |:---|:---:|:---|
 | **Title Defense** | ✅ **PASSED** | Passed in July 2026 with approved title |
-| **Dataset Preparation** | ✅ **v2.0.0 Ready** | 408 labeled images (104 Authentic + 304 Forged) |
-| **System Demo** | ✅ **Deployed** | Live at [forgeguard.streamlit.app](https://forgeguard.streamlit.app/) |
-| **Proposal Writing** | 🔄 **In Progress** | Chapters 1 & 2 (Introduction & Literature Review) |
+| **Dataset Preparation** | ✅ **v2.2.0 Ready** | 777 labeled images (153 Authentic + 624 Forged) |
+| **Model GPU Training** | ✅ **Completed** | Models trained on Colab GPU (`.keras` weights saved) |
+| **Chapter 1 Writing** | ✅ **Completed** | Available at [`thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md`](thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md) |
+| **Chapter 2 Writing** | ✅ **Completed** | Available at [`thesis-docs/Chapter2_Review_of_Related_Literature.md`](thesis-docs/Chapter2_Review_of_Related_Literature.md) |
+| **Forensic Guide** | ✅ **Completed** | Available at [`thesis-docs/gcash_receipt_forensics_guide.md`](thesis-docs/gcash_receipt_forensics_guide.md) |
+| **Live System Demo** | ✅ **Deployed** | Live Streamlit Cloud app at [forgeguard.streamlit.app](https://forgeguard.streamlit.app/) |
 
 ---
 
-## 📖 Study Overview & Research Questions
+## 📁 Workspace Structure
 
-### Problem Statement
-The rapid adoption of mobile wallets (GCash, Maya) has led to a rise in screenshot-based payment fraud. Buyers manipulate transaction details in photo editors, gallery markup, or synthetic receipt generators to deceive small business owners and student entrepreneurs into releasing goods without payment.
-
-### Core Objective
-To comparatively evaluate three Convolutional Neural Network (CNN) architectures — **Basic CNN (~2.1M params)**, **ResNet50 (~23.5M params)**, and **MobileNetV2 (~3.4M params)** — using **Error Level Analysis (ELA)** to detect pixel-level digital forgery in mobile wallet receipt screenshots across varying JPEG compression levels.
-
-### 5 Statement of the Problem (SOP) Questions
-1. **Accuracy by Forgery Type:** Classification accuracy on (1.1) Manually edited receipts vs (1.2) Programmatically generated fake receipts.
-2. **Standard Evaluation Metrics:** Precision, Recall, and F1-score across architectures.
-3. **Computational Efficiency:** Real-time inference speed (latency in ms) and resource requirements.
-4. **Compression Robustness:** Classification performance on (4.1) Original high-resolution vs (4.2) Heavily compressed images.
-5. **Practical Deployment:** Best architecture recommendation for GPU-free devices used by NDMC student entrepreneurs.
-
----
-
-## 📁 Workspace Layout
-
-| Directory | Purpose |
-|:---|:---|
-| **`thesis-docs/`** | Official thesis proposals, guidelines, PDFs, student info, Chapter 1 & 2 drafts |
-| **`thesis-system/`** | Python system code, ELA preprocessors, dataset generator, models, training scripts |
-
----
-
-## 📚 Primary Academic References
-* [1] C. Artaud et al., *"Receipt dataset for fraud detection,"* IWCDF, 2017.
-* [2] K. S. Vaishnavi & K. P. Narayan, *"FakePay: Real-time UPI fraud detection using OCR & CNN,"* Technical Report, 2026.
-* [3] A. M. Nagm et al., *"Detecting image manipulation with ELA-CNN integration,"* *PeerJ Computer Science*, vol. 10, p. e2205, 2024.
-* [4] K. He et al., *"Deep residual learning for image recognition,"* IEEE CVPR, 2016.
-* [5] M. Sandler et al., *"MobileNetV2: Inverted residuals and linear bottlenecks,"* IEEE CVPR, 2018.
-* [6] IEEE 9142188: *"Image Forgery Detection Based on ELA and Deep Learning"*.
+```
+THESIS/
+├── thesis-docs/                # Academic Proposal & Guidelines
+│   ├── Chapter1_Digital_Deception_Mobile_Wallet.md
+│   ├── Chapter2_Review_of_Related_Literature.md
+│   ├── gcash_receipt_forensics_guide.md
+│   └── summary_for_daniela.md
+└── thesis-system/              # System Implementation & Models
+    ├── assets/fonts/           # Official Karla & Poppins font assets
+    ├── dataset/                # Dataset v2.2.0 (777 images + metadata.json)
+    ├── models/                 # Trained .keras weights & evaluation_metrics.json
+    ├── preprocessing/          # Error Level Analysis (ELA) engine
+    ├── tools/                  # Forgery generator & synthetic receipt tools
+    └── training/               # Python train.py & Colab notebook (.ipynb)
+```
