@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-27_23:55:30_UTC
+# FORCE_FRESH_BUILD: 2026-07-27_23:58:00_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.1.0-SMART-DOMAIN-BUILD)
+ForgeGuard — Streamlit Web Application (v1.1.1-AIRTIGHT-DOMAIN-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -1346,15 +1346,30 @@ with main_tab1:
                 """, unsafe_allow_html=True)
                 st.stop()
             # ROBUST DOMAIN CLASSIFIER: Non-Mobile-Receipt Screening
-            is_non_receipt = False
             if aspect_ratio < 0.70 or aspect_ratio > 3.6:
-                is_non_receipt = True
                 st.markdown(f"""
-                <div style="background: rgba(234,179,8,0.14); border: 2px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
-                    <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE: NON-RECEIPT IMAGE DETECTED</div>
-                    <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.5;">The uploaded image is a general browser/desktop screenshot rather than a mobile wallet transaction slip. ForgeGuard CNN models are specialized for GCash and Maya receipt screenshots.</div>
+                <div class="stamp-container" style="margin-top: 1.5rem;">
+                    <div class="stamp-box stamp-warning">
+                        <div class="stamp-title">NON-RECEIPT DOCUMENT DETECTED</div>
+                        <div class="stamp-sub">EVIDENCE OUT OF DOMAIN — UPLOAD GCASH / MAYA MOBILE WALLET RECEIPT</div>
+                    </div>
+                    <div class="stamp-meta-bar">
+                        <span>[VERDICT: <strong style="color: #EAB308;">OUT OF DOMAIN</strong>]</span>
+                        <span>[RESOLUTION: <strong style="color: #A78BFA;">{w}x{h}px</strong>]</span>
+                        <span>[ASPECT RATIO: <strong style="color: #F8FAFC;">{aspect_ratio:.2f} (LANDSCAPE/DESKTOP)</strong>]</span>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
+                    <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE NOTICE</div>
+                    <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.55;">
+                        The uploaded image (desktop/wallpaper screenshot) is classified as a general non-receipt image. 
+                        ForgeGuard neural network models (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>.
+                        Please upload an official transaction slip to perform ELA forgery detection.
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
+                st.stop()
 
             st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
             st.markdown("<div class='eyebrow-gold'>EXPLICIT VERDICT & EXPLAINABLE AI</div>", unsafe_allow_html=True)
