@@ -46,20 +46,19 @@ This workspace customizations file provides context and instructions to the Anti
 > All thesis titles must contain the specific algorithms or mathematical models directly in the text (e.g., *Explainable Transfer Learning*, *Hybrid Neural Networks*, *Multi-Engine Neural Networks*, *Steganography*, *Genetic Algorithms*). This ensures that the topic is classified as **100% Computer Science** rather than Information Technology (IT) capstones. Avoid generic prefixes like "Automated System" or "Monitoring".
 
 > [!CRITICAL]
-> **Rule 5: Repository Separation — TWO SEPARATE REPOS, NOT MIRRORS**
-> These are **two different repositories** with **different purposes** and **different content**. They must NEVER be identical mirrors.
+> **Rule 5: Single Workspace (`c:\Users\USER\Desktop\THESIS`) with Dual Remotes**
+> The single local workspace is `c:\Users\USER\Desktop\THESIS`. Never create separate clones on Desktop.
 >
-> | Repository | Purpose | Local Path | Contains |
-> |:-----------|:--------|:-----------|:---------|
-> | `DeathKnell837/NDMC-BSCS-THESIS-PREP` | Thesis writing workspace | `c:\Users\USER\Desktop\THESIS` | `thesis-docs/`, `README.md`, `.agents/`, thesis PDFs, proposals, Chapter 1 & 2 drafts |
-> | `DeathKnell837/ForgeGuard` | Live Streamlit Cloud system | Separate clone (e.g., `c:\Users\USER\Desktop\ForgeGuard`) | `webapp/`, `.streamlit/`, `requirements.txt`, `preprocessing/`, `tools/`, `models/`, `dataset/`, system README |
+> | Remote Name | Target Repository | Purpose |
+> |:------------|:------------------|:--------|
+> | `origin` | `DeathKnell837/NDMC-BSCS-THESIS-PREP` | Primary thesis workspace repository (`thesis-docs/`, `thesis-system/`, `README.md`) |
+> | `forgeguard` | `DeathKnell837/ForgeGuard` | Live Streamlit Cloud deployment target (`forgeguard.streamlit.app`) |
 >
 > **MANDATORY RULES:**
-> * The `THESIS` folder pushes to `NDMC-BSCS-THESIS-PREP` only. Do NOT add ForgeGuard as a push URL on this remote.
-> * The `ForgeGuard` folder pushes to `DeathKnell837/ForgeGuard` only. This is the Streamlit Cloud deployment target.
-> * When making **system code changes** (webapp, models, preprocessing), edit in the ForgeGuard clone and push to ForgeGuard only.
-> * When making **thesis document changes** (Chapter 1, Chapter 2, guidelines, student info), edit in the THESIS folder and push to NDMC-BSCS-THESIS-PREP only.
-> * **NEVER** set up dual-push (multiple push URLs on one remote). Each local repo has ONE remote pointing to ONE GitHub repository.
+> * All work is conducted inside `c:\Users\USER\Desktop\THESIS`.
+> * Thesis documentation and writing stay inside `thesis-docs/`.
+> * System implementation, dataset, models, and webapp stay inside `thesis-system/` and `webapp/`.
+> * Push to `origin` for thesis prep sync; push to `forgeguard` when deploying webapp changes to Streamlit Cloud.
 
 > [!IMPORTANT]
 > **Rule 6: Approved Title is Final**
