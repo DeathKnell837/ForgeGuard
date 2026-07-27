@@ -4,20 +4,23 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1_score": 1.0,
-    "latency_ms": 12.4
+    "latency_ms": 8.61,
+    "train_duration_s": 198.50
   },
   "MobileNetV2": {
-    "accuracy": 1.0,
-    "precision": 1.0,
+    "accuracy": 0.9574,
+    "precision": 0.9467,
     "recall": 1.0,
-    "f1_score": 1.0,
-    "latency_ms": 28.5
+    "f1_score": 0.9726,
+    "latency_ms": 28.04,
+    "train_duration_s": 76.59
   },
   "ResNet50": {
-    "accuracy": 1.0,
-    "precision": 1.0,
+    "accuracy": 0.7553,
+    "precision": 0.7553,
     "recall": 1.0,
-    "f1_score": 1.0,
-    "latency_ms": 95.2
+    "f1_score": 0.8606,
+    "latency_ms": 109.34,
+    "train_duration_s": 413.11
   }
 }
