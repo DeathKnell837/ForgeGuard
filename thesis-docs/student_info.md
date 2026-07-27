@@ -1,25 +1,24 @@
-# Student Profiles
+# Student & Thesis Profile
 
 ## Group Members
-* **Daniela S. Ungab** (BSCS-4)
 * **Rogie P. Bacanto** (BSCS-4)
-
-## School
-* **School:** Notre Dame of Midsayap College (NDMC), Midsayap, Cotabato
-* **College:** College of Information Technology and Engineering (CITE)
-* **Program:** Bachelor of Science in Computer Science
-* **Year Level:** 4th Year
-* **Status:** Enrolled (June 2026)
-
-## Thesis Details
-* **Subject:** CS Thesis Writing 1
+* **Daniela S. Ungab** (BSCS-4)
+* **School:** Notre Dame of Midsayap College (NDMC), College of Information Technology and Engineering (CITE)
 * **Adviser:** Ms. Doris Ann Mariano
 * **Research Teacher:** Mr. Nero L. Hontiveros
-* **Dean:** Engr. Mark Bryan C. Tenebroso, PCPE, ME-CPE
-* **Current Stage:** Proposal Writing (Chapters 1 & 2)
+* **Dean:** Engr. Mark Bryan C. Tenebroso
 
-### Approved Title
-**"Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery"**
+---
 
-### Google Drive
-📁 [All Thesis Files](https://drive.google.com/drive/folders/1bzRsI6Ywo2yRni5Ij7InCLh0CL0OO90_?usp=drive_link)
+## Approved Thesis Title
+* **Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery*
+* **System Name:** ForgeGuard
+* **Title Defense Status:** **PASSED / COMPLETED (July 2026)**
+* **Current Stage:** **Week 5+ — Chapters 1 & 2 Writing + Model Training Preparation**
+
+---
+
+## Dataset Summary (v2.0.0)
+* **Authentic Receipts:** 104 samples (HighRes PNG + Compressed JPG)
+* **Forged Receipts:** 304 samples (Digitally edited in Photoshop/Gallery + Programmatically generated templates)
+* **Total Dataset Size:** 408 labeled images
