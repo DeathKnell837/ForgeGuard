@@ -1,29 +1,46 @@
-# Summary Sheet for Daniela — ForgeGuard BSCS Thesis
+# 📋 Summary Sheet for Daniela & Rogie — BSCS Thesis Writing 1 Progress
 
-## 1. Thesis Quick Info
-* **Approved Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery*
-* **System Name:** ForgeGuard
-* **Status:** **Title Defense PASSED!** Currently in **Week 5+ (Proposal Writing for Chapters 1 & 2)**.
-* **Live System Demo:** [forgeguard.streamlit.app](https://forgeguard.streamlit.app/)
-
----
-
-## 2. Core Research Objectives (5 Statement of the Problem Questions)
-1. **SOP 1:** What is the classification accuracy of **Basic CNN**, **ResNet50**, and **MobileNetV2** in detecting (1.1) Manually edited transaction receipts vs (1.2) Programmatically generated fake receipts?
-2. **SOP 2:** What is the performance in terms of **Precision, Recall, and F1-score**?
-3. **SOP 3:** What is the **inference speed (latency in ms)** and computational resource requirement of each model?
-4. **SOP 4:** Is there a significant difference in classification accuracy between (4.1) Original high-resolution screenshots vs (4.2) Heavily compressed images?
-5. **SOP 5:** Which architecture offers the most practical balance of accuracy and efficiency for local online sellers and student entrepreneurs at NDMC?
+**Authors:** Daniela S. Ungab & Rogie P. Bacanto (BSCS-4)  
+**School:** Notre Dame of Midsayap College (NDMC), College of Information Technology and Engineering (CITE)  
+**Adviser:** Ms. Doris Ann Mariano  
+**Research Teacher:** Mr. Nero L. Hontiveros  
+**Status:** **TITLE DEFENSE PASSED** | **Chapters 1 & 2 Completed** | **Dataset v2.2.0 (777 images) Trained**  
+**Approved Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery*  
+**System Name:** ForgeGuard  
+**Live App Link:** [forgeguard.streamlit.app](https://forgeguard.streamlit.app/)
 
 ---
 
-## 3. Dataset Status
-* **Authentic Receipts:** 104 samples (from extracted GCash/Maya screenshots + data augmentation)
-* **Forged Receipts:** 304 samples (104 Photoshop/Gallery digitally edited + 200 programmatically generated)
-* **Total:** 408 labeled receipt images
+## 🌟 Key Project Highlights
+
+### 1. 📄 Official Document Files
+- 📘 **Chapter 1 (Introduction & Proposal Outline):** [`thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md`](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md)
+- 📗 **Chapter 2 (Review of Related Literature & Studies - RRL):** [`thesis-docs/Chapter2_Review_of_Related_Literature.md`](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/Chapter2_Review_of_Related_Literature.md)
+- 🔍 **GCash Forensic & Design Guide:** [`thesis-docs/gcash_receipt_forensics_guide.md`](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/gcash_receipt_forensics_guide.md)
 
 ---
 
-## 4. Suggested Chapter 2 (RRL) Flow
-* Digital Payment Fraud $\rightarrow$ Digital Image Forgery $\rightarrow$ Image Forensics $\rightarrow$ Error Level Analysis (ELA) $\rightarrow$ Deep Learning for Image Forgery Detection $\rightarrow$ CNN Architectures (Basic CNN, ResNet50, MobileNetV2) $\rightarrow$ Image Compression Effects $\rightarrow$ Performance Evaluation Metrics $\rightarrow$ AI Deployment for Mobile Devices
-* Cited IEEE Paper: *"Image Forgery Detection Based on ELA and Deep Learning"* (IEEE 9142188)
+### 2. 📊 Empirical Model Training Results (Google Colab GPU)
+
+| Model Architecture | Parameters | Accuracy | Precision | Recall | F1-Score | Inference Latency | Training Time |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 🥇 **Basic CNN** | **~2.1M** | **100.00%** | **100.00%** | **100.00%** | **1.0000** | **8.61 ms** | 198.50 s |
+| 🥈 **MobileNetV2** | **~3.4M** | **95.74%** | **94.67%** | **100.00%** | **0.9726** | **28.04 ms** | **76.59 s** |
+| 🥉 **ResNet50** | **~23.5M** | **75.53%** | **75.53%** | **100.00%** | **0.8606** | **109.34 ms** | 413.11 s |
+
+---
+
+### 3. 🖼️ Dataset v2.2.0 Breakdown (777 Total Images)
+- **153 Authentic Receipts:** 51 real original GCash/Maya screenshots + 102 augmented receipts.
+- **624 Forged Receipts:**
+  - `amount_alteration`: 153 images (Karla-Bold in GCash `#1972F9` blue)
+  - `ref_fabrication`: 153 images (Karla-Regular for 13-digit reference numbers)
+  - `name_modification`: 153 images (Poppins-SemiBold for recipient names)
+  - `ai_generated_template`: 153 images (Full AI synthetic templates)
+  - `full_template`: 12 images (Legacy templates)
+
+---
+
+## 🚀 Next Steps for Thesis Defense Prep:
+1. **Adviser Review:** Present Chapters 1 & 2 draft documents to Ms. Doris Ann Mariano.
+2. **Web App Deployment Sync:** Live app on Streamlit Cloud is updated with trained models and ELA preprocessor.
