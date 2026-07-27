@@ -1,333 +1,4677 @@
 {
-  "version": "2.1.0",
-  "updated_at": "2026-07-27",
-  "dataset_summary": {
-    "total_authentic": 153,
-    "total_forged": 165,
-    "total_samples": 318
-  },
+  "version": "2.2.0",
+  "total_samples": 777,
+  "authentic_count": 153,
+  "forged_count": 624,
   "categories": {
-    "authentic": [
-      "authentic_0001.png",
-      "authentic_0002.png",
-      "authentic_0003.png",
-      "authentic_0004.png",
-      "authentic_0005.png",
-      "authentic_0006.png",
-      "authentic_0007.png",
-      "authentic_0008.png",
-      "authentic_0009.png",
-      "authentic_0010.png",
-      "authentic_0011.png",
-      "authentic_0012.png",
-      "authentic_0013.png",
-      "authentic_0014.png",
-      "authentic_0015.png",
-      "authentic_0016.png",
-      "authentic_0017.png",
-      "authentic_0018.png",
-      "authentic_0019.png",
-      "authentic_0020.png",
-      "authentic_0021.png",
-      "authentic_0022.png",
-      "authentic_0023.png",
-      "authentic_0024.png",
-      "authentic_0025.png",
-      "authentic_0026.png",
-      "authentic_0027.png",
-      "authentic_0028.png",
-      "authentic_0029.png",
-      "authentic_0030.png",
-      "authentic_0031.png",
-      "authentic_0032.png",
-      "authentic_0033.png",
-      "authentic_0034.png",
-      "authentic_0035.png",
-      "authentic_0036.png",
-      "authentic_0037.png",
-      "authentic_0038.png",
-      "authentic_0039.png",
-      "authentic_0040.png",
-      "authentic_0041.png",
-      "authentic_0042.png",
-      "authentic_0043.png",
-      "authentic_0044.png",
-      "authentic_0045.png",
-      "authentic_0046.png",
-      "authentic_0047.png",
-      "authentic_0048.png",
-      "authentic_0049.png",
-      "authentic_0050.png",
-      "authentic_0051.png",
-      "authentic_0052_aug1.png",
-      "authentic_0053_aug2.png",
-      "authentic_0054_aug1.png",
-      "authentic_0055_aug2.png",
-      "authentic_0056_aug1.png",
-      "authentic_0057_aug2.png",
-      "authentic_0058_aug1.png",
-      "authentic_0059_aug2.png",
-      "authentic_0060_aug1.png",
-      "authentic_0061_aug2.png",
-      "authentic_0062_aug1.png",
-      "authentic_0063_aug2.png",
-      "authentic_0064_aug1.png",
-      "authentic_0065_aug2.png",
-      "authentic_0066_aug1.png",
-      "authentic_0067_aug2.png",
-      "authentic_0068_aug1.png",
-      "authentic_0069_aug2.png",
-      "authentic_0070_aug1.png",
-      "authentic_0071_aug2.png",
-      "authentic_0072_aug1.png",
-      "authentic_0073_aug2.png",
-      "authentic_0074_aug1.png",
-      "authentic_0075_aug2.png",
-      "authentic_0076_aug1.png",
-      "authentic_0077_aug2.png",
-      "authentic_0078_aug1.png",
-      "authentic_0079_aug2.png",
-      "authentic_0080_aug1.png",
-      "authentic_0081_aug2.png",
-      "authentic_0082_aug1.png",
-      "authentic_0083_aug2.png",
-      "authentic_0084_aug1.png",
-      "authentic_0085_aug2.png",
-      "authentic_0086_aug1.png",
-      "authentic_0087_aug2.png",
-      "authentic_0088_aug1.png",
-      "authentic_0089_aug2.png",
-      "authentic_0090_aug1.png",
-      "authentic_0091_aug2.png",
-      "authentic_0092_aug1.png",
-      "authentic_0093_aug2.png",
-      "authentic_0094_aug1.png",
-      "authentic_0095_aug2.png",
-      "authentic_0096_aug1.png",
-      "authentic_0097_aug2.png",
-      "authentic_0098_aug1.png",
-      "authentic_0099_aug2.png",
-      "authentic_0100_aug1.png",
-      "authentic_0101_aug2.png",
-      "authentic_0102_aug1.png",
-      "authentic_0103_aug2.png",
-      "authentic_0104_aug1.png",
-      "authentic_0105_aug2.png",
-      "authentic_0106_aug1.png",
-      "authentic_0107_aug2.png",
-      "authentic_0108_aug1.png",
-      "authentic_0109_aug2.png",
-      "authentic_0110_aug1.png",
-      "authentic_0111_aug2.png",
-      "authentic_0112_aug1.png",
-      "authentic_0113_aug2.png",
-      "authentic_0114_aug1.png",
-      "authentic_0115_aug2.png",
-      "authentic_0116_aug1.png",
-      "authentic_0117_aug2.png",
-      "authentic_0118_aug1.png",
-      "authentic_0119_aug2.png",
-      "authentic_0120_aug1.png",
-      "authentic_0121_aug2.png",
-      "authentic_0122_aug1.png",
-      "authentic_0123_aug2.png",
-      "authentic_0124_aug1.png",
-      "authentic_0125_aug2.png",
-      "authentic_0126_aug1.png",
-      "authentic_0127_aug2.png",
-      "authentic_0128_aug1.png",
-      "authentic_0129_aug2.png",
-      "authentic_0130_aug1.png",
-      "authentic_0131_aug2.png",
-      "authentic_0132_aug1.png",
-      "authentic_0133_aug2.png",
-      "authentic_0134_aug1.png",
-      "authentic_0135_aug2.png",
-      "authentic_0136_aug1.png",
-      "authentic_0137_aug2.png",
-      "authentic_0138_aug1.png",
-      "authentic_0139_aug2.png",
-      "authentic_0140_aug1.png",
-      "authentic_0141_aug2.png",
-      "authentic_0142_aug1.png",
-      "authentic_0143_aug2.png",
-      "authentic_0144_aug1.png",
-      "authentic_0145_aug2.png",
-      "authentic_0146_aug1.png",
-      "authentic_0147_aug2.png",
-      "authentic_0148_aug1.png",
-      "authentic_0149_aug2.png",
-      "authentic_0150_aug1.png",
-      "authentic_0151_aug2.png",
-      "authentic_0152_aug1.png",
-      "authentic_0153_aug2.png"
-    ],
-    "forged": [
-      "amount_alteration\\forged_amount_0001.png",
-      "amount_alteration\\forged_amount_0002.png",
-      "amount_alteration\\forged_amount_0003.png",
-      "amount_alteration\\forged_amount_0004.png",
-      "amount_alteration\\forged_amount_0005.png",
-      "amount_alteration\\forged_amount_0006.png",
-      "amount_alteration\\forged_amount_0007.png",
-      "amount_alteration\\forged_amount_0008.png",
-      "amount_alteration\\forged_amount_0009.png",
-      "amount_alteration\\forged_amount_0010.png",
-      "amount_alteration\\forged_amount_0011.png",
-      "amount_alteration\\forged_amount_0012.png",
-      "amount_alteration\\forged_amount_0013.png",
-      "amount_alteration\\forged_amount_0014.png",
-      "amount_alteration\\forged_amount_0015.png",
-      "amount_alteration\\forged_amount_0016.png",
-      "amount_alteration\\forged_amount_0017.png",
-      "amount_alteration\\forged_amount_0018.png",
-      "amount_alteration\\forged_amount_0019.png",
-      "amount_alteration\\forged_amount_0020.png",
-      "amount_alteration\\forged_amount_0021.png",
-      "amount_alteration\\forged_amount_0022.png",
-      "amount_alteration\\forged_amount_0023.png",
-      "amount_alteration\\forged_amount_0024.png",
-      "amount_alteration\\forged_amount_0025.png",
-      "amount_alteration\\forged_amount_0026.png",
-      "amount_alteration\\forged_amount_0027.png",
-      "amount_alteration\\forged_amount_0028.png",
-      "amount_alteration\\forged_amount_0029.png",
-      "amount_alteration\\forged_amount_0030.png",
-      "amount_alteration\\forged_amount_0031.png",
-      "amount_alteration\\forged_amount_0032.png",
-      "amount_alteration\\forged_amount_0033.png",
-      "amount_alteration\\forged_amount_0034.png",
-      "amount_alteration\\forged_amount_0035.png",
-      "amount_alteration\\forged_amount_0036.png",
-      "amount_alteration\\forged_amount_0037.png",
-      "amount_alteration\\forged_amount_0038.png",
-      "amount_alteration\\forged_amount_0039.png",
-      "amount_alteration\\forged_amount_0040.png",
-      "amount_alteration\\forged_amount_0041.png",
-      "amount_alteration\\forged_amount_0042.png",
-      "amount_alteration\\forged_amount_0043.png",
-      "amount_alteration\\forged_amount_0044.png",
-      "amount_alteration\\forged_amount_0045.png",
-      "amount_alteration\\forged_amount_0046.png",
-      "amount_alteration\\forged_amount_0047.png",
-      "amount_alteration\\forged_amount_0048.png",
-      "amount_alteration\\forged_amount_0049.png",
-      "amount_alteration\\forged_amount_0050.png",
-      "amount_alteration\\forged_amount_0051.png",
-      "full_template\\forged_full_template_0001.png",
-      "full_template\\forged_full_template_0002.png",
-      "full_template\\forged_full_template_0003.png",
-      "full_template\\forged_full_template_0004.png",
-      "full_template\\forged_full_template_0005.png",
-      "full_template\\forged_full_template_0006.png",
-      "full_template\\forged_full_template_0007.png",
-      "full_template\\forged_full_template_0008.png",
-      "full_template\\forged_full_template_0009.png",
-      "full_template\\forged_full_template_0010.png",
-      "full_template\\forged_full_template_0011.png",
-      "full_template\\forged_full_template_0012.png",
-      "name_modification\\forged_name_0001.png",
-      "name_modification\\forged_name_0002.png",
-      "name_modification\\forged_name_0003.png",
-      "name_modification\\forged_name_0004.png",
-      "name_modification\\forged_name_0005.png",
-      "name_modification\\forged_name_0006.png",
-      "name_modification\\forged_name_0007.png",
-      "name_modification\\forged_name_0008.png",
-      "name_modification\\forged_name_0009.png",
-      "name_modification\\forged_name_0010.png",
-      "name_modification\\forged_name_0011.png",
-      "name_modification\\forged_name_0012.png",
-      "name_modification\\forged_name_0013.png",
-      "name_modification\\forged_name_0014.png",
-      "name_modification\\forged_name_0015.png",
-      "name_modification\\forged_name_0016.png",
-      "name_modification\\forged_name_0017.png",
-      "name_modification\\forged_name_0018.png",
-      "name_modification\\forged_name_0019.png",
-      "name_modification\\forged_name_0020.png",
-      "name_modification\\forged_name_0021.png",
-      "name_modification\\forged_name_0022.png",
-      "name_modification\\forged_name_0023.png",
-      "name_modification\\forged_name_0024.png",
-      "name_modification\\forged_name_0025.png",
-      "name_modification\\forged_name_0026.png",
-      "name_modification\\forged_name_0027.png",
-      "name_modification\\forged_name_0028.png",
-      "name_modification\\forged_name_0029.png",
-      "name_modification\\forged_name_0030.png",
-      "name_modification\\forged_name_0031.png",
-      "name_modification\\forged_name_0032.png",
-      "name_modification\\forged_name_0033.png",
-      "name_modification\\forged_name_0034.png",
-      "name_modification\\forged_name_0035.png",
-      "name_modification\\forged_name_0036.png",
-      "name_modification\\forged_name_0037.png",
-      "name_modification\\forged_name_0038.png",
-      "name_modification\\forged_name_0039.png",
-      "name_modification\\forged_name_0040.png",
-      "name_modification\\forged_name_0041.png",
-      "name_modification\\forged_name_0042.png",
-      "name_modification\\forged_name_0043.png",
-      "name_modification\\forged_name_0044.png",
-      "name_modification\\forged_name_0045.png",
-      "name_modification\\forged_name_0046.png",
-      "name_modification\\forged_name_0047.png",
-      "name_modification\\forged_name_0048.png",
-      "name_modification\\forged_name_0049.png",
-      "name_modification\\forged_name_0050.png",
-      "name_modification\\forged_name_0051.png",
-      "ref_fabrication\\forged_ref_0001.png",
-      "ref_fabrication\\forged_ref_0002.png",
-      "ref_fabrication\\forged_ref_0003.png",
-      "ref_fabrication\\forged_ref_0004.png",
-      "ref_fabrication\\forged_ref_0005.png",
-      "ref_fabrication\\forged_ref_0006.png",
-      "ref_fabrication\\forged_ref_0007.png",
-      "ref_fabrication\\forged_ref_0008.png",
-      "ref_fabrication\\forged_ref_0009.png",
-      "ref_fabrication\\forged_ref_0010.png",
-      "ref_fabrication\\forged_ref_0011.png",
-      "ref_fabrication\\forged_ref_0012.png",
-      "ref_fabrication\\forged_ref_0013.png",
-      "ref_fabrication\\forged_ref_0014.png",
-      "ref_fabrication\\forged_ref_0015.png",
-      "ref_fabrication\\forged_ref_0016.png",
-      "ref_fabrication\\forged_ref_0017.png",
-      "ref_fabrication\\forged_ref_0018.png",
-      "ref_fabrication\\forged_ref_0019.png",
-      "ref_fabrication\\forged_ref_0020.png",
-      "ref_fabrication\\forged_ref_0021.png",
-      "ref_fabrication\\forged_ref_0022.png",
-      "ref_fabrication\\forged_ref_0023.png",
-      "ref_fabrication\\forged_ref_0024.png",
-      "ref_fabrication\\forged_ref_0025.png",
-      "ref_fabrication\\forged_ref_0026.png",
-      "ref_fabrication\\forged_ref_0027.png",
-      "ref_fabrication\\forged_ref_0028.png",
-      "ref_fabrication\\forged_ref_0029.png",
-      "ref_fabrication\\forged_ref_0030.png",
-      "ref_fabrication\\forged_ref_0031.png",
-      "ref_fabrication\\forged_ref_0032.png",
-      "ref_fabrication\\forged_ref_0033.png",
-      "ref_fabrication\\forged_ref_0034.png",
-      "ref_fabrication\\forged_ref_0035.png",
-      "ref_fabrication\\forged_ref_0036.png",
-      "ref_fabrication\\forged_ref_0037.png",
-      "ref_fabrication\\forged_ref_0038.png",
-      "ref_fabrication\\forged_ref_0039.png",
-      "ref_fabrication\\forged_ref_0040.png",
-      "ref_fabrication\\forged_ref_0041.png",
-      "ref_fabrication\\forged_ref_0042.png",
-      "ref_fabrication\\forged_ref_0043.png",
-      "ref_fabrication\\forged_ref_0044.png",
-      "ref_fabrication\\forged_ref_0045.png",
-      "ref_fabrication\\forged_ref_0046.png",
-      "ref_fabrication\\forged_ref_0047.png",
-      "ref_fabrication\\forged_ref_0048.png",
-      "ref_fabrication\\forged_ref_0049.png",
-      "ref_fabrication\\forged_ref_0050.png",
-      "ref_fabrication\\forged_ref_0051.png"
-    ]
-  }
+    "authentic": 153,
+    "amount_alteration": 153,
+    "ref_fabrication": 153,
+    "name_modification": 153,
+    "ai_generated_template": 153
+  },
+  "samples": [
+    {
+      "filepath": "authentic\\compressed\\authentic_0001.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0002.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0003.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0004.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0005.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0006.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0007.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0008.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0009.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0010.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0011.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0012.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0013.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0014.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0015.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0016.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0017.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0018.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0019.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0020.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0021.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0022.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0023.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0024.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0025.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0026.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0027.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0028.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0029.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0030.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0031.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0032.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0033.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0034.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0035.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0036.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0037.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0038.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0039.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0040.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0041.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0042.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0043.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0044.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0045.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0046.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0047.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0048.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0049.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0050.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0051.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0052_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0053_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0054_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0055_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0056_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0057_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0058_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0059_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0060_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0061_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0062_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0063_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0064_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0065_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0066_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0067_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0068_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0069_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0070_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0071_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0072_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0073_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0074_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0075_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0076_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0077_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0078_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0079_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0080_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0081_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0082_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0083_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0084_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0085_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0086_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0087_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0088_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0089_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0090_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0091_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0092_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0093_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0094_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0095_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0096_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0097_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0098_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0099_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0100_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0101_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0102_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0103_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0104_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0105_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0106_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0107_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0108_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0109_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0110_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0111_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0112_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0113_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0114_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0115_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0116_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0117_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0118_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0119_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0120_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0121_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0122_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0123_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0124_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0125_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0126_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0127_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0128_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0129_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0130_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0131_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0132_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0133_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0134_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0135_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0136_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0137_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0138_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0139_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0140_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0141_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0142_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0143_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0144_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0145_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0146_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0147_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0148_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0149_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0150_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0151_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0152_aug1.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "authentic\\compressed\\authentic_0153_aug2.jpg",
+      "label": 0,
+      "class": "authentic",
+      "type": "authentic"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0001.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0002.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0003.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0004.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0005.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0006.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0007.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0008.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0009.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0010.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0011.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0012.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0013.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0014.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0015.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0016.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0017.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0018.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0019.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0020.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0021.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0022.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0023.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0024.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0025.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0026.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0027.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0028.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0029.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0030.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0031.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0032.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0033.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0034.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0035.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0036.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0037.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0038.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0039.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0040.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0041.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0042.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0043.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0044.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0045.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0046.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0047.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0048.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0049.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0050.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0051.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0052.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0053.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0054.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0055.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0056.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0057.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0058.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0059.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0060.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0061.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0062.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0063.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0064.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0065.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0066.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0067.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0068.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0069.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0070.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0071.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0072.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0073.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0074.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0075.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0076.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0077.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0078.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0079.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0080.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0081.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0082.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0083.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0084.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0085.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0086.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0087.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0088.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0089.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0090.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0091.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0092.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0093.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0094.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0095.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0096.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0097.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0098.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0099.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0100.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0101.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0102.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0103.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0104.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0105.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0106.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0107.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0108.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0109.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0110.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0111.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0112.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0113.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0114.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0115.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0116.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0117.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0118.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0119.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0120.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0121.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0122.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0123.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0124.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0125.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0126.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0127.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0128.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0129.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0130.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0131.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0132.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0133.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0134.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0135.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0136.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0137.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0138.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0139.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0140.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0141.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0142.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0143.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0144.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0145.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0146.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0147.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0148.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0149.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0150.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0151.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0152.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\ai_generated_template\\forged_ai_gen_0153.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ai_generated_template"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0001.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0002.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0003.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0004.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0005.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0006.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0007.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0008.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0009.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0010.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0011.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0012.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0013.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0014.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0015.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0016.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0017.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0018.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0019.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0020.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0021.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0022.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0023.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0024.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0025.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0026.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0027.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0028.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0029.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0030.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0031.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0032.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0033.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0034.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0035.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0036.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0037.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0038.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0039.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0040.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0041.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0042.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0043.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0044.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0045.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0046.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0047.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0048.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0049.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0050.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0051.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0052.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0053.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0054.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0055.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0056.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0057.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0058.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0059.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0060.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0061.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0062.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0063.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0064.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0065.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0066.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0067.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0068.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0069.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0070.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0071.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0072.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0073.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0074.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0075.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0076.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0077.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0078.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0079.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0080.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0081.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0082.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0083.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0084.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0085.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0086.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0087.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0088.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0089.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0090.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0091.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0092.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0093.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0094.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0095.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0096.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0097.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0098.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0099.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0100.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0101.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0102.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0103.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0104.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0105.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0106.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0107.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0108.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0109.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0110.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0111.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0112.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0113.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0114.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0115.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0116.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0117.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0118.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0119.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0120.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0121.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0122.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0123.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0124.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0125.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0126.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0127.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0128.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0129.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0130.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0131.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0132.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0133.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0134.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0135.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0136.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0137.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0138.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0139.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0140.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0141.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0142.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0143.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0144.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0145.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0146.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0147.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0148.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0149.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0150.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0151.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0152.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\amount_alteration\\forged_amount_0153.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "amount_alteration"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0001.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0002.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0003.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0004.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0005.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0006.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0007.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0008.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0009.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0010.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0011.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\full_template\\forged_full_template_0012.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "full_template"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0001.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0002.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0003.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0004.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0005.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0006.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0007.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0008.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0009.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0010.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0011.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0012.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0013.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0014.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0015.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0016.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0017.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0018.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0019.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0020.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0021.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0022.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0023.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0024.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0025.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0026.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0027.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0028.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0029.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0030.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0031.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0032.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0033.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0034.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0035.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0036.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0037.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0038.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0039.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0040.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0041.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0042.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0043.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0044.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0045.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0046.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0047.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0048.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0049.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0050.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0051.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0052.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0053.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0054.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0055.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0056.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0057.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0058.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0059.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0060.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0061.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0062.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0063.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0064.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0065.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0066.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0067.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0068.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0069.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0070.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0071.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0072.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0073.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0074.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0075.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0076.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0077.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0078.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0079.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0080.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0081.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0082.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0083.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0084.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0085.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0086.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0087.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0088.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0089.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0090.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0091.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0092.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0093.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0094.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0095.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0096.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0097.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0098.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0099.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0100.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0101.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0102.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0103.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0104.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0105.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0106.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0107.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0108.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0109.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0110.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0111.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0112.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0113.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0114.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0115.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0116.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0117.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0118.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0119.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0120.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0121.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0122.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0123.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0124.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0125.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0126.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0127.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0128.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0129.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0130.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0131.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0132.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0133.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0134.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0135.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0136.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0137.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0138.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0139.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0140.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0141.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0142.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0143.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0144.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0145.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0146.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0147.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0148.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0149.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0150.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0151.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0152.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\name_modification\\forged_name_0153.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "name_modification"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0001.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0002.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0003.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0004.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0005.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0006.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0007.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0008.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0009.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0010.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0011.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0012.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0013.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0014.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0015.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0016.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0017.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0018.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0019.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0020.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0021.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0022.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0023.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0024.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0025.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0026.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0027.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0028.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0029.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0030.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0031.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0032.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0033.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0034.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0035.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0036.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0037.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0038.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0039.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0040.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0041.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0042.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0043.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0044.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0045.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0046.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0047.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0048.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0049.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0050.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0051.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0052.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0053.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0054.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0055.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0056.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0057.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0058.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0059.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0060.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0061.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0062.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0063.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0064.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0065.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0066.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0067.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0068.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0069.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0070.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0071.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0072.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0073.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0074.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0075.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0076.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0077.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0078.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0079.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0080.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0081.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0082.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0083.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0084.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0085.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0086.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0087.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0088.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0089.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0090.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0091.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0092.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0093.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0094.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0095.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0096.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0097.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0098.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0099.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0100.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0101.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0102.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0103.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0104.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0105.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0106.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0107.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0108.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0109.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0110.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0111.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0112.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0113.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0114.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0115.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0116.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0117.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0118.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0119.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0120.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0121.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0122.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0123.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0124.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0125.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0126.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0127.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0128.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0129.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0130.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0131.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0132.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0133.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0134.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0135.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0136.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0137.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0138.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0139.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0140.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0141.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0142.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0143.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0144.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0145.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0146.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0147.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0148.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0149.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0150.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0151.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0152.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    },
+    {
+      "filepath": "forged\\compressed\\ref_fabrication\\forged_ref_0153.jpg",
+      "label": 1,
+      "class": "forged",
+      "type": "ref_fabrication"
+    }
+  ]
 }
