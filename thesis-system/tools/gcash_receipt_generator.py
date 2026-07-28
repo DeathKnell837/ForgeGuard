@@ -203,7 +203,9 @@ def format_time(dt):
 
 # ============================================================
 # RECEIPT DRAWING ENGINE
-# ======================================================def mask_name_gcash(full_name):
+# ============================================================
+
+def mask_name_gcash(full_name):
     """Format name in GCash Express Send style: GW••••••N D."""
     parts = str(full_name).strip().split()
     if len(parts) >= 2:
