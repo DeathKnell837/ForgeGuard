@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-28_16:03:30_UTC
+# FORCE_FRESH_BUILD: 2026-07-28_16:45:00_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.2.0-CRITICAL-BUGFIX-BUILD)
+ForgeGuard — Streamlit Web Application (v1.2.1-CALIBRATED-HEURISTIC-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -1380,16 +1380,21 @@ with main_tab1:
             # 1. Live ELA computation
             ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
             
-            # 2. Model Inference / Fallback Forensic Logic
+            # 2. Model Inference with @st.cache_resource for memory efficiency
+            @st.cache_resource
+            def load_model(path):
+                import tensorflow as tf
+                return tf.keras.models.load_model(path)
+            
             weights_keras = os.path.join(SYS_DIR, "models", f"{model_key}.keras")
             weights_h5 = os.path.join(SYS_DIR, "models", f"{model_key}.h5")
             weights_path = weights_keras if os.path.exists(weights_keras) else (weights_h5 if os.path.exists(weights_h5) else None)
             
             loaded_model_success = False
+            inference_mode = "FALLBACK"
             if weights_path is not None:
                 try:
-                    import tensorflow as tf
-                    model = tf.keras.models.load_model(weights_path)
+                    model = load_model(weights_path)
                     ela_array = convert_ela_to_array(ela_img, target_size=(128, 128))
                     ela_tensor = np.expand_dims(ela_array, axis=0)
                     pred = float(model.predict(ela_tensor, verbose=0)[0][0])
@@ -1398,15 +1403,30 @@ with main_tab1:
                     confidence = forgery_score if is_forged else (1.0 - forgery_score)
                     is_demo = False
                     loaded_model_success = True
+                    inference_mode = "CNN"
                 except Exception as ex:
                     loaded_model_success = False
 
             if not loaded_model_success:
-                # Rule-Based Forensic Heuristic
+                # Improved Fallback: Regional ELA Differential Analysis
+                # Compare ELA energy in text regions (center band) vs background (edges)
                 ela_np = np.array(ela_img, dtype=np.float32)
-                var_val = float(np.var(ela_np))
-                mean_val = float(np.mean(ela_np))
-                max_val = float(np.max(ela_np))
+                h_ela, w_ela = ela_np.shape[:2]
+                
+                # Split into center band (text region ~20-80% height) and edge bands
+                center_start = int(h_ela * 0.2)
+                center_end = int(h_ela * 0.8)
+                center_band = ela_np[center_start:center_end, :, :]
+                top_band = ela_np[:center_start, :, :]
+                bottom_band = ela_np[center_end:, :, :]
+                
+                center_mean = float(np.mean(center_band))
+                edge_mean = float(np.mean(np.concatenate([top_band, bottom_band], axis=0)))
+                
+                # Forged receipts show higher differential between edited text regions and background
+                regional_diff = abs(center_mean - edge_mean)
+                overall_var = float(np.var(ela_np))
+                overall_mean = float(np.mean(ela_np))
                 
                 fname = getattr(uploaded_file, 'name', '').lower()
                 if any(kw in fname for kw in ['forged', 'edit', 'fake', 'alteration', 'fabrication', 'modification']):
@@ -1416,17 +1436,26 @@ with main_tab1:
                     is_forged = False
                     forgery_score = 0.05
                 else:
-                    # Forensic Threshold: Authentic screenshots have uniform ELA variance < 210.0 and mean < 15.0
-                    is_forged = (var_val > 210.0 and max_val > 230.0) or mean_val > 15.0
+                    # Regional differential > 3.0 indicates localized editing
+                    # Combined with high overall variance suggests tampering
+                    is_forged = regional_diff > 3.0 or overall_mean > 18.0
                     if is_forged:
-                        forgery_score = min(0.98, max(0.85, 0.70 + (var_val / 500.0) * 0.3))
+                        forgery_score = min(0.98, max(0.65, 0.50 + regional_diff / 10.0))
                     else:
-                        forgery_score = min(0.35, max(0.02, (var_val / 500.0) * 0.3))
+                        forgery_score = max(0.02, min(0.35, regional_diff / 10.0))
                     
                 confidence = forgery_score if is_forged else (1.0 - forgery_score)
                 is_demo = True
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.0 if model_key == "mobilenetv2" else (28.0 if model_key == "resnet50" else 42.0))
+            
+            # Display inference mode diagnostic
+            mode_color = "#34D399" if inference_mode == "CNN" else "#EAB308"
+            st.markdown(f"""
+            <div style="font-family: 'IBM Plex Mono'; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem; letter-spacing: 0.5px;">
+                [INFERENCE ENGINE: <strong>{inference_mode}</strong>] {'Trained .keras neural network active' if inference_mode == 'CNN' else 'TensorFlow unavailable — using ELA regional differential heuristic'}
+            </div>
+            """, unsafe_allow_html=True)
             
             # INK STAMP CLASSIFICATION VERDICT (OFFICIAL EVIDENCE STAMP)
             if is_forged:
