@@ -81,3 +81,18 @@ def evaluate_ela_forgery_risk(ela_image: Image.Image) -> dict:
         'max': max_val,
         'is_suspicious': is_suspicious
     }
+
+
+def convert_ela_to_array(ela_image: Image.Image, target_size: tuple = (128, 128)) -> np.ndarray:
+    """
+    Converts ELA PIL Image to a normalized NumPy array for CNN model inference.
+    
+    Args:
+        ela_image: PIL Image (RGB ELA output from compute_ela).
+        target_size: Resize dimensions (width, height) for model input (default 128x128).
+        
+    Returns:
+        np.ndarray: Normalized float32 array with shape (height, width, 3), values in [0, 1].
+    """
+    resized = ela_image.resize(target_size, Image.Resampling.BILINEAR)
+    return np.array(resized, dtype=np.float32) / 255.0

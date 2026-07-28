@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-28_00:05:00_UTC
+# FORCE_FRESH_BUILD: 2026-07-28_16:03:30_UTC
 """
-ForgeGuard — Streamlit Web Application (v1.1.2-FORENSIC-AUDIT-REPORT-BUILD)
+ForgeGuard — Streamlit Web Application (v1.2.0-CRITICAL-BUGFIX-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -1386,7 +1386,7 @@ with main_tab1:
             weights_path = weights_keras if os.path.exists(weights_keras) else (weights_h5 if os.path.exists(weights_h5) else None)
             
             loaded_model_success = False
-            if not is_non_receipt and weights_path is not None:
+            if weights_path is not None:
                 try:
                     import tensorflow as tf
                     model = tf.keras.models.load_model(weights_path)
@@ -1429,13 +1429,7 @@ with main_tab1:
             elapsed_ms = (time.time() - start_time) * 1000 + (12.0 if model_key == "mobilenetv2" else (28.0 if model_key == "resnet50" else 42.0))
             
             # INK STAMP CLASSIFICATION VERDICT (OFFICIAL EVIDENCE STAMP)
-            if is_non_receipt:
-                verdict_text = "NON-RECEIPT DOCUMENT DETECTED"
-                stamp_class = "stamp-warning"
-                sub_reason = "EVIDENCE OUT OF DOMAIN — UPLOAD GCASH / MAYA MOBILE WALLET RECEIPT"
-                verdict_color = "#EAB308"
-                verdict_label = "OUT OF DOMAIN"
-            elif is_forged:
+            if is_forged:
                 verdict_text = "DIGITAL FORGERY DETECTED"
                 stamp_class = "stamp-forged"
                 sub_reason = "HIGH ELA COMPRESSION & PIXEL VARIANCE DETECTED"
