@@ -1123,8 +1123,7 @@ with st.sidebar:
     
     st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
     model_options = [
-        "Gemini 2.5 Flash AI Vision — Multimodal Cloud Model",
-        "MobileNetV2 (3.4M Params) — Recommended Mobile",
+        "MobileNetV2 (3.4M Params) — Recommended",
         "ResNet50 (23.5M Params) — Deep Benchmark",
         "Basic CNN (2.1M Params) — Baseline"
     ]
@@ -1137,10 +1136,7 @@ with st.sidebar:
     )
     
     selected_model_option = st.session_state.get("model_architecture", model_choice)
-    if "Gemini" in selected_model_option:
-        model_key = "gemini_vision"
-        model_display_name = "Gemini 2.5 Flash"
-    elif "MobileNetV2" in selected_model_option:
+    if "MobileNetV2" in selected_model_option:
         model_key = "mobilenetv2"
         model_display_name = "MobileNetV2"
     elif "ResNet50" in selected_model_option:
