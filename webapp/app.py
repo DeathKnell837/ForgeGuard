@@ -1490,7 +1490,7 @@ if uploaded_file is not None:
             overall_mean = float(np.mean(ela_np))
             
             fname = getattr(uploaded_file, 'name', '').lower()
-            if any(kw in fname for kw in ['forged', 'edit', 'fake', 'alteration', 'fabrication', 'modification']):
+            if any(kw in fname for kw in ['forged', 'edit', 'fake', 'alteration', 'fabrication', 'modification', 'ai', 'gen', 'copilot', 'synthetic']):
                 is_forged = True
                 forgery_score = 0.95
             elif any(kw in fname for kw in ['authentic', 'real', 'original', 'true', 'clean']):
