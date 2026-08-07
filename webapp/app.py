@@ -1123,7 +1123,8 @@ with st.sidebar:
     
     st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
     model_options = [
-        "MobileNetV2 (3.4M Params) — Recommended",
+        "Gemini 2.5 Flash AI Vision — Multimodal Cloud Model",
+        "MobileNetV2 (3.4M Params) — Recommended Mobile",
         "ResNet50 (23.5M Params) — Deep Benchmark",
         "Basic CNN (2.1M Params) — Baseline"
     ]
