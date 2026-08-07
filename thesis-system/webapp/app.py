@@ -1680,33 +1680,23 @@ if uploaded_file is not None:
         if is_forged:
             audit_header_color = "#F87171"
             audit_title = "🚨 DETECTED FORGERY: High Pixel Variance & Compression Anomaly"
-            audit_summary = """
-            <strong>Forensic Findings & ELA Analysis:</strong><br>
-            • <strong>Pixel Variance Spike:</strong> Error Level Analysis (ELA at Q=90) revealed localized compression discrepancies across receipt text regions.<br>
-            • <strong>Secondary Resaving Artifacts:</strong> The background canvas exhibits low error noise, while text fields (amount/ref/name) display high error brightness (>200.0). This gradient disparity confirms localized re-encoding after digital manipulation.<br>
-            • <strong>Actionable Security Protocol:</strong> Do NOT accept this receipt as proof of payment. Verify the 13-digit transaction reference number directly inside your official GCash or Maya merchant transaction history.
-            """
+            audit_summary = """<strong>Forensic Findings & ELA Analysis:</strong><br>
+• <strong>Pixel Variance Spike:</strong> Error Level Analysis (ELA at Q=90) revealed localized compression discrepancies across receipt text regions.<br>
+• <strong>Secondary Resaving Artifacts:</strong> The background canvas exhibits low error noise, while text fields (amount/ref/name) display high error brightness (>200.0). This gradient disparity confirms localized re-encoding after digital manipulation.<br>
+• <strong>Actionable Security Protocol:</strong> Do NOT accept this receipt as proof of payment. Verify the 13-digit transaction reference number directly inside your official GCash or Maya merchant transaction history."""
         else:
             audit_header_color = "#34D399"
             audit_title = "🟢 VERIFIED AUTHENTIC: Homogeneous Compression Grid"
-            audit_summary = """
-            <strong>Forensic Findings & ELA Analysis:</strong><br>
-            • <strong>Uniform Error Distribution:</strong> ELA inspection (Q=90) confirms a homogeneous error grid across all image coordinates (variance < 210.0).<br>
-            • <strong>Zero Resaving Anomalies:</strong> No localized text tampering, edge splicing, or font replacement artifacts were detected.<br>
-            • <strong>Actionable Security Protocol:</strong> Receipt matches official mobile wallet device rendering characteristics.
-            """
+            audit_summary = """<strong>Forensic Findings & ELA Analysis:</strong><br>
+• <strong>Uniform Error Distribution:</strong> ELA inspection (Q=90) confirms a homogeneous error grid across all image coordinates (variance < 210.0).<br>
+• <strong>Zero Resaving Anomalies:</strong> No localized text tampering, edge splicing, or font replacement artifacts were detected.<br>
+• <strong>Actionable Security Protocol:</strong> Receipt matches official mobile wallet device rendering characteristics."""
             
-        st.markdown(f"""
-        <div class="glass-panel" style="border-left: 4px solid {audit_header_color}; padding: 1.3rem 1.6rem;">
-            <div class="eyebrow-gold">AUTOMATED FORENSIC AUDIT REPORT</div>
-            <div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">
-                {audit_title}
-            </div>
-            <div style="color: #CBD5E1; font-size: 0.88rem; line-height: 1.65;">
-                {audit_summary}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="glass-panel" style="border-left: 4px solid {audit_header_color}; padding: 1.3rem 1.6rem; margin-top: 1.5rem;">
+<div class="eyebrow-gold">AUTOMATED FORENSIC AUDIT REPORT</div>
+<div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">{audit_title}</div>
+<div style="color: #CBD5E1; font-size: 0.88rem; line-height: 1.65;">{audit_summary}</div>
+</div>""", unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"Error analyzing evidence: {str(e)}")
