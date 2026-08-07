@@ -1706,7 +1706,8 @@ if uploaded_file is not None:
             p3_title = "🛡️ Actionable Merchant Security Protocol"
             p3_desc = "<strong style='color: #34D399;'>RECEIPT MATCHES AUTHENTIC MOBILE PAYMENT PROFILE.</strong> Transaction record displays normal device screenshot rendering characteristics."
 
-        st.markdown(f"""<div style="background: {card_bg}; border: 1px solid {card_border}; border-top: 4px solid {badge_border}; border-radius: 16px; padding: 1.6rem; margin-top: 1.5rem;">
+        top_accent = "#F87171" if is_forged else "#34D399"
+        st.markdown(f"""<div style="background: {card_bg}; border: 1px solid {card_border}; border-top: 4px solid {top_accent}; border-radius: 16px; padding: 1.6rem; margin-top: 1.5rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
 <span class="eyebrow-gold">AUTOMATED FORENSIC SECURITY DOSSIER</span>
 {badge_chip}
