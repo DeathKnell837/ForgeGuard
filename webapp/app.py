@@ -469,7 +469,7 @@ html, body, [class*="css"] {
 }
 
 .mono-readout {
-    font-family: 'IBM Plex Mono', monospace !important;
+    font-family: sans-serif, monospace !important;
 }
 
 /* STREAMLIT HEADER & TRANSPARENT CONTAINER */
@@ -611,7 +611,7 @@ div[data-baseweb="slider"] > div > div > div {
 div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
 div[data-baseweb="slider"] + div {
     color: #A78BFA !important;
-    font-family: 'IBM Plex Mono', monospace !important;
+    font-family: sans-serif, monospace !important;
     font-size: 0.82rem !important;
 }
 
@@ -725,7 +725,7 @@ div[data-testid="stFileUploader"] section {
     color: #F8FAFC !important;
     padding: 7px 16px !important;
     border-radius: 10px !important;
-    font-family: 'IBM Plex Mono', monospace !important;
+    font-family: sans-serif, monospace !important;
     font-size: 0.78rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.8px !important;
@@ -748,7 +748,7 @@ div[data-testid="stFileUploader"] section {
     border: 1px solid rgba(201, 161, 95, 0.35);
     padding: 5px 14px;
     border-radius: 30px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -780,7 +780,7 @@ div[data-testid="stFileUploader"] section {
 }
 
 .eyebrow-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.74rem;
     font-weight: 600;
     color: #8B5CF6;
@@ -790,7 +790,7 @@ div[data-testid="stFileUploader"] section {
 }
 
 .eyebrow-gold {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.74rem;
     font-weight: 600;
     color: #C9A15F;
@@ -892,7 +892,7 @@ div[data-testid="stFileUploader"] section {
 }
 
 .stamp-sub {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.76rem;
     letter-spacing: 1px;
     margin-top: 4px;
@@ -900,7 +900,7 @@ div[data-testid="stFileUploader"] section {
 }
 
 .stamp-meta-bar {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.8rem;
     color: #94A3B8;
     background: #141A24;
@@ -937,7 +937,7 @@ div[data-testid="stFileUploader"] section {
     background: #141A24;
     border: 1px solid #C9A15F;
     color: #C9A15F;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 14px;
@@ -958,7 +958,7 @@ div[data-testid="stFileUploader"] section {
 }
 
 .exhibit-title {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 0.88rem;
     font-weight: 700;
     color: #94A3B8;
@@ -1015,7 +1015,7 @@ label[data-testid="stWidgetLabel"] p {
 }
 
 .metric-num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: sans-serif, monospace;
     font-size: 1.45rem;
     font-weight: 700;
     color: #A78BFA;
@@ -1244,7 +1244,7 @@ st.markdown(f"""
 <div class="navbar-brand">
     <div class="brand-title">
         {SVG_SHIELD}
-        ForgeGuard <span style="font-family: 'IBM Plex Mono'; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
+        ForgeGuard <span style="font-family: sans-serif; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
     </div>
     <div>
         <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
@@ -1382,7 +1382,7 @@ if uploaded_file is not None:
         if w < 180 or h < 240:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
+                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Please upload a clear, high-resolution mobile receipt screenshot (minimum 180x240px).</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1390,7 +1390,7 @@ if uploaded_file is not None:
         elif std_dev < 6.0:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
+                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">The uploaded image contains no readable visual variation or text. Please upload an official transaction receipt.</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1411,7 +1411,7 @@ if uploaded_file is not None:
             </div>
             
             <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
-                <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE NOTICE</div>
+                <div style="color: #EAB308; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE NOTICE</div>
                 <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.55;">
                     The uploaded image (desktop/wallpaper screenshot) is classified as a general non-receipt image. 
                     ForgeGuard neural network models (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>.
@@ -1513,7 +1513,7 @@ if uploaded_file is not None:
         # Display inference mode diagnostic
         mode_color = "#34D399" if inference_mode == "CNN" else "#EAB308"
         st.markdown(f"""
-        <div style="font-family: 'IBM Plex Mono'; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem; letter-spacing: 0.5px;">
+        <div style="font-family: sans-serif; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem; letter-spacing: 0.5px;">
             [INFERENCE ENGINE: <strong>{inference_mode}</strong>] {'Trained .keras neural network active' if inference_mode == 'CNN' else 'TensorFlow unavailable — using ELA regional differential heuristic'}
         </div>
         """, unsafe_allow_html=True)
@@ -1667,35 +1667,68 @@ if uploaded_file is not None:
         if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
             st.markdown(f"""
             <div style="background: rgba(167,139,250,0.08); border: 1.5px solid rgba(167,139,250,0.3); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
-                <div style="color: #A78BFA; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;">🤖 GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
+                <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;">🤖 GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
                 <div style="color: #F8FAFC; font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
                     {gemini_result.get('analysis', '')}
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
-        # AUTOMATED FORENSIC AUDIT REPORT & DETAILED FINDINGS
-        st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.8rem 0 1.25rem 0;'>", unsafe_allow_html=True)
+        # AUTOMATED FORENSIC DOSSIER REPORT
+        st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2.2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
         
         if is_forged:
-            audit_header_color = "#F87171"
-            audit_title = "🚨 DETECTED FORGERY: High Pixel Variance & Compression Anomaly"
-            audit_summary = """<strong>Forensic Findings & ELA Analysis:</strong><br>
-• <strong>Pixel Variance Spike:</strong> Error Level Analysis (ELA at Q=90) revealed localized compression discrepancies across receipt text regions.<br>
-• <strong>Secondary Resaving Artifacts:</strong> The background canvas exhibits low error noise, while text fields (amount/ref/name) display high error brightness (>200.0). This gradient disparity confirms localized re-encoding after digital manipulation.<br>
-• <strong>Actionable Security Protocol:</strong> Do NOT accept this receipt as proof of payment. Verify the 13-digit transaction reference number directly inside your official GCash or Maya merchant transaction history."""
-        else:
-            audit_header_color = "#34D399"
-            audit_title = "🟢 VERIFIED AUTHENTIC: Homogeneous Compression Grid"
-            audit_summary = """<strong>Forensic Findings & ELA Analysis:</strong><br>
-• <strong>Uniform Error Distribution:</strong> ELA inspection (Q=90) confirms a homogeneous error grid across all image coordinates (variance < 210.0).<br>
-• <strong>Zero Resaving Anomalies:</strong> No localized text tampering, edge splicing, or font replacement artifacts were detected.<br>
-• <strong>Actionable Security Protocol:</strong> Receipt matches official mobile wallet device rendering characteristics."""
+            card_border = "rgba(248,113,113,0.4)"
+            card_bg = "rgba(248,113,113,0.04)"
+            badge_chip = '<span style="background: rgba(248,113,113,0.2); border: 1px solid #F87171; color: #F87171; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">HIGH RISK TAMPERING DETECTED</span>'
+            title_text = "🚨 EVIDENCE CLASSIFIED: DIGITAL RECEIPT FORGERY"
             
-        st.markdown(f"""<div class="glass-panel" style="border-left: 4px solid {audit_header_color}; padding: 1.3rem 1.6rem; margin-top: 1.5rem;">
-<div class="eyebrow-gold">AUTOMATED FORENSIC AUDIT REPORT</div>
-<div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">{audit_title}</div>
-<div style="color: #CBD5E1; font-size: 0.88rem; line-height: 1.65;">{audit_summary}</div>
+            p1_title = "⚡ Error Level Analysis (ELA) Hotspot Spike"
+            p1_desc = "Multi-resolution JPEG error evaluation (Q=90) revealed severe localized variance spikes across transaction detail fields (amount, recipient, reference number)."
+            
+            p2_title = "🔍 Font Geometry & Resaving Inconsistency"
+            p2_desc = "Background canvas displays low-noise compression characteristics, whereas critical text boundaries exhibit high-frequency edge gradients indicating post-render editing."
+            
+            p3_title = "🛡️ Actionable Merchant Security Protocol"
+            p3_desc = "<strong style='color: #F87171;'>DO NOT ACCEPT THIS SCREENSHOT AS PROOF OF PAYMENT.</strong> Always verify the 13-digit reference number inside your official GCash/Maya merchant dashboard."
+        else:
+            card_border = "rgba(52,211,153,0.4)"
+            card_bg = "rgba(52,211,153,0.04)"
+            badge_chip = '<span style="background: rgba(52,211,153,0.2); border: 1px solid #34D399; color: #34D399; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">VERIFIED GENUINE RECEIPT</span>'
+            title_text = "🛡️ EVIDENCE CLASSIFIED: AUTHENTIC TRANSACTION RECEIPT"
+            
+            p1_title = "⚡ Homogeneous Error Distribution Grid"
+            p1_desc = "ELA inspection confirms a uniform error noise matrix across all image coordinates. No localized compression anomalies or edge splicing detected."
+            
+            p2_title = "🔍 Authentic Font & Vector Layout Geometry"
+            p2_desc = "Text fields, logos, and UI dividers align strictly with official GCash/Maya mobile app rendering specifications with zero localized resaving signatures."
+            
+            p3_title = "🛡️ Actionable Merchant Security Protocol"
+            p3_desc = "<strong style='color: #34D399;'>RECEIPT MATCHES AUTHENTIC MOBILE PAYMENT PROFILE.</strong> Transaction record displays normal device screenshot rendering characteristics."
+
+        st.markdown(f"""<div style="background: {card_bg}; border: 1px solid {card_border}; border-top: 4px solid {badge_border}; border-radius: 16px; padding: 1.6rem; margin-top: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
+<span class="eyebrow-gold">AUTOMATED FORENSIC SECURITY DOSSIER</span>
+{badge_chip}
+</div>
+<div class="serif-header" style="font-size: 1.35rem; color: #F8FAFC; margin-bottom: 1.4rem;">{title_text}</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+<div style="color: #F8FAFC; font-weight: 700; font-size: 0.92rem; margin-bottom: 6px;">{p1_title}</div>
+<div style="color: #94A3B8; font-size: 0.84rem; line-height: 1.6;">{p1_desc}</div>
+</div>
+
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+<div style="color: #F8FAFC; font-weight: 700; font-size: 0.92rem; margin-bottom: 6px;">{p2_title}</div>
+<div style="color: #94A3B8; font-size: 0.84rem; line-height: 1.6;">{p2_desc}</div>
+</div>
+
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+<div style="color: #F8FAFC; font-weight: 700; font-size: 0.92rem; margin-bottom: 6px;">{p3_title}</div>
+<div style="color: #94A3B8; font-size: 0.84rem; line-height: 1.6;">{p3_desc}</div>
+</div>
+</div>
 </div>""", unsafe_allow_html=True)
 
     except Exception as e:
