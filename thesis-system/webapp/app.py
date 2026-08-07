@@ -62,7 +62,15 @@ def call_gemini_vision(pil_img):
         img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-        prompt = "Analyze this GCash/Maya mobile wallet receipt image for authenticity and forgery. Examine font consistency, alignment, reference number format, date/amount plausibility, and editing artifacts. Return ONLY valid JSON with keys: verdict ('AUTHENTIC' or 'FORGED'), confidence (float 0.5 to 0.99), and analysis (2-sentence clear forensic explanation)."
+        prompt = """First, check if this image is a mobile wallet transaction receipt screenshot (GCash, Maya, Bank Transfer, or Payment Confirmation slip).
+If it is NOT a payment receipt screenshot (e.g. photo of a person, animal, object, landscape, meme, random document, or non-financial image):
+  Set is_receipt to false, verdict to "NOT_A_RECEIPT", confidence to 0.99, and analysis to a 1-sentence clear explanation of what the image actually is.
+
+If it IS a payment receipt:
+  Set is_receipt to true, analyze font consistency, reference number validity, date/amount alignment, and editing artifacts.
+  Set verdict to "AUTHENTIC" or "FORGED", confidence (0.50 to 0.99), and analysis to a 2-sentence forensic explanation.
+
+Return ONLY valid JSON with keys: is_receipt (boolean), verdict ("AUTHENTIC", "FORGED", or "NOT_A_RECEIPT"), confidence (float), and analysis (string)."""
         
         payload = {
             "contents": [{
@@ -1413,6 +1421,33 @@ if uploaded_file is not None:
                     The uploaded image (desktop/wallpaper screenshot) is classified as a general non-receipt image. 
                     ForgeGuard neural network models (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>.
                     Please upload an official transaction slip to perform ELA forgery detection.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            st.stop()
+
+        # Smart AI Domain Pre-Validation (Checks if uploaded file is actually a mobile wallet receipt)
+        gemini_pre_check = call_gemini_vision(pil_img)
+        if gemini_pre_check and isinstance(gemini_pre_check, dict) and (gemini_pre_check.get("is_receipt") is False or gemini_pre_check.get("verdict") == "NOT_A_RECEIPT"):
+            reason_text = gemini_pre_check.get("analysis", "The uploaded file is not a valid GCash or Maya mobile payment transaction receipt.")
+            st.markdown(f"""
+            <div class="stamp-container" style="margin-top: 1.5rem;">
+                <div class="stamp-box stamp-warning">
+                    <div class="stamp-title">NON-RECEIPT FILE DETECTED</div>
+                    <div class="stamp-sub">EVIDENCE OUT OF DOMAIN — PLEASE UPLOAD GCASH / MAYA RECEIPT</div>
+                </div>
+                <div class="stamp-meta-bar">
+                    <span>[VERDICT: <strong style="color: #EAB308;">OUT OF DOMAIN</strong>]</span>
+                    <span>[CONFIDENCE: <strong style="color: #A78BFA;">99.0%</strong>]</span>
+                    <span>[AI DIAGNOSIS: <strong style="color: #F8FAFC;">INVALID FINANCIAL EVIDENCE</strong>]</span>
+                </div>
+            </div>
+            
+            <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
+                <div style="color: #EAB308; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">DOMAIN OUT OF SCOPE NOTICE</div>
+                <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.6;">
+                    {reason_text}<br><br>
+                    ForgeGuard model architectures (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>. Please upload an official transaction slip.
                 </div>
             </div>
             """, unsafe_allow_html=True)
