@@ -1383,7 +1383,7 @@ if uploaded_file is not None:
         if w < 180 or h < 240:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
+                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Please upload a clear, high-resolution mobile receipt screenshot (minimum 180x240px).</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1391,7 +1391,7 @@ if uploaded_file is not None:
         elif std_dev < 6.0:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
+                <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">The uploaded image contains no readable visual variation or text. Please upload an official transaction receipt.</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1412,7 +1412,7 @@ if uploaded_file is not None:
             </div>
             
             <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
-                <div style="color: #EAB308; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE NOTICE</div>
+                <div style="color: #EAB308; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">DOMAIN OUT OF SCOPE NOTICE</div>
                 <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.55;">
                     The uploaded image (desktop/wallpaper screenshot) is classified as a general non-receipt image. 
                     ForgeGuard neural network models (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>.
@@ -1650,7 +1650,7 @@ if uploaded_file is not None:
             <div class="glass-panel-matrix" style="border-top: 3px solid #C9A15F;">
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2 ⭐</div>
+                        <div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2</div>
                         <span class="mono-readout" style="color: {badge_color}; font-size: 0.72rem; font-weight: 700;">[{'FORGED' if is_forged else 'AUTHENTIC'}]</span>
                     </div>
                     <div style="color: #94A3B8; font-size: 0.78rem; margin-bottom: 0.75rem;">Recommended lightweight mobile model</div>
@@ -1668,7 +1668,7 @@ if uploaded_file is not None:
         if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
             st.markdown(f"""
             <div style="background: rgba(167,139,250,0.08); border: 1.5px solid rgba(167,139,250,0.3); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
-                <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;">🤖 GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
+                <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;"><svg style='display:inline-block; vertical-align:middle; width:18px; height:18px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='15' x2='23' y2='15'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='15' x2='4' y2='15'/></svg>GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
                 <div style="color: #F8FAFC; font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
                     {gemini_result.get('analysis', '')}
                 </div>
@@ -1682,29 +1682,29 @@ if uploaded_file is not None:
             card_border = "rgba(248,113,113,0.4)"
             card_bg = "rgba(248,113,113,0.04)"
             badge_chip = '<span style="background: rgba(248,113,113,0.2); border: 1px solid #F87171; color: #F87171; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">HIGH RISK TAMPERING DETECTED</span>'
-            title_text = "🚨 EVIDENCE CLASSIFIED: DIGITAL RECEIPT FORGERY"
+            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#F87171' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>EVIDENCE CLASSIFIED: DIGITAL RECEIPT FORGERY"
             
-            p1_title = "⚡ Error Level Analysis (ELA) Hotspot Spike"
+            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>Error Level Analysis (ELA) Hotspot Spike"
             p1_desc = "Multi-resolution JPEG error evaluation (Q=90) revealed severe localized variance spikes across transaction detail fields (amount, recipient, reference number)."
             
-            p2_title = "🔍 Font Geometry & Resaving Inconsistency"
+            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>Font Geometry & Resaving Inconsistency"
             p2_desc = "Background canvas displays low-noise compression characteristics, whereas critical text boundaries exhibit high-frequency edge gradients indicating post-render editing."
             
-            p3_title = "🛡️ Actionable Merchant Security Protocol"
+            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>Actionable Merchant Security Protocol"
             p3_desc = "<strong style='color: #F87171;'>DO NOT ACCEPT THIS SCREENSHOT AS PROOF OF PAYMENT.</strong> Always verify the 13-digit reference number inside your official GCash/Maya merchant dashboard."
         else:
             card_border = "rgba(52,211,153,0.4)"
             card_bg = "rgba(52,211,153,0.04)"
             badge_chip = '<span style="background: rgba(52,211,153,0.2); border: 1px solid #34D399; color: #34D399; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">VERIFIED GENUINE RECEIPT</span>'
-            title_text = "🛡️ EVIDENCE CLASSIFIED: AUTHENTIC TRANSACTION RECEIPT"
+            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#34D399' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>EVIDENCE CLASSIFIED: AUTHENTIC TRANSACTION RECEIPT"
             
-            p1_title = "⚡ Homogeneous Error Distribution Grid"
+            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>Homogeneous Error Distribution Grid"
             p1_desc = "ELA inspection confirms a uniform error noise matrix across all image coordinates. No localized compression anomalies or edge splicing detected."
             
-            p2_title = "🔍 Authentic Font & Vector Layout Geometry"
+            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>Authentic Font & Vector Layout Geometry"
             p2_desc = "Text fields, logos, and UI dividers align strictly with official GCash/Maya mobile app rendering specifications with zero localized resaving signatures."
             
-            p3_title = "🛡️ Actionable Merchant Security Protocol"
+            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>Actionable Merchant Security Protocol"
             p3_desc = "<strong style='color: #34D399;'>RECEIPT MATCHES AUTHENTIC MOBILE PAYMENT PROFILE.</strong> Transaction record displays normal device screenshot rendering characteristics."
 
         top_accent = "#F87171" if is_forged else "#34D399"
