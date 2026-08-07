@@ -62,13 +62,20 @@ def call_gemini_vision(pil_img):
         img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-        prompt = """First, check if this image is a mobile wallet transaction receipt screenshot (GCash, Maya, Bank Transfer, or Payment Confirmation slip).
-If it is NOT a payment receipt screenshot (e.g. photo of a person, animal, object, landscape, meme, random document, or non-financial image):
-  Set is_receipt to false, verdict to "NOT_A_RECEIPT", confidence to 0.99, and analysis to a 1-sentence clear explanation of what the image actually is.
+        prompt = """CRITICAL DOMAIN CLASSIFICATION TEST:
+First, inspect the image to determine if it is a standalone mobile wallet transaction receipt screenshot (GCash, Maya, or Bank Transfer payment confirmation).
 
-If it IS a payment receipt:
-  Set is_receipt to true, analyze font consistency, reference number validity, date/amount alignment, and editing artifacts.
-  Set verdict to "AUTHENTIC" or "FORGED", confidence (0.50 to 0.99), and analysis to a 2-sentence forensic explanation.
+IF THE IMAGE IS A SCREENSHOT OF A WEB BROWSER, WEBSITE UI, SOFTWARE APP INTERFACE, COMPUTER SCREEN, DESKTOP WALLPAPER, CODE EDITOR, OR NESTED APP PREVIEW (for example: showing web headers, Chrome browser address bar, sidebars, buttons like 'Active Architecture', 'Model & ELA Config', 'Forensic Control Panel', or website user interface elements):
+  - Set is_receipt to false
+  - Set verdict to "NOT_A_RECEIPT"
+  - Set confidence to 0.99
+  - Set analysis to "The uploaded image is a screenshot of a website user interface / software application, not an official standalone mobile wallet transaction receipt."
+
+IF THE IMAGE IS A DIRECT, FULL-SCREEN MOBILE WALLET PAYMENT RECEIPT (GCash or Maya):
+  - Set is_receipt to true
+  - Set verdict to "AUTHENTIC" or "FORGED"
+  - Set confidence to a float between 0.50 and 0.99
+  - Set analysis to a 2-sentence forensic explanation of font, reference number, alignment, and ELA artifacts.
 
 Return ONLY valid JSON with keys: is_receipt (boolean), verdict ("AUTHENTIC", "FORGED", or "NOT_A_RECEIPT"), confidence (float), and analysis (string)."""
         
