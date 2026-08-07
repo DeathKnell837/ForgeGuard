@@ -1,6 +1,6 @@
 # FORCE_FRESH_BUILD: 2026-07-28_16:50:00_UTC
 """
-ForgeGuard ΓÇö Streamlit Web Application (v1.2.2-STABILITY-AUDIT-BUILD)
+ForgeGuard — Streamlit Web Application (v1.2.2-STABILITY-AUDIT-BUILD)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
@@ -419,7 +419,7 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
 # PAGE CONFIGURATION & BASE BACKGROUND
 # ============================================================
 st.set_page_config(
-    page_title="ForgeGuard ΓÇö Digital Receipt Forensic Suite",
+    page_title="ForgeGuard — Digital Receipt Forensic Suite",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -513,7 +513,7 @@ button[aria-label*="collapse"] {
     pointer-events: none !important;
 }
 
-/* The app-owned Γÿ░ sidebar launcher is always visible in top-left */
+/* The app-owned ☰ sidebar launcher is always visible in top-left */
 .forgeguard-sidebar-launcher {
     position: fixed !important;
     top: 0.7rem !important;
@@ -1123,9 +1123,9 @@ with st.sidebar:
     
     st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
     model_options = [
-        "MobileNetV2 (3.4M Params) ΓÇö Recommended",
-        "ResNet50 (23.5M Params) ΓÇö Deep Benchmark",
-        "Basic CNN (2.1M Params) ΓÇö Baseline"
+        "MobileNetV2 (3.4M Params) — Recommended",
+        "ResNet50 (23.5M Params) — Deep Benchmark",
+        "Basic CNN (2.1M Params) — Baseline"
     ]
     model_choice = st.radio(
         "Active architecture",
@@ -1224,7 +1224,7 @@ components.html("""
             launcher.className = 'forgeguard-sidebar-launcher';
             launcher.title = 'Toggle sidebar controls';
             launcher.setAttribute('aria-label', 'Toggle sidebar controls');
-            launcher.textContent = 'Γÿ░';
+            launcher.textContent = '☰';
             doc.body.appendChild(launcher);
         }
         launcher.onclick = (e) => {
@@ -1267,9 +1267,9 @@ st.markdown(f"""
     </div>
     <div class="mono-readout" style="font-size: 0.78rem; color: #64748B; display: flex; gap: 16px; flex-wrap: wrap;">
         <span><strong style="color: #CBD5E1;">Authors:</strong> Rogie P. Bacanto & Daniela S. Ungab</span>
-        <span>ΓÇó</span>
+        <span>•</span>
         <span><strong style="color: #CBD5E1;">Adviser:</strong> Ms. Doris Ann Mariano</span>
-        <span>ΓÇó</span>
+        <span>•</span>
         <span><strong style="color: #C9A15F;">Institution:</strong> Notre Dame of Midsayap College</span>
     </div>
 </div>
@@ -1382,7 +1382,7 @@ if uploaded_file is not None:
         if w < 180 or h < 240:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">ΓÜá∩╕Å INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
+                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Please upload a clear, high-resolution mobile receipt screenshot (minimum 180x240px).</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1390,7 +1390,7 @@ if uploaded_file is not None:
         elif std_dev < 6.0:
             st.markdown(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
-                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">ΓÜá∩╕Å INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
+                <div style="color: #F87171; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">The uploaded image contains no readable visual variation or text. Please upload an official transaction receipt.</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1401,7 +1401,7 @@ if uploaded_file is not None:
             <div class="stamp-container" style="margin-top: 1.5rem;">
                 <div class="stamp-box stamp-warning">
                     <div class="stamp-title">NON-RECEIPT DOCUMENT DETECTED</div>
-                    <div class="stamp-sub">EVIDENCE OUT OF DOMAIN ΓÇö UPLOAD GCASH / MAYA MOBILE WALLET RECEIPT</div>
+                    <div class="stamp-sub">EVIDENCE OUT OF DOMAIN — UPLOAD GCASH / MAYA MOBILE WALLET RECEIPT</div>
                 </div>
                 <div class="stamp-meta-bar">
                     <span>[VERDICT: <strong style="color: #EAB308;">OUT OF DOMAIN</strong>]</span>
@@ -1411,7 +1411,7 @@ if uploaded_file is not None:
             </div>
             
             <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
-                <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">ΓÜá∩╕Å DOMAIN OUT OF SCOPE NOTICE</div>
+                <div style="color: #EAB308; font-family: 'IBM Plex Mono'; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">⚠️ DOMAIN OUT OF SCOPE NOTICE</div>
                 <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.55;">
                     The uploaded image (desktop/wallpaper screenshot) is classified as a general non-receipt image. 
                     ForgeGuard neural network models (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>.
@@ -1514,7 +1514,7 @@ if uploaded_file is not None:
         mode_color = "#34D399" if inference_mode == "CNN" else "#EAB308"
         st.markdown(f"""
         <div style="font-family: 'IBM Plex Mono'; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem; letter-spacing: 0.5px;">
-            [INFERENCE ENGINE: <strong>{inference_mode}</strong>] {'Trained .keras neural network active' if inference_mode == 'CNN' else 'TensorFlow unavailable ΓÇö using ELA regional differential heuristic'}
+            [INFERENCE ENGINE: <strong>{inference_mode}</strong>] {'Trained .keras neural network active' if inference_mode == 'CNN' else 'TensorFlow unavailable — using ELA regional differential heuristic'}
         </div>
         """, unsafe_allow_html=True)
         
@@ -1649,7 +1649,7 @@ if uploaded_file is not None:
             <div class="glass-panel-matrix" style="border-top: 3px solid #C9A15F;">
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2 Γÿà</div>
+                        <div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2 ⭐</div>
                         <span class="mono-readout" style="color: {badge_color}; font-size: 0.72rem; font-weight: 700;">[{'FORGED' if is_forged else 'AUTHENTIC'}]</span>
                     </div>
                     <div style="color: #94A3B8; font-size: 0.78rem; margin-bottom: 0.75rem;">Recommended lightweight mobile model</div>
@@ -1679,21 +1679,21 @@ if uploaded_file is not None:
         
         if is_forged:
             audit_header_color = "#F87171"
-            audit_title = "≡ƒÜ¿ DETECTED FORGERY: High Pixel Variance & Compression Anomaly"
+            audit_title = "🚨 DETECTED FORGERY: High Pixel Variance & Compression Anomaly"
             audit_summary = """
             <strong>Forensic Findings & ELA Analysis:</strong><br>
-            ΓÇó <strong>Pixel Variance Spike:</strong> Error Level Analysis (ELA at Q=90) revealed localized compression discrepancies across receipt text regions.<br>
-            ΓÇó <strong>Secondary Resaving Artifacts:</strong> The background canvas exhibits low error noise, while text fields (amount/ref/name) display high error brightness (>200.0). This gradient disparity confirms localized re-encoding after digital manipulation.<br>
-            ΓÇó <strong>Actionable Security Protocol:</strong> Do NOT accept this receipt as proof of payment. Verify the 13-digit transaction reference number directly inside your official GCash or Maya merchant transaction history.
+            • <strong>Pixel Variance Spike:</strong> Error Level Analysis (ELA at Q=90) revealed localized compression discrepancies across receipt text regions.<br>
+            • <strong>Secondary Resaving Artifacts:</strong> The background canvas exhibits low error noise, while text fields (amount/ref/name) display high error brightness (>200.0). This gradient disparity confirms localized re-encoding after digital manipulation.<br>
+            • <strong>Actionable Security Protocol:</strong> Do NOT accept this receipt as proof of payment. Verify the 13-digit transaction reference number directly inside your official GCash or Maya merchant transaction history.
             """
         else:
             audit_header_color = "#34D399"
-            audit_title = "≡ƒƒó VERIFIED AUTHENTIC: Homogeneous Compression Grid"
+            audit_title = "🟢 VERIFIED AUTHENTIC: Homogeneous Compression Grid"
             audit_summary = """
             <strong>Forensic Findings & ELA Analysis:</strong><br>
-            ΓÇó <strong>Uniform Error Distribution:</strong> ELA inspection (Q=90) confirms a homogeneous error grid across all image coordinates (variance < 210.0).<br>
-            ΓÇó <strong>Zero Resaving Anomalies:</strong> No localized text tampering, edge splicing, or font replacement artifacts were detected.<br>
-            ΓÇó <strong>Actionable Security Protocol:</strong> Receipt matches official mobile wallet device rendering characteristics.
+            • <strong>Uniform Error Distribution:</strong> ELA inspection (Q=90) confirms a homogeneous error grid across all image coordinates (variance < 210.0).<br>
+            • <strong>Zero Resaving Anomalies:</strong> No localized text tampering, edge splicing, or font replacement artifacts were detected.<br>
+            • <strong>Actionable Security Protocol:</strong> Receipt matches official mobile wallet device rendering characteristics.
             """
             
         st.markdown(f"""
