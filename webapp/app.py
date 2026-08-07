@@ -46,7 +46,8 @@ def masked_phone(phone):
 try:
     from preprocessing.ela import generate_ela_image, evaluate_ela_forgery_risk, compute_ela, convert_ela_to_array
 except Exception:
-    
+    pass
+
 def call_gemini_vision(pil_img):
     import urllib.request, json, base64, io, os, time
     fb_k = base64.b64decode("QVEuQWI4Uk42SWdZQ2NraEVCNGYzbHVrSmtlS014bUtkVmVsLWktdjJVYWRTWF9tOTJKdw==").decode("utf-8")
@@ -84,33 +85,33 @@ def call_gemini_vision(pil_img):
         return None
 
 def compute_ela(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
-        if image.mode != 'RGB':
-            image = image.convert('RGB')
-        buf = io.BytesIO()
-        image.save(buf, format='JPEG', quality=quality)
-        buf.seek(0)
-        resaved = Image.open(buf).convert('RGB')
-        ela_diff = ImageChops.difference(image, resaved)
-        return ImageEnhance.Brightness(ela_diff).enhance(scale)
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
+    buf = io.BytesIO()
+    image.save(buf, format='JPEG', quality=quality)
+    buf.seek(0)
+    resaved = Image.open(buf).convert('RGB')
+    ela_diff = ImageChops.difference(image, resaved)
+    return ImageEnhance.Brightness(ela_diff).enhance(scale)
 
-    def generate_ela_image(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
-        return compute_ela(image, quality=quality, scale=scale)
+def generate_ela_image(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
+    return compute_ela(image, quality=quality, scale=scale)
 
-    def evaluate_ela_forgery_risk(ela_image: Image.Image) -> dict:
-        arr = np.array(ela_image, dtype=np.float32)
-        mean_val = float(np.mean(arr))
-        var_val = float(np.var(arr))
-        max_val = float(np.max(arr))
-        return {
-            'mean': mean_val,
-            'variance': var_val,
-            'max': max_val,
-            'is_suspicious': var_val > 185.0 or max_val > 210.0
-        }
+def evaluate_ela_forgery_risk(ela_image: Image.Image) -> dict:
+    arr = np.array(ela_image, dtype=np.float32)
+    mean_val = float(np.mean(arr))
+    var_val = float(np.var(arr))
+    max_val = float(np.max(arr))
+    return {
+        'mean': mean_val,
+        'variance': var_val,
+        'max': max_val,
+        'is_suspicious': var_val > 185.0 or max_val > 210.0
+    }
 
-    def convert_ela_to_array(ela_image: Image.Image, target_size: tuple = (224, 224)) -> np.ndarray:
-        resized = ela_image.resize(target_size, Image.Resampling.BILINEAR)
-        return np.array(resized, dtype=np.float32) / 255.0
+def convert_ela_to_array(ela_image: Image.Image, target_size: tuple = (224, 224)) -> np.ndarray:
+    resized = ela_image.resize(target_size, Image.Resampling.BILINEAR)
+    return np.array(resized, dtype=np.float32) / 255.0
 
 # GCash brand colors & dimensions for receipt generator
 GCASH_BLUE = (0, 110, 235)
