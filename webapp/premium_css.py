@@ -1,58 +1,80 @@
 PREMIUM_CSS = """
 <style>
-/* 1. Font Import */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+/* ============================================================
+   FORGEGUARD ULTIMATE CYBER FORENSIC COMMAND CENTER CSS (v2.0)
+   ============================================================ */
 
-/* 2. Background and Noise */
+/* 1. Google Fonts: JetBrains Mono (Data/Tech), Orbitron / Rajdhani / Spectral (Headers), Inter (Body) */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* 2. Cyber Surface System & Global Theme */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background-color: #060910 !important;
-    color: #F1F5F9 !important;
+    background-color: #04070D !important;
+    color: #E2E8F0 !important;
 }
 
 .stApp {
-    background: radial-gradient(circle at 50% 0%, rgba(20, 26, 36, 1) 0%, rgba(6, 9, 16, 1) 100%) !important;
-    background-color: #060910 !important;
+    background-color: #04070D !important;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 10% 30%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(201, 161, 95, 0.08) 0%, transparent 40%),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px !important;
+    background-position: center, center, center, -1px -1px, -1px -1px !important;
+    background-attachment: fixed !important;
 }
 
+/* Cyber Noise Scanline Texture */
 .stApp::after {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     pointer-events: none;
     z-index: 999999;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
 }
 
-/* 15. Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #060910;
+    background: #04070D;
 }
 ::-webkit-scrollbar-thumb {
-    background: #1E2733;
+    background: #1E293B;
     border-radius: 3px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #8B5CF6;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
 }
 
-/* Typography Classes */
+/* Typography Hierarchy */
 .serif-header {
-    font-family: 'Spectral', Georgia, serif !important;
+    font-family: 'Rajdhani', 'Spectral', sans-serif !important;
     font-weight: 700 !important;
-    letter-spacing: -0.3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase;
 }
 
 .mono-readout {
     font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* STREAMLIT HEADER & CONTROLS */
+/* STREAMLIT HEADER OVERRIDES */
 header[data-testid="stHeader"] {
     background: transparent !important;
     z-index: 99990 !important;
@@ -82,164 +104,186 @@ section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button {
     z-index: 1000001 !important;
     width: 2.35rem !important;
     height: 2.35rem !important;
-    border: 1px solid #C9A15F !important;
+    border: 1px solid #00F0FF !important;
     border-radius: 8px !important;
-    background: #0F1419 !important;
-    color: #C9A15F !important;
+    background: #0A0F1D !important;
+    color: #00F0FF !important;
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
     transition: all 0.3s ease !important;
 }
 .forgeguard-sidebar-launcher:hover {
-    background: #161D27 !important;
-    border-color: #F8FAFC !important;
+    background: #111B2E !important;
+    border-color: #8B5CF6 !important;
     color: #FFFFFF !important;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6) !important;
+    transform: scale(1.05) !important;
 }
 
-/* 7. Premium Sidebar */
+/* SIDEBAR COMMAND PANEL */
 section[data-testid="stSidebar"] {
-    background-color: #0A0F15 !important;
-    border-right: 1px solid rgba(139, 92, 246, 0.15) !important;
-    box-shadow: 4px 0 30px rgba(139, 92, 246, 0.05) !important;
+    background: linear-gradient(180deg, #070B14 0%, #04070D 100%) !important;
+    border-right: 1px solid rgba(0, 240, 255, 0.15) !important;
+    box-shadow: 8px 0 35px rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Pulsing Green Dot */
-.status-dot {
-    width: 8px; height: 8px;
-    background-color: #34D399;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 8px #34D399;
-    animation: pulse-dot 2s infinite;
-}
-@keyframes pulse-dot {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    padding-top: 1.5rem !important;
 }
 
-/* Sidebar Dividers */
-hr {
-    border-color: rgba(201, 161, 95, 0.2) !important;
-    margin: 1.5rem 0 !important;
-}
-
-/* 18. Hide Unnecessary Chrome */
+/* HIDE UNNECESSARY CHROME */
 #MainMenu, footer, 
 [data-testid="stToolbar"], 
+div[data-testid="stToast"], 
+div[class*="stToast"], 
 [data-testid="stDecoration"],
-[data-testid="stStatusWidget"] {
+[data-testid="stStatusWidget"],
+.stDeployButton {
     display: none !important;
 }
 
+/* MAIN CONTAINER CONSTRAINT */
 .block-container {
-    padding-top: 1.25rem !important;
-    padding-bottom: 2.5rem !important;
-    max-width: 1400px !important;
+    padding-top: 1rem !important;
+    padding-bottom: 3rem !important;
+    max-width: 1440px !important;
 }
 
-/* Violet Accent Root */
-:root {
-    --primary-color: #8B5CF6 !important;
-}
-
-/* 7. Custom Slider Styling */
+/* VIOLET / CYAN NEON SLIDERS */
 div[data-baseweb="slider"] [role="slider"] {
-    background-color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.6) !important;
+    background-color: #00F0FF !important;
+    border-color: #00F0FF !important;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.8) !important;
 }
+
 div[data-baseweb="slider"] div[style*="background"] {
-    background-color: #8B5CF6 !important;
+    background: linear-gradient(90deg, #8B5CF6, #00F0FF) !important;
 }
-div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"] {
+
+div[data-baseweb="slider"] > div > div > div {
+    background: linear-gradient(90deg, #8B5CF6, #00F0FF) !important;
+}
+
+div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
+div[data-baseweb="slider"] + div {
+    color: #00F0FF !important;
     font-family: 'JetBrains Mono', monospace !important;
-    color: #A78BFA !important;
+    font-size: 0.82rem !important;
 }
 
-/* 14. Radio Buttons - Stacked Cards */
+/* SIDEBAR RADIO SELECTION CARDS (STACKED HUD CARDS) */
 div[data-testid="stRadio"] div[role="radiogroup"] label {
-    background: #161D27 !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: #0A0F1D !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 12px !important;
-    padding: 12px 16px !important;
-    margin-bottom: 8px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 14px 16px !important;
+    margin-bottom: 10px !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    position: relative !important;
+    overflow: hidden !important;
 }
+
 div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
-    background: #1E2733 !important;
-    border-color: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(0, 240, 255, 0.4) !important;
+    background: #111A2E !important;
+    box-shadow: 0 0 18px rgba(0, 240, 255, 0.15) !important;
+    transform: translateX(4px) !important;
 }
+
 div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] {
-    background: rgba(139, 92, 246, 0.1) !important;
-    border: 1px solid #8B5CF6 !important;
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.2) !important;
-}
-div[data-baseweb="radio"] div[aria-checked="true"] {
-    background-color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(0, 240, 255, 0.15) 100%) !important;
+    border: 1.5px solid #00F0FF !important;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1) !important;
 }
 
-/* 12. File Uploader */
-div[data-testid="stFileUploader"] {
-    background: #0F1419 !important;
-    border: 2px dashed rgba(139, 92, 246, 0.3) !important;
-    border-radius: 16px !important;
-    padding: 2rem !important;
-    transition: all 0.3s ease !important;
-}
-div[data-testid="stFileUploader"]:hover {
-    border-color: #8B5CF6 !important;
-    background: #161D27 !important;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15) !important;
+div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] span {
+    color: #00F0FF !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5) !important;
 }
 
-/* 8. Header Brand Bar */
+/* ============================================================
+   CYBER FORENSIC HUD BRAND BAR & BANNER
+   ============================================================ */
 .navbar-brand {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #0F1419;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, #090E1A 0%, #0D1527 100%);
+    border: 1px solid rgba(0, 240, 255, 0.25);
     border-radius: 16px;
     padding: 1rem 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
+    margin-bottom: 0.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 240, 255, 0.05);
+    position: relative;
+    overflow: hidden;
 }
+
+.navbar-brand::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, #00F0FF, #8B5CF6, transparent);
+}
+
 .brand-title {
-    font-family: 'Spectral', serif;
-    font-size: 1.8rem;
+    font-family: 'Rajdhani', 'Spectral', sans-serif;
+    font-size: 1.85rem;
     font-weight: 800;
+    letter-spacing: 1px;
     color: #F8FAFC;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-transform: uppercase;
 }
-.nav-toggle-btn {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    color: #F8FAFC;
-    padding: 6px 14px;
-    border-radius: 8px;
+
+.brand-shield {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.8));
+    animation: shield-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes shield-glow {
+    0% { filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5)); }
+    100% { filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.9)); }
+}
+
+.version-pill {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.nav-toggle-btn:hover {
-    background: rgba(139, 92, 246, 0.2);
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
-}
-.badge-gold {
-    background: rgba(201, 161, 95, 0.1);
-    color: #C9A15F;
-    border: 1px solid rgba(201, 161, 95, 0.4);
-    padding: 4px 12px;
+    font-weight: 700;
+    font-size: 0.72rem;
+    color: #00F0FF;
+    background: rgba(0, 240, 255, 0.12);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 3px 10px;
     border-radius: 20px;
+    margin-left: 8px;
+    letter-spacing: 0.8px;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.badge-gold {
+    background: rgba(201, 161, 95, 0.12);
+    color: #F59E0B;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    padding: 6px 16px;
+    border-radius: 30px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    box-shadow: inset 0 0 8px rgba(201, 161, 95, 0.1);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
 }
 
 /* 3. Surface Depth System - Panels */
