@@ -667,14 +667,23 @@ div[data-testid="stImage"] img {
     .gauge-container {
         max-width: 160px;
     }
-    .info-chip {
-        font-size: 0.68rem;
-        padding: 4px 8px;
-    }
-    .version-pill {
-        font-size: 0.62rem;
-        padding: 2px 8px;
-    }
+/* PREMIUM CYBER SCANNER SPINNER & STATUS WIDGET */
+[data-testid="stStatusWidget"], .stSpinner {
+    background: rgba(15, 23, 42, 0.85) !important;
+    border: 1.5px solid rgba(139, 92, 246, 0.5) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.35) !important;
+    color: #38BDF8 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    padding: 0.75rem 1.25rem !important;
+    margin: 1rem 0 !important;
+}
+.stSpinner > div > div {
+    border-top-color: #00F0FF !important;
+    border-right-color: #8B5CF6 !important;
+    border-bottom-color: #38BDF8 !important;
 }
 
 </style>

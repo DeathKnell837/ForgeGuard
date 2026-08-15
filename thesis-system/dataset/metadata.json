@@ -1,8 +1,8 @@
 {
   "version": "2.2.0",
-  "total_samples": 777,
-  "authentic_count": 153,
-  "forged_count": 624,
+  "total_samples": 952,
+  "authentic_count": 0,
+  "forged_count": 175,
   "categories": {
     "authentic": 153,
     "amount_alteration": 153,
@@ -4672,6 +4672,1931 @@
       "label": 1,
       "class": "forged",
       "type": "ref_fabrication"
+    },
+    {
+      "filename": "ai_gen_1_001_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_002_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_003_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_004_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_005_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_006_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_007_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_008_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_009_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_010_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_011_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_012_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_013_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_014_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_015_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_016_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_017_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_018_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_019_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_020_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_021_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_022_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_023_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_024_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_025_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_026_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_027_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_028_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_029_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_030_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_031_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_032_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_033_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_034_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_1_035_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_1",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_001_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_002_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_003_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_004_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_005_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_006_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_007_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_008_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_009_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_010_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_011_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_012_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_013_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_014_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_015_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_016_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_017_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_018_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_019_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_020_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_021_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_022_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_023_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_024_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_025_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_026_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_027_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_028_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_029_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_030_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_031_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_032_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_033_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_034_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_2_035_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_2",
+      "resolution": [
+        454,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_3_001_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_002_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_003_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_004_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_005_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_006_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_007_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_008_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_009_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_010_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_011_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_012_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_013_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_014_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_015_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_016_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_017_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_018_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_019_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_020_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_021_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_022_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_023_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_024_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_025_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_026_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_027_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_028_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_029_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_030_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_031_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_032_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_033_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_034_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_3_035_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_3",
+      "resolution": [
+        414,
+        896
+      ]
+    },
+    {
+      "filename": "ai_gen_4_001_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_002_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_003_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_004_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_005_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_006_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_007_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_008_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_009_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_010_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_011_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_012_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_013_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_014_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_015_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_016_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_017_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_018_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_019_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_020_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_021_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_022_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_023_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_024_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_025_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_026_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_027_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_028_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_029_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_030_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_031_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_032_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_033_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_034_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_4_035_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_4",
+      "resolution": [
+        496,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_001_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_002_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_003_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_004_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_005_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_006_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_007_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_008_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_009_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_010_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_011_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_012_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_013_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_014_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_015_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_016_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_017_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_018_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_019_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_020_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_021_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_022_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_023_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_024_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_025_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_026_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_027_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_028_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_029_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_030_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_031_amount.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "amount",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_032_name.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "name",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_033_ref_date.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ref_date",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_034_full.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "full",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
+    },
+    {
+      "filename": "ai_gen_5_035_ai_synthetic.jpg",
+      "label": "forged",
+      "category": "ai_generated_template",
+      "tamper_type": "ai_synthetic",
+      "source_base": "user_upload_5",
+      "resolution": [
+        527,
+        1024
+      ]
     }
   ]
 }
