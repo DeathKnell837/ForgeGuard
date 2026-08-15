@@ -17,6 +17,7 @@ import time
 import io
 import datetime
 import base64
+import textwrap
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
 import streamlit as st
@@ -757,16 +758,16 @@ elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
 
 # If still no image is selected, display rich cyber forensic intelligence on the landing page!
 if image_bytes is None:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="margin-top: 1.8rem;">
         <div class="eyebrow-label">TRI-CNN ARCHITECTURAL BENCHMARK INTELLIGENCE</div>
         <h4 class="serif-header" style="font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;">Comparative Deep Learning Models</h4>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
     
     c_m1, c_m2, c_m3 = st.columns(3)
     with c_m1:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="glass-panel-matrix" style="border-top: 3px solid #00F0FF;">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -780,10 +781,10 @@ if image_bytes is None:
                 <span>Params: <strong style="color: #F8FAFC;">3.4M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.4%</strong></span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """).strip(), unsafe_allow_html=True)
         
     with c_m2:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="glass-panel-matrix" style="border-top: 3px solid #8B5CF6;">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -797,10 +798,10 @@ if image_bytes is None:
                 <span>Params: <strong style="color: #F8FAFC;">23.5M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.7%</strong></span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """).strip(), unsafe_allow_html=True)
         
     with c_m3:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="glass-panel-matrix" style="border-top: 3px solid #F59E0B;">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -814,9 +815,9 @@ if image_bytes is None:
                 <span>Params: <strong style="color: #F8FAFC;">2.1M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">94.2%</strong></span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """).strip(), unsafe_allow_html=True)
         
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 16px; padding: 1.5rem 2rem; margin-top: 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
         <div class="eyebrow-gold">FORENSIC REASONING PIPELINE</div>
         <div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">How Error Level Analysis (ELA) Exposes Digital Forgery</div>
@@ -827,7 +828,7 @@ if image_bytes is None:
             while digitally spliced or overwritten text displays luminous error hotspots detected by our CNN architectures.
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 # EVIDENCE EVALUATION RESULTS BLOCK
 if image_bytes is not None:
@@ -856,24 +857,24 @@ if image_bytes is not None:
         
         # ROBUST PRE-VALIDATION COUNTERS (Rejection of Non-Receipt / Blank / Low-Res Images)
         if w < 180 or h < 240:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
                 <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">INVALID EVIDENCE: EXTREMELY LOW RESOLUTION ({w}x{h}px)</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">Please upload a clear, high-resolution mobile receipt screenshot (minimum 180x240px).</div>
             </div>
-            """, unsafe_allow_html=True)
+            """).strip(), unsafe_allow_html=True)
             st.stop()
         elif std_dev < 6.0:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div style="background: rgba(248,113,113,0.12); border: 1.5px solid #F87171; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;">
                 <div style="color: #F87171; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">INVALID EVIDENCE: SOLID COLOR / BLANK IMAGE</div>
                 <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 6px; line-height: 1.5;">The uploaded image contains no readable visual variation or text. Please upload an official transaction receipt.</div>
             </div>
-            """, unsafe_allow_html=True)
+            """).strip(), unsafe_allow_html=True)
             st.stop()
         # ROBUST DOMAIN CLASSIFIER: Non-Mobile-Receipt Screening
         if aspect_ratio < 0.70 or aspect_ratio > 3.6:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div class="stamp-container" style="margin-top: 1.5rem;">
                 <div class="stamp-box stamp-warning">
                     <div class="stamp-title">NON-RECEIPT DOCUMENT DETECTED</div>
@@ -894,14 +895,14 @@ if image_bytes is not None:
                     Please upload an official transaction slip to perform ELA forgery detection.
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """).strip(), unsafe_allow_html=True)
             st.stop()
 
         # Smart AI Domain Pre-Validation (Checks if uploaded file is actually a mobile wallet receipt)
         gemini_pre_check = call_gemini_vision(pil_img)
         if gemini_pre_check and isinstance(gemini_pre_check, dict) and (gemini_pre_check.get("is_receipt") is False or gemini_pre_check.get("verdict") == "NOT_A_RECEIPT"):
             reason_text = gemini_pre_check.get("analysis", "The uploaded file is not a valid GCash or Maya mobile payment transaction receipt.")
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div class="stamp-container" style="margin-top: 1.5rem;">
                 <div class="stamp-box stamp-warning">
                     <div class="stamp-title">NON-RECEIPT FILE DETECTED</div>
@@ -909,19 +910,17 @@ if image_bytes is not None:
                 </div>
                 <div class="stamp-meta-bar">
                     <span>[VERDICT: <strong style="color: #EAB308;">OUT OF DOMAIN</strong>]</span>
-                    <span>[CONFIDENCE: <strong style="color: #A78BFA;">99.0%</strong>]</span>
-                    <span>[AI DIAGNOSIS: <strong style="color: #F8FAFC;">INVALID FINANCIAL EVIDENCE</strong>]</span>
+                    <span>[VALIDATION: <strong style="color: #F87171;">AI VISION SCREENING</strong>]</span>
                 </div>
             </div>
             
             <div style="background: rgba(234,179,8,0.12); border: 1.5px solid #EAB308; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0;">
                 <div style="color: #EAB308; font-family: sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px;">DOMAIN OUT OF SCOPE NOTICE</div>
-                <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.6;">
-                    {reason_text}<br><br>
-                    ForgeGuard model architectures (Basic CNN, MobileNetV2, ResNet50) are specialized strictly for authenticating <strong>GCash and Maya mobile wallet transaction receipts</strong>. Please upload an official transaction slip.
+                <div style="color: #F8FAFC; font-size: 0.88rem; margin-top: 6px; line-height: 1.55;">
+                    {reason_text}
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """).strip(), unsafe_allow_html=True)
             st.stop()
 
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
@@ -1154,14 +1153,14 @@ if image_bytes is not None:
                 st.markdown(f"""<div class="glass-panel-matrix"><div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2</div><div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">{m_scores['MobileNetV2']*100:.1f}%</div></div>""", unsafe_allow_html=True)
 
         if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div style="background: rgba(167,139,250,0.08); border: 1.5px solid rgba(167,139,250,0.3); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
                 <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;"><svg style='display:inline-block; vertical-align:middle; width:18px; height:18px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='15' x2='23' y2='15'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='15' x2='4' y2='15'/></svg>GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
                 <div style="color: #F8FAFC; font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
                     {gemini_result.get('analysis', '')}
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """).strip(), unsafe_allow_html=True)
 
         # AUTOMATED FORENSIC DOSSIER REPORT
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2.2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
