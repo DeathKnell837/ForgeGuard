@@ -1,6 +1,6 @@
-# FORCE_FRESH_BUILD: 2026-07-28_16:50:00_UTC
+# FORCE_FRESH_BUILD: 2026-08-15_16:47:00_UTC_PREMIUM_v2
 """
-ForgeGuard — Streamlit Web Application (v1.2.2-STABILITY-AUDIT-BUILD)
+ForgeGuard — Streamlit Web Application (v2.0-PREMIUM-UI)
 ======================================
 BSCS Thesis System: "Securing Mobile Transaction: A Comparative Evaluation of 
 CNN Architectures in Detecting Digital Receipt Forgery"
