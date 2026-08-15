@@ -444,682 +444,35 @@ try:
 except Exception:
     BG_BASE64 = ""
 
-if BG_BASE64:
-    bg_style_rule = f""".stApp {{
-        background: linear-gradient(135deg, rgba(11, 14, 20, 0.92) 0%, rgba(20, 26, 36, 0.95) 100%),
-                    url("data:image/jpeg;base64,{BG_BASE64}") no-repeat center center fixed !important;
-        background-size: cover !important;
-    }}"""
-else:
-    bg_style_rule = """.stApp {
-        background-color: #0B0E14 !important;
-        background-image: 
-            radial-gradient(circle at 50% 15%, rgba(139, 92, 246, 0.1) 0%, transparent 45%),
-            radial-gradient(circle at 85% 85%, rgba(201, 161, 95, 0.06) 0%, transparent 40%),
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
-        background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px !important;
-        background-position: center, center, -1px -1px, -1px -1px !important;
-    }"""
-
 # ============================================================
-# DIGITAL FORENSIC CASE FILE CSS SYSTEM
+# PREMIUM FORENSIC CSS DESIGN SYSTEM (v2.0)
 # ============================================================
-CUSTOM_CSS = "<style>\n" + bg_style_rule + """
-/* Import Google Fonts: Spectral (Serif Display), Inter (Sans Body), IBM Plex Mono (Monospace Readouts) */
-@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
-
-/* Global Reset & Surface Hierarchy */
-html, body, [class*="css"] {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background-color: #0B0E14 !important;
-    color: #F1F5F9 !important;
-}
-
-/* Typography Classes */
-.serif-header {
-    font-family: 'Spectral', Georgia, serif !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.3px !important;
-}
-
-.mono-readout {
-    font-family: sans-serif, monospace !important;
-}
-
-/* STREAMLIT HEADER & TRANSPARENT CONTAINER */
-header[data-testid="stHeader"] {
-    background: transparent !important;
-    background-color: transparent !important;
-    pointer-events: auto !important;
-    z-index: 99990 !important;
-}
-
-/*
- * Keep Streamlit's native control available after the sidebar is collapsed.
- * The control lives in the header when the sidebar is closed, so it needs an
- * explicit fixed position instead of inheriting a hidden/zero-height layout.
- */
-button[data-testid="stSidebarCollapsedControl"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="collapsedControl"] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    position: fixed !important;
-    top: 0.65rem !important;
-    left: 0.65rem !important;
-    width: 2.25rem !important;
-    height: 2.25rem !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 1000000 !important;
-}
-
-/* HIDE SIDEBAR << COLLAPSE ARROW BUTTON AS REQUESTED */
-[data-testid="stSidebarCollapseButton"],
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
-button[aria-label*="Collapse"],
-button[aria-label*="collapse"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
-/* The app-owned ☰ sidebar launcher is always visible in top-left */
-.forgeguard-sidebar-launcher {
-    position: fixed !important;
-    top: 0.7rem !important;
-    left: 0.7rem !important;
-    z-index: 1000001 !important;
-    width: 2.35rem !important;
-    height: 2.35rem !important;
-    padding: 0 !important;
-    border: 1.5px solid #C9A15F !important;
-    border-radius: 9px !important;
-    background: #141A24 !important;
-    color: #C9A15F !important;
-    cursor: pointer !important;
-    font-size: 1.25rem !important;
-    line-height: 1 !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: all 0.2s ease !important;
-}
-
-.forgeguard-sidebar-launcher:hover {
-    background: #1B222D !important;
-    border-color: #F8FAFC !important;
-    color: #FFFFFF !important;
-    transform: scale(1.05) !important;
-}
-
-/* STREAMLIT SIDEBAR SURFACE STYLING */
-section[data-testid="stSidebar"] {
-    background-color: #141A24 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.5) !important;
-    pointer-events: auto !important;
-}
-
-section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
-    padding-top: 1.5rem !important;
-}
-
-/* Ensure the interactive BaseWeb slider layer remains above custom styling. */
-section[data-testid="stSidebar"] div[data-baseweb="slider"],
-section[data-testid="stSidebar"] div[data-baseweb="slider"] *,
-section[data-testid="stSidebar"] div[data-baseweb="slider"] [role="slider"] {
-    pointer-events: auto !important;
-}
-
-/* HIDE UNNECESSARY CHROME */
-#MainMenu, footer, 
-[data-testid="stToolbar"], 
-div[data-testid="stToast"], 
-div[class*="stToast"], 
-[data-testid="stDecoration"],
-[data-testid="stStatusWidget"],
-.stDeployButton {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-/* Page Container Constraints */
-.block-container {
-    padding-top: 1.25rem !important;
-    padding-bottom: 2.5rem !important;
-    max-width: 1400px !important;
-}
-
-/* STREAMLIT PRIMARY ACCENT OVERRIDE -> FORENSIC VIOLET (#8B5CF6) */
-:root {
-    --primary-color: #8B5CF6 !important;
-}
-
-/* Force Streamlit Red accents to Violet */
-[style*="rgb(255, 75, 75)"], [style*="#ff4b4b"], [style*="#FF4B4B"], [style*="RGB(255, 75, 75)"] {
-    background-color: #8B5CF6 !important;
-    color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
-}
-
-/* VIOLET SLIDERS TRACK & THUMB */
-div[data-baseweb="slider"] [role="slider"] {
-    background-color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5) !important;
-}
-
-div[data-baseweb="slider"] div[style*="background"] {
-    background-color: #8B5CF6 !important;
-}
-
-div[data-baseweb="slider"] > div > div > div {
-    background-color: #8B5CF6 !important;
-}
-
-div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
-div[data-baseweb="slider"] + div {
-    color: #A78BFA !important;
-    font-family: sans-serif, monospace !important;
-    font-size: 0.82rem !important;
-}
-
-/* STACKED MODEL PICKER CARDS & RADIO DOT (VIOLET ACCENT) */
-div[data-testid="stRadio"] label span {
-    color: #E2E8F0 !important;
-    font-size: 0.88rem !important;
-    font-weight: 500 !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label {
-    background: #1B222D !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 12px 14px !important;
-    margin-bottom: 8px !important;
-    transition: all 0.25s ease !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    width: 100% !important;
-}
-
-div[data-testid="stRadio"] div[data-testid="stMarkdownContainer"] p {
-    margin: 0 !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.86rem !important;
-    line-height: 1.4 !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
-    border-color: rgba(139, 92, 246, 0.5) !important;
-    background: #222B38 !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] {
-    background: rgba(139, 92, 246, 0.14) !important;
-    border: 1.5px solid #8B5CF6 !important;
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.25) !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] span {
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-}
-
-div[data-baseweb="radio"] div[aria-checked="true"] {
-    background-color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
-}
-
-div[data-baseweb="radio"] input:checked + div {
-    background-color: #8B5CF6 !important;
-    border-color: #8B5CF6 !important;
-}
-
-div[data-baseweb="radio"] div[aria-checked="true"] > div {
-    background-color: #FFFFFF !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] div[style*="background"] {
-    background-color: #8B5CF6 !important;
-}
-
-/* FILE UPLOADER STYLING (UNIFORM VIOLET #8B5CF6 BORDER) */
-div[data-testid="stFileUploader"] {
-    background: #1B222D !important;
-    border: 2px dashed rgba(139, 92, 246, 0.4) !important;
-    border-radius: 14px !important;
-    padding: 1.2rem !important;
-    transition: all 0.2s ease !important;
-}
-
-div[data-testid="stFileUploader"]:hover {
-    border-color: #8B5CF6 !important;
-    background: #222B38 !important;
-}
-
-div[data-testid="stFileUploader"] section {
-    background: transparent !important;
-}
-
-/* HEADER BRAND BAR */
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #141A24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 0.9rem 1.75rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-}
-
-.brand-title {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: 1.7rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-    color: #F8FAFC;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.nav-toggle-btn {
-    background: rgba(139, 92, 246, 0.12) !important;
-    border: 1px solid rgba(139, 92, 246, 0.4) !important;
-    color: #F8FAFC !important;
-    padding: 7px 16px !important;
-    border-radius: 10px !important;
-    font-family: sans-serif, monospace !important;
-    font-size: 0.78rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.8px !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transition: all 0.2s ease !important;
-}
-
-.nav-toggle-btn:hover {
-    background: rgba(139, 92, 246, 0.25) !important;
-    border-color: #8B5CF6 !important;
-    box-shadow: 0 0 14px rgba(139, 92, 246, 0.4) !important;
-}
-
-.badge-gold {
-    background: rgba(201, 161, 95, 0.12);
-    color: #C9A15F;
-    border: 1px solid rgba(201, 161, 95, 0.35);
-    padding: 5px 14px;
-    border-radius: 30px;
-    font-family: sans-serif, monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-/* FORENSIC CASE FILE PANELS (LAYER 1 SURFACE: #141A24) */
-.glass-panel {
-    background: #141A24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.4rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-}
-
-.glass-panel-matrix {
-    background: #141A24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.4rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-    min-height: 235px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.eyebrow-label {
-    font-family: sans-serif, monospace;
-    font-size: 0.74rem;
-    font-weight: 600;
-    color: #8B5CF6;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-}
-
-.eyebrow-gold {
-    font-family: sans-serif, monospace;
-    font-size: 0.74rem;
-    font-weight: 600;
-    color: #C9A15F;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-}
-
-/* NUMBERED TABS (FORENSIC DETECTOR / FORGERY GENERATOR) */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 12px !important;
-    background: #141A24 !important;
-    padding: 8px !important;
-    border-radius: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-}
-
-.stTabs [data-baseweb="tab"] {
-    height: 46px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.3px !important;
-    color: #94A3B8 !important;
-    padding: 0 24px !important;
-    background: transparent !important;
-    border-radius: 10px !important;
-    border: 1px solid transparent !important;
-    transition: all 0.2s ease !important;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-    color: #F1F5F9 !important;
-    background: rgba(139, 92, 246, 0.08) !important;
-    border-color: rgba(139, 92, 246, 0.2) !important;
-}
-
-.stTabs [aria-selected="true"] {
-    background: rgba(139, 92, 246, 0.15) !important;
-    color: #FFFFFF !important;
-    border-bottom: 2.5px solid #8B5CF6 !important;
-    border-top: 1px solid rgba(139, 92, 246, 0.3) !important;
-    border-left: 1px solid rgba(139, 92, 246, 0.3) !important;
-    border-right: 1px solid rgba(139, 92, 246, 0.3) !important;
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2) !important;
-}
-
-.stTabs [data-baseweb="tab-border"] { display: none !important; }
-.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
-
-/* INK STAMP CLASSIFICATION VERDICT (OFFICIAL EVIDENCE STAMP) */
-.stamp-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 1.6rem 0 1.2rem 0;
-}
-
-.stamp-box {
-    display: inline-block;
-    padding: 1.2rem 2.4rem;
-    border-radius: 14px;
-    text-align: center;
-    position: relative;
-}
-
-.stamp-forged {
-    border: 3.5px double #F87171;
-    background: rgba(248, 113, 113, 0.09);
-    color: #F87171;
-    transform: rotate(-2.5deg);
-    box-shadow: 0 0 25px rgba(248, 113, 113, 0.15), inset 0 0 15px rgba(248, 113, 113, 0.08);
-}
-
-.stamp-auth {
-    border: 3.5px double #34D399;
-    background: rgba(52, 211, 153, 0.09);
-    color: #34D399;
-    transform: rotate(2deg);
-    box-shadow: 0 0 25px rgba(52, 211, 153, 0.15), inset 0 0 15px rgba(52, 211, 153, 0.08);
-}
-
-.stamp-warning {
-    border: 3.5px double #EAB308;
-    background: rgba(234, 179, 8, 0.09);
-    color: #EAB308;
-    transform: rotate(-1.5deg);
-    box-shadow: 0 0 25px rgba(234, 179, 8, 0.15), inset 0 0 15px rgba(234, 179, 8, 0.08);
-}
-
-.stamp-title {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: 1.7rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.stamp-sub {
-    font-family: sans-serif, monospace;
-    font-size: 0.76rem;
-    letter-spacing: 1px;
-    margin-top: 4px;
-    opacity: 0.9;
-}
-
-.stamp-meta-bar {
-    font-family: sans-serif, monospace;
-    font-size: 0.8rem;
-    color: #94A3B8;
-    background: #141A24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px 16px;
-    border-radius: 8px;
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-/* EXHIBIT A EVIDENCE PREVIEW FRAME (RECEIPT GENERATOR) */
-.exhibit-frame-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 380px;
-    margin: 0 auto;
-    background: #141A24;
-    border: 2px solid rgba(139, 92, 246, 0.25);
-    border-radius: 20px;
-    padding: 1.8rem 1rem 1.2rem 1rem;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.4);
-    min-height: 580px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.exhibit-tag-header {
-    background: #141A24;
-    border: 1px solid #C9A15F;
-    color: #C9A15F;
-    font-family: sans-serif, monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 14px;
-    border-radius: 6px;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.exhibit-placeholder {
-    text-align: center;
-    color: #64748B;
-    padding: 3rem 1.5rem;
-    border: 2px dashed rgba(139, 92, 246, 0.2);
-    border-radius: 16px;
-    background: #1B222D;
-}
-
-.exhibit-title {
-    font-family: sans-serif, monospace;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: #94A3B8;
-    letter-spacing: 1px;
-    margin-top: 10px;
-}
-
-.exhibit-sub {
-    font-size: 0.8rem;
-    color: #64748B;
-    margin-top: 6px;
-    line-height: 1.45;
-}
-
-/* NESTED INPUT CONTROLS (LAYER 2 SURFACE: #1B222D) */
-div[data-baseweb="input"] > div,
-div[data-baseweb="select"] > div {
-    background-color: #1B222D !important;
-    border: 1px solid rgba(139, 92, 246, 0.2) !important;
-    border-radius: 10px !important;
-    color: #F1F5F9 !important;
-    transition: all 0.2s ease !important;
-}
-
-div[data-baseweb="input"] > div:focus-within,
-div[data-baseweb="select"] > div:focus-within {
-    border-color: #8B5CF6 !important;
-    box-shadow: 0 0 14px rgba(139, 92, 246, 0.35) !important;
-}
-
-div[data-baseweb="input"] input,
-div[data-baseweb="select"] input {
-    color: #F1F5F9 !important;
-}
-
-label[data-testid="stWidgetLabel"] p {
-    color: #CBD5E1 !important;
-    font-weight: 600 !important;
-    font-size: 0.88rem !important;
-}
-
-/* METRIC READOUT CARDS */
-.metric-card {
-    background: #141A24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 1.1rem 0.8rem;
-    text-align: center;
-    min-height: 95px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.metric-num {
-    font-family: sans-serif, monospace;
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: #A78BFA;
-    white-space: nowrap;
-}
-
-.metric-text {
-    font-size: 0.72rem;
-    color: #94A3B8;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-top: 3px;
-    white-space: nowrap;
-}
-
-/* CUSTOM INFO BANNER */
-.custom-info-banner {
-    background: rgba(139, 92, 246, 0.08);
-    border: 1px solid rgba(139, 92, 246, 0.22);
-    border-radius: 12px;
-    padding: 0.9rem 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #94A3B8;
-    font-size: 0.86rem;
-    margin-top: 1rem;
-}
-
-/* IMAGE FORENSICS CONTAINER PRESERVING ASPECT RATIO */
-div[data-testid="stImage"] img {
-    border-radius: 12px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    background-color: #000000 !important;
-    max-height: 440px !important;
-    object-fit: contain !important;
-}
-
-/* BUTTONS & DOWNLOAD BUTTON (VIOLET ACCENT) */
-.stButton>button, div[data-testid="stDownloadButton"] button {
-    background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
-    color: #FFFFFF !important;
-    border: none !important;
-    border-radius: 12px !important;
-    padding: 0.75rem 1.5rem !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.92rem !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 4px 18px rgba(124, 58, 237, 0.35) !important;
-    width: 100% !important;
-    margin-top: 0.5rem !important;
-}
-
-.stButton>button:hover, div[data-testid="stDownloadButton"] button:hover {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 22px rgba(124, 58, 237, 0.5) !important;
-}
-
-/* MOBILE RESPONSIVE QUERIES */
-@media (max-width: 768px) {
-    .navbar-brand {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        padding: 0.9rem 1rem;
-    }
-    .brand-title {
-        font-size: 1.4rem;
-    }
-    .stamp-title {
-        font-size: 1.35rem !important;
-    }
-    .stamp-meta-bar {
-        flex-direction: column;
-        gap: 6px;
-    }
-}
-
-.icon-inline {
-    display: inline-block;
-    vertical-align: middle;
-}
-</style>
-"""
+try:
+    from premium_css import PREMIUM_CSS
+    CUSTOM_CSS = PREMIUM_CSS
+except Exception:
+    # Fallback: minimal CSS if premium_css.py is missing
+    CUSTOM_CSS = """<style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+    html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; background-color: #060910 !important; color: #F1F5F9 !important; }
+    .glass-panel { background: #0F1419; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.4rem; margin-bottom: 1.25rem; }
+    .eyebrow-gold { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: #C9A15F; letter-spacing: 1.8px; text-transform: uppercase; }
+    .serif-header { font-family: 'Spectral', Georgia, serif; font-weight: 700; }
+    .mono-readout { font-family: 'JetBrains Mono', monospace; }
+    </style>"""
+
+# Import premium UI components
+try:
+    from premium_components import (
+        svg_confidence_gauge, premium_verdict_stamp, premium_metric_card,
+        premium_arch_card, premium_header_bar, premium_hero_banner,
+        inference_mode_badge
+    )
+except Exception:
+    pass
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-# ============================================================
 # SVG ICONS
 # ============================================================
 SVG_SHIELD = """<svg class="icon-inline" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>"""
@@ -1174,8 +527,13 @@ with st.sidebar:
     )
     
     st.markdown(f"""
-    <div style="background: #1B222D; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.5; margin-top: 1.2rem;" class="mono-readout">
-        <strong style="color: #C9A15F;">STATUS:</strong> Live ELA compute active.<br>Model: <strong style="color: #A78BFA;">{model_display_name}</strong>
+    <div style="background: #0F1419; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.78rem; color: #94A3B8; line-height: 1.6; margin-top: 1.2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);" class="mono-readout">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #34D399; display: inline-block; animation: pulse-dot 2s ease-in-out infinite; box-shadow: 0 0 8px rgba(52,211,153,0.5);"></span>
+            <strong style="color: #34D399; letter-spacing: 0.5px;">SYSTEM ONLINE</strong>
+        </div>
+        <span style="color: #64748B;">Active Model:</span> <strong style="color: #8B5CF6;">{model_display_name}</strong><br>
+        <span style="color: #64748B;">ELA Engine:</span> <strong style="color: #2DD4BF;">Operational</strong>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1252,40 +610,32 @@ components.html("""
 </script>
 """, height=0, width=0)
 
-st.markdown(f"""
-<div class="navbar-brand">
-    <div class="brand-title">
-        {SVG_SHIELD}
-        ForgeGuard <span style="font-family: sans-serif; font-weight: 400; font-size: 0.9rem; color: #94A3B8; margin-left: 6px;">v1.0</span>
+try:
+    _header_html = premium_header_bar(SVG_SHIELD)
+except Exception:
+    _header_html = f"""
+    <div class="navbar-brand">
+        <div class="brand-title">{SVG_SHIELD} ForgeGuard <span class="version-pill">v2.0</span></div>
+        <div><span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span></div>
     </div>
-    <div>
-        <span class="badge-gold">NDMC CITE APPROVED THESIS TITLE</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    <div class="shimmer-line"></div>
+    """
+st.markdown(_header_html, unsafe_allow_html=True)
 
 # ============================================================
 # HERO DASHBOARD BANNER
 # ============================================================
-st.markdown(f"""
-<div class="glass-panel">
-    <div class="eyebrow-gold">EVIDENCE AUTHENTICATION SYSTEM</div>
-    <div class="serif-header" style="font-size: 1.55rem; color: #F8FAFC; margin-bottom: 0.4rem;">
-        Digital Receipt Forgery Detection & Forensic Suite
+try:
+    _hero_html = premium_hero_banner()
+except Exception:
+    _hero_html = """
+    <div class="glass-panel">
+        <div class="eyebrow-gold">EVIDENCE AUTHENTICATION SYSTEM</div>
+        <div class="serif-header" style="font-size: 1.55rem; color: #F8FAFC;">Digital Receipt Forgery Detection & Forensic Suite</div>
+        <div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.55;">Comparative evaluation of CNN architectures using ELA.</div>
     </div>
-    <div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.8rem;">
-        Comparative evaluation of Convolutional Neural Network architectures (Basic CNN, ResNet50, MobileNetV2) 
-        using Error Level Analysis (ELA) to authenticate pixel-level evidence in mobile wallet receipt screenshots (GCash, Maya).
-    </div>
-    <div class="mono-readout" style="font-size: 0.78rem; color: #64748B; display: flex; gap: 16px; flex-wrap: wrap;">
-        <span><strong style="color: #CBD5E1;">Authors:</strong> Rogie P. Bacanto & Daniela S. Ungab</span>
-        <span>•</span>
-        <span><strong style="color: #CBD5E1;">Adviser:</strong> Ms. Doris Ann Mariano</span>
-        <span>•</span>
-        <span><strong style="color: #C9A15F;">Institution:</strong> Notre Dame of Midsayap College</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """
+st.markdown(_hero_html, unsafe_allow_html=True)
 
 # ============================================================
 # ============================================================
@@ -1551,11 +901,11 @@ if uploaded_file is not None:
         
         # Display inference mode diagnostic
         mode_color = "#34D399" if inference_mode == "CNN" else "#EAB308"
-        st.markdown(f"""
-        <div style="font-family: sans-serif; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem; letter-spacing: 0.5px;">
-            [INFERENCE ENGINE: <strong>{inference_mode}</strong>] {'Trained .keras neural network active' if inference_mode == 'CNN' else 'TensorFlow unavailable — using ELA regional differential heuristic'}
-        </div>
-        """, unsafe_allow_html=True)
+        try:
+            _inf_badge = inference_mode_badge(inference_mode, mode_color)
+        except Exception:
+            _inf_badge = f"<div style='font-family: monospace; font-size: 0.72rem; color: {mode_color}; text-align: center; margin-bottom: 0.5rem;'>[INFERENCE ENGINE: <strong>{inference_mode}</strong>]</div>"
+        st.markdown(_inf_badge, unsafe_allow_html=True)
         
         # INK STAMP CLASSIFICATION VERDICT (OFFICIAL EVIDENCE STAMP)
         if is_forged:
@@ -1571,20 +921,35 @@ if uploaded_file is not None:
             verdict_color = "#34D399"
             verdict_label = "AUTHENTIC"
         
-        st.markdown(f"""
-        <div class="stamp-container">
-            <div class="stamp-box {stamp_class}">
-                <div class="stamp-title">{verdict_text}</div>
-                <div class="stamp-sub">{sub_reason}</div>
+        # PREMIUM CONFIDENCE GAUGE + VERDICT STAMP
+        confidence_pct = confidence * 100
+        try:
+            _gauge_html = svg_confidence_gauge(confidence_pct, verdict_color, verdict_label)
+            st.markdown(_gauge_html, unsafe_allow_html=True)
+        except Exception:
+            pass
+        
+        try:
+            _stamp_html = premium_verdict_stamp(
+                verdict_text, stamp_class, sub_reason, verdict_color,
+                verdict_label, confidence, model_display_name, elapsed_ms
+            )
+        except Exception:
+            _stamp_html = f"""
+            <div class="stamp-container">
+                <div class="stamp-box {stamp_class}">
+                    <div class="stamp-title">{verdict_text}</div>
+                    <div class="stamp-sub">{sub_reason}</div>
+                </div>
+                <div class="stamp-meta-bar">
+                    <span>[VERDICT: <strong style="color: {verdict_color};">{verdict_label}</strong>]</span>
+                    <span>[CONFIDENCE: <strong style="color: {verdict_color};">{confidence_pct:.1f}%</strong>]</span>
+                    <span>[MODEL: <strong style="color: #F8FAFC;">{model_display_name.upper()}</strong>]</span>
+                    <span>[LATENCY: <strong style="color: #2DD4BF;">{elapsed_ms:.1f}ms</strong>]</span>
+                </div>
             </div>
-            <div class="stamp-meta-bar">
-                <span>[VERDICT: <strong style="color: {verdict_color};">{verdict_label}</strong>]</span>
-                <span>[CONFIDENCE: <strong style="color: #A78BFA;">{confidence * 100:.1f}%</strong>]</span>
-                <span>[ACTIVE MODEL: <strong style="color: #F8FAFC;">{model_display_name.upper()}</strong>]</span>
-                <span>[LATENCY: <strong style="color: #A78BFA;">{elapsed_ms:.1f}ms</strong>]</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """
+        st.markdown(_stamp_html, unsafe_allow_html=True)
 
         # METRIC GRID READOUTS
         ela_np = np.array(ela_img, dtype=np.float32)
@@ -1593,14 +958,27 @@ if uploaded_file is not None:
         ela_max = float(np.max(ela_np))
         
         m_col1, m_col2, m_col3, m_col4 = st.columns(4)
+        ela_color = '#F87171' if is_forged else '#34D399'
         with m_col1:
-            st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_mean:.1f}</div><div class="metric-text">ELA Mean Error</div></div>""", unsafe_allow_html=True)
+            try:
+                st.markdown(premium_metric_card(f"{ela_mean:.1f}", "ELA Mean Error", "#2DD4BF", "bar"), unsafe_allow_html=True)
+            except Exception:
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_mean:.1f}</div><div class="metric-text">ELA Mean Error</div></div>""", unsafe_allow_html=True)
         with m_col2:
-            st.markdown(f"""<div class="metric-card"><div class="metric-num" style="color: {'#F87171' if is_forged else '#34D399'};">{ela_var:.1f}</div><div class="metric-text">ELA Variance</div></div>""", unsafe_allow_html=True)
+            try:
+                st.markdown(premium_metric_card(f"{ela_var:.1f}", "ELA Variance", ela_color, "line"), unsafe_allow_html=True)
+            except Exception:
+                st.markdown(f"""<div class="metric-card"><div class="metric-num" style="color: {ela_color};">{ela_var:.1f}</div><div class="metric-text">ELA Variance</div></div>""", unsafe_allow_html=True)
         with m_col3:
-            st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_max:.0f}</div><div class="metric-text">Peak Artifact Density</div></div>""", unsafe_allow_html=True)
+            try:
+                st.markdown(premium_metric_card(f"{ela_max:.0f}", "Peak Artifact Density", "#A78BFA", "bar"), unsafe_allow_html=True)
+            except Exception:
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_max:.0f}</div><div class="metric-text">Peak Artifact Density</div></div>""", unsafe_allow_html=True)
         with m_col4:
-            st.markdown(f"""<div class="metric-card"><div class="metric-num">{model_display_name}</div><div class="metric-text">Active Architecture</div></div>""", unsafe_allow_html=True)
+            try:
+                st.markdown(premium_metric_card(model_display_name, "Active Architecture", "#8B5CF6", "bar"), unsafe_allow_html=True)
+            except Exception:
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{model_display_name}</div><div class="metric-text">Active Architecture</div></div>""", unsafe_allow_html=True)
 
         # FORENSIC VISUALIZATION COLUMNS
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.5rem 0 1rem 0;'>", unsafe_allow_html=True)
@@ -1641,67 +1019,25 @@ if uploaded_file is not None:
         m_params = {"Basic CNN": "2.1M", "ResNet50": "23.5M", "MobileNetV2": "3.4M"}
         
         with comp_col1:
-            badge_color = '#F87171' if is_forged else '#34D399'
-            st.markdown(f"""
-            <div class="glass-panel-matrix" style="border-top: 3px solid #64748B;">
-                <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <div class="serif-header" style="font-size: 1.05rem; color: #F8FAFC;">Basic CNN</div>
-                        <span class="mono-readout" style="color: {badge_color}; font-size: 0.72rem; font-weight: 700;">[{'FORGED' if is_forged else 'AUTHENTIC'}]</span>
-                    </div>
-                    <div style="color: #94A3B8; font-size: 0.78rem; margin-bottom: 0.75rem;">Custom 4-block CNN baseline</div>
-                    <div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">
-                        {m_scores['Basic CNN']*100:.1f}%
-                    </div>
-                </div>
-                <div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8; margin-top: 8px;">Latency: <strong style="color: #F8FAFC;">{m_times['Basic CNN']} ms</strong></div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8;">Params: <strong style="color: #F8FAFC;">{m_params['Basic CNN']}</strong></div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            try:
+                st.markdown(premium_arch_card("Basic CNN", m_scores['Basic CNN'], m_times['Basic CNN'], m_params['Basic CNN'], is_active=(active_arch_name == "Basic CNN"), is_forged=is_forged), unsafe_allow_html=True)
+            except Exception:
+                badge_color = '#F87171' if is_forged else '#34D399'
+                st.markdown(f"""<div class="glass-panel-matrix"><div class="serif-header" style="font-size: 1.05rem; color: #F8FAFC;">Basic CNN</div><div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">{m_scores['Basic CNN']*100:.1f}%</div></div>""", unsafe_allow_html=True)
 
         with comp_col2:
-            badge_color = '#F87171' if is_forged else '#34D399'
-            st.markdown(f"""
-            <div class="glass-panel-matrix" style="border-top: 3px solid #A78BFA;">
-                <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <div class="serif-header" style="font-size: 1.05rem; color: #A78BFA;">ResNet50</div>
-                        <span class="mono-readout" style="color: {badge_color}; font-size: 0.72rem; font-weight: 700;">[{'FORGED' if is_forged else 'AUTHENTIC'}]</span>
-                    </div>
-                    <div style="color: #94A3B8; font-size: 0.78rem; margin-bottom: 0.75rem;">Deep residual benchmark</div>
-                    <div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">
-                        {m_scores['ResNet50']*100:.1f}%
-                    </div>
-                </div>
-                <div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8; margin-top: 8px;">Latency: <strong style="color: #F8FAFC;">{m_times['ResNet50']} ms</strong></div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8;">Params: <strong style="color: #F8FAFC;">{m_params['ResNet50']}</strong></div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            try:
+                st.markdown(premium_arch_card("ResNet50", m_scores['ResNet50'], m_times['ResNet50'], m_params['ResNet50'], is_active=(active_arch_name == "ResNet50"), is_forged=is_forged), unsafe_allow_html=True)
+            except Exception:
+                badge_color = '#F87171' if is_forged else '#34D399'
+                st.markdown(f"""<div class="glass-panel-matrix"><div class="serif-header" style="font-size: 1.05rem; color: #A78BFA;">ResNet50</div><div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">{m_scores['ResNet50']*100:.1f}%</div></div>""", unsafe_allow_html=True)
 
         with comp_col3:
-            badge_color = '#F87171' if is_forged else '#34D399'
-            st.markdown(f"""
-            <div class="glass-panel-matrix" style="border-top: 3px solid #C9A15F;">
-                <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2</div>
-                        <span class="mono-readout" style="color: {badge_color}; font-size: 0.72rem; font-weight: 700;">[{'FORGED' if is_forged else 'AUTHENTIC'}]</span>
-                    </div>
-                    <div style="color: #94A3B8; font-size: 0.78rem; margin-bottom: 0.75rem;">Recommended lightweight mobile model</div>
-                    <div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">
-                        {m_scores['MobileNetV2']*100:.1f}%
-                    </div>
-                </div>
-                <div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8; margin-top: 8px;">Latency: <strong style="color: #F8FAFC;">{m_times['MobileNetV2']} ms</strong></div>
-                    <div class="mono-readout" style="font-size: 0.8rem; color: #94A3B8;">Params: <strong style="color: #F8FAFC;">{m_params['MobileNetV2']}</strong></div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            try:
+                st.markdown(premium_arch_card("MobileNetV2", m_scores['MobileNetV2'], m_times['MobileNetV2'], m_params['MobileNetV2'], is_active=(active_arch_name == "MobileNetV2"), is_forged=is_forged), unsafe_allow_html=True)
+            except Exception:
+                badge_color = '#F87171' if is_forged else '#34D399'
+                st.markdown(f"""<div class="glass-panel-matrix"><div class="serif-header" style="font-size: 1.05rem; color: #C9A15F;">MobileNetV2</div><div class="mono-readout" style="font-size: 1.55rem; font-weight: 700; color: {badge_color};">{m_scores['MobileNetV2']*100:.1f}%</div></div>""", unsafe_allow_html=True)
 
         if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
             st.markdown(f"""
