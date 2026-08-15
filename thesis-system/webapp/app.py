@@ -22,14 +22,14 @@ from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDr
 import streamlit as st
 import streamlit.components.v1 as components
 
-# Ensure user site packages and project root directory are in sys.path
+# Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 SYS_DIR = os.path.abspath(os.path.join(APP_DIR, ".."))
+THESIS_SYS_DIR = os.path.join(SYS_DIR, "thesis-system")
 
-if SYS_DIR not in sys.path:
-    sys.path.insert(0, SYS_DIR)
-if APP_DIR not in sys.path:
-    sys.path.insert(0, APP_DIR)
+for p in [APP_DIR, SYS_DIR, THESIS_SYS_DIR]:
+    if os.path.exists(p) and p not in sys.path:
+        sys.path.insert(0, p)
 if hasattr(site, 'USER_SITE') and site.USER_SITE not in sys.path:
     sys.path.append(site.USER_SITE)
 
