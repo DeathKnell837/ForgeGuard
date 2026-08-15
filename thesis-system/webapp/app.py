@@ -21,7 +21,6 @@ import textwrap
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
 import streamlit as st
-import streamlit.components.v1 as components
 
 # Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -541,75 +540,6 @@ with st.sidebar:
 # ============================================================
 # NAVBAR HEADER
 # ============================================================
-components.html("""
-<script>
-(() => {
-    const doc = window.parent.document;
-    const toggleSidebar = () => {
-        const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
-        if (!sidebar) return;
-
-        const style = window.getComputedStyle(sidebar);
-        const transform = style.transform || style.webkitTransform || '';
-        
-        const isCollapsedByTransform = transform && transform !== 'none' && transform.includes('matrix') && parseFloat(transform.split(',')[4]) < -50;
-        const isCollapsedByDisplay = style.display === 'none' || style.visibility === 'hidden';
-        const isCollapsedByAttr = sidebar.getAttribute('aria-expanded') === 'false';
-        
-        const isClosed = isCollapsedByTransform || isCollapsedByDisplay || isCollapsedByAttr;
-
-        if (isClosed) {
-            const nativeExpand = doc.querySelector('[data-testid="stSidebarCollapsedControl"] button, [data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"]');
-            if (nativeExpand) {
-                nativeExpand.click();
-            }
-            sidebar.setAttribute('aria-expanded', 'true');
-            sidebar.style.setProperty('transform', 'translateX(0)', 'important');
-            sidebar.style.setProperty('left', '0', 'important');
-            sidebar.style.setProperty('margin-left', '0', 'important');
-            sidebar.style.setProperty('visibility', 'visible', 'important');
-            sidebar.style.setProperty('display', 'block', 'important');
-            sidebar.style.setProperty('min-width', 'var(--sidebar-width, 21rem)', 'important');
-            sidebar.style.setProperty('max-width', 'var(--sidebar-width, 21rem)', 'important');
-            sidebar.style.setProperty('width', 'var(--sidebar-width, 21rem)', 'important');
-        } else {
-            const nativeCollapse = doc.querySelector('[data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapseButton"]');
-            if (nativeCollapse) {
-                nativeCollapse.click();
-            }
-            sidebar.setAttribute('aria-expanded', 'false');
-            sidebar.style.setProperty('transform', 'translateX(-100%)', 'important');
-            sidebar.style.setProperty('visibility', 'hidden', 'important');
-            sidebar.style.setProperty('min-width', '0px', 'important');
-            sidebar.style.setProperty('max-width', '0px', 'important');
-            sidebar.style.setProperty('width', '0px', 'important');
-        }
-    };
-
-    const wireControls = () => {
-        let launcher = doc.getElementById('forgeguard-sidebar-launcher');
-        if (!launcher) {
-            launcher = doc.createElement('button');
-            launcher.id = 'forgeguard-sidebar-launcher';
-            launcher.type = 'button';
-            launcher.className = 'forgeguard-sidebar-launcher';
-            launcher.title = 'Toggle sidebar controls';
-            launcher.setAttribute('aria-label', 'Toggle sidebar controls');
-            launcher.textContent = '☰';
-            doc.body.appendChild(launcher);
-        }
-        launcher.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleSidebar();
-        };
-    };
-
-    wireControls();
-    window.setInterval(wireControls, 500);
-})();
-</script>
-""", height=0, width=0)
 
 try:
     _header_html = premium_header_bar(SVG_SHIELD)
