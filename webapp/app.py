@@ -621,6 +621,9 @@ with t_col4:
 # ============================================================
 # FORENSIC ELA DETECTOR
 # ============================================================
+if "uploader_key" not in st.session_state:
+    st.session_state["uploader_key"] = 0
+
 uploaded_file = None
 active_sample_name = None
 
@@ -631,29 +634,34 @@ st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC;
 ex_col1, ex_col2 = st.columns(2)
 with ex_col1:
     if st.button("TEST REAL GCASH RECEIPT [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
+        st.session_state["uploader_key"] += 1
         for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
                     st.session_state["loaded_sample"] = f.read()
                     st.session_state["loaded_sample_name"] = "authentic_gcash_sample_01.jpg"
                 break
+        st.rerun()
 
 with ex_col2:
     if st.button("TEST FAKE / EDITED RECEIPT [EXHIBIT 02]", key="btn_sample_forged", use_container_width=True):
+        st.session_state["uploader_key"] += 1
         for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
                     st.session_state["loaded_sample"] = f.read()
                     st.session_state["loaded_sample_name"] = "tampered_forgery_sample_02.jpg"
                 break
+        st.rerun()
 
 tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
 
 with tab_upload:
+    curr_key = f"file_uploader_{st.session_state['uploader_key']}"
     uploaded_file = st.file_uploader(
         "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
         type=["png", "jpg", "jpeg", "webp"],
-        key="file_uploader",
+        key=curr_key,
         label_visibility="collapsed"
     )
 
@@ -683,7 +691,7 @@ with tab_camera:
     </script>
     """, unsafe_allow_html=True)
     
-    camera_file = st.camera_input("Capture mobile wallet receipt", key="live_rear_camera")
+    camera_file = st.camera_input("Capture mobile wallet receipt", key=f"camera_{st.session_state['uploader_key']}")
     if camera_file is not None:
         uploaded_file = camera_file
 
@@ -692,12 +700,15 @@ image_bytes = None
 if uploaded_file is not None:
     image_bytes = uploaded_file.getvalue() if hasattr(uploaded_file, 'getvalue') else uploaded_file.read()
     st.session_state.pop("loaded_sample", None)
+    st.session_state.pop("loaded_sample_name", None)
 elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
     image_bytes = st.session_state["loaded_sample"]
     st.markdown(f"""
-    <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 12px 18px; margin: 1rem 0; display: flex; align-items: center; gap: 12px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #00F0FF;">Test Image Loaded: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong> — Scan results shown below.</span>
+    <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 12px 18px; margin: 1rem 0; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #00F0FF;">Test Image Loaded: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong></span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
