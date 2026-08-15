@@ -253,31 +253,18 @@ def inference_mode_badge(inference_mode, mode_color):
     """
 
 
-def telemetry_hud_grid():
+def telemetry_card_html(title, value, subtitle, color, svg_path):
     """
-    Renders 4 cyber telemetry metrics displayed immediately on the landing page.
+    Renders an individual cyberpunk HUD telemetry card with zero emojis and sharp SVG icons.
     """
-    return """
-    <div class="telemetry-grid">
-        <div class="telemetry-card" style="border-left: 3px solid #00F0FF;">
-            <div class="telemetry-lbl">⚡ Inference Latency</div>
-            <div class="telemetry-val" style="color: #00F0FF;">12.4ms</div>
-            <div style="font-size: 0.7rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">MobileNetV2 Edge Real-Time</div>
+    return f"""
+    <div style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3.5px solid {color}; border-radius: 14px; padding: 1.1rem 1.2rem; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); min-height: 105px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">{title}</div>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{svg_path}</svg>
         </div>
-        <div class="telemetry-card" style="border-left: 3px solid #10B981;">
-            <div class="telemetry-lbl">🛡️ Forensic Accuracy</div>
-            <div class="telemetry-val" style="color: #10B981;">98.4%</div>
-            <div style="font-size: 0.7rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">Verified on 500+ Test Samples</div>
-        </div>
-        <div class="telemetry-card" style="border-left: 3px solid #8B5CF6;">
-            <div class="telemetry-lbl">🔬 ELA Sensitivity</div>
-            <div class="telemetry-val" style="color: #8B5CF6;">90Q / 15X</div>
-            <div style="font-size: 0.7rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">Pixel-Level Error Resynthesis</div>
-        </div>
-        <div class="telemetry-card" style="border-left: 3px solid #F59E0B;">
-            <div class="telemetry-lbl">🛰️ Multi-Engine Matrix</div>
-            <div class="telemetry-val" style="color: #F59E0B;">3 CNNs</div>
-            <div style="font-size: 0.7rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">Basic CNN / ResNet50 / MobileNet</div>
-        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800; color: {color}; letter-spacing: -0.5px; margin: 4px 0;">{value}</div>
+        <div style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">{subtitle}</div>
     </div>
     """
+

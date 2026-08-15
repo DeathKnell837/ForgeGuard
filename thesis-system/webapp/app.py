@@ -466,7 +466,7 @@ try:
     from premium_components import (
         svg_confidence_gauge, premium_verdict_stamp, premium_metric_card,
         premium_arch_card, premium_header_bar, premium_hero_banner,
-        inference_mode_badge, telemetry_hud_grid
+        inference_mode_badge, telemetry_card_html
     )
 except Exception:
     pass
@@ -637,11 +637,40 @@ except Exception:
     """
 st.markdown(_hero_html, unsafe_allow_html=True)
 
-# LIVE SYSTEM TELEMETRY HUD GRID
-try:
-    st.markdown(telemetry_hud_grid(), unsafe_allow_html=True)
-except Exception:
-    pass
+# LIVE SYSTEM TELEMETRY HUD (4-COLUMN NATIVE GRID)
+t_col1, t_col2, t_col3, t_col4 = st.columns(4)
+with t_col1:
+    try:
+        st.markdown(telemetry_card_html(
+            "INFERENCE LATENCY", "12.4ms", "MobileNetV2 Edge Real-Time", "#00F0FF",
+            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
+        ), unsafe_allow_html=True)
+    except Exception:
+        pass
+with t_col2:
+    try:
+        st.markdown(telemetry_card_html(
+            "FORENSIC ACCURACY", "98.4%", "500+ Validated Samples", "#10B981",
+            '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
+        ), unsafe_allow_html=True)
+    except Exception:
+        pass
+with t_col3:
+    try:
+        st.markdown(telemetry_card_html(
+            "ELA SENSITIVITY", "90Q / 15X", "Quantization Error Matrix", "#8B5CF6",
+            '<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>'
+        ), unsafe_allow_html=True)
+    except Exception:
+        pass
+with t_col4:
+    try:
+        st.markdown(telemetry_card_html(
+            "MULTI-ENGINE MATRIX", "3 CNNs", "MobileNet / ResNet50 / Baseline", "#F59E0B",
+            '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
+        ), unsafe_allow_html=True)
+    except Exception:
+        pass
 
 # ============================================================
 # FORENSIC ELA DETECTOR
@@ -649,13 +678,13 @@ except Exception:
 uploaded_file = None
 active_sample_name = None
 
-st.markdown("<div class='eyebrow-label'>EVIDENCE ACQUISITION & INSTANT BENCHMARKS</div>", unsafe_allow_html=True)
-st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.4rem;'>Upload Receipt or Run Instant Benchmark Exhibit</h3>", unsafe_allow_html=True)
+st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>EVIDENCE ACQUISITION & INSTANT BENCHMARKS</div>", unsafe_allow_html=True)
+st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload Receipt or Run Instant Benchmark Exhibit</h3>", unsafe_allow_html=True)
 
-# 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE
+# 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE (NO EMOJIS)
 ex_col1, ex_col2 = st.columns(2)
 with ex_col1:
-    if st.button("⚡ LOAD VERIFIED AUTHENTIC GCASH RECEIPT (EXHIBIT #01)", key="btn_sample_auth", use_container_width=True):
+    if st.button("LOAD VERIFIED AUTHENTIC GCASH RECEIPT [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
         for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
@@ -664,7 +693,7 @@ with ex_col1:
                 break
 
 with ex_col2:
-    if st.button("⚡ LOAD DIGITALLY FORGED RECEIPT (EXHIBIT #02 - TAMPERED)", key="btn_sample_forged", use_container_width=True):
+    if st.button("LOAD DIGITALLY FORGED RECEIPT [EXHIBIT 02 - TAMPERED]", key="btn_sample_forged", use_container_width=True):
         for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
@@ -672,7 +701,7 @@ with ex_col2:
                     st.session_state["loaded_sample_name"] = "tampered_forgery_sample_02.jpg"
                 break
 
-tab_upload, tab_camera = st.tabs(["📁 Upload Receipt Image", "📸 Live Camera Capture"])
+tab_upload, tab_camera = st.tabs(["Upload Receipt Image", "Live Camera Capture"])
 
 with tab_upload:
     uploaded_file = st.file_uploader(
@@ -719,7 +748,12 @@ if uploaded_file is not None:
     st.session_state.pop("loaded_sample", None)
 elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
     image_bytes = st.session_state["loaded_sample"]
-    st.info(f"🔬 Live Exhibit Loaded: **{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}** — Full forensic pipeline active below.")
+    st.markdown(f"""
+    <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 12px 18px; margin: 1rem 0; display: flex; align-items: center; gap: 12px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #00F0FF;">Live Exhibit Loaded: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong> — Forensic pipeline active below.</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 # If still no image is selected, display rich cyber forensic intelligence on the landing page!
 if image_bytes is None:
