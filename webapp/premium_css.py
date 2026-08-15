@@ -667,6 +667,8 @@ div[data-testid="stImage"] img {
     .gauge-container {
         max-width: 160px;
     }
+}
+
 /* PREMIUM CYBER SCANNER SPINNER & STATUS WIDGET */
 [data-testid="stStatusWidget"], .stSpinner {
     background: rgba(15, 23, 42, 0.85) !important;
