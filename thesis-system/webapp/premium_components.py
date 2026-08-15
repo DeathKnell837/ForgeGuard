@@ -146,7 +146,7 @@ def premium_header_bar(svg_shield):
 <span class="version-pill">v2.0</span>
 </div>
 <div>
-<span class="badge-gold">NDMC CITE BSCS THESIS</span>
+<span class="badge-gold">FORENSIC SECURITY ENGINE</span>
 </div>
 </div>
 <div class="shimmer-line"></div>"""
@@ -165,23 +165,9 @@ DIGITAL RECEIPT VERIFICATION SYSTEM
 <div class="serif-header" style="font-size: 1.65rem; color: #F8FAFC; margin-bottom: 0.5rem; line-height: 1.2;">
 Fake Receipt Scanner & Image Forensic Suite
 </div>
-<div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; max-width: 820px;">
-An AI-powered system that scans GCash and Maya receipt screenshots to catch fake or edited proof of payment. 
-It uses <strong>Error Level Analysis (ELA)</strong> and Convolutional Neural Networks to find edited text, altered amounts, and tampered reference numbers.
-</div>
-<div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
-<div class="info-chip">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-<span><strong style="color: #CBD5E1;">Authors:</strong> Rogie P. Bacanto & Daniela S. Ungab</span>
-</div>
-<div class="info-chip">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1 4 3 6 3s6-2 6-3v-5"/></svg>
-<span><strong style="color: #CBD5E1;">Adviser:</strong> Ms. Doris Ann Mariano</span>
-</div>
-<div class="info-chip">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-<span><strong style="color: #C9A15F;">School:</strong> Notre Dame of Midsayap College</span>
-</div>
+<div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.2rem; max-width: 820px;">
+An AI-powered system that scans GCash and Maya receipt screenshots to catch fake, tampered, Canva-edited, or AI-generated proof of payment. 
+It uses <strong>Error Level Analysis (ELA)</strong> and Convolutional Neural Networks to find edited text, altered amounts, and fake reference numbers.
 </div>
 </div>"""
     return textwrap.dedent(html).strip()
