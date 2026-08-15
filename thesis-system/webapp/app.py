@@ -573,7 +573,7 @@ t_col1, t_col2, t_col3, t_col4 = st.columns(4)
 with t_col1:
     try:
         st.markdown(telemetry_card_html(
-            "INFERENCE LATENCY", "12.4ms", "MobileNetV2 Edge Real-Time", "#00F0FF",
+            "SCAN SPEED", "12.4ms", "Fast MobileNetV2 response", "#00F0FF",
             '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
         ), unsafe_allow_html=True)
     except Exception:
@@ -581,7 +581,7 @@ with t_col1:
 with t_col2:
     try:
         st.markdown(telemetry_card_html(
-            "FORENSIC ACCURACY", "98.4%", "500+ Validated Samples", "#10B981",
+            "ACCURACY", "98.4%", "Tested on 500+ receipts", "#10B981",
             '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
         ), unsafe_allow_html=True)
     except Exception:
@@ -589,7 +589,7 @@ with t_col2:
 with t_col3:
     try:
         st.markdown(telemetry_card_html(
-            "ELA SENSITIVITY", "90Q / 15X", "Quantization Error Matrix", "#8B5CF6",
+            "SENSITIVITY", "90Q / 15X", "Magnifies hidden image edits", "#8B5CF6",
             '<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>'
         ), unsafe_allow_html=True)
     except Exception:
@@ -597,7 +597,7 @@ with t_col3:
 with t_col4:
     try:
         st.markdown(telemetry_card_html(
-            "MULTI-ENGINE MATRIX", "3 CNNs", "MobileNet / ResNet50 / Baseline", "#F59E0B",
+            "AI MODELS", "3 CNNs", "MobileNetV2, ResNet50, Basic", "#F59E0B",
             '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
         ), unsafe_allow_html=True)
     except Exception:
@@ -609,13 +609,13 @@ with t_col4:
 uploaded_file = None
 active_sample_name = None
 
-st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>EVIDENCE ACQUISITION & INSTANT BENCHMARKS</div>", unsafe_allow_html=True)
-st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload Receipt or Run Instant Benchmark Exhibit</h3>", unsafe_allow_html=True)
+st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>EVIDENCE SCANNER & TEST SAMPLES</div>", unsafe_allow_html=True)
+st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload a Receipt or Try a 1-Click Test Sample</h3>", unsafe_allow_html=True)
 
 # 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE (NO EMOJIS)
 ex_col1, ex_col2 = st.columns(2)
 with ex_col1:
-    if st.button("LOAD VERIFIED AUTHENTIC GCASH RECEIPT [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
+    if st.button("TEST REAL GCASH RECEIPT [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
         for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
@@ -624,7 +624,7 @@ with ex_col1:
                 break
 
 with ex_col2:
-    if st.button("LOAD DIGITALLY FORGED RECEIPT [EXHIBIT 02 - TAMPERED]", key="btn_sample_forged", use_container_width=True):
+    if st.button("TEST FAKE / EDITED RECEIPT [EXHIBIT 02]", key="btn_sample_forged", use_container_width=True):
         for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
             if os.path.exists(p):
                 with open(p, "rb") as f:
@@ -682,7 +682,7 @@ elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
     st.markdown(f"""
     <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 12px 18px; margin: 1rem 0; display: flex; align-items: center; gap: 12px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #00F0FF;">Live Exhibit Loaded: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong> — Forensic pipeline active below.</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #00F0FF;">Test Image Loaded: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong> — Scan results shown below.</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -690,8 +690,8 @@ elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
 if image_bytes is None:
     st.markdown(textwrap.dedent("""
     <div style="margin-top: 1.8rem;">
-        <div class="eyebrow-label">TRI-CNN ARCHITECTURAL BENCHMARK INTELLIGENCE</div>
-        <h4 class="serif-header" style="font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;">Comparative Deep Learning Models</h4>
+        <div class="eyebrow-label">HOW THE AI MODELS COMPARE</div>
+        <h4 class="serif-header" style="font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;">Three Deep Learning Models Tested</h4>
     </div>
     """).strip(), unsafe_allow_html=True)
     
@@ -704,11 +704,11 @@ if image_bytes is None:
                     <div class="serif-header" style="font-size: 1.1rem; color: #00F0FF;">MobileNetV2</div>
                     <span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">RECOMMENDED</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Inverted residual bottleneck architecture optimized for edge devices.</div>
+                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Fast and lightweight. Designed specifically for mobile phones and web apps.</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #00F0FF;">12.4 ms</div>
             </div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Params: <strong style="color: #F8FAFC;">3.4M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.4%</strong></span>
+                <span>Size: <strong style="color: #F8FAFC;">3.4M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.4%</strong></span>
             </div>
         </div>
         """).strip(), unsafe_allow_html=True)
@@ -721,11 +721,11 @@ if image_bytes is None:
                     <div class="serif-header" style="font-size: 1.1rem; color: #8B5CF6;">ResNet50</div>
                     <span style="background: rgba(139,92,246,0.15); color: #8B5CF6; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">DEEP BENCHMARK</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">50-layer deep residual network for maximum receptive field depth.</div>
+                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">50-layer deep network. Highly thorough and accurate, but requires more compute.</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #8B5CF6;">28.6 ms</div>
             </div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Params: <strong style="color: #F8FAFC;">23.5M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.7%</strong></span>
+                <span>Size: <strong style="color: #F8FAFC;">23.5M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.7%</strong></span>
             </div>
         </div>
         """).strip(), unsafe_allow_html=True)
@@ -738,24 +738,23 @@ if image_bytes is None:
                     <div class="serif-header" style="font-size: 1.1rem; color: #F59E0B;">Basic CNN</div>
                     <span style="background: rgba(245,158,11,0.15); color: #F59E0B; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">BASELINE</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Custom 4-layer convolutional baseline for empirical comparison.</div>
+                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Custom 4-layer basic network used as a baseline to measure improvements.</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #F59E0B;">45.2 ms</div>
             </div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Params: <strong style="color: #F8FAFC;">2.1M</strong></span> • <span>Accuracy: <strong style="color: #10B981;">94.2%</strong></span>
+                <span>Size: <strong style="color: #F8FAFC;">2.1M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">94.2%</strong></span>
             </div>
         </div>
         """).strip(), unsafe_allow_html=True)
         
     st.markdown(textwrap.dedent("""
     <div style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 16px; padding: 1.5rem 2rem; margin-top: 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-        <div class="eyebrow-gold">FORENSIC REASONING PIPELINE</div>
-        <div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">How Error Level Analysis (ELA) Exposes Digital Forgery</div>
+        <div class="eyebrow-gold">HOW IT WORKS</div>
+        <div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">How Does ForgeGuard Catch Fake Receipts?</div>
         <div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6;">
-            When a digital receipt is modified using photo editors (e.g. altering amount, recipient name, or transaction timestamp), 
-            the modified pixels undergo an additional compression cycle. <strong>Error Level Analysis (ELA)</strong> computes the difference 
-            between the original image and a controlled re-compressed version. Unmodified regions exhibit uniform compression error, 
-            while digitally spliced or overwritten text displays luminous error hotspots detected by our CNN architectures.
+            <strong>1. Hidden Editing Marks:</strong> When someone uses Photoshop, Canva, or a phone editor to change a receipt's amount, name, or date, the edited parts are compressed differently from the original screenshot.<br><br>
+            <strong>2. Error Level Analysis (ELA):</strong> ELA re-compresses the image and finds the difference. Edited areas glow brightly like hotspots.<br><br>
+            <strong>3. AI Detection:</strong> Our CNN neural network scans these glowing hotspots to instantly determine if the receipt is genuine or fake.
         </div>
     </div>
     """).strip(), unsafe_allow_html=True)
@@ -985,10 +984,10 @@ if image_bytes is not None:
                     <div class="stamp-sub">{sub_reason}</div>
                 </div>
                 <div class="stamp-meta-bar">
-                    <span>[VERDICT: <strong style="color: {verdict_color};">{verdict_label}</strong>]</span>
-                    <span>[CONFIDENCE: <strong style="color: {verdict_color};">{confidence_pct:.1f}%</strong>]</span>
-                    <span>[MODEL: <strong style="color: #F8FAFC;">{model_display_name.upper()}</strong>]</span>
-                    <span>[LATENCY: <strong style="color: #2DD4BF;">{elapsed_ms:.1f}ms</strong>]</span>
+                    <span>Result: <strong style="color: {verdict_color};">{verdict_label}</strong></span>
+                    <span>Certainty: <strong style="color: {verdict_color};">{confidence_pct:.1f}%</strong></span>
+                    <span>Model: <strong style="color: #F8FAFC;">{model_display_name}</strong></span>
+                    <span>Speed: <strong style="color: #2DD4BF;">{elapsed_ms:.1f} ms</strong></span>
                 </div>
             </div>
             """
@@ -1004,24 +1003,24 @@ if image_bytes is not None:
         ela_color = '#F87171' if is_forged else '#34D399'
         with m_col1:
             try:
-                st.markdown(premium_metric_card(f"{ela_mean:.1f}", "ELA Mean Error", "#2DD4BF", "bar"), unsafe_allow_html=True)
+                st.markdown(premium_metric_card(f"{ela_mean:.1f}", "Average Image Noise", "#2DD4BF", "bar"), unsafe_allow_html=True)
             except Exception:
-                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_mean:.1f}</div><div class="metric-text">ELA Mean Error</div></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_mean:.1f}</div><div class="metric-text">Average Image Noise</div></div>""", unsafe_allow_html=True)
         with m_col2:
             try:
-                st.markdown(premium_metric_card(f"{ela_var:.1f}", "ELA Variance", ela_color, "line"), unsafe_allow_html=True)
+                st.markdown(premium_metric_card(f"{ela_var:.1f}", "Edit Highlight Level", ela_color, "line"), unsafe_allow_html=True)
             except Exception:
-                st.markdown(f"""<div class="metric-card"><div class="metric-num" style="color: {ela_color};">{ela_var:.1f}</div><div class="metric-text">ELA Variance</div></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div class="metric-card"><div class="metric-num" style="color: {ela_color};">{ela_var:.1f}</div><div class="metric-text">Edit Highlight Level</div></div>""", unsafe_allow_html=True)
         with m_col3:
             try:
-                st.markdown(premium_metric_card(f"{ela_max:.0f}", "Peak Artifact Density", "#A78BFA", "bar"), unsafe_allow_html=True)
+                st.markdown(premium_metric_card(f"{ela_max:.0f}", "Peak Alteration Level", "#A78BFA", "bar"), unsafe_allow_html=True)
             except Exception:
-                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_max:.0f}</div><div class="metric-text">Peak Artifact Density</div></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{ela_max:.0f}</div><div class="metric-text">Peak Alteration Level</div></div>""", unsafe_allow_html=True)
         with m_col4:
             try:
-                st.markdown(premium_metric_card(model_display_name, "Active Architecture", "#8B5CF6", "bar"), unsafe_allow_html=True)
+                st.markdown(premium_metric_card(model_display_name, "Active AI Model", "#8B5CF6", "bar"), unsafe_allow_html=True)
             except Exception:
-                st.markdown(f"""<div class="metric-card"><div class="metric-num">{model_display_name}</div><div class="metric-text">Active Architecture</div></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div class="metric-card"><div class="metric-num">{model_display_name}</div><div class="metric-text">Active AI Model</div></div>""", unsafe_allow_html=True)
 
         # FORENSIC VISUALIZATION COLUMNS
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.5rem 0 1rem 0;'>", unsafe_allow_html=True)
@@ -1030,23 +1029,23 @@ if image_bytes is not None:
         with img_col1:
             st.markdown("<h4 class='serif-header' style='font-size: 1rem; color: #F8FAFC; margin-bottom: 0.4rem;'>Original Screenshot</h4>", unsafe_allow_html=True)
             st.image(pil_img, use_container_width=True)
-            st.caption("Uploaded mobile transaction evidence.")
+            st.caption("Uploaded mobile payment screenshot.")
 
         with img_col2:
             st.markdown("<h4 class='serif-header' style='font-size: 1rem; color: #A78BFA; margin-bottom: 0.4rem;'>Error Level Analysis (ELA)</h4>", unsafe_allow_html=True)
             st.image(ela_img, use_container_width=True)
-            st.caption("Bright regions highlight JPEG error hotspots.")
+            st.caption("Bright glowing spots indicate edited numbers or text.")
 
         with img_col3:
-            st.markdown("<h4 class='serif-header' style='font-size: 1rem; color: #C9A15F; margin-bottom: 0.4rem;'>Grad-CAM Attention Map</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 class='serif-header' style='font-size: 1rem; color: #C9A15F; margin-bottom: 0.4rem;'>AI Focus Heatmap</h4>", unsafe_allow_html=True)
             heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
             overlay = Image.blend(pil_img, heatmap, alpha=0.42)
             st.image(overlay, use_container_width=True)
-            st.caption("Explainable AI (XAI) feature activation map.")
+            st.caption("Shows where the AI looked to reach its verdict.")
 
         # COMPARATIVE ARCHITECTURE MATRIX
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.8rem 0 1.25rem 0;'>", unsafe_allow_html=True)
-        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Multi-Model Architecture Matrix</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 class='serif-header' style='font-size: 1.2rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Comparative Model Scores</h3>", unsafe_allow_html=True)
         
         comp_col1, comp_col2, comp_col3 = st.columns(3)
         
@@ -1085,49 +1084,49 @@ if image_bytes is not None:
         if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
             st.markdown(textwrap.dedent(f"""
             <div style="background: rgba(167,139,250,0.08); border: 1.5px solid rgba(167,139,250,0.3); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
-                <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;"><svg style='display:inline-block; vertical-align:middle; width:18px; height:18px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='15' x2='23' y2='15'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='15' x2='4' y2='15'/></svg>GEMINI 2.5 FLASH MULTIMODAL FORENSIC AUDIT</div>
+                <div style="color: #A78BFA; font-family: sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.5px;"><svg style='display:inline-block; vertical-align:middle; width:18px; height:18px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='15' x2='23' y2='15'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='15' x2='4' y2='15'/></svg>AI VISION SUMMARY</div>
                 <div style="color: #F8FAFC; font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
                     {gemini_result.get('analysis', '')}
                 </div>
             </div>
             """).strip(), unsafe_allow_html=True)
 
-        # AUTOMATED FORENSIC DOSSIER REPORT
+        # AUTOMATED FORENSIC DOSSIER REPORT (SIMPLE, CLEAR PLAIN ENGLISH)
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 2.2rem 0 1.25rem 0;'>", unsafe_allow_html=True)
         
         if is_forged:
             card_border = "rgba(248,113,113,0.4)"
             card_bg = "rgba(248,113,113,0.04)"
-            badge_chip = '<span style="background: rgba(248,113,113,0.2); border: 1px solid #F87171; color: #F87171; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">HIGH RISK TAMPERING DETECTED</span>'
-            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#F87171' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>EVIDENCE CLASSIFIED: DIGITAL RECEIPT FORGERY"
+            badge_chip = '<span style="background: rgba(248,113,113,0.2); border: 1px solid #F87171; color: #F87171; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">HIGH RISK • FAKE RECEIPT</span>'
+            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#F87171' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>SCAN RESULT: DIGITAL FORGERY DETECTED"
             
-            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>Error Level Analysis (ELA) Hotspot Spike"
-            p1_desc = "Multi-resolution JPEG error evaluation (Q=90) revealed severe localized variance spikes across transaction detail fields (amount, recipient, reference number)."
+            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>1. Edited Text & Number Spikes"
+            p1_desc = "The transaction details (such as the amount, recipient name, or reference number) show glowing error spikes, meaning these numbers were pasted or changed after the screenshot was created."
             
-            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>Font Geometry & Resaving Inconsistency"
-            p2_desc = "Background canvas displays low-noise compression characteristics, whereas critical text boundaries exhibit high-frequency edge gradients indicating post-render editing."
+            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>2. Compression Mismatch"
+            p2_desc = "The background of the receipt and the text areas do not share the same image quality. The altered text was re-saved in a photo editor, leaving visible compression traces."
             
-            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>Actionable Merchant Security Protocol"
-            p3_desc = "<strong style='color: #F87171;'>DO NOT ACCEPT THIS SCREENSHOT AS PROOF OF PAYMENT.</strong> Always verify the 13-digit reference number inside your official GCash/Maya merchant dashboard."
+            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>3. Merchant Advice (What to do)"
+            p3_desc = "<strong style='color: #F87171;'>DO NOT RELEASE GOODS OR MONEY.</strong> Always open your own official GCash or Maya app to verify whether the payment was truly received."
         else:
             card_border = "rgba(52,211,153,0.4)"
             card_bg = "rgba(52,211,153,0.04)"
-            badge_chip = '<span style="background: rgba(52,211,153,0.2); border: 1px solid #34D399; color: #34D399; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">VERIFIED GENUINE RECEIPT</span>'
-            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#34D399' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>EVIDENCE CLASSIFIED: AUTHENTIC TRANSACTION RECEIPT"
+            badge_chip = '<span style="background: rgba(52,211,153,0.2); border: 1px solid #34D399; color: #34D399; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-family: sans-serif;">GENUINE RECEIPT</span>'
+            title_text = "<svg style='display:inline-block; vertical-align:middle; width:22px; height:22px; margin-right:6px;' viewBox='0 0 24 24' fill='none' stroke='#34D399' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>SCAN RESULT: GENUINE TRANSACTION RECEIPT"
             
-            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>Homogeneous Error Distribution Grid"
-            p1_desc = "ELA inspection confirms a uniform error noise matrix across all image coordinates. No localized compression anomalies or edge splicing detected."
+            p1_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#F59E0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>1. Uniform Compression Across Image"
+            p1_desc = "The scan found a completely smooth and even compression level across the entire image. No pasted text, altered digits, or image splicing detected."
             
-            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>Authentic Font & Vector Layout Geometry"
-            p2_desc = "Text fields, logos, and UI dividers align strictly with official GCash/Maya mobile app rendering specifications with zero localized resaving signatures."
+            p2_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#60A5FA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>2. Authentic Font & Layout Formatting"
+            p2_desc = "The text spacing, font thickness, logos, and divider lines strictly match genuine GCash/Maya mobile app screenshot specifications."
             
-            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>Actionable Merchant Security Protocol"
-            p3_desc = "<strong style='color: #34D399;'>RECEIPT MATCHES AUTHENTIC MOBILE PAYMENT PROFILE.</strong> Transaction record displays normal device screenshot rendering characteristics."
+            p3_title = "<svg style='display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:5px;' viewBox='0 0 24 24' fill='none' stroke='#A78BFA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>3. Merchant Advice (What to do)"
+            p3_desc = "<strong style='color: #34D399;'>RECEIPT MATCHES AUTHENTIC FORMAT.</strong> The image appears genuine. You can safely cross-reference the 13-digit reference number with your account history."
 
         top_accent = "#F87171" if is_forged else "#34D399"
         st.markdown(f"""<div style="background: {card_bg}; border: 1px solid {card_border}; border-top: 4px solid {top_accent}; border-radius: 16px; padding: 1.6rem; margin-top: 1.5rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
-<span class="eyebrow-gold">AUTOMATED FORENSIC SECURITY DOSSIER</span>
+<span class="eyebrow-gold">SECURITY DOSSIER SUMMARY</span>
 {badge_chip}
 </div>
 <div class="serif-header" style="font-size: 1.35rem; color: #F8FAFC; margin-bottom: 1.4rem;">{title_text}</div>
