@@ -193,13 +193,13 @@ def telemetry_card_html(title, value, subtitle, color, svg_path):
     """
     Renders an individual telemetry card with clear, simple labels.
     """
-    html = f"""<div style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3.5px solid {color}; border-radius: 14px; padding: 1.1rem 1.2rem; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); min-height: 105px; display: flex; flex-direction: column; justify-content: space-between;">
+    html = f"""<div class="metric-card telemetry-card" style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3.5px solid {color}; border-radius: 14px; padding: 1rem 1.1rem; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); min-height: 95px; display: flex; flex-direction: column; justify-content: space-between;">
 <div style="display: flex; justify-content: space-between; align-items: center;">
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">{title}</div>
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">{title}</div>
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{svg_path}</svg>
 </div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800; color: {color}; letter-spacing: -0.5px; margin: 4px 0;">{value}</div>
-<div style="font-size: 0.74rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">{subtitle}</div>
+<div class="telemetry-val" style="font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; color: {color}; letter-spacing: -0.5px; margin: 3px 0;">{value}</div>
+<div class="telemetry-sub" style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">{subtitle}</div>
 </div>"""
     return textwrap.dedent(html).strip()
 

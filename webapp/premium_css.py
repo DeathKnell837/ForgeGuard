@@ -662,10 +662,164 @@ div[data-testid="stImage"] img {
     50% { opacity: 0.6; box-shadow: 0 0 4px rgba(52,211,153,0.2); }
 }
 
-/* RESPONSIVE ADDITIONS */
+/* ============================================================
+   RESPONSIVE MOBILE DESIGN SYSTEM (<= 768px and <= 480px)
+   ============================================================ */
+
 @media (max-width: 768px) {
+    /* 1. Container & Spacing */
+    .block-container {
+        padding-top: 0.5rem !important;
+        padding-bottom: 2rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    /* 2. Top Header Brand Bar */
+    .navbar-brand {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 8px !important;
+        padding: 12px 14px !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .brand-title {
+        font-size: 1.35rem !important;
+    }
+    
+    /* 3. Hero Dashboard Banner */
+    .glass-panel {
+        padding: 1rem 1.15rem !important;
+        margin-bottom: 0.75rem !important;
+        border-radius: 14px !important;
+    }
+    .serif-header {
+        font-size: 1.2rem !important;
+        line-height: 1.3 !important;
+    }
+    .eyebrow-gold, .eyebrow-label {
+        font-size: 0.65rem !important;
+        letter-spacing: 1px !important;
+    }
+    
+    /* 4. Streamlit Grid Columns on Mobile: Make 4-metrics a sleek 2x2 grid */
+    div[data-testid="stHorizontalBlock"]:has(.telemetry-card) {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 0.75rem !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(.telemetry-card) > div[data-testid="column"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+    }
+    .telemetry-card {
+        padding: 0.75rem 0.85rem !important;
+        min-height: 80px !important;
+        border-radius: 10px !important;
+    }
+    .telemetry-val {
+        font-size: 1.25rem !important;
+    }
+    .telemetry-sub {
+        font-size: 0.64rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    /* 5. 1-Click Test Buttons: Make side-by-side on mobile */
+    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) > div[data-testid="column"] {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    button[kind="secondary"] {
+        padding: 0.6rem 0.5rem !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0px !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: 44px !important;
+    }
+    
+    /* 6. Model Architecture Matrix Cards */
+    div[data-testid="stHorizontalBlock"]:has(.glass-panel-matrix) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .glass-panel-matrix {
+        padding: 12px 14px !important;
+        margin-bottom: 0 !important;
+        border-radius: 12px !important;
+    }
+    
+    /* 7. Verdict Stamp & Circular Gauge */
+    .stamp-container {
+        margin: 1rem 0 !important;
+    }
+    .stamp-box {
+        padding: 12px 14px !important;
+        border-width: 2px !important;
+    }
+    .stamp-title {
+        font-size: 1.05rem !important;
+        letter-spacing: 1px !important;
+    }
+    .stamp-sub {
+        font-size: 0.7rem !important;
+        margin-top: 4px !important;
+    }
+    .stamp-meta-bar {
+        font-size: 0.68rem !important;
+        padding: 8px 10px !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+    }
     .gauge-container {
-        max-width: 160px;
+        max-width: 140px !important;
+    }
+    
+    /* 8. Tabs and File Uploader */
+    div[data-testid="stTabs"] button {
+        padding: 8px 12px !important;
+        font-size: 0.78rem !important;
+    }
+    div[data-testid="stFileUploader"] {
+        padding: 0 !important;
+    }
+    
+    /* 9. Diagnostic badge */
+    div[style*="AI SCANNER:"] {
+        font-size: 0.68rem !important;
+        padding: 4px 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra Small Screen optimizations */
+    .brand-title {
+        font-size: 1.2rem !important;
+    }
+    .badge-gold {
+        font-size: 0.62rem !important;
+        padding: 3px 8px !important;
+    }
+    .telemetry-val {
+        font-size: 1.15rem !important;
+    }
+    .stamp-title {
+        font-size: 0.95rem !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) {
+        grid-template-columns: 1fr !important;
     }
 }
 
