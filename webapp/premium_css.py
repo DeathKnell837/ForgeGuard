@@ -212,6 +212,73 @@ div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] spa
 /* ============================================================
    CYBER FORENSIC HUD BRAND BAR & BANNER
    ============================================================ */
+.app-header-compact {
+    background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 0.6rem;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+}
+
+.badge-status-live {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.5px;
+}
+
+.pulse-green {
+    width: 7px;
+    height: 7px;
+    background-color: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10B981;
+    animation: pulse-dot 1.8s infinite;
+}
+
+.telemetry-bar-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.t-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #94A3B8;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 4px 6px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.t-label {
+    color: #64748B;
+    font-size: 0.62rem;
+    margin-right: 4px;
+}
+
+@media (max-width: 600px) {
+    .telemetry-bar-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+}
+
 .navbar-brand {
     display: flex;
     align-items: center;

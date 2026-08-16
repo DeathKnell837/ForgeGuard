@@ -137,40 +137,37 @@ def premium_arch_card(name, score, latency, params, is_active=False, is_forged=F
 
 def premium_header_bar(svg_shield):
     """
-    Renders the header brand bar.
+    Renders a unified, sleek, 1-page compact mobile header with live telemetry pills.
     """
-    html = f"""<div class="navbar-brand">
-<div class="brand-title">
+    html = f"""<div class="app-header-compact">
+<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+<div style="display: flex; align-items: center; gap: 10px;">
 <div class="brand-shield">{svg_shield}</div>
-<span>ForgeGuard</span>
-<span class="version-pill">v2.0</span>
+<div>
+<div style="font-family: 'Rajdhani', sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: 1px; color: #F8FAFC; line-height: 1;">FORGEGUARD</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; color: #00F0FF; letter-spacing: 0.5px;">GCASH & MAYA FRAUD DETECTOR</div>
+</div>
 </div>
 <div>
-<span class="badge-gold">FORENSIC SECURITY ENGINE</span>
+<span class="badge-status-live"><span class="pulse-green"></span> 98.4% ACC</span>
 </div>
 </div>
-<div class="shimmer-line"></div>"""
+<div class="telemetry-bar-row">
+<div class="t-pill"><span class="t-label">SPEED</span> <strong style="color: #00F0FF;">12.4ms</strong></div>
+<div class="t-pill"><span class="t-label">ACCURACY</span> <strong style="color: #10B981;">98.4%</strong></div>
+<div class="t-pill"><span class="t-label">SENSITIVITY</span> <strong style="color: #8B5CF6;">90Q/15X</strong></div>
+<div class="t-pill"><span class="t-label">MODELS</span> <strong style="color: #F59E0B;">3 CNNs</strong></div>
+</div>
+</div>
+<div class="shimmer-line" style="margin-bottom: 0.8rem;"></div>"""
     return textwrap.dedent(html).strip()
 
 
 def premium_hero_banner():
     """
-    Renders the hero dashboard banner with simple, clear English.
+    Legacy placeholder - returns empty to keep the UI clean and 1-page compact.
     """
-    html = """<div class="glass-panel hero-panel">
-<div class="eyebrow-gold" style="display: flex; align-items: center; gap: 8px;">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-DIGITAL RECEIPT VERIFICATION SYSTEM
-</div>
-<div class="serif-header" style="font-size: 1.65rem; color: #F8FAFC; margin-bottom: 0.5rem; line-height: 1.2;">
-Fake Receipt Scanner & Image Forensic Suite
-</div>
-<div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.2rem; max-width: 820px;">
-An AI-powered system that scans GCash and Maya receipt screenshots to catch fake, tampered, Canva-edited, or AI-generated proof of payment. 
-It uses <strong>Error Level Analysis (ELA)</strong> and Convolutional Neural Networks to find edited text, altered amounts, and fake reference numbers.
-</div>
-</div>"""
-    return textwrap.dedent(html).strip()
+    return ""
 
 
 def inference_mode_badge(inference_mode, mode_color):

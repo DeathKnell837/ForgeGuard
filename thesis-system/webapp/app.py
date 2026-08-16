@@ -553,73 +553,23 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ============================================================
-# NAVBAR HEADER
+# COMPACT 1-PAGE APP HEADER & TELEMETRY
 # ============================================================
-
 try:
     _header_html = premium_header_bar(SVG_SHIELD)
 except Exception:
     _header_html = f"""
-    <div class="navbar-brand">
-        <div class="brand-title">{SVG_SHIELD} ForgeGuard <span class="version-pill">v2.0</span></div>
-        <div><span class="badge-gold">FORENSIC SECURITY ENGINE</span></div>
+    <div class="app-header-compact">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 800; font-size: 1.35rem; color: #F8FAFC;">{SVG_SHIELD} FORGEGUARD</div>
+            <span class="badge-status-live"><span class="pulse-green"></span> 98.4% ACC</span>
+        </div>
     </div>
-    <div class="shimmer-line"></div>
     """
 st.markdown(_header_html, unsafe_allow_html=True)
 
 # ============================================================
-# HERO DASHBOARD BANNER
-# ============================================================
-try:
-    _hero_html = premium_hero_banner()
-except Exception:
-    _hero_html = """
-    <div class="glass-panel">
-        <div class="eyebrow-gold">DIGITAL RECEIPT VERIFICATION SYSTEM</div>
-        <div class="serif-header" style="font-size: 1.55rem; color: #F8FAFC;">Fake Receipt Scanner & Image Forensic Suite</div>
-        <div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.55;">An AI-powered system that scans GCash and Maya receipts for fake, tampered, or Canva-edited proof of payment.</div>
-    </div>
-    """
-st.markdown(_hero_html, unsafe_allow_html=True)
-
-# LIVE SYSTEM TELEMETRY HUD (4-COLUMN NATIVE GRID)
-t_col1, t_col2, t_col3, t_col4 = st.columns(4)
-with t_col1:
-    try:
-        st.markdown(telemetry_card_html(
-            "SCAN SPEED", "12.4ms", "Fast MobileNetV2 response", "#00F0FF",
-            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
-        ), unsafe_allow_html=True)
-    except Exception:
-        pass
-with t_col2:
-    try:
-        st.markdown(telemetry_card_html(
-            "ACCURACY", "98.4%", "Tested on 500+ receipts", "#10B981",
-            '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
-        ), unsafe_allow_html=True)
-    except Exception:
-        pass
-with t_col3:
-    try:
-        st.markdown(telemetry_card_html(
-            "SENSITIVITY", "90Q / 15X", "Magnifies hidden image edits", "#8B5CF6",
-            '<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>'
-        ), unsafe_allow_html=True)
-    except Exception:
-        pass
-with t_col4:
-    try:
-        st.markdown(telemetry_card_html(
-            "AI MODELS", "3 CNNs", "MobileNetV2, ResNet50, Basic", "#F59E0B",
-            '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
-        ), unsafe_allow_html=True)
-    except Exception:
-        pass
-
-# ============================================================
-# FORENSIC ELA DETECTOR
+# FORENSIC ELA DETECTOR & 1-CLICK SAMPLES
 # ============================================================
 if "uploader_key" not in st.session_state:
     st.session_state["uploader_key"] = 0
@@ -627,13 +577,10 @@ if "uploader_key" not in st.session_state:
 uploaded_file = None
 active_sample_name = None
 
-st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>EVIDENCE SCANNER & TEST SAMPLES</div>", unsafe_allow_html=True)
-st.markdown("<h3 class='serif-header' style='font-size: 1.35rem; color: #F8FAFC; margin-bottom: 0.6rem;'>Upload a Receipt or Try a 1-Click Test Sample</h3>", unsafe_allow_html=True)
-
-# 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE (NO EMOJIS)
+# 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE (2 COMPACT MOBILE BUTTONS)
 ex_col1, ex_col2 = st.columns(2)
 with ex_col1:
-    if st.button("TEST REAL GCASH RECEIPT [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
+    if st.button("TEST REAL GCASH [01]", key="btn_sample_auth", use_container_width=True):
         st.session_state["uploader_key"] += 1
         for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
             if os.path.exists(p):
@@ -644,7 +591,7 @@ with ex_col1:
         st.rerun()
 
 with ex_col2:
-    if st.button("TEST FAKE / EDITED RECEIPT [EXHIBIT 02]", key="btn_sample_forged", use_container_width=True):
+    if st.button("TEST FAKE RECEIPT [02]", key="btn_sample_forged", use_container_width=True):
         st.session_state["uploader_key"] += 1
         for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
             if os.path.exists(p):
@@ -712,78 +659,55 @@ elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
     </div>
     """, unsafe_allow_html=True)
 
-# If still no image is selected, display rich cyber forensic intelligence on the landing page!
+# If still no image is selected, display expandable technical information below the uploader
 if image_bytes is None:
-    st.markdown(textwrap.dedent("""
-    <div style="margin-top: 1.8rem;">
-        <div class="eyebrow-label">HOW THE AI MODELS COMPARE</div>
-        <h4 class="serif-header" style="font-size: 1.15rem; color: #F8FAFC; margin-bottom: 0.8rem;">Three Deep Learning Models Tested</h4>
-    </div>
-    """).strip(), unsafe_allow_html=True)
-    
-    c_m1, c_m2, c_m3 = st.columns(3)
-    with c_m1:
-        st.markdown(textwrap.dedent("""
-        <div class="glass-panel-matrix" style="border-top: 3px solid #00F0FF;">
-            <div>
+    with st.expander("ℹ️ How the AI Detects Fake Receipts & Model Comparison", expanded=False):
+        c_m1, c_m2, c_m3 = st.columns(3)
+        with c_m1:
+            st.markdown(textwrap.dedent("""
+            <div class="glass-panel-matrix" style="border-top: 3px solid #00F0FF;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <div class="serif-header" style="font-size: 1.1rem; color: #00F0FF;">MobileNetV2</div>
-                    <span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">RECOMMENDED</span>
+                    <div class="serif-header" style="font-size: 1.05rem; color: #00F0FF;">MobileNetV2</div>
+                    <span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">FAST</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Fast and lightweight. Designed specifically for mobile phones and web apps.</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #00F0FF;">12.4 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 800; color: #00F0FF; margin: 4px 0;">12.4 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #64748B;">Accuracy: <strong style="color: #10B981;">98.4%</strong> • Size: 3.4M</div>
             </div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Size: <strong style="color: #F8FAFC;">3.4M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.4%</strong></span>
-            </div>
-        </div>
-        """).strip(), unsafe_allow_html=True)
-        
-    with c_m2:
-        st.markdown(textwrap.dedent("""
-        <div class="glass-panel-matrix" style="border-top: 3px solid #8B5CF6;">
-            <div>
+            """).strip(), unsafe_allow_html=True)
+            
+        with c_m2:
+            st.markdown(textwrap.dedent("""
+            <div class="glass-panel-matrix" style="border-top: 3px solid #8B5CF6;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <div class="serif-header" style="font-size: 1.1rem; color: #8B5CF6;">ResNet50</div>
-                    <span style="background: rgba(139,92,246,0.15); color: #8B5CF6; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">DEEP BENCHMARK</span>
+                    <div class="serif-header" style="font-size: 1.05rem; color: #8B5CF6;">ResNet50</div>
+                    <span style="background: rgba(139,92,246,0.15); color: #8B5CF6; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">DEEP</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">50-layer deep network. Highly thorough and accurate, but requires more compute.</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #8B5CF6;">28.6 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 800; color: #8B5CF6; margin: 4px 0;">28.6 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #64748B;">Accuracy: <strong style="color: #10B981;">98.7%</strong> • Size: 23.5M</div>
             </div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Size: <strong style="color: #F8FAFC;">23.5M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">98.7%</strong></span>
-            </div>
-        </div>
-        """).strip(), unsafe_allow_html=True)
-        
-    with c_m3:
-        st.markdown(textwrap.dedent("""
-        <div class="glass-panel-matrix" style="border-top: 3px solid #F59E0B;">
-            <div>
+            """).strip(), unsafe_allow_html=True)
+            
+        with c_m3:
+            st.markdown(textwrap.dedent("""
+            <div class="glass-panel-matrix" style="border-top: 3px solid #F59E0B;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <div class="serif-header" style="font-size: 1.1rem; color: #F59E0B;">Basic CNN</div>
+                    <div class="serif-header" style="font-size: 1.05rem; color: #F59E0B;">Basic CNN</div>
                     <span style="background: rgba(245,158,11,0.15); color: #F59E0B; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">BASELINE</span>
                 </div>
-                <div style="color: #94A3B8; font-size: 0.82rem; margin-bottom: 0.8rem;">Custom 4-layer basic network used as a baseline to measure improvements.</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: #F59E0B;">45.2 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 800; color: #F59E0B; margin: 4px 0;">45.2 ms</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #64748B;">Accuracy: <strong style="color: #10B981;">94.2%</strong> • Size: 2.1M</div>
             </div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                <span>Size: <strong style="color: #F8FAFC;">2.1M params</strong></span> • <span>Accuracy: <strong style="color: #10B981;">94.2%</strong></span>
+            """).strip(), unsafe_allow_html=True)
+            
+        st.markdown(textwrap.dedent("""
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem;">
+            <div style="color: #F8FAFC; font-weight: 700; font-size: 0.92rem; margin-bottom: 0.4rem;">How Does ForgeGuard Catch Fake Receipts?</div>
+            <div style="color: #94A3B8; font-size: 0.82rem; line-height: 1.5;">
+                • <strong>Error Level Analysis (ELA):</strong> Scans for compression inconsistencies where numbers or names were edited with Photoshop or Canva.<br>
+                • <strong>Deep Learning CNNs:</strong> Classifies whether glowing ELA compression artifacts represent genuine mobile screenshots or digital tampering.
             </div>
         </div>
         """).strip(), unsafe_allow_html=True)
-        
-    st.markdown(textwrap.dedent("""
-    <div style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 16px; padding: 1.5rem 2rem; margin-top: 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-        <div class="eyebrow-gold">HOW IT WORKS</div>
-        <div class="serif-header" style="font-size: 1.25rem; color: #F8FAFC; margin-bottom: 0.6rem;">How Does ForgeGuard Catch Fake Receipts?</div>
-        <div style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6;">
-            <strong>1. Hidden Editing Marks:</strong> When someone uses Photoshop, Canva, or a phone editor to change a receipt's amount, name, or date, the edited parts are compressed differently from the original screenshot.<br><br>
-            <strong>2. Error Level Analysis (ELA):</strong> ELA re-compresses the image and finds the difference. Edited areas glow brightly like hotspots.<br><br>
-            <strong>3. AI Detection:</strong> Our CNN neural network scans these glowing hotspots to instantly determine if the receipt is genuine or fake.
-        </div>
-    </div>
-    """).strip(), unsafe_allow_html=True)
 
 # EVIDENCE EVALUATION RESULTS BLOCK
 if image_bytes is not None:
