@@ -505,7 +505,7 @@ try:
     from premium_components import (
         svg_radial_dial, svg_confidence_gauge, premium_verdict_stamp,
         premium_header_bar, render_saas_model_card, render_comparative_breakdown_bars,
-        executive_sop5_recommendation_card
+        executive_sop5_recommendation_card, render_soc_incident_panel
     )
 except Exception:
     pass
@@ -764,84 +764,50 @@ if app_mode == "Live Scanner":
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
             
-            st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 0.75rem 0;'>", unsafe_allow_html=True)
+            st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1.25rem 0;'>", unsafe_allow_html=True)
             
-            # INK STAMP & CONFIDENCE GAUGE
-            verdict_text = "DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED"
-            stamp_class = "stamp-forged" if is_forged else "stamp-auth"
-            sub_reason = "COMPRESSION & PIXEL VARIANCE DETECTED" if is_forged else "ZERO TAMPERING OR SPLICING ANOMALIES"
-            verdict_color = "#F87171" if is_forged else "#34D399"
-            verdict_label = "FORGED" if is_forged else "AUTHENTIC"
+            # UNIFIED FORENSIC COMMAND CENTER (SOC / NEXORA / SOPHOS ARCHITECTURE)
+            col_lens, col_triage = st.columns([1.0, 1.25], gap="large")
             
-            confidence_pct = confidence * 100
-            try:
-                _gauge_html = svg_confidence_gauge(confidence_pct, verdict_color, verdict_label)
-                st.markdown(_gauge_html, unsafe_allow_html=True)
-            except Exception:
-                pass
-            
-            try:
-                _stamp_html = premium_verdict_stamp(
-                    verdict_text, stamp_class, sub_reason, verdict_color,
-                    verdict_label, confidence, model_display_name, elapsed_ms
-                )
-                st.markdown(_stamp_html, unsafe_allow_html=True)
-            except Exception:
-                pass
-
-            # COMPACT TRI-VIEW: ORIGINAL | ELA | HEATMAP
-            st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>FORENSIC VISUALIZATION (COMPACT VIEW)</div>", unsafe_allow_html=True)
-            img_col1, img_col2, img_col3 = st.columns(3)
-            with img_col1:
-                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>ORIGINAL RECEIPT</div></div>", unsafe_allow_html=True)
-                st.image(pil_img, use_container_width=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-            with img_col2:
-                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #A78BFA;'></div><div class='visual-card-title' style='color: #A78BFA;'>ELA DIFFERENCE</div></div>", unsafe_allow_html=True)
-                st.image(ela_img, use_container_width=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-            with img_col3:
-                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #00F0FF; box-shadow: 0 0 10px #00F0FF;'></div><div class='visual-card-title' style='color: #00F0FF;'>FOCUS HEATMAP</div></div>", unsafe_allow_html=True)
-                heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
-                overlay = Image.blend(pil_img, heatmap, alpha=0.42)
-                st.image(overlay, use_container_width=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-            # FORENSIC ELA QUANTITATIVE METRICS TABLE
+            # Compute ELA metrics
             ela_np = np.array(ela_img, dtype=np.float32)
             ela_mean = float(np.mean(ela_np))
             ela_var = float(np.var(ela_np))
             ela_max = float(np.max(ela_np))
+            heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
+            overlay = Image.blend(pil_img, heatmap, alpha=0.42)
+            
+            with col_lens:
+                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>FORENSIC IMAGE WORKBENCH</div>", unsafe_allow_html=True)
+                vtab_orig, vtab_ela, vtab_heat = st.tabs(["ORIGINAL", "ELA MATRIX", "HEATMAP OVERLAY"])
+                with vtab_orig:
+                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>RAW RECEIPT EVIDENCE</div></div>", unsafe_allow_html=True)
+                    st.image(pil_img, use_container_width=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with vtab_ela:
+                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #A78BFA;'></div><div class='visual-card-title' style='color: #A78BFA;'>COMPRESSION NOISE RESIDUAL</div></div>", unsafe_allow_html=True)
+                    st.image(ela_img, use_container_width=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with vtab_heat:
+                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #00F0FF; box-shadow: 0 0 10px #00F0FF;'></div><div class='visual-card-title' style='color: #00F0FF;'>THERMAL ANOMALY FOCUS</div></div>", unsafe_allow_html=True)
+                    st.image(overlay, use_container_width=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
 
-            st.markdown(f"""
-            <div class="saas-metric-grid">
-                <div class="saas-metric-card" style="border-bottom-color: #00F0FF;">
-                    <div class="saas-metric-label">NOISE MEAN</div>
-                    <div class="saas-metric-value" style="color: #00F0FF;">{ela_mean:.1f}</div>
-                </div>
-                <div class="saas-metric-card" style="border-bottom-color: {verdict_color};">
-                    <div class="saas-metric-label">VARIANCE</div>
-                    <div class="saas-metric-value" style="color: {verdict_color};">{ela_var:.1f}</div>
-                </div>
-                <div class="saas-metric-card" style="border-bottom-color: #A78BFA;">
-                    <div class="saas-metric-label">PEAK PIXEL</div>
-                    <div class="saas-metric-value" style="color: #A78BFA;">{ela_max:.0f}</div>
-                </div>
-                <div class="saas-metric-card" style="border-bottom-color: #34D399;">
-                    <div class="saas-metric-label">SPEED</div>
-                    <div class="saas-metric-value" style="color: #34D399;">{elapsed_ms:.1f}ms</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-            # Plain English findings explanation
-            if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
-                st.markdown(f"""
-                <div class="xai-glow-box">
-                    <span style="color: #A78BFA; font-size: 0.74rem; font-weight: 700; font-family: 'JetBrains Mono', monospace;">EXPLAINABLE AI FINDINGS:</span>
-                    <div style="color: #F8FAFC; font-size: 0.86rem; margin-top: 8px; line-height: 1.6; letter-spacing: 0.2px;">{gemini_result.get('analysis', '')}</div>
-                </div>
-                """, unsafe_allow_html=True)
+            with col_triage:
+                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>NEURAL INCIDENT INTELLIGENCE</div>", unsafe_allow_html=True)
+                gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
+                soc_panel_html = render_soc_incident_panel(
+                    verdict_text="DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED",
+                    is_forged=is_forged,
+                    confidence=confidence,
+                    model_name=model_display_name,
+                    latency_ms=elapsed_ms,
+                    ela_mean=ela_mean,
+                    ela_var=ela_var,
+                    ela_max=ela_max,
+                    gemini_analysis=gemini_text
+                )
+                st.markdown(soc_panel_html, unsafe_allow_html=True)
 
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")

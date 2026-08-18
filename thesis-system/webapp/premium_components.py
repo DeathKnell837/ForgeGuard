@@ -252,5 +252,101 @@ Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for 
 </div>"""
 
 
+def render_soc_incident_panel(verdict_text, is_forged, confidence, model_name, latency_ms, ela_mean, ela_var, ela_max, gemini_analysis=None):
+    """
+    Renders a unified SOC / Nexora / Sophos Threat Analysis & Forensic Incident Console.
+    Eliminates vertical fragmentation and choppy layouts with a cohesive single-surface cockpit.
+    """
+    status_color = "#F87171" if is_forged else "#34D399"
+    status_glow = "rgba(248, 113, 113, 0.25)" if is_forged else "rgba(52, 211, 153, 0.25)"
+    status_border = "rgba(248, 113, 113, 0.4)" if is_forged else "rgba(52, 211, 153, 0.4)"
+    severity_tag = "CRITICAL: TAMPERED ANOMALY" if is_forged else "SECURE: ZERO TAMPERING"
+    verdict_title = "DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED"
+    sub_desc = "Compression rate disparity and synthetic splicing detected in transaction fields." if is_forged else "Pixel noise gradient is uniform across all metadata and amount regions."
+    
+    pct = confidence * 100.0
+    r = 44
+    circumference = 2 * 3.14159265 * r
+    filled = circumference * (min(100.0, max(0.0, pct)) / 100.0)
+    gap = circumference - filled
+    
+    splicing_pct = min(98, max(8, int((ela_var / 400.0) * 100))) if is_forged else 4
+    compression_pct = min(95, max(12, int((ela_mean / 15.0) * 100))) if is_forged else 9
+    
+    analysis_block = ""
+    if gemini_analysis:
+        analysis_block = f"""
+<div style="background:rgba(15,23,42,0.8);border:1px solid rgba(139,92,246,0.3);border-radius:10px;padding:12px 14px;margin-top:12px;">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+<span style="width:6px;height:6px;border-radius:50%;background:#8B5CF6;"></span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#A78BFA;font-weight:700;">EXPLAINABLE AI DIAGNOSTICS</span>
+</div>
+<div style="font-size:0.8rem;color:#E2E8F0;line-height:1.5;">{gemini_analysis}</div>
+</div>"""
+
+    return f"""<div style="background:#0B132B;border:1px solid {status_border};border-radius:16px;padding:1.4rem;box-shadow:0 10px 40px {status_glow};">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<span style="width:10px;height:10px;border-radius:50%;background:{status_color};box-shadow:0 0 10px {status_color};display:inline-block;"></span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:{status_color};letter-spacing:1px;">{severity_tag}</span>
+</div>
+<span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#94A3B8;background:rgba(255,255,255,0.05);padding:3px 8px;border-radius:6px;">{model_name} • {latency_ms:.1f}ms</span>
+</div>
+
+<div style="font-family:'Inter',sans-serif;font-size:1.35rem;font-weight:800;color:#F8FAFC;letter-spacing:0.5px;margin-bottom:4px;">{verdict_title}</div>
+<div style="font-size:0.82rem;color:#94A3B8;line-height:1.4;margin-bottom:16px;">{sub_desc}</div>
+
+<div style="display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:rgba(6,9,16,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px;margin-bottom:14px;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<svg width="100" height="100" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+<circle cx="50" cy="50" r="{r}" fill="none" stroke="{status_color}" stroke-width="8" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+<text x="50" y="48" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono',monospace" font-size="16" font-weight="800">{pct:.1f}%</text>
+<text x="50" y="62" text-anchor="middle" fill="{status_color}" font-family="'JetBrains Mono',monospace" font-size="7.5" font-weight="700" letter-spacing="1">CERTAINTY</text>
+</svg>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div>
+<div style="display:flex;justify-content:space-between;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:#94A3B8;margin-bottom:2px;">
+<span>PIXEL NOISE VARIANCE</span>
+<strong style="color:{status_color};">{ela_var:.1f}</strong>
+</div>
+<div style="width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
+<div style="width:{splicing_pct}%;height:100%;background:{status_color};border-radius:3px;"></div>
+</div>
+</div>
+
+<div>
+<div style="display:flex;justify-content:space-between;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:#94A3B8;margin-bottom:2px;">
+<span>COMPRESSION DISPARITY</span>
+<strong style="color:#00F0FF;">{ela_mean:.1f}</strong>
+</div>
+<div style="width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
+<div style="width:{compression_pct}%;height:100%;background:#00F0FF;border-radius:3px;"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;text-align:center;">
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
+<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">MAX VALUE</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#A78BFA;">{ela_max:.0f}</div>
+</div>
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
+<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">ENGINE SPEED</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#34D399;">{latency_ms:.1f}ms</div>
+</div>
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
+<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">PIPELINE</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#00F0FF;">ELA+CNN</div>
+</div>
+</div>
+{analysis_block}
+</div>"""
+
+
+
 
 
