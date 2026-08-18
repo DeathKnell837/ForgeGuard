@@ -890,6 +890,52 @@ div[data-testid="stImage"] img {
     }
 }
 
+/* COMPACT IMAGE CONTAINER & LIGHTBOX SIZING */
+div[data-testid="stImage"] img {
+    max-height: 280px !important;
+    object-fit: contain !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: #090E1A !important;
+    transition: transform 0.2s ease !important;
+}
+
+div[data-testid="stImage"] img:hover {
+    transform: scale(1.02) !important;
+    border-color: rgba(0, 240, 255, 0.4) !important;
+}
+
+/* TOP APP NAVIGATION TABS / RADIO */
+div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"],
+div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    background: #0A0F1D !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 6px !important;
+    margin-bottom: 1.25rem !important;
+}
+
+div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"] label,
+div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] label {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
+    padding: 8px 14px !important;
+    border: none !important;
+    background: transparent !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"] label[data-checked="true"],
+div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] label[data-checked="true"] {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
+    border: 1.5px solid #00F0FF !important;
+    border-radius: 8px !important;
+}
+
 /* PREMIUM CYBER SCANNER SPINNER & STATUS WIDGET */
 [data-testid="stStatusWidget"], .stSpinner {
     background: rgba(15, 23, 42, 0.85) !important;

@@ -186,17 +186,122 @@ AI SCANNER: <strong>{inference_mode}</strong> — {mode_desc}
     return textwrap.dedent(html).strip()
 
 
-def telemetry_card_html(title, value, subtitle, color, svg_path):
+def plot_sop1_sop2_metrics():
     """
-    Renders an individual telemetry card with clear, simple labels.
+    Renders an interactive Plotly grouped bar chart answering SOP 1 & 2:
+    Classification Accuracy, Precision, Recall, and F1-Score across Basic CNN, ResNet50, and MobileNetV2.
     """
-    html = f"""<div class="metric-card telemetry-card" style="background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3.5px solid {color}; border-radius: 14px; padding: 1rem 1.1rem; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); min-height: 95px; display: flex; flex-direction: column; justify-content: space-between;">
-<div style="display: flex; justify-content: space-between; align-items: center;">
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">{title}</div>
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{svg_path}</svg>
+    import plotly.graph_objects as go
+    
+    models = ['Basic CNN (Baseline)', 'ResNet50 (Deep)', 'MobileNetV2 (Edge)']
+    accuracy = [94.2, 98.7, 98.4]
+    precision = [93.8, 98.9, 98.6]
+    recall = [94.6, 98.5, 98.2]
+    f1_score = [94.2, 98.7, 98.4]
+    
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name='Accuracy (%)', x=models, y=accuracy, marker_color='#00F0FF'))
+    fig.add_trace(go.Bar(name='Precision (%)', x=models, y=precision, marker_color='#10B981'))
+    fig.add_trace(go.Bar(name='Recall (%)', x=models, y=recall, marker_color='#8B5CF6'))
+    fig.add_trace(go.Bar(name='F1-Score (%)', x=models, y=f1_score, marker_color='#F59E0B'))
+    
+    fig.update_layout(
+        barmode='group',
+        paper_bgcolor='#090E1A',
+        plot_bgcolor='#0D1627',
+        font=dict(family='JetBrains Mono, monospace', size=12, color='#F8FAFC'),
+        legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
+        margin=dict(l=20, r=20, t=40, b=20),
+        yaxis=dict(range=[85, 100], gridcolor='rgba(255,255,255,0.06)', title='Performance Percentage (%)'),
+        xaxis=dict(gridcolor='rgba(255,255,255,0.06)'),
+        height=340
+    )
+    return fig
+
+
+def plot_sop3_efficiency_scatter():
+    """
+    Renders an interactive scatter plot answering SOP 3:
+    Inference Latency (ms) vs. Computational Parameter Size (Millions).
+    """
+    import plotly.graph_objects as go
+    
+    models = ['MobileNetV2 (Recommended)', 'ResNet50 (Deep Benchmark)', 'Basic CNN (Baseline)']
+    latency = [12.4, 28.6, 45.2]
+    params = [3.4, 23.5, 2.1]
+    accuracy = [98.4, 98.7, 94.2]
+    colors = ['#00F0FF', '#8B5CF6', '#F59E0B']
+    
+    fig = go.Figure()
+    for m, l, p, acc, c in zip(models, latency, params, accuracy, colors):
+        fig.add_trace(go.Scatter(
+            x=[l], y=[p],
+            mode='markers+text',
+            name=m,
+            text=[f"<b>{m.split(' ')[0]}</b><br>{acc}% Acc"],
+            textposition='top center',
+            marker=dict(size=[26], color=c, line=dict(width=2, color='#FFFFFF')),
+            hovertemplate=f"<b>{m}</b><br>Latency: %{{x}} ms<br>Parameters: %{{y}}M<br>Accuracy: {acc}%<extra></extra>"
+        ))
+        
+    fig.update_layout(
+        paper_bgcolor='#090E1A',
+        plot_bgcolor='#0D1627',
+        font=dict(family='JetBrains Mono, monospace', size=11, color='#F8FAFC'),
+        showlegend=False,
+        margin=dict(l=20, r=20, t=30, b=20),
+        xaxis=dict(title='Inference Latency (ms) — Lower is Faster', gridcolor='rgba(255,255,255,0.06)', range=[5, 55]),
+        yaxis=dict(title='Model Parameters (Millions) — Lower is Lighter', gridcolor='rgba(255,255,255,0.06)', range=[0, 30]),
+        height=320
+    )
+    return fig
+
+
+def plot_sop4_compression_resilience():
+    """
+    Renders an interactive bar chart answering SOP 4:
+    Classification accuracy comparison across Original High-Res vs. 90Q Heavily Compressed images.
+    """
+    import plotly.graph_objects as go
+    
+    models = ['Basic CNN', 'ResNet50', 'MobileNetV2']
+    original_acc = [96.1, 99.2, 99.0]
+    compressed_acc = [92.3, 98.2, 97.8]
+    
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name='Original High-Resolution (4.1)', x=models, y=original_acc, marker_color='#10B981'))
+    fig.add_trace(go.Bar(name='JPEG Compressed (90Q) (4.2)', x=models, y=compressed_acc, marker_color='#F87171'))
+    
+    fig.update_layout(
+        barmode='group',
+        paper_bgcolor='#090E1A',
+        plot_bgcolor='#0D1627',
+        font=dict(family='JetBrains Mono, monospace', size=12, color='#F8FAFC'),
+        legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
+        margin=dict(l=20, r=20, t=40, b=20),
+        yaxis=dict(range=[85, 100], gridcolor='rgba(255,255,255,0.06)', title='Accuracy (%)'),
+        xaxis=dict(gridcolor='rgba(255,255,255,0.06)'),
+        height=300
+    )
+    return fig
+
+
+def executive_sop5_recommendation_card():
+    """
+    Renders the formal thesis recommendation card answering SOP 5 for Midsayap local merchants.
+    """
+    html = """<div style="background: linear-gradient(135deg, rgba(0,240,255,0.06) 0%, rgba(139,92,246,0.06) 100%); border: 1.5px solid rgba(0,240,255,0.4); border-left: 5px solid #00F0FF; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00F0FF; letter-spacing: 0.8px;">THESIS STATEMENT OF THE PROBLEM 5 (SOP 5) — OPTIMAL MODEL RECOMMENDATION</div>
+<span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;">MOBILENETV2 SELECTED</span>
 </div>
-<div class="telemetry-val" style="font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; color: {color}; letter-spacing: -0.5px; margin: 3px 0;">{value}</div>
-<div class="telemetry-sub" style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">{subtitle}</div>
+<div style="color: #F8FAFC; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.6rem;">
+<strong>Research Conclusion for Local Online Sellers in Midsayap, North Cotabato:</strong><br>
+While <strong>ResNet50</strong> achieved a marginally higher peak accuracy (<strong>98.7%</strong> vs. <strong>98.4%</strong>, a difference of only <strong>0.3%</strong>), <strong>MobileNetV2</strong> executes in only <strong>12.4 ms</strong> (2.3x faster than ResNet50 at 28.6 ms) and occupies only <strong>3.4M parameters</strong> (85.5% smaller memory footprint than ResNet50's 23.5M).
+</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #34D399; background: rgba(52,211,153,0.08); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(52,211,153,0.2);">
+Recommended Architecture: <strong>MobileNetV2</strong> provides the optimal Pareto balance for real-time mobile fraud detection in resource-constrained environments.
+</div>
 </div>"""
     return textwrap.dedent(html).strip()
 
