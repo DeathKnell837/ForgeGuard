@@ -425,6 +425,30 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([tx, ty - 15, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx - 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx + 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
+    # 11. SAWTOOTH TEAR LINE DIRECTLY AT BOTTOM OF WHITE CARD
+    tear_y = card_bottom
+    saw_w, saw_h = 26, 20
+    for x_pos in range(card_x1, card_x2, saw_w):
+        poly = [
+            (x_pos, tear_y),
+            (x_pos + saw_w // 2, tear_y + saw_h),
+            (x_pos + saw_w, tear_y)
+        ]
+        draw.polygon(poly, fill=GCASH_BLUE)
+        
+    # 12. DOWNLOAD PILL BUTTON TIGHTLY BELOW SAWTOOTH LINE
+    btn_y = card_bottom + 85
+    btn_w, btn_h = 360, 75
+    btn_x1 = (W - btn_w) // 2
+    btn_x2 = btn_x1 + btn_w
+    draw.rounded_rectangle([btn_x1, btn_y, btn_x2, btn_y + btn_h], radius=38, outline=GCASH_WHITE, width=3)
+    
+    # Download tray icon
+    tx = btn_x1 + 65
+    ty = btn_y + 38
+    draw.line([tx, ty - 15, tx, ty + 8], fill=GCASH_WHITE, width=4)
+    draw.line([tx - 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
+    draw.line([tx + 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx - 14, ty + 16, tx + 14, ty + 16], fill=GCASH_WHITE, width=4)
     
     draw.text((btn_x1 + 105, btn_y + 18), "Download", fill=GCASH_WHITE, font=font_download)
@@ -439,7 +463,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([3 * W // 4 + 15, nav_y + 25, 3 * W // 4 - 15, nav_y + 45], fill=(180, 180, 180), width=4)
     draw.line([3 * W // 4 - 15, nav_y + 45, 3 * W // 4 + 15, nav_y + 65], fill=(180, 180, 180), width=4)
     
-    return img
+    return imgmg
 
 def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
     """Self-contained Express Send receipt renderer."""
@@ -500,11 +524,20 @@ SVG_BRAIN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 2
 SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>"""
 
 # ============================================================
-# STREAMLIT SIDEBAR: MODEL & FORENSIC CONTROLS
+# STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
 # ============================================================
 with st.sidebar:
-    st.markdown("<div class='eyebrow-gold'>FORENSIC CONTROL PANEL</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.3rem; color: #F8FAFC; margin-bottom: 0.9rem;'>Model & ELA Config</h3>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>SYSTEM NAVIGATION</div>", unsafe_allow_html=True)
+    app_mode = st.radio(
+        "System Navigation",
+        options=["Live Scanner", "Model Comparison"],
+        index=0,
+        key="sidebar_app_mode",
+        label_visibility="collapsed"
+    )
+    
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>FORENSIC ENGINE CONFIG</div>", unsafe_allow_html=True)
     
     st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
     model_options = [
@@ -517,7 +550,7 @@ with st.sidebar:
         options=model_options,
         index=0,
         key="model_architecture",
-        help="This picks which AI model checks your receipt for fakes. MobileNetV2 is fast and works well even on basic phones, which is why it is recommended. ResNet50 is slower but more thorough. Basic CNN is a simple version used only for comparison."
+        help="Selects which deep learning CNN architecture performs live inference. MobileNetV2 is recommended for fast edge devices."
     )
     
     selected_model_option = st.session_state.get("model_architecture", model_choice)
@@ -536,21 +569,21 @@ with st.sidebar:
     
     ela_quality = st.slider(
         "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
-        help="This controls how closely the scan looks for hidden editing marks. Higher numbers catch smaller changes. 90 works well for most receipts."
+        help="Controls ELA compression differential sensitivity (default: 90Q)."
     )
     ela_scale = st.slider(
         "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
-        help="This makes any editing marks the scan finds show up brighter and easier to see in the result. It does not change accuracy, only how visible the evidence looks."
+        help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
     )
     
     st.markdown(f"""
-    <div style="background: #0F1419; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.06); font-size: 0.78rem; color: #94A3B8; line-height: 1.6; margin-top: 1.2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);" class="mono-readout">
+    <div style="background: #080D18; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.6; margin-top: 1.2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);" class="mono-readout">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
             <span style="width: 8px; height: 8px; border-radius: 50%; background: #34D399; display: inline-block; animation: pulse-dot 2s ease-in-out infinite; box-shadow: 0 0 8px rgba(52,211,153,0.5);"></span>
             <strong style="color: #34D399; letter-spacing: 0.5px;">SYSTEM ONLINE</strong>
         </div>
-        <span style="color: #64748B;">Active Model:</span> <strong style="color: #8B5CF6;">{model_display_name}</strong><br>
-        <span style="color: #64748B;">ELA Engine:</span> <strong style="color: #2DD4BF;">Operational</strong>
+        <span style="color: #64748B;">Active Engine:</span> <strong style="color: #00F0FF;">{model_display_name}</strong><br>
+        <span style="color: #64748B;">ELA Pipeline:</span> <strong style="color: #10B981;">Operational</strong>
     </div>
     """, unsafe_allow_html=True)
 
@@ -570,19 +603,9 @@ except Exception:
     """
 st.markdown(_header_html, unsafe_allow_html=True)
 
-# TOP MULTI-PAGE NAVIGATION TABS
-app_mode = st.radio(
-    "Navigation",
-    options=["Forensic Evidence Scanner", "Comparative Model Benchmarks (SOP 1-5)", "Dataset & Methodology"],
-    index=0,
-    horizontal=True,
-    label_visibility="collapsed",
-    key="top_app_navigation"
-)
-
-if app_mode == "Forensic Evidence Scanner":
+if app_mode == "Live Scanner":
     # ============================================================
-    # PAGE 1: FORENSIC EVIDENCE SCANNER (CLEAN 1-PAGE MOBILE FIT)
+    # PAGE 1: LIVE FORENSIC SCANNER (PRACTICAL SYSTEM INTERFACE)
     # ============================================================
     if "uploader_key" not in st.session_state:
         st.session_state["uploader_key"] = 0
@@ -593,7 +616,7 @@ if app_mode == "Forensic Evidence Scanner":
     # 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE
     ex_col1, ex_col2 = st.columns(2)
     with ex_col1:
-        if st.button("TEST REAL GCASH [EXHIBIT 01]", key="btn_sample_auth", use_container_width=True):
+        if st.button("TEST REAL GCASH [01]", key="btn_sample_auth", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
                 if os.path.exists(p):
@@ -604,7 +627,7 @@ if app_mode == "Forensic Evidence Scanner":
             st.rerun()
 
     with ex_col2:
-        if st.button("TEST FAKE RECEIPT [EXHIBIT 02]", key="btn_sample_forged", use_container_width=True):
+        if st.button("TEST FAKE RECEIPT [02]", key="btn_sample_forged", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
                 if os.path.exists(p):
@@ -691,7 +714,7 @@ if app_mode == "Forensic Evidence Scanner":
             confidence = 0.95
             forgery_score = 0.05
 
-            # Parallel Real CNN Prediction
+            # Parallel Real CNN Prediction across all 3 architectures
             model_predictions = {}
             for k in ['mobilenetv2', 'resnet50', 'basic_cnn']:
                 w_keras = os.path.join(SYS_DIR, "models", f"{k}.keras")
@@ -790,12 +813,12 @@ if app_mode == "Forensic Evidence Scanner":
             ela_max = float(np.max(ela_np))
 
             st.markdown(f"""
-            <div style="background: #0A0F1D; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-top: 1rem;">
+            <div style="background: #080D18; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-top: 1rem;">
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
                     <div><span style="font-size: 0.68rem; color: #64748B;">NOISE MEAN</span><br><strong style="color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_mean:.1f}</strong></div>
                     <div><span style="font-size: 0.68rem; color: #64748B;">VARIANCE</span><br><strong style="color: {verdict_color}; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_var:.1f}</strong></div>
                     <div><span style="font-size: 0.68rem; color: #64748B;">PEAK PIXEL</span><br><strong style="color: #A78BFA; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_max:.0f}</strong></div>
-                    <div><span style="font-size: 0.68rem; color: #64748B;">LATENCY</span><br><strong style="color: #34D399; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{elapsed_ms:.1f}ms</strong></div>
+                    <div><span style="font-size: 0.68rem; color: #64748B;">SPEED</span><br><strong style="color: #34D399; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{elapsed_ms:.1f}ms</strong></div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -812,88 +835,40 @@ if app_mode == "Forensic Evidence Scanner":
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")
 
-elif app_mode == "Comparative Model Benchmarks (SOP 1-5)":
+else:
     # ============================================================
-    # PAGE 2: THESIS SOP BENCHMARK EVALUATION (INTERACTIVE CHARTS)
+    # PAGE 2: MODEL COMPARISON & PERFORMANCE BENCHMARKS
     # ============================================================
-    st.markdown("<div class='eyebrow-gold'>NDMC BSCS THESIS RESEARCH SUITE</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.4rem; color: #F8FAFC; margin-bottom: 0.5rem;'>Comparative Evaluation of CNN Architectures (SOP 1 – 5)</h3>", unsafe_allow_html=True)
-    st.markdown("<div style='color: #94A3B8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;'>This section directly answers the 5 Statements of the Problem (SOP 1 to 5) from the official thesis research at Notre Dame of Midsayap College.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>NEURAL NETWORK EVALUATION</div>", unsafe_allow_html=True)
+    st.markdown("<h3 class='serif-header' style='font-size: 1.4rem; color: #F8FAFC; margin-bottom: 0.5rem;'>CNN Model Comparison & Performance Benchmarks</h3>", unsafe_allow_html=True)
+    st.markdown("<div style='color: #94A3B8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;'>Comparative analysis across Basic CNN, ResNet50, and MobileNetV2 on Error Level Analysis (ELA) features.</div>", unsafe_allow_html=True)
 
-    # SOP 1 & 2: Classification Accuracy, Precision, Recall, F1
-    st.markdown("<div class='eyebrow-label'>SOP 1 & 2: CLASSIFICATION PERFORMANCE METRICS</div>", unsafe_allow_html=True)
+    # 1. Classification Metrics (Accuracy, Precision, Recall, F1)
+    st.markdown("<div class='eyebrow-label'>CLASSIFICATION PERFORMANCE METRICS</div>", unsafe_allow_html=True)
     try:
         fig1 = plot_sop1_sop2_metrics()
         st.plotly_chart(fig1, use_container_width=True)
     except Exception as e:
         st.error(f"Error rendering chart: {e}")
 
-    # SOP 3: Speed vs Resource Requirements
-    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>SOP 3: INFERENCE SPEED (MS) VS. RESOURCE REQUIREMENT (PARAMS)</div>", unsafe_allow_html=True)
+    # 2. Speed vs Resource Requirements
+    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>INFERENCE SPEED (MS) VS. RESOURCE FOOTPRINT (PARAMS)</div>", unsafe_allow_html=True)
     try:
         fig2 = plot_sop3_efficiency_scatter()
         st.plotly_chart(fig2, use_container_width=True)
     except Exception as e:
         st.error(f"Error rendering chart: {e}")
 
-    # SOP 4: Quality Degradation Resilience
-    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>SOP 4: ORIGINAL HIGH-RESOLUTION VS. HEAVILY COMPRESSED (90Q)</div>", unsafe_allow_html=True)
+    # 3. Compression Resilience
+    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>ORIGINAL HIGH-RESOLUTION VS. COMPRESSED (90Q)</div>", unsafe_allow_html=True)
     try:
         fig3 = plot_sop4_compression_resilience()
         st.plotly_chart(fig3, use_container_width=True)
     except Exception as e:
         st.error(f"Error rendering chart: {e}")
 
-    # SOP 5: Practical Recommendation for Midsayap Local Online Sellers
+    # 4. Optimal Architecture Recommendation
     try:
         st.markdown(executive_sop5_recommendation_card(), unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error rendering recommendation: {e}")
-
-else:
-    # ============================================================
-    # PAGE 3: DATASET & METHODOLOGY
-    # ============================================================
-    st.markdown("<div class='eyebrow-gold'>ACADEMIC METHODOLOGY & DATASET</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.4rem; color: #F8FAFC; margin-bottom: 0.5rem;'>Dataset Distribution & Forensic ELA Pipeline</h3>", unsafe_allow_html=True)
-
-    c_d1, c_d2 = st.columns(2)
-    with c_d1:
-        st.markdown("""
-        <div style="background: #0A0F1D; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem;">
-            <div style="color: #00F0FF; font-weight: 700; font-size: 0.95rem; margin-bottom: 8px;">DATASET PROFILE (638 SAMPLES)</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94A3B8; line-height: 1.8;">
-                • Authentic Receipts: <strong style="color: #10B981;">154 images</strong><br>
-                • Amount Alterations: <strong style="color: #F87171;">153 images</strong><br>
-                • Recipient Modifications: <strong style="color: #F87171;">153 images</strong><br>
-                • Reference Fabrications: <strong style="color: #F87171;">153 images</strong><br>
-                • AI Diffusion Synthetic: <strong style="color: #A78BFA;">25 images</strong>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c_d2:
-        st.markdown("""
-        <div style="background: #0A0F1D; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem;">
-            <div style="color: #8B5CF6; font-weight: 700; font-size: 0.95rem; margin-bottom: 8px;">ERROR LEVEL ANALYSIS (ELA) FORMULA</div>
-            <div style="font-size: 0.82rem; color: #94A3B8; line-height: 1.6;">
-                ELA computes the absolute difference between original pixel values and an artificially re-compressed JPEG state:<br>
-                <div style="font-family: 'JetBrains Mono', monospace; color: #F8FAFC; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 6px; margin: 6px 0;">
-                    D(x, y) = |I(x, y) - I_resaved(x, y)| × S
-                </div>
-                Where <em>S = 15.0</em> scale factor and JPEG Quality <em>Q = 90</em>.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.25rem; margin-top: 1.25rem;">
-        <div style="color: #F8FAFC; font-weight: 700; font-size: 0.92rem; margin-bottom: 6px;">RESEARCH PROJECT METADATA</div>
-        <div style="font-size: 0.82rem; color: #94A3B8; line-height: 1.6;">
-            <strong>Title:</strong> Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery<br>
-            <strong>Institution:</strong> Notre Dame of Midsayap College (NDMC) | College of Information Technology and Engineering (CITE)<br>
-            <strong>Researchers:</strong> Rogie P. Bacanto & Daniela S. Ungab (BSCS-4)<br>
-            <strong>Adviser:</strong> Ms. Doris Ann Mariano | <strong>Domain:</strong> Digital Image Forensics & Mobile Payment Security
-        </div>
-    </div>
-    """, unsafe_allow_html=True)

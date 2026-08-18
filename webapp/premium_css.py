@@ -905,35 +905,41 @@ div[data-testid="stImage"] img:hover {
     border-color: rgba(0, 240, 255, 0.4) !important;
 }
 
-/* TOP APP NAVIGATION TABS / RADIO */
-div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"],
-div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] {
+/* SIDEBAR NAV SELECTOR (EMBIEN / WEBSTACKS CYBER DESIGN) */
+div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: column !important;
     gap: 8px !important;
-    background: #0A0F1D !important;
+    background: #080D18 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 6px !important;
+    border-radius: 14px !important;
+    padding: 8px !important;
     margin-bottom: 1.25rem !important;
 }
 
-div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"] label,
-div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] label {
-    flex: 1 !important;
-    margin-bottom: 0 !important;
-    padding: 8px 14px !important;
-    border: none !important;
+div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label {
+    padding: 10px 14px !important;
+    border-radius: 10px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    color: #94A3B8 !important;
     background: transparent !important;
-    justify-content: center !important;
-    text-align: center !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
 }
 
-div[data-testid="stRadio"]:has(input[value*="Forensic Scanner"]) div[role="radiogroup"] label[data-checked="true"],
-div[data-testid="stRadio"]:has(input[value*="Detector"]) div[role="radiogroup"] label[data-checked="true"] {
+div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label:hover {
+    background: rgba(0, 240, 255, 0.08) !important;
+    color: #F8FAFC !important;
+}
+
+div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label[data-checked="true"] {
     background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
     border: 1.5px solid #00F0FF !important;
-    border-radius: 8px !important;
+    color: #00F0FF !important;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) !important;
 }
 
 /* PREMIUM CYBER SCANNER SPINNER & STATUS WIDGET */
