@@ -507,7 +507,7 @@ try:
         render_investigator_profile_card,
         render_top_command_bar,
         render_exhibit_metadata_bar,
-        render_soc_incident_panel,
+        render_panoramic_incident_cockpit,
         render_sophos_benchmark_summary_tiles,
         render_saas_model_card,
         render_comparative_breakdown_bars,
@@ -752,9 +752,6 @@ if "Live" in app_mode:
             
             st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1.25rem 0;'>", unsafe_allow_html=True)
             
-            # UNIFIED FORENSIC COMMAND CENTER (SOC / NEXORA / SOPHOS ARCHITECTURE)
-            col_lens, col_triage = st.columns([1.0, 1.25], gap="large")
-            
             # Compute ELA metrics
             ela_np = np.array(ela_img, dtype=np.float32)
             ela_mean = float(np.mean(ela_np))
@@ -763,43 +760,41 @@ if "Live" in app_mode:
             heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
             overlay = Image.blend(pil_img, heatmap, alpha=0.42)
             
-            with col_lens:
-                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>FORENSIC EXHIBIT CANVAS</div>", unsafe_allow_html=True)
-                import hashlib
-                sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
-                res_str = f"{pil_img.width}x{pil_img.height}"
-                sample_label = active_sample_name or "EXHIBIT_EVIDENCE.JPG"
-                st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
-                
-                vtab_orig, vtab_ela, vtab_heat = st.tabs(["RAW RECEIPT", "ELA MATRIX", "HEATMAP OVERLAY"])
-                with vtab_orig:
-                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>PRIMARY EVIDENCE EXHIBIT</div></div>", unsafe_allow_html=True)
-                    st.image(pil_img, use_container_width=True)
-                    st.markdown("</div>", unsafe_allow_html=True)
-                with vtab_ela:
-                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #A78BFA;'></div><div class='visual-card-title' style='color: #A78BFA;'>COMPRESSION NOISE RESIDUAL</div></div>", unsafe_allow_html=True)
-                    st.image(ela_img, use_container_width=True)
-                    st.markdown("</div>", unsafe_allow_html=True)
-                with vtab_heat:
-                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #00F0FF; box-shadow: 0 0 10px #00F0FF;'></div><div class='visual-card-title' style='color: #00F0FF;'>THERMAL ANOMALY FOCUS</div></div>", unsafe_allow_html=True)
-                    st.image(overlay, use_container_width=True)
-                    st.markdown("</div>", unsafe_allow_html=True)
-
-            with col_triage:
-                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>NEURAL INCIDENT INTELLIGENCE</div>", unsafe_allow_html=True)
-                gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
-                soc_panel_html = render_soc_incident_panel(
-                    verdict_text="DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED",
-                    is_forged=is_forged,
-                    confidence=confidence,
-                    model_name=model_display_name,
-                    latency_ms=elapsed_ms,
-                    ela_mean=ela_mean,
-                    ela_var=ela_var,
-                    ela_max=ela_max,
-                    gemini_analysis=gemini_text
-                )
-                st.markdown(soc_panel_html, unsafe_allow_html=True)
+            import hashlib
+            sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
+            res_str = f"{pil_img.width}x{pil_img.height}"
+            sample_label = active_sample_name or "EXHIBIT_EVIDENCE.JPG"
+            
+            st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>SIMULTANEOUS 3-EXHIBIT FORENSIC MATRIX</div>", unsafe_allow_html=True)
+            st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
+            
+            # 3 PARALLEL EXHIBIT COLUMNS (RAW, ELA, HEATMAP)
+            col_raw, col_ela, col_heat = st.columns(3)
+            with col_raw:
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#94A3B8;'><span>1. RAW RECEIPT EXHIBIT</span><span style='color:#64748B;'>ORIGINAL</span></div>", unsafe_allow_html=True)
+                st.image(pil_img, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+            with col_ela:
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#A78BFA;'><span>2. ELA NOISE MATRIX</span><span style='color:#A78BFA;'>90Q / 15X</span></div>", unsafe_allow_html=True)
+                st.image(ela_img, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+            with col_heat:
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#00F0FF;'><span>3. HEATMAP OVERLAY</span><span style='color:#00F0FF;'>SPLICING GRADIENT</span></div>", unsafe_allow_html=True)
+                st.image(overlay, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+            
+            # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
+            gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
+            cockpit_html = render_panoramic_incident_cockpit(
+                verdict_text="DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED",
+                is_forged=is_forged,
+                confidence=confidence,
+                ela_mean=ela_mean,
+                ela_var=ela_var,
+                ela_max=ela_max,
+                gemini_analysis=gemini_text
+            )
+            st.markdown(cockpit_html, unsafe_allow_html=True)
 
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")

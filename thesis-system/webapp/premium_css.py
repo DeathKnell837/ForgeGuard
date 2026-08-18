@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v3.2)
-   Zero-Gap, Contained Exhibit Viewer & 3-Engine Consensus HUD
+   FORGEGUARD ULTIMATE ZERO-GAP PANORAMIC FORENSIC SUITE (v3.5)
+   Simultaneous 3-Exhibit Matrix + 3-Engine Real-Time Consensus
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap');
@@ -27,57 +27,71 @@ html, body, [class*="css"] {
     background-attachment: fixed !important;
 }
 
-/* ZERO TOP GAP / WHITESPACE FIX */
-header[data-testid="stHeader"] {
+/* ABSOLUTE AGGRESSIVE ZERO TOP WHITESPACE FIX */
+header[data-testid="stHeader"],
+.stApp > header,
+[data-testid="stHeader"] {
     display: none !important;
     height: 0px !important;
+    min-height: 0px !important;
+    max-height: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+div[data-testid="stAppViewContainer"] > section.main {
+    padding-top: 0.2rem !important;
 }
 
 .main .block-container,
 div[data-testid="stAppViewBlockContainer"] {
-    padding-top: 0.75rem !important;
-    padding-bottom: 1.5rem !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    max-width: 98% !important;
+    padding-top: 0.2rem !important;
+    padding-bottom: 1rem !important;
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+    max-width: 99% !important;
+}
+
+div[data-testid="stVerticalBlock"] {
+    gap: 0.45rem !important;
 }
 
 /* Sidebar Styling */
 section[data-testid="stSidebar"] {
     background-color: #0A0E17 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding-top: 0.5rem !important;
+    padding-top: 0.4rem !important;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
-    padding-top: 0.5rem !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-top: 0.4rem !important;
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
 }
 
 .rail-section-header {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: #64748B;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin: 1rem 0 0.4rem 0;
+    margin: 0.75rem 0 0.35rem 0;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
 div[data-testid="stRadio"] > div {
-    gap: 6px !important;
+    gap: 5px !important;
 }
 
 div[data-testid="stRadio"] label {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 10px !important;
-    padding: 0.6rem 0.85rem !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0.75rem !important;
+    transition: all 0.2s ease !important;
     cursor: pointer !important;
     width: 100% !important;
 }
@@ -85,19 +99,19 @@ div[data-testid="stRadio"] label {
 div[data-testid="stRadio"] label:hover {
     background: rgba(0, 240, 255, 0.05) !important;
     border-color: rgba(0, 240, 255, 0.3) !important;
-    transform: translateX(3px) !important;
+    transform: translateX(2px) !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"],
 div[data-testid="stRadio"] label:has(input:checked) {
     background: linear-gradient(90deg, rgba(0, 240, 255, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%) !important;
     border: 1px solid rgba(0, 240, 255, 0.5) !important;
-    box-shadow: 0 4px 16px rgba(0, 240, 255, 0.12) !important;
+    box-shadow: 0 2px 10px rgba(0, 240, 255, 0.12) !important;
 }
 
 div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
     font-weight: 600 !important;
     color: #F8FAFC !important;
 }
@@ -109,17 +123,17 @@ div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
     align-items: center;
     background: #0B111E;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 0.65rem 1.1rem;
-    margin-bottom: 0.9rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .breadcrumb-trail {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
+    gap: 6px;
+    font-size: 0.78rem;
     font-family: 'Inter', sans-serif;
     color: #64748B;
 }
@@ -133,38 +147,38 @@ div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
 .telemetry-pill-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .top-telemetry-pill {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
-    padding: 3px 9px;
+    border-radius: 6px;
+    padding: 2px 8px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
 }
 
 /* Action Buttons */
 .stButton > button {
     background: linear-gradient(180deg, #131B2E 0%, #0D1322 100%) !important;
     border: 1px solid rgba(0, 240, 255, 0.3) !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     color: #F8FAFC !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.8px !important;
-    padding: 0.65rem 1rem !important;
+    padding: 0.5rem 0.9rem !important;
     width: 100% !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.2s ease !important;
 }
 
 .stButton > button:hover {
     border-color: #00F0FF !important;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.35) !important;
-    transform: translateY(-2px) !important;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.35) !important;
+    transform: translateY(-1px) !important;
     color: #00F0FF !important;
 }
 
@@ -172,35 +186,51 @@ div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
 div[data-testid="stFileUploader"] {
     background: #0B111E !important;
     border: 1.5px dashed rgba(0, 240, 255, 0.35) !important;
-    border-radius: 12px !important;
-    padding: 0.9rem !important;
-    transition: all 0.3s ease !important;
+    border-radius: 10px !important;
+    padding: 0.6rem !important;
+    transition: all 0.2s ease !important;
 }
 
-/* CONSTRAIN EXHIBIT IMAGE HEIGHT SO IT NEVER GETS GIGANTIC */
-.visual-card-wrapper {
+/* 3-EXHIBIT IMAGE CONTAINMENT - ZERO VERTICAL BLOAT */
+.exhibit-card-frame {
     background: #0B111E;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 0.75rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 0.6rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.visual-card-wrapper img,
+.exhibit-header-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.exhibit-card-frame img,
 div[data-testid="stImage"] img {
-    max-height: 420px !important;
+    max-height: 290px !important;
     width: auto !important;
     max-width: 100% !important;
     margin: 0 auto !important;
     display: block !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     object-fit: contain !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* Section Eyebrow Labels */
 .eyebrow-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     color: #00F0FF;
     letter-spacing: 1.5px;
