@@ -793,16 +793,19 @@ if app_mode == "Live Scanner":
             st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>FORENSIC VISUALIZATION (COMPACT VIEW)</div>", unsafe_allow_html=True)
             img_col1, img_col2, img_col3 = st.columns(3)
             with img_col1:
-                st.markdown("<div style='font-size: 0.8rem; color: #94A3B8; font-weight: 700; margin-bottom: 4px;'>ORIGINAL RECEIPT</div>", unsafe_allow_html=True)
+                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>ORIGINAL RECEIPT</div></div>", unsafe_allow_html=True)
                 st.image(pil_img, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
             with img_col2:
-                st.markdown("<div style='font-size: 0.8rem; color: #A78BFA; font-weight: 700; margin-bottom: 4px;'>ELA DIFFERENCE</div>", unsafe_allow_html=True)
+                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #A78BFA;'></div><div class='visual-card-title' style='color: #A78BFA;'>ELA DIFFERENCE</div></div>", unsafe_allow_html=True)
                 st.image(ela_img, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
             with img_col3:
-                st.markdown("<div style='font-size: 0.8rem; color: #00F0FF; font-weight: 700; margin-bottom: 4px;'>FOCUS HEATMAP</div>", unsafe_allow_html=True)
+                st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #00F0FF; box-shadow: 0 0 10px #00F0FF;'></div><div class='visual-card-title' style='color: #00F0FF;'>FOCUS HEATMAP</div></div>", unsafe_allow_html=True)
                 heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
                 overlay = Image.blend(pil_img, heatmap, alpha=0.42)
                 st.image(overlay, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
 
             # FORENSIC ELA QUANTITATIVE METRICS TABLE
             ela_np = np.array(ela_img, dtype=np.float32)
@@ -811,12 +814,22 @@ if app_mode == "Live Scanner":
             ela_max = float(np.max(ela_np))
 
             st.markdown(f"""
-            <div style="background: #080D18; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-top: 1rem;">
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
-                    <div><span style="font-size: 0.68rem; color: #64748B;">NOISE MEAN</span><br><strong style="color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_mean:.1f}</strong></div>
-                    <div><span style="font-size: 0.68rem; color: #64748B;">VARIANCE</span><br><strong style="color: {verdict_color}; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_var:.1f}</strong></div>
-                    <div><span style="font-size: 0.68rem; color: #64748B;">PEAK PIXEL</span><br><strong style="color: #A78BFA; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{ela_max:.0f}</strong></div>
-                    <div><span style="font-size: 0.68rem; color: #64748B;">SPEED</span><br><strong style="color: #34D399; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">{elapsed_ms:.1f}ms</strong></div>
+            <div class="saas-metric-grid">
+                <div class="saas-metric-card" style="border-bottom-color: #00F0FF;">
+                    <div class="saas-metric-label">NOISE MEAN</div>
+                    <div class="saas-metric-value" style="color: #00F0FF;">{ela_mean:.1f}</div>
+                </div>
+                <div class="saas-metric-card" style="border-bottom-color: {verdict_color};">
+                    <div class="saas-metric-label">VARIANCE</div>
+                    <div class="saas-metric-value" style="color: {verdict_color};">{ela_var:.1f}</div>
+                </div>
+                <div class="saas-metric-card" style="border-bottom-color: #A78BFA;">
+                    <div class="saas-metric-label">PEAK PIXEL</div>
+                    <div class="saas-metric-value" style="color: #A78BFA;">{ela_max:.0f}</div>
+                </div>
+                <div class="saas-metric-card" style="border-bottom-color: #34D399;">
+                    <div class="saas-metric-label">SPEED</div>
+                    <div class="saas-metric-value" style="color: #34D399;">{elapsed_ms:.1f}ms</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -824,9 +837,9 @@ if app_mode == "Live Scanner":
             # Plain English findings explanation
             if gemini_result and isinstance(gemini_result, dict) and "analysis" in gemini_result:
                 st.markdown(f"""
-                <div style="background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 12px 16px; margin-top: 0.75rem;">
+                <div class="xai-glow-box">
                     <span style="color: #A78BFA; font-size: 0.74rem; font-weight: 700; font-family: 'JetBrains Mono', monospace;">EXPLAINABLE AI FINDINGS:</span>
-                    <div style="color: #F8FAFC; font-size: 0.86rem; margin-top: 4px; line-height: 1.5;">{gemini_result.get('analysis', '')}</div>
+                    <div style="color: #F8FAFC; font-size: 0.86rem; margin-top: 8px; line-height: 1.6; letter-spacing: 0.2px;">{gemini_result.get('analysis', '')}</div>
                 </div>
                 """, unsafe_allow_html=True)
 

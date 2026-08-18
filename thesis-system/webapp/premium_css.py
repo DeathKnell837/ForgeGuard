@@ -961,5 +961,188 @@ div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="
     border-bottom-color: #38BDF8 !important;
 }
 
+/* ============================================================
+   LIVE SCANNER - PROCREATOR / WEBSTACKS SAAS UI UPGRADES
+   ============================================================ */
+
+/* Sleek File Uploader Dropzone */
+div[data-testid="stFileUploaderDropzone"] {
+    background: linear-gradient(145deg, rgba(15,20,31,0.8) 0%, rgba(6,9,16,0.9) 100%) !important;
+    border: 2px dashed rgba(0, 240, 255, 0.3) !important;
+    border-radius: 16px !important;
+    padding: 2.5rem 1.5rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5) !important;
+}
+
+div[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: rgba(0, 240, 255, 0.8) !important;
+    background: linear-gradient(145deg, rgba(15,20,31,0.9) 0%, rgba(0, 240, 255, 0.05) 100%) !important;
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0,0,0,0.5) !important;
+}
+
+div[data-testid="stFileUploaderDropzone"] section {
+    color: #F8FAFC !important;
+}
+div[data-testid="stFileUploaderDropzone"] svg {
+    stroke: #00F0FF !important;
+    fill: rgba(0, 240, 255, 0.1) !important;
+    width: 42px !important;
+    height: 42px !important;
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
+}
+
+div[data-testid="stFileDropzoneInstructions"] {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #94A3B8 !important;
+    letter-spacing: 0.5px !important;
+}
+
+div[data-testid="stFileDropzoneInstructions"] span:first-child {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: #00F0FF !important;
+    font-weight: 600 !important;
+}
+
+/* Micro-Animated "TEST REAL GCASH" / "TEST FAKE RECEIPT" Buttons */
+div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) button[data-testid="baseButton-secondary"] {
+    background: linear-gradient(180deg, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.95) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 12px !important;
+    color: #F8FAFC !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.5px !important;
+    padding: 0.75rem 1rem !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    height: 100% !important;
+    position: relative;
+    overflow: hidden;
+}
+
+div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample_auth"]) button[data-testid="baseButton-secondary"]:hover {
+    border-color: #34D399 !important;
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.25) !important;
+    color: #34D399 !important;
+    transform: translateY(-2px) !important;
+}
+
+div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample_forged"]) button[data-testid="baseButton-secondary"]:hover {
+    border-color: #F87171 !important;
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.25) !important;
+    color: #F87171 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Visualization Image Cards (SaaS Style) */
+.visual-card-wrapper {
+    background: #0B132B;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 12px;
+    height: 100%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.visual-card-wrapper:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+}
+
+.visual-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+
+.visual-card-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+
+.visual-card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Quant Table Metrics (SaaS Data Cards) */
+.saas-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .saas-metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.saas-metric-card {
+    background: linear-gradient(180deg, rgba(30,41,59,0.5) 0%, rgba(15,23,42,0.8) 100%);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.saas-metric-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    background: linear-gradient(180deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.9) 100%);
+    transform: translateY(-2px);
+}
+
+.saas-metric-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.saas-metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Explainable AI Glow Box */
+.xai-glow-box {
+    background: linear-gradient(145deg, rgba(139,92,246,0.08) 0%, rgba(15,23,42,0.5) 100%);
+    border: 1px solid rgba(139,92,246,0.25);
+    border-left: 3px solid #8B5CF6;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.xai-glow-box::before {
+    content: '';
+    position: absolute;
+    top: -50px; left: -50px; width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
 </style>
 """
