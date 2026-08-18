@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v3.0)
-   Sophos, Nexora, Nightfall & SOC Command Center Architecture
+   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v3.2)
+   Zero-Gap, Contained Exhibit Viewer & 3-Engine Consensus HUD
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap');
@@ -17,44 +17,36 @@ html, body, [class*="css"] {
 .stApp {
     background-color: #070A11 !important;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 0% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 100% 70%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px) !important;
+        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 0% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 100% 70%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px) !important;
     background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px !important;
     background-position: center, center, center, -1px -1px, -1px -1px !important;
     background-attachment: fixed !important;
 }
 
-/* Custom Sleek Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #070A11;
-}
-::-webkit-scrollbar-thumb {
-    background: #1E293B;
-    border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #00F0FF;
-}
-
-/* Streamlit Header Override */
+/* ZERO TOP GAP / WHITESPACE FIX */
 header[data-testid="stHeader"] {
-    background: transparent !important;
-    z-index: 99990 !important;
+    display: none !important;
+    height: 0px !important;
 }
 
-/* Sidebar: Sophos & Nightfall Navigation Rail */
+.main .block-container,
+div[data-testid="stAppViewBlockContainer"] {
+    padding-top: 0.75rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    max-width: 98% !important;
+}
+
+/* Sidebar Styling */
 section[data-testid="stSidebar"] {
     background-color: #0A0E17 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding-top: 1rem !important;
+    padding-top: 0.5rem !important;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
@@ -63,7 +55,6 @@ section[data-testid="stSidebar"] > div:first-child {
     padding-right: 1rem !important;
 }
 
-/* Sidebar Section Headers */
 .rail-section-header {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
@@ -71,13 +62,12 @@ section[data-testid="stSidebar"] > div:first-child {
     color: #64748B;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin: 1.25rem 0 0.5rem 0;
+    margin: 1rem 0 0.4rem 0;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-/* Custom Radio Navigation Pills */
 div[data-testid="stRadio"] > div {
     gap: 6px !important;
 }
@@ -86,7 +76,7 @@ div[data-testid="stRadio"] label {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 10px !important;
-    padding: 0.65rem 0.9rem !important;
+    padding: 0.6rem 0.85rem !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     cursor: pointer !important;
     width: 100% !important;
@@ -112,25 +102,16 @@ div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
     color: #F8FAFC !important;
 }
 
-/* Sidebar Sliders */
-div[data-testid="stSlider"] label {
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.72rem !important;
-    font-weight: 600 !important;
-    color: #94A3B8 !important;
-    letter-spacing: 0.5px !important;
-}
-
-/* Top Command Bar & Breadcrumbs */
+/* Top Command Bar */
 .top-command-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #0B111E;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 0.8rem 1.25rem;
-    margin-bottom: 1.25rem;
+    border-radius: 12px;
+    padding: 0.65rem 1.1rem;
+    margin-bottom: 0.9rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -138,7 +119,7 @@ div[data-testid="stSlider"] label {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-family: 'Inter', sans-serif;
     color: #64748B;
 }
@@ -159,25 +140,25 @@ div[data-testid="stSlider"] label {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 8px;
-    padding: 4px 10px;
+    padding: 3px 9px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
 }
 
-/* Quick Action Test Buttons */
+/* Action Buttons */
 .stButton > button {
     background: linear-gradient(180deg, #131B2E 0%, #0D1322 100%) !important;
     border: 1px solid rgba(0, 240, 255, 0.3) !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     color: #F8FAFC !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.85rem !important;
+    font-size: 0.82rem !important;
     font-weight: 700 !important;
-    letter-spacing: 1px !important;
-    padding: 0.75rem 1.25rem !important;
+    letter-spacing: 0.8px !important;
+    padding: 0.65rem 1rem !important;
     width: 100% !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .stButton > button:hover {
@@ -187,70 +168,39 @@ div[data-testid="stSlider"] label {
     color: #00F0FF !important;
 }
 
-/* Cyber Upload Dropzone */
+/* File Uploader */
 div[data-testid="stFileUploader"] {
     background: #0B111E !important;
     border: 1.5px dashed rgba(0, 240, 255, 0.35) !important;
-    border-radius: 14px !important;
-    padding: 1.25rem !important;
+    border-radius: 12px !important;
+    padding: 0.9rem !important;
     transition: all 0.3s ease !important;
 }
 
-div[data-testid="stFileUploader"]:hover {
-    border-color: #00F0FF !important;
-    box-shadow: inset 0 0 24px rgba(0, 240, 255, 0.08), 0 0 16px rgba(0, 240, 255, 0.15) !important;
-}
-
-/* Streamlit Tabs Override (Sophos & Nexora Style) */
-div[data-baseweb="tab-list"] {
-    background: #0A0E17 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 10px !important;
-    padding: 4px !important;
-    gap: 4px !important;
-    margin-bottom: 0.8rem !important;
-}
-
-div[data-baseweb="tab"] {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 8px !important;
-    color: #94A3B8 !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.76rem !important;
-    font-weight: 700 !important;
-    padding: 6px 14px !important;
-    transition: all 0.2s ease !important;
-}
-
-div[data-baseweb="tab"][aria-selected="true"] {
-    background: #1E293B !important;
-    color: #00F0FF !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Exhibit Visual Card Wrapper */
+/* CONSTRAIN EXHIBIT IMAGE HEIGHT SO IT NEVER GETS GIGANTIC */
 .visual-card-wrapper {
     background: #0B111E;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 0.9rem;
+    border-radius: 12px;
+    padding: 0.75rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.visual-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.visual-card-wrapper img,
+div[data-testid="stImage"] img {
+    max-height: 420px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border-radius: 8px !important;
+    object-fit: contain !important;
 }
 
 /* Section Eyebrow Labels */
 .eyebrow-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: #00F0FF;
     letter-spacing: 1.5px;
