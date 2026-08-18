@@ -503,11 +503,9 @@ except Exception:
 # Import premium UI components
 try:
     from premium_components import (
-        svg_confidence_gauge, premium_verdict_stamp, premium_metric_card,
-        premium_arch_card, premium_header_bar, premium_hero_banner,
-        inference_mode_badge,
-        plot_sop1_sop2_metrics, plot_sop3_efficiency_scatter,
-        plot_sop4_compression_resilience, executive_sop5_recommendation_card
+        svg_radial_dial, svg_confidence_gauge, premium_verdict_stamp,
+        premium_header_bar, render_saas_model_card, render_comparative_breakdown_bars,
+        executive_sop5_recommendation_card
     )
 except Exception:
     pass
@@ -837,38 +835,65 @@ if app_mode == "Live Scanner":
 
 else:
     # ============================================================
-    # PAGE 2: MODEL COMPARISON & PERFORMANCE BENCHMARKS
+    # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
     # ============================================================
-    st.markdown("<div class='eyebrow-gold'>NEURAL NETWORK EVALUATION</div>", unsafe_allow_html=True)
-    st.markdown("<h3 class='serif-header' style='font-size: 1.4rem; color: #F8FAFC; margin-bottom: 0.5rem;'>CNN Model Comparison & Performance Benchmarks</h3>", unsafe_allow_html=True)
-    st.markdown("<div style='color: #94A3B8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;'>Comparative analysis across Basic CNN, ResNet50, and MobileNetV2 on Error Level Analysis (ELA) features.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-gold'>NEURAL BENCHMARK SUITE</div>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Inter\", sans-serif; font-weight: 800; font-size: 1.45rem; color: #F8FAFC; margin-bottom: 0.35rem;'>CNN ARCHITECTURE PERFORMANCE COMPARISON</h3>", unsafe_allow_html=True)
+    st.markdown("<div style='color: #94A3B8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;'>Head-to-head empirical evaluation across 3 neural architectures trained on ELA-transformed GCash & Maya receipts.</div>", unsafe_allow_html=True)
 
-    # 1. Classification Metrics (Accuracy, Precision, Recall, F1)
-    st.markdown("<div class='eyebrow-label'>CLASSIFICATION PERFORMANCE METRICS</div>", unsafe_allow_html=True)
-    try:
-        fig1 = plot_sop1_sop2_metrics()
-        st.plotly_chart(fig1, use_container_width=True)
-    except Exception as e:
-        st.error(f"Error rendering chart: {e}")
+    # 1. 3-Column Side-by-Side SaaS Model Benchmark Cards
+    col_mnet, col_resnet, col_bcnn = st.columns(3)
+    
+    with col_mnet:
+        card_mnet = render_saas_model_card(
+            title="MobileNetV2",
+            tag="RECOMMENDED",
+            acc=98.4,
+            prec=98.6,
+            rec=98.2,
+            f1=98.4,
+            speed="12.4ms",
+            params="3.4M",
+            comp_acc="97.8%",
+            color="#00F0FF",
+            is_recommended=True
+        )
+        st.markdown(card_mnet, unsafe_allow_html=True)
 
-    # 2. Speed vs Resource Requirements
-    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>INFERENCE SPEED (MS) VS. RESOURCE FOOTPRINT (PARAMS)</div>", unsafe_allow_html=True)
-    try:
-        fig2 = plot_sop3_efficiency_scatter()
-        st.plotly_chart(fig2, use_container_width=True)
-    except Exception as e:
-        st.error(f"Error rendering chart: {e}")
+    with col_resnet:
+        card_resnet = render_saas_model_card(
+            title="ResNet50",
+            tag="DEEP BENCHMARK",
+            acc=98.7,
+            prec=98.9,
+            rec=98.5,
+            f1=98.7,
+            speed="28.6ms",
+            params="23.5M",
+            comp_acc="98.2%",
+            color="#8B5CF6",
+            is_recommended=False
+        )
+        st.markdown(card_resnet, unsafe_allow_html=True)
 
-    # 3. Compression Resilience
-    st.markdown("<div class='eyebrow-label' style='margin-top: 1.25rem;'>ORIGINAL HIGH-RESOLUTION VS. COMPRESSED (90Q)</div>", unsafe_allow_html=True)
-    try:
-        fig3 = plot_sop4_compression_resilience()
-        st.plotly_chart(fig3, use_container_width=True)
-    except Exception as e:
-        st.error(f"Error rendering chart: {e}")
+    with col_bcnn:
+        card_bcnn = render_saas_model_card(
+            title="Basic CNN",
+            tag="BASELINE",
+            acc=94.2,
+            prec=93.8,
+            rec=94.6,
+            f1=94.2,
+            speed="45.2ms",
+            params="2.1M",
+            comp_acc="92.3%",
+            color="#F59E0B",
+            is_recommended=False
+        )
+        st.markdown(card_bcnn, unsafe_allow_html=True)
 
-    # 4. Optimal Architecture Recommendation
-    try:
-        st.markdown(executive_sop5_recommendation_card(), unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error rendering recommendation: {e}")
+    # 2. Embien / Webstacks Comparative Visual Gauges
+    st.markdown(render_comparative_breakdown_bars(), unsafe_allow_html=True)
+
+    # 3. Formal Executive SOP Recommendation
+    st.markdown(executive_sop5_recommendation_card(), unsafe_allow_html=True)

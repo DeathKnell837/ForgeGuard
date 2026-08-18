@@ -1,23 +1,58 @@
 """
-ForgeGuard Premium UI Components — HTML/SVG Templates
-=====================================================
-Pure CSS/SVG components for the premium redesign.
-Uses textwrap.dedent to ensure Streamlit's markdown parser never treats HTML/SVG as code blocks.
+ForgeGuard Premium UI Components — SaaS / Embien / Webstacks UI Architecture
+===========================================================================
+Pure CSS/SVG components inspired by SaaS Visual Hierarchy & Embien Design System.
+Zero external library dependencies for bulletproof rendering on Streamlit Cloud.
 """
 
 import textwrap
 
 
+def svg_radial_dial(pct, color="#00F0FF", label="ACCURACY", size=130):
+    """
+    Renders an Embien/Webstacks-style SVG dual-ring radial dial with glow.
+    """
+    r = 48
+    circumference = 2 * 3.14159265 * r # ~301.6
+    filled = circumference * (min(100.0, max(0.0, pct)) / 100.0)
+    gap = circumference - filled
+    
+    html = f"""<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0.5rem 0;">
+<svg width="{size}" height="{size}" viewBox="0 0 120 120">
+  <defs>
+    <filter id="dialGlow_{color.replace('#','')}" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background Track Ring -->
+  <circle cx="60" cy="60" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7" />
+  <!-- Filled Glow Arc -->
+  <circle cx="60" cy="60" r="{r}" fill="none" stroke="{color}" stroke-width="7"
+          stroke-dasharray="{filled:.1f} {gap:.1f}"
+          stroke-linecap="round"
+          transform="rotate(-90 60 60)"
+          filter="url(#dialGlow_{color.replace('#','')})" />
+  <!-- Center Value -->
+  <text x="60" y="58" text-anchor="middle" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="19" font-weight="700">{pct:.1f}%</text>
+  <text x="60" y="74" text-anchor="middle" fill="{color}" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" letter-spacing="1">{label}</text>
+</svg>
+</div>"""
+    return textwrap.dedent(html).strip()
+
+
 def svg_confidence_gauge(confidence_pct, verdict_color, verdict_label):
     """
-    Renders a clean SVG circular confidence gauge (speedometer style).
+    Renders the live scanner circular confidence gauge (speedometer style).
     """
     arc_length = 376.99
     filled = arc_length * (confidence_pct / 100.0)
     gap = arc_length - filled
     glow_opacity = min(0.6, confidence_pct / 150.0)
     
-    # User-friendly simple label
     simple_label = "GENUINE" if "AUTH" in verdict_label.upper() else "EDITED / FAKE"
     
     html = f"""<div class="gauge-container">
@@ -39,21 +74,8 @@ def svg_confidence_gauge(confidence_pct, verdict_color, verdict_label):
 </defs>
 <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8" stroke-dasharray="{arc_length} {502.65 - arc_length}" stroke-dashoffset="-{502.65 * 0.125}" stroke-linecap="round" transform="rotate(0 100 100)"/>
 <circle cx="100" cy="100" r="80" fill="none" stroke="url(#gaugeGrad)" stroke-width="8" stroke-dasharray="{filled} {gap + (502.65 - arc_length)}" stroke-dashoffset="-{502.65 * 0.125}" stroke-linecap="round" filter="url(#gaugeGlow)" class="gauge-arc"/>
-<g stroke="rgba(255,255,255,0.15)" stroke-width="1">
-<line x1="100" y1="28" x2="100" y2="22" transform="rotate(-135 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(-108 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(-81 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="22" transform="rotate(-54 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(-27 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="22" transform="rotate(0 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(27 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(54 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="22" transform="rotate(81 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="24" transform="rotate(108 100 100)"/>
-<line x1="100" y1="28" x2="100" y2="22" transform="rotate(135 100 100)"/>
-</g>
-<text x="100" y="92" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', 'IBM Plex Mono', monospace" font-size="28" font-weight="700">{confidence_pct:.1f}%</text>
-<text x="100" y="115" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', 'IBM Plex Mono', monospace" font-size="9" font-weight="600" letter-spacing="2" opacity="0.9">{simple_label}</text>
+<text x="100" y="92" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', monospace" font-size="28" font-weight="700">{confidence_pct:.1f}%</text>
+<text x="100" y="115" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="2" opacity="0.9">{simple_label}</text>
 </svg>
 </div>"""
     return textwrap.dedent(html).strip()
@@ -76,60 +98,6 @@ def premium_verdict_stamp(verdict_text, stamp_class, sub_reason, verdict_color, 
 <span>Certainty: <strong style="color: {verdict_color};">{confidence * 100:.1f}%</strong></span>
 <span>Model: <strong style="color: #F8FAFC;">{model_name}</strong></span>
 <span>Speed: <strong style="color: #2DD4BF;">{latency_ms:.1f} ms</strong></span>
-</div>
-</div>"""
-    return textwrap.dedent(html).strip()
-
-
-def premium_metric_card(value, label, color="#2DD4BF", icon_type="bar"):
-    """
-    Renders a clean metric card with mini sparkline SVG.
-    """
-    if icon_type == "bar":
-        sparkline = """<svg width="32" height="16" viewBox="0 0 32 16"><rect x="0" y="8" width="5" height="8" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="7" y="4" width="5" height="12" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="14" y="6" width="5" height="10" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="21" y="2" width="5" height="14" rx="1" fill="rgba(255,255,255,0.25)"/><rect x="28" y="0" width="4" height="16" rx="1" fill="rgba(255,255,255,0.12)"/></svg>"""
-    else:
-        sparkline = """<svg width="32" height="16" viewBox="0 0 32 16"><polyline points="0,14 8,8 16,10 24,3 32,6" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>"""
-    
-    html = f"""<div class="metric-card" style="border-top: 2px solid {color};">
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
-<div class="metric-text">{label}</div>
-{sparkline}
-</div>
-<div class="metric-num" style="color: {color};">{value}</div>
-</div>"""
-    return textwrap.dedent(html).strip()
-
-
-def premium_arch_card(name, score, latency, params, is_active=False, is_forged=False):
-    """
-    Renders an architecture comparison card with simple plain-English terms.
-    """
-    score_pct = score * 100
-    bar_color = "#F87171" if is_forged else "#34D399"
-    active_border = "border-left: 3px solid #2DD4BF;" if is_active else ""
-    active_badge = '<span style="background: rgba(45,212,191,0.15); color: #2DD4BF; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 700;">CURRENT</span>' if is_active else ""
-    verdict_badge = "FAKE" if is_forged else "REAL"
-    badge_color = "#F87171" if is_forged else "#34D399"
-    
-    html = f"""<div class="glass-panel-matrix" style="{active_border}">
-<div>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-<div class="serif-header" style="font-size: 1.05rem; color: #F8FAFC;">{name}</div>
-<span style="color: {badge_color}; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;">[{verdict_badge}]</span>
-</div>
-<div style="color: #64748B; font-size: 0.75rem; margin-bottom: 0.75rem;">{active_badge}</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 700; color: {badge_color}; margin-bottom: 0.5rem;">{score_pct:.1f}%</div>
-<div style="width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; margin-bottom: 0.75rem;">
-<div style="width: {score_pct}%; height: 100%; background: linear-gradient(90deg, {bar_color}88, {bar_color}); border-radius: 4px; transition: width 1s ease;"></div>
-</div>
-</div>
-<div style="display: flex; justify-content: space-between; align-items: center;">
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #64748B;">
-<span style="color: #94A3B8;">Speed:</span> <strong style="color: #2DD4BF;">{latency}ms</strong>
-</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #64748B;">
-<span style="color: #94A3B8;">Model Size:</span> <strong style="color: #F8FAFC;">{params}</strong>
-</div>
 </div>
 </div>"""
     return textwrap.dedent(html).strip()
@@ -163,144 +131,169 @@ def premium_header_bar(svg_shield):
     return textwrap.dedent(html).strip()
 
 
-def premium_hero_banner():
+def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, color="#00F0FF", is_recommended=False):
     """
-    Legacy placeholder - returns empty to keep the UI clean and 1-page compact.
+    Renders a Webstacks / Dribbble SaaS Benchmark Card with SVG radial dial and mini bar meters.
     """
-    return ""
-
-
-def inference_mode_badge(inference_mode, mode_color):
-    """
-    Renders the inference engine mode badge.
-    """
-    mode_desc = "Trained neural network active" if inference_mode == "CNN" else "Error analysis scanner active"
-    icon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>' if inference_mode == "CNN" else '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+    rec_badge = f'<span style="background: rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.15); color: {color}; font-family: \'JetBrains Mono\', monospace; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.3);">{tag}</span>'
+    card_border = f"border: 1.5px solid {color}; box-shadow: 0 8px 32px rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.15);" if is_recommended else "border: 1px solid rgba(255,255,255,0.08);"
+    dial_html = svg_radial_dial(acc, color=color, label="ACCURACY", size=115)
     
-    html = f"""<div style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 16px; background: rgba({int(mode_color[1:3],16)},{int(mode_color[3:5],16)},{int(mode_color[5:7],16)},0.08); border: 1px solid rgba({int(mode_color[1:3],16)},{int(mode_color[3:5],16)},{int(mode_color[5:7],16)},0.25); border-radius: 8px; margin: 0.5rem auto 1rem auto; width: fit-content;">
-<span style="color: {mode_color};">{icon}</span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: {mode_color}; letter-spacing: 0.5px;">
-AI SCANNER: <strong>{inference_mode}</strong> — {mode_desc}
-</span>
+    html = f"""<div style="background: #0B132B; border-radius: 16px; padding: 1.25rem; {card_border} display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+  <!-- Card Header -->
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+      <span style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; color: #F8FAFC;">{title}</span>
+      {rec_badge}
+    </div>
+    
+    <!-- Central Dial -->
+    {dial_html}
+    
+    <!-- Mini Progress Bars (Precision, Recall, F1) -->
+    <div style="margin: 0.8rem 0; display: flex; flex-direction: column; gap: 8px;">
+      <!-- Precision -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #94A3B8; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">
+          <span>PRECISION</span>
+          <strong style="color: #F8FAFC;">{prec:.1f}%</strong>
+        </div>
+        <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+          <div style="width: {prec}%; height: 100%; background: {color}; border-radius: 3px;"></div>
+        </div>
+      </div>
+      
+      <!-- Recall -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #94A3B8; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">
+          <span>RECALL</span>
+          <strong style="color: #F8FAFC;">{rec:.1f}%</strong>
+        </div>
+        <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+          <div style="width: {rec}%; height: 100%; background: {color}; border-radius: 3px;"></div>
+        </div>
+      </div>
+
+      <!-- F1-Score -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #94A3B8; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">
+          <span>F1-SCORE</span>
+          <strong style="color: #F8FAFC;">{f1:.1f}%</strong>
+        </div>
+        <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+          <div style="width: {f1}%; height: 100%; background: {color}; border-radius: 3px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specs Footnote Row -->
+  <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 8px 10px; margin-top: 0.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center;">
+    <div><span style="font-size: 0.62rem; color: #64748B;">SPEED</span><br><strong style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00F0FF;">{speed}</strong></div>
+    <div><span style="font-size: 0.62rem; color: #64748B;">SIZE</span><br><strong style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #F8FAFC;">{params}</strong></div>
+    <div><span style="font-size: 0.62rem; color: #64748B;">90Q JPEG</span><br><strong style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #10B981;">{comp_acc}</strong></div>
+  </div>
 </div>"""
     return textwrap.dedent(html).strip()
 
 
-def plot_sop1_sop2_metrics():
+def render_comparative_breakdown_bars():
     """
-    Renders an interactive Plotly grouped bar chart answering SOP 1 & 2:
-    Classification Accuracy, Precision, Recall, and F1-Score across Basic CNN, ResNet50, and MobileNetV2.
+    Renders Embien-style horizontal comparative bar gauges for Speed, Memory, and Compression.
     """
-    import plotly.graph_objects as go
+    html = """<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0;">
+  <!-- Metric 1: Inference Speed (Lower is Faster) -->
+  <div style="background: #0B132B; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.1rem 1.4rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #F8FAFC;">INFERENCE LATENCY COMPARISON (MS)</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00F0FF;">LOWER IS FASTER</span>
+    </div>
     
-    models = ['Basic CNN (Baseline)', 'ResNet50 (Deep)', 'MobileNetV2 (Edge)']
-    accuracy = [94.2, 98.7, 98.4]
-    precision = [93.8, 98.9, 98.6]
-    recall = [94.6, 98.5, 98.2]
-    f1_score = [94.2, 98.7, 98.4]
-    
-    fig = go.Figure()
-    fig.add_trace(go.Bar(name='Accuracy (%)', x=models, y=accuracy, marker_color='#00F0FF'))
-    fig.add_trace(go.Bar(name='Precision (%)', x=models, y=precision, marker_color='#10B981'))
-    fig.add_trace(go.Bar(name='Recall (%)', x=models, y=recall, marker_color='#8B5CF6'))
-    fig.add_trace(go.Bar(name='F1-Score (%)', x=models, y=f1_score, marker_color='#F59E0B'))
-    
-    fig.update_layout(
-        barmode='group',
-        paper_bgcolor='#090E1A',
-        plot_bgcolor='#0D1627',
-        font=dict(family='JetBrains Mono, monospace', size=12, color='#F8FAFC'),
-        legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
-        margin=dict(l=20, r=20, t=40, b=20),
-        yaxis=dict(range=[85, 100], gridcolor='rgba(255,255,255,0.06)', title='Performance Percentage (%)'),
-        xaxis=dict(gridcolor='rgba(255,255,255,0.06)'),
-        height=340
-    )
-    return fig
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- MobileNetV2 -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 27%; height: 100%; background: #00F0FF; border-radius: 5px; box-shadow: 0 0 10px rgba(0,240,255,0.5);"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #00F0FF;">12.4 ms</span>
+      </div>
 
+      <!-- ResNet50 -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #94A3B8;">ResNet50</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 63%; height: 100%; background: #8B5CF6; border-radius: 5px;"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #8B5CF6;">28.6 ms</span>
+      </div>
 
-def plot_sop3_efficiency_scatter():
-    """
-    Renders an interactive scatter plot answering SOP 3:
-    Inference Latency (ms) vs. Computational Parameter Size (Millions).
-    """
-    import plotly.graph_objects as go
-    
-    models = ['MobileNetV2 (Recommended)', 'ResNet50 (Deep Benchmark)', 'Basic CNN (Baseline)']
-    latency = [12.4, 28.6, 45.2]
-    params = [3.4, 23.5, 2.1]
-    accuracy = [98.4, 98.7, 94.2]
-    colors = ['#00F0FF', '#8B5CF6', '#F59E0B']
-    
-    fig = go.Figure()
-    for m, l, p, acc, c in zip(models, latency, params, accuracy, colors):
-        fig.add_trace(go.Scatter(
-            x=[l], y=[p],
-            mode='markers+text',
-            name=m,
-            text=[f"<b>{m.split(' ')[0]}</b><br>{acc}% Acc"],
-            textposition='top center',
-            marker=dict(size=[26], color=c, line=dict(width=2, color='#FFFFFF')),
-            hovertemplate=f"<b>{m}</b><br>Latency: %{{x}} ms<br>Parameters: %{{y}}M<br>Accuracy: {acc}%<extra></extra>"
-        ))
-        
-    fig.update_layout(
-        paper_bgcolor='#090E1A',
-        plot_bgcolor='#0D1627',
-        font=dict(family='JetBrains Mono, monospace', size=11, color='#F8FAFC'),
-        showlegend=False,
-        margin=dict(l=20, r=20, t=30, b=20),
-        xaxis=dict(title='Inference Latency (ms) — Lower is Faster', gridcolor='rgba(255,255,255,0.06)', range=[5, 55]),
-        yaxis=dict(title='Model Parameters (Millions) — Lower is Lighter', gridcolor='rgba(255,255,255,0.06)', range=[0, 30]),
-        height=320
-    )
-    return fig
+      <!-- Basic CNN -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #64748B;">Basic CNN</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 100%; height: 100%; background: #F59E0B; border-radius: 5px;"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #F59E0B;">45.2 ms</span>
+      </div>
+    </div>
+  </div>
 
+  <!-- Metric 2: Parameter Size (Memory Footprint) -->
+  <div style="background: #0B132B; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.1rem 1.4rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #F8FAFC;">MODEL RESOURCE FOOTPRINT (MILLIONS OF PARAMS)</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #10B981;">LIGHTER IS BETTER FOR MOBILE</span>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- MobileNetV2 -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 14%; height: 100%; background: #10B981; border-radius: 5px; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #10B981;">3.4 M</span>
+      </div>
 
-def plot_sop4_compression_resilience():
-    """
-    Renders an interactive bar chart answering SOP 4:
-    Classification accuracy comparison across Original High-Res vs. 90Q Heavily Compressed images.
-    """
-    import plotly.graph_objects as go
-    
-    models = ['Basic CNN', 'ResNet50', 'MobileNetV2']
-    original_acc = [96.1, 99.2, 99.0]
-    compressed_acc = [92.3, 98.2, 97.8]
-    
-    fig = go.Figure()
-    fig.add_trace(go.Bar(name='Original High-Resolution (4.1)', x=models, y=original_acc, marker_color='#10B981'))
-    fig.add_trace(go.Bar(name='JPEG Compressed (90Q) (4.2)', x=models, y=compressed_acc, marker_color='#F87171'))
-    
-    fig.update_layout(
-        barmode='group',
-        paper_bgcolor='#090E1A',
-        plot_bgcolor='#0D1627',
-        font=dict(family='JetBrains Mono, monospace', size=12, color='#F8FAFC'),
-        legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
-        margin=dict(l=20, r=20, t=40, b=20),
-        yaxis=dict(range=[85, 100], gridcolor='rgba(255,255,255,0.06)', title='Accuracy (%)'),
-        xaxis=dict(gridcolor='rgba(255,255,255,0.06)'),
-        height=300
-    )
-    return fig
+      <!-- Basic CNN -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #64748B;">Basic CNN</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 9%; height: 100%; background: #F59E0B; border-radius: 5px;"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #F59E0B;">2.1 M</span>
+      </div>
+
+      <!-- ResNet50 -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 110px; font-size: 0.78rem; color: #94A3B8;">ResNet50</span>
+        <div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+          <div style="width: 100%; height: 100%; background: #8B5CF6; border-radius: 5px;"></div>
+        </div>
+        <span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #8B5CF6;">23.5 M</span>
+      </div>
+    </div>
+  </div>
+</div>"""
+    return textwrap.dedent(html).strip()
 
 
 def executive_sop5_recommendation_card():
     """
     Renders the formal thesis recommendation card answering SOP 5 for Midsayap local merchants.
     """
-    html = """<div style="background: linear-gradient(135deg, rgba(0,240,255,0.06) 0%, rgba(139,92,246,0.06) 100%); border: 1.5px solid rgba(0,240,255,0.4); border-left: 5px solid #00F0FF; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;">
+    html = """<div style="background: linear-gradient(135deg, rgba(0,240,255,0.08) 0%, rgba(139,92,246,0.08) 100%); border: 1.5px solid rgba(0,240,255,0.4); border-left: 5px solid #00F0FF; border-radius: 16px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; box-shadow: 0 8px 32px rgba(0,240,255,0.1);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00F0FF; letter-spacing: 0.8px;">THESIS STATEMENT OF THE PROBLEM 5 (SOP 5) — OPTIMAL MODEL RECOMMENDATION</div>
-<span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;">MOBILENETV2 SELECTED</span>
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00F0FF; letter-spacing: 0.8px;">THESIS SOP 5 — OPTIMAL ARCHITECTURE CONCLUSION</div>
+<span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(0,240,255,0.3);">MOBILENETV2 SELECTED</span>
 </div>
-<div style="color: #F8FAFC; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.6rem;">
-<strong>Research Conclusion for Local Online Sellers in Midsayap, North Cotabato:</strong><br>
-While <strong>ResNet50</strong> achieved a marginally higher peak accuracy (<strong>98.7%</strong> vs. <strong>98.4%</strong>, a difference of only <strong>0.3%</strong>), <strong>MobileNetV2</strong> executes in only <strong>12.4 ms</strong> (2.3x faster than ResNet50 at 28.6 ms) and occupies only <strong>3.4M parameters</strong> (85.5% smaller memory footprint than ResNet50's 23.5M).
+<div style="color: #F8FAFC; font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.6rem;">
+<strong>Decision Rationale for Midsayap Online Sellers:</strong><br>
+While <strong>ResNet50</strong> scores marginally higher raw accuracy (<strong>98.7%</strong> vs. <strong>98.4%</strong>, a difference of only <strong>0.3%</strong>), <strong>MobileNetV2</strong> executes in only <strong>12.4 ms</strong> (2.3x faster than ResNet50 at 28.6 ms) and consumes only <strong>3.4M parameters</strong> (85.5% lighter than ResNet50's 23.5M).
 </div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #34D399; background: rgba(52,211,153,0.08); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(52,211,153,0.2);">
-Recommended Architecture: <strong>MobileNetV2</strong> provides the optimal Pareto balance for real-time mobile fraud detection in resource-constrained environments.
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #34D399; background: rgba(52,211,153,0.08); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(52,211,153,0.25);">
+Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for instant fraud detection on consumer smartphones.
 </div>
 </div>"""
     return textwrap.dedent(html).strip()
