@@ -1,1148 +1,263 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD ULTIMATE CYBER FORENSIC COMMAND CENTER CSS (v2.0)
+   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v3.0)
+   Sophos, Nexora, Nightfall & SOC Command Center Architecture
    ============================================================ */
 
-/* 1. Google Fonts: JetBrains Mono (Data/Tech), Orbitron / Rajdhani / Spectral (Headers), Inter (Body) */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap');
 
-/* 2. Cyber Surface System & Global Theme */
+/* Global Surface & Canvas */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background-color: #04070D !important;
+    background-color: #070A11 !important;
     color: #E2E8F0 !important;
 }
 
 .stApp {
-    background-color: #04070D !important;
+    background-color: #070A11 !important;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 10% 30%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 70%, rgba(201, 161, 95, 0.08) 0%, transparent 40%),
-        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px) !important;
-    background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px !important;
+        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 0% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 100% 70%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px !important;
     background-position: center, center, center, -1px -1px, -1px -1px !important;
     background-attachment: fixed !important;
 }
 
-/* Cyber Noise Scanline Texture */
-.stApp::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 999999;
-    opacity: 0.025;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15),
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-}
-
-/* Custom Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #04070D;
+    background: #070A11;
 }
 ::-webkit-scrollbar-thumb {
     background: #1E293B;
     border-radius: 3px;
-    border: 1px solid rgba(0, 240, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #8B5CF6;
-    box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+    background: #00F0FF;
 }
 
-/* Typography Hierarchy */
-.serif-header {
-    font-family: 'Rajdhani', 'Spectral', sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase;
-}
-
-.mono-readout {
-    font-family: 'JetBrains Mono', monospace !important;
-}
-
-/* STREAMLIT HEADER OVERRIDES */
+/* Streamlit Header Override */
 header[data-testid="stHeader"] {
     background: transparent !important;
     z-index: 99990 !important;
 }
 
-button[data-testid="stSidebarCollapsedControl"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="collapsedControl"] {
-    display: inline-flex !important;
-    position: fixed !important;
-    top: 0.65rem !important;
-    left: 0.65rem !important;
-    width: 2.25rem !important;
-    height: 2.25rem !important;
-    z-index: 1000000 !important;
-}
-
-[data-testid="stSidebarCollapseButton"],
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button {
-    display: none !important;
-}
-
-.forgeguard-sidebar-launcher {
-    position: fixed !important;
-    top: 0.7rem !important;
-    left: 0.7rem !important;
-    z-index: 1000001 !important;
-    width: 2.35rem !important;
-    height: 2.35rem !important;
-    border: 1px solid #00F0FF !important;
-    border-radius: 8px !important;
-    background: #0A0F1D !important;
-    color: #00F0FF !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
-    transition: all 0.3s ease !important;
-}
-.forgeguard-sidebar-launcher:hover {
-    background: #111B2E !important;
-    border-color: #8B5CF6 !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6) !important;
-    transform: scale(1.05) !important;
-}
-
-/* SIDEBAR COMMAND PANEL */
+/* Sidebar: Sophos & Nightfall Navigation Rail */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #070B14 0%, #04070D 100%) !important;
-    border-right: 1px solid rgba(0, 240, 255, 0.15) !important;
-    box-shadow: 8px 0 35px rgba(0, 0, 0, 0.8) !important;
-}
-
-section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
-    padding-top: 1.5rem !important;
-}
-
-/* HIDE UNNECESSARY CHROME */
-#MainMenu, footer, 
-[data-testid="stToolbar"], 
-div[data-testid="stToast"], 
-div[class*="stToast"], 
-[data-testid="stDecoration"],
-[data-testid="stStatusWidget"],
-.stDeployButton {
-    display: none !important;
-}
-
-/* MAIN CONTAINER CONSTRAINT */
-.block-container {
+    background-color: #0A0E17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-top: 1rem !important;
-    padding-bottom: 3rem !important;
-    max-width: 1440px !important;
 }
 
-/* VIOLET / CYAN NEON SLIDERS */
-div[data-baseweb="slider"] [role="slider"] {
-    background-color: #00F0FF !important;
-    border-color: #00F0FF !important;
-    box-shadow: 0 0 16px rgba(0, 240, 255, 0.8) !important;
+section[data-testid="stSidebar"] > div:first-child {
+    padding-top: 0.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
 
-div[data-baseweb="slider"] div[style*="background"] {
-    background: linear-gradient(90deg, #8B5CF6, #00F0FF) !important;
-}
-
-div[data-baseweb="slider"] > div > div > div {
-    background: linear-gradient(90deg, #8B5CF6, #00F0FF) !important;
-}
-
-div[data-testid="stSliderTickBarMin"], div[data-testid="stSliderTickBarMax"],
-div[data-baseweb="slider"] + div {
-    color: #00F0FF !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
-}
-
-/* SIDEBAR RADIO SELECTION CARDS (STACKED HUD CARDS) */
-div[data-testid="stRadio"] div[role="radiogroup"] label {
-    background: #0A0F1D !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 14px 16px !important;
-    margin-bottom: 10px !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    position: relative !important;
-    overflow: hidden !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
-    border-color: rgba(0, 240, 255, 0.4) !important;
-    background: #111A2E !important;
-    box-shadow: 0 0 18px rgba(0, 240, 255, 0.15) !important;
-    transform: translateX(4px) !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(0, 240, 255, 0.15) 100%) !important;
-    border: 1.5px solid #00F0FF !important;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1) !important;
-}
-
-div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] span {
-    color: #00F0FF !important;
-    font-weight: 700 !important;
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5) !important;
-}
-
-/* ============================================================
-   CYBER FORENSIC HUD BRAND BAR & BANNER
-   ============================================================ */
-.app-header-compact {
-    background: linear-gradient(135deg, #090E1A 0%, #0D1627 100%);
-    border: 1px solid rgba(0, 240, 255, 0.25);
-    border-radius: 14px;
-    padding: 12px 16px;
-    margin-bottom: 0.6rem;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-}
-
-.badge-status-live {
+/* Sidebar Section Headers */
+.rail-section-header {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
     font-weight: 700;
-    color: #10B981;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    padding: 4px 10px;
-    border-radius: 20px;
-    display: inline-flex;
+    color: #64748B;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 1.25rem 0 0.5rem 0;
+    display: flex;
     align-items: center;
     gap: 6px;
-    letter-spacing: 0.5px;
 }
 
-.pulse-green {
-    width: 7px;
-    height: 7px;
-    background-color: #10B981;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #10B981;
-    animation: pulse-dot 1.8s infinite;
+/* Custom Radio Navigation Pills */
+div[data-testid="stRadio"] > div {
+    gap: 6px !important;
 }
 
-.telemetry-bar-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+div[data-testid="stRadio"] label {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 10px !important;
+    padding: 0.65rem 0.9rem !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    width: 100% !important;
 }
 
-.t-pill {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: #94A3B8;
+div[data-testid="stRadio"] label:hover {
+    background: rgba(0, 240, 255, 0.05) !important;
+    border-color: rgba(0, 240, 255, 0.3) !important;
+    transform: translateX(3px) !important;
+}
+
+div[data-testid="stRadio"] label[data-checked="true"],
+div[data-testid="stRadio"] label:has(input:checked) {
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%) !important;
+    border: 1px solid rgba(0, 240, 255, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(0, 240, 255, 0.12) !important;
+}
+
+div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #F8FAFC !important;
+}
+
+/* Sidebar Sliders */
+div[data-testid="stSlider"] label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: #94A3B8 !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Top Command Bar & Breadcrumbs */
+.top-command-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0B111E;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0.8rem 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.breadcrumb-trail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-family: 'Inter', sans-serif;
+    color: #64748B;
+}
+
+.breadcrumb-active {
+    color: #F8FAFC;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.telemetry-pill-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-telemetry-pill {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
-    padding: 4px 6px;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.t-label {
-    color: #64748B;
-    font-size: 0.62rem;
-    margin-right: 4px;
-}
-
-@media (max-width: 600px) {
-    .telemetry-bar-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5px;
-    }
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(135deg, #090E1A 0%, #0D1527 100%);
-    border: 1px solid rgba(0, 240, 255, 0.25);
-    border-radius: 16px;
-    padding: 1rem 2rem;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 240, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.navbar-brand::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, #00F0FF, #8B5CF6, transparent);
-}
-
-.brand-title {
-    font-family: 'Rajdhani', 'Spectral', sans-serif;
-    font-size: 1.85rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: #F8FAFC;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-transform: uppercase;
-}
-
-.brand-shield {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.8));
-    animation: shield-glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes shield-glow {
-    0% { filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5)); }
-    100% { filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.9)); }
-}
-
-.version-pill {
+    border-radius: 8px;
+    padding: 4px 10px;
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
     font-size: 0.72rem;
-    color: #00F0FF;
-    background: rgba(0, 240, 255, 0.12);
-    border: 1px solid rgba(0, 240, 255, 0.4);
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-left: 8px;
-    letter-spacing: 0.8px;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
 }
 
-.badge-gold {
-    background: rgba(201, 161, 95, 0.12);
-    color: #F59E0B;
-    border: 1px solid rgba(245, 158, 11, 0.4);
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
-}
-
-/* 3. Surface Depth System - Panels */
-.glass-panel {
-    background: #0F1419;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-}
-.glass-panel-inner {
-    background: #161D27;
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid rgba(255,255,255,0.03);
-}
-
-.eyebrow-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: #8B5CF6;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.eyebrow-gold {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: #C9A15F;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* 13. Tabs */
-.stTabs [data-baseweb="tab-list"] {
-    background: #0F1419 !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 16px !important;
-    padding: 8px !important;
-    gap: 8px !important;
-    backdrop-filter: blur(12px) !important;
-}
-.stTabs [data-baseweb="tab"] {
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 500 !important;
-    color: #94A3B8 !important;
-    border-radius: 10px !important;
-    padding: 10px 20px !important;
-    transition: all 0.3s ease !important;
-}
-.stTabs [data-baseweb="tab"]:hover {
-    background: rgba(139, 92, 246, 0.1) !important;
-    color: #F8FAFC !important;
-}
-.stTabs [aria-selected="true"] {
-    background: rgba(139, 92, 246, 0.15) !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2) !important;
-    border: 1px solid rgba(139, 92, 246, 0.3) !important;
-}
-.stTabs [data-baseweb="tab-border"], .stTabs [data-baseweb="tab-highlight"] {
-    display: none !important;
-}
-
-/* 11. Verdict Stamps */
-@keyframes stamp-slam {
-  0% { transform: rotate(var(--stamp-rotate, 2deg)) scale(2.5); opacity: 0; }
-  60% { transform: rotate(var(--stamp-rotate, 2deg)) scale(0.9); opacity: 1; }
-  80% { transform: rotate(var(--stamp-rotate, 2deg)) scale(1.05); }
-  100% { transform: rotate(var(--stamp-rotate, 2deg)) scale(1); }
-}
-
-.stamp-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 0;
-}
-.stamp-box {
-    display: inline-block;
-    padding: 1.5rem 2.5rem;
-    border-radius: 12px;
-    text-align: center;
-    animation: stamp-slam 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-.stamp-forged {
-    --stamp-rotate: -3deg;
-    border: 4px double #F87171;
-    background: rgba(248, 113, 113, 0.05);
-    color: #F87171;
-    box-shadow: inset 0 0 20px rgba(248, 113, 113, 0.1), 0 0 30px rgba(248, 113, 113, 0.15);
-}
-.stamp-auth {
-    --stamp-rotate: 2deg;
-    border: 4px double #34D399;
-    background: rgba(52, 211, 153, 0.05);
-    color: #34D399;
-    box-shadow: inset 0 0 20px rgba(52, 211, 153, 0.1), 0 0 30px rgba(52, 211, 153, 0.15);
-}
-.stamp-warning {
-    --stamp-rotate: -1deg;
-    border: 4px double #FBBF24;
-    background: rgba(251, 191, 36, 0.05);
-    color: #FBBF24;
-    box-shadow: inset 0 0 20px rgba(251, 191, 36, 0.1), 0 0 30px rgba(251, 191, 36, 0.15);
-}
-.stamp-title {
-    font-family: 'Spectral', serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-.stamp-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
-}
-.stamp-meta-bar {
-    background: #0F1419;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: #94A3B8;
-    margin-top: 1rem;
-}
-
-/* 10. Architecture Matrix Cards */
-.glass-panel-matrix {
-    background: #0F1419;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glass-panel-matrix:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
-}
-.glass-panel-matrix.active-model {
-    border-left: 3px solid #2DD4BF;
-}
-
-/* 4. Gold Shimmer Line */
-@keyframes gold-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.shimmer-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #C9A15F, transparent);
-  background-size: 200% 100%;
-  animation: gold-shimmer 3s ease-in-out infinite;
-  margin: 1rem 0;
-}
-
-/* 6. Confidence Gauge Styles */
-.confidence-gauge-svg {
-    filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.4));
-}
-.gauge-bg { stroke: #1E2733; }
-.gauge-val { stroke: #2DD4BF; stroke-linecap: round; }
-
-/* 9. Metric Cards */
-.metric-card {
-    background: #0F1419;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-top: 2px solid #8B5CF6;
-    border-radius: 16px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-}
-.metric-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-}
-.metric-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.8rem;
-    color: #F8FAFC;
-    font-weight: 700;
-}
-.metric-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: #94A3B8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Exhibit Frame */
-.exhibit-frame-wrapper {
-    background: #0F1419;
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 8px 32px rgba(0,0,0,0.4);
-}
-.exhibit-tag-header {
-    background: #161D27;
-    border: 1px solid #C9A15F;
-    color: #C9A15F;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 6px;
-}
-.exhibit-placeholder {
-    background: #161D27;
-    border: 1px dashed rgba(139, 92, 246, 0.3);
-    padding: 3rem;
-    text-align: center;
-    border-radius: 12px;
-}
-.exhibit-title { font-family: 'JetBrains Mono', monospace; color: #E2E8F0; }
-.exhibit-sub { color: #94A3B8; font-size: 0.85rem; }
-
-/* Custom Info Banner */
-.custom-info-banner {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 12px;
-    padding: 1rem;
-    color: #E2E8F0;
-    font-size: 0.9rem;
-}
-
-/* Images */
-div[data-testid="stImage"] img {
-    border-radius: 12px !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-/* Buttons */
-.stButton>button, div[data-testid="stDownloadButton"] button {
-    background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%) !important;
-    color: #FFF !important;
-    border: none !important;
-    border-radius: 12px !important;
-    padding: 0.8rem 1.5rem !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3) !important;
-}
-.stButton>button:hover, div[data-testid="stDownloadButton"] button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5) !important;
-}
-
-/* 16. Mobile Breakpoints */
-@media (max-width: 768px) {
-    .navbar-brand {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-    }
-    .metric-num { font-size: 1.5rem; }
-    .stamp-title { font-size: 1.5rem; }
-}
-
-.icon-inline {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-/* ============================================
-   PREMIUM COMPONENTS — ADDITIONAL STYLES
-   ============================================ */
-
-/* SVG CONFIDENCE GAUGE */
-.gauge-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1.5rem auto;
-    max-width: 220px;
-}
-
-.gauge-svg {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 0 12px rgba(0,0,0,0.5));
-}
-
-.gauge-arc {
-    transition: stroke-dasharray 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* HERO PANEL */
-.hero-panel {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-panel::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-/* INFO CHIPS (in hero banner) */
-.info-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: #94A3B8;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
-    padding: 6px 12px;
-    transition: all 0.2s ease;
-}
-
-.info-chip:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.1);
-}
-
-/* VERSION PILL */
-.version-pill {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    font-size: 0.7rem;
-    color: #8B5CF6;
-    background: rgba(139,92,246,0.12);
-    border: 1px solid rgba(139,92,246,0.3);
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-left: 8px;
-    letter-spacing: 0.5px;
-}
-
-/* BRAND SHIELD ICON WRAPPER */
-.brand-shield {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.brand-shield svg {
-    filter: drop-shadow(0 0 6px rgba(139,92,246,0.4));
-}
-
-/* STAMP RING DECORATION */
-.stamp-ring {
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 1px dashed currentColor;
-    border-radius: 18px;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-/* PULSING STATUS DOT (sidebar) */
-@keyframes pulse-dot {
-    0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(52,211,153,0.5); }
-    50% { opacity: 0.6; box-shadow: 0 0 4px rgba(52,211,153,0.2); }
-}
-
-/* ============================================================
-   RESPONSIVE MOBILE DESIGN SYSTEM (<= 768px and <= 480px)
-   ============================================================ */
-
-@media (max-width: 768px) {
-    /* 1. Container & Spacing */
-    .block-container {
-        padding-top: 0.5rem !important;
-        padding-bottom: 2rem !important;
-        padding-left: 0.75rem !important;
-        padding-right: 0.75rem !important;
-    }
-    
-    /* 2. Top Header Brand Bar */
-    .navbar-brand {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        gap: 8px !important;
-        padding: 12px 14px !important;
-        margin-bottom: 0.75rem !important;
-    }
-    .brand-title {
-        font-size: 1.35rem !important;
-    }
-    
-    /* 3. Hero Dashboard Banner */
-    .glass-panel {
-        padding: 1rem 1.15rem !important;
-        margin-bottom: 0.75rem !important;
-        border-radius: 14px !important;
-    }
-    .serif-header {
-        font-size: 1.2rem !important;
-        line-height: 1.3 !important;
-    }
-    .eyebrow-gold, .eyebrow-label {
-        font-size: 0.65rem !important;
-        letter-spacing: 1px !important;
-    }
-    
-    /* 4. Streamlit Grid Columns on Mobile: Make 4-metrics a sleek 2x2 grid */
-    div[data-testid="stHorizontalBlock"]:has(.telemetry-card) {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-        margin-bottom: 0.75rem !important;
-    }
-    div[data-testid="stHorizontalBlock"]:has(.telemetry-card) > div[data-testid="column"] {
-        width: 100% !important;
-        min-width: 0 !important;
-        flex: 1 1 auto !important;
-    }
-    .telemetry-card {
-        padding: 0.75rem 0.85rem !important;
-        min-height: 80px !important;
-        border-radius: 10px !important;
-    }
-    .telemetry-val {
-        font-size: 1.25rem !important;
-    }
-    .telemetry-sub {
-        font-size: 0.64rem !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    
-    /* 5. 1-Click Test Buttons: Make side-by-side on mobile */
-    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-    }
-    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) > div[data-testid="column"] {
-        width: 100% !important;
-        min-width: 0 !important;
-    }
-    button[kind="secondary"] {
-        padding: 0.6rem 0.5rem !important;
-        font-size: 0.72rem !important;
-        letter-spacing: 0px !important;
-        white-space: normal !important;
-        height: auto !important;
-        min-height: 44px !important;
-    }
-    
-    /* 6. Model Architecture Matrix Cards */
-    div[data-testid="stHorizontalBlock"]:has(.glass-panel-matrix) {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-    }
-    .glass-panel-matrix {
-        padding: 12px 14px !important;
-        margin-bottom: 0 !important;
-        border-radius: 12px !important;
-    }
-    
-    /* 7. Verdict Stamp & Circular Gauge */
-    .stamp-container {
-        margin: 1rem 0 !important;
-    }
-    .stamp-box {
-        padding: 12px 14px !important;
-        border-width: 2px !important;
-    }
-    .stamp-title {
-        font-size: 1.05rem !important;
-        letter-spacing: 1px !important;
-    }
-    .stamp-sub {
-        font-size: 0.7rem !important;
-        margin-top: 4px !important;
-    }
-    .stamp-meta-bar {
-        font-size: 0.68rem !important;
-        padding: 8px 10px !important;
-        flex-wrap: wrap !important;
-        gap: 6px !important;
-    }
-    .gauge-container {
-        max-width: 140px !important;
-    }
-    
-    /* 8. Tabs and File Uploader */
-    div[data-testid="stTabs"] button {
-        padding: 8px 12px !important;
-        font-size: 0.78rem !important;
-    }
-    div[data-testid="stFileUploader"] {
-        padding: 0 !important;
-    }
-    
-    /* 9. Diagnostic badge */
-    div[style*="AI SCANNER:"] {
-        font-size: 0.68rem !important;
-        padding: 4px 10px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Extra Small Screen optimizations */
-    .brand-title {
-        font-size: 1.2rem !important;
-    }
-    .badge-gold {
-        font-size: 0.62rem !important;
-        padding: 3px 8px !important;
-    }
-    .telemetry-val {
-        font-size: 1.15rem !important;
-    }
-    .stamp-title {
-        font-size: 0.95rem !important;
-    }
-    div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* COMPACT IMAGE CONTAINER & LIGHTBOX SIZING */
-div[data-testid="stImage"] img {
-    max-height: 280px !important;
-    object-fit: contain !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    background: #090E1A !important;
-    transition: transform 0.2s ease !important;
-}
-
-div[data-testid="stImage"] img:hover {
-    transform: scale(1.02) !important;
-    border-color: rgba(0, 240, 255, 0.4) !important;
-}
-
-/* SIDEBAR NAV SELECTOR (EMBIEN / WEBSTACKS CYBER DESIGN) */
-div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    background: #080D18 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 14px !important;
-    padding: 8px !important;
-    margin-bottom: 1.25rem !important;
-}
-
-div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label {
-    padding: 10px 14px !important;
-    border-radius: 10px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 0.88rem !important;
-    color: #94A3B8 !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-}
-
-div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label:hover {
-    background: rgba(0, 240, 255, 0.08) !important;
-    color: #F8FAFC !important;
-}
-
-div[data-testid="stSidebar"] div[data-testid="stRadio"]:first-of-type div[role="radiogroup"] label[data-checked="true"] {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
-    border: 1.5px solid #00F0FF !important;
-    color: #00F0FF !important;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) !important;
-}
-
-/* PREMIUM CYBER SCANNER SPINNER & STATUS WIDGET */
-[data-testid="stStatusWidget"], .stSpinner {
-    background: rgba(15, 23, 42, 0.85) !important;
-    border: 1.5px solid rgba(139, 92, 246, 0.5) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.35) !important;
-    color: #38BDF8 !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.5px !important;
-    padding: 0.75rem 1.25rem !important;
-    margin: 1rem 0 !important;
-}
-.stSpinner > div > div {
-    border-top-color: #00F0FF !important;
-    border-right-color: #8B5CF6 !important;
-    border-bottom-color: #38BDF8 !important;
-}
-
-/* ============================================================
-   LIVE SCANNER - PROCREATOR / WEBSTACKS SAAS UI UPGRADES
-   ============================================================ */
-
-/* Sleek File Uploader Dropzone */
-div[data-testid="stFileUploaderDropzone"] {
-    background: linear-gradient(145deg, rgba(15,20,31,0.8) 0%, rgba(6,9,16,0.9) 100%) !important;
-    border: 2px dashed rgba(0, 240, 255, 0.3) !important;
-    border-radius: 16px !important;
-    padding: 2.5rem 1.5rem !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5) !important;
-}
-
-div[data-testid="stFileUploaderDropzone"]:hover {
-    border-color: rgba(0, 240, 255, 0.8) !important;
-    background: linear-gradient(145deg, rgba(15,20,31,0.9) 0%, rgba(0, 240, 255, 0.05) 100%) !important;
-    box-shadow: 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0,0,0,0.5) !important;
-}
-
-div[data-testid="stFileUploaderDropzone"] section {
-    color: #F8FAFC !important;
-}
-div[data-testid="stFileUploaderDropzone"] svg {
-    stroke: #00F0FF !important;
-    fill: rgba(0, 240, 255, 0.1) !important;
-    width: 42px !important;
-    height: 42px !important;
-    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
-}
-
-div[data-testid="stFileDropzoneInstructions"] {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.95rem !important;
-    font-weight: 500 !important;
-    color: #94A3B8 !important;
-    letter-spacing: 0.5px !important;
-}
-
-div[data-testid="stFileDropzoneInstructions"] span:first-child {
-    font-family: 'JetBrains Mono', monospace !important;
-    color: #00F0FF !important;
-    font-weight: 600 !important;
-}
-
-/* Micro-Animated "TEST REAL GCASH" / "TEST FAKE RECEIPT" Buttons */
-div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample"]) button[data-testid="baseButton-secondary"] {
-    background: linear-gradient(180deg, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.95) 100%) !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+/* Quick Action Test Buttons */
+.stButton > button {
+    background: linear-gradient(180deg, #131B2E 0%, #0D1322 100%) !important;
+    border: 1px solid rgba(0, 240, 255, 0.3) !important;
     border-radius: 12px !important;
     color: #F8FAFC !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-weight: 600 !important;
     font-size: 0.85rem !important;
-    letter-spacing: 0.5px !important;
-    padding: 0.75rem 1rem !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    height: 100% !important;
-    position: relative;
-    overflow: hidden;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    padding: 0.75rem 1.25rem !important;
+    width: 100% !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample_auth"]) button[data-testid="baseButton-secondary"]:hover {
-    border-color: #34D399 !important;
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.25) !important;
-    color: #34D399 !important;
+.stButton > button:hover {
+    border-color: #00F0FF !important;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.35) !important;
     transform: translateY(-2px) !important;
+    color: #00F0FF !important;
 }
 
-div[data-testid="stHorizontalBlock"]:has(button[key*="btn_sample_forged"]) button[data-testid="baseButton-secondary"]:hover {
-    border-color: #F87171 !important;
-    box-shadow: 0 0 20px rgba(248, 113, 113, 0.25) !important;
-    color: #F87171 !important;
-    transform: translateY(-2px) !important;
+/* Cyber Upload Dropzone */
+div[data-testid="stFileUploader"] {
+    background: #0B111E !important;
+    border: 1.5px dashed rgba(0, 240, 255, 0.35) !important;
+    border-radius: 14px !important;
+    padding: 1.25rem !important;
+    transition: all 0.3s ease !important;
 }
 
-/* Visualization Image Cards (SaaS Style) */
+div[data-testid="stFileUploader"]:hover {
+    border-color: #00F0FF !important;
+    box-shadow: inset 0 0 24px rgba(0, 240, 255, 0.08), 0 0 16px rgba(0, 240, 255, 0.15) !important;
+}
+
+/* Streamlit Tabs Override (Sophos & Nexora Style) */
+div[data-baseweb="tab-list"] {
+    background: #0A0E17 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 0.8rem !important;
+}
+
+div[data-baseweb="tab"] {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #94A3B8 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    padding: 6px 14px !important;
+    transition: all 0.2s ease !important;
+}
+
+div[data-baseweb="tab"][aria-selected="true"] {
+    background: #1E293B !important;
+    color: #00F0FF !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Exhibit Visual Card Wrapper */
 .visual-card-wrapper {
-    background: #0B132B;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #0B111E;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 12px;
-    height: 100%;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.visual-card-wrapper:hover {
-    transform: translateY(-4px);
-    border-color: rgba(139, 92, 246, 0.4);
-    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+    padding: 0.9rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .visual-card-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.visual-card-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-}
-
-.visual-card-title {
+/* Section Eyebrow Labels */
+.eyebrow-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    color: #00F0FF;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
-
-/* Quant Table Metrics (SaaS Data Cards) */
-.saas-metric-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 1.5rem;
-}
-
-@media (max-width: 768px) {
-    .saas-metric-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.saas-metric-card {
-    background: linear-gradient(180deg, rgba(30,41,59,0.5) 0%, rgba(15,23,42,0.8) 100%);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px;
-    padding: 16px 12px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.saas-metric-card:hover {
-    border-color: rgba(255,255,255,0.15);
-    background: linear-gradient(180deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.9) 100%);
-    transform: translateY(-2px);
-}
-
-.saas-metric-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 600;
-    color: #94A3B8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-}
-
-.saas-metric-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-/* Explainable AI Glow Box */
-.xai-glow-box {
-    background: linear-gradient(145deg, rgba(139,92,246,0.08) 0%, rgba(15,23,42,0.5) 100%);
-    border: 1px solid rgba(139,92,246,0.25);
-    border-left: 3px solid #8B5CF6;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.xai-glow-box::before {
-    content: '';
-    position: absolute;
-    top: -50px; left: -50px; width: 100px; height: 100px;
-    background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
 </style>
 """

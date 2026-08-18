@@ -503,9 +503,16 @@ except Exception:
 # Import premium UI components
 try:
     from premium_components import (
-        svg_radial_dial, svg_confidence_gauge, premium_verdict_stamp,
-        premium_header_bar, render_saas_model_card, render_comparative_breakdown_bars,
-        executive_sop5_recommendation_card, render_soc_incident_panel
+        render_sophos_brand_sidebar,
+        render_investigator_profile_card,
+        render_top_command_bar,
+        render_exhibit_metadata_bar,
+        render_soc_incident_panel,
+        render_sophos_benchmark_summary_tiles,
+        render_saas_model_card,
+        render_comparative_breakdown_bars,
+        executive_sop5_recommendation_card,
+        svg_radial_dial
     )
 except Exception:
     pass
@@ -525,30 +532,29 @@ SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24
 # STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
 # ============================================================
 with st.sidebar:
-    st.markdown("<div class='eyebrow-gold'>SYSTEM NAVIGATION</div>", unsafe_allow_html=True)
+    st.markdown(render_sophos_brand_sidebar(), unsafe_allow_html=True)
+    
+    st.markdown("<div class='rail-section-header'>FORENSIC OPERATIONS</div>", unsafe_allow_html=True)
     app_mode = st.radio(
-        "System Navigation",
-        options=["Live Scanner", "Model Comparison"],
+        "Navigation",
+        options=["Live Threat Scanner", "Model Benchmark Suite"],
         index=0,
         key="sidebar_app_mode",
         label_visibility="collapsed"
     )
     
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
-    st.markdown("<div class='eyebrow-gold'>FORENSIC ENGINE CONFIG</div>", unsafe_allow_html=True)
-    
-    st.markdown("<div class='eyebrow-label'>ACTIVE ARCHITECTURE</div>", unsafe_allow_html=True)
+    st.markdown("<div class='rail-section-header'>NEURAL ENGINE</div>", unsafe_allow_html=True)
     model_options = [
-        "MobileNetV2 (3.4M Params) — Recommended",
-        "ResNet50 (23.5M Params) — Deep Benchmark",
-        "Basic CNN (2.1M Params) — Baseline"
+        "MobileNetV2 (3.4M) — Recommended",
+        "ResNet50 (23.5M) — Deep Benchmark",
+        "Basic CNN (2.1M) — Baseline"
     ]
     model_choice = st.radio(
-        "Active architecture",
+        "Model",
         options=model_options,
         index=0,
         key="model_architecture",
-        help="Selects which deep learning CNN architecture performs live inference. MobileNetV2 is recommended for fast edge devices."
+        label_visibility="collapsed"
     )
     
     selected_model_option = st.session_state.get("model_architecture", model_choice)
@@ -562,9 +568,7 @@ with st.sidebar:
         model_key = "basic_cnn"
         model_display_name = "Basic CNN"
 
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1rem 0;'>", unsafe_allow_html=True)
-    st.markdown("<div class='eyebrow-gold'>FORENSIC CALIBRATION</div>", unsafe_allow_html=True)
-    
+    st.markdown("<div class='rail-section-header'>CALIBRATION (ELA)</div>", unsafe_allow_html=True)
     ela_quality = st.slider(
         "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
         help="Controls ELA compression differential sensitivity (default: 90Q)."
@@ -574,34 +578,16 @@ with st.sidebar:
         help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
     )
     
-    st.markdown(f"""
-    <div style="background: #080D18; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #94A3B8; line-height: 1.6; margin-top: 1.2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);" class="mono-readout">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-            <span style="width: 8px; height: 8px; border-radius: 50%; background: #34D399; display: inline-block; animation: pulse-dot 2s ease-in-out infinite; box-shadow: 0 0 8px rgba(52,211,153,0.5);"></span>
-            <strong style="color: #34D399; letter-spacing: 0.5px;">SYSTEM ONLINE</strong>
-        </div>
-        <span style="color: #64748B;">Active Engine:</span> <strong style="color: #00F0FF;">{model_display_name}</strong><br>
-        <span style="color: #64748B;">ELA Pipeline:</span> <strong style="color: #10B981;">Operational</strong>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(render_investigator_profile_card(), unsafe_allow_html=True)
 
 # ============================================================
-# COMPACT 1-PAGE APP HEADER & TELEMETRY
+# TOP COMMAND BAR & GLOBAL TELEMETRY
 # ============================================================
-try:
-    _header_html = premium_header_bar(SVG_SHIELD)
-except Exception:
-    _header_html = f"""
-    <div class="app-header-compact">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 800; font-size: 1.35rem; color: #F8FAFC;">{SVG_SHIELD} FORGEGUARD</div>
-            <span class="badge-status-live"><span class="pulse-green"></span> 98.4% ACC</span>
-        </div>
-    </div>
-    """
-st.markdown(_header_html, unsafe_allow_html=True)
+breadcrumb_label = "LIVE THREAT SCANNER" if "Live" in app_mode else "MODEL BENCHMARK SUITE"
+latency_val = 12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2)
+st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
 
-if app_mode == "Live Scanner":
+if "Live" in app_mode:
     # ============================================================
     # PAGE 1: LIVE FORENSIC SCANNER (PRACTICAL SYSTEM INTERFACE)
     # ============================================================
@@ -778,10 +764,16 @@ if app_mode == "Live Scanner":
             overlay = Image.blend(pil_img, heatmap, alpha=0.42)
             
             with col_lens:
-                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>FORENSIC IMAGE WORKBENCH</div>", unsafe_allow_html=True)
-                vtab_orig, vtab_ela, vtab_heat = st.tabs(["ORIGINAL", "ELA MATRIX", "HEATMAP OVERLAY"])
+                st.markdown("<div class='eyebrow-label' style='margin-bottom: 8px;'>FORENSIC EXHIBIT CANVAS</div>", unsafe_allow_html=True)
+                import hashlib
+                sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
+                res_str = f"{pil_img.width}x{pil_img.height}"
+                sample_label = active_sample_name or "EXHIBIT_EVIDENCE.JPG"
+                st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
+                
+                vtab_orig, vtab_ela, vtab_heat = st.tabs(["RAW RECEIPT", "ELA MATRIX", "HEATMAP OVERLAY"])
                 with vtab_orig:
-                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>RAW RECEIPT EVIDENCE</div></div>", unsafe_allow_html=True)
+                    st.markdown("<div class='visual-card-wrapper'><div class='visual-card-header'><div class='visual-card-dot' style='background: #94A3B8;'></div><div class='visual-card-title' style='color: #94A3B8;'>PRIMARY EVIDENCE EXHIBIT</div></div>", unsafe_allow_html=True)
                     st.image(pil_img, use_container_width=True)
                     st.markdown("</div>", unsafe_allow_html=True)
                 with vtab_ela:
@@ -816,9 +808,8 @@ else:
     # ============================================================
     # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
     # ============================================================
-    st.markdown("<div class='eyebrow-gold'>NEURAL BENCHMARK SUITE</div>", unsafe_allow_html=True)
-    st.markdown("<h3 style='font-family: \"Inter\", sans-serif; font-weight: 800; font-size: 1.45rem; color: #F8FAFC; margin-bottom: 0.35rem;'>CNN ARCHITECTURE PERFORMANCE COMPARISON</h3>", unsafe_allow_html=True)
-    st.markdown("<div style='color: #94A3B8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;'>Head-to-head empirical evaluation across 3 neural architectures trained on ELA-transformed GCash & Maya receipts.</div>", unsafe_allow_html=True)
+    st.markdown(render_sophos_benchmark_summary_tiles(), unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-label' style='margin: 1rem 0 0.6rem 0;'>HEAD-TO-HEAD ARCHITECTURE BENCHMARK MATRIX</div>", unsafe_allow_html=True)
 
     # 1. 3-Column Side-by-Side SaaS Model Benchmark Cards
     col_mnet, col_resnet, col_bcnn = st.columns(3)

@@ -1,116 +1,230 @@
+# -*- coding: utf-8 -*-
 """
-ForgeGuard Premium UI Components — SaaS / Embien / Webstacks UI Architecture
-===========================================================================
-Pure CSS/SVG components inspired by SaaS Visual Hierarchy & Embien Design System.
-Zero external library dependencies for bulletproof rendering on Streamlit Cloud.
+ForgeGuard Enterprise Forensic Command Center Components
+Designed with Sophos, Nexora, Nightfall & SOC Command Center UI architectures.
 """
 
+import math
 
-def svg_radial_dial(pct, color="#00F0FF", label="ACCURACY", size=130):
+def render_sophos_brand_sidebar():
     """
-    Renders an Embien/Webstacks-style SVG dual-ring radial dial with glow.
+Renders the Sophos/Nightfall-style Brand Header in the left navigation rail.
+"""
+    return """<div style="padding-bottom: 0.8rem; margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+<div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #00F0FF 0%, #8B5CF6 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,240,255,0.4);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#070A11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+</svg>
+</div>
+<div>
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.25rem; font-weight: 800; color: #F8FAFC; letter-spacing: 1px; line-height: 1;">FORGEGUARD</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #00F0FF; letter-spacing: 0.5px;">MOBILE FORENSICS v2.4</div>
+</div>
+</div>
+</div>"""
+
+
+def render_investigator_profile_card():
     """
-    r = 48
-    circumference = 2 * 3.14159265 * r  # ~301.6
+Renders the Sophos-style Investigator Profile Card in the sidebar footer.
+"""
+    return """<div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; margin-top: 1.5rem;">
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+<div style="width: 30px; height: 30px; border-radius: 50%; background: #1E293B; border: 1px solid #00F0FF; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #00F0FF; font-weight: 700;">
+BS
+</div>
+<div>
+<div style="font-size: 0.78rem; font-weight: 700; color: #F8FAFC;">Rogie B. & Daniela U.</div>
+<div style="font-size: 0.65rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">NDMC CITE • BSCS-4</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: #10B981; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6px;">
+<span style="display: flex; align-items: center; gap: 4px;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+SYSTEM READY
+</span>
+<span style="color: #94A3B8;">3 CNNs ACTIVE</span>
+</div>
+</div>"""
+
+
+def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, model_name="MobileNetV2"):
+    """
+Renders the SOC Command Center Top Bar with breadcrumbs and telemetry pills.
+"""
+    return f"""<div class="top-command-bar">
+<div class="breadcrumb-trail">
+<span>FORGEGUARD</span>
+<span>/</span>
+<span>EVIDENCE TRIAGE</span>
+<span>/</span>
+<span class="breadcrumb-active">{breadcrumb_text}</span>
+</div>
+<div class="telemetry-pill-group">
+<div class="top-telemetry-pill">
+<span style="color: #64748B;">SPEED:</span> <strong style="color: #00F0FF;">{latency_ms:.1f}ms</strong>
+</div>
+<div class="top-telemetry-pill">
+<span style="color: #64748B;">GLOBAL ACC:</span> <strong style="color: #10B981;">{accuracy_pct:.1f}%</strong>
+</div>
+<div class="top-telemetry-pill">
+<span style="color: #64748B;">ENGINE:</span> <strong style="color: #8B5CF6;">{model_name}</strong>
+</div>
+</div>
+</div>"""
+
+
+def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
+    """
+Renders forensic exhibit chain-of-custody metadata.
+"""
+    return f"""<div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 12px; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #94A3B8;">
+<div>EXHIBIT: <span style="color: #F8FAFC; font-weight: 600;">{filename}</span></div>
+<div>RES: <span style="color: #00F0FF;">{resolution}</span></div>
+<div>HASH: <span style="color: #A78BFA;">{sha256_hash}</span></div>
+</div>"""
+
+
+def render_soc_incident_panel(verdict_text, is_forged, confidence, model_name, latency_ms, ela_mean, ela_var, ela_max, gemini_analysis=None):
+    """
+Renders a unified SOC / Nexora / Sophos Threat Analysis & Forensic Incident Console.
+"""
+    status_color = "#F87171" if is_forged else "#34D399"
+    status_glow = "rgba(248, 113, 113, 0.25)" if is_forged else "rgba(52, 211, 153, 0.25)"
+    status_border = "rgba(248, 113, 113, 0.4)" if is_forged else "rgba(52, 211, 153, 0.4)"
+    severity_tag = "CRITICAL: TAMPERED ARTIFACT" if is_forged else "SECURE: ZERO TAMPERING"
+    verdict_title = "DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED"
+    sub_desc = "Compression rate disparity & synthetic splicing detected in transaction fields." if is_forged else "Pixel noise gradient is uniform across all metadata and amount regions."
+    
+    pct = confidence * 100.0
+    r = 44
+    circumference = 2 * 3.14159265 * r
     filled = circumference * (min(100.0, max(0.0, pct)) / 100.0)
     gap = circumference - filled
-    color_clean = color.replace('#', '')
     
-    return f"""<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0.4rem 0;">
+    splicing_pct = min(98, max(8, int((ela_var / 400.0) * 100))) if is_forged else 4
+    compression_pct = min(95, max(12, int((ela_mean / 15.0) * 100))) if is_forged else 9
+    
+    analysis_block = ""
+    if gemini_analysis:
+        analysis_block = f"""
+<div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 12px 14px; margin-top: 12px;">
+<div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #A78BFA; font-weight: 700;">EXPLAINABLE AI DIAGNOSTICS</span>
+</div>
+<div style="font-size: 0.8rem; color: #E2E8F0; line-height: 1.5;">{gemini_analysis}</div>
+</div>"""
+
+    return f"""<div style="background: #0B111E; border: 1px solid {status_border}; border-radius: 14px; padding: 1.25rem; box-shadow: 0 10px 40px {status_glow};">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<div style="display: flex; align-items: center; gap: 8px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: {status_color}; box-shadow: 0 0 10px {status_color}; display: inline-block;"></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: {status_color}; letter-spacing: 1px;">{severity_tag}</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94A3B8; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 6px;">{model_name} • {latency_ms:.1f}ms</span>
+</div>
+
+<div style="font-family: 'Inter', sans-serif; font-size: 1.35rem; font-weight: 800; color: #F8FAFC; letter-spacing: 0.5px; margin-bottom: 4px;">{verdict_title}</div>
+<div style="font-size: 0.82rem; color: #94A3B8; line-height: 1.4; margin-bottom: 14px;">{sub_desc}</div>
+
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; align-items: center; background: rgba(6,9,16,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<svg width="95" height="95" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+<circle cx="50" cy="50" r="{r}" fill="none" stroke="{status_color}" stroke-width="8" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+<text x="50" y="48" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="800">{pct:.1f}%</text>
+<text x="50" y="62" text-anchor="middle" fill="{status_color}" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" letter-spacing="1">CERTAINTY</text>
+</svg>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #94A3B8; margin-bottom: 2px;">
+<span>PIXEL NOISE VARIANCE</span>
+<strong style="color: {status_color};">{ela_var:.1f}</strong>
+</div>
+<div style="width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+<div style="width: {splicing_pct}%; height: 100%; background: {status_color}; border-radius: 3px;"></div>
+</div>
+</div>
+
+<div>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #94A3B8; margin-bottom: 2px;">
+<span>COMPRESSION DISPARITY</span>
+<strong style="color: #00F0FF;">{ela_mean:.1f}</strong>
+</div>
+<div style="width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+<div style="width: {compression_pct}%; height: 100%; background: #00F0FF; border-radius: 3px;"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center;">
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 8px;">
+<div style="font-size: 0.65rem; color: #64748B; font-family: 'Inter', sans-serif;">PEAK PIXEL</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: #A78BFA;">{ela_max:.0f}</div>
+</div>
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 8px;">
+<div style="font-size: 0.65rem; color: #64748B; font-family: 'Inter', sans-serif;">ENGINE SPEED</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: #34D399;">{latency_ms:.1f}ms</div>
+</div>
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 8px;">
+<div style="font-size: 0.65rem; color: #64748B; font-family: 'Inter', sans-serif;">PIPELINE</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: #00F0FF;">ELA+CNN</div>
+</div>
+</div>
+{analysis_block}
+</div>"""
+
+
+def render_sophos_benchmark_summary_tiles():
+    """
+Renders the Sophos-style 4 top metric tiles on Page 2 (Model Comparison).
+"""
+    return """<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.25rem;">
+<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px;">
+<div style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">TOP ACCURACY</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.45rem; font-weight: 800; color: #F8FAFC;">98.7%</div>
+<div style="font-size: 0.68rem; color: #8B5CF6; margin-top: 4px;">ResNet50 (Deep Benchmark)</div>
+</div>
+<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px;">
+<div style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">FASTEST INFERENCE</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.45rem; font-weight: 800; color: #00F0FF;">12.4ms</div>
+<div style="font-size: 0.68rem; color: #00F0FF; margin-top: 4px;">MobileNetV2 (2.3x Faster)</div>
+</div>
+<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px;">
+<div style="font-size: 0.72rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">LIGHTEST FOOTPRINT</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.45rem; font-weight: 800; color: #10B981;">3.4M</div>
+<div style="font-size: 0.68rem; color: #10B981; margin-top: 4px;">85.5% Lighter than ResNet</div>
+</div>
+<div style="background: #0B111E; border: 1px solid rgba(0,240,255,0.3); border-radius: 12px; padding: 14px; box-shadow: 0 0 20px rgba(0,240,255,0.1);">
+<div style="font-size: 0.72rem; color: #00F0FF; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">SOP 5 PARETO WINNER</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 800; color: #00F0FF;">MobileNetV2</div>
+<div style="font-size: 0.68rem; color: #F8FAFC; margin-top: 4px;">Optimal Smartphone Model</div>
+</div>
+</div>"""
+
+
+def svg_radial_dial(percent, color="#00F0FF", label="ACCURACY", size=120):
+    """
+Renders an SVG radial progress dial for benchmark cards.
+"""
+    r = 44
+    circumference = 2 * 3.14159265 * r
+    filled = circumference * (min(100.0, max(0.0, percent)) / 100.0)
+    gap = circumference - filled
+    
+    return f"""<div style="display: flex; justify-content: center; margin: 0.6rem 0;">
 <svg width="{size}" height="{size}" viewBox="0 0 120 120">
-<defs>
-<filter id="dialGlow_{color_clean}" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="3" result="blur"/>
-<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-</filter>
-</defs>
-<circle cx="60" cy="60" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
-<circle cx="60" cy="60" r="{r}" fill="none" stroke="{color}" stroke-width="7" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 60 60)" filter="url(#dialGlow_{color_clean})"/>
-<text x="60" y="58" text-anchor="middle" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="19" font-weight="700">{pct:.1f}%</text>
+<circle cx="60" cy="60" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+<circle cx="60" cy="60" r="{r}" fill="none" stroke="{color}" stroke-width="8" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+<text x="60" y="58" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="800">{percent:.1f}%</text>
 <text x="60" y="74" text-anchor="middle" fill="{color}" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" letter-spacing="1">{label}</text>
 </svg>
 </div>"""
-
-
-def svg_confidence_gauge(confidence_pct, verdict_color, verdict_label):
-    """
-    Renders the live scanner circular confidence gauge (speedometer style).
-    """
-    arc_length = 376.99
-    filled = arc_length * (confidence_pct / 100.0)
-    gap = arc_length - filled
-    glow_opacity = min(0.6, confidence_pct / 150.0)
-    
-    simple_label = "GENUINE" if "AUTH" in verdict_label.upper() else "EDITED / FAKE"
-    
-    return f"""<div class="gauge-container">
-<svg viewBox="0 0 200 200" class="gauge-svg">
-<defs>
-<filter id="gaugeGlow">
-<feGaussianBlur stdDeviation="4" result="blur"/>
-<feFlood flood-color="{verdict_color}" flood-opacity="{glow_opacity}"/>
-<feComposite in2="blur" operator="in"/>
-<feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-</filter>
-<linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" style="stop-color:{verdict_color};stop-opacity:0.4"/>
-<stop offset="100%" style="stop-color:{verdict_color};stop-opacity:1"/>
-</linearGradient>
-</defs>
-<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8" stroke-dasharray="{arc_length} {502.65 - arc_length}" stroke-dashoffset="-{502.65 * 0.125}" stroke-linecap="round" transform="rotate(0 100 100)"/>
-<circle cx="100" cy="100" r="80" fill="none" stroke="url(#gaugeGrad)" stroke-width="8" stroke-dasharray="{filled} {gap + (502.65 - arc_length)}" stroke-dashoffset="-{502.65 * 0.125}" stroke-linecap="round" filter="url(#gaugeGlow)" class="gauge-arc"/>
-<text x="100" y="92" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', monospace" font-size="28" font-weight="700">{confidence_pct:.1f}%</text>
-<text x="100" y="115" text-anchor="middle" fill="{verdict_color}" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="2" opacity="0.9">{simple_label}</text>
-</svg>
-</div>"""
-
-
-def premium_verdict_stamp(verdict_text, stamp_class, sub_reason, verdict_color, verdict_label, confidence, model_name, latency_ms):
-    """
-    Renders the stamp verdict with plain-English summary.
-    """
-    clean_verdict = "VERIFIED GENUINE" if "AUTH" in verdict_label.upper() else "EDITED / FAKE RECEIPT"
-    
-    return f"""<div class="stamp-container">
-<div class="stamp-box {stamp_class}">
-<div class="stamp-ring"></div>
-<div class="stamp-title">{verdict_text}</div>
-<div class="stamp-sub">{sub_reason}</div>
-</div>
-<div class="stamp-meta-bar">
-<span>Result: <strong style="color: {verdict_color};">{clean_verdict}</strong></span>
-<span>Certainty: <strong style="color: {verdict_color};">{confidence * 100:.1f}%</strong></span>
-<span>Model: <strong style="color: #F8FAFC;">{model_name}</strong></span>
-<span>Speed: <strong style="color: #2DD4BF;">{latency_ms:.1f} ms</strong></span>
-</div>
-</div>"""
-
-
-def premium_header_bar(svg_shield):
-    """
-    Renders a unified, sleek, 1-page compact mobile header with live telemetry pills.
-    """
-    return f"""<div class="app-header-compact">
-<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 8px;">
-<div style="display: flex; align-items: center; gap: 10px;">
-<div class="brand-shield">{svg_shield}</div>
-<div>
-<div style="font-family: 'Rajdhani', sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: 1px; color: #F8FAFC; line-height: 1;">FORGEGUARD</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; color: #00F0FF; letter-spacing: 0.5px;">GCASH & MAYA FRAUD DETECTOR</div>
-</div>
-</div>
-<div>
-<span class="badge-status-live"><span class="pulse-green"></span> 98.4% ACC</span>
-</div>
-</div>
-<div class="telemetry-bar-row">
-<div class="t-pill"><span class="t-label">SPEED</span> <strong style="color: #00F0FF;">12.4ms</strong></div>
-<div class="t-pill"><span class="t-label">ACCURACY</span> <strong style="color: #10B981;">98.4%</strong></div>
-<div class="t-pill"><span class="t-label">SENSITIVITY</span> <strong style="color: #8B5CF6;">90Q/15X</strong></div>
-<div class="t-pill"><span class="t-label">MODELS</span> <strong style="color: #F59E0B;">3 CNNs</strong></div>
-</div>
-</div>
-<div class="shimmer-line" style="margin-bottom: 0.8rem;"></div>"""
 
 
 def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, color="#00F0FF", is_recommended=False):
@@ -118,11 +232,11 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
     Renders a Webstacks / Dribbble SaaS Benchmark Card with SVG radial dial and mini bar meters.
     """
     r_val, g_val, b_val = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-    rec_badge = f'<span style="background:rgba({r_val},{g_val},{b_val},0.15);color:{color};font-family:\'JetBrains Mono\',monospace;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid rgba({r_val},{g_val},{b_val},0.3);">{tag}</span>'
+    rec_badge = f"""<span style="background:rgba({r_val},{g_val},{b_val},0.15);color:{color};font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid rgba({r_val},{g_val},{b_val},0.3);">{tag}</span>"""
     card_border = f"border: 1.5px solid {color}; box-shadow: 0 8px 32px rgba({r_val},{g_val},{b_val},0.15);" if is_recommended else "border: 1px solid rgba(255,255,255,0.08);"
     dial_html = svg_radial_dial(acc, color=color, label="ACCURACY", size=115)
     
-    return f"""<div style="background:#0B132B;border-radius:16px;padding:1.25rem;{card_border}display:flex;flex-direction:column;justify-content:space-between;min-height:380px;">
+    return f"""<div style="background:#0B111E;border-radius:14px;padding:1.25rem;{card_border}display:flex;flex-direction:column;justify-content:space-between;min-height:380px;">
 <div>
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
 <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;color:#F8FAFC;">{title}</span>
@@ -159,74 +273,79 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
 </div>
 </div>
 </div>
-<div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:8px 10px;margin-top:0.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center;">
-<div><span style="font-size:0.62rem;color:#64748B;">SPEED</span><br><strong style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#00F0FF;">{speed}</strong></div>
-<div><span style="font-size:0.62rem;color:#64748B;">SIZE</span><br><strong style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#F8FAFC;">{params}</strong></div>
-<div><span style="font-size:0.62rem;color:#64748B;">90Q JPEG</span><br><strong style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#10B981;">{comp_acc}</strong></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;text-align:center;">
+<div>
+<div style="font-size:0.65rem;color:#64748B;font-family:'JetBrains Mono',monospace;">LATENCY</div>
+<div style="font-size:0.9rem;font-weight:700;color:#F8FAFC;font-family:'JetBrains Mono',monospace;">{speed}</div>
+</div>
+<div>
+<div style="font-size:0.65rem;color:#64748B;font-family:'JetBrains Mono',monospace;">PARAMS</div>
+<div style="font-size:0.9rem;font-weight:700;color:#F8FAFC;font-family:'JetBrains Mono',monospace;">{params}</div>
+</div>
 </div>
 </div>"""
 
 
 def render_comparative_breakdown_bars():
     """
-    Renders Embien-style horizontal comparative bar gauges for Speed, Memory, and Compression.
-    """
-    return """<div style="display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;">
-<div style="background:#0B132B;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.1rem 1.4rem;">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-<span style="font-family:'Inter',sans-serif;font-size:0.92rem;font-weight:700;color:#F8FAFC;">INFERENCE LATENCY COMPARISON (MS)</span>
-<span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#00F0FF;">LOWER IS FASTER</span>
+Renders comparative latency and parameter footprint bars.
+"""
+    return """<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 1.25rem;">
+<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.1rem 1.4rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #F8FAFC;">INFERENCE LATENCY ON MOBILE CPU (LOWER IS BETTER)</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00F0FF;">MILLISECONDS</span>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;">
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#F8FAFC;font-weight:600;">MobileNetV2</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:27%;height:100%;background:#00F0FF;border-radius:5px;box-shadow:0 0 10px rgba(0,240,255,0.5);"></div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 27%; height: 100%; background: #00F0FF; border-radius: 5px; box-shadow: 0 0 10px rgba(0,240,255,0.5);"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#00F0FF;">12.4 ms</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #00F0FF;">12.4 ms</span>
 </div>
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#94A3B8;">ResNet50</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:63%;height:100%;background:#8B5CF6;border-radius:5px;"></div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #94A3B8;">ResNet50</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 63%; height: 100%; background: #8B5CF6; border-radius: 5px;"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#8B5CF6;">28.6 ms</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #8B5CF6;">28.6 ms</span>
 </div>
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#64748B;">Basic CNN</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:100%;height:100%;background:#F59E0B;border-radius:5px;"></div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #64748B;">Basic CNN</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 100%; height: 100%; background: #F59E0B; border-radius: 5px;"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#F59E0B;">45.2 ms</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #F59E0B;">45.2 ms</span>
 </div>
 </div>
 </div>
-<div style="background:#0B132B;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.1rem 1.4rem;">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-<span style="font-family:'Inter',sans-serif;font-size:0.92rem;font-weight:700;color:#F8FAFC;">MODEL RESOURCE FOOTPRINT (MILLIONS OF PARAMS)</span>
-<span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#10B981;">LIGHTER IS BETTER FOR MOBILE</span>
+<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.1rem 1.4rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #F8FAFC;">MODEL RESOURCE FOOTPRINT (MILLIONS OF PARAMS)</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #10B981;">LIGHTER IS BETTER FOR MOBILE</span>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;">
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#F8FAFC;font-weight:600;">MobileNetV2</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:14%;height:100%;background:#10B981;border-radius:5px;box-shadow:0 0 10px rgba(16,185,129,0.5);"></div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 14%; height: 100%; background: #10B981; border-radius: 5px; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#10B981;">3.4 M</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #10B981;">3.4 M</span>
 </div>
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#64748B;">Basic CNN</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:9%;height:100%;background:#F59E0B;border-radius:5px;"></div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #64748B;">Basic CNN</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 9%; height: 100%; background: #F59E0B; border-radius: 5px;"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#F59E0B;">2.1 M</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #F59E0B;">2.1 M</span>
 </div>
-<div style="display:flex;align-items:center;gap:12px;">
-<span style="width:110px;font-size:0.78rem;color:#94A3B8;">ResNet50</span>
-<div style="flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;">
-<div style="width:100%;height:100%;background:#8B5CF6;border-radius:5px;"></div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 110px; font-size: 0.78rem; color: #94A3B8;">ResNet50</span>
+<div style="flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden;">
+<div style="width: 100%; height: 100%; background: #8B5CF6; border-radius: 5px;"></div>
 </div>
-<span style="width:65px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:#8B5CF6;">23.5 M</span>
+<span style="width: 65px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #8B5CF6;">23.5 M</span>
 </div>
 </div>
 </div>
@@ -235,118 +354,18 @@ def render_comparative_breakdown_bars():
 
 def executive_sop5_recommendation_card():
     """
-    Renders the formal thesis recommendation card answering SOP 5 for Midsayap local merchants.
-    """
-    return """<div style="background:linear-gradient(135deg,rgba(0,240,255,0.08) 0%,rgba(139,92,246,0.08) 100%);border:1.5px solid rgba(0,240,255,0.4);border-left:5px solid #00F0FF;border-radius:16px;padding:1.25rem 1.5rem;margin-top:1.5rem;box-shadow:0 8px 32px rgba(0,240,255,0.1);">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-<div style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:800;color:#00F0FF;letter-spacing:0.8px;">THESIS SOP 5 — OPTIMAL ARCHITECTURE CONCLUSION</div>
-<span style="background:rgba(0,240,255,0.15);color:#00F0FF;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(0,240,255,0.3);">MOBILENETV2 SELECTED</span>
+Renders the formal thesis recommendation card answering SOP 5 for Midsayap local merchants.
+"""
+    return """<div style="background: linear-gradient(135deg, rgba(0,240,255,0.08) 0%, rgba(139,92,246,0.08) 100%); border: 1.5px solid rgba(0,240,255,0.4); border-left: 5px solid #00F0FF; border-radius: 14px; padding: 1.25rem 1.5rem; margin-top: 1.25rem; box-shadow: 0 8px 32px rgba(0,240,255,0.1);">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00F0FF; letter-spacing: 0.8px;">THESIS SOP 5 — OPTIMAL ARCHITECTURE CONCLUSION</div>
+<span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(0,240,255,0.3);">MOBILENETV2 SELECTED</span>
 </div>
-<div style="color:#F8FAFC;font-size:0.88rem;line-height:1.6;margin-bottom:0.6rem;">
+<div style="color: #F8FAFC; font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.6rem;">
 <strong>Decision Rationale for Midsayap Online Sellers:</strong><br>
 While <strong>ResNet50</strong> scores marginally higher raw accuracy (<strong>98.7%</strong> vs. <strong>98.4%</strong>, a difference of only <strong>0.3%</strong>), <strong>MobileNetV2</strong> executes in only <strong>12.4 ms</strong> (2.3x faster than ResNet50 at 28.6 ms) and consumes only <strong>3.4M parameters</strong> (85.5% lighter than ResNet50's 23.5M).
 </div>
-<div style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#34D399;background:rgba(52,211,153,0.08);padding:8px 12px;border-radius:8px;border:1px solid rgba(52,211,153,0.25);">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #34D399; background: rgba(52,211,153,0.08); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(52,211,153,0.25);">
 Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for instant fraud detection on consumer smartphones.
 </div>
 </div>"""
-
-
-def render_soc_incident_panel(verdict_text, is_forged, confidence, model_name, latency_ms, ela_mean, ela_var, ela_max, gemini_analysis=None):
-    """
-    Renders a unified SOC / Nexora / Sophos Threat Analysis & Forensic Incident Console.
-    Eliminates vertical fragmentation and choppy layouts with a cohesive single-surface cockpit.
-    """
-    status_color = "#F87171" if is_forged else "#34D399"
-    status_glow = "rgba(248, 113, 113, 0.25)" if is_forged else "rgba(52, 211, 153, 0.25)"
-    status_border = "rgba(248, 113, 113, 0.4)" if is_forged else "rgba(52, 211, 153, 0.4)"
-    severity_tag = "CRITICAL: TAMPERED ANOMALY" if is_forged else "SECURE: ZERO TAMPERING"
-    verdict_title = "DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED"
-    sub_desc = "Compression rate disparity and synthetic splicing detected in transaction fields." if is_forged else "Pixel noise gradient is uniform across all metadata and amount regions."
-    
-    pct = confidence * 100.0
-    r = 44
-    circumference = 2 * 3.14159265 * r
-    filled = circumference * (min(100.0, max(0.0, pct)) / 100.0)
-    gap = circumference - filled
-    
-    splicing_pct = min(98, max(8, int((ela_var / 400.0) * 100))) if is_forged else 4
-    compression_pct = min(95, max(12, int((ela_mean / 15.0) * 100))) if is_forged else 9
-    
-    analysis_block = ""
-    if gemini_analysis:
-        analysis_block = f"""
-<div style="background:rgba(15,23,42,0.8);border:1px solid rgba(139,92,246,0.3);border-radius:10px;padding:12px 14px;margin-top:12px;">
-<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-<span style="width:6px;height:6px;border-radius:50%;background:#8B5CF6;"></span>
-<span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#A78BFA;font-weight:700;">EXPLAINABLE AI DIAGNOSTICS</span>
-</div>
-<div style="font-size:0.8rem;color:#E2E8F0;line-height:1.5;">{gemini_analysis}</div>
-</div>"""
-
-    return f"""<div style="background:#0B132B;border:1px solid {status_border};border-radius:16px;padding:1.4rem;box-shadow:0 10px 40px {status_glow};">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-<div style="display:flex;align-items:center;gap:8px;">
-<span style="width:10px;height:10px;border-radius:50%;background:{status_color};box-shadow:0 0 10px {status_color};display:inline-block;"></span>
-<span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:{status_color};letter-spacing:1px;">{severity_tag}</span>
-</div>
-<span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#94A3B8;background:rgba(255,255,255,0.05);padding:3px 8px;border-radius:6px;">{model_name} • {latency_ms:.1f}ms</span>
-</div>
-
-<div style="font-family:'Inter',sans-serif;font-size:1.35rem;font-weight:800;color:#F8FAFC;letter-spacing:0.5px;margin-bottom:4px;">{verdict_title}</div>
-<div style="font-size:0.82rem;color:#94A3B8;line-height:1.4;margin-bottom:16px;">{sub_desc}</div>
-
-<div style="display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:rgba(6,9,16,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px;margin-bottom:14px;">
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-<svg width="100" height="100" viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
-<circle cx="50" cy="50" r="{r}" fill="none" stroke="{status_color}" stroke-width="8" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 50 50)"/>
-<text x="50" y="48" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono',monospace" font-size="16" font-weight="800">{pct:.1f}%</text>
-<text x="50" y="62" text-anchor="middle" fill="{status_color}" font-family="'JetBrains Mono',monospace" font-size="7.5" font-weight="700" letter-spacing="1">CERTAINTY</text>
-</svg>
-</div>
-
-<div style="display:flex;flex-direction:column;gap:8px;">
-<div>
-<div style="display:flex;justify-content:space-between;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:#94A3B8;margin-bottom:2px;">
-<span>PIXEL NOISE VARIANCE</span>
-<strong style="color:{status_color};">{ela_var:.1f}</strong>
-</div>
-<div style="width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
-<div style="width:{splicing_pct}%;height:100%;background:{status_color};border-radius:3px;"></div>
-</div>
-</div>
-
-<div>
-<div style="display:flex;justify-content:space-between;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:#94A3B8;margin-bottom:2px;">
-<span>COMPRESSION DISPARITY</span>
-<strong style="color:#00F0FF;">{ela_mean:.1f}</strong>
-</div>
-<div style="width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
-<div style="width:{compression_pct}%;height:100%;background:#00F0FF;border-radius:3px;"></div>
-</div>
-</div>
-</div>
-</div>
-
-<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;text-align:center;">
-<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
-<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">MAX VALUE</div>
-<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#A78BFA;">{ela_max:.0f}</div>
-</div>
-<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
-<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">ENGINE SPEED</div>
-<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#34D399;">{latency_ms:.1f}ms</div>
-</div>
-<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:8px;">
-<div style="font-size:0.65rem;color:#64748B;font-family:'Inter',sans-serif;">PIPELINE</div>
-<div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#00F0FF;">ELA+CNN</div>
-</div>
-</div>
-{analysis_block}
-</div>"""
-
-
-
-
-
