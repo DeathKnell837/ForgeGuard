@@ -55,12 +55,12 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
-   PERMANENT SIDEBAR RAIL (Sophos & Nightfall Style)
+   PERMANENT FLAT SIDEBAR RAIL (Sophos Inspired Flat Design)
    ============================================================ */
 section[data-testid="stSidebar"] {
-    background-color: #0A0E17 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding-top: 0.4rem !important;
+    background-color: #070A11 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding-top: 0.2rem !important;
     visibility: visible !important;
 }
 
@@ -106,55 +106,108 @@ button[data-testid="stSidebarCollapsedControl"] {
 
 section[data-testid="stSidebar"] > div:first-child {
     padding-top: 0.4rem !important;
-    padding-left: 0.9rem !important;
-    padding-right: 0.9rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
 }
 
+/* Section Header Labels — Small, Muted Monospace with Generous Whitespace Separation (no borders/lines) */
 .rail-section-header {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 700;
     color: #64748B;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin: 0.75rem 0 0.35rem 0;
+    margin-top: 22px !important;
+    margin-bottom: 8px !important;
+    padding-left: 0.6rem !important;
+    border: none !important;
+    background: transparent !important;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
+/* Flat Spacious Radio Buttons (Navigation & Model Selector) */
 div[data-testid="stRadio"] > div {
-    gap: 5px !important;
+    gap: 3px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
 }
 
+/* Hide default circular radio inputs for clean SaaS nav row appearance */
+div[data-testid="stRadio"] [data-testid="stRadioDot"],
+div[data-testid="stRadio"] input[type="radio"],
+div[data-testid="stRadio"] label > div:first-child:not([data-testid="stMarkdownContainer"]) {
+    display: none !important;
+}
+
+/* Inactive items: completely flat, generous padding, muted text, no borders */
 div[data-testid="stRadio"] label {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: transparent !important;
+    border: none !important;
     border-radius: 8px !important;
-    padding: 0.5rem 0.75rem !important;
-    transition: all 0.2s ease !important;
+    padding: 0.65rem 0.85rem !important;
+    margin: 0 !important;
+    transition: all 0.15s ease !important;
     cursor: pointer !important;
     width: 100% !important;
+    box-shadow: none !important;
 }
 
 div[data-testid="stRadio"] label:hover {
-    background: rgba(0, 240, 255, 0.05) !important;
-    border-color: rgba(0, 240, 255, 0.3) !important;
-    transform: translateX(2px) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
 }
 
+div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p {
+    color: #E2E8F0 !important;
+}
+
+/* Active / Selected item: filled violet-tinted rounded rect background, white text */
 div[data-testid="stRadio"] label[data-checked="true"],
 div[data-testid="stRadio"] label:has(input:checked) {
-    background: linear-gradient(90deg, rgba(0, 240, 255, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%) !important;
-    border: 1px solid rgba(0, 240, 255, 0.5) !important;
-    box-shadow: 0 2px 10px rgba(0, 240, 255, 0.12) !important;
+    background: rgba(139, 92, 246, 0.16) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.12) !important;
 }
 
 div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.8rem !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    color: #94A3B8 !important;
+    letter-spacing: 0.15px !important;
+    margin: 0 !important;
+    transition: color 0.15s ease !important;
+}
+
+div[data-testid="stRadio"] label[data-checked="true"] div[data-testid="stMarkdownContainer"] p,
+div[data-testid="stRadio"] label:has(input:checked) div[data-testid="stMarkdownContainer"] p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.82rem !important;
     font-weight: 600 !important;
-    color: #F8FAFC !important;
+    color: #FFFFFF !important;
+}
+
+/* Calibration Sliders — Flat, no box wrapper, sitting directly on sidebar surface */
+div[data-testid="stSlider"] {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 0.4rem 0.3rem 0.4rem !important;
+    box-shadow: none !important;
+}
+
+div[data-testid="stSlider"] label {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    color: #94A3B8 !important;
+    margin-bottom: 2px !important;
 }
 
 /* Top Command Bar */

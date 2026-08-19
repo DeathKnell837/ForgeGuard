@@ -5,38 +5,38 @@ Simultaneous 3-Exhibit Matrix + 3-Engine Real-Time Consensus
 """
 
 def render_sophos_brand_sidebar():
-    return """<div style="padding-bottom: 0.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
-<div style="display: flex; align-items: center; gap: 8px;">
-<div style="width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, #00F0FF 0%, #8B5CF6 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,240,255,0.4);">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#070A11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    return """<div style="padding: 0.4rem 0.5rem 0.8rem 0.5rem; margin-bottom: 0.4rem;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #00F0FF 0%, #8B5CF6 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(0,240,255,0.35);">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#070A11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
 </svg>
 </div>
 <div>
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; font-weight: 800; color: #F8FAFC; letter-spacing: 1px; line-height: 1;">FORGEGUARD</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #00F0FF; letter-spacing: 0.5px;">MOBILE FORENSICS v2.4</div>
+<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; font-weight: 800; color: #F8FAFC; letter-spacing: 0.8px; line-height: 1;">FORGEGUARD</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: #64748B; letter-spacing: 0.5px;">MOBILE FORENSICS v2.4</div>
 </div>
 </div>
 </div>"""
 
 
 def render_investigator_profile_card():
-    return """<div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px; margin-top: 1rem;">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-<div style="width: 26px; height: 26px; border-radius: 50%; background: #1E293B; border: 1px solid #00F0FF; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; color: #00F0FF; font-weight: 700;">
+    return """<div style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 1.5rem; padding-top: 1rem; padding-left: 0.25rem; padding-right: 0.25rem;">
+<div style="display: flex; align-items: center; gap: 9px; margin-bottom: 6px;">
+<div style="width: 26px; height: 26px; border-radius: 50%; background: #131B2E; border: 1px solid rgba(0,240,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: #00F0FF; font-weight: 700; font-family: 'Inter', sans-serif;">
 BS
 </div>
 <div>
-<div style="font-size: 0.72rem; font-weight: 700; color: #F8FAFC;">Rogie B. & Daniela U.</div>
+<div style="font-size: 0.74rem; font-weight: 700; color: #F8FAFC; font-family: 'Inter', sans-serif;">Rogie B. & Daniela U.</div>
 <div style="font-size: 0.6rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">NDMC CITE • BSCS-4</div>
 </div>
 </div>
-<div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #10B981; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 4px;">
-<span style="display: flex; align-items: center; gap: 4px;">
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #10B981; padding-top: 2px;">
+<span style="display: flex; align-items: center; gap: 5px;">
 <span style="width: 5px; height: 5px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
 SYSTEM ONLINE
 </span>
-<span style="color: #94A3B8;">3 CNNs ACTIVE</span>
+<span style="color: #64748B;">3 CNNs ACTIVE</span>
 </div>
 </div>"""
 
