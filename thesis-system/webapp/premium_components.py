@@ -356,6 +356,11 @@ Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for 
 
 def render_dashboard_kpi_row(total, authenticated, forged, avg_confidence):
     """Renders 4 SOC-style KPI stat cards in a horizontal grid."""
+    total = int(total or 0)
+    authenticated = int(authenticated or 0)
+    forged = int(forged or 0)
+    avg_confidence = float(avg_confidence or 0.0)
+
     # Compute deltas (session-based, show last scan change)
     def _delta_html(value, suffix="", is_pct=False):
         if value == 0:
@@ -416,6 +421,8 @@ def render_dashboard_kpi_row(total, authenticated, forged, avg_confidence):
 
 def render_dashboard_verdict_donut(authenticated, forged):
     """Renders SVG donut ring chart for Case Verdict Breakdown."""
+    authenticated = int(authenticated or 0)
+    forged = int(forged or 0)
     total = authenticated + forged
     if total == 0:
         return """<div class="dash-card-panel">
@@ -481,6 +488,8 @@ def render_dashboard_verdict_donut(authenticated, forged):
 
 def render_dashboard_flag_bars(flag_counts):
     """Renders horizontal bar breakdown for Flag Reason Distribution."""
+    if not flag_counts or not isinstance(flag_counts, dict):
+        flag_counts = {}
     total_flags = sum(flag_counts.values()) if flag_counts else 0
 
     if total_flags == 0:
@@ -501,7 +510,8 @@ def render_dashboard_flag_bars(flag_counts):
     }
 
     bars_html = ""
-    for label, count in flag_counts.items():
+    for label in ["High ELA Noise", "Low Model Confidence", "Metadata Anomaly", "Unanimous Forgery"]:
+        count = flag_counts.get(label, 0)
         pct = (count / total_flags * 100) if total_flags > 0 else 0
         color = bar_colors.get(label, "#8B5CF6")
         bars_html += f"""<div>
@@ -524,7 +534,7 @@ def render_dashboard_flag_bars(flag_counts):
 
 def render_dashboard_timeline(scan_log):
     """Renders scan activity timeline as a bar chart with session data."""
-    if not scan_log:
+    if not scan_log or not isinstance(scan_log, list):
         return """<div class="dash-timeline-card">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
 <div class="dash-section-title" style="margin-bottom: 0;">SCAN ACTIVITY TIMELINE</div>
@@ -540,7 +550,6 @@ def render_dashboard_timeline(scan_log):
     # Group scans into buckets (by scan index, show last 12)
     max_bars = 12
     recent = scan_log[-max_bars:]
-    max_count = 1  # each entry is 1 scan, but we show individual bars
 
     bars_html = ""
     labels_html = ""
@@ -548,13 +557,13 @@ def render_dashboard_timeline(scan_log):
         # Each scan is one bar
         is_forged = entry.get("verdict") == "FORGED"
         color = "#F87171" if is_forged else "#8B5CF6"
-        conf = entry.get("confidence", 95)
+        conf = float(entry.get("confidence", 95))
         height_pct = max(15, min(100, conf))  # height based on confidence
 
         # Extract short time label
         try:
             from datetime import datetime as _dt
-            t = _dt.fromisoformat(entry["time"])
+            t = _dt.fromisoformat(entry.get("time", ""))
             time_label = t.strftime("%H:%M")
         except Exception:
             time_label = f"#{i+1}"

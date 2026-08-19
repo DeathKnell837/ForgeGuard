@@ -425,30 +425,6 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([tx, ty - 15, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx - 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx + 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
-    # 11. SAWTOOTH TEAR LINE DIRECTLY AT BOTTOM OF WHITE CARD
-    tear_y = card_bottom
-    saw_w, saw_h = 26, 20
-    for x_pos in range(card_x1, card_x2, saw_w):
-        poly = [
-            (x_pos, tear_y),
-            (x_pos + saw_w // 2, tear_y + saw_h),
-            (x_pos + saw_w, tear_y)
-        ]
-        draw.polygon(poly, fill=GCASH_BLUE)
-        
-    # 12. DOWNLOAD PILL BUTTON TIGHTLY BELOW SAWTOOTH LINE
-    btn_y = card_bottom + 85
-    btn_w, btn_h = 360, 75
-    btn_x1 = (W - btn_w) // 2
-    btn_x2 = btn_x1 + btn_w
-    draw.rounded_rectangle([btn_x1, btn_y, btn_x2, btn_y + btn_h], radius=38, outline=GCASH_WHITE, width=3)
-    
-    # Download tray icon
-    tx = btn_x1 + 65
-    ty = btn_y + 38
-    draw.line([tx, ty - 15, tx, ty + 8], fill=GCASH_WHITE, width=4)
-    draw.line([tx - 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
-    draw.line([tx + 10, ty - 2, tx, ty + 8], fill=GCASH_WHITE, width=4)
     draw.line([tx - 14, ty + 16, tx + 14, ty + 16], fill=GCASH_WHITE, width=4)
     
     draw.text((btn_x1 + 105, btn_y + 18), "Download", fill=GCASH_WHITE, font=font_download)
@@ -463,7 +439,7 @@ def draw_express_send_receipt(receipt_data, add_artifacts=False, artifact_type=N
     draw.line([3 * W // 4 + 15, nav_y + 25, 3 * W // 4 - 15, nav_y + 45], fill=(180, 180, 180), width=4)
     draw.line([3 * W // 4 - 15, nav_y + 45, 3 * W // 4 + 15, nav_y + 65], fill=(180, 180, 180), width=4)
     
-    return imgmg
+    return img
 
 def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
     """Self-contained Express Send receipt renderer."""
@@ -526,10 +502,15 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 # ── Dashboard Session Analytics Counters ──
 if "dash_total_scans" not in st.session_state:
     st.session_state["dash_total_scans"] = 0
+if "dash_authenticated" not in st.session_state:
     st.session_state["dash_authenticated"] = 0
+if "dash_forged" not in st.session_state:
     st.session_state["dash_forged"] = 0
+if "dash_total_confidence" not in st.session_state:
     st.session_state["dash_total_confidence"] = 0.0
+if "dash_scan_log" not in st.session_state:
     st.session_state["dash_scan_log"] = []
+if "dash_flag_counts" not in st.session_state:
     st.session_state["dash_flag_counts"] = {
         "High ELA Noise": 0,
         "Low Model Confidence": 0,
@@ -544,7 +525,12 @@ def render_dashboard_page():
     forged = st.session_state.get("dash_forged", 0)
     conf_sum = st.session_state.get("dash_total_confidence", 0.0)
     avg_conf = (conf_sum / total) if total > 0 else 0.0
-    flags = st.session_state.get("dash_flag_counts", {})
+    flags = st.session_state.get("dash_flag_counts", {
+        "High ELA Noise": 0,
+        "Low Model Confidence": 0,
+        "Metadata Anomaly": 0,
+        "Unanimous Forgery": 0
+    })
     scan_log = st.session_state.get("dash_scan_log", [])
 
     # Section header
@@ -803,25 +789,36 @@ elif "Live" in app_mode:
             elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
             
             # ── Update Dashboard Analytics ──
-            st.session_state["dash_total_scans"] += 1
+            st.session_state["dash_total_scans"] = st.session_state.get("dash_total_scans", 0) + 1
             if is_forged:
-                st.session_state["dash_forged"] += 1
+                st.session_state["dash_forged"] = st.session_state.get("dash_forged", 0) + 1
             else:
-                st.session_state["dash_authenticated"] += 1
-            st.session_state["dash_total_confidence"] += confidence * 100
+                st.session_state["dash_authenticated"] = st.session_state.get("dash_authenticated", 0) + 1
+            st.session_state["dash_total_confidence"] = st.session_state.get("dash_total_confidence", 0.0) + (confidence * 100)
+
+            if "dash_flag_counts" not in st.session_state or not isinstance(st.session_state["dash_flag_counts"], dict):
+                st.session_state["dash_flag_counts"] = {
+                    "High ELA Noise": 0,
+                    "Low Model Confidence": 0,
+                    "Metadata Anomaly": 0,
+                    "Unanimous Forgery": 0
+                }
 
             scan_flags = []
             _ela_np_tmp = np.array(ela_img, dtype=np.float32)
             _ela_mean_tmp = float(np.mean(_ela_np_tmp))
             if _ela_mean_tmp > 15.0:
                 scan_flags.append("High ELA Noise")
-                st.session_state["dash_flag_counts"]["High ELA Noise"] += 1
+                st.session_state["dash_flag_counts"]["High ELA Noise"] = st.session_state["dash_flag_counts"].get("High ELA Noise", 0) + 1
             if confidence < 0.85:
                 scan_flags.append("Low Model Confidence")
-                st.session_state["dash_flag_counts"]["Low Model Confidence"] += 1
+                st.session_state["dash_flag_counts"]["Low Model Confidence"] = st.session_state["dash_flag_counts"].get("Low Model Confidence", 0) + 1
             if model_predictions and all(model_predictions.get(k, 0) >= 0.5 for k in model_predictions):
                 scan_flags.append("Unanimous Forgery")
-                st.session_state["dash_flag_counts"]["Unanimous Forgery"] += 1
+                st.session_state["dash_flag_counts"]["Unanimous Forgery"] = st.session_state["dash_flag_counts"].get("Unanimous Forgery", 0) + 1
+
+            if "dash_scan_log" not in st.session_state or not isinstance(st.session_state["dash_scan_log"], list):
+                st.session_state["dash_scan_log"] = []
 
             from datetime import datetime as _datetime
             st.session_state["dash_scan_log"].append({
@@ -844,7 +841,7 @@ elif "Live" in app_mode:
             import hashlib
             sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
             res_str = f"{pil_img.width}x{pil_img.height}"
-            sample_label = active_sample_name or "EXHIBIT_EVIDENCE.JPG"
+            sample_label = (getattr(uploaded_file, 'name', '') or sample_name or "EXHIBIT_EVIDENCE.JPG").upper()
             
             st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>SIMULTANEOUS 3-EXHIBIT FORENSIC MATRIX</div>", unsafe_allow_html=True)
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
