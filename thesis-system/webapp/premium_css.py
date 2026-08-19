@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD ULTIMATE ZERO-GAP PANORAMIC FORENSIC SUITE (v3.5)
-   Simultaneous 3-Exhibit Matrix + 3-Engine Real-Time Consensus
+   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v4.0)
+   Permanent SaaS Sidebar Rail + Zero-Gap + Reopen Safeguard
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap');
@@ -27,16 +27,14 @@ html, body, [class*="css"] {
     background-attachment: fixed !important;
 }
 
-/* ABSOLUTE AGGRESSIVE ZERO TOP WHITESPACE FIX */
-header[data-testid="stHeader"],
-.stApp > header,
-[data-testid="stHeader"] {
-    display: none !important;
+/* ZERO TOP WHITESPACE (Clean Header that preserves sidebar toggle) */
+header[data-testid="stHeader"] {
+    background: transparent !important;
     height: 0px !important;
     min-height: 0px !important;
-    max-height: 0px !important;
     padding: 0px !important;
     margin: 0px !important;
+    z-index: 99990 !important;
 }
 
 div[data-testid="stAppViewContainer"] > section.main {
@@ -56,11 +54,54 @@ div[data-testid="stVerticalBlock"] {
     gap: 0.45rem !important;
 }
 
-/* Sidebar Styling */
+/* ============================================================
+   PERMANENT SIDEBAR RAIL (Sophos & Nightfall Style)
+   ============================================================ */
 section[data-testid="stSidebar"] {
     background-color: #0A0E17 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-top: 0.4rem !important;
+    visibility: visible !important;
+}
+
+/* Hide the collapse button inside sidebar to prevent accidental collapse */
+[data-testid="stSidebarCollapseButton"],
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+section[data-testid="stSidebar"] button[kind="header"],
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
+    display: none !important;
+}
+
+/* ALWAYS PROMINENT REOPEN TOGGLE (If ever collapsed in localStorage) */
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"],
+button[data-testid="stSidebarCollapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+    z-index: 999999 !important;
+    background: #0B111E !important;
+    border: 1.5px solid #00F0FF !important;
+    border-radius: 8px !important;
+    color: #00F0FF !important;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5) !important;
+    cursor: pointer !important;
+    padding: 4px 6px !important;
+}
+
+[data-testid="stSidebarCollapsedControl"]:hover,
+[data-testid="collapsedControl"]:hover {
+    background: rgba(0, 240, 255, 0.15) !important;
+    transform: scale(1.05) !important;
+}
+
+[data-testid="stSidebarCollapsedControl"] svg,
+[data-testid="collapsedControl"] svg {
+    fill: #00F0FF !important;
+    stroke: #00F0FF !important;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
@@ -191,7 +232,7 @@ div[data-testid="stFileUploader"] {
     transition: all 0.2s ease !important;
 }
 
-/* 3-EXHIBIT IMAGE CONTAINMENT - ZERO VERTICAL BLOAT */
+/* 3-EXHIBIT IMAGE CONTAINMENT */
 .exhibit-card-frame {
     background: #0B111E;
     border: 1px solid rgba(255, 255, 255, 0.08);
