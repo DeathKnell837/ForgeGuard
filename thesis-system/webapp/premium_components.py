@@ -348,3 +348,244 @@ def executive_sop5_recommendation_card():
 Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for instant fraud detection on consumer smartphones.
 </div>
 </div>"""
+
+
+# ============================================================
+# DASHBOARD COMPONENTS — SOC Analytics Overview
+# ============================================================
+
+def render_dashboard_kpi_row(total, authenticated, forged, avg_confidence):
+    """Renders 4 SOC-style KPI stat cards in a horizontal grid."""
+    # Compute deltas (session-based, show last scan change)
+    def _delta_html(value, suffix="", is_pct=False):
+        if value == 0:
+            return '<span class="dash-kpi-delta" style="color: #64748B;">— NO DATA</span>'
+        color = "#10B981"
+        arrow = "▲"
+        return f'<span class="dash-kpi-delta" style="color: {color};">{arrow} {value}{suffix}</span>'
+
+    conf_display = f"{avg_confidence:.1f}%" if total > 0 else "—"
+    conf_delta = _delta_html(round(avg_confidence, 1), "%") if total > 0 else '<span class="dash-kpi-delta" style="color: #64748B;">— AWAITING</span>'
+
+    return f"""<div class="dash-kpi-grid">
+<div class="dash-kpi-card" style="border-left: 3px solid #00F0FF;">
+<div class="dash-kpi-icon" style="background: rgba(0,240,255,0.1);">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/>
+</svg>
+</div>
+<div class="dash-kpi-label">TOTAL RECEIPTS SCANNED</div>
+<div class="dash-kpi-value">{total}</div>
+{_delta_html(total, " scans")}
+</div>
+
+<div class="dash-kpi-card" style="border-left: 3px solid #10B981;">
+<div class="dash-kpi-icon" style="background: rgba(16,185,129,0.1);">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+</svg>
+</div>
+<div class="dash-kpi-label">AUTHENTICATED</div>
+<div class="dash-kpi-value" style="color: #10B981;">{authenticated}</div>
+{_delta_html(authenticated, " verified")}
+</div>
+
+<div class="dash-kpi-card" style="border-left: 3px solid #F87171;">
+<div class="dash-kpi-icon" style="background: rgba(248,113,113,0.1);">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+</svg>
+</div>
+<div class="dash-kpi-label">FLAGGED AS FORGED</div>
+<div class="dash-kpi-value" style="color: #F87171;">{forged}</div>
+{_delta_html(forged, " flagged")}
+</div>
+
+<div class="dash-kpi-card" style="border-left: 3px solid #8B5CF6;">
+<div class="dash-kpi-icon" style="background: rgba(139,92,246,0.1);">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+</svg>
+</div>
+<div class="dash-kpi-label">AVG CONFIDENCE</div>
+<div class="dash-kpi-value" style="color: #A78BFA;">{conf_display}</div>
+{conf_delta}
+</div>
+</div>"""
+
+
+def render_dashboard_verdict_donut(authenticated, forged):
+    """Renders SVG donut ring chart for Case Verdict Breakdown."""
+    total = authenticated + forged
+    if total == 0:
+        return """<div class="dash-card-panel">
+<div class="dash-section-title">CASE VERDICT BREAKDOWN</div>
+<div class="dash-empty-state">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+<span>NO SCAN DATA YET</span>
+<span style="font-size: 0.65rem; color: #475569;">Run scans in Live Threat Scanner to populate</span>
+</div>
+</div>"""
+
+    # SVG donut math
+    r = 55
+    cx, cy = 70, 70
+    circumference = 2 * 3.14159265 * r
+    auth_pct = (authenticated / total) * 100
+    forged_pct = (forged / total) * 100
+    auth_arc = circumference * (auth_pct / 100.0)
+    forged_arc = circumference * (forged_pct / 100.0)
+    gap_arc = circumference - auth_arc - forged_arc
+
+    # Forged starts where auth ends
+    auth_offset = circumference * 0.25  # start at top
+    forged_offset = auth_offset - auth_arc
+
+    return f"""<div class="dash-card-panel">
+<div class="dash-section-title">CASE VERDICT BREAKDOWN</div>
+<div style="display: flex; align-items: center; gap: 24px;">
+<div style="position: relative; width: 140px; height: 140px; flex-shrink: 0;">
+<svg width="140" height="140" viewBox="0 0 140 140">
+<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
+<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#10B981" stroke-width="12"
+  stroke-dasharray="{auth_arc:.1f} {circumference - auth_arc:.1f}"
+  stroke-dashoffset="{auth_offset:.1f}" stroke-linecap="round" transform="rotate(-90 {cx} {cy})"/>
+<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#F87171" stroke-width="12"
+  stroke-dasharray="{forged_arc:.1f} {circumference - forged_arc:.1f}"
+  stroke-dashoffset="{forged_offset:.1f}" stroke-linecap="round" transform="rotate(-90 {cx} {cy})"/>
+<text x="{cx}" y="{cy - 4}" text-anchor="middle" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="22" font-weight="800">{total}</text>
+<text x="{cx}" y="{cy + 14}" text-anchor="middle" fill="#64748B" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" letter-spacing="1.2">TOTAL SCANS</text>
+</svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; flex: 1;">
+<div class="dash-legend-item">
+<span class="dash-legend-dot" style="background: #10B981;"></span>
+<span>Authenticated</span>
+<strong style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #10B981;">{authenticated} ({auth_pct:.0f}%)</strong>
+</div>
+<div class="dash-legend-item">
+<span class="dash-legend-dot" style="background: #F87171;"></span>
+<span>Flagged as Forged</span>
+<strong style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #F87171;">{forged} ({forged_pct:.0f}%)</strong>
+</div>
+<div style="margin-top: 4px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #64748B;">
+<span>DETECTION RATE</span>
+<span style="color: #A78BFA;">{forged_pct:.1f}%</span>
+</div>
+</div>
+</div>
+</div>
+</div>"""
+
+
+def render_dashboard_flag_bars(flag_counts):
+    """Renders horizontal bar breakdown for Flag Reason Distribution."""
+    total_flags = sum(flag_counts.values()) if flag_counts else 0
+
+    if total_flags == 0:
+        return """<div class="dash-card-panel">
+<div class="dash-section-title">FLAG REASON DISTRIBUTION</div>
+<div class="dash-empty-state">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+<span>NO FLAGS RECORDED</span>
+<span style="font-size: 0.65rem; color: #475569;">Flags are assigned during forgery detection</span>
+</div>
+</div>"""
+
+    bar_colors = {
+        "High ELA Noise": "#8B5CF6",
+        "Low Model Confidence": "#A78BFA",
+        "Metadata Anomaly": "#F59E0B",
+        "Unanimous Forgery": "#F87171"
+    }
+
+    bars_html = ""
+    for label, count in flag_counts.items():
+        pct = (count / total_flags * 100) if total_flags > 0 else 0
+        color = bar_colors.get(label, "#8B5CF6")
+        bars_html += f"""<div>
+<div class="dash-bar-label-row">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #E2E8F0;">{label}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: {color};">{pct:.0f}%</span>
+</div>
+<div class="dash-bar-track">
+<div class="dash-bar-fill" style="width: {pct}%; background: {color}; box-shadow: 0 0 8px {color}40;"></div>
+</div>
+</div>"""
+
+    return f"""<div class="dash-card-panel">
+<div class="dash-section-title">FLAG REASON DISTRIBUTION</div>
+<div class="dash-bar-row">
+{bars_html}
+</div>
+</div>"""
+
+
+def render_dashboard_timeline(scan_log):
+    """Renders scan activity timeline as a bar chart with session data."""
+    if not scan_log:
+        return """<div class="dash-timeline-card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<div class="dash-section-title" style="margin-bottom: 0;">SCAN ACTIVITY TIMELINE</div>
+<span class="dash-filter-pill">THIS SESSION</span>
+</div>
+<div class="dash-empty-state">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+<span>NO ACTIVITY RECORDED</span>
+<span style="font-size: 0.65rem; color: #475569;">Scan receipts to build activity timeline</span>
+</div>
+</div>"""
+
+    # Group scans into buckets (by scan index, show last 12)
+    max_bars = 12
+    recent = scan_log[-max_bars:]
+    max_count = 1  # each entry is 1 scan, but we show individual bars
+
+    bars_html = ""
+    labels_html = ""
+    for i, entry in enumerate(recent):
+        # Each scan is one bar
+        is_forged = entry.get("verdict") == "FORGED"
+        color = "#F87171" if is_forged else "#8B5CF6"
+        conf = entry.get("confidence", 95)
+        height_pct = max(15, min(100, conf))  # height based on confidence
+
+        # Extract short time label
+        try:
+            from datetime import datetime as _dt
+            t = _dt.fromisoformat(entry["time"])
+            time_label = t.strftime("%H:%M")
+        except Exception:
+            time_label = f"#{i+1}"
+
+        bars_html += f'<div class="dash-timeline-bar" style="height: {height_pct}%; background: {color}; box-shadow: 0 0 6px {color}40;" title="Scan #{i+1}: {entry.get("verdict", "?")} ({conf:.1f}%)"></div>'
+        labels_html += f'<div class="dash-timeline-label">{time_label}</div>'
+
+    # Pad remaining slots
+    remaining = max_bars - len(recent)
+    for _ in range(remaining):
+        bars_html += '<div class="dash-timeline-bar" style="height: 4px; background: rgba(255,255,255,0.04);"></div>'
+        labels_html += '<div class="dash-timeline-label">—</div>'
+
+    return f"""<div class="dash-timeline-card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<div class="dash-section-title" style="margin-bottom: 0;">SCAN ACTIVITY TIMELINE</div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6; display: inline-block;"></span>
+<span style="color: #94A3B8;">AUTH</span>
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #F87171; display: inline-block; margin-left: 6px;"></span>
+<span style="color: #94A3B8;">FORGED</span>
+</div>
+<span class="dash-filter-pill">THIS SESSION</span>
+</div>
+</div>
+<div class="dash-timeline-bars">
+{bars_html}
+</div>
+<div style="display: grid; grid-template-columns: repeat({max_bars}, 1fr); gap: 6px;">
+{labels_html}
+</div>
+</div>"""
+

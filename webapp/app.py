@@ -512,12 +512,56 @@ try:
         render_saas_model_card,
         render_comparative_breakdown_bars,
         executive_sop5_recommendation_card,
-        svg_radial_dial
+        svg_radial_dial,
+        render_dashboard_kpi_row,
+        render_dashboard_verdict_donut,
+        render_dashboard_flag_bars,
+        render_dashboard_timeline
     )
 except Exception:
     pass
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+
+# ── Dashboard Session Analytics Counters ──
+if "dash_total_scans" not in st.session_state:
+    st.session_state["dash_total_scans"] = 0
+    st.session_state["dash_authenticated"] = 0
+    st.session_state["dash_forged"] = 0
+    st.session_state["dash_total_confidence"] = 0.0
+    st.session_state["dash_scan_log"] = []
+    st.session_state["dash_flag_counts"] = {
+        "High ELA Noise": 0,
+        "Low Model Confidence": 0,
+        "Metadata Anomaly": 0,
+        "Unanimous Forgery": 0
+    }
+
+def render_dashboard_page():
+    """Render the SOC-style Dashboard overview page."""
+    total = st.session_state.get("dash_total_scans", 0)
+    auth = st.session_state.get("dash_authenticated", 0)
+    forged = st.session_state.get("dash_forged", 0)
+    conf_sum = st.session_state.get("dash_total_confidence", 0.0)
+    avg_conf = (conf_sum / total) if total > 0 else 0.0
+    flags = st.session_state.get("dash_flag_counts", {})
+    scan_log = st.session_state.get("dash_scan_log", [])
+
+    # Section header
+    st.markdown("<div class='eyebrow-label' style='margin: 0.2rem 0 0.5rem 0;'>📊 SESSION FORENSIC ANALYTICS</div>", unsafe_allow_html=True)
+
+    # ROW 1: KPI Cards
+    st.markdown(render_dashboard_kpi_row(total, auth, forged, avg_conf), unsafe_allow_html=True)
+
+    # ROW 2: Donut + Flag Bars (2 columns)
+    col_donut, col_bars = st.columns([1, 1], gap="small")
+    with col_donut:
+        st.markdown(render_dashboard_verdict_donut(auth, forged), unsafe_allow_html=True)
+    with col_bars:
+        st.markdown(render_dashboard_flag_bars(flags), unsafe_allow_html=True)
+
+    # ROW 3: Timeline (full-width)
+    st.markdown(render_dashboard_timeline(scan_log), unsafe_allow_html=True)
 
 # SVG ICONS
 # ============================================================
@@ -537,7 +581,7 @@ with st.sidebar:
     st.markdown("<div class='rail-section-header'>FORENSIC OPERATIONS</div>", unsafe_allow_html=True)
     app_mode = st.radio(
         "Navigation",
-        options=["Live Threat Scanner", "Model Benchmark Suite"],
+        options=["Dashboard", "Live Threat Scanner", "Model Benchmark Suite"],
         index=0,
         key="sidebar_app_mode",
         label_visibility="collapsed"
@@ -583,11 +627,19 @@ with st.sidebar:
 # ============================================================
 # TOP COMMAND BAR & GLOBAL TELEMETRY
 # ============================================================
-breadcrumb_label = "LIVE THREAT SCANNER" if "Live" in app_mode else "MODEL BENCHMARK SUITE"
+if "Dashboard" in app_mode:
+    breadcrumb_label = "DASHBOARD"
+elif "Live" in app_mode:
+    breadcrumb_label = "LIVE THREAT SCANNER"
+else:
+    breadcrumb_label = "MODEL BENCHMARK SUITE"
 latency_val = 12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2)
 st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
 
-if "Live" in app_mode:
+if "Dashboard" in app_mode:
+    render_dashboard_page()
+
+elif "Live" in app_mode:
     # ============================================================
     # PAGE 1: LIVE FORENSIC SCANNER (PRACTICAL SYSTEM INTERFACE)
     # ============================================================
@@ -750,6 +802,35 @@ if "Live" in app_mode:
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
             
+            # ── Update Dashboard Analytics ──
+            st.session_state["dash_total_scans"] += 1
+            if is_forged:
+                st.session_state["dash_forged"] += 1
+            else:
+                st.session_state["dash_authenticated"] += 1
+            st.session_state["dash_total_confidence"] += confidence * 100
+
+            scan_flags = []
+            _ela_np_tmp = np.array(ela_img, dtype=np.float32)
+            _ela_mean_tmp = float(np.mean(_ela_np_tmp))
+            if _ela_mean_tmp > 15.0:
+                scan_flags.append("High ELA Noise")
+                st.session_state["dash_flag_counts"]["High ELA Noise"] += 1
+            if confidence < 0.85:
+                scan_flags.append("Low Model Confidence")
+                st.session_state["dash_flag_counts"]["Low Model Confidence"] += 1
+            if model_predictions and all(model_predictions.get(k, 0) >= 0.5 for k in model_predictions):
+                scan_flags.append("Unanimous Forgery")
+                st.session_state["dash_flag_counts"]["Unanimous Forgery"] += 1
+
+            from datetime import datetime as _datetime
+            st.session_state["dash_scan_log"].append({
+                "time": _datetime.now().isoformat(),
+                "verdict": "FORGED" if is_forged else "AUTHENTIC",
+                "confidence": confidence * 100,
+                "flags": scan_flags
+            })
+
             st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1.25rem 0;'>", unsafe_allow_html=True)
             
             # Compute ELA metrics
