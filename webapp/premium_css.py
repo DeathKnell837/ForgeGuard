@@ -130,17 +130,47 @@ section[data-testid="stSidebar"] > div:first-child {
 
 /* Flat Spacious Radio Buttons (Navigation & Model Selector) */
 div[data-testid="stRadio"] > div {
-    gap: 3px !important;
+    gap: 4px !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
 }
 
-/* Hide default circular radio inputs for clean SaaS nav row appearance */
+div[data-testid="stRadio"] [data-baseweb="radio"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+div[data-testid="stRadio"] [data-baseweb="radio"] > div {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Remove all radio circles, dots, borders, and rings completely */
+div[data-testid="stRadio"] label > div:first-of-type:not([data-testid="stMarkdownContainer"]),
+div[data-testid="stRadio"] [data-baseweb="radio"] > div:first-of-type:not([data-testid="stMarkdownContainer"]),
+div[data-testid="stRadio"] [data-baseweb="radio"] input + div,
+div[data-testid="stRadio"] label input + div,
 div[data-testid="stRadio"] [data-testid="stRadioDot"],
 div[data-testid="stRadio"] input[type="radio"],
-div[data-testid="stRadio"] label > div:first-child:not([data-testid="stMarkdownContainer"]) {
+div[data-testid="stRadio"] [aria-hidden="true"],
+div[data-testid="stRadio"] label > div:not([data-testid="stMarkdownContainer"]):not(:has([data-testid="stMarkdownContainer"])) {
     display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    min-width: 0px !important;
+    min-height: 0px !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Inactive items: completely flat, generous padding, muted text, no borders */
@@ -167,7 +197,7 @@ div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p 
     color: #E2E8F0 !important;
 }
 
-/* Active / Selected item: filled violet-tinted rounded rect background, white text */
+/* Active / Selected item: solid filled violet-tinted rounded rect background, crisp white text */
 div[data-testid="stRadio"] label[data-checked="true"],
 div[data-testid="stRadio"] label:has(input:checked) {
     background: rgba(139, 92, 246, 0.16) !important;

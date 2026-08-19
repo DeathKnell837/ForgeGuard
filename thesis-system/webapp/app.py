@@ -567,7 +567,7 @@ with st.sidebar:
     st.markdown("<div class='rail-section-header'>FORENSIC OPERATIONS</div>", unsafe_allow_html=True)
     app_mode = st.radio(
         "Navigation",
-        options=["Dashboard", "Live Threat Scanner", "Model Benchmark Suite"],
+        options=["📊  Dashboard", "🛡️  Live Threat Scanner", "📈  Model Benchmark Suite"],
         index=0,
         key="sidebar_app_mode",
         label_visibility="collapsed"
@@ -575,9 +575,9 @@ with st.sidebar:
     
     st.markdown("<div class='rail-section-header'>NEURAL ENGINE</div>", unsafe_allow_html=True)
     model_options = [
-        "MobileNetV2 (3.4M) — Recommended",
-        "ResNet50 (23.5M) — Deep Benchmark",
-        "Basic CNN (2.1M) — Baseline"
+        "⚡  MobileNetV2 (3.4M) — Recommended",
+        "🧠  ResNet50 (23.5M) — Deep Benchmark",
+        "⚙️  Basic CNN (2.1M) — Baseline"
     ]
     model_choice = st.radio(
         "Model",
