@@ -123,102 +123,101 @@ section[data-testid="stSidebar"] > div:first-child {
 }
 
 /* Flat Spacious Radio Buttons (Navigation & Model Selector) */
-div[data-testid="stRadio"] > div {
+div[data-testid="stElementContainer"]:has(div[data-testid="stRadio"]) {
+    width: 100% !important;
+}
+
+div[data-testid="stRadio"] {
+    width: 100% !important;
+}
+
+div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
+    display: flex !important;
+    flex-direction: column !important;
     gap: 4px !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
+    width: 100% !important;
 }
 
-div[data-testid="stRadio"] [data-baseweb="radio"] {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-div[data-testid="stRadio"] [data-baseweb="radio"] > div {
-    background: transparent !important;
-    border: none !important;
-}
-
-/* Remove all radio circles, dots, and native rings completely */
-div[data-testid="stRadio"] label > div:first-of-type:not([data-testid="stMarkdownContainer"]),
-div[data-testid="stRadio"] [data-baseweb="radio"] > div:first-of-type:not([data-testid="stMarkdownContainer"]),
-div[data-testid="stRadio"] [data-baseweb="radio"] input + div,
-div[data-testid="stRadio"] label input + div,
-div[data-testid="stRadio"] [data-testid="stRadioDot"],
+/* Hide native input */
 div[data-testid="stRadio"] input[type="radio"],
-div[data-testid="stRadio"] [aria-hidden="true"],
-div[data-testid="stRadio"] label > div:not([data-testid="stMarkdownContainer"]):not(:has([data-testid="stMarkdownContainer"])) {
+div[data-testid="stRadio"] [data-testid="stRadioDot"] {
+    display: none !important;
+    opacity: 0 !important;
+    width: 0px !important;
+    height: 0px !important;
+}
+
+/* Hide the radio circle icon specifically without hiding the wrapper */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] div:has(> div:empty):not(:has(p)),
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] > div > div > div:first-child:not(:has(p)):not([data-testid="stMarkdownContainer"]),
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] [data-baseweb="radio"] > div:first-child {
     display: none !important;
     width: 0px !important;
     height: 0px !important;
-    min-width: 0px !important;
-    min-height: 0px !important;
-    border: none !important;
-    outline: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
 }
 
-/* Inactive items: completely flat, generous padding (12-14px), muted text, no borders */
-div[data-testid="stRadio"] label {
+/* Option Row */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] {
     background: transparent !important;
     border: none !important;
     border-radius: 8px !important;
-    padding: 0.7rem 0.9rem !important;
-    margin: 0 !important;
+    padding: 9px 12px !important;
+    margin: 1px 0 !important;
     transition: all 0.15s ease !important;
     cursor: pointer !important;
     width: 100% !important;
-    box-shadow: none !important;
     display: flex !important;
     align-items: center !important;
 }
 
-div[data-testid="stRadio"] label:hover {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: none !important;
-    box-shadow: none !important;
-    transform: none !important;
-}
-
-div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] {
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] > div,
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] > div > div {
     width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
-div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Inactive text */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
     color: #8A8A94 !important;
-    letter-spacing: 0.1px !important;
     margin: 0 !important;
-    transition: color 0.15s ease !important;
     line-height: 1.4 !important;
+    transition: color 0.15s ease !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p {
+/* Inactive hover */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+}
+
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover div[data-testid="stMarkdownContainer"] p {
     color: #FFFFFF !important;
 }
 
-/* Active item: solid filled violet-tinted rounded rect background, crisp white text */
-div[data-testid="stRadio"] label[data-checked="true"],
-div[data-testid="stRadio"] label:has(input:checked) {
+/* Active Highlight */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"],
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) {
     background: rgba(124, 111, 240, 0.14) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    box-shadow: none !important;
 }
 
-div[data-testid="stRadio"] label[data-checked="true"] div[data-testid="stMarkdownContainer"] p,
-div[data-testid="stRadio"] label:has(input:checked) div[data-testid="stMarkdownContainer"] p {
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"] div[data-testid="stMarkdownContainer"] p,
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 600 !important;
