@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v6.0)
-   Exact Behance Reference Implementation
+   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v6.2)
+   Calibrated Saturation, Hairline Borders & Generous Spacing
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -17,8 +17,8 @@ html, body, [class*="css"] {
 .stApp {
     background-color: #101216 !important;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.06) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.03) 0%, transparent 50%) !important;
+        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.02) 0%, transparent 50%) !important;
     background-attachment: fixed !important;
 }
 
@@ -39,14 +39,15 @@ div[data-testid="stAppViewContainer"] > section.main {
 .main .block-container,
 div[data-testid="stAppViewBlockContainer"] {
     padding-top: 0.3rem !important;
-    padding-bottom: 1.8rem !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
+    padding-bottom: 2.2rem !important;
+    padding-left: 1.8rem !important;
+    padding-right: 1.8rem !important;
     max-width: 98% !important;
 }
 
+/* Generous Breathing Room Between Vertical Blocks */
 div[data-testid="stVerticalBlock"] {
-    gap: 0.75rem !important;
+    gap: 1.2rem !important;
 }
 
 /* ============================================================
@@ -55,7 +56,7 @@ div[data-testid="stVerticalBlock"] {
 section[data-testid="stSidebar"] {
     background-color: #101216 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
-    padding-top: 0.2rem !important;
+    padding-top: 0.4rem !important;
     min-width: 300px !important;
     width: 300px !important;
     visibility: visible !important;
@@ -92,17 +93,16 @@ button[data-testid="stSidebarCollapsedControl"] {
 
 [data-testid="stSidebarCollapsedControl"]:hover,
 [data-testid="collapsedControl"]:hover {
-    background: rgba(124, 111, 240, 0.2) !important;
-    border-color: #7C6FF0 !important;
-    transform: scale(1.05) !important;
+    background: rgba(139, 92, 246, 0.15) !important;
+    border-color: rgba(139, 92, 246, 0.3) !important;
 }
 
 div[data-testid="stSidebarContent"] {
-    padding: 0.8rem 1rem 1rem 1rem !important;
+    padding: 1rem 1.1rem 1.2rem 1.1rem !important;
 }
 
 div[data-testid="stSidebarUserContent"] {
-    padding: 0 0 3rem 0 !important;
+    padding: 0 0 2rem 0 !important;
 }
 
 /* Section Header Labels — Exact Sophos MENU style */
@@ -113,8 +113,8 @@ div[data-testid="stSidebarUserContent"] {
     color: #6B7280 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    margin-top: 22px !important;
-    margin-bottom: 10px !important;
+    margin-top: 24px !important;
+    margin-bottom: 12px !important;
     padding-left: 0.6rem !important;
     border: none !important;
     background: transparent !important;
@@ -135,7 +135,7 @@ div[data-testid="stRadio"] {
 div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: 5px !important;
+    gap: 6px !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
@@ -183,17 +183,13 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"] > div > div {
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] {
     width: 100% !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
     visibility: visible !important;
     opacity: 1 !important;
 }
 
 /* Inactive Nav text */
-div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] {
-    display: flex !important;
-    align-items: center !important;
-}
-
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.86rem !important;
@@ -242,40 +238,84 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover div[data-tes
     color: #FFFFFF !important;
 }
 
-/* Active Highlight Capsule — Sophos Frosted Gradient */
+/* Soft, Low-Opacity Active Nav Highlight */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"],
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    background: rgba(139, 92, 246, 0.10) !important;
+    border: 1px solid rgba(139, 92, 246, 0.18) !important;
+    box-shadow: none !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"] div[data-testid="stMarkdownContainer"] p,
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.84rem !important;
+    font-size: 0.86rem !important;
     font-weight: 600 !important;
     color: #FFFFFF !important;
+}
+
+/* Advanced Calibration Collapsible Expander in Sidebar */
+section[data-testid="stSidebar"] div[data-testid="stExpander"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin-top: 18px !important;
+    margin-bottom: 12px !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stExpander"] details {
+    background: transparent !important;
+    border: none !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 8px 10px !important;
+    color: #9CA3AF !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.4px !important;
+    transition: all 0.15s ease !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #FFFFFF !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary svg {
+    fill: #6B7280 !important;
+    width: 14px !important;
+    height: 14px !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+    background: transparent !important;
+    border: none !important;
+    padding: 10px 4px 4px 4px !important;
 }
 
 /* Calibration Sliders — Sophos Dark Styling */
 div[data-testid="stSlider"] {
     background: transparent !important;
     border: none !important;
-    padding: 0 0.4rem 0.4rem 0.4rem !important;
+    padding: 0 0.2rem 0.6rem 0.2rem !important;
     box-shadow: none !important;
 }
 
 div[data-testid="stSlider"] label {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.76rem !important;
+    font-size: 0.74rem !important;
     font-weight: 500 !important;
     color: #9CA3AF !important;
-    margin-bottom: 3px !important;
+    margin-bottom: 2px !important;
 }
 
 div[data-testid="stSlider"] [data-baseweb="slider"] {
-    margin-top: 4px !important;
+    margin-top: 2px !important;
 }
 
 div[data-testid="stSlider"] [data-baseweb="slider"] > div:first-child {
@@ -285,15 +325,15 @@ div[data-testid="stSlider"] [data-baseweb="slider"] > div:first-child {
 div[data-testid="stSlider"] [role="slider"] {
     background: #7C6FF0 !important;
     border: 2px solid #FFFFFF !important;
-    box-shadow: 0 0 12px rgba(124, 111, 240, 0.5) !important;
-    width: 16px !important;
-    height: 16px !important;
+    box-shadow: 0 0 8px rgba(124, 111, 240, 0.4) !important;
+    width: 14px !important;
+    height: 14px !important;
 }
 
 div[data-testid="stSlider"] [data-testid="stSliderThumbValue"],
 div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.7rem !important;
+    font-size: 0.68rem !important;
     color: #6B7280 !important;
 }
 
@@ -305,9 +345,9 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     background: #161922;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 0.7rem 1.2rem;
-    margin-bottom: 0.9rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    padding: 0.8rem 1.4rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 .breadcrumb-trail {
@@ -335,7 +375,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     background: #1A1D26;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    padding: 4px 11px;
+    padding: 5px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 0.72rem;
     display: flex;
@@ -343,40 +383,41 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     gap: 6px;
 }
 
-/* Action Buttons (Outline and Primary) */
+/* Neutral Outline Action Buttons (Secondary) */
 .stButton > button {
-    background: #161922 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
     border-radius: 10px !important;
-    color: #E2E8F0 !important;
+    color: #9CA3AF !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.82rem !important;
-    font-weight: 600 !important;
-    padding: 0.6rem 1.1rem !important;
+    font-weight: 500 !important;
+    padding: 0.65rem 1.2rem !important;
     width: 100% !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
 }
 
 .stButton > button:hover {
-    border-color: rgba(124, 111, 240, 0.5) !important;
-    background: rgba(124, 111, 240, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
     color: #FFFFFF !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 16px rgba(124, 111, 240, 0.2) !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* File Uploader Container */
 div[data-testid="stFileUploader"] {
     background: #161922 !important;
-    border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.14) !important;
     border-radius: 14px !important;
-    padding: 1rem !important;
+    padding: 1.2rem !important;
+    margin-top: 0.4rem !important;
     transition: all 0.2s ease !important;
 }
 
 div[data-testid="stFileUploader"]:hover {
-    border-color: rgba(124, 111, 240, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
     background: #181C26 !important;
 }
 
@@ -385,6 +426,7 @@ div[data-testid="stFileUploader"] section {
     border: none !important;
 }
 
+/* Primary CTA Button (Upload) - Solid Controlled Violet */
 div[data-testid="stFileUploader"] button {
     background: #7C6FF0 !important;
     border: none !important;
@@ -393,6 +435,11 @@ div[data-testid="stFileUploader"] button {
     font-family: 'Inter', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.78rem !important;
+    box-shadow: 0 2px 8px rgba(124, 111, 240, 0.3) !important;
+}
+
+div[data-testid="stFileUploader"] button:hover {
+    background: #6D5DE7 !important;
 }
 
 /* Tabs Styling */
@@ -401,6 +448,7 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"] {
     background-color: transparent !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-bottom: 6px !important;
+    margin-top: 0.6rem !important;
 }
 
 div[data-testid="stTabs"] [data-baseweb="tab"] {
@@ -411,12 +459,12 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
-    padding: 7px 16px !important;
+    padding: 8px 18px !important;
 }
 
 div[data-testid="stTabs"] [aria-selected="true"] {
-    background: rgba(124, 111, 240, 0.15) !important;
-    border: 1px solid rgba(124, 111, 240, 0.3) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
@@ -426,7 +474,7 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     background: #161922;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 0.9rem;
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -438,11 +486,11 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     font-family: 'Inter', sans-serif;
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 600;
 }
 
@@ -474,24 +522,24 @@ div[data-testid="stImage"] img {
 .incident-cockpit-card {
     background: #161922;
     border-radius: 14px;
-    padding: 1.3rem 1.5rem;
-    margin-top: 0.9rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.6rem 1.8rem;
+    margin-top: 1.4rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Benchmark KPI Tiles (Exact Sophos Top 4 Cards) */
 .bench-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 1.1rem;
+    gap: 16px;
+    margin-bottom: 1.5rem;
 }
 
 .bench-kpi-card {
     background: #161922;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 16px 18px;
+    padding: 20px 22px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -500,8 +548,7 @@ div[data-testid="stImage"] img {
 }
 
 .bench-kpi-card:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.14);
 }
 
 .bench-kpi-icon-chip {
@@ -513,7 +560,7 @@ div[data-testid="stImage"] img {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .bench-kpi-label {
@@ -522,7 +569,7 @@ div[data-testid="stImage"] img {
     font-weight: 600;
     color: #9CA3AF;
     letter-spacing: 0.5px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .bench-kpi-value {
@@ -531,7 +578,7 @@ div[data-testid="stImage"] img {
     font-weight: 800;
     color: #FFFFFF;
     line-height: 1.1;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .bench-kpi-sub {
@@ -541,22 +588,22 @@ div[data-testid="stImage"] img {
     color: #9CA3AF;
 }
 
-/* Head to Head Model Cards */
+/* Head to Head Model Cards - All Flat Hairline Borders */
 .model-matrix-card {
     background: #161922;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 1.3rem;
+    padding: 1.6rem 1.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 370px;
+    min-height: 380px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .model-matrix-card.recommended {
-    border: 1.5px solid rgba(124, 111, 240, 0.6);
-    box-shadow: 0 4px 24px rgba(124, 111, 240, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .progress-track-dark {

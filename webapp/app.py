@@ -521,15 +521,15 @@ with st.sidebar:
     model_key = "mobilenetv2"
     model_display_name = "MobileNetV2"
 
-    st.markdown("<div class='rail-section-header'>Calibration (ELA)</div>", unsafe_allow_html=True)
-    ela_quality = st.slider(
-        "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
-        help="Controls ELA compression differential sensitivity (default: 90Q)."
-    )
-    ela_scale = st.slider(
-        "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
-        help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
-    )
+    with st.expander("Advanced Calibration", expanded=False):
+        ela_quality = st.slider(
+            "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
+            help="Controls ELA compression differential sensitivity (default: 90Q)."
+        )
+        ela_scale = st.slider(
+            "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
+            help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
+        )
     
     st.markdown(render_investigator_profile_card(), unsafe_allow_html=True)
 
