@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD SOPHOS ENTERPRISE FORENSIC SYSTEM CSS (v5.0)
-   Sophos AI Smart Cybersecurity Visual Identity
+   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v6.0)
+   Exact Behance Reference Implementation
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -10,17 +10,19 @@ PREMIUM_CSS = """
 /* Global Surface & Canvas */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    background-color: #0A0A0C !important;
+    background-color: #101216 !important;
     color: #E2E8F0 !important;
 }
 
 .stApp {
-    background-color: #0A0A0C !important;
-    background-image: radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.05) 0%, transparent 50%) !important;
+    background-color: #101216 !important;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.03) 0%, transparent 50%) !important;
     background-attachment: fixed !important;
 }
 
-/* ZERO TOP WHITESPACE (Clean Header that preserves sidebar toggle) */
+/* ZERO TOP WHITESPACE (Clean Header) */
 header[data-testid="stHeader"] {
     background: transparent !important;
     height: 0px !important;
@@ -37,23 +39,25 @@ div[data-testid="stAppViewContainer"] > section.main {
 .main .block-container,
 div[data-testid="stAppViewBlockContainer"] {
     padding-top: 0.3rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-bottom: 1.8rem !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
     max-width: 98% !important;
 }
 
 div[data-testid="stVerticalBlock"] {
-    gap: 0.6rem !important;
+    gap: 0.75rem !important;
 }
 
 /* ============================================================
-   SOPHOS FLAT SIDEBAR RAIL
+   SOPHOS SIDEBAR RAIL
    ============================================================ */
 section[data-testid="stSidebar"] {
-    background-color: #0A0A0C !important;
-    border-right: 1px solid #232326 !important;
+    background-color: #101216 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding-top: 0.2rem !important;
+    min-width: 300px !important;
+    width: 300px !important;
     visibility: visible !important;
 }
 
@@ -76,11 +80,11 @@ button[data-testid="stSidebarCollapsedControl"] {
     top: 0.6rem !important;
     left: 0.6rem !important;
     z-index: 999999 !important;
-    background: #111114 !important;
-    border: 1px solid #7C6FF0 !important;
+    background: #1A1D26 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
-    color: #7C6FF0 !important;
-    box-shadow: 0 4px 16px rgba(124, 111, 240, 0.25) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
     cursor: pointer !important;
     padding: 6px 8px !important;
     transition: all 0.2s ease !important;
@@ -88,33 +92,30 @@ button[data-testid="stSidebarCollapsedControl"] {
 
 [data-testid="stSidebarCollapsedControl"]:hover,
 [data-testid="collapsedControl"]:hover {
-    background: rgba(124, 111, 240, 0.15) !important;
+    background: rgba(124, 111, 240, 0.2) !important;
+    border-color: #7C6FF0 !important;
     transform: scale(1.05) !important;
 }
 
-[data-testid="stSidebarCollapsedControl"] svg,
-[data-testid="collapsedControl"] svg {
-    fill: #7C6FF0 !important;
-    stroke: #7C6FF0 !important;
+div[data-testid="stSidebarContent"] {
+    padding: 0.8rem 1rem 1rem 1rem !important;
 }
 
-section[data-testid="stSidebar"] > div:first-child {
-    padding-top: 0.6rem !important;
-    padding-left: 0.9rem !important;
-    padding-right: 0.9rem !important;
+div[data-testid="stSidebarUserContent"] {
+    padding: 0 0 3rem 0 !important;
 }
 
-/* Section Header Labels — Small, Muted Uppercase with Generous Whitespace */
+/* Section Header Labels — Exact Sophos MENU style */
 .rail-section-header {
     font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 0.65rem !important;
+    font-size: 0.64rem !important;
     font-weight: 700 !important;
-    color: #8A8A94 !important;
-    letter-spacing: 1.2px !important;
+    color: #6B7280 !important;
+    letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    margin-top: 24px !important;
-    margin-bottom: 8px !important;
-    padding-left: 0.5rem !important;
+    margin-top: 22px !important;
+    margin-bottom: 10px !important;
+    padding-left: 0.6rem !important;
     border: none !important;
     background: transparent !important;
     display: flex;
@@ -122,7 +123,7 @@ section[data-testid="stSidebar"] > div:first-child {
     gap: 6px;
 }
 
-/* Flat Spacious Radio Buttons (Navigation & Model Selector) */
+/* Sophos Radio Navigation Items */
 div[data-testid="stElementContainer"]:has(div[data-testid="stRadio"]) {
     width: 100% !important;
 }
@@ -134,14 +135,14 @@ div[data-testid="stRadio"] {
 div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: 4px !important;
+    gap: 5px !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
     width: 100% !important;
 }
 
-/* Hide native input */
+/* Hide native input and radio dots */
 div[data-testid="stRadio"] input[type="radio"],
 div[data-testid="stRadio"] [data-testid="stRadioDot"] {
     display: none !important;
@@ -150,7 +151,6 @@ div[data-testid="stRadio"] [data-testid="stRadioDot"] {
     height: 0px !important;
 }
 
-/* Hide the radio circle icon specifically without hiding the wrapper */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] div:has(> div:empty):not(:has(p)),
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] > div > div > div:first-child:not(:has(p)):not([data-testid="stMarkdownContainer"]),
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] [data-baseweb="radio"] > div:first-child {
@@ -159,16 +159,17 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"] [data-baseweb="rad
     height: 0px !important;
 }
 
-/* Option Row */
+/* Sophos Nav Item Capsule */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] {
     background: transparent !important;
-    border: none !important;
+    border: 1px solid transparent !important;
     border-radius: 8px !important;
-    padding: 9px 12px !important;
-    margin: 1px 0 !important;
+    padding: 10px 14px !important;
+    margin: 0 !important;
     transition: all 0.15s ease !important;
     cursor: pointer !important;
     width: 100% !important;
+    box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
 }
@@ -187,33 +188,33 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="s
     opacity: 1 !important;
 }
 
-/* Inactive text */
+/* Inactive Nav text */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
-    color: #8A8A94 !important;
+    color: #9CA3AF !important;
     margin: 0 !important;
     line-height: 1.4 !important;
     transition: color 0.15s ease !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
-/* Inactive hover */
+/* Inactive Hover */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
     background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover div[data-testid="stMarkdownContainer"] p {
     color: #FFFFFF !important;
 }
 
-/* Active Highlight */
+/* Active Highlight Capsule — Sophos Frosted Gradient */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"],
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) {
-    background: rgba(124, 111, 240, 0.14) !important;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"] div[data-testid="stMarkdownContainer"] p,
@@ -236,7 +237,7 @@ div[data-testid="stSlider"] label {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.76rem !important;
     font-weight: 500 !important;
-    color: #8A8A94 !important;
+    color: #9CA3AF !important;
     margin-bottom: 3px !important;
 }
 
@@ -245,13 +246,13 @@ div[data-testid="stSlider"] [data-baseweb="slider"] {
 }
 
 div[data-testid="stSlider"] [data-baseweb="slider"] > div:first-child {
-    background: #16161A !important;
+    background: #1A1D26 !important;
 }
 
 div[data-testid="stSlider"] [role="slider"] {
     background: #7C6FF0 !important;
     border: 2px solid #FFFFFF !important;
-    box-shadow: 0 0 10px rgba(124, 111, 240, 0.4) !important;
+    box-shadow: 0 0 12px rgba(124, 111, 240, 0.5) !important;
     width: 16px !important;
     height: 16px !important;
 }
@@ -260,17 +261,7 @@ div[data-testid="stSlider"] [data-testid="stSliderThumbValue"],
 div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.7rem !important;
-    color: #8A8A94 !important;
-}
-
-/* Alert & Notice Banners */
-div[data-testid="stAlert"] {
-    background: #111114 !important;
-    border: 1px solid #232326 !important;
-    border-radius: 8px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.8rem !important;
-    color: #E2E8F0 !important;
+    color: #6B7280 !important;
 }
 
 /* Top Command / Breadcrumb Bar */
@@ -278,11 +269,12 @@ div[data-testid="stAlert"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #111114;
-    border: 1px solid #232326;
-    border-radius: 10px;
-    padding: 0.65rem 1.1rem;
-    margin-bottom: 0.8rem;
+    background: #161922;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 0.9rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .breadcrumb-trail {
@@ -291,7 +283,7 @@ div[data-testid="stAlert"] {
     gap: 8px;
     font-size: 0.82rem;
     font-family: 'Inter', sans-serif;
-    color: #8A8A94;
+    color: #9CA3AF;
     font-weight: 500;
 }
 
@@ -307,47 +299,52 @@ div[data-testid="stAlert"] {
 }
 
 .top-telemetry-pill {
-    background: #16161A;
-    border: 1px solid #232326;
-    border-radius: 6px;
-    padding: 3px 10px;
+    background: #1A1D26;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 4px 11px;
     font-family: 'Inter', sans-serif;
     font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* Action Buttons (Outline and Primary) */
 .stButton > button {
-    background: #111114 !important;
-    border: 1px solid #232326 !important;
-    border-radius: 8px !important;
+    background: #161922 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
     color: #E2E8F0 !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.82rem !important;
     font-weight: 600 !important;
-    padding: 0.55rem 1rem !important;
+    padding: 0.6rem 1.1rem !important;
     width: 100% !important;
-    box-shadow: none !important;
-    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .stButton > button:hover {
-    border-color: #7C6FF0 !important;
-    background: rgba(124, 111, 240, 0.08) !important;
+    border-color: rgba(124, 111, 240, 0.5) !important;
+    background: rgba(124, 111, 240, 0.1) !important;
     color: #FFFFFF !important;
     transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(124, 111, 240, 0.2) !important;
 }
 
 /* File Uploader Container */
 div[data-testid="stFileUploader"] {
-    background: #111114 !important;
-    border: 1px solid #232326 !important;
-    border-radius: 12px !important;
-    padding: 0.8rem !important;
+    background: #161922 !important;
+    border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    padding: 1rem !important;
     transition: all 0.2s ease !important;
 }
 
 div[data-testid="stFileUploader"]:hover {
-    border-color: rgba(124, 111, 240, 0.4) !important;
+    border-color: rgba(124, 111, 240, 0.5) !important;
+    background: #181C26 !important;
 }
 
 div[data-testid="stFileUploader"] section {
@@ -355,40 +352,52 @@ div[data-testid="stFileUploader"] section {
     border: none !important;
 }
 
+div[data-testid="stFileUploader"] button {
+    background: #7C6FF0 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #FFFFFF !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.78rem !important;
+}
+
 /* Tabs Styling */
 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
     gap: 8px !important;
     background-color: transparent !important;
-    border-bottom: 1px solid #232326 !important;
-    padding-bottom: 4px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 6px !important;
 }
 
 div[data-testid="stTabs"] [data-baseweb="tab"] {
     background: transparent !important;
     border: none !important;
-    border-radius: 6px !important;
-    color: #8A8A94 !important;
+    border-radius: 8px !important;
+    color: #9CA3AF !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
-    padding: 6px 14px !important;
+    padding: 7px 16px !important;
 }
 
 div[data-testid="stTabs"] [aria-selected="true"] {
-    background: rgba(124, 111, 240, 0.12) !important;
+    background: rgba(124, 111, 240, 0.15) !important;
+    border: 1px solid rgba(124, 111, 240, 0.3) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
 
 /* 3-Exhibit Card Frames */
 .exhibit-card-frame {
-    background: #111114;
-    border: 1px solid #232326;
-    border-radius: 12px;
-    padding: 0.75rem;
+    background: #161922;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0.9rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .exhibit-header-tag {
@@ -396,11 +405,11 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #232326;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 600;
 }
 
@@ -411,17 +420,17 @@ div[data-testid="stImage"] img {
     max-width: 100% !important;
     margin: 0 auto !important;
     display: block !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     object-fit: contain !important;
 }
 
 /* Section Title Micro-Labels */
 .eyebrow-label {
     font-family: 'Inter', sans-serif;
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 700;
-    color: #8A8A94;
-    letter-spacing: 1.2px;
+    color: #9CA3AF;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
@@ -430,96 +439,114 @@ div[data-testid="stImage"] img {
 
 /* Incident Cockpit Card */
 .incident-cockpit-card {
-    background: #111114;
-    border-radius: 12px;
-    padding: 1.2rem 1.4rem;
-    margin-top: 0.8rem;
+    background: #161922;
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    margin-top: 0.9rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Benchmark KPI Tiles */
+/* Benchmark KPI Tiles (Exact Sophos Top 4 Cards) */
 .bench-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 1rem;
+    gap: 14px;
+    margin-bottom: 1.1rem;
 }
 
 .bench-kpi-card {
-    background: #111114;
-    border: 1px solid #232326;
-    border-radius: 12px;
-    padding: 14px 16px;
+    background: #161922;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.bench-kpi-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
 }
 
 .bench-kpi-icon-chip {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: #16161A;
-    border: 1px solid #232326;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #1A1D26;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .bench-kpi-label {
     font-family: 'Inter', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #8A8A94;
-    letter-spacing: 1.1px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #9CA3AF;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .bench-kpi-value {
     font-family: 'Inter', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.85rem;
     font-weight: 800;
     color: #FFFFFF;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 6px;
 }
 
 .bench-kpi-sub {
     font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 500;
-    color: #8A8A94;
+    color: #9CA3AF;
 }
 
 /* Head to Head Model Cards */
 .model-matrix-card {
-    background: #111114;
-    border: 1px solid #232326;
-    border-radius: 12px;
-    padding: 1.2rem;
+    background: #161922;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 360px;
+    min-height: 370px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .model-matrix-card.recommended {
-    border: 1.5px solid #7C6FF0;
-    box-shadow: 0 4px 24px rgba(124, 111, 240, 0.15);
+    border: 1.5px solid rgba(124, 111, 240, 0.6);
+    box-shadow: 0 4px 24px rgba(124, 111, 240, 0.18);
 }
 
 .progress-track-dark {
     width: 100%;
-    height: 6px;
-    background: #16161A;
-    border-radius: 3px;
+    height: 7px;
+    background: #1A1D26;
+    border-radius: 4px;
     overflow: hidden;
 }
 
 .progress-fill-rounded {
     height: 100%;
-    border-radius: 3px;
+    border-radius: 4px;
+}
+
+/* Alert & Notice Banners */
+div[data-testid="stAlert"] {
+    background: #161922 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.8rem !important;
+    color: #E2E8F0 !important;
 }
 </style>
 """

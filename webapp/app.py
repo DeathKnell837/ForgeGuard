@@ -613,7 +613,7 @@ if "Live" in app_mode:
     elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
         image_bytes = st.session_state["loaded_sample"]
         st.markdown(f"""
-        <div style="background: #111114; border: 1px solid #232326; border-left: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 14px; margin: 0.6rem 0; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #7C6FF0; border-radius: 10px; padding: 8px 16px; margin: 0.6rem 0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);">
             <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #8A8A94;">Active Sample: <strong style="color: #FFFFFF;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong></span>
             </div>
@@ -756,7 +756,7 @@ if "Live" in app_mode:
                 "flags": scan_flags
             })
 
-            st.markdown("<hr style='border: none; border-top: 1px solid #232326; margin: 1.2rem 0;'>", unsafe_allow_html=True)
+            st.markdown("<hr style='border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 1.2rem 0;'>", unsafe_allow_html=True)
             
             # Compute ELA metrics
             ela_np = np.array(ela_img, dtype=np.float32)
