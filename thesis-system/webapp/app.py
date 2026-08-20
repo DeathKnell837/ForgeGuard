@@ -58,8 +58,9 @@ def load_tf_model(path):
 
 def call_gemini_vision(pil_img):
     import urllib.request, json, base64, io, os, time
-    fb_k = base64.b64decode("QVEuQWI4Uk42SWdZQ2NraEVCNGYzbHVrSmtlS014bUtkVmVsLWktdjJVYWRTWF9tOTJKdw==").decode("utf-8")
-    api_key = os.environ.get("GEMINI_API_KEY")
+    
+    # Permanent API Key with multi-tier fallback (never deleted)
+    api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:
         try:
             if hasattr(st, "secrets"):
@@ -67,14 +68,15 @@ def call_gemini_vision(pil_img):
         except Exception:
             api_key = ""
     if not api_key:
-        api_key = fb_k
+        api_key = base64.b64decode("QVEuQWI4Uk42SWdZQ0Nja2hFQjRmM2x1a0prZUtNeG1LZFZlbC1pLXYyVWFkU1hfbTkySnc=").decode("utf-8")
     if not api_key:
         return None
+        
     try:
         img_resized = pil_img.copy().convert("RGB")
-        img_resized.thumbnail((800, 800))
+        img_resized.thumbnail((400, 400))
         buffered = io.BytesIO()
-        img_resized.save(buffered, format="JPEG", quality=80)
+        img_resized.save(buffered, format="JPEG", quality=65)
         img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
@@ -115,11 +117,11 @@ Return ONLY valid JSON matching this schema:
             }
         }
         req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=8) as resp:
+        with urllib.request.urlopen(req, timeout=25) as resp:
             res = json.loads(resp.read().decode("utf-8"))
             text = res["candidates"][0]["content"]["parts"][0]["text"]
             return json.loads(text)
-    except Exception:
+    except Exception as e:
         return None
 
 def compute_ela(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
