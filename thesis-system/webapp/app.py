@@ -485,21 +485,20 @@ except Exception:
     </style>"""
 
 # Import premium UI components
-try:
-    from premium_components import (
-        render_sophos_brand_sidebar,
-        render_investigator_profile_card,
-        render_top_command_bar,
-        render_exhibit_metadata_bar,
-        render_panoramic_incident_cockpit,
-        render_sophos_benchmark_summary_tiles,
-        render_saas_model_card,
-        render_comparative_breakdown_bars,
-        executive_sop5_recommendation_card,
-        svg_radial_dial
-    )
-except Exception:
-    pass
+from premium_components import (
+    render_sophos_brand_sidebar,
+    render_investigator_profile_card,
+    render_top_command_bar,
+    render_exhibit_metadata_bar,
+    render_panoramic_incident_cockpit,
+    render_sophos_benchmark_summary_tiles,
+    render_sophos_segmented_donut,
+    render_sophos_hatched_bars,
+    render_sophos_pillar_columns,
+    render_saas_model_card,
+    executive_sop5_recommendation_card,
+    svg_radial_dial
+)
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
@@ -796,9 +795,19 @@ else:
     # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
     # ============================================================
     st.markdown(render_sophos_benchmark_summary_tiles(), unsafe_allow_html=True)
-    st.markdown("<div class='eyebrow-label' style='margin: 1rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
+    
+    # 1. Sophos Visual Charts (Segmented Donut & Hatched Horizontal Bars)
+    c_donut, c_hatched = st.columns(2)
+    with c_donut:
+        st.markdown(render_sophos_segmented_donut(), unsafe_allow_html=True)
+    with c_hatched:
+        st.markdown(render_sophos_hatched_bars(), unsafe_allow_html=True)
+        
+    # 2. Sophos 12-Month 3D Pillar Column Chart
+    st.markdown(render_sophos_pillar_columns(), unsafe_allow_html=True)
 
-    # 1. 3-Column Side-by-Side SaaS Model Benchmark Cards
+    # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards
+    st.markdown("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
     col_mnet, col_resnet, col_bcnn = st.columns(3)
     
     with col_mnet:
@@ -812,7 +821,6 @@ else:
             speed="12.4ms",
             params="3.4M",
             comp_acc="97.8%",
-            color="#7C6FF0",
             is_recommended=True
         )
         st.markdown(card_mnet, unsafe_allow_html=True)
@@ -828,7 +836,6 @@ else:
             speed="28.6ms",
             params="23.5M",
             comp_acc="98.2%",
-            color="#2DD4BF",
             is_recommended=False
         )
         st.markdown(card_resnet, unsafe_allow_html=True)
@@ -844,13 +851,9 @@ else:
             speed="45.2ms",
             params="2.1M",
             comp_acc="92.3%",
-            color="#F59E0B",
             is_recommended=False
         )
         st.markdown(card_bcnn, unsafe_allow_html=True)
 
-    # 2. Embien / Webstacks Comparative Visual Gauges
-    st.markdown(render_comparative_breakdown_bars(), unsafe_allow_html=True)
-
-    # 3. Formal Executive SOP Recommendation
+    # 4. Formal Executive SOP Recommendation
     st.markdown(executive_sop5_recommendation_card(), unsafe_allow_html=True)

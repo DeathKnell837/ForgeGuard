@@ -631,5 +631,68 @@ div[data-testid="stAlert"] {
     font-size: 0.8rem !important;
     color: #E2E8F0 !important;
 }
+
+/* Sophos Hatched Progress Track & Glowing Capsule Fill */
+.sophos-hatched-track {
+    width: 100%;
+    height: 9px;
+    background-color: #1A1D26;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.03) 5px, rgba(255, 255, 255, 0.03) 10px);
+    border-radius: 6px;
+    position: relative;
+    overflow: visible;
+}
+
+.sophos-hatched-fill {
+    height: 100%;
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.sophos-hatched-fill.purple {
+    background: linear-gradient(90deg, #4338CA 0%, #6366F1 100%);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.35);
+}
+
+.sophos-hatched-fill.emerald {
+    background: linear-gradient(90deg, #047857 0%, #10B981 100%);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+.sophos-hatched-fill.slate {
+    background: linear-gradient(90deg, #334155 0%, #64748B 100%);
+}
+
+.sophos-thumb {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #1A1D26;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    right: -3px;
+    top: -2px;
+}
+
+/* Sophos 3D Pillar Columns */
+.sophos-pillar {
+    width: 12px;
+    border-radius: 5px 5px 3px 3px;
+    transition: all 0.2s ease;
+}
+
+.sophos-pillar.purple {
+    background: linear-gradient(180deg, #818CF8 0%, #4338CA 100%);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+.sophos-pillar.slate {
+    background: linear-gradient(180deg, #64748B 0%, #1E293B 100%);
+}
+
 </style>
 """
