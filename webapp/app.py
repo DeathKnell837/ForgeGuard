@@ -59,7 +59,15 @@ def load_tf_model(path):
 def call_gemini_vision(pil_img):
     import urllib.request, json, base64, io, os, time
     fb_k = base64.b64decode("QVEuQWI4Uk42SWdZQ2NraEVCNGYzbHVrSmtlS014bUtkVmVsLWktdjJVYWRTWF9tOTJKdw==").decode("utf-8")
-    api_key = os.environ.get("GEMINI_API_KEY") or getattr(st, "secrets", {}).get("GEMINI_API_KEY", "") or fb_k
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        try:
+            if hasattr(st, "secrets"):
+                api_key = st.secrets.get("GEMINI_API_KEY", "")
+        except Exception:
+            api_key = ""
+    if not api_key:
+        api_key = fb_k
     if not api_key:
         return None
     try:
@@ -510,30 +518,8 @@ with st.sidebar:
         label_visibility="collapsed"
     )
     
-    st.markdown("<div class='rail-section-header'>Neural Engine</div>", unsafe_allow_html=True)
-    model_options = [
-        "MobileNetV2 (3.4M) — Recommended",
-        "ResNet50 (23.5M) — Deep Benchmark",
-        "Basic CNN (2.1M) — Baseline"
-    ]
-    model_choice = st.radio(
-        "Model",
-        options=model_options,
-        index=0,
-        key="model_architecture",
-        label_visibility="collapsed"
-    )
-    
-    selected_model_option = st.session_state.get("model_architecture", model_choice)
-    if "MobileNetV2" in selected_model_option:
-        model_key = "mobilenetv2"
-        model_display_name = "MobileNetV2"
-    elif "ResNet50" in selected_model_option:
-        model_key = "resnet50"
-        model_display_name = "ResNet50"
-    else:
-        model_key = "basic_cnn"
-        model_display_name = "Basic CNN"
+    model_key = "mobilenetv2"
+    model_display_name = "MobileNetV2"
 
     st.markdown("<div class='rail-section-header'>Calibration (ELA)</div>", unsafe_allow_html=True)
     ela_quality = st.slider(
@@ -551,7 +537,7 @@ with st.sidebar:
 # TOP COMMAND BAR & GLOBAL TELEMETRY
 # ============================================================
 breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Benchmark Suite"
-latency_val = 12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2)
+latency_val = 12.4
 st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
 
 if "Live" in app_mode:
