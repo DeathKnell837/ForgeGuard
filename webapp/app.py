@@ -756,7 +756,7 @@ if "Live" in app_mode:
                 "flags": scan_flags
             })
 
-            st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 1.25rem 0 1.25rem 0;'>", unsafe_allow_html=True)
+            st.markdown("<hr style='border: none; border-top: 1px solid #232326; margin: 1.2rem 0;'>", unsafe_allow_html=True)
             
             # Compute ELA metrics
             ela_np = np.array(ela_img, dtype=np.float32)
@@ -777,22 +777,22 @@ if "Live" in app_mode:
             # 3 PARALLEL EXHIBIT COLUMNS (RAW, ELA, HEATMAP)
             col_raw, col_ela, col_heat = st.columns(3)
             with col_raw:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#94A3B8;'><span>1. Raw Receipt Exhibit</span><span style='color:#8A8A94;'>Original</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#8A8A94;'><span>1. Raw Receipt Exhibit</span><span style='color:#8A8A94;'>Original</span></div>", unsafe_allow_html=True)
                 st.image(pil_img, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             with col_ela:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#A78BFA;'><span>2. ELA Noise Matrix</span><span style='color:#7C6FF0;'>90Q / 15x</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#7C6FF0;'><span>2. ELA Noise Matrix</span><span style='color:#7C6FF0;'>90Q / 15x</span></div>", unsafe_allow_html=True)
                 st.image(ela_img, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             with col_heat:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#00F0FF;'><span>3. Heatmap Overlay</span><span style='color:#2DD4BF;'>Splicing Gradient</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#2DD4BF;'><span>3. Heatmap Overlay</span><span style='color:#2DD4BF;'>Splicing Gradient</span></div>", unsafe_allow_html=True)
                 st.image(overlay, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             
             # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
             gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
             cockpit_html = render_panoramic_incident_cockpit(
-                verdict_text="DIGITAL FORGERY DETECTED" if is_forged else "AUTHENTIC RECEIPT VERIFIED",
+                verdict_text="Digital Forgery Detected" if is_forged else "Authentic Receipt Verified",
                 is_forged=is_forged,
                 confidence=confidence,
                 ela_mean=ela_mean,
@@ -826,7 +826,7 @@ else:
             speed="12.4ms",
             params="3.4M",
             comp_acc="97.8%",
-            color="#00F0FF",
+            color="#7C6FF0",
             is_recommended=True
         )
         st.markdown(card_mnet, unsafe_allow_html=True)
@@ -842,7 +842,7 @@ else:
             speed="28.6ms",
             params="23.5M",
             comp_acc="98.2%",
-            color="#8B5CF6",
+            color="#2DD4BF",
             is_recommended=False
         )
         st.markdown(card_resnet, unsafe_allow_html=True)

@@ -225,7 +225,7 @@ div[data-testid="stRadio"] label:has(input:checked) div[data-testid="stMarkdownC
     color: #FFFFFF !important;
 }
 
-/* Calibration Sliders — Flat, no card wrapper, sitting directly on sidebar */
+/* Calibration Sliders — Sophos Dark Styling */
 div[data-testid="stSlider"] {
     background: transparent !important;
     border: none !important;
@@ -239,6 +239,39 @@ div[data-testid="stSlider"] label {
     font-weight: 500 !important;
     color: #8A8A94 !important;
     margin-bottom: 3px !important;
+}
+
+div[data-testid="stSlider"] [data-baseweb="slider"] {
+    margin-top: 4px !important;
+}
+
+div[data-testid="stSlider"] [data-baseweb="slider"] > div:first-child {
+    background: #16161A !important;
+}
+
+div[data-testid="stSlider"] [role="slider"] {
+    background: #7C6FF0 !important;
+    border: 2px solid #FFFFFF !important;
+    box-shadow: 0 0 10px rgba(124, 111, 240, 0.4) !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+div[data-testid="stSlider"] [data-testid="stSliderThumbValue"],
+div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.7rem !important;
+    color: #8A8A94 !important;
+}
+
+/* Alert & Notice Banners */
+div[data-testid="stAlert"] {
+    background: #111114 !important;
+    border: 1px solid #232326 !important;
+    border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.8rem !important;
+    color: #E2E8F0 !important;
 }
 
 /* Top Command / Breadcrumb Bar */
