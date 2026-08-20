@@ -1,29 +1,22 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD ENTERPRISE FORENSIC COMMAND CENTER CSS (v4.0)
-   Permanent SaaS Sidebar Rail + Zero-Gap + Reopen Safeguard
+   FORGEGUARD SOPHOS ENTERPRISE FORENSIC SYSTEM CSS (v5.0)
+   Sophos AI Smart Cybersecurity Visual Identity
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* Global Surface & Canvas */
 html, body, [class*="css"] {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background-color: #070A11 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background-color: #0A0A0C !important;
     color: #E2E8F0 !important;
 }
 
 .stApp {
-    background-color: #070A11 !important;
-    background-image: 
-        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.10) 0%, transparent 45%),
-        radial-gradient(circle at 0% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 100% 70%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
-        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px) !important;
-    background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px !important;
-    background-position: center, center, center, -1px -1px, -1px -1px !important;
+    background-color: #0A0A0C !important;
+    background-image: radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.05) 0%, transparent 50%) !important;
     background-attachment: fixed !important;
 }
 
@@ -43,28 +36,28 @@ div[data-testid="stAppViewContainer"] > section.main {
 
 .main .block-container,
 div[data-testid="stAppViewBlockContainer"] {
-    padding-top: 0.2rem !important;
-    padding-bottom: 1rem !important;
-    padding-left: 1.2rem !important;
-    padding-right: 1.2rem !important;
-    max-width: 99% !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    max-width: 98% !important;
 }
 
 div[data-testid="stVerticalBlock"] {
-    gap: 0.45rem !important;
+    gap: 0.6rem !important;
 }
 
 /* ============================================================
-   PERMANENT FLAT SIDEBAR RAIL (Sophos Inspired Flat Design)
+   SOPHOS FLAT SIDEBAR RAIL
    ============================================================ */
 section[data-testid="stSidebar"] {
-    background-color: #070A11 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: #0A0A0C !important;
+    border-right: 1px solid #232326 !important;
     padding-top: 0.2rem !important;
     visibility: visible !important;
 }
 
-/* Hide the collapse button inside sidebar to prevent accidental collapse */
+/* Hide collapse button inside sidebar */
 [data-testid="stSidebarCollapseButton"],
 section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
 section[data-testid="stSidebar"] button[kind="header"],
@@ -72,7 +65,7 @@ section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
     display: none !important;
 }
 
-/* ALWAYS PROMINENT REOPEN TOGGLE (If ever collapsed in localStorage) */
+/* Floating Reopen Toggle Button */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stSidebarCollapsedControl"] {
@@ -80,47 +73,48 @@ button[data-testid="stSidebarCollapsedControl"] {
     visibility: visible !important;
     opacity: 1 !important;
     position: fixed !important;
-    top: 0.5rem !important;
-    left: 0.5rem !important;
+    top: 0.6rem !important;
+    left: 0.6rem !important;
     z-index: 999999 !important;
-    background: #0B111E !important;
-    border: 1.5px solid #00F0FF !important;
+    background: #111114 !important;
+    border: 1px solid #7C6FF0 !important;
     border-radius: 8px !important;
-    color: #00F0FF !important;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5) !important;
+    color: #7C6FF0 !important;
+    box-shadow: 0 4px 16px rgba(124, 111, 240, 0.25) !important;
     cursor: pointer !important;
-    padding: 4px 6px !important;
+    padding: 6px 8px !important;
+    transition: all 0.2s ease !important;
 }
 
 [data-testid="stSidebarCollapsedControl"]:hover,
 [data-testid="collapsedControl"]:hover {
-    background: rgba(0, 240, 255, 0.15) !important;
+    background: rgba(124, 111, 240, 0.15) !important;
     transform: scale(1.05) !important;
 }
 
 [data-testid="stSidebarCollapsedControl"] svg,
 [data-testid="collapsedControl"] svg {
-    fill: #00F0FF !important;
-    stroke: #00F0FF !important;
+    fill: #7C6FF0 !important;
+    stroke: #7C6FF0 !important;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
-    padding-top: 0.4rem !important;
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-top: 0.6rem !important;
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
 }
 
-/* Section Header Labels — Small, Muted Monospace with Generous Whitespace Separation (no borders/lines) */
+/* Section Header Labels — Small, Muted Uppercase with Generous Whitespace */
 .rail-section-header {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    font-weight: 700;
-    color: #64748B;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 22px !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    color: #8A8A94 !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase !important;
+    margin-top: 24px !important;
     margin-bottom: 8px !important;
-    padding-left: 0.6rem !important;
+    padding-left: 0.5rem !important;
     border: none !important;
     background: transparent !important;
     display: flex;
@@ -144,12 +138,41 @@ div[data-testid="stRadio"] [data-baseweb="radio"] {
     margin: 0 !important;
 }
 
-/* Inactive items: completely flat, generous padding, muted text, no borders */
+div[data-testid="stRadio"] [data-baseweb="radio"] > div {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Remove all radio circles, dots, and native rings completely */
+div[data-testid="stRadio"] label > div:first-of-type:not([data-testid="stMarkdownContainer"]),
+div[data-testid="stRadio"] [data-baseweb="radio"] > div:first-of-type:not([data-testid="stMarkdownContainer"]),
+div[data-testid="stRadio"] [data-baseweb="radio"] input + div,
+div[data-testid="stRadio"] label input + div,
+div[data-testid="stRadio"] [data-testid="stRadioDot"],
+div[data-testid="stRadio"] input[type="radio"],
+div[data-testid="stRadio"] [aria-hidden="true"],
+div[data-testid="stRadio"] label > div:not([data-testid="stMarkdownContainer"]):not(:has([data-testid="stMarkdownContainer"])) {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    min-width: 0px !important;
+    min-height: 0px !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Inactive items: completely flat, generous padding (12-14px), muted text, no borders */
 div[data-testid="stRadio"] label {
     background: transparent !important;
     border: none !important;
     border-radius: 8px !important;
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.7rem 0.9rem !important;
     margin: 0 !important;
     transition: all 0.15s ease !important;
     cursor: pointer !important;
@@ -160,158 +183,177 @@ div[data-testid="stRadio"] label {
 }
 
 div[data-testid="stRadio"] label:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
     border: none !important;
     box-shadow: none !important;
     transform: none !important;
 }
 
-/* Active / Selected item: solid filled violet-tinted rounded rect background */
-div[data-testid="stRadio"] label[data-checked="true"],
-div[data-testid="stRadio"] label:has(input:checked) {
-    background: rgba(139, 92, 246, 0.18) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.15) !important;
+div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] {
+    width: 100% !important;
 }
 
-/* Hide ONLY the radio input and circle dot */
-div[data-testid="stRadio"] input[type="radio"] {
-    display: none !important;
-}
-
-div[data-testid="stRadio"] [data-testid="stRadioDot"] {
-    display: none !important;
-}
-
-div[data-testid="stRadio"] label > div:first-child:not(:has(p)) {
-    display: none !important;
-}
-
-/* GUARANTEE text is ALWAYS fully visible and styled */
-div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"],
 div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 0.82rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.84rem !important;
     font-weight: 500 !important;
-    color: #8F9CAE !important;
-    letter-spacing: 0.2px !important;
+    color: #8A8A94 !important;
+    letter-spacing: 0.1px !important;
     margin: 0 !important;
-    line-height: 1.4 !important;
     transition: color 0.15s ease !important;
+    line-height: 1.4 !important;
 }
 
 div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p {
-    color: #F1F5F9 !important;
+    color: #FFFFFF !important;
+}
+
+/* Active item: solid filled violet-tinted rounded rect background, crisp white text */
+div[data-testid="stRadio"] label[data-checked="true"],
+div[data-testid="stRadio"] label:has(input:checked) {
+    background: rgba(124, 111, 240, 0.14) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] div[data-testid="stMarkdownContainer"] p,
 div[data-testid="stRadio"] label:has(input:checked) div[data-testid="stMarkdownContainer"] p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.84rem !important;
     font-weight: 600 !important;
     color: #FFFFFF !important;
 }
 
-/* Calibration Sliders — Flat, no box wrapper, sitting directly on sidebar surface */
+/* Calibration Sliders — Flat, no card wrapper, sitting directly on sidebar */
 div[data-testid="stSlider"] {
     background: transparent !important;
     border: none !important;
-    padding: 0 0.4rem 0.3rem 0.4rem !important;
+    padding: 0 0.4rem 0.4rem 0.4rem !important;
     box-shadow: none !important;
 }
 
 div[data-testid="stSlider"] label {
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.75rem !important;
+    font-size: 0.76rem !important;
     font-weight: 500 !important;
-    color: #94A3B8 !important;
-    margin-bottom: 2px !important;
+    color: #8A8A94 !important;
+    margin-bottom: 3px !important;
 }
 
-/* Top Command Bar */
+/* Top Command / Breadcrumb Bar */
 .top-command-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0B111E;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111114;
+    border: 1px solid #232326;
     border-radius: 10px;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    padding: 0.65rem 1.1rem;
+    margin-bottom: 0.8rem;
 }
 
 .breadcrumb-trail {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
+    gap: 8px;
+    font-size: 0.82rem;
     font-family: 'Inter', sans-serif;
-    color: #64748B;
+    color: #8A8A94;
+    font-weight: 500;
 }
 
 .breadcrumb-active {
-    color: #F8FAFC;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    color: #FFFFFF;
+    font-weight: 600;
 }
 
 .telemetry-pill-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .top-telemetry-pill {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #16161A;
+    border: 1px solid #232326;
     border-radius: 6px;
-    padding: 2px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
+    padding: 3px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
 }
 
-/* Action Buttons */
+/* Action Buttons (Outline and Primary) */
 .stButton > button {
-    background: linear-gradient(180deg, #131B2E 0%, #0D1322 100%) !important;
-    border: 1px solid rgba(0, 240, 255, 0.3) !important;
+    background: #111114 !important;
+    border: 1px solid #232326 !important;
     border-radius: 8px !important;
-    color: #F8FAFC !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.8px !important;
-    padding: 0.5rem 0.9rem !important;
+    color: #E2E8F0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    padding: 0.55rem 1rem !important;
     width: 100% !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
     transition: all 0.2s ease !important;
 }
 
 .stButton > button:hover {
-    border-color: #00F0FF !important;
-    box-shadow: 0 0 16px rgba(0, 240, 255, 0.35) !important;
+    border-color: #7C6FF0 !important;
+    background: rgba(124, 111, 240, 0.08) !important;
+    color: #FFFFFF !important;
     transform: translateY(-1px) !important;
-    color: #00F0FF !important;
 }
 
-/* File Uploader */
+/* File Uploader Container */
 div[data-testid="stFileUploader"] {
-    background: #0B111E !important;
-    border: 1.5px dashed rgba(0, 240, 255, 0.35) !important;
-    border-radius: 10px !important;
-    padding: 0.6rem !important;
+    background: #111114 !important;
+    border: 1px solid #232326 !important;
+    border-radius: 12px !important;
+    padding: 0.8rem !important;
     transition: all 0.2s ease !important;
 }
 
-/* 3-EXHIBIT IMAGE CONTAINMENT */
+div[data-testid="stFileUploader"]:hover {
+    border-color: rgba(124, 111, 240, 0.4) !important;
+}
+
+div[data-testid="stFileUploader"] section {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Tabs Styling */
+div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+    gap: 8px !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid #232326 !important;
+    padding-bottom: 4px !important;
+}
+
+div[data-testid="stTabs"] [data-baseweb="tab"] {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 6px !important;
+    color: #8A8A94 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 500 !important;
+    padding: 6px 14px !important;
+}
+
+div[data-testid="stTabs"] [aria-selected="true"] {
+    background: rgba(124, 111, 240, 0.12) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+/* 3-Exhibit Card Frames */
 .exhibit-card-frame {
-    background: #0B111E;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 0.6rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: #111114;
+    border: 1px solid #232326;
+    border-radius: 12px;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -322,12 +364,12 @@ div[data-testid="stFileUploader"] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 6px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 700;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #232326;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
 }
 
 .exhibit-card-frame img,
@@ -337,228 +379,115 @@ div[data-testid="stImage"] img {
     max-width: 100% !important;
     margin: 0 auto !important;
     display: block !important;
-    border-radius: 6px !important;
+    border-radius: 8px !important;
     object-fit: contain !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
+/* Section Title Micro-Labels */
 .eyebrow-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     font-weight: 700;
-    color: #00F0FF;
-    letter-spacing: 1.5px;
+    color: #8A8A94;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-/* ============================================================
-   DASHBOARD — SOC ANALYTICS OVERVIEW
-   ============================================================ */
+/* Incident Cockpit Card */
+.incident-cockpit-card {
+    background: #111114;
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 0.8rem;
+}
 
-.dash-kpi-grid {
+/* Benchmark KPI Tiles */
+.bench-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 1rem;
 }
 
-.dash-kpi-card {
-    background: #0B111E;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+.bench-kpi-card {
+    background: #111114;
+    border: 1px solid #232326;
     border-radius: 12px;
-    padding: 16px 18px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.25s ease;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.dash-kpi-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-
-.dash-kpi-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    border-radius: 12px 0 0 12px;
-}
-
-.dash-kpi-icon {
+.bench-kpi-icon-chip {
     width: 32px;
     height: 32px;
     border-radius: 8px;
+    background: #16161A;
+    border: 1px solid #232326;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
 }
 
-.dash-kpi-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
+.bench-kpi-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
     font-weight: 700;
-    color: #64748B;
-    letter-spacing: 1.5px;
+    color: #8A8A94;
+    letter-spacing: 1.1px;
     text-transform: uppercase;
     margin-bottom: 4px;
 }
 
-.dash-kpi-value {
+.bench-kpi-value {
     font-family: 'Inter', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    color: #F8FAFC;
+    color: #FFFFFF;
     line-height: 1;
     margin-bottom: 6px;
 }
 
-.dash-kpi-delta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 3px;
+.bench-kpi-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #8A8A94;
 }
 
-.dash-card-panel {
-    background: #0B111E;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+/* Head to Head Model Cards */
+.model-matrix-card {
+    background: #111114;
+    border: 1px solid #232326;
     border-radius: 12px;
-    padding: 18px 20px;
-    min-height: 260px;
-}
-
-.dash-section-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: #64748B;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.dash-bar-row {
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-}
-
-.dash-bar-label-row {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+    min-height: 360px;
 }
 
-.dash-bar-track {
+.model-matrix-card.recommended {
+    border: 1.5px solid #7C6FF0;
+    box-shadow: 0 4px 24px rgba(124, 111, 240, 0.15);
+}
+
+.progress-track-dark {
     width: 100%;
-    height: 7px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
+    height: 6px;
+    background: #16161A;
+    border-radius: 3px;
     overflow: hidden;
 }
 
-.dash-bar-fill {
+.progress-fill-rounded {
     height: 100%;
-    border-radius: 4px;
-    transition: width 0.6s ease;
-}
-
-.dash-timeline-card {
-    background: #0B111E;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-top: 14px;
-}
-
-.dash-timeline-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    height: 120px;
-    padding-top: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.dash-timeline-bar {
-    flex: 1;
-    border-radius: 3px 3px 0 0;
-    min-height: 4px;
-    transition: height 0.4s ease;
-}
-
-.dash-empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 120px;
-    border: 1.5px dashed rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: #64748B;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    gap: 8px;
-}
-
-.dash-filter-pill {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    font-weight: 600;
-    color: #A78BFA;
-    letter-spacing: 0.8px;
-}
-
-.dash-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.78rem;
-    color: #E2E8F0;
-}
-
-.dash-legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.dash-donut-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.dash-timeline-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    color: #64748B;
-    text-align: center;
-    padding-top: 4px;
+    border-radius: 3px;
 }
 </style>
 """

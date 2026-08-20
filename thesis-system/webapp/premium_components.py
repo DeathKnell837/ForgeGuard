@@ -1,42 +1,42 @@
 # -*- coding: utf-8 -*-
 """
 ForgeGuard Enterprise Forensic Command Center Components
-Simultaneous 3-Exhibit Matrix + 3-Engine Real-Time Consensus
+Sophos AI Smart Cybersecurity Visual Identity (v5.0)
 """
 
 def render_sophos_brand_sidebar():
-    return """<div style="padding: 0.4rem 0.5rem 0.8rem 0.5rem; margin-bottom: 0.4rem;">
+    return """<div style="padding: 0.4rem 0.4rem 0.8rem 0.4rem; margin-bottom: 0.4rem;">
 <div style="display: flex; align-items: center; gap: 10px;">
-<div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #00F0FF 0%, #8B5CF6 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(0,240,255,0.35);">
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#070A11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #7C6FF0 0%, #4F46E5 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(124, 111, 240, 0.35);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
 </svg>
 </div>
 <div>
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; font-weight: 800; color: #F8FAFC; letter-spacing: 0.8px; line-height: 1;">FORGEGUARD</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: #64748B; letter-spacing: 0.5px;">MOBILE FORENSICS v2.4</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px; line-height: 1.1;">ForgeGuard</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.62rem; color: #8A8A94; font-weight: 500; letter-spacing: 0.5px;">Mobile Forensics v2.4</div>
 </div>
 </div>
 </div>"""
 
 
 def render_investigator_profile_card():
-    return """<div style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 1.5rem; padding-top: 1rem; padding-left: 0.25rem; padding-right: 0.25rem;">
-<div style="display: flex; align-items: center; gap: 9px; margin-bottom: 6px;">
-<div style="width: 26px; height: 26px; border-radius: 50%; background: #131B2E; border: 1px solid rgba(0,240,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: #00F0FF; font-weight: 700; font-family: 'Inter', sans-serif;">
+    return """<div style="border-top: 1px solid #232326; margin-top: 1.8rem; padding-top: 1rem; padding-left: 0.4rem; padding-right: 0.4rem;">
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+<div style="width: 28px; height: 28px; border-radius: 50%; background: #16161A; border: 1px solid #232326; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; color: #7C6FF0; font-weight: 700; font-family: 'Inter', sans-serif;">
 BS
 </div>
 <div>
-<div style="font-size: 0.74rem; font-weight: 700; color: #F8FAFC; font-family: 'Inter', sans-serif;">Rogie B. & Daniela U.</div>
-<div style="font-size: 0.6rem; color: #64748B; font-family: 'JetBrains Mono', monospace;">NDMC CITE • BSCS-4</div>
+<div style="font-size: 0.76rem; font-weight: 600; color: #FFFFFF; font-family: 'Inter', sans-serif;">Rogie B. & Daniela U.</div>
+<div style="font-size: 0.62rem; color: #8A8A94; font-family: 'Inter', sans-serif;">NDMC CITE • BSCS-4</div>
 </div>
 </div>
-<div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #10B981; padding-top: 2px;">
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; font-family: 'Inter', sans-serif; color: #10B981; padding-top: 2px;">
 <span style="display: flex; align-items: center; gap: 5px;">
-<span style="width: 5px; height: 5px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-SYSTEM ONLINE
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+System Online
 </span>
-<span style="color: #64748B;">3 CNNs ACTIVE</span>
+<span style="color: #8A8A94;">3 CNNs Active</span>
 </div>
 </div>"""
 
@@ -44,128 +44,123 @@ SYSTEM ONLINE
 def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, model_name="MobileNetV2"):
     return f"""<div class="top-command-bar">
 <div class="breadcrumb-trail">
-<span>FORGEGUARD</span>
-<span>/</span>
-<span>EVIDENCE TRIAGE</span>
-<span>/</span>
+<span>ForgeGuard</span>
+<span style="color: #4A4A52;">/</span>
+<span>Evidence Triage</span>
+<span style="color: #4A4A52;">/</span>
 <span class="breadcrumb-active">{breadcrumb_text}</span>
 </div>
 <div class="telemetry-pill-group">
-<div class="top-telemetry-pill">
-<span style="color: #64748B;">CONSENSUS:</span> <strong style="color: #10B981;">3/3 MODELS UNANIMOUS</strong>
+<div class="top-telemetry-pill" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25);">
+<span style="color: #10B981; font-weight: 600;">3/3 Models Unanimous</span>
+</div>
+<div class="top-telemetry-pill" style="background: rgba(124, 111, 240, 0.08); border-color: rgba(124, 111, 240, 0.25);">
+<span style="color: #8A8A94;">Global Acc:</span> <strong style="color: #7C6FF0;">{accuracy_pct}%</strong>
 </div>
 <div class="top-telemetry-pill">
-<span style="color: #64748B;">GLOBAL ACC:</span> <strong style="color: #00F0FF;">98.4%</strong>
-</div>
-<div class="top-telemetry-pill">
-<span style="color: #64748B;">PIPELINE:</span> <strong style="color: #8B5CF6;">ELA + MULTI-CNN</strong>
+<span style="color: #8A8A94;">Engine:</span> <strong style="color: #FFFFFF;">{model_name}</strong>
 </div>
 </div>
 </div>"""
 
 
 def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
-    return f"""<div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 4px 10px; margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #94A3B8;">
-<div>EXHIBIT: <span style="color: #F8FAFC; font-weight: 600;">{filename}</span></div>
-<div>RES: <span style="color: #00F0FF;">{resolution}</span></div>
-<div>HASH: <span style="color: #A78BFA;">{sha256_hash}</span></div>
+    return f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #111114; border: 1px solid #232326; border-radius: 8px; padding: 6px 14px; margin-bottom: 8px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #8A8A94;">
+<div>Exhibit: <span style="color: #FFFFFF; font-weight: 600;">{filename}</span></div>
+<div>Resolution: <span style="color: #7C6FF0; font-weight: 600;">{resolution}</span></div>
+<div>SHA256: <span style="color: #8A8A94; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;">{sha256_hash}</span></div>
 </div>"""
 
 
 def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None):
-    """
-    Renders a unified wide-angle incident console containing 3-Engine simultaneous breakdown + Forensic metrics.
-    """
-    status_color = "#F87171" if is_forged else "#34D399"
-    status_glow = "rgba(248, 113, 113, 0.25)" if is_forged else "rgba(52, 211, 153, 0.25)"
-    status_border = "rgba(248, 113, 113, 0.4)" if is_forged else "rgba(52, 211, 153, 0.4)"
-    severity_tag = "CRITICAL: DIGITAL FORGERY CONFIRMED" if is_forged else "SECURE: AUTHENTIC RECEIPT CONFIRMED"
+    status_color = "#EF4444" if is_forged else "#10B981"
+    status_bg = "rgba(239, 68, 68, 0.08)" if is_forged else "rgba(16, 185, 129, 0.08)"
+    status_border = "rgba(239, 68, 68, 0.25)" if is_forged else "rgba(16, 185, 129, 0.25)"
+    severity_tag = "Critical: Digital Forgery Confirmed" if is_forged else "Secure: Authentic Receipt Confirmed"
     sub_desc = "Compression rate disparity & synthetic splicing detected across amount fields." if is_forged else "Uniform pixel noise gradient across all metadata and amount regions."
     
     pct = confidence * 100.0
-    
     mnet_conf = (pct if is_forged else (100 - pct * 0.05))
     resnet_conf = (pct + 0.6 if is_forged else (100 - pct * 0.04))
     bcnn_conf = (pct - 3.4 if is_forged else (100 - pct * 0.08))
     
     analysis_block = ""
     if gemini_analysis:
-        analysis_block = f"""<div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 8px 12px; margin-top: 8px;">
-<div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-<span style="width: 5px; height: 5px; border-radius: 50%; background: #8B5CF6;"></span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #A78BFA; font-weight: 700;">EXPLAINABLE AI FORENSIC DIAGNOSTICS</span>
+        analysis_block = f"""<div style="background: #16161A; border: 1px solid #232326; border-left: 3px solid #7C6FF0; border-radius: 8px; padding: 10px 14px; margin-top: 12px;">
+<div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #7C6FF0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Explainable AI Forensic Diagnostics</span>
 </div>
-<div style="font-size: 0.76rem; color: #E2E8F0; line-height: 1.4;">{gemini_analysis}</div>
+<div style="font-size: 0.8rem; color: #E2E8F0; line-height: 1.45;">{gemini_analysis}</div>
 </div>"""
 
-    return f"""<div style="background: #0B111E; border: 1px solid {status_border}; border-radius: 12px; padding: 1rem; box-shadow: 0 10px 40px {status_glow}; margin-top: 0.6rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+    return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border};">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 <div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 8px; height: 8px; border-radius: 50%; background: {status_color}; box-shadow: 0 0 8px {status_color}; display: inline-block;"></span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; color: {status_color}; letter-spacing: 1px;">{severity_tag}</span>
+<span style="width: 8px; height: 8px; border-radius: 50%; background: {status_color}; display: inline-block;"></span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.74rem; font-weight: 700; color: {status_color}; letter-spacing: 0.3px;">{severity_tag}</span>
 </div>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 2px 8px; border-radius: 6px;">3/3 MODELS UNANIMOUS</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 3px 10px; border-radius: 6px; font-weight: 600;">3/3 Models Unanimous</span>
 </div>
 
-<div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; align-items: center;">
+<div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; align-items: center;">
 <div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 800; color: #F8FAFC; letter-spacing: 0.5px; margin-bottom: 2px;">{verdict_text}</div>
-<div style="font-size: 0.75rem; color: #94A3B8; line-height: 1.35; margin-bottom: 8px;">{sub_desc}</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px; margin-bottom: 4px;">{verdict_text}</div>
+<div style="font-size: 0.78rem; color: #8A8A94; line-height: 1.4; margin-bottom: 12px;">{sub_desc}</div>
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center;">
-<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 5px;">
-<div style="font-size: 0.6rem; color: #64748B; font-family: 'Inter', sans-serif;">NOISE MEAN</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00F0FF;">{ela_mean:.1f}</div>
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center;">
+<div style="background: #16161A; border: 1px solid #232326; border-radius: 8px; padding: 7px 6px;">
+<div style="font-size: 0.62rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Mean</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #7C6FF0;">{ela_mean:.1f}</div>
 </div>
-<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 5px;">
-<div style="font-size: 0.6rem; color: #64748B; font-family: 'Inter', sans-serif;">VARIANCE</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: {status_color};">{ela_var:.1f}</div>
+<div style="background: #16161A; border: 1px solid #232326; border-radius: 8px; padding: 7px 6px;">
+<div style="font-size: 0.62rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Variance</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {status_color};">{ela_var:.1f}</div>
 </div>
-<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 5px;">
-<div style="font-size: 0.6rem; color: #64748B; font-family: 'Inter', sans-serif;">PEAK PIXEL</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #A78BFA;">{ela_max:.0f}</div>
+<div style="background: #16161A; border: 1px solid #232326; border-radius: 8px; padding: 7px 6px;">
+<div style="font-size: 0.62rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Peak Pixel</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #2DD4BF;">{ela_max:.0f}</div>
 </div>
-<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 5px;">
-<div style="font-size: 0.6rem; color: #64748B; font-family: 'Inter', sans-serif;">BEST SPEED</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #10B981;">12.4ms</div>
+<div style="background: #16161A; border: 1px solid #232326; border-radius: 8px; padding: 7px 6px;">
+<div style="font-size: 0.62rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Best Speed</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #10B981;">12.4ms</div>
 </div>
 </div>
-</div>
-
-<div style="background: rgba(6,9,16,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 10px;">
-<div style="display: flex; justify-content: space-between; font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: #64748B; margin-bottom: 4px;">
-<span>3-ENGINE SIMULTANEOUS INFERENCE</span>
-<span>CERTAINTY • SPEED</span>
 </div>
 
-<div style="display: flex; flex-direction: column; gap: 5px;">
+<div style="background: #16161A; border: 1px solid #232326; border-radius: 10px; padding: 10px 14px;">
+<div style="display: flex; justify-content: space-between; font-size: 0.68rem; font-family: 'Inter', sans-serif; font-weight: 600; color: #8A8A94; margin-bottom: 8px; text-transform: uppercase;">
+<span>Simultaneous Architecture Inference</span>
+<span>Certainty • Latency</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px;">
 <div>
-<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; margin-bottom: 2px;">
-<span style="color: #00F0FF; font-weight: 700;">MobileNetV2 (Recommended)</span>
-<span><strong style="color: {status_color};">{mnet_conf:.1f}%</strong> • <span style="color: #94A3B8;">12.4ms</span></span>
+<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 3px;">
+<span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 (Recommended)</span>
+<span><strong style="color: {status_color};">{mnet_conf:.1f}%</strong> • <span style="color: #8A8A94;">12.4ms</span></span>
 </div>
-<div style="width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;">
-<div style="width: {mnet_conf}%; height: 100%; background: #00F0FF; border-radius: 2px;"></div>
-</div>
-</div>
-
-<div>
-<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; margin-bottom: 2px;">
-<span style="color: #8B5CF6; font-weight: 700;">ResNet50 (Deep Benchmark)</span>
-<span><strong style="color: {status_color};">{resnet_conf:.1f}%</strong> • <span style="color: #94A3B8;">28.6ms</span></span>
-</div>
-<div style="width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;">
-<div style="width: {resnet_conf}%; height: 100%; background: #8B5CF6; border-radius: 2px;"></div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {mnet_conf}%; background: #7C6FF0;"></div>
 </div>
 </div>
 
 <div>
-<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; margin-bottom: 2px;">
-<span style="color: #F59E0B; font-weight: 700;">Basic CNN (Baseline)</span>
-<span><strong style="color: {status_color};">{bcnn_conf:.1f}%</strong> • <span style="color: #94A3B8;">45.2ms</span></span>
+<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 3px;">
+<span style="color: #8A8A94; font-weight: 600;">ResNet50 (Deep Benchmark)</span>
+<span><strong style="color: {status_color};">{resnet_conf:.1f}%</strong> • <span style="color: #8A8A94;">28.6ms</span></span>
 </div>
-<div style="width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;">
-<div style="width: {bcnn_conf}%; height: 100%; background: #F59E0B; border-radius: 2px;"></div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {resnet_conf}%; background: #2DD4BF;"></div>
+</div>
+</div>
+
+<div>
+<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 3px;">
+<span style="color: #8A8A94; font-weight: 600;">Basic CNN (Baseline)</span>
+<span><strong style="color: {status_color};">{bcnn_conf:.1f}%</strong> • <span style="color: #8A8A94;">45.2ms</span></span>
+</div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {bcnn_conf}%; background: #F59E0B;"></div>
 </div>
 </div>
 </div>
@@ -176,159 +171,182 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 
 
 def render_sophos_benchmark_summary_tiles():
-    return """<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 0.8rem;">
-<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px;">
-<div style="font-size: 0.65rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">TOP ACCURACY</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800; color: #F8FAFC;">98.7%</div>
-<div style="font-size: 0.62rem; color: #8B5CF6;">ResNet50 (Deep Benchmark)</div>
+    return """<div class="bench-kpi-grid">
+<div class="bench-kpi-card">
+<div class="bench-kpi-icon-chip">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FF0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+</svg>
 </div>
-<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px;">
-<div style="font-size: 0.65rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">FASTEST INFERENCE</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800; color: #00F0FF;">12.4ms</div>
-<div style="font-size: 0.62rem; color: #00F0FF;">MobileNetV2 (2.3x Faster)</div>
+<div class="bench-kpi-label">Top Accuracy</div>
+<div class="bench-kpi-value">98.7%</div>
+<div class="bench-kpi-sub" style="color: #7C6FF0;">ResNet50 (Deep Benchmark)</div>
 </div>
-<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px;">
-<div style="font-size: 0.65rem; color: #64748B; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">LIGHTEST FOOTPRINT</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800; color: #10B981;">3.4M</div>
-<div style="font-size: 0.62rem; color: #10B981;">85.5% Lighter than ResNet</div>
+
+<div class="bench-kpi-card">
+<div class="bench-kpi-icon-chip">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+</svg>
 </div>
-<div style="background: #0B111E; border: 1px solid rgba(0,240,255,0.3); border-radius: 10px; padding: 10px; box-shadow: 0 0 20px rgba(0,240,255,0.1);">
-<div style="font-size: 0.65rem; color: #00F0FF; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">SOP 5 PARETO WINNER</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 800; color: #00F0FF;">MobileNetV2</div>
-<div style="font-size: 0.62rem; color: #F8FAFC;">Optimal Smartphone Model</div>
+<div class="bench-kpi-label">Fastest Inference</div>
+<div class="bench-kpi-value">12.4ms</div>
+<div class="bench-kpi-sub" style="color: #2DD4BF;">MobileNetV2 (2.3x Faster)</div>
+</div>
+
+<div class="bench-kpi-card">
+<div class="bench-kpi-icon-chip">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+</svg>
+</div>
+<div class="bench-kpi-label">Lightest Footprint</div>
+<div class="bench-kpi-value">3.4M</div>
+<div class="bench-kpi-sub" style="color: #10B981;">85.5% Lighter than ResNet</div>
+</div>
+
+<div class="bench-kpi-card" style="border-color: rgba(124, 111, 240, 0.4); background: #111114;">
+<div class="bench-kpi-icon-chip" style="background: rgba(124, 111, 240, 0.12); border-color: rgba(124, 111, 240, 0.3);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FF0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+</svg>
+</div>
+<div class="bench-kpi-label" style="color: #7C6FF0;">SOP 5 Pareto Winner</div>
+<div class="bench-kpi-value" style="color: #7C6FF0; font-size: 1.5rem;">MobileNetV2</div>
+<div class="bench-kpi-sub" style="color: #FFFFFF;">Optimal Smartphone Model</div>
 </div>
 </div>"""
 
 
-def svg_radial_dial(percent, color="#00F0FF", label="ACCURACY", size=105):
+def svg_radial_dial(percent, color="#7C6FF0", label="ACCURACY", size=105):
     r = 40
     circumference = 2 * 3.14159265 * r
     filled = circumference * (min(100.0, max(0.0, percent)) / 100.0)
     gap = circumference - filled
     
-    return f"""<div style="display: flex; justify-content: center; margin: 0.4rem 0;">
+    return f"""<div style="display: flex; justify-content: center; margin: 0.6rem 0;">
 <svg width="{size}" height="{size}" viewBox="0 0 120 120">
-<circle cx="60" cy="60" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+<circle cx="60" cy="60" r="{r}" fill="none" stroke="#16161A" stroke-width="8"/>
 <circle cx="60" cy="60" r="{r}" fill="none" stroke="{color}" stroke-width="8" stroke-dasharray="{filled:.1f} {gap:.1f}" stroke-linecap="round" transform="rotate(-90 60 60)"/>
-<text x="60" y="58" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="800">{percent:.1f}%</text>
-<text x="60" y="74" text-anchor="middle" fill="{color}" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" letter-spacing="1">{label}</text>
+<text x="60" y="58" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="17" font-weight="800">{percent:.1f}%</text>
+<text x="60" y="74" text-anchor="middle" fill="{color}" font-family="'Inter', sans-serif" font-size="8" font-weight="700" letter-spacing="1">{label}</text>
 </svg>
 </div>"""
 
 
-def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, color="#00F0FF", is_recommended=False):
-    r_val, g_val, b_val = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-    rec_badge = f"""<span style="background:rgba({r_val},{g_val},{b_val},0.15);color:{color};font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;padding:2px 6px;border-radius:4px;border:1px solid rgba({r_val},{g_val},{b_val},0.3);">{tag}</span>"""
-    card_border = f"border: 1.5px solid {color}; box-shadow: 0 8px 32px rgba({r_val},{g_val},{b_val},0.15);" if is_recommended else "border: 1px solid rgba(255,255,255,0.08);"
+def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, color="#7C6FF0", is_recommended=False):
+    rec_badge = f"""<span style="background:rgba(124, 111, 240, 0.12);color:{color};font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:700;padding:3px 8px;border-radius:6px;border:1px solid rgba(124, 111, 240, 0.25);">{tag}</span>"""
+    card_class = "model-matrix-card recommended" if is_recommended else "model-matrix-card"
     dial_html = svg_radial_dial(acc, color=color, label="ACCURACY", size=100)
     
-    return f"""<div style="background:#0B111E;border-radius:10px;padding:1rem;{card_border}display:flex;flex-direction:column;justify-content:space-between;min-height:340px;">
+    return f"""<div class="{card_class}">
 <div>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
-<span style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;color:#F8FAFC;">{title}</span>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+<span style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; color: #FFFFFF;">{title}</span>
 {rec_badge}
 </div>
 {dial_html}
-<div style="margin:0.5rem 0;display:flex;flex-direction:column;gap:5px;">
+<div style="margin: 0.6rem 0; display: flex; flex-direction: column; gap: 7px;">
 <div>
-<div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#94A3B8;font-family:'JetBrains Mono',monospace;margin-bottom:2px;">
-<span>PRECISION</span>
-<strong style="color:#F8FAFC;">{prec:.1f}%</strong>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8A8A94; font-family: 'Inter', sans-serif; margin-bottom: 2px;">
+<span>Precision</span>
+<strong style="color: #FFFFFF;">{prec:.1f}%</strong>
 </div>
-<div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
-<div style="width:{prec}%;height:100%;background:{color};border-radius:2px;"></div>
-</div>
-</div>
-<div>
-<div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#94A3B8;font-family:'JetBrains Mono',monospace;margin-bottom:2px;">
-<span>RECALL</span>
-<strong style="color:#F8FAFC;">{rec:.1f}%</strong>
-</div>
-<div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
-<div style="width:{rec}%;height:100%;background:{color};border-radius:2px;"></div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {prec}%; background: {color};"></div>
 </div>
 </div>
 <div>
-<div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#94A3B8;font-family:'JetBrains Mono',monospace;margin-bottom:2px;">
-<span>F1-SCORE</span>
-<strong style="color:#F8FAFC;">{f1:.1f}%</strong>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8A8A94; font-family: 'Inter', sans-serif; margin-bottom: 2px;">
+<span>Recall</span>
+<strong style="color: #FFFFFF;">{rec:.1f}%</strong>
 </div>
-<div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
-<div style="width:{f1}%;height:100%;background:{color};border-radius:2px;"></div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {rec}%; background: {color};"></div>
 </div>
-</div>
-</div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;background:rgba(0,0,0,0.3);border-radius:6px;padding:5px;text-align:center;">
-<div>
-<div style="font-size:0.6rem;color:#64748B;font-family:'JetBrains Mono',monospace;">LATENCY</div>
-<div style="font-size:0.82rem;font-weight:700;color:#F8FAFC;font-family:'JetBrains Mono',monospace;">{speed}</div>
 </div>
 <div>
-<div style="font-size:0.6rem;color:#64748B;font-family:'JetBrains Mono',monospace;">PARAMS</div>
-<div style="font-size:0.82rem;font-weight:700;color:#F8FAFC;font-family:'JetBrains Mono',monospace;">{params}</div>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8A8A94; font-family: 'Inter', sans-serif; margin-bottom: 2px;">
+<span>F1-Score</span>
+<strong style="color: #FFFFFF;">{f1:.1f}%</strong>
+</div>
+<div class="progress-track-dark">
+<div class="progress-fill-rounded" style="width: {f1}%; background: {color};"></div>
+</div>
+</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #16161A; border: 1px solid #232326; border-radius: 8px; padding: 6px; text-align: center;">
+<div>
+<div style="font-size: 0.6rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Latency</div>
+<div style="font-size: 0.85rem; font-weight: 700; color: #FFFFFF; font-family: 'Inter', sans-serif;">{speed}</div>
+</div>
+<div>
+<div style="font-size: 0.6rem; color: #8A8A94; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Params</div>
+<div style="font-size: 0.85rem; font-weight: 700; color: #FFFFFF; font-family: 'Inter', sans-serif;">{params}</div>
 </div>
 </div>
 </div>"""
 
 
 def render_comparative_breakdown_bars():
-    return """<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 0.8rem;">
-<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.85rem 1.1rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: #F8FAFC;">INFERENCE SPEED ON MOBILE CPU</span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #00F0FF;">MILLISECONDS</span>
+    return """<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 1rem;">
+<div style="background: #111114; border: 1px solid #232326; border-radius: 12px; padding: 1rem 1.2rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: #FFFFFF;">Inference Speed on Mobile CPU</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #7C6FF0; font-weight: 600;">Milliseconds</span>
 </div>
-<div style="display: flex; flex-direction: column; gap: 6px;">
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 27%; height: 100%; background: #00F0FF; border-radius: 3px; box-shadow: 0 0 10px rgba(0,240,255,0.5);"></div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #FFFFFF; font-weight: 600;">MobileNetV2</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 27%; background: #7C6FF0;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #00F0FF;">12.4 ms</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #7C6FF0;">12.4 ms</span>
 </div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #94A3B8;">ResNet50</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 63%; height: 100%; background: #8B5CF6; border-radius: 3px;"></div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #8A8A94;">ResNet50</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 63%; background: #2DD4BF;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #8B5CF6;">28.6 ms</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #2DD4BF;">28.6 ms</span>
 </div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #64748B;">Basic CNN</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 100%; height: 100%; background: #F59E0B; border-radius: 3px;"></div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #8A8A94;">Basic CNN</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 100%; background: #F59E0B;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #F59E0B;">45.2 ms</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #F59E0B;">45.2 ms</span>
 </div>
 </div>
 </div>
-<div style="background: #0B111E; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.85rem 1.1rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: #F8FAFC;">MODEL PARAMETER FOOTPRINT</span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #10B981;">MILLIONS OF PARAMS</span>
+
+<div style="background: #111114; border: 1px solid #232326; border-radius: 12px; padding: 1rem 1.2rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: #FFFFFF;">Model Parameter Footprint</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #10B981; font-weight: 600;">Millions of Params</span>
 </div>
-<div style="display: flex; flex-direction: column; gap: 6px;">
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #F8FAFC; font-weight: 600;">MobileNetV2</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 14%; height: 100%; background: #10B981; border-radius: 3px; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #FFFFFF; font-weight: 600;">MobileNetV2</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 14%; background: #10B981;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #10B981;">3.4 M</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #10B981;">3.4 M</span>
 </div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #64748B;">Basic CNN</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 9%; height: 100%; background: #F59E0B; border-radius: 3px;"></div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #8A8A94;">Basic CNN</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 9%; background: #F59E0B;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #F59E0B;">2.1 M</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #F59E0B;">2.1 M</span>
 </div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<span style="width: 95px; font-size: 0.74rem; color: #94A3B8;">ResNet50</span>
-<div style="flex: 1; height: 7px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-<div style="width: 100%; height: 100%; background: #8B5CF6; border-radius: 3px;"></div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 100px; font-size: 0.76rem; color: #8A8A94;">ResNet50</span>
+<div class="progress-track-dark" style="flex: 1; height: 8px;">
+<div class="progress-fill-rounded" style="width: 100%; background: #2DD4BF;"></div>
 </div>
-<span style="width: 55px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #8B5CF6;">23.5 M</span>
+<span style="width: 60px; text-align: right; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700; color: #2DD4BF;">23.5 M</span>
 </div>
 </div>
 </div>
@@ -336,265 +354,15 @@ def render_comparative_breakdown_bars():
 
 
 def executive_sop5_recommendation_card():
-    return """<div style="background: linear-gradient(135deg, rgba(0,240,255,0.08) 0%, rgba(139,92,246,0.08) 100%); border: 1.5px solid rgba(0,240,255,0.4); border-left: 4px solid #00F0FF; border-radius: 10px; padding: 0.9rem 1.2rem; margin-top: 0.8rem; box-shadow: 0 6px 24px rgba(0,240,255,0.1);">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-<div style="font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 800; color: #00F0FF; letter-spacing: 0.8px;">THESIS SOP 5 — OPTIMAL ARCHITECTURE CONCLUSION</div>
-<span style="background: rgba(0,240,255,0.15); color: #00F0FF; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 12px; border: 1px solid rgba(0,240,255,0.3);">MOBILENETV2 SELECTED</span>
+    return """<div style="background: #111114; border: 1px solid #232326; border-left: 4px solid #7C6FF0; border-radius: 12px; padding: 1rem 1.3rem; margin-top: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 800; color: #7C6FF0; letter-spacing: 0.2px;">Thesis SOP 5 — Optimal Architecture Conclusion</div>
+<span style="background: rgba(124, 111, 240, 0.12); color: #7C6FF0; font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(124, 111, 240, 0.25);">MobileNetV2 Selected</span>
 </div>
-<div style="color: #F8FAFC; font-size: 0.82rem; line-height: 1.45; margin-bottom: 0.4rem;">
+<div style="color: #E2E8F0; font-size: 0.84rem; line-height: 1.5; margin-bottom: 0.5rem;">
 <strong>Decision Rationale for Midsayap Online Sellers:</strong> <strong>MobileNetV2</strong> delivers <strong>98.4% accuracy</strong> at <strong>12.4 ms latency</strong> (2.3x faster than ResNet50) with only <strong>3.4M parameters</strong>.
 </div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #34D399; background: rgba(52,211,153,0.08); padding: 5px 8px; border-radius: 6px; border: 1px solid rgba(52,211,153,0.25);">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #10B981; background: rgba(16, 185, 129, 0.08); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);">
 Pareto Verdict: <strong>MobileNetV2</strong> is the optimal real-time model for instant fraud detection on consumer smartphones.
 </div>
 </div>"""
-
-
-# ============================================================
-# DASHBOARD COMPONENTS — SOC Analytics Overview
-# ============================================================
-
-def render_dashboard_kpi_row(total, authenticated, forged, avg_confidence):
-    """Renders 4 SOC-style KPI stat cards in a horizontal grid."""
-    total = int(total or 0)
-    authenticated = int(authenticated or 0)
-    forged = int(forged or 0)
-    avg_confidence = float(avg_confidence or 0.0)
-
-    # Compute deltas (session-based, show last scan change)
-    def _delta_html(value, suffix="", is_pct=False):
-        if value == 0:
-            return '<span class="dash-kpi-delta" style="color: #64748B;">— NO DATA</span>'
-        color = "#10B981"
-        arrow = "▲"
-        return f'<span class="dash-kpi-delta" style="color: {color};">{arrow} {value}{suffix}</span>'
-
-    conf_display = f"{avg_confidence:.1f}%" if total > 0 else "—"
-    conf_delta = _delta_html(round(avg_confidence, 1), "%") if total > 0 else '<span class="dash-kpi-delta" style="color: #64748B;">— AWAITING</span>'
-
-    return f"""<div class="dash-kpi-grid">
-<div class="dash-kpi-card" style="border-left: 3px solid #00F0FF;">
-<div class="dash-kpi-icon" style="background: rgba(0,240,255,0.1);">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/>
-</svg>
-</div>
-<div class="dash-kpi-label">TOTAL RECEIPTS SCANNED</div>
-<div class="dash-kpi-value">{total}</div>
-{_delta_html(total, " scans")}
-</div>
-
-<div class="dash-kpi-card" style="border-left: 3px solid #10B981;">
-<div class="dash-kpi-icon" style="background: rgba(16,185,129,0.1);">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
-</svg>
-</div>
-<div class="dash-kpi-label">AUTHENTICATED</div>
-<div class="dash-kpi-value" style="color: #10B981;">{authenticated}</div>
-{_delta_html(authenticated, " verified")}
-</div>
-
-<div class="dash-kpi-card" style="border-left: 3px solid #F87171;">
-<div class="dash-kpi-icon" style="background: rgba(248,113,113,0.1);">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-</svg>
-</div>
-<div class="dash-kpi-label">FLAGGED AS FORGED</div>
-<div class="dash-kpi-value" style="color: #F87171;">{forged}</div>
-{_delta_html(forged, " flagged")}
-</div>
-
-<div class="dash-kpi-card" style="border-left: 3px solid #8B5CF6;">
-<div class="dash-kpi-icon" style="background: rgba(139,92,246,0.1);">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-</svg>
-</div>
-<div class="dash-kpi-label">AVG CONFIDENCE</div>
-<div class="dash-kpi-value" style="color: #A78BFA;">{conf_display}</div>
-{conf_delta}
-</div>
-</div>"""
-
-
-def render_dashboard_verdict_donut(authenticated, forged):
-    """Renders SVG donut ring chart for Case Verdict Breakdown."""
-    authenticated = int(authenticated or 0)
-    forged = int(forged or 0)
-    total = authenticated + forged
-    if total == 0:
-        return """<div class="dash-card-panel">
-<div class="dash-section-title">CASE VERDICT BREAKDOWN</div>
-<div class="dash-empty-state">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-<span>NO SCAN DATA YET</span>
-<span style="font-size: 0.65rem; color: #475569;">Run scans in Live Threat Scanner to populate</span>
-</div>
-</div>"""
-
-    # SVG donut math
-    r = 55
-    cx, cy = 70, 70
-    circumference = 2 * 3.14159265 * r
-    auth_pct = (authenticated / total) * 100
-    forged_pct = (forged / total) * 100
-    auth_arc = circumference * (auth_pct / 100.0)
-    forged_arc = circumference * (forged_pct / 100.0)
-    gap_arc = circumference - auth_arc - forged_arc
-
-    # Forged starts where auth ends
-    auth_offset = circumference * 0.25  # start at top
-    forged_offset = auth_offset - auth_arc
-
-    return f"""<div class="dash-card-panel">
-<div class="dash-section-title">CASE VERDICT BREAKDOWN</div>
-<div style="display: flex; align-items: center; gap: 24px;">
-<div style="position: relative; width: 140px; height: 140px; flex-shrink: 0;">
-<svg width="140" height="140" viewBox="0 0 140 140">
-<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
-<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#10B981" stroke-width="12"
-  stroke-dasharray="{auth_arc:.1f} {circumference - auth_arc:.1f}"
-  stroke-dashoffset="{auth_offset:.1f}" stroke-linecap="round" transform="rotate(-90 {cx} {cy})"/>
-<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#F87171" stroke-width="12"
-  stroke-dasharray="{forged_arc:.1f} {circumference - forged_arc:.1f}"
-  stroke-dashoffset="{forged_offset:.1f}" stroke-linecap="round" transform="rotate(-90 {cx} {cy})"/>
-<text x="{cx}" y="{cy - 4}" text-anchor="middle" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="22" font-weight="800">{total}</text>
-<text x="{cx}" y="{cy + 14}" text-anchor="middle" fill="#64748B" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" letter-spacing="1.2">TOTAL SCANS</text>
-</svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px; flex: 1;">
-<div class="dash-legend-item">
-<span class="dash-legend-dot" style="background: #10B981;"></span>
-<span>Authenticated</span>
-<strong style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #10B981;">{authenticated} ({auth_pct:.0f}%)</strong>
-</div>
-<div class="dash-legend-item">
-<span class="dash-legend-dot" style="background: #F87171;"></span>
-<span>Flagged as Forged</span>
-<strong style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #F87171;">{forged} ({forged_pct:.0f}%)</strong>
-</div>
-<div style="margin-top: 4px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);">
-<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #64748B;">
-<span>DETECTION RATE</span>
-<span style="color: #A78BFA;">{forged_pct:.1f}%</span>
-</div>
-</div>
-</div>
-</div>
-</div>"""
-
-
-def render_dashboard_flag_bars(flag_counts):
-    """Renders horizontal bar breakdown for Flag Reason Distribution."""
-    if not flag_counts or not isinstance(flag_counts, dict):
-        flag_counts = {}
-    total_flags = sum(flag_counts.values()) if flag_counts else 0
-
-    if total_flags == 0:
-        return """<div class="dash-card-panel">
-<div class="dash-section-title">FLAG REASON DISTRIBUTION</div>
-<div class="dash-empty-state">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-<span>NO FLAGS RECORDED</span>
-<span style="font-size: 0.65rem; color: #475569;">Flags are assigned during forgery detection</span>
-</div>
-</div>"""
-
-    bar_colors = {
-        "High ELA Noise": "#8B5CF6",
-        "Low Model Confidence": "#A78BFA",
-        "Metadata Anomaly": "#F59E0B",
-        "Unanimous Forgery": "#F87171"
-    }
-
-    bars_html = ""
-    for label in ["High ELA Noise", "Low Model Confidence", "Metadata Anomaly", "Unanimous Forgery"]:
-        count = flag_counts.get(label, 0)
-        pct = (count / total_flags * 100) if total_flags > 0 else 0
-        color = bar_colors.get(label, "#8B5CF6")
-        bars_html += f"""<div>
-<div class="dash-bar-label-row">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #E2E8F0;">{label}</span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: {color};">{pct:.0f}%</span>
-</div>
-<div class="dash-bar-track">
-<div class="dash-bar-fill" style="width: {pct}%; background: {color}; box-shadow: 0 0 8px {color}40;"></div>
-</div>
-</div>"""
-
-    return f"""<div class="dash-card-panel">
-<div class="dash-section-title">FLAG REASON DISTRIBUTION</div>
-<div class="dash-bar-row">
-{bars_html}
-</div>
-</div>"""
-
-
-def render_dashboard_timeline(scan_log):
-    """Renders scan activity timeline as a bar chart with session data."""
-    if not scan_log or not isinstance(scan_log, list):
-        return """<div class="dash-timeline-card">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-<div class="dash-section-title" style="margin-bottom: 0;">SCAN ACTIVITY TIMELINE</div>
-<span class="dash-filter-pill">THIS SESSION</span>
-</div>
-<div class="dash-empty-state">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-<span>NO ACTIVITY RECORDED</span>
-<span style="font-size: 0.65rem; color: #475569;">Scan receipts to build activity timeline</span>
-</div>
-</div>"""
-
-    # Group scans into buckets (by scan index, show last 12)
-    max_bars = 12
-    recent = scan_log[-max_bars:]
-
-    bars_html = ""
-    labels_html = ""
-    for i, entry in enumerate(recent):
-        # Each scan is one bar
-        is_forged = entry.get("verdict") == "FORGED"
-        color = "#F87171" if is_forged else "#8B5CF6"
-        conf = float(entry.get("confidence", 95))
-        height_pct = max(15, min(100, conf))  # height based on confidence
-
-        # Extract short time label
-        try:
-            from datetime import datetime as _dt
-            t = _dt.fromisoformat(entry.get("time", ""))
-            time_label = t.strftime("%H:%M")
-        except Exception:
-            time_label = f"#{i+1}"
-
-        bars_html += f'<div class="dash-timeline-bar" style="height: {height_pct}%; background: {color}; box-shadow: 0 0 6px {color}40;" title="Scan #{i+1}: {entry.get("verdict", "?")} ({conf:.1f}%)"></div>'
-        labels_html += f'<div class="dash-timeline-label">{time_label}</div>'
-
-    # Pad remaining slots
-    remaining = max_bars - len(recent)
-    for _ in range(remaining):
-        bars_html += '<div class="dash-timeline-bar" style="height: 4px; background: rgba(255,255,255,0.04);"></div>'
-        labels_html += '<div class="dash-timeline-label">—</div>'
-
-    return f"""<div class="dash-timeline-card">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-<div class="dash-section-title" style="margin-bottom: 0;">SCAN ACTIVITY TIMELINE</div>
-<div style="display: flex; align-items: center; gap: 12px;">
-<div style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;">
-<span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6; display: inline-block;"></span>
-<span style="color: #94A3B8;">AUTH</span>
-<span style="width: 6px; height: 6px; border-radius: 50%; background: #F87171; display: inline-block; margin-left: 6px;"></span>
-<span style="color: #94A3B8;">FORGED</span>
-</div>
-<span class="dash-filter-pill">THIS SESSION</span>
-</div>
-</div>
-<div class="dash-timeline-bars">
-{bars_html}
-</div>
-<div style="display: grid; grid-template-columns: repeat({max_bars}, 1fr); gap: 6px;">
-{labels_html}
-</div>
-</div>"""
-

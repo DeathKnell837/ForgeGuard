@@ -488,75 +488,12 @@ try:
         render_saas_model_card,
         render_comparative_breakdown_bars,
         executive_sop5_recommendation_card,
-        svg_radial_dial,
-        render_dashboard_kpi_row,
-        render_dashboard_verdict_donut,
-        render_dashboard_flag_bars,
-        render_dashboard_timeline
+        svg_radial_dial
     )
 except Exception:
     pass
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
-
-# ── Dashboard Session Analytics Counters ──
-if "dash_total_scans" not in st.session_state:
-    st.session_state["dash_total_scans"] = 0
-if "dash_authenticated" not in st.session_state:
-    st.session_state["dash_authenticated"] = 0
-if "dash_forged" not in st.session_state:
-    st.session_state["dash_forged"] = 0
-if "dash_total_confidence" not in st.session_state:
-    st.session_state["dash_total_confidence"] = 0.0
-if "dash_scan_log" not in st.session_state:
-    st.session_state["dash_scan_log"] = []
-if "dash_flag_counts" not in st.session_state:
-    st.session_state["dash_flag_counts"] = {
-        "High ELA Noise": 0,
-        "Low Model Confidence": 0,
-        "Metadata Anomaly": 0,
-        "Unanimous Forgery": 0
-    }
-
-def render_dashboard_page():
-    """Render the SOC-style Dashboard overview page."""
-    total = st.session_state.get("dash_total_scans", 0)
-    auth = st.session_state.get("dash_authenticated", 0)
-    forged = st.session_state.get("dash_forged", 0)
-    conf_sum = st.session_state.get("dash_total_confidence", 0.0)
-    avg_conf = (conf_sum / total) if total > 0 else 0.0
-    flags = st.session_state.get("dash_flag_counts", {
-        "High ELA Noise": 0,
-        "Low Model Confidence": 0,
-        "Metadata Anomaly": 0,
-        "Unanimous Forgery": 0
-    })
-    scan_log = st.session_state.get("dash_scan_log", [])
-
-    # Section header
-    st.markdown("<div class='eyebrow-label' style='margin: 0.2rem 0 0.5rem 0;'>📊 SESSION FORENSIC ANALYTICS</div>", unsafe_allow_html=True)
-
-    # ROW 1: KPI Cards
-    st.markdown(render_dashboard_kpi_row(total, auth, forged, avg_conf), unsafe_allow_html=True)
-
-    # ROW 2: Donut + Flag Bars (2 columns)
-    col_donut, col_bars = st.columns([1, 1], gap="small")
-    with col_donut:
-        st.markdown(render_dashboard_verdict_donut(auth, forged), unsafe_allow_html=True)
-    with col_bars:
-        st.markdown(render_dashboard_flag_bars(flags), unsafe_allow_html=True)
-
-    # ROW 3: Timeline (full-width)
-    st.markdown(render_dashboard_timeline(scan_log), unsafe_allow_html=True)
-
-# SVG ICONS
-# ============================================================
-SVG_SHIELD = """<svg class="icon-inline" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>"""
-SVG_SHIELD_CHECK = """<svg class="icon-inline" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>"""
-SVG_SHIELD_ALERT = """<svg class="icon-inline" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>"""
-SVG_SCAN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>"""
-SVG_BRAIN = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A15F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>"""
-SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>"""
 
 # ============================================================
 # STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
@@ -564,20 +501,20 @@ SVG_INFO = """<svg class="icon-inline" width="20" height="20" viewBox="0 0 24 24
 with st.sidebar:
     st.markdown(render_sophos_brand_sidebar(), unsafe_allow_html=True)
     
-    st.markdown("<div class='rail-section-header'>FORENSIC OPERATIONS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='rail-section-header'>Forensic Operations</div>", unsafe_allow_html=True)
     app_mode = st.radio(
         "Navigation",
-        options=["📊  Dashboard", "🛡️  Live Threat Scanner", "📈  Model Benchmark Suite"],
+        options=["Live Threat Scanner", "Model Benchmark Suite"],
         index=0,
         key="sidebar_app_mode",
         label_visibility="collapsed"
     )
     
-    st.markdown("<div class='rail-section-header'>NEURAL ENGINE</div>", unsafe_allow_html=True)
+    st.markdown("<div class='rail-section-header'>Neural Engine</div>", unsafe_allow_html=True)
     model_options = [
-        "⚡  MobileNetV2 (3.4M) — Recommended",
-        "🧠  ResNet50 (23.5M) — Deep Benchmark",
-        "⚙️  Basic CNN (2.1M) — Baseline"
+        "MobileNetV2 (3.4M) — Recommended",
+        "ResNet50 (23.5M) — Deep Benchmark",
+        "Basic CNN (2.1M) — Baseline"
     ]
     model_choice = st.radio(
         "Model",
@@ -598,7 +535,7 @@ with st.sidebar:
         model_key = "basic_cnn"
         model_display_name = "Basic CNN"
 
-    st.markdown("<div class='rail-section-header'>CALIBRATION (ELA)</div>", unsafe_allow_html=True)
+    st.markdown("<div class='rail-section-header'>Calibration (ELA)</div>", unsafe_allow_html=True)
     ela_quality = st.slider(
         "ELA JPEG Quality", 1, 100, 90, key="jpeg_quality",
         help="Controls ELA compression differential sensitivity (default: 90Q)."
@@ -613,19 +550,11 @@ with st.sidebar:
 # ============================================================
 # TOP COMMAND BAR & GLOBAL TELEMETRY
 # ============================================================
-if "Dashboard" in app_mode:
-    breadcrumb_label = "DASHBOARD"
-elif "Live" in app_mode:
-    breadcrumb_label = "LIVE THREAT SCANNER"
-else:
-    breadcrumb_label = "MODEL BENCHMARK SUITE"
+breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Benchmark Suite"
 latency_val = 12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2)
 st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
 
-if "Dashboard" in app_mode:
-    render_dashboard_page()
-
-elif "Live" in app_mode:
+if "Live" in app_mode:
     # ============================================================
     # PAGE 1: LIVE FORENSIC SCANNER (PRACTICAL SYSTEM INTERFACE)
     # ============================================================
@@ -638,7 +567,7 @@ elif "Live" in app_mode:
     # 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE
     ex_col1, ex_col2 = st.columns(2)
     with ex_col1:
-        if st.button("TEST REAL GCASH [01]", key="btn_sample_auth", use_container_width=True):
+        if st.button("Load Authentic GCash Sample [01]", key="btn_sample_auth", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
                 if os.path.exists(p):
@@ -649,7 +578,7 @@ elif "Live" in app_mode:
             st.rerun()
 
     with ex_col2:
-        if st.button("TEST FAKE RECEIPT [02]", key="btn_sample_forged", use_container_width=True):
+        if st.button("Load Tampered Forgery Sample [02]", key="btn_sample_forged", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
                 if os.path.exists(p):
@@ -684,10 +613,9 @@ elif "Live" in app_mode:
     elif "loaded_sample" in st.session_state and st.session_state["loaded_sample"]:
         image_bytes = st.session_state["loaded_sample"]
         st.markdown(f"""
-        <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 10px 16px; margin: 0.75rem 0; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00F0FF;">Active Sample: <strong style="color: #F8FAFC;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong></span>
+        <div style="background: #111114; border: 1px solid #232326; border-left: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 14px; margin: 0.6rem 0; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #8A8A94;">Active Sample: <strong style="color: #FFFFFF;">{st.session_state.get('loaded_sample_name', 'Sample Exhibit')}</strong></span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -843,21 +771,21 @@ elif "Live" in app_mode:
             res_str = f"{pil_img.width}x{pil_img.height}"
             sample_label = (getattr(uploaded_file, 'name', '') or sample_name or "EXHIBIT_EVIDENCE.JPG").upper()
             
-            st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>SIMULTANEOUS 3-EXHIBIT FORENSIC MATRIX</div>", unsafe_allow_html=True)
+            st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>Simultaneous 3-Exhibit Forensic Matrix</div>", unsafe_allow_html=True)
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
             
             # 3 PARALLEL EXHIBIT COLUMNS (RAW, ELA, HEATMAP)
             col_raw, col_ela, col_heat = st.columns(3)
             with col_raw:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#94A3B8;'><span>1. RAW RECEIPT EXHIBIT</span><span style='color:#64748B;'>ORIGINAL</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#94A3B8;'><span>1. Raw Receipt Exhibit</span><span style='color:#8A8A94;'>Original</span></div>", unsafe_allow_html=True)
                 st.image(pil_img, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             with col_ela:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#A78BFA;'><span>2. ELA NOISE MATRIX</span><span style='color:#A78BFA;'>90Q / 15X</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#A78BFA;'><span>2. ELA Noise Matrix</span><span style='color:#7C6FF0;'>90Q / 15x</span></div>", unsafe_allow_html=True)
                 st.image(ela_img, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             with col_heat:
-                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#00F0FF;'><span>3. HEATMAP OVERLAY</span><span style='color:#00F0FF;'>SPLICING GRADIENT</span></div>", unsafe_allow_html=True)
+                st.markdown("<div class='exhibit-card-frame'><div class='exhibit-header-tag' style='color:#00F0FF;'><span>3. Heatmap Overlay</span><span style='color:#2DD4BF;'>Splicing Gradient</span></div>", unsafe_allow_html=True)
                 st.image(overlay, use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             
@@ -882,7 +810,7 @@ else:
     # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
     # ============================================================
     st.markdown(render_sophos_benchmark_summary_tiles(), unsafe_allow_html=True)
-    st.markdown("<div class='eyebrow-label' style='margin: 1rem 0 0.6rem 0;'>HEAD-TO-HEAD ARCHITECTURE BENCHMARK MATRIX</div>", unsafe_allow_html=True)
+    st.markdown("<div class='eyebrow-label' style='margin: 1rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
 
     # 1. 3-Column Side-by-Side SaaS Model Benchmark Cards
     col_mnet, col_resnet, col_bcnn = st.columns(3)
