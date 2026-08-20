@@ -144,35 +144,6 @@ div[data-testid="stRadio"] [data-baseweb="radio"] {
     margin: 0 !important;
 }
 
-div[data-testid="stRadio"] [data-baseweb="radio"] > div {
-    background: transparent !important;
-    border: none !important;
-}
-
-/* Remove all radio circles, dots, borders, and rings completely */
-div[data-testid="stRadio"] label > div:first-of-type:not([data-testid="stMarkdownContainer"]),
-div[data-testid="stRadio"] [data-baseweb="radio"] > div:first-of-type:not([data-testid="stMarkdownContainer"]),
-div[data-testid="stRadio"] [data-baseweb="radio"] input + div,
-div[data-testid="stRadio"] label input + div,
-div[data-testid="stRadio"] [data-testid="stRadioDot"],
-div[data-testid="stRadio"] input[type="radio"],
-div[data-testid="stRadio"] [aria-hidden="true"],
-div[data-testid="stRadio"] label > div:not([data-testid="stMarkdownContainer"]):not(:has([data-testid="stMarkdownContainer"])) {
-    display: none !important;
-    width: 0px !important;
-    height: 0px !important;
-    min-width: 0px !important;
-    min-height: 0px !important;
-    border: none !important;
-    outline: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 /* Inactive items: completely flat, generous padding, muted text, no borders */
 div[data-testid="stRadio"] label {
     background: transparent !important;
@@ -184,42 +155,61 @@ div[data-testid="stRadio"] label {
     cursor: pointer !important;
     width: 100% !important;
     box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 div[data-testid="stRadio"] label:hover {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
     border: none !important;
     box-shadow: none !important;
     transform: none !important;
 }
 
-div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p {
-    color: #E2E8F0 !important;
-}
-
-/* Active / Selected item: solid filled violet-tinted rounded rect background, crisp white text */
+/* Active / Selected item: solid filled violet-tinted rounded rect background */
 div[data-testid="stRadio"] label[data-checked="true"],
 div[data-testid="stRadio"] label:has(input:checked) {
-    background: rgba(139, 92, 246, 0.16) !important;
+    background: rgba(139, 92, 246, 0.18) !important;
     border: none !important;
     border-radius: 8px !important;
-    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.12) !important;
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.15) !important;
 }
 
+/* Hide ONLY the radio input and circle dot */
+div[data-testid="stRadio"] input[type="radio"] {
+    display: none !important;
+}
+
+div[data-testid="stRadio"] [data-testid="stRadioDot"] {
+    display: none !important;
+}
+
+div[data-testid="stRadio"] label > div:first-child:not(:has(p)) {
+    display: none !important;
+}
+
+/* GUARANTEE text is ALWAYS fully visible and styled */
+div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"],
 div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
-    font-family: 'Inter', sans-serif !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
     font-size: 0.82rem !important;
     font-weight: 500 !important;
-    color: #94A3B8 !important;
-    letter-spacing: 0.15px !important;
+    color: #8F9CAE !important;
+    letter-spacing: 0.2px !important;
     margin: 0 !important;
+    line-height: 1.4 !important;
     transition: color 0.15s ease !important;
+}
+
+div[data-testid="stRadio"] label:hover div[data-testid="stMarkdownContainer"] p {
+    color: #F1F5F9 !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] div[data-testid="stMarkdownContainer"] p,
 div[data-testid="stRadio"] label:has(input:checked) div[data-testid="stMarkdownContainer"] p {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.82rem !important;
     font-weight: 600 !important;
     color: #FFFFFF !important;
 }
