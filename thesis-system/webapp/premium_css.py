@@ -22,24 +22,27 @@ html, body, [class*="css"] {
     background-attachment: fixed !important;
 }
 
-/* ZERO TOP WHITESPACE (Clean Header) */
+/* ZERO TOP WHITESPACE (Clean Header & No Wide Forehead) */
 header[data-testid="stHeader"] {
-    background: transparent !important;
+    display: none !important;
     height: 0px !important;
     min-height: 0px !important;
     padding: 0px !important;
     margin: 0px !important;
-    z-index: 99990 !important;
+    z-index: -1 !important;
 }
 
-div[data-testid="stAppViewContainer"] > section.main {
-    padding-top: 0.2rem !important;
+div[data-testid="stAppViewContainer"] > section.main,
+section[data-testid="stMain"] {
+    padding-top: 0px !important;
 }
 
-.main .block-container,
+div[data-testid="stMainBlockContainer"],
+.stMainBlockContainer,
+.block-container,
 div[data-testid="stAppViewBlockContainer"] {
-    padding-top: 0.3rem !important;
-    padding-bottom: 2.2rem !important;
+    padding-top: 0.8rem !important;
+    padding-bottom: 2rem !important;
     padding-left: 1.8rem !important;
     padding-right: 1.8rem !important;
     max-width: 98% !important;

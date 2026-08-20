@@ -531,7 +531,7 @@ with st.sidebar:
             help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
         )
     
-    st.markdown(render_investigator_profile_card(), unsafe_allow_html=True)
+
 
 # ============================================================
 # TOP COMMAND BAR & GLOBAL TELEMETRY
