@@ -54,15 +54,25 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
-   SOPHOS SIDEBAR RAIL
+   SOPHOS SIDEBAR RAIL (Flush Top Header)
    ============================================================ */
 section[data-testid="stSidebar"] {
     background-color: #101216 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
-    padding-top: 0.4rem !important;
+    padding-top: 0px !important;
     min-width: 300px !important;
     width: 300px !important;
     visibility: visible !important;
+}
+
+/* Eliminate empty sidebar header (wide forehead) */
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
+[data-testid="stSidebarHeader"] {
+    display: none !important;
+    height: 0px !important;
+    min-height: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 /* Hide collapse button inside sidebar */
@@ -101,7 +111,8 @@ button[data-testid="stSidebarCollapsedControl"] {
 }
 
 div[data-testid="stSidebarContent"] {
-    padding: 1rem 1.1rem 1.2rem 1.1rem !important;
+    padding: 0.6rem 1.1rem 1.2rem 1.1rem !important;
+    padding-top: 0.6rem !important;
 }
 
 div[data-testid="stSidebarUserContent"] {
