@@ -572,6 +572,7 @@ from premium_components import (
     render_investigator_profile_card,
     render_top_command_bar,
     render_cyber_scanning_loader,
+    render_live_scanner_standby_hub,
     render_exhibit_metadata_bar,
     render_panoramic_incident_cockpit,
     render_sophos_benchmark_summary_tiles,
@@ -644,7 +645,7 @@ if "Live" in app_mode:
     # 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE
     ex_col1, ex_col2 = st.columns(2)
     with ex_col1:
-        if st.button("Load Authentic GCash Sample [01]", key="btn_sample_auth", use_container_width=True):
+        if st.button("Load Authentic GCash Exhibit [01] (PHP 170.00 Express Send)", key="btn_sample_auth", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "authentic_test.jpg"), os.path.join(SYS_DIR, "authentic_test.jpg"), "authentic_test.jpg"]:
                 if os.path.exists(p):
@@ -655,7 +656,7 @@ if "Live" in app_mode:
             st.rerun()
 
     with ex_col2:
-        if st.button("Load Tampered Forgery Sample [02]", key="btn_sample_forged", use_container_width=True):
+        if st.button("Load Tampered Forgery Exhibit [02] (PHP 50,000.00 Spliced Amount)", key="btn_sample_forged", use_container_width=True):
             st.session_state["uploader_key"] += 1
             for p in [os.path.join(APP_DIR, "forged_test.jpg"), os.path.join(SYS_DIR, "forged_test.jpg"), "forged_test.jpg"]:
                 if os.path.exists(p):
@@ -945,9 +946,11 @@ if "Live" in app_mode:
                     gemini_analysis=gemini_text
                 )
                 st.markdown(cockpit_html, unsafe_allow_html=True)
-
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")
+    else:
+        # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
+        st.markdown(render_live_scanner_standby_hub(), unsafe_allow_html=True)
 
 else:
     # ============================================================

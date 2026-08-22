@@ -540,3 +540,126 @@ def svg_radial_dial(percent, color="#6366F1", label="ACCURACY", size=110):
 <text x="55" y="58" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="16" font-weight="800">{percent:.1f}%</text>
 <text x="55" y="73" text-anchor="middle" fill="#9CA3AF" font-family="'Inter', sans-serif" font-size="8" font-weight="700" letter-spacing="1.2">{label}</text>
 </svg></div>'''
+
+
+def render_live_scanner_standby_hub():
+    return """<div style="margin-top: 1.4rem; display: flex; flex-direction: column; gap: 1.4rem;">
+
+<!-- 1. OPERATIONAL TELEMETRY & SYSTEM READINESS GRID (4 CARDS) -->
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.6px;">Forensic System Readiness &amp; Telemetry</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #2DD4BF; background: rgba(45, 212, 191, 0.1); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(45, 212, 191, 0.25);">LIVE RADAR STANDBY</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #6366F1; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="font-size: 0.68rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Inter', sans-serif;">Active CNN Engine</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 4px 0 2px 0;">MobileNetV2</div>
+<div style="font-size: 0.72rem; color: #818CF8; font-family: 'Inter', sans-serif;">3.4M Params • 12.4ms Latency</div>
+</div>
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #10B981; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="font-size: 0.68rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Inter', sans-serif;">Forensic Pipeline</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 4px 0 2px 0;">Dual-Stream</div>
+<div style="font-size: 0.72rem; color: #34D399; font-family: 'Inter', sans-serif;">90Q ELA Noise + RGB Tensor</div>
+</div>
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #2DD4BF; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="font-size: 0.68rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Inter', sans-serif;">Multimodal Reasoning</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 4px 0 2px 0;">Ox Alpha (XAI)</div>
+<div style="font-size: 0.72rem; color: #2DD4BF; font-family: 'Inter', sans-serif;">1M Context • Splicing OCR</div>
+</div>
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #F59E0B; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="font-size: 0.68rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Inter', sans-serif;">Supported Formats</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 4px 0 2px 0;">GCash &amp; Maya</div>
+<div style="font-size: 0.72rem; color: #FBBF24; font-family: 'Inter', sans-serif;">PNG, JPG, WEBP Receipts</div>
+</div>
+</div>
+</div>
+
+<!-- 2. FOUR-STAGE FORENSIC VERIFICATION PROTOCOL (SOP 1-5 WORKFLOW) -->
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+<div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.94rem; font-weight: 700; color: #FFFFFF;">Standard Operating Procedure (SOP 1-5 Forensic Protocol)</span>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; margin-top: 2px;">End-to-end automated digital receipt forgery detection pipeline</div>
+</div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #818CF8; background: rgba(99, 102, 241, 0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.25);">NDMC BSCS RESEARCH</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+<!-- Step 1 -->
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 1rem;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 800; color: #6366F1;">PHASE 01</span>
+<span style="font-size: 0.65rem; color: #9CA3AF; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;">Ingestion</span>
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Optical Receipt Screening</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; line-height: 1.45;">Ingests mobile screenshot or live camera capture and screens out non-receipt images using domain heuristics.</div>
+</div>
+
+<!-- Step 2 -->
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 1rem;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 800; color: #10B981;">PHASE 02</span>
+<span style="font-size: 0.65rem; color: #9CA3AF; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;">Forensics</span>
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">ELA Noise Differential</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; line-height: 1.45;">Computes 90Q JPEG re-compression difference amplified 15.0x to expose digital tampering, splicing, and edits.</div>
+</div>
+
+<!-- Step 3 -->
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 1rem;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 800; color: #2DD4BF;">PHASE 03</span>
+<span style="font-size: 0.65rem; color: #9CA3AF; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;">Inference</span>
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Multi-CNN Consensus</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; line-height: 1.45;">Executes parallel prediction across MobileNetV2, ResNet50, and Basic CNN to compute unanimous confidence.</div>
+</div>
+
+<!-- Step 4 -->
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 1rem;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 800; color: #F59E0B;">PHASE 04</span>
+<span style="font-size: 0.65rem; color: #9CA3AF; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;">Diagnosis</span>
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Multimodal XAI Report</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; line-height: 1.45;">Ox Alpha analyzes transaction metadata, typography, and remnant pixels to produce actionable forensic explanations.</div>
+</div>
+</div>
+</div>
+
+<!-- 3. THREAT TAXONOMY: 6 EVALUATED FORGERY VECTORS -->
+<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.9rem;">
+<span style="font-family: 'Inter', sans-serif; font-size: 0.94rem; font-weight: 700; color: #FFFFFF;">Target Forgery Threat Taxonomy &amp; Detection Scope</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF;">6 Core Evaluation Attack Vectors</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #EF4444; margin-bottom: 3px;">Amount Splicing &amp; Injection</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Tampered payment figures edited via raster image editors (Photoshop / Canva).</div>
+</div>
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #F59E0B; margin-bottom: 3px;">Font Kerning &amp; Typography</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Mismatched typeface weights, baseline misalignment, and non-native font substitution.</div>
+</div>
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #EC4899; margin-bottom: 3px;">Synthetic Generator Apps</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Receipts generated by fake receipt maker mobile applications and web scripts.</div>
+</div>
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #8B5CF6; margin-bottom: 3px;">Metadata &amp; Ref Number Cloning</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Duplicated reference numbers, invalid 13-digit checksums, and tampered timestamps.</div>
+</div>
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #10B981; margin-bottom: 3px;">Authentic Transaction Baseline</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Official GCash / Maya app screenshots with authentic uniform compression noise.</div>
+</div>
+<div style="background: #1A1D26; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #3B82F6; margin-bottom: 3px;">JPEG Re-compression Noise</div>
+<div style="font-size: 0.70rem; color: #9CA3AF; line-height: 1.4;">Secondary compression artifacts from repeated saving or social media messaging transfer.</div>
+</div>
+</div>
+</div>
+
+</div>"""
