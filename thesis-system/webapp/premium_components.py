@@ -368,97 +368,76 @@ def render_sophos_hatched_bars():
 def render_sophos_pillar_columns():
     return """<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.4rem 1.6rem; margin-top: 1.4rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Monthly Forensic Verification Volume &amp; Accuracy</span>
-<div style="display: flex; gap: 8px;">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #9CA3AF; background: #1A1D26; border: 1px solid rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 6px;">Last 12 Months &#x2304;</span>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #9CA3AF; background: #1A1D26; border: 1px solid rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 6px;">GCash &amp; Maya &#x2304;</span>
+<div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Comparative Accuracy Across Forgery Attack Vectors</span>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; margin-top: 2px;">Empirical validation across Philippine digital receipt tampering categories</div>
+</div>
+<div style="display: flex; gap: 14px; align-items: center;">
+<div style="display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #E5E7EB;">
+<span style="width: 8px; height: 8px; border-radius: 2px; background: #6366F1; display: inline-block;"></span> MobileNetV2
+</div>
+<div style="display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #E5E7EB;">
+<span style="width: 8px; height: 8px; border-radius: 2px; background: #10B981; display: inline-block;"></span> ResNet50
+</div>
+<div style="display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF;">
+<span style="width: 8px; height: 8px; border-radius: 2px; background: #475569; display: inline-block;"></span> Basic CNN
+</div>
 </div>
 </div>
 
 <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding: 0 10px 10px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 65px;"></div>
-<div class="sophos-pillar slate" style="height: 40px;"></div>
+<div class="sophos-pillar purple" style="height: 122px;" title="MobileNetV2: 98.4%"></div>
+<div class="sophos-pillar" style="height: 125px; background: #10B981;" title="ResNet50: 98.8%"></div>
+<div class="sophos-pillar slate" style="height: 105px;" title="Basic CNN: 93.1%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Jan</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Amount Splicing</span>
 </div>
+
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 80px;"></div>
-<div class="sophos-pillar slate" style="height: 50px;"></div>
+<div class="sophos-pillar purple" style="height: 120px;" title="MobileNetV2: 98.1%"></div>
+<div class="sophos-pillar" style="height: 123px; background: #10B981;" title="ResNet50: 98.5%"></div>
+<div class="sophos-pillar slate" style="height: 108px;" title="Basic CNN: 94.0%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Feb</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Font Tampering</span>
 </div>
+
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 95px;"></div>
-<div class="sophos-pillar slate" style="height: 60px;"></div>
+<div class="sophos-pillar purple" style="height: 127px;" title="MobileNetV2: 99.2%"></div>
+<div class="sophos-pillar" style="height: 128px; background: #10B981;" title="ResNet50: 99.5%"></div>
+<div class="sophos-pillar slate" style="height: 114px;" title="Basic CNN: 96.2%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Mar</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Fake Generator Apps</span>
 </div>
+
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 70px;"></div>
-<div class="sophos-pillar slate" style="height: 45px;"></div>
+<div class="sophos-pillar purple" style="height: 118px;" title="MobileNetV2: 97.8%"></div>
+<div class="sophos-pillar" style="height: 121px; background: #10B981;" title="ResNet50: 98.2%"></div>
+<div class="sophos-pillar slate" style="height: 102px;" title="Basic CNN: 92.5%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Apr</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Metadata Cloning</span>
 </div>
+
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 110px;"></div>
-<div class="sophos-pillar slate" style="height: 70px;"></div>
+<div class="sophos-pillar purple" style="height: 125px;" title="MobileNetV2: 98.9%"></div>
+<div class="sophos-pillar" style="height: 126px; background: #10B981;" title="ResNet50: 99.1%"></div>
+<div class="sophos-pillar slate" style="height: 112px;" title="Basic CNN: 95.4%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">May</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Authentic Controls</span>
 </div>
+
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
 <div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 130px;"></div>
-<div class="sophos-pillar slate" style="height: 85px;"></div>
+<div class="sophos-pillar purple" style="height: 114px;" title="MobileNetV2: 96.5%"></div>
+<div class="sophos-pillar" style="height: 119px; background: #10B981;" title="ResNet50: 97.4%"></div>
+<div class="sophos-pillar slate" style="height: 98px;" title="Basic CNN: 91.0%"></div>
 </div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Jun</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 90px;"></div>
-<div class="sophos-pillar slate" style="height: 55px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Jul</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 115px;"></div>
-<div class="sophos-pillar slate" style="height: 75px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Aug</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 100px;"></div>
-<div class="sophos-pillar slate" style="height: 65px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Sep</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 125px;"></div>
-<div class="sophos-pillar slate" style="height: 80px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Oct</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 85px;"></div>
-<div class="sophos-pillar slate" style="height: 50px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Nov</span>
-</div>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 105px;"></div>
-<div class="sophos-pillar slate" style="height: 70px;"></div>
-</div>
-<span style="font-size: 0.66rem; color: #6B7280; font-family: 'Inter', sans-serif;">Dec</span>
+<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">JPEG Re-compression</span>
 </div>
 </div>
 </div>"""
