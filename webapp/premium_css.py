@@ -1000,5 +1000,35 @@ div[data-testid="stAlert"] {
     animation: bus-pulse 2.5s infinite;
 }
 
+/* ============================================================
+   SOPHOS 3D PILLAR COLUMNS & BENCHMARK BAR STYLES
+   ============================================================ */
+.sophos-pillar {
+    width: 14px;
+    border-radius: 4px 4px 2px 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.sophos-pillar.purple {
+    background: linear-gradient(180deg, #818CF8 0%, #4338CA 100%);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.45);
+}
+
+.sophos-pillar.emerald {
+    background: linear-gradient(180deg, #34D399 0%, #059669 100%);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+
+.sophos-pillar.slate {
+    background: linear-gradient(180deg, #94A3B8 0%, #334155 100%);
+    box-shadow: 0 0 8px rgba(148, 163, 184, 0.25);
+}
+
+.sophos-pillar:hover {
+    filter: brightness(1.25);
+    transform: scaleY(1.05);
+}
+
 </style>
 """

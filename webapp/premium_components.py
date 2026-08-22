@@ -385,59 +385,59 @@ def render_sophos_pillar_columns():
 </div>
 </div>
 
-<div style="display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding: 0 10px 10px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 122px;" title="MobileNetV2: 98.4%"></div>
-<div class="sophos-pillar" style="height: 125px; background: #10B981;" title="ResNet50: 98.8%"></div>
-<div class="sophos-pillar slate" style="height: 105px;" title="Basic CNN: 93.1%"></div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; height: 175px; padding: 0 14px 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 124px; display: inline-block;" title="MobileNetV2: 98.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 127px; display: inline-block;" title="ResNet50: 98.8%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 106px; display: inline-block;" title="Basic CNN: 93.1%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Amount Splicing</span>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 120px;" title="MobileNetV2: 98.1%"></div>
-<div class="sophos-pillar" style="height: 123px; background: #10B981;" title="ResNet50: 98.5%"></div>
-<div class="sophos-pillar slate" style="height: 108px;" title="Basic CNN: 94.0%"></div>
-</div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Font Tampering</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Amount Splicing</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 127px;" title="MobileNetV2: 99.2%"></div>
-<div class="sophos-pillar" style="height: 128px; background: #10B981;" title="ResNet50: 99.5%"></div>
-<div class="sophos-pillar slate" style="height: 114px;" title="Basic CNN: 96.2%"></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 121px; display: inline-block;" title="MobileNetV2: 98.1%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 125px; display: inline-block;" title="ResNet50: 98.5%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 109px; display: inline-block;" title="Basic CNN: 94.0%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Fake Generator Apps</span>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 118px;" title="MobileNetV2: 97.8%"></div>
-<div class="sophos-pillar" style="height: 121px; background: #10B981;" title="ResNet50: 98.2%"></div>
-<div class="sophos-pillar slate" style="height: 102px;" title="Basic CNN: 92.5%"></div>
-</div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Metadata Cloning</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Font Tampering</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 125px;" title="MobileNetV2: 98.9%"></div>
-<div class="sophos-pillar" style="height: 126px; background: #10B981;" title="ResNet50: 99.1%"></div>
-<div class="sophos-pillar slate" style="height: 112px;" title="Basic CNN: 95.4%"></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 130px; display: inline-block;" title="MobileNetV2: 99.2%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 132px; display: inline-block;" title="ResNet50: 99.5%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 116px; display: inline-block;" title="Basic CNN: 96.2%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">Authentic Controls</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Fake Generator Apps</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-<div style="display: flex; align-items: flex-end; gap: 4px; height: 130px;">
-<div class="sophos-pillar purple" style="height: 114px;" title="MobileNetV2: 96.5%"></div>
-<div class="sophos-pillar" style="height: 119px; background: #10B981;" title="ResNet50: 97.4%"></div>
-<div class="sophos-pillar slate" style="height: 98px;" title="Basic CNN: 91.0%"></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 119px; display: inline-block;" title="MobileNetV2: 97.8%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 123px; display: inline-block;" title="ResNet50: 98.2%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 103px; display: inline-block;" title="Basic CNN: 92.5%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #D1D5DB; font-family: 'Inter', sans-serif; font-weight: 600;">JPEG Re-compression</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Metadata Cloning</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 126px; display: inline-block;" title="MobileNetV2: 98.9%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 128px; display: inline-block;" title="ResNet50: 99.1%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 114px; display: inline-block;" title="Basic CNN: 95.4%"></div>
+</div>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Authentic Controls</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 115px; display: inline-block;" title="MobileNetV2: 96.5%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 120px; display: inline-block;" title="ResNet50: 97.4%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 99px; display: inline-block;" title="Basic CNN: 91.0%"></div>
+</div>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">JPEG Re-compression</span>
 </div>
 </div>
 </div>"""
