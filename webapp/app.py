@@ -686,20 +686,19 @@ if "Live" in app_mode:
                 confidence = forgery_score if is_forged else (1.0 - forgery_score)
                 loaded_model_success = True
                 inference_mode = "CNN"
-            else:
-                gemini_result = call_gemini_vision(pil_img)
-                if gemini_result and isinstance(gemini_result, dict) and "verdict" in gemini_result:
-                    is_forged = (gemini_result.get("verdict", "").upper() == "FORGED")
-                    confidence = float(gemini_result.get("confidence", 0.95))
-                    forgery_score = confidence if is_forged else (1.0 - confidence)
-                    loaded_model_success = True
-                    inference_mode = "AI VISION + ELA"
-                else:
-                    ela_np = np.array(ela_img, dtype=np.float32)
-                    ela_mean = float(np.mean(ela_np))
-                    is_forged = ela_mean > 12.0
-                    confidence = 0.92
-                    inference_mode = "ELA MATH"
+            # Run Explainable AI Diagnostics & Forensic Signal Analysis
+            if gemini_result is None:
+                try:
+                    gemini_result = call_gemini_vision(pil_img)
+                except Exception:
+                    gemini_result = None
+
+            if gemini_result and isinstance(gemini_result, dict) and "verdict" in gemini_result:
+                # If Gemini returned a clear analysis, align verdict & confidence with multimodal findings
+                is_forged = (gemini_result.get("verdict", "").upper() == "FORGED") or is_forged
+                if "confidence" in gemini_result and isinstance(gemini_result["confidence"], (int, float)):
+                    confidence = float(gemini_result["confidence"])
+                inference_mode = "AI VISION + ELA FORENSICS"
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
             
