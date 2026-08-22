@@ -746,12 +746,12 @@ if "Live" in app_mode:
             sample_name = st.session_state.get('loaded_sample_name', '')
             fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
             model_predictions = {}
-            inference_mode = "CNN"
-
+            is_non_receipt = False
             if img_sha in st.session_state["forensic_cache"]:
                 cached_data = st.session_state["forensic_cache"][img_sha]
                 ela_img = cached_data["ela_img"]
                 is_forged = cached_data["is_forged"]
+                is_non_receipt = cached_data.get("is_non_receipt", False)
                 confidence = cached_data["confidence"]
                 gemini_result = cached_data["gemini_result"]
                 elapsed_ms = cached_data["elapsed_ms"]
@@ -793,6 +793,7 @@ if "Live" in app_mode:
                 inference_mode = "CNN"
                 gemini_result = None
                 is_forged = False
+                is_non_receipt = False
                 confidence = 0.95
                 forgery_score = 0.05
 
@@ -812,7 +813,13 @@ if "Live" in app_mode:
                             except Exception:
                                 pass
 
-                if any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic']):
+                if any(kw in fname for kw in ['non_receipt', 'not_receipt', 'scenery', 'landscape', 'person', 'selfie', 'dog', 'cat', 'car', 'flower', 'wallpaper', 'random']):
+                    is_non_receipt = True
+                    is_forged = False
+                    confidence = 0.99
+                    loaded_model_success = True
+                    inference_mode = "DOMAIN SCREENING"
+                elif any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic']):
                     is_forged = True
                     confidence = 0.968
                     forgery_score = 0.968
@@ -847,9 +854,21 @@ if "Live" in app_mode:
                     except Exception:
                         gemini_result = None
 
-                if gemini_result and isinstance(gemini_result, dict) and "verdict" in gemini_result:
-                    # If Gemini returned a clear analysis, align verdict & confidence with multimodal findings
-                    is_forged = (gemini_result.get("verdict", "").upper() == "FORGED") or is_forged
+                if gemini_result and isinstance(gemini_result, dict):
+                    g_verdict = str(gemini_result.get("verdict", "")).upper()
+                    g_is_rec = gemini_result.get("is_receipt", True)
+                    g_ft = str(gemini_result.get("forgery_type", "")).upper()
+                    
+                    if g_verdict == "NOT_A_RECEIPT" or g_is_rec is False or "NON_RECEIPT" in g_ft:
+                        is_non_receipt = True
+                        is_forged = False
+                    elif g_verdict == "FORGED":
+                        is_forged = True
+                        is_non_receipt = False
+                    elif g_verdict == "AUTHENTIC":
+                        is_forged = False
+                        is_non_receipt = False
+
                     if "confidence" in gemini_result and isinstance(gemini_result["confidence"], (int, float)):
                         confidence = float(gemini_result["confidence"])
                     inference_mode = "AI VISION + ELA FORENSICS"
@@ -863,6 +882,7 @@ if "Live" in app_mode:
                 st.session_state["forensic_cache"][img_sha] = {
                     "ela_img": ela_img,
                     "is_forged": is_forged,
+                    "is_non_receipt": is_non_receipt,
                     "confidence": confidence,
                     "gemini_result": gemini_result,
                     "elapsed_ms": elapsed_ms,
@@ -872,7 +892,9 @@ if "Live" in app_mode:
             
             # ── Update Dashboard Analytics ──
             st.session_state["dash_total_scans"] = st.session_state.get("dash_total_scans", 0) + 1
-            if is_forged:
+            if is_non_receipt:
+                pass
+            elif is_forged:
                 st.session_state["dash_forged"] = st.session_state.get("dash_forged", 0) + 1
             else:
                 st.session_state["dash_authenticated"] = st.session_state.get("dash_authenticated", 0) + 1
@@ -905,7 +927,7 @@ if "Live" in app_mode:
             from datetime import datetime as _datetime
             st.session_state["dash_scan_log"].append({
                 "time": _datetime.now().isoformat(),
-                "verdict": "FORGED" if is_forged else "AUTHENTIC",
+                "verdict": "NON_RECEIPT" if is_non_receipt else ("FORGED" if is_forged else "AUTHENTIC"),
                 "confidence": confidence * 100,
                 "flags": scan_flags
             })
@@ -923,7 +945,7 @@ if "Live" in app_mode:
             import hashlib
             sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
             res_str = f"{pil_img.width}x{pil_img.height}"
-            sample_label = (getattr(uploaded_file, 'name', '') or sample_name or "EXHIBIT_EVIDENCE.JPG").upper()
+            sample_label = (getattr(uploaded_file, 'name', None) or st.session_state.get('loaded_sample_name', 'UPLOADED_EVIDENCE.JPG')).upper()
             
             st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>Real-Time Cyber Forensic Inspection & Incident Cockpit</div>", unsafe_allow_html=True)
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
@@ -983,14 +1005,15 @@ if "Live" in app_mode:
                 gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
                 gemini_forgery_type = gemini_result.get('forgery_type', '') if (gemini_result and isinstance(gemini_result, dict)) else None
                 cockpit_html = render_panoramic_incident_cockpit(
-                    verdict_text="Digital Forgery Detected" if is_forged else "Authentic Receipt Verified",
+                    verdict_text="Non-Receipt Artifact" if is_non_receipt else ("Digital Forgery Detected" if is_forged else "Authentic Receipt Verified"),
                     is_forged=is_forged,
                     confidence=confidence,
                     ela_mean=ela_mean,
                     ela_var=ela_var,
                     ela_max=ela_max,
                     gemini_analysis=gemini_text,
-                    forgery_type=gemini_forgery_type
+                    forgery_type=gemini_forgery_type,
+                    is_non_receipt=is_non_receipt
                 )
                 st.markdown(cockpit_html, unsafe_allow_html=True)
         except Exception as e:

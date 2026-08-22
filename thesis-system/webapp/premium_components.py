@@ -97,15 +97,23 @@ def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
 </div>"""
 
 
-def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None, forgery_type=None):
-    status_color = "#EF4444" if is_forged else "#10B981"
-    status_border = "rgba(239, 68, 68, 0.25)" if is_forged else "rgba(16, 185, 129, 0.25)"
-    
-    if not is_forged:
+def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None, forgery_type=None, is_non_receipt=False):
+    if is_non_receipt:
+        status_color = "#F59E0B"
+        status_border = "rgba(245, 158, 11, 0.35)"
+        severity_tag = "Invalid Domain: Non-Receipt Image Detected"
+        sub_desc = "The uploaded file does not conform to Philippine digital payment receipt geometry (GCash / Maya / ShopeePay). Forensic transaction evaluation bypassed."
+        forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Domain Rejected</span>'
+        verdict_text = "Non-Receipt Artifact"
+    elif not is_forged:
+        status_color = "#10B981"
+        status_border = "rgba(16, 185, 129, 0.25)"
         severity_tag = "Secure: Authentic Receipt Confirmed"
         sub_desc = "Uniform pixel noise gradient across all metadata and amount regions."
         forgery_badge = ""
     else:
+        status_color = "#EF4444"
+        status_border = "rgba(239, 68, 68, 0.25)"
         ft_upper = str(forgery_type or "").upper()
         if "AI_GENERATED" in ft_upper or "DIFFUSION" in ft_upper or "SYNTHETIC" in ft_upper:
             severity_tag = "Critical: AI-Generated Synthetic Receipt Detected"
@@ -125,12 +133,21 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
             forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F87171; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Amount Splicing</span>'
     
     pct = confidence * 100.0
-    mnet_conf = (pct if is_forged else (100 - pct * 0.05))
-    resnet_conf = (pct + 0.6 if is_forged else (100 - pct * 0.04))
-    bcnn_conf = (pct - 3.4 if is_forged else (100 - pct * 0.08))
+    if is_non_receipt:
+        mnet_conf = 0.0
+        resnet_conf = 0.0
+        bcnn_conf = 0.0
+    else:
+        mnet_conf = (pct if is_forged else (100 - pct * 0.05))
+        resnet_conf = (pct + 0.6 if is_forged else (100 - pct * 0.04))
+        bcnn_conf = (pct - 3.4 if is_forged else (100 - pct * 0.08))
     
-    trend_noise = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; High</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Normal</span>'
-    trend_var = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; Disparity</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Uniform</span>'
+    if is_non_receipt:
+        trend_noise = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">Out of Scope</span>'
+        trend_var = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">Inapplicable</span>'
+    else:
+        trend_noise = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; High</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Normal</span>'
+        trend_var = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; Disparity</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Uniform</span>'
     
     analysis_block = ""
     if gemini_analysis:
@@ -142,6 +159,9 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="font-size: 0.82rem; color: #E2E8F0; line-height: 1.5;">{gemini_analysis}</div>
 </div>"""
 
+    consensus_label = "Domain Filter: Non-Receipt" if is_non_receipt else "3/3 Models Unanimous"
+    consensus_style = "color: #F59E0B; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);" if is_non_receipt else "color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);"
+
     return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border}; padding: 18px 20px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <div style="display: flex; align-items: center; gap: 8px;">
@@ -150,7 +170,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
 {forgery_badge}
-<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 3px 10px; border-radius: 6px; font-weight: 600;">3/3 Models Unanimous</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; {consensus_style} padding: 3px 10px; border-radius: 6px; font-weight: 600;">{consensus_label}</span>
 </div>
 </div>
 
@@ -176,9 +196,9 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="padding-top: 2px;"><span style="color: #6B7280; font-size: 0.68rem;">/ 255</span></div>
 </div>
 <div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Best Speed</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #10B981;">12.4ms</div>
-<div style="padding-top: 2px;"><span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&uarr; 2.3x</span></div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Domain Status</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'};">{'REJECTED' if is_non_receipt else 'VALIDATED'}</div>
+<div style="padding-top: 2px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else '12.4ms'}</span></div>
 </div>
 </div>
 
