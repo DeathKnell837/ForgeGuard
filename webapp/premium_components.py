@@ -46,6 +46,33 @@ def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, 
 </div>"""
 
 
+def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]", status_text="Ingesting raster pixels & computing Error Level Analysis matrix...", progress_pct=30):
+    return f"""<div class="cyber-loader-card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<div class="cyber-loader-spinner"></div>
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #2DD4BF; letter-spacing: 1.2px; font-weight: 700; text-transform: uppercase;">{phase_title}</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: #FFFFFF; margin-top: 1px;">Real-Time Forensic Evidence Processing</div>
+</div>
+</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.84rem; font-weight: 700; color: #7C6FF0;">{progress_pct}%</div>
+</div>
+
+<div class="cyber-loader-progress-track">
+<div class="cyber-loader-progress-bar" style="width: {progress_pct}%;"></div>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 0.76rem; color: #9CA3AF; font-family: 'Inter', sans-serif;">
+<div style="display: flex; align-items: center; gap: 7px;">
+<span class="cyber-loader-pulse-dot"></span>
+<span>{status_text}</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #6B7280; letter-spacing: 0.5px;">SOP 1-5 PIPELINE ACTIVE</span>
+</div>
+</div>"""
+
+
 def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
     return f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 9px 18px; margin-bottom: 12px; font-family: 'Inter', sans-serif; font-size: 0.74rem; color: #9CA3AF; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);">
 <div>Exhibit: <span style="color: #FFFFFF; font-weight: 600;">{filename}</span></div>

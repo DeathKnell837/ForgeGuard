@@ -491,6 +491,7 @@ from premium_components import (
     render_sophos_brand_sidebar,
     render_investigator_profile_card,
     render_top_command_bar,
+    render_cyber_scanning_loader,
     render_exhibit_metadata_bar,
     render_panoramic_incident_cockpit,
     render_sophos_benchmark_summary_tiles,
@@ -638,9 +639,27 @@ if "Live" in app_mode:
                 st.warning("Solid color or blank image detected. Please upload an official transaction receipt.")
                 st.stop()
 
+            loader_slot = st.empty()
+            
+            # Phase 1: Ingesting raster pixels & computing ELA Noise Matrix
+            loader_slot.markdown(render_cyber_scanning_loader(
+                phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]",
+                status_text="Ingesting raster pixels & computing Error Level Analysis matrix (90Q / 15x)...",
+                progress_pct=28
+            ), unsafe_allow_html=True)
+            time.sleep(0.18)
+
             start_time = time.time()
             ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
             
+            # Phase 2: Parallel Architecture Consensus Matrix
+            loader_slot.markdown(render_cyber_scanning_loader(
+                phase_title="PARALLEL CNN CONSENSUS [PHASE 2/3]",
+                status_text="Executing MobileNetV2, ResNet50, and Basic CNN consensus matrix...",
+                progress_pct=64
+            ), unsafe_allow_html=True)
+            time.sleep(0.18)
+
             sample_name = st.session_state.get('loaded_sample_name', '')
             fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
             
@@ -686,6 +705,14 @@ if "Live" in app_mode:
                 confidence = forgery_score if is_forged else (1.0 - forgery_score)
                 loaded_model_success = True
                 inference_mode = "CNN"
+
+            # Phase 3: Explainable Multimodal Diagnostics
+            loader_slot.markdown(render_cyber_scanning_loader(
+                phase_title="EXPLAINABLE AI DIAGNOSTICS [PHASE 3/3]",
+                status_text="Synthesizing multimodal transaction intelligence & tampering localization...",
+                progress_pct=92
+            ), unsafe_allow_html=True)
+
             # Run Explainable AI Diagnostics & Forensic Signal Analysis
             if gemini_result is None:
                 try:
@@ -701,6 +728,9 @@ if "Live" in app_mode:
                 inference_mode = "AI VISION + ELA FORENSICS"
 
             elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
+            
+            # Smoothly clear the loading slot
+            loader_slot.empty()
             
             # ── Update Dashboard Analytics ──
             st.session_state["dash_total_scans"] = st.session_state.get("dash_total_scans", 0) + 1

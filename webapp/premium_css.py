@@ -164,6 +164,87 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
+   CYBER FORENSIC LOADING ANIMATION (Zero Emoji, Enterprise HUD)
+   ============================================================ */
+.cyber-loader-card {
+    background: #101216;
+    border: 1px solid rgba(124, 111, 240, 0.3);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 1.2rem 0;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(124, 111, 240, 0.14);
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-loader-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #2DD4BF, #7C6FF0, transparent);
+    animation: cyber-top-shimmer 2.2s linear infinite;
+}
+
+@keyframes cyber-top-shimmer {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+.cyber-loader-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2.5px solid rgba(45, 212, 191, 0.18);
+    border-top: 2.5px solid #2DD4BF;
+    border-right: 2.5px solid #7C6FF0;
+    border-radius: 50%;
+    animation: cyber-spin 0.8s linear infinite;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+}
+
+@keyframes cyber-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cyber-loader-progress-track {
+    width: 100%;
+    height: 6px;
+    background: #1A1D26;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cyber-loader-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #7C6FF0, #2DD4BF);
+    border-radius: 999px;
+    position: relative;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(45, 212, 191, 0.6);
+}
+
+.cyber-loader-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2DD4BF;
+    box-shadow: 0 0 8px #2DD4BF;
+    display: inline-block;
+    animation: cyber-pulse 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes cyber-pulse {
+    0% { opacity: 0.35; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ============================================================
    SOPHOS SIDEBAR RAIL (Flush Top Header)
    ============================================================ */
 section[data-testid="stSidebar"] {
