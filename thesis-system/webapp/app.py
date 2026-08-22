@@ -24,10 +24,16 @@ import streamlit as st
 
 # Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
-SYS_DIR = os.path.abspath(os.path.join(APP_DIR, ".."))
-THESIS_SYS_DIR = os.path.join(SYS_DIR, "thesis-system")
+if os.path.exists(os.path.join(APP_DIR, "thesis-system")):
+    SYS_DIR = os.path.join(APP_DIR, "thesis-system")
+elif os.path.exists(os.path.join(APP_DIR, "..", "thesis-system")):
+    SYS_DIR = os.path.abspath(os.path.join(APP_DIR, "..", "thesis-system"))
+elif os.path.exists(os.path.join(APP_DIR, "models")):
+    SYS_DIR = APP_DIR
+else:
+    SYS_DIR = os.path.abspath(os.path.join(APP_DIR, ".."))
 
-for p in [APP_DIR, SYS_DIR, THESIS_SYS_DIR]:
+for p in [APP_DIR, SYS_DIR, os.path.join(SYS_DIR, "thesis-system"), os.path.join(APP_DIR, "webapp"), os.path.join(SYS_DIR, "webapp")]:
     if os.path.exists(p) and p not in sys.path:
         sys.path.insert(0, p)
 if hasattr(site, 'USER_SITE') and site.USER_SITE not in sys.path:
