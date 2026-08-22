@@ -921,7 +921,7 @@ if "Live" in app_mode:
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
             
             # SIDE-BY-SIDE FORENSIC WORKBENCH (CYBER SCANNER ON LEFT, COCKPIT ON RIGHT)
-            col_scan_hud, col_cockpit = st.columns([1, 1.85], gap="large")
+            col_scan_hud, col_cockpit = st.columns([1.05, 1.95], gap="large")
             
             with col_scan_hud:
                 # Interactive Layer Switcher (Pure Typography & SVG Masks, Zero Emojis)
@@ -947,31 +947,30 @@ if "Live" in app_mode:
                     layer_tag = "Raster Screenshot"
                     layer_color = "#9CA3AF"
                 
+                # Encode active image as base64 for seamless single-block container rendering
+                buf_hud = io.BytesIO()
+                active_img.save(buf_hud, format="JPEG", quality=95)
+                active_img_b64 = base64.b64encode(buf_hud.getvalue()).decode("utf-8")
+
                 # Cyber Scanner HUD Frame with Animated Laser Beam
-                hud_header = f"""<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
-                    <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
-                    <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
-                </div>"""
-                st.markdown(hud_header, unsafe_allow_html=True)
-                
-                # Render Image inside Cyber Laser Scanner HUD
-                st.markdown("""
-                <div class="cyber-scanner-frame">
-                    <div class="cyber-scanner-hud">
-                        <div class="cyber-scanner-laser"></div>
-                        <div class="cyber-scanner-radar-glow"></div>
-                        <div class="cyber-corner-tl"></div>
-                        <div class="cyber-corner-tr"></div>
-                        <div class="cyber-corner-bl"></div>
-                        <div class="cyber-corner-br"></div>
-                """, unsafe_allow_html=True)
-                
-                st.image(active_img, use_container_width=True)
-                
-                st.markdown("""
+                hud_html = f"""<div style="margin-bottom: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
+                        <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
+                        <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
+                    <div class="cyber-scanner-frame">
+                        <div class="cyber-scanner-hud">
+                            <div class="cyber-scanner-laser"></div>
+                            <div class="cyber-scanner-radar-glow"></div>
+                            <div class="cyber-corner-tl"></div>
+                            <div class="cyber-corner-tr"></div>
+                            <div class="cyber-corner-bl"></div>
+                            <div class="cyber-corner-br"></div>
+                            <img src="data:image/jpeg;base64,{active_img_b64}" style="width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 6px; display: block;" alt="Forensic Evidence Raster" />
+                        </div>
+                    </div>
+                </div>"""
+                st.markdown(hud_html, unsafe_allow_html=True)
 
             with col_cockpit:
                 # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
