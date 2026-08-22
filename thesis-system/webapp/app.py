@@ -949,27 +949,30 @@ if "Live" in app_mode:
                 
                 # Encode active image as base64 for seamless single-block container rendering
                 buf_hud = io.BytesIO()
-                active_img.save(buf_hud, format="JPEG", quality=95)
+                active_img.save(buf_hud, format="JPEG", quality=92)
                 active_img_b64 = base64.b64encode(buf_hud.getvalue()).decode("utf-8")
 
-                # Cyber Scanner HUD Frame with Animated Laser Beam
+                target_box_html = '<div class="tamper-target-box"><div class="tamper-target-tag">ANOMALY: SPLICED PIXELS</div></div>' if (is_forged and "Original" in layer_choice) else ''
+
+                # Cyber Scanner HUD Frame with Animated Laser Beam & Target Lock (Pure zero-indent HTML)
                 hud_html = f"""<div style="margin-bottom: 6px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
-                        <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
-                        <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
-                    </div>
-                    <div class="cyber-scanner-frame">
-                        <div class="cyber-scanner-hud">
-                            <div class="cyber-scanner-laser"></div>
-                            <div class="cyber-scanner-radar-glow"></div>
-                            <div class="cyber-corner-tl"></div>
-                            <div class="cyber-corner-tr"></div>
-                            <div class="cyber-corner-bl"></div>
-                            <div class="cyber-corner-br"></div>
-                            <img src="data:image/jpeg;base64,{active_img_b64}" style="width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 6px; display: block;" alt="Forensic Evidence Raster" />
-                        </div>
-                    </div>
-                </div>"""
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
+<span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
+<span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
+</div>
+<div class="cyber-scanner-frame">
+<div class="cyber-scanner-hud">
+<div class="cyber-scanner-laser"></div>
+<div class="cyber-scanner-radar-glow"></div>
+<div class="cyber-corner-tl"></div>
+<div class="cyber-corner-tr"></div>
+<div class="cyber-corner-bl"></div>
+<div class="cyber-corner-br"></div>
+{target_box_html}
+<img src="data:image/jpeg;base64,{active_img_b64}" style="width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 6px; display: block;" alt="Forensic Evidence Raster" />
+</div>
+</div>
+</div>"""
                 st.markdown(hud_html, unsafe_allow_html=True)
 
             with col_cockpit:

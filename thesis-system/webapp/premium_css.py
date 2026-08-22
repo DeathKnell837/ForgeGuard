@@ -139,6 +139,42 @@ div[data-testid="stVerticalBlock"] {
     pointer-events: none;
 }
 
+.tamper-target-box {
+    position: absolute;
+    top: 42%;
+    left: 18%;
+    width: 64%;
+    height: 15%;
+    border: 2px dashed #EF4444;
+    background: rgba(239, 68, 68, 0.15);
+    border-radius: 6px;
+    z-index: 15;
+    pointer-events: none;
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.45), inset 0 0 12px rgba(239, 68, 68, 0.25);
+    animation: target-pulse 2s infinite ease-in-out;
+}
+
+.tamper-target-tag {
+    position: absolute;
+    top: -11px;
+    left: 8px;
+    background: #EF4444;
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+@keyframes target-pulse {
+    0% { opacity: 0.85; transform: scale(0.995); }
+    50% { opacity: 1; transform: scale(1.005); }
+    100% { opacity: 0.85; transform: scale(0.995); }
+}
+
 .cyber-corner-bl {
     position: absolute;
     bottom: 6px;
