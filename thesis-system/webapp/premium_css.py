@@ -919,20 +919,85 @@ div[data-testid="stAlert"] {
     top: -2px;
 }
 
-/* Sophos 3D Pillar Columns */
-.sophos-pillar {
-    width: 12px;
-    border-radius: 5px 5px 3px 3px;
-    transition: all 0.2s ease;
+/* ============================================================
+   FUTURISTIC STANDBY FORENSIC CONSOLE (Clean, Visual, Not Boxy Cards)
+   ============================================================ */
+@keyframes radar-sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-.sophos-pillar.purple {
-    background: linear-gradient(180deg, #818CF8 0%, #4338CA 100%);
-    box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+@keyframes bus-pulse {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(250%); opacity: 0; }
 }
 
-.sophos-pillar.slate {
-    background: linear-gradient(180deg, #64748B 0%, #1E293B 100%);
+@keyframes beacon-ping {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.radar-chassis {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0F131D 0%, #080A0F 100%);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.08), inset 0 0 20px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.radar-sweep-blade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg at 50% 50%, rgba(45, 212, 191, 0) 0deg, rgba(45, 212, 191, 0) 270deg, rgba(45, 212, 191, 0.35) 360deg);
+    animation: radar-sweep 4s linear infinite;
+    pointer-events: none;
+}
+
+.pipeline-node {
+    background: #11141D;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pipeline-node:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+    background: #161A26;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 16px rgba(99, 102, 241, 0.15);
+}
+
+.pipeline-connector-line {
+    height: 2px;
+    background: linear-gradient(90deg, #6366F1, #2DD4BF);
+    position: relative;
+    overflow: hidden;
+}
+
+.pipeline-connector-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 0 8px #FFFFFF, 0 0 16px #2DD4BF;
+    animation: bus-pulse 2.5s infinite;
 }
 
 </style>
