@@ -612,15 +612,6 @@ with st.sidebar:
             "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
             help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
         )
-        custom_or_key = st.text_input(
-            "OpenRouter / Vision Key",
-            type="password",
-            placeholder="sk-or-v1-...",
-            help="Optional: OpenRouter API key for unlimited free multimodal AI vision.",
-            key="input_custom_or_key"
-        )
-        if custom_or_key:
-            st.session_state["custom_openrouter_key"] = custom_or_key.strip()
     
 
 
