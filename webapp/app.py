@@ -760,13 +760,19 @@ if "Live" in app_mode:
             else:
                 loader_slot = st.empty()
                 
+                # Pre-encode uploaded evidence image for live laser scan display during SOP phases
+                buf_live = io.BytesIO()
+                pil_img.save(buf_live, format="JPEG", quality=90)
+                live_scan_b64 = base64.b64encode(buf_live.getvalue()).decode("utf-8")
+
                 # Phase 1: Ingesting raster pixels & computing ELA Noise Matrix
                 loader_slot.markdown(render_cyber_scanning_loader(
                     phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]",
                     status_text="Ingesting raster pixels & computing Error Level Analysis matrix (90Q / 15x)...",
-                    progress_pct=28
+                    progress_pct=28,
+                    img_b64=live_scan_b64
                 ), unsafe_allow_html=True)
-                time.sleep(0.18)
+                time.sleep(0.35)
 
                 start_time = time.time()
                 ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
@@ -774,10 +780,11 @@ if "Live" in app_mode:
                 # Phase 2: Parallel Architecture Consensus Matrix
                 loader_slot.markdown(render_cyber_scanning_loader(
                     phase_title="PARALLEL CNN CONSENSUS [PHASE 2/3]",
-                    status_text="Executing MobileNetV2, ResNet50, and Basic CNN consensus matrix...",
-                    progress_pct=64
+                    status_text="Executing MobileNetV2, ResNet50, and Basic CNN pixel tensor matrix...",
+                    progress_pct=64,
+                    img_b64=live_scan_b64
                 ), unsafe_allow_html=True)
-                time.sleep(0.18)
+                time.sleep(0.35)
 
                 sample_name = st.session_state.get('loaded_sample_name', '')
                 fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
@@ -829,7 +836,8 @@ if "Live" in app_mode:
                 loader_slot.markdown(render_cyber_scanning_loader(
                     phase_title="EXPLAINABLE AI DIAGNOSTICS [PHASE 3/3]",
                     status_text="Synthesizing multimodal transaction intelligence & tampering localization...",
-                    progress_pct=92
+                    progress_pct=92,
+                    img_b64=live_scan_b64
                 ), unsafe_allow_html=True)
 
                 # Run Explainable AI Diagnostics & Forensic Signal Analysis

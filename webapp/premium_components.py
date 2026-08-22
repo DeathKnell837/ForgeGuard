@@ -46,7 +46,21 @@ def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, 
 </div>"""
 
 
-def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]", status_text="Ingesting raster pixels & computing Error Level Analysis matrix...", progress_pct=30):
+def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]", status_text="Ingesting raster pixels & computing Error Level Analysis matrix...", progress_pct=30, img_b64=None):
+    img_scan_html = ""
+    if img_b64:
+        img_scan_html = f"""<div style="display: flex; justify-content: center; margin-top: 14px; margin-bottom: 4px;">
+<div class="cyber-scanner-hud" style="max-width: 240px; box-shadow: 0 0 28px rgba(45, 212, 191, 0.2); border: 1px solid rgba(45, 212, 191, 0.3);">
+<div class="cyber-scanner-laser"></div>
+<div class="cyber-scanner-radar-glow"></div>
+<div class="cyber-corner-tl"></div>
+<div class="cyber-corner-tr"></div>
+<div class="cyber-corner-bl"></div>
+<div class="cyber-corner-br"></div>
+<img src="data:image/jpeg;base64,{img_b64}" style="width: 100%; height: auto; max-height: 320px; object-fit: contain; border-radius: 6px; display: block;" alt="Scanning Evidence" />
+</div>
+</div>"""
+
     return f"""<div class="cyber-loader-card">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <div style="display: flex; align-items: center; gap: 10px;">
@@ -70,6 +84,8 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 </div>
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #6B7280; letter-spacing: 0.5px;">SOP 1-5 PIPELINE ACTIVE</span>
 </div>
+
+{img_scan_html}
 </div>"""
 
 
