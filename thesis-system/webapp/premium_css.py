@@ -54,26 +54,46 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
-   CYBER FORENSIC SCANNER (ANIMATED LASER BEAM HUD)
+   CYBER FORENSIC SCANNER (EVALUATION HUD & CENTERED DISPLAY)
    ============================================================ */
 .cyber-scanner-frame {
     position: relative;
-    background: #101216;
+    background: #0F131D;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 14px;
+    padding: 16px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
 .cyber-scanner-hud {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     background: #060910;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    text-align: center;
+    max-width: 100%;
+}
+
+.cyber-evidence-img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    border-radius: 6px;
 }
 
 .cyber-scanner-laser {
@@ -85,7 +105,7 @@ div[data-testid="stVerticalBlock"] {
     background: linear-gradient(90deg, transparent, #2DD4BF, #7C6FF0, #2DD4BF, transparent);
     box-shadow: 0 0 16px #2DD4BF, 0 0 28px rgba(124, 111, 240, 0.8);
     z-index: 10;
-    animation: cyber-laser-sweep 2.8s ease-in-out infinite alternate;
+    animation: cyber-laser-sweep 2.2s ease-in-out infinite alternate;
     pointer-events: none;
 }
 
@@ -97,7 +117,7 @@ div[data-testid="stVerticalBlock"] {
     height: 48px;
     background: linear-gradient(180deg, rgba(45, 212, 191, 0.16), transparent);
     z-index: 9;
-    animation: cyber-laser-sweep 2.8s ease-in-out infinite alternate;
+    animation: cyber-laser-sweep 2.2s ease-in-out infinite alternate;
     pointer-events: none;
 }
 
@@ -137,42 +157,6 @@ div[data-testid="stVerticalBlock"] {
     border-right: 2px solid #2DD4BF;
     z-index: 12;
     pointer-events: none;
-}
-
-.tamper-target-box {
-    position: absolute;
-    top: 42%;
-    left: 18%;
-    width: 64%;
-    height: 15%;
-    border: 2px dashed #EF4444;
-    background: rgba(239, 68, 68, 0.15);
-    border-radius: 6px;
-    z-index: 15;
-    pointer-events: none;
-    box-shadow: 0 0 18px rgba(239, 68, 68, 0.45), inset 0 0 12px rgba(239, 68, 68, 0.25);
-    animation: target-pulse 2s infinite ease-in-out;
-}
-
-.tamper-target-tag {
-    position: absolute;
-    top: -11px;
-    left: 8px;
-    background: #EF4444;
-    color: #FFFFFF;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    font-weight: 800;
-    padding: 1px 6px;
-    border-radius: 3px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-@keyframes target-pulse {
-    0% { opacity: 0.85; transform: scale(0.995); }
-    50% { opacity: 1; transform: scale(1.005); }
-    100% { opacity: 0.85; transform: scale(0.995); }
 }
 
 .cyber-corner-bl {
