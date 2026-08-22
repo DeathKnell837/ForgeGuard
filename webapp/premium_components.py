@@ -81,11 +81,32 @@ def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
 </div>"""
 
 
-def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None):
+def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None, forgery_type=None):
     status_color = "#EF4444" if is_forged else "#10B981"
     status_border = "rgba(239, 68, 68, 0.25)" if is_forged else "rgba(16, 185, 129, 0.25)"
-    severity_tag = "Critical: Digital Forgery Confirmed" if is_forged else "Secure: Authentic Receipt Confirmed"
-    sub_desc = "Compression rate disparity & synthetic splicing detected across amount fields." if is_forged else "Uniform pixel noise gradient across all metadata and amount regions."
+    
+    if not is_forged:
+        severity_tag = "Secure: Authentic Receipt Confirmed"
+        sub_desc = "Uniform pixel noise gradient across all metadata and amount regions."
+        forgery_badge = ""
+    else:
+        ft_upper = str(forgery_type or "").upper()
+        if "AI_GENERATED" in ft_upper or "DIFFUSION" in ft_upper or "SYNTHETIC" in ft_upper:
+            severity_tag = "Critical: AI-Generated Synthetic Receipt Detected"
+            sub_desc = "Generative diffusion artifacts, distorted glyph morphology, and anomalous noise distribution detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #C084FC; background: rgba(192, 132, 252, 0.12); border: 1px solid rgba(192, 132, 252, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">AI Synthetic Diffusion</span>'
+        elif "CANVA" in ft_upper or "PHOTOSHOP" in ft_upper:
+            severity_tag = "Critical: Photoshop / Canva Raster Tampering Detected"
+            sub_desc = "Raster layer splicing, font antialiasing disparity, and localized compression discontinuity detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Photoshop / Canva Splice</span>'
+        elif "GENERATOR" in ft_upper or "APP" in ft_upper:
+            severity_tag = "Critical: Fake Generator App Template Detected"
+            sub_desc = "Non-native font rendering, layout geometry deviation, and synthetic UI elements detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #38BDF8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Fake Generator App</span>'
+        else:
+            severity_tag = "Critical: Digital Forgery Confirmed"
+            sub_desc = "Compression rate disparity & synthetic splicing detected across amount fields."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F87171; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Amount Splicing</span>'
     
     pct = confidence * 100.0
     mnet_conf = (pct if is_forged else (100 - pct * 0.05))
@@ -111,7 +132,10 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <span style="width: 8px; height: 8px; border-radius: 50%; background: {status_color}; display: inline-block; box-shadow: 0 0 8px {status_color};"></span>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.76rem; font-weight: 700; color: {status_color}; letter-spacing: 0.3px;">{severity_tag}</span>
 </div>
+<div style="display: flex; align-items: center; gap: 8px;">
+{forgery_badge}
 <span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 3px 10px; border-radius: 6px; font-weight: 600;">3/3 Models Unanimous</span>
+</div>
 </div>
 
 <div style="margin-bottom: 14px;">
