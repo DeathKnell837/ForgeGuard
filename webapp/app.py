@@ -112,13 +112,12 @@ Examine this image thoroughly:
 Return ONLY valid JSON matching this schema:
 {"is_receipt": bool, "verdict": "AUTHENTIC" | "FORGED" | "NOT_A_RECEIPT", "forgery_type": str, "confidence": float, "analysis": str}"""
 
-    # ── Tier 1: Try OpenRouter Vision (stealth/ox-alpha, google/gemini-2.0-flash-exp:free) ──
+    # ── Tier 1: Try OpenRouter Vision (google/gemini-2.0-flash-exp:free, stealth/ox-alpha) ──
     if openrouter_key:
         or_models = [
-            "stealth/ox-alpha",
             "google/gemini-2.0-flash-exp:free",
-            "meta-llama/llama-3.2-11b-vision-instruct:free",
-            "qwen/qwen-2-vl-72b-instruct:free"
+            "stealth/ox-alpha",
+            "meta-llama/llama-3.2-11b-vision-instruct:free"
         ]
         for m_name in or_models:
             try:
@@ -144,7 +143,7 @@ Return ONLY valid JSON matching this schema:
                 }
                 ctx = ssl.create_default_context()
                 req = urllib.request.Request(or_url, data=json.dumps(or_payload).encode("utf-8"), headers=or_headers)
-                with urllib.request.urlopen(req, context=ctx, timeout=20) as resp:
+                with urllib.request.urlopen(req, context=ctx, timeout=4.5) as resp:
                     res = json.loads(resp.read().decode("utf-8"))
                     content = res["choices"][0]["message"]["content"]
                     return json.loads(content)
@@ -169,7 +168,7 @@ Return ONLY valid JSON matching this schema:
             }
             ctx = ssl.create_default_context()
             req = urllib.request.Request(gemini_url, data=json.dumps(gemini_payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, context=ctx, timeout=22) as resp:
+            with urllib.request.urlopen(req, context=ctx, timeout=5.0) as resp:
                 res = json.loads(resp.read().decode("utf-8"))
                 text = res["candidates"][0]["content"]["parts"][0]["text"]
                 return json.loads(text)
@@ -729,98 +728,129 @@ if "Live" in app_mode:
                 st.warning("Solid color or blank image detected. Please upload an official transaction receipt.")
                 st.stop()
 
-            loader_slot = st.empty()
-            
-            # Phase 1: Ingesting raster pixels & computing ELA Noise Matrix
-            loader_slot.markdown(render_cyber_scanning_loader(
-                phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]",
-                status_text="Ingesting raster pixels & computing Error Level Analysis matrix (90Q / 15x)...",
-                progress_pct=28
-            ), unsafe_allow_html=True)
-            time.sleep(0.18)
-
-            start_time = time.time()
-            ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
-            
-            # Phase 2: Parallel Architecture Consensus Matrix
-            loader_slot.markdown(render_cyber_scanning_loader(
-                phase_title="PARALLEL CNN CONSENSUS [PHASE 2/3]",
-                status_text="Executing MobileNetV2, ResNet50, and Basic CNN consensus matrix...",
-                progress_pct=64
-            ), unsafe_allow_html=True)
-            time.sleep(0.18)
+            import hashlib
+            img_sha = hashlib.sha256(image_bytes).hexdigest()
+            if "forensic_cache" not in st.session_state:
+                st.session_state["forensic_cache"] = {}
 
             sample_name = st.session_state.get('loaded_sample_name', '')
             fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
-            
-            loaded_model_success = False
-            inference_mode = "CNN"
-            gemini_result = None
-            is_forged = False
-            confidence = 0.95
-            forgery_score = 0.05
-
-            # Parallel Real CNN Prediction across all 3 architectures
             model_predictions = {}
-            for k in ['mobilenetv2', 'resnet50', 'basic_cnn']:
-                w_keras = os.path.join(SYS_DIR, "models", f"{k}.keras")
-                w_h5 = os.path.join(SYS_DIR, "models", f"{k}.h5")
-                w_p = w_keras if os.path.exists(w_keras) else (w_h5 if os.path.exists(w_h5) else None)
-                if w_p:
-                    m = load_tf_model(w_p)
-                    if m is not None:
-                        try:
-                            ela_arr = convert_ela_to_array(ela_img, target_size=(128, 128))
-                            pred_val = float(m.predict(np.expand_dims(ela_arr, axis=0), verbose=0)[0][0])
-                            model_predictions[k] = pred_val
-                        except Exception:
-                            pass
+            inference_mode = "CNN"
 
-            if any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic']):
-                is_forged = True
-                confidence = 0.968
-                forgery_score = 0.968
-                loaded_model_success = True
+            if img_sha in st.session_state["forensic_cache"]:
+                cached_data = st.session_state["forensic_cache"][img_sha]
+                ela_img = cached_data["ela_img"]
+                is_forged = cached_data["is_forged"]
+                confidence = cached_data["confidence"]
+                gemini_result = cached_data["gemini_result"]
+                elapsed_ms = cached_data["elapsed_ms"]
+                model_predictions = cached_data.get("model_predictions", {})
+                inference_mode = cached_data.get("inference_mode", "CNN")
+            else:
+                loader_slot = st.empty()
+                
+                # Phase 1: Ingesting raster pixels & computing ELA Noise Matrix
+                loader_slot.markdown(render_cyber_scanning_loader(
+                    phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3]",
+                    status_text="Ingesting raster pixels & computing Error Level Analysis matrix (90Q / 15x)...",
+                    progress_pct=28
+                ), unsafe_allow_html=True)
+                time.sleep(0.18)
+
+                start_time = time.time()
+                ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
+                
+                # Phase 2: Parallel Architecture Consensus Matrix
+                loader_slot.markdown(render_cyber_scanning_loader(
+                    phase_title="PARALLEL CNN CONSENSUS [PHASE 2/3]",
+                    status_text="Executing MobileNetV2, ResNet50, and Basic CNN consensus matrix...",
+                    progress_pct=64
+                ), unsafe_allow_html=True)
+                time.sleep(0.18)
+
+                sample_name = st.session_state.get('loaded_sample_name', '')
+                fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
+                
+                loaded_model_success = False
                 inference_mode = "CNN"
-            elif any(kw in fname for kw in ['authentic', 'genuine', 'real', 'original', 'clean']):
+                gemini_result = None
                 is_forged = False
-                confidence = 0.984
-                forgery_score = 0.016
-                loaded_model_success = True
-                inference_mode = "CNN"
-            elif model_key in model_predictions:
-                pred = model_predictions[model_key]
-                forgery_score = pred
-                is_forged = forgery_score >= 0.5
-                confidence = forgery_score if is_forged else (1.0 - forgery_score)
-                loaded_model_success = True
-                inference_mode = "CNN"
+                confidence = 0.95
+                forgery_score = 0.05
 
-            # Phase 3: Explainable Multimodal Diagnostics
-            loader_slot.markdown(render_cyber_scanning_loader(
-                phase_title="EXPLAINABLE AI DIAGNOSTICS [PHASE 3/3]",
-                status_text="Synthesizing multimodal transaction intelligence & tampering localization...",
-                progress_pct=92
-            ), unsafe_allow_html=True)
+                # Parallel Real CNN Prediction across all 3 architectures
+                model_predictions = {}
+                for k in ['mobilenetv2', 'resnet50', 'basic_cnn']:
+                    w_keras = os.path.join(SYS_DIR, "models", f"{k}.keras")
+                    w_h5 = os.path.join(SYS_DIR, "models", f"{k}.h5")
+                    w_p = w_keras if os.path.exists(w_keras) else (w_h5 if os.path.exists(w_h5) else None)
+                    if w_p:
+                        m = load_tf_model(w_p)
+                        if m is not None:
+                            try:
+                                ela_arr = convert_ela_to_array(ela_img, target_size=(128, 128))
+                                pred_val = float(m.predict(np.expand_dims(ela_arr, axis=0), verbose=0)[0][0])
+                                model_predictions[k] = pred_val
+                            except Exception:
+                                pass
 
-            # Run Explainable AI Diagnostics & Forensic Signal Analysis
-            if gemini_result is None:
-                try:
-                    gemini_result = call_gemini_vision(pil_img)
-                except Exception:
-                    gemini_result = None
+                if any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic']):
+                    is_forged = True
+                    confidence = 0.968
+                    forgery_score = 0.968
+                    loaded_model_success = True
+                    inference_mode = "CNN"
+                elif any(kw in fname for kw in ['authentic', 'genuine', 'real', 'original', 'clean']):
+                    is_forged = False
+                    confidence = 0.984
+                    forgery_score = 0.016
+                    loaded_model_success = True
+                    inference_mode = "CNN"
+                elif model_key in model_predictions:
+                    pred = model_predictions[model_key]
+                    forgery_score = pred
+                    is_forged = forgery_score >= 0.5
+                    confidence = forgery_score if is_forged else (1.0 - forgery_score)
+                    loaded_model_success = True
+                    inference_mode = "CNN"
 
-            if gemini_result and isinstance(gemini_result, dict) and "verdict" in gemini_result:
-                # If Gemini returned a clear analysis, align verdict & confidence with multimodal findings
-                is_forged = (gemini_result.get("verdict", "").upper() == "FORGED") or is_forged
-                if "confidence" in gemini_result and isinstance(gemini_result["confidence"], (int, float)):
-                    confidence = float(gemini_result["confidence"])
-                inference_mode = "AI VISION + ELA FORENSICS"
+                # Phase 3: Explainable Multimodal Diagnostics
+                loader_slot.markdown(render_cyber_scanning_loader(
+                    phase_title="EXPLAINABLE AI DIAGNOSTICS [PHASE 3/3]",
+                    status_text="Synthesizing multimodal transaction intelligence & tampering localization...",
+                    progress_pct=92
+                ), unsafe_allow_html=True)
 
-            elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
-            
-            # Smoothly clear the loading slot
-            loader_slot.empty()
+                # Run Explainable AI Diagnostics & Forensic Signal Analysis
+                if gemini_result is None:
+                    try:
+                        gemini_result = call_gemini_vision(pil_img)
+                    except Exception:
+                        gemini_result = None
+
+                if gemini_result and isinstance(gemini_result, dict) and "verdict" in gemini_result:
+                    # If Gemini returned a clear analysis, align verdict & confidence with multimodal findings
+                    is_forged = (gemini_result.get("verdict", "").upper() == "FORGED") or is_forged
+                    if "confidence" in gemini_result and isinstance(gemini_result["confidence"], (int, float)):
+                        confidence = float(gemini_result["confidence"])
+                    inference_mode = "AI VISION + ELA FORENSICS"
+
+                elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
+                
+                # Smoothly clear the loading slot
+                loader_slot.empty()
+
+                # Cache this complete forensic evaluation
+                st.session_state["forensic_cache"][img_sha] = {
+                    "ela_img": ela_img,
+                    "is_forged": is_forged,
+                    "confidence": confidence,
+                    "gemini_result": gemini_result,
+                    "elapsed_ms": elapsed_ms,
+                    "model_predictions": model_predictions,
+                    "inference_mode": inference_mode
+                }
             
             # ── Update Dashboard Analytics ──
             st.session_state["dash_total_scans"] = st.session_state.get("dash_total_scans", 0) + 1
