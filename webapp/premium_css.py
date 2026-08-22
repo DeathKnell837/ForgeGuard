@@ -54,6 +54,116 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
+   CYBER FORENSIC SCANNER (ANIMATED LASER BEAM HUD)
+   ============================================================ */
+.cyber-scanner-frame {
+    position: relative;
+    background: #101216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.cyber-scanner-hud {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #060910;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cyber-scanner-laser {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #2DD4BF, #7C6FF0, #2DD4BF, transparent);
+    box-shadow: 0 0 16px #2DD4BF, 0 0 28px rgba(124, 111, 240, 0.8);
+    z-index: 10;
+    animation: cyber-laser-sweep 2.8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.cyber-scanner-radar-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: linear-gradient(180deg, rgba(45, 212, 191, 0.16), transparent);
+    z-index: 9;
+    animation: cyber-laser-sweep 2.8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes cyber-laser-sweep {
+    0% {
+        top: 0%;
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        top: calc(100% - 4px);
+        opacity: 0.7;
+    }
+}
+
+.cyber-corner-tl {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid #2DD4BF;
+    border-left: 2px solid #2DD4BF;
+    z-index: 12;
+    pointer-events: none;
+}
+
+.cyber-corner-tr {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid #2DD4BF;
+    border-right: 2px solid #2DD4BF;
+    z-index: 12;
+    pointer-events: none;
+}
+
+.cyber-corner-bl {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    width: 14px;
+    height: 14px;
+    border-bottom: 2px solid #2DD4BF;
+    border-left: 2px solid #2DD4BF;
+    z-index: 12;
+    pointer-events: none;
+}
+
+.cyber-corner-br {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 14px;
+    height: 14px;
+    border-bottom: 2px solid #2DD4BF;
+    border-right: 2px solid #2DD4BF;
+    z-index: 12;
+    pointer-events: none;
+}
+
+/* ============================================================
    SOPHOS SIDEBAR RAIL (Flush Top Header)
    ============================================================ */
 section[data-testid="stSidebar"] {
@@ -111,8 +221,8 @@ button[data-testid="stSidebarCollapsedControl"] {
 }
 
 div[data-testid="stSidebarContent"] {
-    padding: 0.6rem 1.1rem 1.2rem 1.1rem !important;
-    padding-top: 0.6rem !important;
+    padding: 0.8rem 1.1rem 1.2rem 1.1rem !important;
+    padding-top: 0.8rem !important;
 }
 
 div[data-testid="stSidebarUserContent"] {
