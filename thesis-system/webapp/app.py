@@ -761,13 +761,13 @@ if "Live" in app_mode:
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
             
             # SIDE-BY-SIDE FORENSIC WORKBENCH (CYBER SCANNER ON LEFT, COCKPIT ON RIGHT)
-            col_scan_hud, col_cockpit = st.columns([1, 1.45], gap="large")
+            col_scan_hud, col_cockpit = st.columns([1, 1.85], gap="large")
             
             with col_scan_hud:
-                # Interactive Layer Switcher
+                # Interactive Layer Switcher (Pure Typography & SVG Masks, Zero Emojis)
                 layer_choice = st.radio(
                     "Forensic Layer",
-                    options=["📸 Original Receipt", "🔍 ELA Noise Matrix", "🌡️ Splicing Heatmap"],
+                    options=["Original Receipt", "ELA Noise Matrix", "Splicing Heatmap"],
                     horizontal=True,
                     label_visibility="collapsed",
                     key="layer_switcher_radio"

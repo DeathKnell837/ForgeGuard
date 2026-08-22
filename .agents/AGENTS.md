@@ -66,6 +66,12 @@ This workspace customizations file provides context and instructions to the Anti
 > *"Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery"*
 > (ForgeGuard System). Do NOT reference or propose the 3 old pre-defense candidate titles (Concrete Crack, Phishing URL, Deepfake Detection) in any new documents. They may remain in archival files only.
 
+> [!CRITICAL]
+> **Rule 7: Strict Zero-Emoji Policy (Professional Enterprise UI & Academic Standards)**
+> * **NEVER** use emojis anywhere in the UI, labels, buttons, navigation, headers, tables, charts, or documentation.
+> * Always use **clean pure typography** or **custom SVG vector line icons** (Lucide / Feather style SVG masks) for all visual UI elements.
+> * Maintain a formal, high-tech, enterprise cybersecurity and image forensics aesthetic matching Sophos / Behance standards.
+
 ---
 
 ## 3. Approved Thesis Title

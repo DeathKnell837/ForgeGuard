@@ -78,7 +78,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="font-size: 0.82rem; color: #E2E8F0; line-height: 1.5;">{gemini_analysis}</div>
 </div>"""
 
-    return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border};">
+    return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border}; padding: 18px 20px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <div style="display: flex; align-items: center; gap: 8px;">
 <span style="width: 8px; height: 8px; border-radius: 50%; background: {status_color}; display: inline-block; box-shadow: 0 0 8px {status_color};"></span>
@@ -87,37 +87,36 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 3px 10px; border-radius: 6px; font-weight: 600;">3/3 Models Unanimous</span>
 </div>
 
-<div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center;">
-<div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.35rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px; margin-bottom: 4px;">{verdict_text}</div>
-<div style="font-size: 0.78rem; color: #9CA3AF; line-height: 1.45; margin-bottom: 16px;">{sub_desc}</div>
+<div style="margin-bottom: 14px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 1.32rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px; margin-bottom: 3px;">{verdict_text}</div>
+<div style="font-size: 0.78rem; color: #9CA3AF; line-height: 1.4;">{sub_desc}</div>
+</div>
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; text-align: center;">
-<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 8px;">
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; margin-bottom: 16px;">
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Mean</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">{ela_mean:.1f}</div>
 <div style="padding-top: 2px;">{trend_noise}</div>
 </div>
-<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 8px;">
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Variance</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: {status_color};">{ela_var:.1f}</div>
 <div style="padding-top: 2px;">{trend_var}</div>
 </div>
-<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 8px;">
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Peak Pixel</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #9CA3AF;">{ela_max:.0f}</div>
 <div style="padding-top: 2px;"><span style="color: #6B7280; font-size: 0.68rem;">/ 255</span></div>
 </div>
-<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 8px;">
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Best Speed</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #10B981;">12.4ms</div>
 <div style="padding-top: 2px;"><span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&uarr; 2.3x</span></div>
 </div>
 </div>
-</div>
 
-<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 18px;">
-<div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-family: 'Inter', sans-serif; font-weight: 600; color: #9CA3AF; margin-bottom: 12px; text-transform: uppercase;">
+<div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;">
+<div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: 'Inter', sans-serif; font-weight: 600; color: #9CA3AF; margin-bottom: 12px; text-transform: uppercase;">
 <span>Simultaneous Architecture Inference</span>
 <span>Certainty &bull; Latency</span>
 </div>
@@ -154,7 +153,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 </div>
 </div>
 </div>
-</div>
+
 {analysis_block}
 </div>"""
 
