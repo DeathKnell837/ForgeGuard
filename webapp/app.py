@@ -259,7 +259,7 @@ Return ONLY valid JSON matching this schema:
         ela_arr = np.array(ela_test, dtype=np.float32)
         mean_val = float(np.mean(ela_arr))
         var_val = float(np.var(ela_arr))
-        is_suspicious = (var_val > 250.0) or (mean_val > 10.0)
+        is_suspicious = (var_val > 550.0) or (mean_val > 22.0)
         
         if is_suspicious:
             return {
