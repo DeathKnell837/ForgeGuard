@@ -1153,9 +1153,12 @@ else:
     # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards
     st.markdown("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
     
-    eval_metrics_path = os.path.join(base_dir, "models", "evaluation_metrics.json")
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
     if not os.path.exists(eval_metrics_path):
-        eval_metrics_path = os.path.join(os.path.dirname(__file__), "..", "models", "evaluation_metrics.json")
+        eval_metrics_path = os.path.join(os.path.dirname(__file__), "models", "evaluation_metrics.json")
+    if not os.path.exists(eval_metrics_path):
+        eval_metrics_path = os.path.join(os.getcwd(), "models", "evaluation_metrics.json")
     
     dyn_metrics = {}
     if os.path.exists(eval_metrics_path):
