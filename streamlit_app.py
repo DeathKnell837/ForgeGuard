@@ -1152,17 +1152,34 @@ else:
 
     # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards
     st.markdown("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
+    
+    eval_metrics_path = os.path.join(base_dir, "models", "evaluation_metrics.json")
+    if not os.path.exists(eval_metrics_path):
+        eval_metrics_path = os.path.join(os.path.dirname(__file__), "..", "models", "evaluation_metrics.json")
+    
+    dyn_metrics = {}
+    if os.path.exists(eval_metrics_path):
+        try:
+            with open(eval_metrics_path, "r") as f:
+                dyn_metrics = json.load(f)
+        except Exception:
+            pass
+
+    mnet_m = dyn_metrics.get("MobileNetV2", {})
+    resnet_m = dyn_metrics.get("ResNet50", {})
+    bcnn_m = dyn_metrics.get("Basic_CNN", {})
+
     col_mnet, col_resnet, col_bcnn = st.columns(3)
     
     with col_mnet:
         card_mnet = render_saas_model_card(
             title="MobileNetV2",
             tag="RECOMMENDED",
-            acc=98.4,
-            prec=98.6,
-            rec=98.2,
-            f1=98.4,
-            speed="12.4ms",
+            acc=mnet_m.get("accuracy", 0.9735) * 100.0 if mnet_m.get("accuracy", 0.9735) <= 1.0 else mnet_m.get("accuracy", 97.35),
+            prec=mnet_m.get("precision", 0.9844) * 100.0 if mnet_m.get("precision", 0.9844) <= 1.0 else mnet_m.get("precision", 98.44),
+            rec=mnet_m.get("recall", 0.9844) * 100.0 if mnet_m.get("recall", 0.9844) <= 1.0 else mnet_m.get("recall", 98.44),
+            f1=mnet_m.get("f1_score", 0.9844) * 100.0 if mnet_m.get("f1_score", 0.9844) <= 1.0 else mnet_m.get("f1_score", 98.44),
+            speed=f"{mnet_m.get('latency_ms', 28.04):.1f}ms",
             params="3.4M",
             comp_acc="97.8%",
             is_recommended=True
@@ -1173,11 +1190,11 @@ else:
         card_resnet = render_saas_model_card(
             title="ResNet50",
             tag="DEEP BENCHMARK",
-            acc=98.7,
-            prec=98.9,
-            rec=98.5,
-            f1=98.7,
-            speed="28.6ms",
+            acc=resnet_m.get("accuracy", 0.9669) * 100.0 if resnet_m.get("accuracy", 0.9669) <= 1.0 else resnet_m.get("accuracy", 96.69),
+            prec=resnet_m.get("precision", 0.9920) * 100.0 if resnet_m.get("precision", 0.9920) <= 1.0 else resnet_m.get("precision", 99.20),
+            rec=resnet_m.get("recall", 0.9688) * 100.0 if resnet_m.get("recall", 0.9688) <= 1.0 else resnet_m.get("recall", 96.88),
+            f1=resnet_m.get("f1_score", 0.9802) * 100.0 if resnet_m.get("f1_score", 0.9802) <= 1.0 else resnet_m.get("f1_score", 98.02),
+            speed=f"{resnet_m.get('latency_ms', 109.4):.1f}ms",
             params="23.5M",
             comp_acc="98.2%",
             is_recommended=False
@@ -1188,11 +1205,11 @@ else:
         card_bcnn = render_saas_model_card(
             title="Basic CNN",
             tag="BASELINE",
-            acc=94.2,
-            prec=93.8,
-            rec=94.6,
-            f1=94.2,
-            speed="45.2ms",
+            acc=bcnn_m.get("accuracy", 0.9801) * 100.0 if bcnn_m.get("accuracy", 0.9801) <= 1.0 else bcnn_m.get("accuracy", 98.01),
+            prec=bcnn_m.get("precision", 0.9921) * 100.0 if bcnn_m.get("precision", 0.9921) <= 1.0 else bcnn_m.get("precision", 99.21),
+            rec=bcnn_m.get("recall", 0.9844) * 100.0 if bcnn_m.get("recall", 0.9844) <= 1.0 else bcnn_m.get("recall", 98.44),
+            f1=bcnn_m.get("f1_score", 0.9882) * 100.0 if bcnn_m.get("f1_score", 0.9882) <= 1.0 else bcnn_m.get("f1_score", 98.82),
+            speed=f"{bcnn_m.get('latency_ms', 8.66):.1f}ms",
             params="2.1M",
             comp_acc="92.3%",
             is_recommended=False
