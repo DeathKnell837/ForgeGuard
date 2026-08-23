@@ -74,173 +74,11 @@ def load_tf_model(path):
     except Exception:
         return None
 
-def call_gemini_vision(pil_img):
-    import urllib.request, json, base64, io, os, time, ssl
-    
-    # ── Multi-Tier API Key Resolution ──
-    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
-    if not openrouter_key:
-        try:
-            if hasattr(st, "secrets"):
-                openrouter_key = st.secrets.get("OPENROUTER_API_KEY", "")
-        except Exception:
-            openrouter_key = ""
-    if not openrouter_key and "custom_openrouter_key" in st.session_state:
-        openrouter_key = st.session_state.get("custom_openrouter_key", "")
-    if not openrouter_key:
-        openrouter_key = base64.b64decode("c2stb3ItdjEtMmFkZTMxYjYzYzNiN2U1ZjY0NWUyZTlkNDUwN2Y4Y2I5NzQyN2ZkYTU2YjRjZTUyNTc4ZDJmMDQ5OTY2YjEwNQ==").decode("utf-8")
-
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    if not gemini_key:
-        try:
-            if hasattr(st, "secrets"):
-                gemini_key = st.secrets.get("GEMINI_API_KEY", "")
-        except Exception:
-            gemini_key = ""
-    if not gemini_key:
-        gemini_key = base64.b64decode("QVEuQWI4Uk42SWdZQ0Nja2hFQjRmM2x1a0prZUtNeG1LZFZlbC1pLXYyVWFkU1hfbTkySnc=").decode("utf-8")
-        
-    img_resized = pil_img.copy().convert("RGB")
-    img_resized.thumbnail((600, 600))
-    buffered = io.BytesIO()
-    img_resized.save(buffered, format="JPEG", quality=65)
-    img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
-
-    prompt = """CRITICAL DOMAIN & FORENSIC RECEIPT CLASSIFICATION:
-You are a senior digital image forensics scientist specialized in Philippine mobile transaction receipts (GCash, Maya, ShopeePay, GrabPay).
-
-Examine this image thoroughly using multi-level optical forensic criteria:
-
-1. NON-RECEIPT SCREENING:
-   - If the image is a desktop screen, browser, code editor, scenery, person, selfie, or non-receipt document:
-     Set is_receipt = false, verdict = "NOT_A_RECEIPT", forgery_type = "NON_RECEIPT", confidence = 0.99, and explain what the image contains.
-
-2. FORENSIC CLASSIFICATION (GCash / Maya):
-   Examine optical anomalies to categorize the image into one of these types:
-
-   A) AI_GENERATED_RECEIPT (Synthetic / Diffusion Model Output e.g. Midjourney, DALL-E, Flux, Stable Diffusion):
-      - Distorted, melted, or hallucinated Philippine Peso symbols (₱, PHP).
-      - Illegible pseudo-characters, warped glyphs, or garbled fine print.
-      - Deformed, warped, or non-functional QR codes and barcodes lacking rigid matrix squares.
-      - Hyper-smooth background textures lacking authentic JPEG 8x8 discrete cosine transform (DCT) block noise.
-      - Hybrid or imaginary UI elements mixing elements that do not exist in official GCash/Maya apps.
-
-   B) CANVA_OR_PHOTOSHOP_EDIT (Raster Graphic Manipulation / Splicing):
-      - Sharp antialiasing or resolution mismatch between overlaid text (e.g. PHP 50,000.00) and base background.
-      - Misaligned baseline grids or uneven font kerning/tracking.
-      - Compression artifact halos around numerical amount or recipient name.
-
-   C) FAKE_GENERATOR_APP (Synthetic Mobile App or Web Maker):
-      - System default fonts (Arial, Roboto, Segoe UI) instead of GCash proprietary typography.
-      - Missing official masked phone dot patterns (+63 9•• ••• ••••).
-      - Invalid or malformed 13-digit transaction reference numbers.
-
-   D) AUTHENTIC (Genuine Official Screenshot):
-      - Standard official GCash / Maya typography, layout geometry, status bar, and valid 13-digit reference format.
-      - Uniform compression noise gradient across all text and background pixels.
-
-3. OUTPUT FORMAT:
-   - is_receipt: true or false
-   - verdict: "AUTHENTIC" | "FORGED" | "NOT_A_RECEIPT"
-   - forgery_type: "NONE" | "AI_GENERATED_RECEIPT" | "CANVA_OR_PHOTOSHOP_EDIT" | "FAKE_GENERATOR_APP" | "TAMPERED_AMOUNT"
-   - confidence: float between 0.88 and 0.99
-   - analysis: Clear, professional forensic explanation in 2 concise sentences describing (1) transaction details found, and (2) specific physical or AI-generation evidence detected.
-
-Return ONLY valid JSON matching this schema:
-{"is_receipt": bool, "verdict": "AUTHENTIC" | "FORGED" | "NOT_A_RECEIPT", "forgery_type": str, "confidence": float, "analysis": str}"""
-
-    def _clean_json_parse(raw_text):
-        if not raw_text:
-            return None
-        c = str(raw_text).strip()
-        if c.startswith("```json"):
-            c = c[7:]
-        elif c.startswith("```"):
-            c = c[3:]
-        if c.endswith("```"):
-            c = c[:-3]
-        c = c.strip()
-        try:
-            return json.loads(c)
-        except Exception:
-            s_idx = c.find("{")
-            e_idx = c.rfind("}")
-            if s_idx != -1 and e_idx != -1 and e_idx > s_idx:
-                try:
-                    return json.loads(c[s_idx:e_idx+1])
-                except Exception:
-                    pass
-        return None
-
-    # ── Tier 1: Try OpenRouter Vision (google/gemini-2.0-flash-exp:free, stealth/ox-alpha) ──
-    if openrouter_key:
-        or_models = [
-            "google/gemini-2.0-flash-exp:free",
-            "stealth/ox-alpha",
-            "meta-llama/llama-3.2-11b-vision-instruct:free"
-        ]
-        for m_name in or_models:
-            try:
-                or_url = "https://openrouter.ai/api/v1/chat/completions"
-                or_headers = {
-                    "Authorization": f"Bearer {openrouter_key}",
-                    "HTTP-Referer": "https://forgeguard.streamlit.app",
-                    "X-Title": "ForgeGuard Mobile Forensic Suite",
-                    "Content-Type": "application/json"
-                }
-                or_payload = {
-                    "model": m_name,
-                    "messages": [
-                        {
-                            "role": "user",
-                            "content": [
-                                {"type": "text", "text": prompt},
-                                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
-                            ]
-                        }
-                    ],
-                    "response_format": {"type": "json_object"}
-                }
-                ctx = ssl.create_default_context()
-                req = urllib.request.Request(or_url, data=json.dumps(or_payload).encode("utf-8"), headers=or_headers)
-                with urllib.request.urlopen(req, context=ctx, timeout=4.5) as resp:
-                    res = json.loads(resp.read().decode("utf-8"))
-                    content = res["choices"][0]["message"]["content"]
-                    parsed = _clean_json_parse(content)
-                    if parsed and "verdict" in parsed:
-                        return parsed
-            except Exception:
-                continue
-
-    # ── Tier 2: Try Google Gemini API ──
-    if gemini_key:
-        try:
-            gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_key}"
-            gemini_payload = {
-                "contents": [{
-                    "parts": [
-                        {"inline_data": {"mime_type": "image/jpeg", "data": img_b64}},
-                        {"text": prompt}
-                    ]
-                }],
-                "generationConfig": {
-                    "response_mime_type": "application/json",
-                    "temperature": 0.1
-                }
-            }
-            ctx = ssl.create_default_context()
-            req = urllib.request.Request(gemini_url, data=json.dumps(gemini_payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, context=ctx, timeout=5.0) as resp:
-                res = json.loads(resp.read().decode("utf-8"))
-                text = res["candidates"][0]["content"]["parts"][0]["text"]
-                parsed = _clean_json_parse(text)
-                if parsed and "verdict" in parsed:
-                    return parsed
-        except Exception:
-            pass
-
-    # ── Tier 3: Local Deterministic Forensic Signal Fallback ──
-    # If API quotas are exhausted, generate accurate forensic diagnostics from mathematical ELA signals
+def _fallback_ela_rule_based(pil_img):
+    """
+    Tier 3: Local Deterministic Forensic Signal Fallback.
+    If API quotas are exhausted, generate accurate forensic diagnostics from mathematical ELA signals.
+    """
     try:
         w_img, h_img = pil_img.size
         aspect = h_img / float(w_img) if w_img > 0 else 1.0
@@ -296,6 +134,174 @@ Return ONLY valid JSON matching this schema:
             "confidence": 0.95,
             "analysis": "Standard forensic baseline verification complete."
         }
+
+def call_gemini_vision(pil_img):
+    import urllib.request, json, base64, io, os, time, ssl
+    
+    # ── Multi-Tier API Key Resolution ──
+    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
+    if not openrouter_key:
+        try:
+            if hasattr(st, "secrets"):
+                openrouter_key = st.secrets.get("OPENROUTER_API_KEY", "")
+        except Exception:
+            openrouter_key = ""
+    if not openrouter_key and "custom_openrouter_key" in st.session_state:
+        openrouter_key = st.session_state.get("custom_openrouter_key", "")
+    if not openrouter_key:
+        openrouter_key = base64.b64decode("c2stb3ItdjEtMmFkZTMxYjYzYzNiN2U1ZjY0NWUyZTlkNDUwN2Y4Y2I5NzQyN2ZkYTU2YjRjZTUyNTc4ZDJmMDQ5OTY2YjEwNQ==").decode("utf-8")
+
+    gemini_key = os.environ.get("GEMINI_API_KEY", "")
+    if not gemini_key:
+        try:
+            if hasattr(st, "secrets"):
+                gemini_key = st.secrets.get("GEMINI_API_KEY", "")
+        except Exception:
+            gemini_key = ""
+    if not gemini_key:
+        gemini_key = base64.b64decode("QVEuQWI4Uk42SWdZQ0Nja2hFQjRmM2x1a0prZUtNeG1LZFZlbC1pLXYyVWFkU1hfbTkySnc=").decode("utf-8")
+        
+    img_resized = pil_img.copy().convert("RGB")
+    img_resized.thumbnail((600, 600))
+    buffered = io.BytesIO()
+    img_resized.save(buffered, format="JPEG", quality=65)
+    img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+    prompt = """CRITICAL DOMAIN & FORENSIC RECEIPT CLASSIFICATION:
+You are a senior digital image forensics scientist specialized in Philippine mobile transaction receipts (GCash, Maya, ShopeePay, GrabPay).
+
+Examine this image thoroughly using multi-level optical forensic criteria:
+
+1. NON-RECEIPT SCREENING:
+   - If the image is a desktop screen, browser, code editor, scenery, person, selfie, or non-receipt document:
+     Set is_receipt = false, verdict = "NOT_A_RECEIPT", forgery_type = "NON_RECEIPT", confidence = 0.99, and explain what the image contains.
+
+2. FORENSIC CLASSIFICATION (GCash / Maya):
+   Examine optical anomalies to categorize the image into one of these types:
+
+   A) AI_GENERATED_RECEIPT (Synthetic / Diffusion Model Output):
+      - Distorted/hallucinated Peso symbols (₱), warped glyphs, or garbled fine print.
+      - Hyper-smooth background textures lacking authentic JPEG DCT block noise.
+      - Hybrid/imaginary UI elements.
+
+   B) CANVA_OR_PHOTOSHOP_EDIT (Raster Graphic Manipulation / Splicing):
+      - Sharp antialiasing or resolution mismatch between overlaid text and base background.
+      - Misaligned baseline grids or uneven font kerning.
+
+   C) FAKE_GENERATOR_APP (Synthetic Mobile App or Web Maker):
+      - System default fonts (Arial, Roboto, Segoe UI) instead of GCash proprietary typography.
+      - Missing official masked phone dot patterns (+63 9•• ••• ••••).
+      - Invalid or malformed 13-digit transaction reference numbers.
+
+   D) AUTHENTIC (Genuine Philippine Mobile Wallet Receipt):
+      - Official GCash blue (#005CEE / #0066FF) or Maya emerald palette.
+      - Exact brand typography and correct spacing.
+      - Consistent JPEG compression noise without localized splicing boundaries.
+
+Output STRICT JSON ONLY:
+{
+  "is_receipt": true/false,
+  "verdict": "AUTHENTIC" | "FORGED" | "NOT_A_RECEIPT",
+  "forgery_type": "AI_GENERATED_RECEIPT" | "CANVA_OR_PHOTOSHOP_EDIT" | "FAKE_GENERATOR_APP" | "NON_RECEIPT" | "NONE",
+  "confidence": 0.50 to 0.99,
+  "analysis": "2-3 concise sentences detailing optical, typographical, and structural forensic findings."
+}"""
+
+    def _clean_json_parse(raw_text):
+        try:
+            cleaned = raw_text.strip()
+            if "```json" in cleaned:
+                cleaned = cleaned.split("```json")[1].split("```")[0].strip()
+            elif "```" in cleaned:
+                cleaned = cleaned.split("```")[1].split("```")[0].strip()
+            return json.loads(cleaned)
+        except Exception:
+            return None
+
+    # ── Tier 1: OpenRouter Vision API (Multi-Model Resilient Cascade) ──
+    if openrouter_key:
+        vision_models = [
+            "google/gemini-2.0-flash-exp:free",
+            "stealth/ox-alpha",
+            "meta-llama/llama-3.2-11b-vision-instruct:free",
+            "qwen/qwen-2-vl-72b-instruct:free",
+            "meta-llama/llama-3.2-90b-vision-instruct:free"
+        ]
+        
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        
+        for v_model in vision_models:
+            try:
+                payload = json.dumps({
+                    "model": v_model,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": prompt},
+                                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
+                            ]
+                        }
+                    ],
+                    "temperature": 0.1,
+                    "max_tokens": 400
+                }).encode("utf-8")
+                
+                req = urllib.request.Request(
+                    "https://openrouter.ai/api/v1/chat/completions",
+                    data=payload,
+                    headers={
+                        "Authorization": f"Bearer {openrouter_key}",
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": "https://forgeguard.streamlit.app",
+                        "X-Title": "ForgeGuard Forensic Suite"
+                    },
+                    method="POST"
+                )
+                
+                with urllib.request.urlopen(req, timeout=8, context=ctx) as response:
+                    res = json.loads(response.read().decode("utf-8"))
+                    text = res["choices"][0]["message"]["content"]
+                    parsed = _clean_json_parse(text)
+                    if parsed and "verdict" in parsed:
+                        return parsed
+            except Exception:
+                continue
+
+    # ── Tier 2: Google Gemini Vision Direct ──
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_key}"
+            payload = json.dumps({
+                "contents": [
+                    {
+                        "parts": [
+                            {"text": prompt},
+                            {"inline_data": {"mime_type": "image/jpeg", "data": img_b64}}
+                        ]
+                    }
+                ],
+                "generationConfig": {"temperature": 0.1, "maxOutputTokens": 400}
+            }).encode("utf-8")
+            
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            
+            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"}, method="POST")
+            with urllib.request.urlopen(req, timeout=8, context=ctx) as response:
+                res = json.loads(response.read().decode("utf-8"))
+                text = res["candidates"][0]["content"]["parts"][0]["text"]
+                parsed = _clean_json_parse(text)
+                if parsed and "verdict" in parsed:
+                    return parsed
+        except Exception:
+            pass
+
+    # ── Tier 3: Local Deterministic Forensic Signal Fallback ──
+    return _fallback_ela_rule_based(pil_img)
 
 def compute_ela(image: Image.Image, quality: int = 90, scale: float = 15.0) -> Image.Image:
     if image.mode != 'RGB':
