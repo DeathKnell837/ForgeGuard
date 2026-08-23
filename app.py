@@ -954,11 +954,15 @@ if "Live" in app_mode:
                         is_forged = True
                         is_non_receipt = False
                     elif g_verdict == "AUTHENTIC":
-                        is_forged = False
-                        is_non_receipt = False
+                        if not is_forged:
+                            is_forged = False
+                            is_non_receipt = False
 
                     if "confidence" in gemini_result and isinstance(gemini_result["confidence"], (int, float)):
-                        confidence = float(gemini_result["confidence"])
+                        if is_forged and g_verdict == "AUTHENTIC":
+                            pass
+                        else:
+                            confidence = float(gemini_result["confidence"])
                     inference_mode = "AI VISION + ELA FORENSICS"
 
                 elapsed_ms = (time.time() - start_time) * 1000 + (12.4 if model_key == "mobilenetv2" else (28.6 if model_key == "resnet50" else 45.2))
