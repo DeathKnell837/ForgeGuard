@@ -54,6 +54,18 @@ try:
 except Exception:
     pass
 
+try:
+    from preprocessing.ai_forensics import detect_ai_generation
+except Exception:
+    def detect_ai_generation(pil_img):
+        return {
+            "is_ai_generated": False, "ai_confidence": 0.0,
+            "dct_grid_score": 0.5, "freq_deviation_score": 0.0,
+            "texture_smoothness_score": 0.0, "glyph_integrity_score": 0.0,
+            "ai_generation_type": "NONE",
+            "explanation": "AI forensics module not available."
+        }
+
 @st.cache_resource
 def load_tf_model(path):
     try:
@@ -89,7 +101,7 @@ def call_gemini_vision(pil_img):
         gemini_key = base64.b64decode("QVEuQWI4Uk42SWdZQ0Nja2hFQjRmM2x1a0prZUtNeG1LZFZlbC1pLXYyVWFkU1hfbTkySnc=").decode("utf-8")
         
     img_resized = pil_img.copy().convert("RGB")
-    img_resized.thumbnail((400, 400))
+    img_resized.thumbnail((600, 600))
     buffered = io.BytesIO()
     img_resized.save(buffered, format="JPEG", quality=65)
     img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
@@ -799,6 +811,8 @@ if "Live" in app_mode:
             fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
             model_predictions = {}
             is_non_receipt = False
+            ai_forensics_result = {}
+            forgery_type_override = None
             if img_sha in st.session_state["forensic_cache"]:
                 cached_data = st.session_state["forensic_cache"][img_sha]
                 ela_img = cached_data["ela_img"]
@@ -809,6 +823,7 @@ if "Live" in app_mode:
                 elapsed_ms = cached_data["elapsed_ms"]
                 model_predictions = cached_data.get("model_predictions", {})
                 inference_mode = cached_data.get("inference_mode", "CNN")
+                ai_forensics_result = cached_data.get("ai_forensics", {})
             else:
                 loader_slot = st.empty()
                 
@@ -828,6 +843,9 @@ if "Live" in app_mode:
 
                 start_time = time.time()
                 ela_img = compute_ela(pil_img, quality=ela_quality, scale=ela_scale)
+                
+                # Run AI-Generation Forensic Engine (parallel to ELA)
+                ai_forensics_result = detect_ai_generation(pil_img)
                 
                 # Phase 2: Parallel Architecture Consensus Matrix
                 loader_slot.markdown(render_cyber_scanning_loader(
@@ -871,6 +889,13 @@ if "Live" in app_mode:
                     confidence = 0.99
                     loaded_model_success = True
                     inference_mode = "DOMAIN SCREENING"
+                elif ai_forensics_result.get("is_ai_generated", False) and ai_forensics_result.get("ai_confidence", 0) >= 0.55:
+                    is_forged = True
+                    confidence = min(0.99, float(ai_forensics_result["ai_confidence"]))
+                    forgery_score = confidence
+                    loaded_model_success = True
+                    inference_mode = "AI FORENSICS ENGINE"
+                    forgery_type_override = "AI_GENERATED_RECEIPT"
                 elif any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic']):
                     is_forged = True
                     confidence = 0.968
@@ -939,7 +964,8 @@ if "Live" in app_mode:
                     "gemini_result": gemini_result,
                     "elapsed_ms": elapsed_ms,
                     "model_predictions": model_predictions,
-                    "inference_mode": inference_mode
+                    "inference_mode": inference_mode,
+                    "ai_forensics": ai_forensics_result
                 }
             
             # ── Update Dashboard Analytics ──
@@ -1056,15 +1082,34 @@ if "Live" in app_mode:
                 # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
                 gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
                 gemini_forgery_type = gemini_result.get('forgery_type', '') if (gemini_result and isinstance(gemini_result, dict)) else None
+                
+                # Determine verdict text
+                if is_non_receipt:
+                    final_verdict_text = "Non-Receipt Artifact"
+                elif is_forged and ai_forensics_result.get("is_ai_generated", False):
+                    final_verdict_text = "AI-Generated Forgery Detected"
+                elif is_forged:
+                    final_verdict_text = "Digital Forgery Detected"
+                else:
+                    final_verdict_text = "Authentic Receipt Verified"
+                
+                # Override forgery_type if AI forensics flagged it
+                final_forgery_type = gemini_forgery_type
+                try:
+                    if forgery_type_override:
+                        final_forgery_type = forgery_type_override
+                except NameError:
+                    pass
+
                 cockpit_html = render_panoramic_incident_cockpit(
-                    verdict_text="Non-Receipt Artifact" if is_non_receipt else ("Digital Forgery Detected" if is_forged else "Authentic Receipt Verified"),
+                    verdict_text=final_verdict_text,
                     is_forged=is_forged,
                     confidence=confidence,
                     ela_mean=ela_mean,
                     ela_var=ela_var,
                     ela_max=ela_max,
                     gemini_analysis=gemini_text,
-                    forgery_type=gemini_forgery_type,
+                    forgery_type=final_forgery_type,
                     is_non_receipt=is_non_receipt
                 )
                 st.markdown(cockpit_html, unsafe_allow_html=True)
