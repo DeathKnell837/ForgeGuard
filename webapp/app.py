@@ -716,7 +716,7 @@ if "Live" in app_mode:
     active_sample_name = None
 
     # 1-CLICK INSTANT DEMO EXHIBIT SHOWCASE
-    ex_col1, ex_col2 = st.columns(2)
+    ex_col1, ex_col2, ex_col3 = st.columns(3)
     with ex_col1:
         if st.button("Load Authentic GCash Exhibit [01] (PHP 170.00 Express Send)", key="btn_sample_auth", use_container_width=True):
             st.session_state["uploader_key"] += 1
@@ -736,6 +736,17 @@ if "Live" in app_mode:
                     with open(p, "rb") as f:
                         st.session_state["loaded_sample"] = f.read()
                         st.session_state["loaded_sample_name"] = "tampered_forgery_sample_02.jpg"
+                    break
+            st.rerun()
+
+    with ex_col3:
+        if st.button("Load AI-Generated Exhibit [03] (Copilot Diffusion Model)", key="btn_sample_ai", use_container_width=True):
+            st.session_state["uploader_key"] += 1
+            for p in [os.path.join(APP_DIR, "ai_test.png"), os.path.join(SYS_DIR, "ai_test.png"), "ai_test.png"]:
+                if os.path.exists(p):
+                    with open(p, "rb") as f:
+                        st.session_state["loaded_sample"] = f.read()
+                        st.session_state["loaded_sample_name"] = "ai_diffusion_copilot_sample_03.png"
                     break
             st.rerun()
 
