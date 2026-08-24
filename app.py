@@ -767,7 +767,7 @@ if "Live" in app_mode:
                     break
             st.rerun()
 
-    tab_upload, tab_camera = st.tabs(["Upload Receipt Screenshot", "Live Camera Capture"])
+    tab_upload, tab_camera = st.tabs(["Upload Screenshot", "Live Camera"])
 
     with tab_upload:
         curr_key = f"file_uploader_{st.session_state['uploader_key']}"
