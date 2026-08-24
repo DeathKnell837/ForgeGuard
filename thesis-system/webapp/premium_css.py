@@ -324,16 +324,47 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
 }
 
 @media (max-width: 768px) {
-    section[data-testid="stSidebar"][aria-expanded="true"] {
-        min-width: 82vw !important;
-        width: 82vw !important;
-        max-width: 320px !important;
+    div[data-testid="stAppViewContainer"],
+    .stAppViewContainer {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    div[data-testid="stAppViewContainer"] > section.main,
+    section[data-testid="stMain"],
+    .stMain {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    section[data-testid="stSidebar"] {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         bottom: 0 !important;
+        height: 100vh !important;
         z-index: 999999 !important;
-        box-shadow: 12px 0 36px rgba(0, 0, 0, 0.75) !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    section[data-testid="stSidebar"]:not([aria-expanded="true"]),
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        transform: translateX(-110%) !important;
+        display: none !important;
+    }
+
+    section[data-testid="stSidebar"][aria-expanded="true"] {
+        min-width: 82vw !important;
+        width: 82vw !important;
+        max-width: 320px !important;
+        transform: translateX(0%) !important;
+        display: block !important;
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.8) !important;
     }
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
