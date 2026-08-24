@@ -933,13 +933,16 @@ div[data-testid="stFileUploader"] button:hover {
 
 /* Tabs Styling (Streamlit 1.37+ & Legacy BaseWeb) */
 div[data-testid="stTabs"] div[role="tablist"],
-div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+div[data-testid="stTabs"] [data-baseweb="tab-list"],
+div[data-testid="stTabs"] div[data-orientation="horizontal"] {
     gap: 8px !important;
     background-color: transparent !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-bottom: 6px !important;
     margin-top: 0.6rem !important;
+    margin-left: 0px !important;
     padding-left: 0px !important;
+    transform: none !important;
 }
 
 div[data-testid="stTabs"] div[data-testid="stTab"],
@@ -952,8 +955,10 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     font-size: 0.84rem !important;
     font-weight: 500 !important;
     padding: 8px 16px !important;
+    margin-left: 0px !important;
     white-space: nowrap !important;
     cursor: pointer !important;
+    transform: none !important;
 }
 
 div[data-testid="stTabs"] div[data-testid="stTab"][aria-selected="true"],
@@ -967,10 +972,12 @@ div[data-testid="stTabs"] div[data-testid="stTab"][data-selected="true"] {
 
 @media (max-width: 768px) {
     div[data-testid="stTabs"] div[role="tablist"],
-    div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+    div[data-testid="stTabs"] [data-baseweb="tab-list"],
+    div[data-testid="stTabs"] div[data-orientation="horizontal"] {
         display: flex !important;
         width: 100% !important;
         gap: 6px !important;
+        margin-left: 0px !important;
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
@@ -979,7 +986,8 @@ div[data-testid="stTabs"] div[data-testid="stTab"][data-selected="true"] {
         flex: 1 1 50% !important;
         text-align: center !important;
         justify-content: center !important;
-        padding: 8px 6px !important;
+        margin-left: 0px !important;
+        padding: 8px 8px !important;
         font-size: 0.78rem !important;
     }
 }
