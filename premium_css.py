@@ -978,6 +978,16 @@ div[data-testid="stTabs"] div[data-testid="stTab"][data-selected="true"] {
     font-weight: 600 !important;
 }
 
+div[data-testid="stTabs"] div[data-testid="stTab"] p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.82rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    line-height: 1.2 !important;
+}
+
 @media (max-width: 768px) {
     div[data-testid="stTabs"] div[role="tablist"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"],
