@@ -960,6 +960,23 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     font-weight: 600 !important;
 }
 
+@media (max-width: 768px) {
+    div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+        display: flex !important;
+        width: 100% !important;
+        gap: 6px !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+    }
+    div[data-testid="stTabs"] [data-baseweb="tab"] {
+        flex: 1 1 50% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 8px 6px !important;
+        font-size: 0.78rem !important;
+    }
+}
+
 /* 3-Exhibit Card Frames */
 .exhibit-card-frame {
     background: #141822;
