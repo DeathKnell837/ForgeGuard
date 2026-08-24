@@ -931,16 +931,18 @@ div[data-testid="stFileUploader"] button:hover {
     background: #6D5DE7 !important;
 }
 
-/* Tabs Styling */
+/* Tabs Styling (Streamlit 1.37+ & Legacy BaseWeb) */
+div[data-testid="stTabs"] div[role="tablist"],
 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
     gap: 8px !important;
     background-color: transparent !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-bottom: 6px !important;
     margin-top: 0.6rem !important;
-    overflow-x: auto !important;
+    padding-left: 0px !important;
 }
 
+div[data-testid="stTabs"] div[data-testid="stTab"],
 div[data-testid="stTabs"] [data-baseweb="tab"] {
     background: transparent !important;
     border: none !important;
@@ -949,25 +951,30 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
-    padding: 8px 18px !important;
+    padding: 8px 16px !important;
     white-space: nowrap !important;
+    cursor: pointer !important;
 }
 
-div[data-testid="stTabs"] [aria-selected="true"] {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+div[data-testid="stTabs"] div[data-testid="stTab"][aria-selected="true"],
+div[data-testid="stTabs"] [data-baseweb="tab"][aria-selected="true"],
+div[data-testid="stTabs"] div[data-testid="stTab"][data-selected="true"] {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
 
 @media (max-width: 768px) {
+    div[data-testid="stTabs"] div[role="tablist"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"] {
         display: flex !important;
         width: 100% !important;
         gap: 6px !important;
-        padding-left: 2px !important;
-        padding-right: 2px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
+    div[data-testid="stTabs"] div[data-testid="stTab"],
     div[data-testid="stTabs"] [data-baseweb="tab"] {
         flex: 1 1 50% !important;
         text-align: center !important;
