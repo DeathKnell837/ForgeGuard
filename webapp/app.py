@@ -640,7 +640,7 @@ def draw_gcash_receipt(receipt_data, add_artifacts=False, artifact_type=None):
 st.set_page_config(
     page_title="ForgeGuard — Digital Receipt Forensic Suite",
     layout="wide",
-    initial_sidebar_state="auto"
+    initial_sidebar_state="collapsed"
 )
 
 try:
