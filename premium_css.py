@@ -301,40 +301,73 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
-   SOPHOS SIDEBAR RAIL (Flush Top Header)
+   SOPHOS SIDEBAR RAIL (Flush Top Header & Clean Mobile Drawer)
    ============================================================ */
 section[data-testid="stSidebar"] {
     background-color: #101216 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding-top: 0px !important;
-    min-width: 290px !important;
-    width: 290px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+section[data-testid="stSidebar"][aria-expanded="true"] {
+    min-width: 280px !important;
+    width: 280px !important;
     visibility: visible !important;
 }
 
+section[data-testid="stSidebar"][aria-expanded="false"] {
+    min-width: 0px !important;
+    width: 0px !important;
+    transform: translateX(-100%) !important;
+    visibility: hidden !important;
+}
+
 @media (max-width: 768px) {
-    section[data-testid="stSidebar"] {
+    section[data-testid="stSidebar"][aria-expanded="true"] {
         min-width: 82vw !important;
         width: 82vw !important;
+        max-width: 320px !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        z-index: 999999 !important;
+        box-shadow: 12px 0 36px rgba(0, 0, 0, 0.75) !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"] button[kind="header"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #FFFFFF !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 8px !important;
+        margin: 8px !important;
     }
 }
 
-/* Eliminate empty sidebar header (wide forehead) */
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
-[data-testid="stSidebarHeader"] {
-    display: none !important;
-    height: 0px !important;
-    min-height: 0px !important;
-    padding: 0px !important;
-    margin: 0px !important;
-}
+@media (min-width: 769px) {
+    /* Eliminate empty sidebar header (wide forehead) on desktop */
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
+    [data-testid="stSidebarHeader"] {
+        display: none !important;
+        height: 0px !important;
+        min-height: 0px !important;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
 
-/* Hide collapse button inside sidebar */
-[data-testid="stSidebarCollapseButton"],
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
-section[data-testid="stSidebar"] button[kind="header"],
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
-    display: none !important;
+    /* Hide collapse button inside sidebar on desktop */
+    [data-testid="stSidebarCollapseButton"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"] button[kind="header"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
+        display: none !important;
+    }
 }
 
 /* Floating Reopen Toggle Button */
@@ -347,7 +380,7 @@ button[data-testid="stSidebarCollapsedControl"] {
     position: fixed !important;
     top: 0.6rem !important;
     left: 0.6rem !important;
-    z-index: 999999 !important;
+    z-index: 99999 !important;
     background: #1A1D26 !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
@@ -362,6 +395,20 @@ button[data-testid="stSidebarCollapsedControl"] {
 [data-testid="collapsedControl"]:hover {
     background: rgba(139, 92, 246, 0.15) !important;
     border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Responsive Column Stacking for Mobile Layouts */
+@media (max-width: 768px) {
+    div[data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    div[data-testid="column"],
+    div[data-testid="stColumn"] {
+        min-width: 100% !important;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
 }
 
 div[data-testid="stSidebarContent"] {
