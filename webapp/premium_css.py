@@ -324,47 +324,79 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
 }
 
 @media (max-width: 768px) {
+    /* Full-width viewport canvas on mobile */
     div[data-testid="stAppViewContainer"],
     .stAppViewContainer {
         display: block !important;
-        width: 100% !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
         overflow-x: hidden !important;
+        left: 0 !important;
     }
     
     div[data-testid="stAppViewContainer"] > section.main,
     section[data-testid="stMain"],
     .stMain {
-        width: 100% !important;
-        min-width: 100% !important;
-        max-width: 100% !important;
+        width: 100vw !important;
+        min-width: 100vw !important;
+        max-width: 100vw !important;
         display: block !important;
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        left: 0 !important;
+        overflow-x: hidden !important;
     }
 
-    section[data-testid="stSidebar"] {
+    div[data-testid="stMainBlockContainer"],
+    .stMainBlockContainer,
+    .block-container,
+    div[data-testid="stAppViewBlockContainer"] {
+        padding-top: 0.4rem !important;
+        padding-bottom: 5rem !important;
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Completely eliminate sidebar from document flow when collapsed on mobile */
+    section[data-testid="stSidebar"]:not([aria-expanded="true"]),
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        display: none !important;
+        position: fixed !important;
+        width: 0px !important;
+        min-width: 0px !important;
+        max-width: 0px !important;
+        height: 0px !important;
+        left: -9999px !important;
+        top: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateX(-100%) !important;
+    }
+
+    /* Slide-over off-canvas drawer when expanded on mobile */
+    section[data-testid="stSidebar"][aria-expanded="true"] {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         bottom: 0 !important;
         height: 100vh !important;
-        z-index: 999999 !important;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-
-    section[data-testid="stSidebar"]:not([aria-expanded="true"]),
-    section[data-testid="stSidebar"][aria-expanded="false"] {
-        transform: translateX(-110%) !important;
-        display: none !important;
-    }
-
-    section[data-testid="stSidebar"][aria-expanded="true"] {
-        min-width: 82vw !important;
         width: 82vw !important;
-        max-width: 320px !important;
-        transform: translateX(0%) !important;
+        max-width: 310px !important;
+        z-index: 999999 !important;
         display: block !important;
-        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.8) !important;
+        visibility: visible !important;
+        transform: translateX(0%) !important;
+        box-shadow: 14px 0 44px rgba(0, 0, 0, 0.85) !important;
+        background: #101216 !important;
     }
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
@@ -815,25 +847,33 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 
 /* Neutral Outline Action Buttons (Secondary) */
 .stButton > button {
-    background: transparent !important;
-    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    background: #141824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 10px !important;
-    color: #9CA3AF !important;
+    color: #F1F5F9 !important;
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.82rem !important;
-    font-weight: 500 !important;
-    padding: 0.65rem 1.2rem !important;
+    font-size: 0.80rem !important;
+    font-weight: 600 !important;
+    padding: 0.6rem 0.8rem !important;
     width: 100% !important;
-    box-shadow: none !important;
-    transition: all 0.15s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
 }
 
 .stButton > button:hover {
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(124, 111, 240, 0.5) !important;
+    background: #1D2232 !important;
     color: #FFFFFF !important;
-    transform: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 14px rgba(124, 111, 240, 0.25) !important;
+    transform: translateY(-1px) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0px) !important;
+    background: #0E1118 !important;
 }
 
 /* File Uploader Container */
