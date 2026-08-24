@@ -690,21 +690,23 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 # ============================================================
 if "app_mode" not in st.session_state:
     st.session_state["app_mode"] = "Live Threat Scanner"
+if "sidebar_app_mode_radio" not in st.session_state:
+    st.session_state["sidebar_app_mode_radio"] = st.session_state["app_mode"]
+
+def on_sidebar_nav_change():
+    st.session_state["app_mode"] = st.session_state["sidebar_app_mode_radio"]
 
 with st.sidebar:
     st.markdown(render_sophos_brand_sidebar(), unsafe_allow_html=True)
     
     st.markdown("<div class='rail-section-header'>Forensic Operations</div>", unsafe_allow_html=True)
-    sidebar_mode = st.radio(
+    st.radio(
         "Navigation",
         options=["Live Threat Scanner", "Model Benchmark Suite"],
-        index=0 if st.session_state["app_mode"] == "Live Threat Scanner" else 1,
         key="sidebar_app_mode_radio",
+        on_change=on_sidebar_nav_change,
         label_visibility="collapsed"
     )
-    if sidebar_mode != st.session_state["app_mode"]:
-        st.session_state["app_mode"] = sidebar_mode
-        st.rerun()
     
     model_key = "mobilenetv2"
     model_display_name = "MobileNetV2"
@@ -719,7 +721,7 @@ with st.sidebar:
             help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
         )
 
-app_mode = st.session_state["app_mode"]
+app_mode = st.session_state.get("app_mode", "Live Threat Scanner")
 
 # ============================================================
 # TOP BRAND COMMAND BAR & GLOBAL TELEMETRY
@@ -736,6 +738,7 @@ with nav_col1:
     if st.button("Live Threat Scanner", key="top_nav_live_btn", use_container_width=True, type=btn_live_type):
         if app_mode != "Live Threat Scanner":
             st.session_state["app_mode"] = "Live Threat Scanner"
+            st.session_state["sidebar_app_mode_radio"] = "Live Threat Scanner"
             st.rerun()
 
 with nav_col2:
@@ -744,6 +747,7 @@ with nav_col2:
     if st.button("Model Benchmark Suite", key="top_nav_bench_btn", use_container_width=True, type=btn_bench_type):
         if app_mode != "Model Benchmark Suite":
             st.session_state["app_mode"] = "Model Benchmark Suite"
+            st.session_state["sidebar_app_mode_radio"] = "Model Benchmark Suite"
             st.rerun()
 
 if "Live" in app_mode:
