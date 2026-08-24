@@ -301,54 +301,64 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* ============================================================
-   SOPHOS SIDEBAR RAIL (Flush Top Header & Clean Mobile Drawer)
+   SOPHOS SIDEBAR RAIL (Desktop Docked vs Mobile Off-Canvas Drawer)
    ============================================================ */
-section[data-testid="stSidebar"] {
-    background-color: #101216 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
-    padding-top: 0px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
+@media (min-width: 769px) {
+    section[data-testid="stSidebar"] {
+        background-color: #101216 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+        padding-top: 0px !important;
+        position: relative !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
 
-section[data-testid="stSidebar"][aria-expanded="true"] {
-    min-width: 280px !important;
-    width: 280px !important;
-    visibility: visible !important;
-}
+    section[data-testid="stSidebar"][aria-expanded="true"] {
+        min-width: 280px !important;
+        width: 280px !important;
+        visibility: visible !important;
+    }
 
-section[data-testid="stSidebar"][aria-expanded="false"] {
-    min-width: 0px !important;
-    width: 0px !important;
-    transform: translateX(-100%) !important;
-    visibility: hidden !important;
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        min-width: 0px !important;
+        width: 0px !important;
+        transform: translateX(-100%) !important;
+        visibility: hidden !important;
+    }
+
+    /* Eliminate empty sidebar header (wide forehead) on desktop */
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
+    [data-testid="stSidebarHeader"] {
+        display: none !important;
+        height: 0px !important;
+        min-height: 0px !important;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+
+    /* Hide collapse button inside sidebar on desktop */
+    [data-testid="stSidebarCollapseButton"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"] button[kind="header"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
+        display: none !important;
+    }
 }
 
 @media (max-width: 768px) {
     /* Full-width container canvas on mobile */
     div[data-testid="stAppViewContainer"],
-    .stAppViewContainer {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important;
-        left: 0 !important;
-        position: relative !important;
-    }
-    
+    .stAppViewContainer,
     div[data-testid="stAppViewContainer"] > section.main,
     section[data-testid="stMain"],
     .stMain {
-        width: 100% !important;
-        min-width: 100% !important;
-        max-width: 100% !important;
         display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
-        left: 0 !important;
         overflow-x: hidden !important;
+        left: 0 !important;
         position: relative !important;
     }
 
@@ -366,39 +376,39 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
         box-sizing: border-box !important;
     }
 
-    /* Completely eliminate sidebar from document flow when collapsed on mobile */
-    section[data-testid="stSidebar"]:not([aria-expanded="true"]),
-    section[data-testid="stSidebar"][aria-expanded="false"] {
-        display: none !important;
-        position: fixed !important;
-        width: 0px !important;
-        min-width: 0px !important;
-        max-width: 0px !important;
-        height: 0px !important;
-        left: -9999px !important;
-        top: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        transform: translateX(-100%) !important;
-    }
-
-    /* Slide-over off-canvas drawer when expanded on mobile */
-    section[data-testid="stSidebar"][aria-expanded="true"] {
+    /* Off-canvas mobile sidebar drawer (NEVER in normal flex layout flow) */
+    section[data-testid="stSidebar"] {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         bottom: 0 !important;
         height: 100vh !important;
-        width: 280px !important;
-        max-width: 85% !important;
         z-index: 999999 !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    section[data-testid="stSidebar"]:not([aria-expanded="true"]),
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        display: none !important;
+        width: 0px !important;
+        min-width: 0px !important;
+        max-width: 0px !important;
+        height: 0px !important;
+        left: -9999px !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateX(-110%) !important;
+    }
+
+    section[data-testid="stSidebar"][aria-expanded="true"] {
         display: block !important;
         visibility: visible !important;
+        width: 280px !important;
+        max-width: 82% !important;
         transform: translateX(0%) !important;
-        box-shadow: 14px 0 44px rgba(0, 0, 0, 0.85) !important;
+        box-shadow: 14px 0 44px rgba(0, 0, 0, 0.9) !important;
         background: #101216 !important;
     }
 
