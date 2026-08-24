@@ -1,8 +1,8 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v6.2)
-   Calibrated Saturation, Hairline Borders & Generous Spacing
+   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v8.0-MOBILE-RESPONSIVE)
+   High-End Cyber Forensics, Responsive Glassmorphism & Zero-Emoji Purity
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -10,15 +10,18 @@ PREMIUM_CSS = """
 /* Global Surface & Canvas */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    background-color: #101216 !important;
+    background-color: #0A0D14 !important;
     color: #E2E8F0 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .stApp {
-    background-color: #101216 !important;
+    background-color: #0A0D14 !important;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.04) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.02) 0%, transparent 50%) !important;
+        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 0% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 40%) !important;
     background-attachment: fixed !important;
 }
 
@@ -42,15 +45,35 @@ div[data-testid="stMainBlockContainer"],
 .block-container,
 div[data-testid="stAppViewBlockContainer"] {
     padding-top: 0.8rem !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 3.5rem !important;
     padding-left: 1.8rem !important;
     padding-right: 1.8rem !important;
     max-width: 98% !important;
 }
 
+/* Responsive Block Container for Mobile/Tablet */
+@media (max-width: 768px) {
+    div[data-testid="stMainBlockContainer"],
+    .stMainBlockContainer,
+    .block-container,
+    div[data-testid="stAppViewBlockContainer"] {
+        padding-top: 0.5rem !important;
+        padding-bottom: 4rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        max-width: 100% !important;
+    }
+}
+
 /* Generous Breathing Room Between Vertical Blocks */
 div[data-testid="stVerticalBlock"] {
     gap: 1.2rem !important;
+}
+
+@media (max-width: 768px) {
+    div[data-testid="stVerticalBlock"] {
+        gap: 0.9rem !important;
+    }
 }
 
 /* ============================================================
@@ -94,6 +117,12 @@ div[data-testid="stVerticalBlock"] {
     max-height: 520px;
     object-fit: contain;
     border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+    .cyber-evidence-img {
+        max-height: 380px;
+    }
 }
 
 .cyber-scanner-laser {
@@ -197,6 +226,13 @@ div[data-testid="stVerticalBlock"] {
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    .cyber-loader-card {
+        padding: 16px 16px;
+        margin: 0.8rem 0;
+    }
+}
+
 .cyber-loader-card::before {
     content: "";
     position: absolute;
@@ -271,9 +307,16 @@ section[data-testid="stSidebar"] {
     background-color: #101216 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding-top: 0px !important;
-    min-width: 300px !important;
-    width: 300px !important;
+    min-width: 290px !important;
+    width: 290px !important;
     visibility: visible !important;
+}
+
+@media (max-width: 768px) {
+    section[data-testid="stSidebar"] {
+        min-width: 82vw !important;
+        width: 82vw !important;
+    }
 }
 
 /* Eliminate empty sidebar header (wide forehead) */
@@ -601,17 +644,31 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     color: #6B7280 !important;
 }
 
-/* Top Command / Breadcrumb Bar */
+/* ============================================================
+   TOP COMMAND / BREADCRUMB BAR (Fluid Responsive Flexbox)
+   ============================================================ */
 .top-command-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #161922;
+    background: #141822;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 0.8rem 1.4rem;
     margin-bottom: 1.2rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .top-command-bar {
+        padding: 0.7rem 0.9rem;
+        margin-bottom: 0.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 }
 
 .breadcrumb-trail {
@@ -622,6 +679,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     font-family: 'Inter', sans-serif;
     color: #9CA3AF;
     font-weight: 500;
+    flex-wrap: wrap;
 }
 
 .breadcrumb-active {
@@ -633,6 +691,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .top-telemetry-pill {
@@ -645,6 +704,35 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
+}
+
+/* Exhibit Metadata Bar Responsive */
+.exhibit-metadata-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #141822;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 9px 18px;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    color: #9CA3AF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .exhibit-metadata-bar {
+        padding: 8px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 0.70rem;
+    }
 }
 
 /* Neutral Outline Action Buttons (Secondary) */
@@ -672,12 +760,18 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 
 /* File Uploader Container */
 div[data-testid="stFileUploader"] {
-    background: #161922 !important;
+    background: #141822 !important;
     border: 1px dashed rgba(255, 255, 255, 0.14) !important;
     border-radius: 14px !important;
     padding: 1.2rem !important;
     margin-top: 0.4rem !important;
     transition: all 0.2s ease !important;
+}
+
+@media (max-width: 768px) {
+    div[data-testid="stFileUploader"] {
+        padding: 0.8rem !important;
+    }
 }
 
 div[data-testid="stFileUploader"]:hover {
@@ -713,6 +807,7 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"] {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-bottom: 6px !important;
     margin-top: 0.6rem !important;
+    overflow-x: auto !important;
 }
 
 div[data-testid="stTabs"] [data-baseweb="tab"] {
@@ -724,6 +819,7 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     font-size: 0.84rem !important;
     font-weight: 500 !important;
     padding: 8px 18px !important;
+    white-space: nowrap !important;
 }
 
 div[data-testid="stTabs"] [aria-selected="true"] {
@@ -735,7 +831,7 @@ div[data-testid="stTabs"] [aria-selected="true"] {
 
 /* 3-Exhibit Card Frames */
 .exhibit-card-frame {
-    background: #161922;
+    background: #141822;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 1.2rem;
@@ -743,6 +839,14 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     flex-direction: column;
     align-items: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .exhibit-card-frame {
+        padding: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
 }
 
 .exhibit-header-tag {
@@ -784,26 +888,66 @@ div[data-testid="stImage"] img {
 
 /* Incident Cockpit Card */
 .incident-cockpit-card {
-    background: #161922;
+    background: #141822;
     border-radius: 14px;
     padding: 1.6rem 1.8rem;
     margin-top: 1.4rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Benchmark KPI Tiles (Exact Sophos Top 4 Cards) */
+@media (max-width: 768px) {
+    .incident-cockpit-card {
+        padding: 1.1rem 1.1rem;
+        margin-top: 1rem;
+    }
+}
+
+/* Incident Telemetry 4-Metric Grid */
+.incident-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+    .incident-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}
+
+/* ============================================================
+   BENCHMARK KPI TILES (Fluid 4-Col to 2x2 Grid)
+   ============================================================ */
 .bench-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .bench-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bench-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
 }
 
 .bench-kpi-card {
-    background: #161922;
+    background: #141822;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 20px 22px;
+    padding: 18px 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -811,8 +955,15 @@ div[data-testid="stImage"] img {
     transition: all 0.2s ease;
 }
 
+@media (max-width: 480px) {
+    .bench-kpi-card {
+        padding: 14px 14px;
+    }
+}
+
 .bench-kpi-card:hover {
     border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
 }
 
 .bench-kpi-icon-chip {
@@ -827,34 +978,42 @@ div[data-testid="stImage"] img {
     margin-bottom: 14px;
 }
 
+@media (max-width: 480px) {
+    .bench-kpi-icon-chip {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 8px;
+    }
+}
+
 .bench-kpi-label {
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
     color: #9CA3AF;
     letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .bench-kpi-value {
     font-family: 'Inter', sans-serif;
-    font-size: 1.85rem;
+    font-size: clamp(1.4rem, 3.5vw, 1.85rem);
     font-weight: 800;
     color: #FFFFFF;
     line-height: 1.1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .bench-kpi-sub {
     font-family: 'Inter', sans-serif;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 500;
     color: #9CA3AF;
 }
 
 /* Head to Head Model Cards - All Flat Hairline Borders */
 .model-matrix-card {
-    background: #161922;
+    background: #141822;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 1.6rem 1.6rem;
@@ -863,11 +1022,19 @@ div[data-testid="stImage"] img {
     justify-content: space-between;
     min-height: 380px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .model-matrix-card {
+        min-height: auto;
+        padding: 1.2rem 1.2rem;
+    }
 }
 
 .model-matrix-card.recommended {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
 }
 
 .progress-track-dark {
@@ -885,7 +1052,7 @@ div[data-testid="stImage"] img {
 
 /* Alert & Notice Banners */
 div[data-testid="stAlert"] {
-    background: #161922 !important;
+    background: #141822 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 10px !important;
     font-family: 'Inter', sans-serif !important;
@@ -940,7 +1107,7 @@ div[data-testid="stAlert"] {
 }
 
 /* ============================================================
-   FUTURISTIC STANDBY FORENSIC CONSOLE (Clean, Visual, Not Boxy Cards)
+   FUTURISTIC STANDBY FORENSIC CONSOLE (Responsive & Uncompressed)
    ============================================================ */
 @keyframes radar-sweep {
     0% { transform: rotate(0deg); }
@@ -955,8 +1122,59 @@ div[data-testid="stAlert"] {
 
 @keyframes beacon-ping {
     0% { transform: scale(0.95); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 1; }
     100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Standby Hub Flex Container */
+.standby-hub-container {
+    background: #10131B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.6rem 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.2rem;
+    width: 100%;
+}
+
+.standby-radar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+}
+
+.standby-telemetry-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 420px;
+    width: 100%;
+}
+
+@media (max-width: 880px) {
+    .standby-hub-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.4rem 1.2rem;
+        gap: 1.5rem;
+    }
+    
+    .standby-radar-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.2rem;
+    }
+    
+    .standby-telemetry-right {
+        max-width: 100%;
+        text-align: left;
+    }
 }
 
 .radar-chassis {
@@ -966,11 +1184,19 @@ div[data-testid="stAlert"] {
     border-radius: 50%;
     background: radial-gradient(circle, #0F131D 0%, #080A0F 100%);
     border: 1px solid rgba(45, 212, 191, 0.25);
-    box-shadow: 0 0 30px rgba(45, 212, 191, 0.08), inset 0 0 20px rgba(0,0,0,0.8);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.10), inset 0 0 20px rgba(0,0,0,0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .radar-chassis {
+        width: 160px;
+        height: 160px;
+    }
 }
 
 .radar-sweep-blade {
@@ -985,6 +1211,36 @@ div[data-testid="stAlert"] {
     pointer-events: none;
 }
 
+.radar-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    pointer-events: none;
+}
+
+/* ============================================================
+   PIPELINE BUS FLOW (Desktop Horizontal -> Mobile Vertical)
+   ============================================================ */
+.pipeline-bus-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+@media (max-width: 860px) {
+    .pipeline-bus-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .pipeline-connector-line {
+        display: none !important;
+    }
+}
+
 .pipeline-node {
     background: #11141D;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -992,6 +1248,8 @@ div[data-testid="stAlert"] {
     padding: 14px 18px;
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .pipeline-node:hover {
@@ -1003,9 +1261,11 @@ div[data-testid="stAlert"] {
 
 .pipeline-connector-line {
     height: 2px;
+    width: 28px;
     background: linear-gradient(90deg, #6366F1, #2DD4BF);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .pipeline-connector-line::after {
@@ -1021,8 +1281,65 @@ div[data-testid="stAlert"] {
 }
 
 /* ============================================================
+   THREAT SCOPE MATRIX GRID (Responsive 3-Col -> 2-Col -> 1-Col)
+   ============================================================ */
+.threat-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .threat-scope-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 580px) {
+    .threat-scope-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* ============================================================
    SOPHOS 3D PILLAR COLUMNS & BENCHMARK BAR STYLES
    ============================================================ */
+.sophos-pillar-container {
+    background: #141822;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 1.4rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .sophos-pillar-container {
+        padding: 1rem 0.8rem;
+    }
+}
+
+.sophos-chart-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+}
+
+.sophos-pillar-chart-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-width: 520px;
+    height: 175px;
+    padding: 0 14px 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .sophos-pillar {
     width: 14px;
     border-radius: 4px 4px 2px 2px;
@@ -1048,6 +1365,39 @@ div[data-testid="stAlert"] {
 .sophos-pillar:hover {
     filter: brightness(1.25);
     transform: scaleY(1.05);
+}
+
+/* ============================================================
+   DONUT & EFFICIENCY ROW (Responsive 2-Col Split)
+   ============================================================ */
+.benchmark-split-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 1.4rem;
+}
+
+@media (max-width: 860px) {
+    .benchmark-split-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+.donut-card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 0.4rem 0;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .donut-card-inner {
+        flex-direction: column;
+        gap: 14px;
+    }
 }
 
 </style>

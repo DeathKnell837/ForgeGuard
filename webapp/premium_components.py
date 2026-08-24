@@ -90,7 +90,7 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 
 
 def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
-    return f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 9px 18px; margin-bottom: 12px; font-family: 'Inter', sans-serif; font-size: 0.74rem; color: #9CA3AF; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);">
+    return f"""<div class="exhibit-metadata-bar">
 <div>Exhibit: <span style="color: #FFFFFF; font-weight: 600;">{filename}</span></div>
 <div>Resolution: <span style="color: #9CA3AF; font-weight: 600;">{resolution}</span></div>
 <div>SHA256: <span style="color: #9CA3AF; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;">{sha256_hash}</span></div>
@@ -179,7 +179,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="font-size: 0.78rem; color: #9CA3AF; line-height: 1.4;">{sub_desc}</div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; margin-bottom: 16px;">
+<div class="incident-metrics-grid">
 <div style="background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Mean</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">{ela_mean:.1f}</div>
@@ -426,13 +426,13 @@ def render_sophos_hatched_bars():
 
 
 def render_sophos_pillar_columns():
-    return """<div style="background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.4rem 1.6rem; margin-top: 1.4rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    return """<div class="sophos-pillar-container">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Comparative Accuracy Across Forgery Attack Vectors</span>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; margin-top: 2px;">Empirical validation across Philippine digital receipt tampering categories</div>
 </div>
-<div style="display: flex; gap: 14px; align-items: center;">
+<div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
 <div style="display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #E5E7EB;">
 <span style="width: 8px; height: 8px; border-radius: 2px; background: #6366F1; display: inline-block;"></span> MobileNetV2
 </div>
@@ -445,59 +445,61 @@ def render_sophos_pillar_columns():
 </div>
 </div>
 
-<div style="display: flex; align-items: flex-end; justify-content: space-between; height: 175px; padding: 0 14px 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div class="sophos-chart-scroll-wrapper">
+<div class="sophos-pillar-chart-row">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 124px; display: inline-block;" title="MobileNetV2: 98.4%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 127px; display: inline-block;" title="ResNet50: 98.8%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 106px; display: inline-block;" title="Basic CNN: 93.1%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Amount Splicing</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Amount Splicing</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 121px; display: inline-block;" title="MobileNetV2: 98.1%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 125px; display: inline-block;" title="ResNet50: 98.5%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 109px; display: inline-block;" title="Basic CNN: 94.0%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Font Tampering</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Font Tampering</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 130px; display: inline-block;" title="MobileNetV2: 99.2%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 132px; display: inline-block;" title="ResNet50: 99.5%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 116px; display: inline-block;" title="Basic CNN: 96.2%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Fake Generator Apps</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Fake Generator Apps</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 119px; display: inline-block;" title="MobileNetV2: 97.8%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 123px; display: inline-block;" title="ResNet50: 98.2%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 103px; display: inline-block;" title="Basic CNN: 92.5%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Metadata Cloning</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Metadata Cloning</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 126px; display: inline-block;" title="MobileNetV2: 98.9%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 128px; display: inline-block;" title="ResNet50: 99.1%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 114px; display: inline-block;" title="Basic CNN: 95.4%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">Authentic Controls</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Authentic Controls</span>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
 <div class="sophos-pillar purple" style="width: 14px; height: 115px; display: inline-block;" title="MobileNetV2: 96.5%"></div>
 <div class="sophos-pillar emerald" style="width: 14px; height: 120px; display: inline-block;" title="ResNet50: 97.4%"></div>
 <div class="sophos-pillar slate" style="width: 14px; height: 99px; display: inline-block;" title="Basic CNN: 91.0%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600;">JPEG Re-compression</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">JPEG Re-compression</span>
+</div>
 </div>
 </div>
 </div>"""
@@ -606,8 +608,8 @@ def render_live_scanner_standby_hub():
     return """<div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem;">
 
 <!-- 1. CYBER OPTICAL RADAR & OPERATIONAL TELEMETRY ARRAY -->
-<div style="background: #10131B; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1.6rem 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: space-between; gap: 2.2rem;">
-<div style="display: flex; align-items: center; gap: 1.8rem;">
+<div class="standby-hub-container">
+<div class="standby-radar-left">
 <div class="radar-chassis">
 <div class="radar-sweep-blade"></div>
 <div class="radar-ring" style="width: 140px; height: 140px;"></div>
@@ -618,21 +620,21 @@ def render_live_scanner_standby_hub():
 <div style="position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF; box-shadow: 0 0 12px #2DD4BF; animation: beacon-ping 2s infinite;"></div>
 </div>
 <div>
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
 <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY • AWAITING EVIDENCE INGESTION</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
 </div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #9CA3AF; margin-top: 4px; max-width: 440px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
 </div>
 </div>
 
 <!-- Right Telemetry Progress Readouts -->
-<div style="flex: 1; display: flex; flex-direction: column; gap: 10px; max-width: 420px;">
+<div class="standby-telemetry-right">
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.75rem; margin-bottom: 4px;">
 <span style="color: #FFFFFF; font-weight: 600;">Active Neural Engine: <strong style="color: #818CF8;">MobileNetV2</strong></span>
-<span style="color: #818CF8; font-family: 'JetBrains Mono', monospace; font-weight: 700;">12.4ms • 3.4M Params</span>
+<span style="color: #818CF8; font-family: 'JetBrains Mono', monospace; font-weight: 700;">12.4ms &bull; 3.4M Params</span>
 </div>
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill purple" style="width: 98%;"><span class="sophos-thumb"></span></div>
@@ -663,7 +665,7 @@ def render_live_scanner_standby_hub():
 
 <!-- 2. CONNECTED BUS PIPELINE GRAPH (SOP 1-5 FLOW) -->
 <div style="background: #10131B; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.35);">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 8px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Standard Operating Procedure (SOP 1-5 Forensic Dataflow)</span>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; margin-top: 2px;">Automated 4-stage optical verification bus</div>
@@ -671,7 +673,7 @@ def render_live_scanner_standby_hub():
 <span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #818CF8; background: rgba(99, 102, 241, 0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.25);">NDMC BSCS RESEARCH</span>
 </div>
 
-<div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 8px;">
+<div class="pipeline-bus-grid">
 <!-- Node 1 -->
 <div class="pipeline-node">
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 800; color: #6366F1; margin-bottom: 3px;">PHASE 01</div>
@@ -679,7 +681,7 @@ def render_live_scanner_standby_hub():
 <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">Layout &amp; domain validation</div>
 </div>
 
-<div class="pipeline-connector-line" style="width: 28px;"></div>
+<div class="pipeline-connector-line"></div>
 
 <!-- Node 2 -->
 <div class="pipeline-node">
@@ -688,7 +690,7 @@ def render_live_scanner_standby_hub():
 <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">90Q compression gradient</div>
 </div>
 
-<div class="pipeline-connector-line" style="width: 28px;"></div>
+<div class="pipeline-connector-line"></div>
 
 <!-- Node 3 -->
 <div class="pipeline-node">
@@ -697,7 +699,7 @@ def render_live_scanner_standby_hub():
 <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">3-Engine parallel inference</div>
 </div>
 
-<div class="pipeline-connector-line" style="width: 28px;"></div>
+<div class="pipeline-connector-line"></div>
 
 <!-- Node 4 -->
 <div class="pipeline-node">
@@ -710,7 +712,7 @@ def render_live_scanner_standby_hub():
 
 <!-- 3. THREAT VECTOR SPECTRAL MATRIX -->
 <div style="background: #10131B; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.35);">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 8px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Digital Receipt Forgery Threat Scope &amp; Target Classes</span>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; margin-top: 2px;">Evaluated tampering attack vectors in Philippine mobile commerce</div>
@@ -718,7 +720,7 @@ def render_live_scanner_standby_hub():
 <span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF;">6 Target Attack Vectors</span>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+<div class="threat-scope-grid">
 <div style="background: #161A24; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 14px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
 <span style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #EF4444;">Amount Splicing &amp; Injection</span>
