@@ -324,30 +324,32 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
 }
 
 @media (max-width: 768px) {
-    /* Full-width viewport canvas on mobile */
+    /* Full-width container canvas on mobile */
     div[data-testid="stAppViewContainer"],
     .stAppViewContainer {
         display: block !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        min-width: 100vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         overflow-x: hidden !important;
         left: 0 !important;
+        position: relative !important;
     }
     
     div[data-testid="stAppViewContainer"] > section.main,
     section[data-testid="stMain"],
     .stMain {
-        width: 100vw !important;
-        min-width: 100vw !important;
-        max-width: 100vw !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
         left: 0 !important;
         overflow-x: hidden !important;
+        position: relative !important;
     }
 
     div[data-testid="stMainBlockContainer"],
@@ -360,6 +362,7 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
         padding-right: 0.65rem !important;
         width: 100% !important;
         max-width: 100% !important;
+        min-width: 100% !important;
         box-sizing: border-box !important;
     }
 
@@ -389,8 +392,8 @@ section[data-testid="stSidebar"][aria-expanded="false"] {
         left: 0 !important;
         bottom: 0 !important;
         height: 100vh !important;
-        width: 82vw !important;
-        max-width: 310px !important;
+        width: 280px !important;
+        max-width: 85% !important;
         z-index: 999999 !important;
         display: block !important;
         visibility: visible !important;
