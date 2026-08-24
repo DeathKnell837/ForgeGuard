@@ -14,6 +14,11 @@ html, body, [class*="css"] {
     color: #E2E8F0 !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .stApp {
@@ -23,6 +28,9 @@ html, body, [class*="css"] {
         radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.04) 0%, transparent 50%),
         radial-gradient(circle at 0% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 40%) !important;
     background-attachment: fixed !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* ZERO TOP WHITESPACE (Clean Header & No Wide Forehead) */
