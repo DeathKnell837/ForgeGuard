@@ -1465,8 +1465,9 @@ div[data-testid="stAlert"] {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    min-width: 520px;
-    height: 175px;
+    min-width: 680px;
+    gap: 18px;
+    height: 180px;
     padding: 0 14px 10px 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
