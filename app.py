@@ -688,17 +688,23 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 # ============================================================
 # STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
 # ============================================================
+if "app_mode" not in st.session_state:
+    st.session_state["app_mode"] = "Live Threat Scanner"
+
 with st.sidebar:
     st.markdown(render_sophos_brand_sidebar(), unsafe_allow_html=True)
     
     st.markdown("<div class='rail-section-header'>Forensic Operations</div>", unsafe_allow_html=True)
-    app_mode = st.radio(
+    sidebar_mode = st.radio(
         "Navigation",
         options=["Live Threat Scanner", "Model Benchmark Suite"],
-        index=0,
-        key="sidebar_app_mode",
+        index=0 if st.session_state["app_mode"] == "Live Threat Scanner" else 1,
+        key="sidebar_app_mode_radio",
         label_visibility="collapsed"
     )
+    if sidebar_mode != st.session_state["app_mode"]:
+        st.session_state["app_mode"] = sidebar_mode
+        st.rerun()
     
     model_key = "mobilenetv2"
     model_display_name = "MobileNetV2"
@@ -712,15 +718,33 @@ with st.sidebar:
             "ELA Difference Scale", 1.0, 30.0, 15.0, 0.5, key="ela_scale",
             help="Amplifies pixel variance brightness for visualization (default: 15.0x)."
         )
-    
 
+app_mode = st.session_state["app_mode"]
 
 # ============================================================
-# TOP COMMAND BAR & GLOBAL TELEMETRY
+# TOP BRAND COMMAND BAR & GLOBAL TELEMETRY
 # ============================================================
 breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Benchmark Suite"
 latency_val = 12.4
 st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
+
+# TOP FORENSIC NAVIGATION SWITCH (Direct Access on Mobile & Desktop)
+nav_col1, nav_col2 = st.columns(2)
+with nav_col1:
+    is_live_active = (app_mode == "Live Threat Scanner")
+    btn_live_type = "primary" if is_live_active else "secondary"
+    if st.button("Live Threat Scanner", key="top_nav_live_btn", use_container_width=True, type=btn_live_type):
+        if app_mode != "Live Threat Scanner":
+            st.session_state["app_mode"] = "Live Threat Scanner"
+            st.rerun()
+
+with nav_col2:
+    is_bench_active = (app_mode == "Model Benchmark Suite")
+    btn_bench_type = "primary" if is_bench_active else "secondary"
+    if st.button("Model Benchmark Suite", key="top_nav_bench_btn", use_container_width=True, type=btn_bench_type):
+        if app_mode != "Model Benchmark Suite":
+            st.session_state["app_mode"] = "Model Benchmark Suite"
+            st.rerun()
 
 if "Live" in app_mode:
     # ============================================================

@@ -457,28 +457,43 @@ div[data-testid="stVerticalBlock"] {
 /* Floating Reopen Toggle Button */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
-button[data-testid="stSidebarCollapsedControl"] {
+button[data-testid="stSidebarCollapsedControl"],
+div[data-testid="stSidebarCollapsedControl"] button {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     position: fixed !important;
-    top: 0.6rem !important;
-    left: 0.6rem !important;
+    top: 10px !important;
+    left: 10px !important;
     z-index: 99999 !important;
-    background: #1A1D26 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background: #141822 !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     border-radius: 8px !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
     cursor: pointer !important;
-    padding: 6px 8px !important;
+    padding: 7px 9px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: all 0.2s ease !important;
 }
 
+[data-testid="stSidebarCollapsedControl"] svg,
+button[data-testid="stSidebarCollapsedControl"] svg,
+div[data-testid="stSidebarCollapsedControl"] button svg {
+    stroke: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
 [data-testid="stSidebarCollapsedControl"]:hover,
-[data-testid="collapsedControl"]:hover {
-    background: rgba(139, 92, 246, 0.15) !important;
-    border-color: rgba(139, 92, 246, 0.3) !important;
+[data-testid="collapsedControl"]:hover,
+div[data-testid="stSidebarCollapsedControl"] button:hover {
+    background: rgba(139, 92, 246, 0.25) !important;
+    border-color: rgba(139, 92, 246, 0.4) !important;
 }
 
 /* Responsive Column Stacking for Mobile Layouts */
@@ -897,6 +912,23 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     background: #0E1118 !important;
 }
 
+/* Primary Active Navigation / Action Buttons */
+.stButton > button[kind="primary"],
+.stButton > button[data-testid="baseButton-primary"] {
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%) !important;
+    border: 1px solid rgba(167, 139, 250, 0.4) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35) !important;
+    font-weight: 700 !important;
+}
+
+.stButton > button[kind="primary"]:hover,
+.stButton > button[data-testid="baseButton-primary"]:hover {
+    background: linear-gradient(135deg, #4338CA 0%, #6D28D9 100%) !important;
+    border-color: rgba(167, 139, 250, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5) !important;
+}
+
 /* File Uploader Container */
 div[data-testid="stFileUploader"] {
     background: #141822 !important;
@@ -1307,54 +1339,86 @@ div[data-testid="stAlert"] {
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* Standby Hub Flex Container */
+/* Standby Hub Flex Container (Stacked Radar & Full-Width Telemetry Array) */
 .standby-hub-container {
     background: #10131B;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    padding: 1.6rem 2rem;
+    padding: 1.6rem 1.8rem;
     box-shadow: 0 8px 32px rgba(0,0,0,0.35);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 2.2rem;
+    gap: 1.5rem;
     width: 100%;
+    box-sizing: border-box;
 }
 
-.standby-radar-left {
-    display: flex;
-    align-items: center;
-    gap: 1.8rem;
-}
-
-.standby-telemetry-right {
-    flex: 1;
+.standby-radar-top {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-width: 420px;
+    align-items: center;
+    gap: 1.2rem;
     width: 100%;
 }
 
-@media (max-width: 880px) {
+.standby-radar-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.standby-telemetry-full {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.telemetry-bar-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.telemetry-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    width: 100%;
+    gap: 8px;
+}
+
+.telemetry-bar-label {
+    color: #FFFFFF;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.telemetry-bar-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.76rem;
+    white-space: nowrap;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
     .standby-hub-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 1.4rem 1.2rem;
-        gap: 1.5rem;
-    }
-    
-    .standby-radar-left {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        padding: 1.2rem 1rem;
         gap: 1.2rem;
     }
-    
-    .standby-telemetry-right {
-        max-width: 100%;
-        text-align: left;
+    .telemetry-bar-header {
+        font-size: 0.73rem;
+    }
+    .telemetry-bar-val {
+        font-size: 0.71rem;
     }
 }
 
