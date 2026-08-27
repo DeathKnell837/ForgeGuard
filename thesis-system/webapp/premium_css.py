@@ -616,26 +616,26 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="s
     transition: color 0.15s ease !important;
 }
 
-/* Nav Item 1 Icon: Shield / Radar */
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before {
+/* Sidebar Nav Item 1 Icon: Shield / Radar */
+section[data-testid="stSidebar"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before {
     content: "";
     display: inline-block;
-    width: 17px;
-    height: 17px;
-    margin-right: 11px;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
     background-color: currentColor;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E") no-repeat center / contain;
     flex-shrink: 0;
 }
 
-/* Nav Item 2 Icon: Analytics / Bar Chart */
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
+/* Sidebar Nav Item 2 Icon: Analytics / Bar Chart */
+section[data-testid="stSidebar"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
     content: "";
     display: inline-block;
-    width: 17px;
-    height: 17px;
-    margin-right: 11px;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
     background-color: currentColor;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'%3E%3C/line%3E%3Cline x1='12' y1='20' x2='12' y2='4'%3E%3C/line%3E%3Cline x1='6' y1='20' x2='6' y2='14'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'%3E%3C/line%3E%3Cline x1='12' y1='20' x2='12' y2='4'%3E%3C/line%3E%3Cline x1='6' y1='20' x2='6' y2='14'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain;
@@ -649,9 +649,9 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
 }
 
 /* ============================================================
-   FORENSIC LAYER SWITCHER (PURE SVG MASKS, ZERO EMOJIS)
+   FORENSIC LAYER SWITCHER ICONS (Original Receipt, ELA Noise Matrix, Splicing Heatmap)
    ============================================================ */
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input[value="Original Receipt"]) div[data-testid="stMarkdownContainer"] p::before {
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before {
     content: "";
     display: inline-block;
     width: 14px;
@@ -663,7 +663,7 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input[value="O
     flex-shrink: 0;
 }
 
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input[value="ELA Noise Matrix"]) div[data-testid="stMarkdownContainer"] p::before {
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
     content: "";
     display: inline-block;
     width: 14px;
@@ -675,15 +675,15 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input[value="E
     flex-shrink: 0;
 }
 
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input[value="Splicing Heatmap"]) div[data-testid="stMarkdownContainer"] p::before {
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before {
     content: "";
     display: inline-block;
     width: 14px;
     height: 14px;
     margin-right: 8px;
     background-color: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z'/%3E%3C/svg%3E") no-repeat center / contain;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z'/%3E%3C/svg%3E") no-repeat center / contain;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z'/%3E%3C/svg%3E") no-repeat center / contain;
     flex-shrink: 0;
 }
 
