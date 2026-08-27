@@ -793,21 +793,13 @@ if "Live" in app_mode:
                     break
             st.rerun()
 
-    tab_upload, tab_camera = st.tabs(["Upload Screenshot", "Live Camera"])
-
-    with tab_upload:
-        curr_key = f"file_uploader_{st.session_state['uploader_key']}"
-        uploaded_file = st.file_uploader(
-            "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
-            type=["png", "jpg", "jpeg", "webp"],
-            key=curr_key,
-            label_visibility="collapsed"
-        )
-
-    with tab_camera:
-        camera_file = st.camera_input("Capture mobile wallet receipt", key=f"camera_{st.session_state['uploader_key']}")
-        if camera_file is not None:
-            uploaded_file = camera_file
+    curr_key = f"file_uploader_{st.session_state['uploader_key']}"
+    uploaded_file = st.file_uploader(
+        "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
+        type=["png", "jpg", "jpeg", "webp"],
+        key=curr_key,
+        label_visibility="collapsed"
+    )
 
     # Resolve image bytes from upload or pre-loaded sample
     image_bytes = None
