@@ -683,7 +683,14 @@ from premium_components import (
     svg_radial_dial
 )
 
-st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+def render_html(html_str: str):
+    """Renders HTML cleanly using st.html (Streamlit 1.33+) or fallback to st.markdown."""
+    if hasattr(st, "html"):
+        st.html(html_str)
+    else:
+        st.markdown(html_str, unsafe_allow_html=True)
+
+render_html(CUSTOM_CSS)
 
 # ============================================================
 # STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
@@ -695,9 +702,9 @@ nav_options = ["Live Threat Scanner", "Model Benchmark Suite"]
 current_idx = 0 if st.session_state["app_mode"] == "Live Threat Scanner" else 1
 
 with st.sidebar:
-    st.markdown(render_sophos_brand_sidebar(), unsafe_allow_html=True)
+    render_html(render_sophos_brand_sidebar())
     
-    st.markdown("<div class='rail-section-header'>Forensic Operations</div>", unsafe_allow_html=True)
+    render_html("<div class='rail-section-header'>Forensic Operations</div>")
     selected_mode = st.radio(
         "Navigation",
         options=nav_options,
@@ -728,7 +735,7 @@ app_mode = st.session_state["app_mode"]
 # ============================================================
 breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Benchmark Suite"
 latency_val = 12.4
-st.markdown(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name), unsafe_allow_html=True)
+render_html(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name))
 
 # TOP FORENSIC NAVIGATION SWITCH (Direct Access on Mobile & Desktop)
 nav_col1, nav_col2 = st.columns(2)
@@ -1164,31 +1171,31 @@ if "Live" in app_mode:
                     forgery_type=final_forgery_type,
                     is_non_receipt=is_non_receipt
                 )
-                st.markdown(cockpit_html, unsafe_allow_html=True)
+                render_html(cockpit_html)
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
-        st.markdown(render_live_scanner_standby_hub(), unsafe_allow_html=True)
+        render_html(render_live_scanner_standby_hub())
 
 else:
     # ============================================================
     # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
     # ============================================================
-    st.markdown(render_sophos_benchmark_summary_tiles(), unsafe_allow_html=True)
+    render_html(render_sophos_benchmark_summary_tiles())
     
     # 1. Sophos Visual Charts (Segmented Donut & Hatched Horizontal Bars)
     c_donut, c_hatched = st.columns(2)
     with c_donut:
-        st.markdown(render_sophos_segmented_donut(), unsafe_allow_html=True)
+        render_html(render_sophos_segmented_donut())
     with c_hatched:
-        st.markdown(render_sophos_hatched_bars(), unsafe_allow_html=True)
+        render_html(render_sophos_hatched_bars())
         
     # 2. Sophos 12-Month 3D Pillar Column Chart
-    st.markdown(render_sophos_pillar_columns(), unsafe_allow_html=True)
+    render_html(render_sophos_pillar_columns())
 
     # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards
-    st.markdown("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>", unsafe_allow_html=True)
+    render_html("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>")
     
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
@@ -1224,7 +1231,7 @@ else:
             comp_acc="97.8%",
             is_recommended=True
         )
-        st.markdown(card_mnet, unsafe_allow_html=True)
+        render_html(card_mnet)
 
     with col_resnet:
         card_resnet = render_saas_model_card(
@@ -1239,7 +1246,7 @@ else:
             comp_acc="98.2%",
             is_recommended=False
         )
-        st.markdown(card_resnet, unsafe_allow_html=True)
+        render_html(card_resnet)
 
     with col_bcnn:
         card_bcnn = render_saas_model_card(
@@ -1254,7 +1261,7 @@ else:
             comp_acc="92.3%",
             is_recommended=False
         )
-        st.markdown(card_bcnn, unsafe_allow_html=True)
+        render_html(card_bcnn)
 
     # 4. Formal Executive SOP Recommendation
-    st.markdown(executive_sop5_recommendation_card(), unsafe_allow_html=True)
+    render_html(executive_sop5_recommendation_card())
