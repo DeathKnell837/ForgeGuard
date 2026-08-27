@@ -246,13 +246,16 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 
 
 def render_sophos_benchmark_summary_tiles():
-    return """<div class="bench-kpi-grid">
+    icon_acc = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>"
+    icon_zap = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23818CF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>"
+    icon_cpu = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2338BDF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='14' x2='23' y2='14'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='14' x2='4' y2='14'/></svg>"
+    icon_trophy = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='8' r='7'/><polyline points='8.21 13.89 7 23 12 20 17 23 15.79 13.88'/></svg>"
+
+    return f"""<div class="bench-kpi-grid">
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.25);">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-</svg>
+<div class="bench-kpi-icon-chip" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3);">
+<img src="{icon_acc}" width="18" height="18" style="display: block;" />
 </div>
 <span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 4.5% vs Base</span>
 </div>
@@ -265,10 +268,8 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip" style="background: rgba(129, 140, 248, 0.1); border-color: rgba(129, 140, 248, 0.25);">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-</svg>
+<div class="bench-kpi-icon-chip" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.3);">
+<img src="{icon_zap}" width="18" height="18" style="display: block;" />
 </div>
 <span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 2.3x Faster</span>
 </div>
@@ -281,10 +282,8 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip" style="background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.25);">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
-</svg>
+<div class="bench-kpi-icon-chip" style="background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.3);">
+<img src="{icon_cpu}" width="18" height="18" style="display: block;" />
 </div>
 <span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 85.5% Lighter</span>
 </div>
@@ -297,10 +296,8 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.25);">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-</svg>
+<div class="bench-kpi-icon-chip" style="background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3);">
+<img src="{icon_trophy}" width="18" height="18" style="display: block;" />
 </div>
 <span style="color: #F59E0B; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;">Pareto Winner</span>
 </div>
@@ -321,17 +318,10 @@ def render_sophos_segmented_donut():
 </div>
 
 <div style="display: flex; align-items: center; justify-content: space-around; gap: 20px; padding: 0.4rem 0;">
-<div style="position: relative; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center;">
-<svg width="170" height="170" viewBox="0 0 170 170">
-<circle cx="85" cy="85" r="60" fill="none" stroke="#1A1D26" stroke-width="16"/>
-<circle cx="85" cy="85" r="60" fill="none" stroke="#818CF8" stroke-width="16" stroke-dasharray="181 196" stroke-linecap="round" transform="rotate(-90 85 85)"/>
-<circle cx="85" cy="85" r="60" fill="none" stroke="#34D399" stroke-width="16" stroke-dasharray="121 256" stroke-linecap="round" transform="rotate(83 85 85)"/>
-<circle cx="85" cy="85" r="60" fill="none" stroke="#64748B" stroke-width="16" stroke-dasharray="75 302" stroke-linecap="round" transform="rotate(199 85 85)"/>
-</svg>
-
-<div style="position: absolute; width: 84px; height: 48px; border-radius: 24px; background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
-<span style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 800; color: #FFFFFF; line-height: 1;">98.4%</span>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 600; color: #9CA3AF; letter-spacing: 0.4px;">OVERALL</span>
+<div style="position: relative; width: 154px; height: 154px; border-radius: 50%; background: conic-gradient(#818CF8 0deg 172.8deg, #34D399 172.8deg 288deg, #64748B 288deg 360deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 24px rgba(129, 140, 248, 0.2); flex-shrink: 0;">
+<div style="width: 114px; height: 114px; border-radius: 50%; background: #161922; border: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);">
+<span style="font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">98.4%</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.60rem; font-weight: 600; color: #9CA3AF; letter-spacing: 0.5px; margin-top: 2px;">OVERALL</span>
 </div>
 </div>
 
@@ -499,10 +489,7 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
     badge_style = "background: rgba(99, 102, 241, 0.12); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.25);" if is_recommended else "background: rgba(255, 255, 255, 0.05); color: #9CA3AF; border: 1px solid rgba(255, 255, 255, 0.08);"
     arc_color = "#818CF8" if is_recommended else ("#34D399" if "ResNet" in title else "#94A3B8")
     
-    r = 38
-    circ = 2 * 3.14159265 * r
-    fill_len = circ * (acc / 100.0)
-    gap_len = circ - fill_len
+    deg = acc * 3.6
     
     return f"""<div class="model-matrix-card">
 <div>
@@ -511,13 +498,11 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
 <span style="{badge_style} font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600; padding: 3px 8px; border-radius: 6px;">{tag}</span>
 </div>
 
-<div style="display: flex; justify-content: center; align-items: center; margin: 1rem 0 0.8rem 0; position: relative;">
-<svg width="110" height="110" viewBox="0 0 110 110">
-<circle cx="55" cy="55" r="38" fill="none" stroke="#1A1D26" stroke-width="9"/>
-<circle cx="55" cy="55" r="38" fill="none" stroke="{arc_color}" stroke-width="9" stroke-dasharray="{fill_len:.1f} {gap_len:.1f}" stroke-linecap="round" transform="rotate(-90 55 55)"/>
-</svg>
-<div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #12151E; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 4px 10px; text-align: center;">
-<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 800; color: #FFFFFF; line-height: 1.1;">{acc:.1f}%</div>
+<div style="display: flex; justify-content: center; align-items: center; margin: 1.2rem 0 1rem 0;">
+<div style="position: relative; width: 92px; height: 92px; border-radius: 50%; background: conic-gradient({arc_color} 0deg {deg:.1f}deg, #1A1D26 {deg:.1f}deg 360deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(129, 140, 248, 0.15);">
+<div style="width: 74px; height: 74px; border-radius: 50%; background: #12151E; border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<div style="font-family: 'Inter', sans-serif; font-size: 0.96rem; font-weight: 800; color: #FFFFFF; line-height: 1.1;">{acc:.1f}%</div>
+</div>
 </div>
 </div>
 
