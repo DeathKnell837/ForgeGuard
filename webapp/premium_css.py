@@ -1416,7 +1416,7 @@ div[data-testid="stAlert"] {
     text-align: right;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .standby-hub-container {
         grid-template-columns: 1fr;
         padding: 1.2rem 1rem;
