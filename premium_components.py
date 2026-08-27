@@ -249,9 +249,9 @@ def render_sophos_benchmark_summary_tiles():
     return """<div class="bench-kpi-grid">
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+<div class="bench-kpi-icon-chip" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.25);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
 </svg>
 </div>
 <span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 4.5% vs Base</span>
@@ -265,8 +265,8 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="bench-kpi-icon-chip" style="background: rgba(129, 140, 248, 0.1); border-color: rgba(129, 140, 248, 0.25);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
 </svg>
 </div>
@@ -281,8 +281,8 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="bench-kpi-icon-chip" style="background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.25);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
 </svg>
 </div>
@@ -297,16 +297,16 @@ def render_sophos_benchmark_summary_tiles():
 
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-<div class="bench-kpi-icon-chip">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FF0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="bench-kpi-icon-chip" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.25);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
 </svg>
 </div>
-<span style="color: #7C6FF0; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;">Pareto Winner</span>
+<span style="color: #F59E0B; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;">Pareto Winner</span>
 </div>
 <div>
 <div class="bench-kpi-label">SOP 5 Selected Model</div>
-<div class="bench-kpi-value" style="font-size: 1.55rem;">MobileNetV2</div>
+<div class="bench-kpi-value" style="font-size: 1.55rem; color: #F59E0B;">MobileNetV2</div>
 <div class="bench-kpi-sub">Optimal Smartphone Deployment</div>
 </div>
 </div>
@@ -323,20 +323,10 @@ def render_sophos_segmented_donut():
 <div style="display: flex; align-items: center; justify-content: space-around; gap: 20px; padding: 0.4rem 0;">
 <div style="position: relative; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center;">
 <svg width="170" height="170" viewBox="0 0 170 170">
-<defs>
-<filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="3" result="blur"/>
-<feComposite in="SourceGraphic" in2="blur" operator="over"/>
-</filter>
-<filter id="emerald-glow" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="3" result="blur"/>
-<feComposite in="SourceGraphic" in2="blur" operator="over"/>
-</filter>
-</defs>
-<circle cx="85" cy="85" r="62" fill="none" stroke="#1A1D26" stroke-width="18"/>
-<circle cx="85" cy="85" r="62" fill="none" stroke="#6366F1" stroke-width="18" stroke-dasharray="187 202" stroke-linecap="round" filter="url(#purple-glow)" transform="rotate(-90 85 85)"/>
-<circle cx="85" cy="85" r="62" fill="none" stroke="#10B981" stroke-width="18" stroke-dasharray="124 265" stroke-linecap="round" filter="url(#emerald-glow)" transform="rotate(85 85 85)"/>
-<circle cx="85" cy="85" r="62" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="78 311" stroke-linecap="round" transform="rotate(205 85 85)"/>
+<circle cx="85" cy="85" r="60" fill="none" stroke="#1A1D26" stroke-width="16"/>
+<circle cx="85" cy="85" r="60" fill="none" stroke="#818CF8" stroke-width="16" stroke-dasharray="181 196" stroke-linecap="round" transform="rotate(-90 85 85)"/>
+<circle cx="85" cy="85" r="60" fill="none" stroke="#34D399" stroke-width="16" stroke-dasharray="121 256" stroke-linecap="round" transform="rotate(83 85 85)"/>
+<circle cx="85" cy="85" r="60" fill="none" stroke="#64748B" stroke-width="16" stroke-dasharray="75 302" stroke-linecap="round" transform="rotate(199 85 85)"/>
 </svg>
 
 <div style="position: absolute; width: 84px; height: 48px; border-radius: 24px; background: #1A1D26; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
@@ -347,7 +337,7 @@ def render_sophos_segmented_donut():
 
 <div style="display: flex; flex-direction: column; gap: 12px;">
 <div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #6366F1; box-shadow: 0 0 8px #6366F1; display: inline-block;"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 8px #818CF8; display: inline-block;"></span>
 <div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">48% MobileNetV2</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">Optimal Edge Consensus (12.4ms)</div>
@@ -355,7 +345,7 @@ def render_sophos_segmented_donut():
 </div>
 
 <div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981; display: inline-block;"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; display: inline-block;"></span>
 <div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">32% ResNet50</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">Deep Feature Benchmark (98.7%)</div>
@@ -363,7 +353,7 @@ def render_sophos_segmented_donut():
 </div>
 
 <div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #475569; display: inline-block;"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #64748B; display: inline-block;"></span>
 <div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #9CA3AF;">20% Basic CNN</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #6B7280;">Baseline Reference (94.2%)</div>
@@ -507,7 +497,7 @@ def render_sophos_pillar_columns():
 
 def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, is_recommended=False):
     badge_style = "background: rgba(99, 102, 241, 0.12); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.25);" if is_recommended else "background: rgba(255, 255, 255, 0.05); color: #9CA3AF; border: 1px solid rgba(255, 255, 255, 0.08);"
-    arc_color = "#6366F1" if is_recommended else ("#10B981" if "ResNet" in title else "#475569")
+    arc_color = "#818CF8" if is_recommended else ("#34D399" if "ResNet" in title else "#94A3B8")
     
     r = 38
     circ = 2 * 3.14159265 * r
@@ -521,12 +511,12 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
 <span style="{badge_style} font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600; padding: 3px 8px; border-radius: 6px;">{tag}</span>
 </div>
 
-<div style="display: flex; justify-content: center; margin: 1rem 0 0.8rem 0; position: relative;">
+<div style="display: flex; justify-content: center; align-items: center; margin: 1rem 0 0.8rem 0; position: relative;">
 <svg width="110" height="110" viewBox="0 0 110 110">
-<circle cx="55" cy="55" r="{r}" fill="none" stroke="#1A1D26" stroke-width="10"/>
-<circle cx="55" cy="55" r="{r}" fill="none" stroke="{arc_color}" stroke-width="10" stroke-dasharray="{fill_len:.1f} {gap_len:.1f}" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+<circle cx="55" cy="55" r="38" fill="none" stroke="#1A1D26" stroke-width="9"/>
+<circle cx="55" cy="55" r="38" fill="none" stroke="{arc_color}" stroke-width="9" stroke-dasharray="{fill_len:.1f} {gap_len:.1f}" stroke-linecap="round" transform="rotate(-90 55 55)"/>
 </svg>
-<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1A1D26; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 4px 10px; text-align: center;">
+<div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #12151E; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 4px 10px; text-align: center;">
 <div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 800; color: #FFFFFF; line-height: 1.1;">{acc:.1f}%</div>
 </div>
 </div>
