@@ -690,7 +690,7 @@ def render_html(html_str: str):
     else:
         st.markdown(html_str, unsafe_allow_html=True)
 
-render_html(CUSTOM_CSS)
+st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 # ============================================================
 # STREAMLIT SIDEBAR: NAVIGATION & FORENSIC CONTROLS
