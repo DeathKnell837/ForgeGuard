@@ -622,7 +622,7 @@ def render_live_scanner_standby_hub():
 </div>
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
-<span class="telemetry-bar-label">Multimodal Reasoning: <strong style="color: #2DD4BF;">Ox Alpha XAI</strong></span>
+<span class="telemetry-bar-label">Multimodal Reasoning: <strong style="color: #2DD4BF;">Gemini 2.0 Flash XAI</strong></span>
 <span class="telemetry-bar-val" style="color: #2DD4BF;">1M Context Active</span>
 </div>
 <div class="sophos-hatched-track">
@@ -661,7 +661,7 @@ def render_live_scanner_standby_hub():
 <div class="pipeline-connector-line"></div>
 <div class="pipeline-node">
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 800; color: #F59E0B; margin-bottom: 3px;">PHASE 04</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #FFFFFF;">Ox Alpha XAI Report</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #FFFFFF;">Multimodal XAI Report</div>
 <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">Explainable tamper audit</div>
 </div>
 </div>

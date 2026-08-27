@@ -222,7 +222,6 @@ Output STRICT JSON ONLY:
     if openrouter_key:
         vision_models = [
             "google/gemini-2.0-flash-exp:free",
-            "stealth/ox-alpha",
             "meta-llama/llama-3.2-11b-vision-instruct:free",
             "qwen/qwen-2-vl-72b-instruct:free",
             "meta-llama/llama-3.2-90b-vision-instruct:free"
