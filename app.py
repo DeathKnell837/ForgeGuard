@@ -651,9 +651,12 @@ except Exception:
 # ============================================================
 # PREMIUM FORENSIC CSS DESIGN SYSTEM (v2.0)
 # ============================================================
+import importlib
+
 try:
-    from premium_css import PREMIUM_CSS
-    CUSTOM_CSS = PREMIUM_CSS
+    import premium_css
+    importlib.reload(premium_css)
+    CUSTOM_CSS = premium_css.PREMIUM_CSS
 except Exception:
     # Fallback: minimal CSS if premium_css.py is missing
     CUSTOM_CSS = """<style>
@@ -666,6 +669,8 @@ except Exception:
     </style>"""
 
 # Import premium UI components
+import premium_components
+importlib.reload(premium_components)
 from premium_components import (
     render_sophos_brand_sidebar,
     render_investigator_profile_card,
