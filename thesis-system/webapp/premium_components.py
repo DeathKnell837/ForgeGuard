@@ -626,7 +626,6 @@ def render_live_scanner_standby_hub():
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #9CA3AF; margin-top: 4px; max-width: 480px; line-height: 1.45; text-align: center; margin-left: auto; margin-right: auto;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
 </div>
 </div>
-
 <div class="standby-telemetry-full">
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
@@ -637,7 +636,6 @@ def render_live_scanner_standby_hub():
 <div class="sophos-hatched-fill purple" style="width: 98%;"><span class="sophos-thumb"></span></div>
 </div>
 </div>
-
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
 <span class="telemetry-bar-label">Forensic Pipeline: <strong style="color: #34D399;">90Q ELA Matrix</strong></span>
@@ -647,7 +645,6 @@ def render_live_scanner_standby_hub():
 <div class="sophos-hatched-fill emerald" style="width: 90%;"><span class="sophos-thumb"></span></div>
 </div>
 </div>
-
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
 <span class="telemetry-bar-label">Multimodal Reasoning: <strong style="color: #2DD4BF;">Ox Alpha XAI</strong></span>
