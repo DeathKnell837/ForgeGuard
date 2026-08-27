@@ -1172,6 +1172,38 @@ if "Live" in app_mode:
                     is_non_receipt=is_non_receipt
                 )
                 render_html(cockpit_html)
+
+            # TRI-SPECTRAL COMPARATIVE FORENSIC INSPECTION GALLERY (SIDE-BY-SIDE)
+            st.markdown("<hr style='border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 1.6rem 0 1.2rem 0;'>", unsafe_allow_html=True)
+            st.markdown("<div class='eyebrow-label' style='margin-bottom: 0.8rem;'>Tri-Spectral Comparative Forensic Evidence Gallery</div>", unsafe_allow_html=True)
+            
+            gal_col1, gal_col2, gal_col3 = st.columns(3)
+            with gal_col1:
+                st.markdown("""
+                <div style="background: #121620; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 12px; padding: 10px 14px; margin-bottom: 8px;">
+                    <div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Original Screenshot</div>
+                    <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">Mobile transaction receipt raster</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.image(pil_img, use_container_width=True)
+
+            with gal_col2:
+                st.markdown("""
+                <div style="background: #121620; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 12px; padding: 10px 14px; margin-bottom: 8px;">
+                    <div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #7C6FF0;">Error Level Analysis (ELA)</div>
+                    <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">90Q compression noise matrix</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.image(ela_img, use_container_width=True)
+
+            with gal_col3:
+                st.markdown("""
+                <div style="background: #121620; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 12px; padding: 10px 14px; margin-bottom: 8px;">
+                    <div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #2DD4BF;">Splicing Heatmap Overlay</div>
+                    <div style="font-size: 0.70rem; color: #9CA3AF; margin-top: 2px;">Explainable AI tampering hotspot map</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.image(overlay, use_container_width=True)
         except Exception as e:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
