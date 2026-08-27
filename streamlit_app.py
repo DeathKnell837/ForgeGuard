@@ -737,23 +737,7 @@ breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Bench
 latency_val = 12.4
 render_html(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name))
 
-# TOP FORENSIC NAVIGATION SWITCH (Direct Access on Mobile & Desktop)
-nav_col1, nav_col2 = st.columns(2)
-with nav_col1:
-    is_live_active = (app_mode == "Live Threat Scanner")
-    btn_live_type = "primary" if is_live_active else "secondary"
-    if st.button("Live Threat Scanner", key="top_nav_live_btn", use_container_width=True, type=btn_live_type):
-        if app_mode != "Live Threat Scanner":
-            st.session_state["app_mode"] = "Live Threat Scanner"
-            st.rerun()
 
-with nav_col2:
-    is_bench_active = (app_mode == "Model Benchmark Suite")
-    btn_bench_type = "primary" if is_bench_active else "secondary"
-    if st.button("Model Benchmark Suite", key="top_nav_bench_btn", use_container_width=True, type=btn_bench_type):
-        if app_mode != "Model Benchmark Suite":
-            st.session_state["app_mode"] = "Model Benchmark Suite"
-            st.rerun()
 
 if "Live" in app_mode:
     # ============================================================

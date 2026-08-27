@@ -607,7 +607,7 @@ def svg_radial_dial(percent, color="#6366F1", label="ACCURACY", size=110):
 def render_live_scanner_standby_hub():
     return """<div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem;">
 <div class="standby-hub-container">
-<div class="standby-radar-top">
+<div class="standby-radar-left">
 <div class="radar-chassis">
 <div class="radar-sweep-blade"></div>
 <div class="radar-ring" style="width: 140px; height: 140px;"></div>
@@ -618,15 +618,15 @@ def render_live_scanner_standby_hub():
 <div style="position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF; box-shadow: 0 0 12px #2DD4BF; animation: beacon-ping 2s infinite;"></div>
 </div>
 <div class="standby-radar-info">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; justify-content: center; flex-wrap: wrap;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
 <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
 </div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: #FFFFFF; line-height: 1.2; text-align: center;">Live Optical Threat Radar</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #9CA3AF; margin-top: 4px; max-width: 480px; line-height: 1.45; text-align: center; margin-left: auto; margin-right: auto;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; max-width: 420px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
 </div>
 </div>
-<div class="standby-telemetry-full">
+<div class="standby-telemetry-right">
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
 <span class="telemetry-bar-label">Active Neural Engine: <strong style="color: #818CF8;">MobileNetV2</strong></span>

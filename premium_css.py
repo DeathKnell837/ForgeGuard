@@ -651,12 +651,14 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
 /* ============================================================
    FORENSIC LAYER SWITCHER ICONS (Original Receipt, ELA Noise Matrix, Splicing Heatmap)
    ============================================================ */
-.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
 div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
-    width: 14px !important;
-    height: 14px !important;
+    width: 15px !important;
+    height: 15px !important;
     margin-right: 8px !important;
     background-color: currentColor !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpolyline points='21 15 16 10 5 21'/%3E%3C/svg%3E") no-repeat center / contain !important;
@@ -664,12 +666,14 @@ div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-te
     flex-shrink: 0 !important;
 }
 
-.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
 div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
-    width: 14px !important;
-    height: 14px !important;
+    width: 15px !important;
+    height: 15px !important;
     margin-right: 8px !important;
     background-color: currentColor !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat center / contain !important;
@@ -677,12 +681,14 @@ div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-te
     flex-shrink: 0 !important;
 }
 
-.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
 div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
-    width: 14px !important;
-    height: 14px !important;
+    width: 15px !important;
+    height: 15px !important;
     margin-right: 8px !important;
     background-color: currentColor !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z'/%3E%3C/svg%3E") no-repeat center / contain !important;
@@ -1342,43 +1348,41 @@ div[data-testid="stAlert"] {
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* Standby Hub Flex Container (Stacked Radar & Full-Width Telemetry Array) */
+/* Standby Hub Flex/Grid Container (2-Column Desktop, Responsive Mobile) */
 .standby-hub-container {
     background: #10131B;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 1.6rem 1.8rem;
     box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     width: 100%;
     box-sizing: border-box;
 }
 
-.standby-radar-top {
+.standby-radar-left {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
     width: 100%;
 }
 
 .standby-radar-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
     width: 100%;
 }
 
-.standby-telemetry-full {
+.standby-telemetry-right {
     display: flex;
     flex-direction: column;
     gap: 14px;
     width: 100%;
-    max-width: 620px;
-    margin: 0 auto;
 }
 
 .telemetry-bar-unit {
@@ -1412,10 +1416,21 @@ div[data-testid="stAlert"] {
     text-align: right;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .standby-hub-container {
+        grid-template-columns: 1fr;
         padding: 1.2rem 1rem;
         gap: 1.2rem;
+    }
+    .standby-radar-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+    .standby-radar-info {
+        align-items: center;
+        text-align: center;
     }
     .telemetry-bar-header {
         font-size: 0.73rem;
