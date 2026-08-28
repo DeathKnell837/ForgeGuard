@@ -33,14 +33,24 @@ html, body, [class*="css"] {
     max-width: 100% !important;
 }
 
-/* ZERO TOP WHITESPACE (Clean Header & No Wide Forehead) */
+/* ZERO TOP WHITESPACE (Transparent Header Preserving Sidebar Controls) */
 header[data-testid="stHeader"] {
-    display: none !important;
+    background: transparent !important;
     height: 0px !important;
     min-height: 0px !important;
     padding: 0px !important;
     margin: 0px !important;
-    z-index: -1 !important;
+    border: none !important;
+    pointer-events: none !important;
+    z-index: 99999 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+}
+
+header[data-testid="stHeader"] > * {
+    pointer-events: auto !important;
 }
 
 div[data-testid="stAppViewContainer"] > section.main,
@@ -315,7 +325,6 @@ div[data-testid="stVerticalBlock"] {
     section[data-testid="stSidebar"] {
         background-color: #181D2A !important;
         border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-        padding-top: 0px !important;
         position: relative !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -324,6 +333,7 @@ div[data-testid="stVerticalBlock"] {
         min-width: 280px !important;
         width: 280px !important;
         visibility: visible !important;
+        transform: translateX(0%) !important;
     }
 
     section[data-testid="stSidebar"][aria-expanded="false"] {
@@ -333,20 +343,62 @@ div[data-testid="stVerticalBlock"] {
         visibility: hidden !important;
     }
 
+    /* Desktop Sidebar Header & Built-in Collapse Button */
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
     [data-testid="stSidebarHeader"] {
-        display: none !important;
-        height: 0px !important;
-        min-height: 0px !important;
-        padding: 0px !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        padding: 8px 14px !important;
         margin: 0px !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        background: transparent !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
 
-    [data-testid="stSidebarCollapseButton"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
     section[data-testid="stSidebar"] button[kind="header"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
-        display: none !important;
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: #252D40 !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 8px !important;
+        color: #E2E8F0 !important;
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+        padding: 0px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover,
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button:hover {
+        background: #2D374D !important;
+        color: #FFFFFF !important;
+        border-color: rgba(129, 140, 248, 0.6) !important;
+        box-shadow: 0 0 12px rgba(129, 140, 248, 0.35) !important;
+        transform: scale(1.05) !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] svg,
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button svg,
+    section[data-testid="stSidebar"] button[kind="header"] svg {
+        stroke: #CBD5E1 !important;
+        fill: #CBD5E1 !important;
+        width: 18px !important;
+        height: 18px !important;
     }
 }
 
@@ -422,43 +474,53 @@ div[data-testid="stVerticalBlock"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
         color: #FFFFFF !important;
-        background: rgba(255, 255, 255, 0.08) !important;
+        background: #252D40 !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-radius: 8px !important;
         margin: 8px !important;
+        width: 34px !important;
+        height: 34px !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 }
 
-/* Floating Reopen Toggle Button */
+/* Floating Reopen / Expand Sidebar Toggle Button (Always Visible & Clickable When Sidebar is Collapsed) */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stSidebarCollapsedControl"],
-div[data-testid="stSidebarCollapsedControl"] button {
+div[data-testid="stSidebarCollapsedControl"] button,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
+header[data-testid="stHeader"] button {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    pointer-events: auto !important;
     position: fixed !important;
-    top: 10px !important;
-    left: 10px !important;
-    z-index: 99999 !important;
+    top: 14px !important;
+    left: 14px !important;
+    z-index: 999999 !important;
     background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 8px !important;
+    border: 1px solid rgba(129, 140, 248, 0.5) !important;
+    border-radius: 9px !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45), 0 0 12px rgba(129, 140, 248, 0.3) !important;
     cursor: pointer !important;
-    padding: 7px 9px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
+    padding: 7px 10px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-testid="stSidebarCollapsedControl"] svg,
 button[data-testid="stSidebarCollapsedControl"] svg,
-div[data-testid="stSidebarCollapsedControl"] button svg {
+div[data-testid="stSidebarCollapsedControl"] button svg,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
+header[data-testid="stHeader"] button svg {
     stroke: #FFFFFF !important;
     fill: #FFFFFF !important;
     width: 20px !important;
@@ -467,9 +529,14 @@ div[data-testid="stSidebarCollapsedControl"] button svg {
 
 [data-testid="stSidebarCollapsedControl"]:hover,
 [data-testid="collapsedControl"]:hover,
-div[data-testid="stSidebarCollapsedControl"] button:hover {
-    background: rgba(139, 92, 246, 0.25) !important;
-    border-color: rgba(139, 92, 246, 0.4) !important;
+button[data-testid="stSidebarCollapsedControl"]:hover,
+div[data-testid="stSidebarCollapsedControl"] button:hover,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"]:hover,
+header[data-testid="stHeader"] button:hover {
+    background: #252D40 !important;
+    border-color: #818CF8 !important;
+    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.5) !important;
+    transform: scale(1.06) !important;
 }
 
 /* Responsive Column Stacking for Mobile Layouts */
