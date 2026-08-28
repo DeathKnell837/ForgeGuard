@@ -205,7 +205,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;">
 <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: 'Inter', sans-serif; font-weight: 600; color: #9CA3AF; margin-bottom: 12px; text-transform: uppercase;">
 <span>Simultaneous Architecture Inference</span>
-<span>Certainty &bull; Latency</span>
+<span>Accuracy &bull; Speed</span>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -539,7 +539,7 @@ def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_a
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px; text-align: center;">
 <div>
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Latency</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Speed (Latency)</div>
 <div style="font-size: 0.92rem; font-weight: 700; color: #FFFFFF; font-family: 'Inter', sans-serif;">{speed}</div>
 </div>
 <div>
