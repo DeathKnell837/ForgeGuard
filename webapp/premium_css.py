@@ -503,20 +503,25 @@ header[data-testid="stHeader"] [data-testid="stToolbar"] {
 /* ============================================================
    CLEAN 3-LINES HAMBURGER MENU CONTROLS (Zero Chevron)
    ============================================================ */
-/* Hide default Streamlit chevron icons and text inside sidebar controls */
-[data-testid="stSidebarCollapsedControl"] svg,
-button[data-testid="stExpandSidebarButton"] svg,
-button[data-testid="stSidebarCollapsedControl"] svg,
-div[data-testid="stSidebarCollapsedControl"] button svg,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
-header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] svg,
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] svg,
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button svg,
-section[data-testid="stSidebar"] button[kind="header"] svg,
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] svg {
+/* Hide ALL child text, spans, icons, and SVGs inside sidebar controls */
+[data-testid="stSidebarCollapsedControl"] *,
+button[data-testid="stExpandSidebarButton"] *,
+button[data-testid="stSidebarCollapsedControl"] *,
+div[data-testid="stSidebarCollapsedControl"] button *,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] *,
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] *,
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] *,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button *,
+section[data-testid="stSidebar"] button[kind="header"] *,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] * {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    font-size: 0px !important;
+    width: 0px !important;
+    height: 0px !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
 }
 
 [data-testid="stSidebarCollapsedControl"],
