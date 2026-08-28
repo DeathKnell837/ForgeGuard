@@ -336,19 +336,31 @@ div[data-testid="stVerticalBlock"] {
         transform: translateX(0%) !important;
     }
 
-    section[data-testid="stSidebar"][aria-expanded="false"] {
+    section[data-testid="stSidebar"][aria-expanded="false"],
+    section[data-testid="stSidebar"]:not([aria-expanded="true"]) {
         min-width: 0px !important;
         width: 0px !important;
-        transform: translateX(-100%) !important;
+        max-width: 0px !important;
+        height: 0px !important;
+        transform: translateX(-110%) !important;
         visibility: hidden !important;
+        display: none !important;
+        pointer-events: none !important;
     }
 
-    /* Desktop Sidebar Header & Built-in Collapse Button */
-    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
-    [data-testid="stSidebarHeader"] {
+    /* Desktop Sidebar Header & Built-in Collapse Button (Visible Only When Expanded) */
+    section[data-testid="stSidebar"][aria-expanded="true"] [data-testid="stSidebarHeader"],
+    section[data-testid="stSidebar"][aria-expanded="true"] [data-testid="stSidebarCollapseButton"],
+    section[data-testid="stSidebar"][aria-expanded="true"] [data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"][aria-expanded="true"] button[kind="header"],
+    section[data-testid="stSidebar"][aria-expanded="true"] [data-testid="stBaseButton-headerNoPadding"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] {
         height: 48px !important;
         min-height: 48px !important;
         padding: 8px 14px !important;
@@ -362,12 +374,7 @@ div[data-testid="stVerticalBlock"] {
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
     section[data-testid="stSidebar"] button[kind="header"],
-    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
+    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
         background: #252D40 !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         border-radius: 8px !important;
@@ -389,15 +396,6 @@ div[data-testid="stVerticalBlock"] {
         background: #2E384D !important;
         color: #FFFFFF !important;
         border-color: rgba(129, 140, 248, 0.5) !important;
-    }
-
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] svg,
-    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button svg,
-    section[data-testid="stSidebar"] button[kind="header"] svg {
-        stroke: #CBD5E1 !important;
-        fill: #CBD5E1 !important;
-        width: 16px !important;
-        height: 16px !important;
     }
 }
 
@@ -524,30 +522,26 @@ section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] * 
     pointer-events: none !important;
 }
 
-/* Base button container for sidebar toggle */
+/* Floating Reopen / Expand Sidebar Button (when sidebar is collapsed) */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stExpandSidebarButton"],
 button[data-testid="stSidebarCollapsedControl"],
 div[data-testid="stSidebarCollapsedControl"] button,
 header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
-header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"],
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
-section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
-section[data-testid="stSidebar"] button[kind="header"],
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    position: relative !important;
-    font-size: 0px !important;
-    color: transparent !important;
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    z-index: 999999 !important;
     background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 8px !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
     width: 36px !important;
     height: 36px !important;
     min-width: 36px !important;
@@ -557,40 +551,8 @@ section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
     align-items: center !important;
     justify-content: center !important;
     box-sizing: border-box !important;
+    cursor: pointer !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* When sidebar is collapsed, position the expand button container with clean margin away from the screen edge */
-div[data-testid="stSidebarCollapsedControl"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="collapsedControl"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: 12px 14px !important;
-    margin: 0px !important;
-    width: auto !important;
-    height: auto !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-}
-
-div[data-testid="stSidebarCollapsedControl"] button,
-button[data-testid="stExpandSidebarButton"],
-button[data-testid="stSidebarCollapsedControl"] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    margin: 0 !important;
-    background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
 }
 
 /* Crisp 3-Lines SVG Vector Icon Mask */
