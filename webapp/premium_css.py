@@ -362,6 +362,7 @@ div[data-testid="stVerticalBlock"] {
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
     section[data-testid="stSidebar"] button[kind="header"],
+    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"],
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button {
         display: flex !important;
         visibility: visible !important;
@@ -370,26 +371,24 @@ div[data-testid="stVerticalBlock"] {
         background: #252D40 !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         border-radius: 8px !important;
-        color: #E2E8F0 !important;
-        width: 34px !important;
-        height: 34px !important;
-        min-width: 34px !important;
-        min-height: 34px !important;
+        color: #CBD5E1 !important;
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
         padding: 0px !important;
         align-items: center !important;
         justify-content: center !important;
         cursor: pointer !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover,
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button:hover {
-        background: #2D374D !important;
+        background: #2E384D !important;
         color: #FFFFFF !important;
-        border-color: rgba(129, 140, 248, 0.6) !important;
-        box-shadow: 0 0 12px rgba(129, 140, 248, 0.35) !important;
-        transform: scale(1.05) !important;
+        border-color: rgba(129, 140, 248, 0.5) !important;
     }
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] svg,
@@ -397,8 +396,8 @@ div[data-testid="stVerticalBlock"] {
     section[data-testid="stSidebar"] button[kind="header"] svg {
         stroke: #CBD5E1 !important;
         fill: #CBD5E1 !important;
-        width: 18px !important;
-        height: 18px !important;
+        width: 16px !important;
+        height: 16px !important;
     }
 }
 
@@ -470,7 +469,8 @@ div[data-testid="stVerticalBlock"] {
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
-    section[data-testid="stSidebar"] button[kind="header"] {
+    section[data-testid="stSidebar"] button[kind="header"],
+    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -480,8 +480,8 @@ div[data-testid="stVerticalBlock"] {
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-radius: 8px !important;
         margin: 8px !important;
-        width: 34px !important;
-        height: 34px !important;
+        width: 32px !important;
+        height: 32px !important;
         align-items: center !important;
         justify-content: center !important;
     }
@@ -500,54 +500,53 @@ header[data-testid="stHeader"] [data-testid="stToolbar"] {
     pointer-events: none !important;
 }
 
-/* Floating Reopen / Expand Sidebar Toggle Button (Always Visible & Clickable When Sidebar is Collapsed) */
+/* Sleek Integrated Reopen Sidebar Toggle Button */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
+button[data-testid="stExpandSidebarButton"],
 button[data-testid="stSidebarCollapsedControl"],
 div[data-testid="stSidebarCollapsedControl"] button,
 header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] button {
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    position: fixed !important;
-    top: 14px !important;
-    left: 14px !important;
-    z-index: 999999 !important;
-    background: #1C2333 !important;
-    border: 1px solid rgba(129, 140, 248, 0.5) !important;
-    border-radius: 9px !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45), 0 0 12px rgba(129, 140, 248, 0.3) !important;
+    background: #181D2A !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: #94A3B8 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
     cursor: pointer !important;
-    padding: 7px 10px !important;
-    min-width: 38px !important;
-    min-height: 38px !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    padding: 0px !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-testid="stSidebarCollapsedControl"] svg,
+button[data-testid="stExpandSidebarButton"] svg,
 button[data-testid="stSidebarCollapsedControl"] svg,
 div[data-testid="stSidebarCollapsedControl"] button svg,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg {
-    stroke: #FFFFFF !important;
-    fill: #FFFFFF !important;
-    width: 20px !important;
-    height: 20px !important;
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] svg {
+    stroke: #CBD5E1 !important;
+    fill: #CBD5E1 !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 [data-testid="stSidebarCollapsedControl"]:hover,
+button[data-testid="stExpandSidebarButton"]:hover,
 [data-testid="collapsedControl"]:hover,
-button[data-testid="stSidebarCollapsedControl"]:hover,
-div[data-testid="stSidebarCollapsedControl"] button:hover,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"]:hover {
+button[data-testid="stSidebarCollapsedControl"]:hover {
     background: #252D40 !important;
-    border-color: #818CF8 !important;
-    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.5) !important;
-    transform: scale(1.06) !important;
+    border-color: rgba(129, 140, 248, 0.5) !important;
+    color: #FFFFFF !important;
 }
 
 /* Responsive Column Stacking for Mobile Layouts */
