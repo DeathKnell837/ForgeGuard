@@ -1,16 +1,16 @@
 PREMIUM_CSS = """
 <style>
 /* ============================================================
-   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v8.0-MOBILE-RESPONSIVE)
-   High-End Cyber Forensics, Responsive Glassmorphism & Zero-Emoji Purity
+   FORGEGUARD SOPHOS AI CYBERSECURITY DESIGN SYSTEM (v9.0-SLATE-GRAY)
+   Polished Enterprise Slate Gray, Responsive Glassmorphism & Zero-Emoji Purity
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
-/* Global Surface & Canvas */
+/* Global Surface & Canvas — Polished Slate Gray Tone */
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    background-color: #0A0D14 !important;
+    background-color: #121620 !important;
     color: #E2E8F0 !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -22,11 +22,11 @@ html, body, [class*="css"] {
 }
 
 .stApp {
-    background-color: #0A0D14 !important;
+    background-color: #121620 !important;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.06) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 0% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 40%) !important;
+        radial-gradient(circle at 50% 0%, rgba(124, 111, 240, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 0% 50%, rgba(99, 102, 241, 0.04) 0%, transparent 40%) !important;
     background-attachment: fixed !important;
     overflow-x: hidden !important;
     width: 100% !important;
@@ -89,11 +89,11 @@ div[data-testid="stVerticalBlock"] {
    ============================================================ */
 .cyber-scanner-frame {
     position: relative;
-    background: #0F131D;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 16px;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,9 +108,9 @@ div[data-testid="stVerticalBlock"] {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: #060910;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: #141926;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     margin: 0 auto;
     text-align: center;
     max-width: 100%;
@@ -224,12 +224,12 @@ div[data-testid="stVerticalBlock"] {
    CYBER FORENSIC LOADING ANIMATION (Zero Emoji, Enterprise HUD)
    ============================================================ */
 .cyber-loader-card {
-    background: #101216;
-    border: 1px solid rgba(124, 111, 240, 0.3);
+    background: #1C2333;
+    border: 1px solid rgba(124, 111, 240, 0.35);
     border-radius: 14px;
     padding: 22px 26px;
     margin: 1.2rem 0;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(124, 111, 240, 0.14);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 0 24px rgba(124, 111, 240, 0.16);
     position: relative;
     overflow: hidden;
 }
@@ -277,11 +277,11 @@ div[data-testid="stVerticalBlock"] {
 .cyber-loader-progress-track {
     width: 100%;
     height: 6px;
-    background: #1A1D26;
+    background: #252D40;
     border-radius: 999px;
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cyber-loader-progress-bar {
@@ -313,8 +313,8 @@ div[data-testid="stVerticalBlock"] {
    ============================================================ */
 @media (min-width: 769px) {
     section[data-testid="stSidebar"] {
-        background-color: #101216 !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+        background-color: #181D2A !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
         padding-top: 0px !important;
         position: relative !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -333,7 +333,6 @@ div[data-testid="stVerticalBlock"] {
         visibility: hidden !important;
     }
 
-    /* Eliminate empty sidebar header (wide forehead) on desktop */
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
     [data-testid="stSidebarHeader"] {
         display: none !important;
@@ -343,7 +342,6 @@ div[data-testid="stVerticalBlock"] {
         margin: 0px !important;
     }
 
-    /* Hide collapse button inside sidebar on desktop */
     [data-testid="stSidebarCollapseButton"],
     section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
     section[data-testid="stSidebar"] button[kind="header"],
@@ -353,7 +351,6 @@ div[data-testid="stVerticalBlock"] {
 }
 
 @media (max-width: 768px) {
-    /* Full-width container canvas on mobile */
     div[data-testid="stAppViewContainer"],
     .stAppViewContainer,
     div[data-testid="stAppViewContainer"] > section.main,
@@ -384,7 +381,6 @@ div[data-testid="stVerticalBlock"] {
         box-sizing: border-box !important;
     }
 
-    /* Off-canvas mobile sidebar drawer (NEVER in normal flex layout flow) */
     section[data-testid="stSidebar"] {
         position: fixed !important;
         top: 0 !important;
@@ -416,8 +412,8 @@ div[data-testid="stVerticalBlock"] {
         width: 280px !important;
         max-width: 82% !important;
         transform: translateX(0%) !important;
-        box-shadow: 14px 0 44px rgba(0, 0, 0, 0.9) !important;
-        background: #101216 !important;
+        box-shadow: 14px 0 44px rgba(0, 0, 0, 0.7) !important;
+        background: #181D2A !important;
     }
 
     section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
@@ -434,26 +430,6 @@ div[data-testid="stVerticalBlock"] {
     }
 }
 
-@media (min-width: 769px) {
-    /* Eliminate empty sidebar header (wide forehead) on desktop */
-    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"],
-    [data-testid="stSidebarHeader"] {
-        display: none !important;
-        height: 0px !important;
-        min-height: 0px !important;
-        padding: 0px !important;
-        margin: 0px !important;
-    }
-
-    /* Hide collapse button inside sidebar on desktop */
-    [data-testid="stSidebarCollapseButton"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
-    section[data-testid="stSidebar"] button[kind="header"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
-        display: none !important;
-    }
-}
-
 /* Floating Reopen Toggle Button */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
@@ -466,11 +442,11 @@ div[data-testid="stSidebarCollapsedControl"] button {
     top: 10px !important;
     left: 10px !important;
     z-index: 99999 !important;
-    background: #141822 !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
     border-radius: 8px !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
     cursor: pointer !important;
     padding: 7px 9px !important;
     min-width: 36px !important;
@@ -524,7 +500,7 @@ div[data-testid="stSidebarUserContent"] {
     font-family: 'Inter', -apple-system, sans-serif !important;
     font-size: 0.64rem !important;
     font-weight: 700 !important;
-    color: #6B7280 !important;
+    color: #94A3B8 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
     margin-top: 24px !important;
@@ -608,7 +584,7 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"] div[data-testid="s
     font-family: 'Inter', sans-serif !important;
     font-size: 0.86rem !important;
     font-weight: 500 !important;
-    color: #9CA3AF !important;
+    color: #CBD5E1 !important;
     margin: 0 !important;
     line-height: 1.4 !important;
     display: flex !important;
@@ -644,8 +620,8 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] label[data-testid="s
 
 /* Inactive Hover */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border-color: rgba(255, 255, 255, 0.06) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* ============================================================
@@ -703,8 +679,8 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover div[data-tes
 /* Soft, Low-Opacity Active Nav Highlight */
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"],
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) {
-    background: rgba(139, 92, 246, 0.10) !important;
-    border: 1px solid rgba(139, 92, 246, 0.18) !important;
+    background: rgba(99, 102, 241, 0.16) !important;
+    border: 1px solid rgba(99, 102, 241, 0.35) !important;
     box-shadow: none !important;
 }
 
@@ -716,51 +692,7 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked)
     color: #FFFFFF !important;
 }
 
-/* Advanced Calibration Collapsible Expander in Sidebar */
-section[data-testid="stSidebar"] div[data-testid="stExpander"] {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    margin-top: 18px !important;
-    margin-bottom: 12px !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stExpander"] details {
-    background: transparent !important;
-    border: none !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 8px 10px !important;
-    color: #9CA3AF !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.76rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.4px !important;
-    transition: all 0.15s ease !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
-    background: rgba(255, 255, 255, 0.04) !important;
-    color: #FFFFFF !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stExpander"] summary svg {
-    fill: #6B7280 !important;
-    width: 14px !important;
-    height: 14px !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
-    background: transparent !important;
-    border: none !important;
-    padding: 10px 4px 4px 4px !important;
-}
-
-/* Calibration Sliders — Sophos Dark Styling */
+/* Sliders — Sophos Slate Styling */
 div[data-testid="stSlider"] {
     background: transparent !important;
     border: none !important;
@@ -772,7 +704,7 @@ div[data-testid="stSlider"] label {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.74rem !important;
     font-weight: 500 !important;
-    color: #9CA3AF !important;
+    color: #94A3B8 !important;
     margin-bottom: 2px !important;
 }
 
@@ -781,7 +713,7 @@ div[data-testid="stSlider"] [data-baseweb="slider"] {
 }
 
 div[data-testid="stSlider"] [data-baseweb="slider"] > div:first-child {
-    background: #1A1D26 !important;
+    background: #252D40 !important;
 }
 
 div[data-testid="stSlider"] [role="slider"] {
@@ -796,7 +728,7 @@ div[data-testid="stSlider"] [data-testid="stSliderThumbValue"],
 div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     font-family: 'Inter', sans-serif !important;
     font-size: 0.68rem !important;
-    color: #6B7280 !important;
+    color: #94A3B8 !important;
 }
 
 /* ============================================================
@@ -806,12 +738,12 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 12px;
     padding: 0.8rem 1.4rem;
     margin-bottom: 1.2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -832,7 +764,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     gap: 8px;
     font-size: 0.82rem;
     font-family: 'Inter', sans-serif;
-    color: #9CA3AF;
+    color: #94A3B8;
     font-weight: 500;
     flex-wrap: wrap;
 }
@@ -850,7 +782,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 }
 
 .top-telemetry-pill {
-    background: #1A1D26;
+    background: #252D40;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 5px 12px;
@@ -867,14 +799,14 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 10px;
     padding: 9px 18px;
     margin-bottom: 12px;
     font-family: 'Inter', sans-serif;
     font-size: 0.74rem;
-    color: #9CA3AF;
+    color: #94A3B8;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     flex-wrap: wrap;
     gap: 8px;
@@ -890,9 +822,9 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     }
 }
 
-/* Neutral Outline Action Buttons (Secondary) */
+/* Action Buttons (Secondary) */
 .stButton > button {
-    background: #141824 !important;
+    background: #222B3D !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 10px !important;
     color: #F1F5F9 !important;
@@ -901,7 +833,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     font-weight: 600 !important;
     padding: 0.6rem 0.8rem !important;
     width: 100% !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     text-align: center !important;
     white-space: normal !important;
@@ -910,7 +842,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 
 .stButton > button:hover {
     border-color: rgba(124, 111, 240, 0.5) !important;
-    background: #1D2232 !important;
+    background: #2B364C !important;
     color: #FFFFFF !important;
     box-shadow: 0 4px 14px rgba(124, 111, 240, 0.25) !important;
     transform: translateY(-1px) !important;
@@ -918,7 +850,7 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 
 .stButton > button:active {
     transform: translateY(0px) !important;
-    background: #0E1118 !important;
+    background: #181F2C !important;
 }
 
 /* Primary Active Navigation / Action Buttons */
@@ -940,8 +872,8 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
 
 /* File Uploader Container */
 div[data-testid="stFileUploader"] {
-    background: #141822 !important;
-    border: 1px dashed rgba(255, 255, 255, 0.14) !important;
+    background: #1C2333 !important;
+    border: 1px dashed rgba(255, 255, 255, 0.16) !important;
     border-radius: 14px !important;
     padding: 1.2rem !important;
     margin-top: 0.4rem !important;
@@ -955,8 +887,8 @@ div[data-testid="stFileUploader"] {
 }
 
 div[data-testid="stFileUploader"]:hover {
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background: #181C26 !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    background: #232B3E !important;
 }
 
 div[data-testid="stFileUploader"] section {
@@ -999,7 +931,7 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     background: transparent !important;
     border: none !important;
     border-radius: 8px !important;
-    color: #9CA3AF !important;
+    color: #94A3B8 !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
@@ -1013,8 +945,8 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
 div[data-testid="stTabs"] div[data-testid="stTab"][aria-selected="true"],
 div[data-testid="stTabs"] [data-baseweb="tab"][aria-selected="true"],
 div[data-testid="stTabs"] div[data-testid="stTab"][data-selected="true"] {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
@@ -1053,8 +985,8 @@ div[data-testid="stTabs"] div[data-testid="stTab"] p {
 
 /* 3-Exhibit Card Frames */
 .exhibit-card-frame {
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 1.2rem;
     display: flex;
@@ -1078,7 +1010,7 @@ div[data-testid="stTabs"] div[data-testid="stTab"] p {
     width: 100%;
     margin-bottom: 12px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     font-family: 'Inter', sans-serif;
     font-size: 0.76rem;
     font-weight: 600;
@@ -1100,7 +1032,7 @@ div[data-testid="stImage"] img {
     font-family: 'Inter', sans-serif;
     font-size: 0.66rem;
     font-weight: 700;
-    color: #9CA3AF;
+    color: #94A3B8;
     letter-spacing: 1.4px;
     text-transform: uppercase;
     display: flex;
@@ -1110,11 +1042,12 @@ div[data-testid="stImage"] img {
 
 /* Incident Cockpit Card */
 .incident-cockpit-card {
-    background: #141822;
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 1.6rem 1.8rem;
     margin-top: 1.4rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
 }
 
 @media (max-width: 768px) {
@@ -1166,8 +1099,8 @@ div[data-testid="stImage"] img {
 }
 
 .bench-kpi-card {
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 18px 20px;
     display: flex;
@@ -1184,7 +1117,7 @@ div[data-testid="stImage"] img {
 }
 
 .bench-kpi-card:hover {
-    border-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.18);
     transform: translateY(-2px);
 }
 
@@ -1192,7 +1125,7 @@ div[data-testid="stImage"] img {
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: #1A1D26;
+    background: #252D40;
     border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
@@ -1212,7 +1145,7 @@ div[data-testid="stImage"] img {
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
-    color: #9CA3AF;
+    color: #94A3B8;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
 }
@@ -1230,13 +1163,13 @@ div[data-testid="stImage"] img {
     font-family: 'Inter', sans-serif;
     font-size: 0.72rem;
     font-weight: 500;
-    color: #9CA3AF;
+    color: #94A3B8;
 }
 
 /* Head to Head Model Cards - All Flat Hairline Borders */
 .model-matrix-card {
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 1.6rem 1.6rem;
     display: flex;
@@ -1255,14 +1188,14 @@ div[data-testid="stImage"] img {
 }
 
 .model-matrix-card.recommended {
-    border: 1px solid rgba(99, 102, 241, 0.35);
+    border: 1px solid rgba(99, 102, 241, 0.4);
     box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
 }
 
 .progress-track-dark {
     width: 100%;
     height: 7px;
-    background: #1A1D26;
+    background: #252D40;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -1274,8 +1207,8 @@ div[data-testid="stImage"] img {
 
 /* Alert & Notice Banners */
 div[data-testid="stAlert"] {
-    background: #141822 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
     border-radius: 10px !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.8rem !important;
@@ -1286,7 +1219,7 @@ div[data-testid="stAlert"] {
 .sophos-hatched-track {
     width: 100%;
     height: 9px;
-    background-color: #1A1D26;
+    background-color: #252D40;
     background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.03) 5px, rgba(255, 255, 255, 0.03) 10px);
     border-radius: 6px;
     position: relative;
@@ -1313,16 +1246,16 @@ div[data-testid="stAlert"] {
 }
 
 .sophos-hatched-fill.slate {
-    background: linear-gradient(90deg, #334155 0%, #64748B 100%);
+    background: linear-gradient(90deg, #475569 0%, #64748B 100%);
 }
 
 .sophos-thumb {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #1A1D26;
+    background: #252D40;
     border: 2px solid #FFFFFF;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     position: absolute;
     right: -3px;
     top: -2px;
@@ -1350,11 +1283,11 @@ div[data-testid="stAlert"] {
 
 /* Standby Hub Flex/Grid Container (2-Column Desktop, Responsive Mobile) */
 .standby-hub-container {
-    background: #10131B;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 16px;
     padding: 1.6rem 1.8rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
     display: grid;
     grid-template-columns: 1.15fr 1fr;
     align-items: center;
@@ -1445,9 +1378,9 @@ div[data-testid="stAlert"] {
     width: 190px;
     height: 190px;
     border-radius: 50%;
-    background: radial-gradient(circle, #0F131D 0%, #080A0F 100%);
-    border: 1px solid rgba(45, 212, 191, 0.25);
-    box-shadow: 0 0 30px rgba(45, 212, 191, 0.10), inset 0 0 20px rgba(0,0,0,0.8);
+    background: radial-gradient(circle, #182030 0%, #121824 100%);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.12), inset 0 0 20px rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1477,7 +1410,7 @@ div[data-testid="stAlert"] {
 .radar-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(45, 212, 191, 0.15);
+    border: 1px solid rgba(45, 212, 191, 0.18);
     pointer-events: none;
 }
 
@@ -1505,7 +1438,7 @@ div[data-testid="stAlert"] {
 }
 
 .pipeline-node {
-    background: #11141D;
+    background: #252D40;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 14px 18px;
@@ -1517,9 +1450,9 @@ div[data-testid="stAlert"] {
 
 .pipeline-node:hover {
     border-color: rgba(99, 102, 241, 0.5);
-    background: #161A26;
+    background: #2D374D;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 16px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 16px rgba(99, 102, 241, 0.15);
 }
 
 .pipeline-connector-line {
@@ -1571,8 +1504,8 @@ div[data-testid="stAlert"] {
    SOPHOS 3D PILLAR COLUMNS & BENCHMARK BAR STYLES
    ============================================================ */
 .sophos-pillar-container {
-    background: #141822;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 14px;
     padding: 1.4rem 1.6rem;
     margin-top: 1.4rem;
