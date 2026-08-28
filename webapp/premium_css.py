@@ -487,13 +487,26 @@ div[data-testid="stVerticalBlock"] {
     }
 }
 
+/* Streamlit Toolbar and Status Widget Clean Elimination */
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+header[data-testid="stHeader"] [data-testid="stToolbar"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0px !important;
+    width: 0px !important;
+    pointer-events: none !important;
+}
+
 /* Floating Reopen / Expand Sidebar Toggle Button (Always Visible & Clickable When Sidebar is Collapsed) */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stSidebarCollapsedControl"],
 div[data-testid="stSidebarCollapsedControl"] button,
 header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
-header[data-testid="stHeader"] button {
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] button {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -519,8 +532,7 @@ header[data-testid="stHeader"] button {
 [data-testid="stSidebarCollapsedControl"] svg,
 button[data-testid="stSidebarCollapsedControl"] svg,
 div[data-testid="stSidebarCollapsedControl"] button svg,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
-header[data-testid="stHeader"] button svg {
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg {
     stroke: #FFFFFF !important;
     fill: #FFFFFF !important;
     width: 20px !important;
@@ -531,8 +543,7 @@ header[data-testid="stHeader"] button svg {
 [data-testid="collapsedControl"]:hover,
 button[data-testid="stSidebarCollapsedControl"]:hover,
 div[data-testid="stSidebarCollapsedControl"] button:hover,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"]:hover,
-header[data-testid="stHeader"] button:hover {
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"]:hover {
     background: #252D40 !important;
     border-color: #818CF8 !important;
     box-shadow: 0 4px 20px rgba(129, 140, 248, 0.5) !important;
