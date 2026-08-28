@@ -500,53 +500,93 @@ header[data-testid="stHeader"] [data-testid="stToolbar"] {
     pointer-events: none !important;
 }
 
-/* Sleek Integrated Reopen Sidebar Toggle Button */
+/* ============================================================
+   CLEAN 3-LINES HAMBURGER MENU CONTROLS (Zero Chevron)
+   ============================================================ */
+/* Hide default Streamlit chevron icons and text inside sidebar controls */
+[data-testid="stSidebarCollapsedControl"] svg,
+button[data-testid="stExpandSidebarButton"] svg,
+button[data-testid="stSidebarCollapsedControl"] svg,
+div[data-testid="stSidebarCollapsedControl"] button svg,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] svg,
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] svg,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button svg,
+section[data-testid="stSidebar"] button[kind="header"] svg,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] svg {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stExpandSidebarButton"],
 button[data-testid="stSidebarCollapsedControl"],
 div[data-testid="stSidebarCollapsedControl"] button,
 header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
-header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] {
-    display: flex !important;
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"],
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button,
+section[data-testid="stSidebar"] button[kind="header"],
+section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
+    display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    background: #181D2A !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    position: relative !important;
+    font-size: 0px !important; /* Hide raw font ligature text */
+    color: transparent !important;
+    background: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
-    color: #94A3B8 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
     cursor: pointer !important;
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    min-height: 32px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
     padding: 0px !important;
+    margin: 0px !important;
     align-items: center !important;
     justify-content: center !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-[data-testid="stSidebarCollapsedControl"] svg,
-button[data-testid="stExpandSidebarButton"] svg,
-button[data-testid="stSidebarCollapsedControl"] svg,
-div[data-testid="stSidebarCollapsedControl"] button svg,
-header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"] svg,
-header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] svg {
-    stroke: #CBD5E1 !important;
-    fill: #CBD5E1 !important;
-    width: 16px !important;
-    height: 16px !important;
+/* Crisp 3-Lines SVG Vector Icon Mask */
+[data-testid="stSidebarCollapsedControl"]::after,
+button[data-testid="stExpandSidebarButton"]::after,
+button[data-testid="stSidebarCollapsedControl"]::after,
+div[data-testid="stSidebarCollapsedControl"] button::after,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"]::after,
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"]::after,
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]::after,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button::after,
+section[data-testid="stSidebar"] button[kind="header"]::after,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"]::after {
+    content: "" !important;
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    background-color: #CBD5E1 !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain !important;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain !important;
+    transition: background-color 0.2s ease !important;
 }
 
 [data-testid="stSidebarCollapsedControl"]:hover,
 button[data-testid="stExpandSidebarButton"]:hover,
-[data-testid="collapsedControl"]:hover,
-button[data-testid="stSidebarCollapsedControl"]:hover {
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button:hover {
     background: #252D40 !important;
     border-color: rgba(129, 140, 248, 0.5) !important;
-    color: #FFFFFF !important;
+}
+
+[data-testid="stSidebarCollapsedControl"]:hover::after,
+button[data-testid="stExpandSidebarButton"]:hover::after,
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover::after,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button:hover::after {
+    background-color: #FFFFFF !important;
 }
 
 /* Responsive Column Stacking for Mobile Layouts */
