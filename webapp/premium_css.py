@@ -501,7 +501,7 @@ header[data-testid="stHeader"] [data-testid="stToolbar"] {
 }
 
 /* ============================================================
-   CLEAN 3-LINES HAMBURGER MENU CONTROLS (Zero Chevron)
+   CLEAN 3-LINES HAMBURGER MENU CONTROLS (Zero Chevron & Zero Clipping)
    ============================================================ */
 /* Hide ALL child text, spans, icons, and SVGs inside sidebar controls */
 [data-testid="stSidebarCollapsedControl"] *,
@@ -524,6 +524,7 @@ section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] * 
     pointer-events: none !important;
 }
 
+/* Base button container for sidebar toggle */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="collapsedControl"],
 button[data-testid="stExpandSidebarButton"],
@@ -540,22 +541,39 @@ section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] {
     opacity: 1 !important;
     pointer-events: auto !important;
     position: relative !important;
-    font-size: 0px !important; /* Hide raw font ligature text */
+    font-size: 0px !important;
     color: transparent !important;
     background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 8px !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer !important;
-    width: 34px !important;
-    height: 34px !important;
-    min-width: 34px !important;
-    min-height: 34px !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
     padding: 0px !important;
     margin: 0px !important;
     align-items: center !important;
     justify-content: center !important;
+    box-sizing: border-box !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* When sidebar is collapsed, position the expand button with clean margin away from the screen edge */
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"],
+button[data-testid="stExpandSidebarButton"],
+button[data-testid="stSidebarCollapsedControl"],
+div[data-testid="stSidebarCollapsedControl"] button,
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
+header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] {
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    z-index: 999999 !important;
+    margin: 0 !important;
+    transform: none !important;
 }
 
 /* Crisp 3-Lines SVG Vector Icon Mask */
@@ -584,7 +602,8 @@ button[data-testid="stExpandSidebarButton"]:hover,
 section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover,
 section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] button:hover {
     background: #252D40 !important;
-    border-color: rgba(129, 140, 248, 0.5) !important;
+    border-color: rgba(129, 140, 248, 0.6) !important;
+    box-shadow: 0 0 12px rgba(129, 140, 248, 0.3) !important;
 }
 
 [data-testid="stSidebarCollapsedControl"]:hover::after,
