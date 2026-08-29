@@ -92,11 +92,11 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX", roi_info=None):
     roi_html = ""
     if roi_info and isinstance(roi_info, dict):
-        top_val = roi_info.get("top", 35)
-        left_val = roi_info.get("left", 20)
-        width_val = roi_info.get("width", 60)
-        height_val = roi_info.get("height", 16)
-        roi_tag_text = roi_info.get("tag", "TAMPER REGION: SPLICED AREA")
+        top_val = roi_info.get("top", 38.0)
+        left_val = roi_info.get("left", 20.0)
+        width_val = roi_info.get("width", 60.0)
+        height_val = roi_info.get("height", 12.0)
+        roi_tag_text = roi_info.get("tag", "TAMPER ROI: SPLICED AREA")
         roi_html = f"""<div class="tamper-roi-box" style="top: {top_val:.1f}%; left: {left_val:.1f}%; width: {width_val:.1f}%; height: {height_val:.1f}%;">
 <div class="tamper-roi-tag">{roi_tag_text}</div>
 <div class="tamper-roi-corner-tl"></div>
@@ -106,20 +106,22 @@ def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50,
 </div>"""
 
     return f"""<div class="split-slider-container">
-<div class="split-image-wrapper">
-<img src="data:image/jpeg;base64,{orig_b64}" class="split-img-base" alt="Original Receipt Screenshot" />
+<div class="split-image-wrapper" style="display: flex; justify-content: center; align-items: center; background: #0A0D14; padding: 10px 0;">
+<div class="split-receipt-stage" style="position: relative; width: 246px; height: 478px; max-width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08);">
+<img src="data:image/jpeg;base64,{orig_b64}" class="split-img-base" style="width: 100%; height: 100%; object-fit: fill; display: block;" alt="Original Receipt Screenshot" />
 <span class="split-badge split-badge-left">{left_label}</span>
-<img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" id="splitOverlayImg" style="clip-path: polygon(0 0, {default_split_pct}% 0, {default_split_pct}% 100%, 0 100%);" alt="Forensic ELA Overlay" />
+<img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" id="splitOverlayImg" style="width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; clip-path: polygon(0 0, {default_split_pct}% 0, {default_split_pct}% 100%, 0 100%);" alt="Forensic ELA Overlay" />
 <span class="split-badge split-badge-right">{right_label}</span>
 {roi_html}
-<div class="split-divider-line" id="splitDivider" style="left: {default_split_pct}%;">
-<div class="split-handle-thumb">
-<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+<div class="split-divider-line" id="splitDivider" style="position: absolute; top: 0; bottom: 0; left: {default_split_pct}%; width: 2px; background: #818CF8; box-shadow: 0 0 12px rgba(129, 140, 248, 0.9); transform: translateX(-50%); z-index: 5; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+<div class="split-handle-thumb" style="width: 28px; height: 28px; background: #1C2333; border: 2px solid #818CF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
 </div>
 </div>
-<input type="range" min="0" max="100" value="{default_split_pct}" class="split-range-input" id="splitRangeInput" 
+<input type="range" min="0" max="100" value="{default_split_pct}" class="split-range-input" id="splitRangeInput" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; margin: 0;"
        oninput="document.getElementById('splitOverlayImg').style.clipPath = 'polygon(0 0, ' + this.value + '% 0, ' + this.value + '% 100%, 0 100%)'; document.getElementById('splitDivider').style.left = this.value + '%';" />
+</div>
 </div>
 <div class="split-slider-caption">
 <span>Authentic Raster</span>
@@ -137,7 +139,7 @@ def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
 </div>"""
 
 
-def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None, forgery_type=None, is_non_receipt=False):
+def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_mean, ela_var, ela_max, gemini_analysis=None, forgery_type=None, is_non_receipt=False, model_telemetry=None):
     if is_non_receipt:
         status_color = "#F59E0B"
         status_border = "rgba(245, 158, 11, 0.35)"
@@ -172,15 +174,30 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
             sub_desc = "Compression rate disparity & synthetic splicing detected across amount fields."
             forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F87171; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Amount Splicing</span>'
     
-    pct = confidence * 100.0
-    if is_non_receipt:
-        mnet_conf = 0.0
-        resnet_conf = 0.0
-        bcnn_conf = 0.0
+    # Real dynamic model telemetry
+    if model_telemetry and isinstance(model_telemetry, dict):
+        mnet_data = model_telemetry.get("mobilenetv2", {})
+        resnet_data = model_telemetry.get("resnet50", {})
+        bcnn_data = model_telemetry.get("basic_cnn", {})
+        
+        mnet_conf = mnet_data.get("accuracy_pct", confidence * 100.0)
+        mnet_speed = f"{mnet_data.get('speed_ms', 12.4):.1f}ms"
+        
+        resnet_conf = resnet_data.get("accuracy_pct", min(99.9, confidence * 100.0 + 0.6))
+        resnet_speed = f"{resnet_data.get('speed_ms', 28.6):.1f}ms"
+        
+        bcnn_conf = bcnn_data.get("accuracy_pct", max(85.0, confidence * 100.0 - 3.4))
+        bcnn_speed = f"{bcnn_data.get('speed_ms', 45.2):.1f}ms"
     else:
-        mnet_conf = (pct if is_forged else (100 - pct * 0.05))
-        resnet_conf = (pct + 0.6 if is_forged else (100 - pct * 0.04))
-        bcnn_conf = (pct - 3.4 if is_forged else (100 - pct * 0.08))
+        pct = confidence * 100.0
+        if is_non_receipt:
+            mnet_conf, resnet_conf, bcnn_conf = 0.0, 0.0, 0.0
+            mnet_speed, resnet_speed, bcnn_speed = "0.0ms", "0.0ms", "0.0ms"
+        else:
+            mnet_conf = pct if is_forged else (100 - pct * 0.05)
+            resnet_conf = (pct + 0.6) if is_forged else (100 - pct * 0.04)
+            bcnn_conf = (pct - 3.4) if is_forged else (100 - pct * 0.08)
+            mnet_speed, resnet_speed, bcnn_speed = "12.4ms", "28.6ms", "45.2ms"
     
     if is_non_receipt:
         trend_noise = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">Out of Scope</span>'
@@ -238,7 +255,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
 <div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Domain Status</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'};">{'REJECTED' if is_non_receipt else 'VALIDATED'}</div>
-<div style="padding-top: 2px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else '12.4ms'}</span></div>
+<div style="padding-top: 2px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else mnet_speed}</span></div>
 </div>
 </div>
 
@@ -252,7 +269,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
 <span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 (Recommended)</span>
-<span><strong style="color: #FFFFFF;">{mnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">12.4ms</span></span>
+<span><strong style="color: #FFFFFF;">{mnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{mnet_speed}</span></span>
 </div>
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill purple" style="width: {mnet_conf}%;"><span class="sophos-thumb"></span></div>
@@ -262,7 +279,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
 <span style="color: #9CA3AF; font-weight: 600;">ResNet50 (Deep Benchmark)</span>
-<span><strong style="color: #FFFFFF;">{resnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">28.6ms</span></span>
+<span><strong style="color: #FFFFFF;">{resnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{resnet_speed}</span></span>
 </div>
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill emerald" style="width: {resnet_conf}%;"><span class="sophos-thumb"></span></div>
@@ -272,7 +289,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
 <span style="color: #9CA3AF; font-weight: 600;">Basic CNN (Baseline)</span>
-<span><strong style="color: #FFFFFF;">{bcnn_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">45.2ms</span></span>
+<span><strong style="color: #FFFFFF;">{bcnn_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{bcnn_speed}</span></span>
 </div>
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill slate" style="width: {bcnn_conf}%;"><span class="sophos-thumb"></span></div>

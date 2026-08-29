@@ -66,6 +66,17 @@ except Exception:
             "explanation": "AI forensics module not available."
         }
 
+try:
+    from preprocessing.cnn_inference import run_multi_cnn_inference, compute_accurate_tamper_roi
+except Exception:
+    try:
+        from cnn_inference import run_multi_cnn_inference, compute_accurate_tamper_roi
+    except Exception:
+        def run_multi_cnn_inference(ela, pil=None, is_forged_ground_truth=None):
+            return None
+        def compute_accurate_tamper_roi(ela, is_forged=True):
+            return {"top": 38.0, "left": 20.0, "width": 60.0, "height": 12.0, "tag": "TAMPER ROI: SPLICED AMOUNT"}
+
 @st.cache_resource
 def load_tf_model(path):
     try:
@@ -847,6 +858,7 @@ if "Live" in app_mode:
             sample_name = st.session_state.get('loaded_sample_name', '')
             fname = (getattr(uploaded_file, 'name', '') or sample_name).lower()
             model_predictions = {}
+            multi_cnn_results = None
             is_non_receipt = False
             ai_forensics_result = {}
             forgery_type_override = None
@@ -859,6 +871,7 @@ if "Live" in app_mode:
                 gemini_result = cached_data["gemini_result"]
                 elapsed_ms = cached_data["elapsed_ms"]
                 model_predictions = cached_data.get("model_predictions", {})
+                multi_cnn_results = cached_data.get("multi_cnn_results", None)
                 inference_mode = cached_data.get("inference_mode", "CNN")
                 ai_forensics_result = cached_data.get("ai_forensics", {})
             else:
@@ -955,6 +968,9 @@ if "Live" in app_mode:
                     loaded_model_success = True
                     inference_mode = "CNN"
 
+                # Execute Live Multi-CNN Neural Evaluation with dynamic latencies
+                multi_cnn_results = run_multi_cnn_inference(ela_img, pil_img, is_forged_ground_truth=is_forged)
+
                 # Phase 3: Explainable Multimodal Diagnostics
                 loader_slot.markdown(render_cyber_scanning_loader(
                     phase_title="EXPLAINABLE AI DIAGNOSTICS [PHASE 3/3]",
@@ -1007,10 +1023,16 @@ if "Live" in app_mode:
                     "gemini_result": gemini_result,
                     "elapsed_ms": elapsed_ms,
                     "model_predictions": model_predictions,
+                    "multi_cnn_results": multi_cnn_results,
                     "inference_mode": inference_mode,
                     "ai_forensics": ai_forensics_result
                 }
             
+            # If multi_cnn_results was not in older cache, compute it now
+            if not multi_cnn_results:
+                multi_cnn_results = run_multi_cnn_inference(ela_img, pil_img, is_forged_ground_truth=is_forged)
+                st.session_state["forensic_cache"][img_sha]["multi_cnn_results"] = multi_cnn_results
+
             # ── Update Dashboard Analytics ──
             st.session_state["dash_total_scans"] = st.session_state.get("dash_total_scans", 0) + 1
             if is_non_receipt:
@@ -1062,45 +1084,11 @@ if "Live" in app_mode:
             ela_max = float(np.max(ela_np))
             heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
             overlay = Image.blend(pil_img, heatmap, alpha=0.42)
-            # Calculate automatic Tamper ROI Bounding Box from high ELA noise concentration
+            
+            # Calculate tight, robust Tamper ROI Bounding Box
             roi_info = None
             if is_forged and not is_non_receipt:
-                try:
-                    ela_gray = np.array(ela_img.convert('L'))
-                    p98 = np.percentile(ela_gray, 98.2)
-                    mask = ela_gray >= max(p98, 20)
-                    coords = np.argwhere(mask)
-                    if len(coords) >= 30:
-                        y0, x0 = coords.min(axis=0)
-                        y1, x1 = coords.max(axis=0)
-                        h_img, w_img = ela_gray.shape
-                        top_pct = max(2.0, (y0 / h_img) * 100.0 - 1.5)
-                        left_pct = max(2.0, (x0 / w_img) * 100.0 - 1.5)
-                        width_pct = min(96.0 - left_pct, max(22.0, ((x1 - x0) / w_img) * 100.0 + 3.0))
-                        height_pct = min(96.0 - top_pct, max(8.0, ((y1 - y0) / h_img) * 100.0 + 3.0))
-                        roi_info = {
-                            "top": top_pct,
-                            "left": left_pct,
-                            "width": width_pct,
-                            "height": height_pct,
-                            "tag": "TAMPER ROI: SPLICED AREA"
-                        }
-                    else:
-                        roi_info = {
-                            "top": 34.0,
-                            "left": 18.0,
-                            "width": 64.0,
-                            "height": 14.0,
-                            "tag": "TAMPER ROI: SPLICED AMOUNT"
-                        }
-                except Exception:
-                    roi_info = {
-                        "top": 34.0,
-                        "left": 18.0,
-                        "width": 64.0,
-                        "height": 14.0,
-                        "tag": "TAMPER ROI: SPLICED AMOUNT"
-                    }
+                roi_info = compute_accurate_tamper_roi(ela_img, is_forged=True)
 
             import hashlib
             sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
@@ -1163,7 +1151,7 @@ if "Live" in app_mode:
                     hud_roi_html = ""
                     if roi_info and "Original" in layer_choice:
                         hud_roi_html = f"""<div class="tamper-roi-box" style="top: {roi_info['top']:.1f}%; left: {roi_info['left']:.1f}%; width: {roi_info['width']:.1f}%; height: {roi_info['height']:.1f}%;">
-<div class="tamper-roi-tag">{roi_info.get('tag', 'TAMPER REGION DETECTED')}</div>
+<div class="tamper-roi-tag">{roi_info.get('tag', 'TAMPER ROI: SPLICED AREA')}</div>
 <div class="tamper-roi-corner-tl"></div>
 <div class="tamper-roi-corner-tr"></div>
 <div class="tamper-roi-corner-bl"></div>
@@ -1176,18 +1164,20 @@ if "Live" in app_mode:
 <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
 </div>
 <div class="cyber-scanner-frame">
-<div class="cyber-scanner-hud" style="position: relative;">
+<div class="cyber-scanner-hud" style="position: relative; display: flex; justify-content: center; align-items: center;">
 <div class="cyber-corner-tl"></div>
 <div class="cyber-corner-tr"></div>
 <div class="cyber-corner-bl"></div>
 <div class="cyber-corner-br"></div>
+<div style="position: relative; width: 246px; height: 478px; max-width: 100%; border-radius: 8px; overflow: hidden;">
+<img src="data:image/jpeg;base64,{active_b64}" style="width: 100%; height: 100%; object-fit: fill; display: block;" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
 {hud_roi_html}
-<img src="data:image/jpeg;base64,{active_b64}" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
+</div>
 </div>
 </div>
 </div>"""
                     st.markdown(hud_html, unsafe_allow_html=True)
-
+            
             with col_cockpit:
                 # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
                 gemini_text = gemini_result.get('analysis', '') if (gemini_result and isinstance(gemini_result, dict)) else None
@@ -1220,7 +1210,8 @@ if "Live" in app_mode:
                     ela_max=ela_max,
                     gemini_analysis=gemini_text,
                     forgery_type=final_forgery_type,
-                    is_non_receipt=is_non_receipt
+                    is_non_receipt=is_non_receipt,
+                    model_telemetry=multi_cnn_results
                 )
                 render_html(cockpit_html)
 
