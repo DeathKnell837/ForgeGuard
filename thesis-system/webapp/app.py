@@ -77,6 +77,17 @@ except Exception:
         def compute_accurate_tamper_roi(ela, is_forged=True):
             return {"top": 38.0, "left": 20.0, "width": 60.0, "height": 12.0, "tag": "TAMPER ROI: SPLICED AMOUNT"}
 
+try:
+    from lottie_helper import load_lottie_file, load_lottie_url, render_lottie, LOTTIE_AVAILABLE
+except Exception:
+    try:
+        from webapp.lottie_helper import load_lottie_file, load_lottie_url, render_lottie, LOTTIE_AVAILABLE
+    except Exception:
+        LOTTIE_AVAILABLE = False
+        def load_lottie_file(p): return None
+        def load_lottie_url(u): return None
+        def render_lottie(d, **kwargs): return False
+
 @st.cache_resource
 def load_tf_model(path):
     try:
