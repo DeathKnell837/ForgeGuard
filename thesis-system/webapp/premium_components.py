@@ -376,17 +376,7 @@ def render_sophos_benchmark_summary_tiles(eval_metrics=None, session_total=0, se
     session_val = f"{session_total} Scans" if session_total > 0 else "0 Scans"
     session_status = "Live Active" if session_total > 0 else "Standby Ready"
 
-    return f"""<div style="background: linear-gradient(180deg, #182030 0%, #111622 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #7C6FF0; border-radius: 14px; padding: 14px 20px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-<div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.2px;">Empirical CNN Architecture Benchmark Suite</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.76rem; color: #94A3B8; margin-top: 2px;">Comparative performance evaluation across 3 neural engines (MobileNetV2, ResNet50, Basic CNN)</div>
-</div>
-<div style="flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(124, 111, 240, 0.12); border: 1px solid rgba(124, 111, 240, 0.3); border-radius: 10px; box-shadow: 0 0 14px rgba(124, 111, 240, 0.25);">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-</div>
-</div>
-
-<div class="bench-kpi-grid">
+    return f"""<div class="bench-kpi-grid">
 <div class="bench-kpi-card">
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 <div class="bench-kpi-icon-chip" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3);">

@@ -1261,6 +1261,18 @@ else:
     session_auth = st.session_state.get("dash_authenticated", 0)
     session_forged = st.session_state.get("dash_forged", 0)
 
+    # Top Benchmark Banner with Live Moving Lottie Neural Shield
+    b_col_text, b_col_lottie = st.columns([0.88, 0.12])
+    with b_col_text:
+        render_html("""<div style="background: linear-gradient(180deg, #182030 0%, #111622 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #7C6FF0; border-radius: 14px; padding: 18px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.2px;">Empirical CNN Architecture Benchmark Suite</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.76rem; color: #94A3B8; margin-top: 4px;">Comparative performance evaluation across 3 neural engines (MobileNetV2, ResNet50, Basic CNN)</div>
+</div>""")
+    with b_col_lottie:
+        shield_data = load_lottie_file("security_shield.json")
+        if shield_data:
+            render_lottie(shield_data, height=80, key="bench_shield_lottie_page2")
+
     render_html(render_sophos_benchmark_summary_tiles(
         eval_metrics=dyn_metrics,
         session_total=session_scans,
