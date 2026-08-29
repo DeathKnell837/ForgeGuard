@@ -97,23 +97,23 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 
 
 def render_tri_spectral_card(title, subtitle, badge, accent_color, accent_bg, accent_border, img_b64, spec_left, spec_right):
-    return f"""<div style="background: #111622; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); box-sizing: border-box;">
-<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+    return f"""<div style="background: linear-gradient(180deg, #161D2B 0%, #101520 100%); border: 1px solid rgba(255, 255, 255, 0.09); border-top: 3px solid {accent_color}; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); box-sizing: border-box;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
 <div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; gap: 6px;">
-<span style="width: 8px; height: 8px; border-radius: 2px; background: {accent_color}; display: inline-block;"></span>
+<span style="width: 7px; height: 7px; border-radius: 50%; background: {accent_color}; display: inline-block; box-shadow: 0 0 6px {accent_color};"></span>
 {title}
 </div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #94A3B8; margin-top: 2px;">{subtitle}</div>
 </div>
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: {accent_color}; background: {accent_bg}; padding: 2px 7px; border-radius: 4px; border: 1px solid {accent_border}; font-weight: 700; text-transform: uppercase; white-space: nowrap;">{badge}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: {accent_color}; background: {accent_bg}; padding: 2px 8px; border-radius: 4px; border: 1px solid {accent_border}; font-weight: 700; text-transform: uppercase; white-space: nowrap; letter-spacing: 0.4px;">{badge}</span>
 </div>
-<div style="flex: 1; display: flex; justify-content: center; align-items: center; background: #080B10; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.06); padding: 12px; min-height: 440px; overflow: hidden; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);">
-<img src="data:image/jpeg;base64,{img_b64}" style="max-width: 100%; max-height: 460px; width: auto; height: auto; object-fit: contain; display: block; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);" alt="{title}" />
+<div style="flex: 1; display: flex; justify-content: center; align-items: center; background: #0A0E16; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.06); padding: 10px; min-height: 440px; overflow: hidden; box-shadow: inset 0 2px 12px rgba(0,0,0,0.6);">
+<img src="data:image/jpeg;base64,{img_b64}" style="max-width: 100%; max-height: 460px; width: auto; height: auto; object-fit: contain; display: block; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);" alt="{title}" />
 </div>
-<div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.06); display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #64748B;">
+<div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.06); display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #64748B;">
 <span>{spec_left}</span>
-<span style="font-family: 'JetBrains Mono', monospace; color: #94A3B8; font-size: 0.65rem;">{spec_right}</span>
+<span style="font-family: 'JetBrains Mono', monospace; color: #94A3B8; font-size: 0.65rem; background: rgba(255,255,255,0.04); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">{spec_right}</span>
 </div>
 </div>"""
 
@@ -256,25 +256,25 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 </div>
 
 <div class="incident-metrics-grid">
-<div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Average Noise</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">{ela_mean:.1f}</div>
-<div style="padding-top: 2px;">{trend_noise}</div>
+<div style="background: linear-gradient(180deg, #1C2436 0%, #151B28 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #64748B; border-radius: 10px; padding: 10px 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;">Average Noise</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.12rem; font-weight: 700; color: #FFFFFF; margin: 2px 0;">{ela_mean:.1f}</div>
+<div style="padding-top: 1px;">{trend_noise}</div>
 </div>
-<div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Variance</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: {status_color};">{ela_var:.1f}</div>
-<div style="padding-top: 2px;">{trend_var}</div>
+<div style="background: linear-gradient(180deg, #1C2436 0%, #151B28 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid {status_color}; border-radius: 10px; padding: 10px 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;">Noise Variance</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.12rem; font-weight: 700; color: {status_color}; margin: 2px 0;">{ela_var:.1f}</div>
+<div style="padding-top: 1px;">{trend_var}</div>
 </div>
-<div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Max Noise</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #9CA3AF;">{ela_max:.0f}</div>
-<div style="padding-top: 2px;"><span style="color: #6B7280; font-size: 0.68rem;">/ 255</span></div>
+<div style="background: linear-gradient(180deg, #1C2436 0%, #151B28 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #7C6FF0; border-radius: 10px; padding: 10px 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;">Max Noise</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.12rem; font-weight: 700; color: #E2E8F0; margin: 2px 0;">{ela_max:.0f}</div>
+<div style="padding-top: 1px;"><span style="color: #6B7280; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;">/ 255</span></div>
 </div>
-<div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Receipt Check</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'};">{'REJECTED' if is_non_receipt else 'VALID'}</div>
-<div style="padding-top: 2px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else mnet_speed}</span></div>
+<div style="background: linear-gradient(180deg, #1C2436 0%, #151B28 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid {'#F59E0B' if is_non_receipt else '#10B981'}; border-radius: 10px; padding: 10px 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;">Receipt Check</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.98rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'}; margin: 2px 0;">{'REJECTED' if is_non_receipt else 'VALID'}</div>
+<div style="padding-top: 1px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else mnet_speed}</span></div>
 </div>
 </div>
 

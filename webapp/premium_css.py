@@ -1182,35 +1182,37 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     }
 }
 
-/* Action Buttons (Secondary) */
+/* Action Buttons (Secondary) - Segmented Cyber Glass Tabs */
 .stButton > button {
-    background: #222B3D !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background: linear-gradient(180deg, #1E2638 0%, #151B28 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
     border-radius: 10px !important;
     color: #F1F5F9 !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.80rem !important;
     font-weight: 600 !important;
-    padding: 0.6rem 0.8rem !important;
+    padding: 0.65rem 0.9rem !important;
     width: 100% !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     text-align: center !important;
     white-space: normal !important;
     line-height: 1.3 !important;
+    letter-spacing: 0.2px !important;
 }
 
 .stButton > button:hover {
-    border-color: rgba(124, 111, 240, 0.5) !important;
-    background: #2B364C !important;
+    border-color: rgba(124, 111, 240, 0.6) !important;
+    background: linear-gradient(180deg, #28334A 0%, #1C2436 100%) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(124, 111, 240, 0.25) !important;
-    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(124, 111, 240, 0.25), 0 0 14px rgba(124, 111, 240, 0.15) !important;
+    transform: translateY(-2px) !important;
 }
 
 .stButton > button:active {
     transform: translateY(0px) !important;
-    background: #181F2C !important;
+    background: #141A26 !important;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.5) !important;
 }
 
 /* Primary Active Navigation / Action Buttons */
@@ -1230,14 +1232,15 @@ div[data-testid="stSlider"] [data-testid="stSliderTickBar"] {
     box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5) !important;
 }
 
-/* File Uploader Container */
+/* File Uploader Container - Cyber Glow Dropzone */
 div[data-testid="stFileUploader"] {
-    background: #1C2333 !important;
-    border: 1px dashed rgba(255, 255, 255, 0.16) !important;
+    background: radial-gradient(circle at 50% 50%, #1C2333 0%, #141924 100%) !important;
+    border: 1.5px dashed rgba(124, 111, 240, 0.28) !important;
     border-radius: 14px !important;
-    padding: 1.2rem !important;
+    padding: 1.2rem 1.4rem !important;
     margin-top: 0.4rem !important;
-    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 @media (max-width: 768px) {
@@ -1247,8 +1250,9 @@ div[data-testid="stFileUploader"] {
 }
 
 div[data-testid="stFileUploader"]:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: #232B3E !important;
+    border-color: #7C6FF0 !important;
+    background: radial-gradient(circle at 50% 50%, #222B3E 0%, #181E2B 100%) !important;
+    box-shadow: 0 0 24px rgba(124, 111, 240, 0.18), inset 0 0 16px rgba(124, 111, 240, 0.05) !important;
 }
 
 div[data-testid="stFileUploader"] section {
