@@ -1622,23 +1622,11 @@ div[data-testid="stAlert"] {
 }
 
 /* ============================================================
-   HERO STANDBY FORENSIC CONSOLE (Redesigned Visual Centerpiece)
+   FUTURISTIC STANDBY FORENSIC CONSOLE (Responsive & Uncompressed)
    ============================================================ */
 @keyframes radar-sweep {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-@keyframes radar-outer-pulse {
-    0% { box-shadow: 0 0 50px rgba(124, 111, 240, 0.10), 0 0 100px rgba(124, 111, 240, 0.05); }
-    50% { box-shadow: 0 0 70px rgba(124, 111, 240, 0.22), 0 0 140px rgba(124, 111, 240, 0.10); }
-    100% { box-shadow: 0 0 50px rgba(124, 111, 240, 0.10), 0 0 100px rgba(124, 111, 240, 0.05); }
-}
-
-@keyframes radar-label-float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0); }
 }
 
 @keyframes bus-pulse {
@@ -1649,90 +1637,45 @@ div[data-testid="stAlert"] {
 
 @keyframes beacon-ping {
     0% { transform: scale(0.95); opacity: 0.8; }
-    50% { transform: scale(1.15); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 1; }
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* Hero Headline */
-.hero-headline {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 800;
-    color: #FFFFFF;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    text-align: center;
-    margin: 0 0 0.4rem 0;
-}
-
-.hero-tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    color: #9CA3AF;
-    text-align: center;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.55;
-}
-
-/* Hero Wrapper -- transparent, centered column with breathing room */
+/* Standby Hub Flex/Grid Container (2-Column Desktop, Responsive Mobile) */
 .standby-hub-container {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 3.2rem 1rem 2rem;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
     align-items: center;
-    gap: 0;
+    gap: 2rem;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Radar + annotation pills wrapper */
-.radar-hero-block {
-    position: relative;
-    width: 380px;
-    height: 380px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem auto 0.6rem;
-    flex-shrink: 0;
-}
-
 .standby-radar-left {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 100%;
 }
 
 .standby-radar-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     width: 100%;
-    margin-top: 0.6rem;
 }
 
-/* Telemetry bars -- below radar, centered, narrower */
 .standby-telemetry-right {
     display: flex;
     flex-direction: column;
     gap: 14px;
     width: 100%;
-    max-width: 580px;
-    margin: 2rem auto 0;
-    background: #1C2333;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 14px;
-    padding: 1.4rem 1.8rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    box-sizing: border-box;
 }
 
 .telemetry-bar-unit {
@@ -1766,189 +1709,21 @@ div[data-testid="stAlert"] {
     text-align: right;
 }
 
-/* Radar Chassis -- enlarged with violet glow and pulse */
-.radar-chassis {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #182030 0%, #121824 60%, #0E1117 100%);
-    border: 1.5px solid rgba(124, 111, 240, 0.30);
-    box-shadow: 0 0 50px rgba(124, 111, 240, 0.14), 0 0 100px rgba(124, 111, 240, 0.06), inset 0 0 30px rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-shrink: 0;
-    animation: radar-outer-pulse 3.5s ease-in-out infinite;
-}
-
-/* Sweep blade with trailing light fade (150 deg arc) */
-.radar-sweep-blade {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: conic-gradient(
-        from 0deg at 50% 50%,
-        rgba(124, 111, 240, 0) 0deg,
-        rgba(124, 111, 240, 0) 210deg,
-        rgba(124, 111, 240, 0.04) 260deg,
-        rgba(124, 111, 240, 0.10) 300deg,
-        rgba(124, 111, 240, 0.22) 340deg,
-        rgba(124, 111, 240, 0.40) 358deg,
-        rgba(124, 111, 240, 0.45) 360deg
-    );
-    animation: radar-sweep 4s linear infinite;
-    pointer-events: none;
-}
-
-/* Concentric rings with staggered opacity */
-.radar-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(124, 111, 240, 0.12);
-    pointer-events: none;
-}
-.radar-ring-1 { width: 250px; height: 250px; border-color: rgba(124, 111, 240, 0.06); }
-.radar-ring-2 { width: 200px; height: 200px; border-color: rgba(124, 111, 240, 0.10); }
-.radar-ring-3 { width: 150px; height: 150px; border-color: rgba(124, 111, 240, 0.14); }
-.radar-ring-4 { width: 100px; height: 100px; border-color: rgba(124, 111, 240, 0.18); }
-.radar-ring-5 { width: 50px;  height: 50px;  border-color: rgba(124, 111, 240, 0.22); }
-
-/* Crosshair lines inside radar */
-.radar-crosshair-h, .radar-crosshair-v {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.05);
-}
-.radar-crosshair-h { width: 100%; height: 1px; }
-.radar-crosshair-v { height: 100%; width: 1px; }
-
-/* Center beacon */
-.radar-center-beacon {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #7C6FF0;
-    box-shadow: 0 0 14px #7C6FF0, 0 0 28px rgba(124, 111, 240, 0.4);
-    animation: beacon-ping 2s infinite;
-    z-index: 2;
-}
-
-/* ---- Floating Annotation Pills ---- */
-.radar-annotation-pill {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    border-radius: 100px;
-    background: rgba(28, 35, 51, 0.88);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(124, 111, 240, 0.25);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.64rem;
-    font-weight: 700;
-    color: #C4B5FD;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.radar-annotation-pill--gold {
-    border-color: rgba(245, 158, 11, 0.30);
-    color: #FCD34D;
-}
-
-.radar-annotation-pill--emerald {
-    border-color: rgba(16, 185, 129, 0.30);
-    color: #6EE7B7;
-}
-
-.radar-pill-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-    box-shadow: 0 0 6px currentColor;
-    flex-shrink: 0;
-}
-
-/* Pill positions around the 380px wrapper */
-.radar-pill-pos-tr {
-    top: 28px;
-    right: -12px;
-    animation: radar-label-float 4s ease-in-out infinite;
-}
-.radar-pill-pos-bl {
-    bottom: 42px;
-    left: -20px;
-    animation: radar-label-float 4s ease-in-out 1.2s infinite;
-}
-.radar-pill-pos-l {
-    top: 50%;
-    left: -30px;
-    transform: translateY(-50%);
-    animation: radar-label-float 4s ease-in-out 2.4s infinite;
-}
-
-/* Connector lines from pills to radar edge */
-.radar-annotation-line {
-    position: absolute;
-    background: rgba(124, 111, 240, 0.12);
-    z-index: 4;
-    pointer-events: none;
-}
-.radar-line-tr {
-    width: 36px;
-    height: 1px;
-    top: 44px;
-    right: 50px;
-    transform: rotate(-28deg);
-}
-.radar-line-bl {
-    width: 32px;
-    height: 1px;
-    bottom: 56px;
-    left: 44px;
-    transform: rotate(20deg);
-}
-.radar-line-l {
-    width: 28px;
-    height: 1px;
-    top: 50%;
-    left: 40px;
-}
-
-/* ---- Responsive ---- */
 @media (max-width: 768px) {
     .standby-hub-container {
-        padding: 2rem 0.6rem 1.4rem;
-    }
-    .hero-headline {
-        font-size: clamp(1.6rem, 6vw, 2.2rem);
-    }
-    .radar-hero-block {
-        width: 300px;
-        height: 300px;
-    }
-    .radar-chassis {
-        width: 220px;
-        height: 220px;
-    }
-    .radar-ring-1 { width: 195px; height: 195px; }
-    .radar-ring-2 { width: 156px; height: 156px; }
-    .radar-ring-3 { width: 117px; height: 117px; }
-    .radar-ring-4 { width: 78px;  height: 78px;  }
-    .radar-ring-5 { width: 39px;  height: 39px;  }
-    .standby-telemetry-right {
-        max-width: 100%;
+        grid-template-columns: 1fr;
         padding: 1.2rem 1rem;
+        gap: 1.2rem;
+    }
+    .standby-radar-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+    .standby-radar-info {
+        align-items: center;
+        text-align: center;
     }
     .telemetry-bar-header {
         font-size: 0.73rem;
@@ -1956,31 +1731,47 @@ div[data-testid="stAlert"] {
     .telemetry-bar-val {
         font-size: 0.71rem;
     }
-    .radar-annotation-pill {
-        font-size: 0.58rem;
-        padding: 4px 10px;
-    }
-    .radar-pill-pos-tr { top: 16px; right: -4px; }
-    .radar-pill-pos-bl { bottom: 26px; left: -8px; }
-    .radar-pill-pos-l  { left: -14px; }
-    .radar-annotation-line { display: none; }
+}
+
+.radar-chassis {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #182030 0%, #121824 100%);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.12), inset 0 0 20px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 @media (max-width: 480px) {
-    .radar-hero-block {
-        width: 260px;
-        height: 260px;
-    }
     .radar-chassis {
-        width: 190px;
-        height: 190px;
+        width: 160px;
+        height: 160px;
     }
-    .radar-ring-1 { width: 168px; height: 168px; }
-    .radar-ring-2 { width: 134px; height: 134px; }
-    .radar-ring-3 { width: 101px; height: 101px; }
-    .radar-ring-4 { width: 67px;  height: 67px;  }
-    .radar-ring-5 { width: 34px;  height: 34px;  }
-    .radar-annotation-pill { display: none; }
+}
+
+.radar-sweep-blade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg at 50% 50%, rgba(45, 212, 191, 0) 0deg, rgba(45, 212, 191, 0) 270deg, rgba(45, 212, 191, 0.35) 360deg);
+    animation: radar-sweep 4s linear infinite;
+    pointer-events: none;
+}
+
+.radar-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 212, 191, 0.18);
+    pointer-events: none;
 }
 
 /* ============================================================
