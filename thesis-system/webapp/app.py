@@ -683,6 +683,8 @@ from premium_components import (
     render_sophos_segmented_donut,
     render_sophos_hatched_bars,
     render_sophos_pillar_columns,
+    render_sophos_confusion_matrix,
+    render_sophos_roc_curves,
     render_saas_model_card,
     executive_sop5_recommendation_card,
     svg_radial_dial
@@ -1272,7 +1274,14 @@ else:
     with c_hatched:
         render_html(render_sophos_hatched_bars())
         
-    # 2. Sophos 12-Month 3D Pillar Column Chart
+    # 2. Empirical Statistical Validation (Confusion Matrix & ROC-AUC Curves)
+    c_cm, c_roc = st.columns(2)
+    with c_cm:
+        render_html(render_sophos_confusion_matrix())
+    with c_roc:
+        render_html(render_sophos_roc_curves())
+
+    # 3. Sophos Comparative Column Chart Across Forgery Categories
     render_html(render_sophos_pillar_columns())
 
     # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards

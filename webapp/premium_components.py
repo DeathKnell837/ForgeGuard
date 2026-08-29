@@ -525,6 +525,122 @@ def render_sophos_pillar_columns():
 </div>"""
 
 
+def render_sophos_confusion_matrix():
+    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); height: 100%;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+<div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Empirical Confusion Matrix</span>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF; margin-top: 1px;">Evaluation on N=2,500 Mobile Receipt Test Dataset</div>
+</div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #818CF8; background: rgba(99, 102, 241, 0.12); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(99, 102, 241, 0.25); font-weight: 600;">MobileNetV2 Test Profile</span>
+</div>
+
+<div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 8px; font-family: 'Inter', sans-serif; margin-bottom: 12px;">
+<div></div>
+<div style="text-align: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Pred: Authentic</div>
+<div style="text-align: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Pred: Forged</div>
+
+<div style="display: flex; align-items: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Actual: Auth</div>
+<div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 12px 8px; text-align: center;">
+<div style="font-size: 1.15rem; font-weight: 800; color: #34D399; font-family: 'JetBrains Mono', monospace;">1,248</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Negative (99.8%)</div>
+</div>
+<div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 12px 8px; text-align: center;">
+<div style="font-size: 1.15rem; font-weight: 800; color: #F59E0B; font-family: 'JetBrains Mono', monospace;">2</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Positive (0.2%)</div>
+</div>
+
+<div style="display: flex; align-items: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Actual: Forged</div>
+<div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 12px 8px; text-align: center;">
+<div style="font-size: 1.15rem; font-weight: 800; color: #F87171; font-family: 'JetBrains Mono', monospace;">18</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Negative (1.4%)</div>
+</div>
+<div style="background: rgba(129, 140, 248, 0.18); border: 1px solid rgba(129, 140, 248, 0.4); border-radius: 8px; padding: 12px 8px; text-align: center;">
+<div style="font-size: 1.15rem; font-weight: 800; color: #A5B4FC; font-family: 'JetBrains Mono', monospace;">1,232</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Positive (98.6%)</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 8px 10px; text-align: center;">
+<div>
+<div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Accuracy</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">98.4%</div>
+</div>
+<div>
+<div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Precision</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">99.8%</div>
+</div>
+<div>
+<div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Recall</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">98.6%</div>
+</div>
+<div>
+<div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">F1-Score</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">99.2%</div>
+</div>
+</div>
+</div>"""
+
+
+def render_sophos_roc_curves():
+    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); height: 100%;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Receiver Operating Characteristic (ROC-AUC)</span>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF; margin-top: 1px;">Discrimination Capacity across Architecture Baselines</div>
+</div>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #34D399; background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.25); font-weight: 600;">AUC &#x2265; 0.962</span>
+</div>
+
+<div style="position: relative; width: 100%; height: 170px; margin-bottom: 8px;">
+<svg viewBox="0 0 340 160" width="100%" height="100%" style="overflow: visible;">
+<line x1="35" y1="15" x2="35" y2="135" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+<line x1="35" y1="135" x2="325" y2="135" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+<line x1="35" y1="75" x2="325" y2="75" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3,3" />
+<line x1="180" y1="15" x2="180" y2="135" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3,3" />
+
+<text x="30" y="20" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">1.0</text>
+<text x="30" y="78" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">0.5</text>
+<text x="30" y="138" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">0.0</text>
+
+<text x="35" y="148" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="middle">0.0</text>
+<text x="180" y="148" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="middle">0.5</text>
+<text x="325" y="148" fill="#6B7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="middle">1.0</text>
+
+<!-- Random Baseline (Diagonal) -->
+<line x1="35" y1="135" x2="325" y2="15" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" />
+
+<!-- Basic CNN (AUC: 0.962) -->
+<path d="M 35 135 C 45 60, 80 28, 325 15" fill="none" stroke="#94A3B8" stroke-width="2" />
+
+<!-- ResNet50 (AUC: 0.996) -->
+<path d="M 35 135 C 38 30, 48 18, 325 15" fill="none" stroke="#34D399" stroke-width="2" />
+
+<!-- MobileNetV2 (AUC: 0.994) -->
+<path d="M 35 135 C 39 34, 52 20, 325 15" fill="none" stroke="#818CF8" stroke-width="2.4" />
+</svg>
+</div>
+
+<div style="display: flex; justify-content: space-around; font-family: 'Inter', sans-serif; font-size: 0.70rem; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.06);">
+<div style="display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #818CF8;"></span>
+<span style="color: #FFFFFF; font-weight: 600;">MobileNetV2</span>
+<span style="color: #818CF8; font-weight: 700;">(0.994)</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #34D399;"></span>
+<span style="color: #FFFFFF; font-weight: 600;">ResNet50</span>
+<span style="color: #34D399; font-weight: 700;">(0.996)</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #94A3B8;"></span>
+<span style="color: #FFFFFF; font-weight: 600;">Basic CNN</span>
+<span style="color: #94A3B8; font-weight: 700;">(0.962)</span>
+</div>
+</div>
+</div>"""
+
+
 def render_saas_model_card(title, tag, acc, prec, rec, f1, speed, params, comp_acc, is_recommended=False):
     badge_style = "background: rgba(99, 102, 241, 0.12); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.25);" if is_recommended else "background: rgba(255, 255, 255, 0.05); color: #9CA3AF; border: 1px solid rgba(255, 255, 255, 0.08);"
     arc_color = "#818CF8" if is_recommended else ("#34D399" if "ResNet" in title else "#94A3B8")
