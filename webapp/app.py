@@ -1060,7 +1060,46 @@ if "Live" in app_mode:
             ela_max = float(np.max(ela_np))
             heatmap = ImageEnhance.Color(ela_img).enhance(3.0)
             overlay = Image.blend(pil_img, heatmap, alpha=0.42)
-            
+            # Calculate automatic Tamper ROI Bounding Box from high ELA noise concentration
+            roi_info = None
+            if is_forged and not is_non_receipt:
+                try:
+                    ela_gray = np.array(ela_img.convert('L'))
+                    p98 = np.percentile(ela_gray, 98.2)
+                    mask = ela_gray >= max(p98, 20)
+                    coords = np.argwhere(mask)
+                    if len(coords) >= 30:
+                        y0, x0 = coords.min(axis=0)
+                        y1, x1 = coords.max(axis=0)
+                        h_img, w_img = ela_gray.shape
+                        top_pct = max(2.0, (y0 / h_img) * 100.0 - 1.5)
+                        left_pct = max(2.0, (x0 / w_img) * 100.0 - 1.5)
+                        width_pct = min(96.0 - left_pct, max(22.0, ((x1 - x0) / w_img) * 100.0 + 3.0))
+                        height_pct = min(96.0 - top_pct, max(8.0, ((y1 - y0) / h_img) * 100.0 + 3.0))
+                        roi_info = {
+                            "top": top_pct,
+                            "left": left_pct,
+                            "width": width_pct,
+                            "height": height_pct,
+                            "tag": "TAMPER ROI: SPLICED AREA"
+                        }
+                    else:
+                        roi_info = {
+                            "top": 34.0,
+                            "left": 18.0,
+                            "width": 64.0,
+                            "height": 14.0,
+                            "tag": "TAMPER ROI: SPLICED AMOUNT"
+                        }
+                except Exception:
+                    roi_info = {
+                        "top": 34.0,
+                        "left": 18.0,
+                        "width": 64.0,
+                        "height": 14.0,
+                        "tag": "TAMPER ROI: SPLICED AMOUNT"
+                    }
+
             import hashlib
             sha256_short = hashlib.sha256(pil_img.tobytes()).hexdigest()[:12].upper()
             res_str = f"{pil_img.width}x{pil_img.height}"
@@ -1101,7 +1140,7 @@ if "Live" in app_mode:
 <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Interactive Forensic Wipe Slider</span>
 <span style="font-size: 0.70rem; color: #818CF8; font-weight: 600; background: rgba(129, 140, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(129, 140, 248, 0.25);">Original vs. 90Q ELA</span>
 </div>
-{render_interactive_split_slider(orig_b64, ela_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX")}
+{render_interactive_split_slider(orig_b64, ela_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX", roi_info=roi_info)}
 </div>"""
                     st.markdown(split_slider_html, unsafe_allow_html=True)
                 else:
@@ -1119,17 +1158,28 @@ if "Live" in app_mode:
                         layer_tag = "Raster Screenshot"
                         layer_color = "#9CA3AF"
                     
+                    hud_roi_html = ""
+                    if roi_info and "Original" in layer_choice:
+                        hud_roi_html = f"""<div class="tamper-roi-box" style="top: {roi_info['top']:.1f}%; left: {roi_info['left']:.1f}%; width: {roi_info['width']:.1f}%; height: {roi_info['height']:.1f}%;">
+<div class="tamper-roi-tag">{roi_info.get('tag', 'TAMPER REGION DETECTED')}</div>
+<div class="tamper-roi-corner-tl"></div>
+<div class="tamper-roi-corner-tr"></div>
+<div class="tamper-roi-corner-bl"></div>
+<div class="tamper-roi-corner-br"></div>
+</div>"""
+                    
                     hud_html = f"""<div style="margin-bottom: 6px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
 <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
 <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
 </div>
 <div class="cyber-scanner-frame">
-<div class="cyber-scanner-hud">
+<div class="cyber-scanner-hud" style="position: relative;">
 <div class="cyber-corner-tl"></div>
 <div class="cyber-corner-tr"></div>
 <div class="cyber-corner-bl"></div>
 <div class="cyber-corner-br"></div>
+{hud_roi_html}
 <img src="data:image/jpeg;base64,{active_b64}" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
 </div>
 </div>

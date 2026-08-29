@@ -89,13 +89,29 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 </div>"""
 
 
-def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX"):
+def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX", roi_info=None):
+    roi_html = ""
+    if roi_info and isinstance(roi_info, dict):
+        top_val = roi_info.get("top", 35)
+        left_val = roi_info.get("left", 20)
+        width_val = roi_info.get("width", 60)
+        height_val = roi_info.get("height", 16)
+        roi_tag_text = roi_info.get("tag", "TAMPER REGION: SPLICED AREA")
+        roi_html = f"""<div class="tamper-roi-box" style="top: {top_val:.1f}%; left: {left_val:.1f}%; width: {width_val:.1f}%; height: {height_val:.1f}%;">
+<div class="tamper-roi-tag">{roi_tag_text}</div>
+<div class="tamper-roi-corner-tl"></div>
+<div class="tamper-roi-corner-tr"></div>
+<div class="tamper-roi-corner-bl"></div>
+<div class="tamper-roi-corner-br"></div>
+</div>"""
+
     return f"""<div class="split-slider-container">
 <div class="split-image-wrapper">
 <img src="data:image/jpeg;base64,{orig_b64}" class="split-img-base" alt="Original Receipt Screenshot" />
 <span class="split-badge split-badge-left">{left_label}</span>
 <img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" id="splitOverlayImg" style="clip-path: polygon(0 0, {default_split_pct}% 0, {default_split_pct}% 100%, 0 100%);" alt="Forensic ELA Overlay" />
 <span class="split-badge split-badge-right">{right_label}</span>
+{roi_html}
 <div class="split-divider-line" id="splitDivider" style="left: {default_split_pct}%;">
 <div class="split-handle-thumb">
 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>

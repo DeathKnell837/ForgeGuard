@@ -877,6 +877,61 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
 }
 
 /* ============================================================
+   TAMPERED REGION GLOWING BOUNDING BOX (ROI DETECTION)
+   ============================================================ */
+.tamper-roi-box {
+    position: absolute;
+    border: 2px dashed #EF4444;
+    border-radius: 6px;
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.65), inset 0 0 12px rgba(239, 68, 68, 0.25);
+    pointer-events: none;
+    z-index: 8;
+    animation: pulse-tamper-roi 2s infinite ease-in-out;
+}
+
+@keyframes pulse-tamper-roi {
+    0%, 100% {
+        border-color: rgba(239, 68, 68, 0.95);
+        box-shadow: 0 0 16px rgba(239, 68, 68, 0.65), inset 0 0 12px rgba(239, 68, 68, 0.25);
+    }
+    50% {
+        border-color: rgba(239, 68, 68, 0.45);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.35), inset 0 0 6px rgba(239, 68, 68, 0.1);
+    }
+}
+
+.tamper-roi-tag {
+    position: absolute;
+    top: -18px;
+    left: -1px;
+    background: #EF4444;
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    white-space: nowrap;
+}
+
+.tamper-roi-corner-tl,
+.tamper-roi-corner-tr,
+.tamper-roi-corner-bl,
+.tamper-roi-corner-br {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+}
+
+.tamper-roi-corner-tl { top: -2px; left: -2px; border-top: 2px solid #F87171; border-left: 2px solid #F87171; }
+.tamper-roi-corner-tr { top: -2px; right: -2px; border-top: 2px solid #F87171; border-right: 2px solid #F87171; }
+.tamper-roi-corner-bl { bottom: -2px; left: -2px; border-bottom: 2px solid #F87171; border-left: 2px solid #F87171; }
+.tamper-roi-corner-br { bottom: -2px; right: -2px; border-bottom: 2px solid #F87171; border-right: 2px solid #F87171; }
+
+/* ============================================================
    FORENSIC LAYER SWITCHER ICONS (4 Layers: Split, Original, ELA, Heatmap)
    ============================================================ */
 /* Option 1: Split Comparison */
