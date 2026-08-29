@@ -745,12 +745,172 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
 }
 
 /* ============================================================
-   FORENSIC LAYER SWITCHER ICONS (Original Receipt, ELA Noise Matrix, Splicing Heatmap)
+   INTERACTIVE BEFORE/AFTER SPLIT COMPARISON SLIDER
    ============================================================ */
+.split-slider-container {
+    position: relative;
+    width: 100%;
+    background: #121620;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 8px;
+}
+
+.split-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    background: #0D111A;
+}
+
+.split-img-base {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+}
+
+.split-img-overlay-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    border-right: 2px solid #818CF8;
+    box-shadow: 2px 0 14px rgba(129, 140, 248, 0.6);
+    background: #0D111A;
+    pointer-events: none;
+}
+
+.split-img-overlay {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 480px;
+    object-fit: contain;
+}
+
+.split-divider-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #818CF8;
+    box-shadow: 0 0 12px rgba(129, 140, 248, 0.9);
+    pointer-events: none;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-handle-thumb {
+    width: 32px;
+    height: 32px;
+    background: #1C2333;
+    border: 2px solid #818CF8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 12px rgba(129, 140, 248, 0.6);
+}
+
+.split-range-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    cursor: ew-resize;
+    z-index: 10;
+    -webkit-appearance: none;
+}
+
+.split-badge {
+    position: absolute;
+    top: 10px;
+    padding: 3px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.split-badge-left {
+    right: 12px;
+    background: rgba(18, 22, 32, 0.85);
+    color: #94A3B8;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.split-badge-right {
+    left: 12px;
+    background: rgba(124, 111, 240, 0.25);
+    color: #A5B4FC;
+    border: 1px solid rgba(129, 140, 248, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.split-slider-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: #181D2A;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.70rem;
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+.split-instruction {
+    color: #818CF8;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.6px;
+}
+
+/* ============================================================
+   FORENSIC LAYER SWITCHER ICONS (4 Layers: Split, Original, ELA, Heatmap)
+   ============================================================ */
+/* Option 1: Split Comparison */
 .st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
 div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
 div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(1) div[data-testid="stMarkdownContainer"] p::before,
 div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(1) div[data-testid="stMarkdownContainer"] p::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 15px !important;
+    height: 15px !important;
+    margin-right: 8px !important;
+    background-color: currentColor !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='12' y1='3' x2='12' y2='21'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='12' y1='3' x2='12' y2='21'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    flex-shrink: 0 !important;
+}
+
+/* Option 2: Original Receipt */
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
     width: 15px !important;
@@ -762,10 +922,11 @@ div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-te
     flex-shrink: 0 !important;
 }
 
-.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
-div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
-div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(2) div[data-testid="stMarkdownContainer"] p::before,
-div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(2) div[data-testid="stMarkdownContainer"] p::before {
+/* Option 3: ELA Noise Matrix */
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
     width: 15px !important;
@@ -777,10 +938,11 @@ div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-te
     flex-shrink: 0 !important;
 }
 
-.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
-div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
-div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(3) div[data-testid="stMarkdownContainer"] p::before,
-div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(3) div[data-testid="stMarkdownContainer"] p::before {
+/* Option 4: Splicing Heatmap */
+.st-key-layer_switcher_radio div[data-testid="stRadioGroup"] label:nth-child(4) div[data-testid="stMarkdownContainer"] p::before,
+div.st-key-layer_switcher_radio label[data-testid="stRadioOption"]:nth-child(4) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div.st-key-layer_switcher_radio label:nth-child(4) div[data-testid="stMarkdownContainer"] p::before,
+div[data-testid="stMainBlockContainer"] div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-child(4) div[data-testid="stMarkdownContainer"] p::before {
     content: "" !important;
     display: inline-block !important;
     width: 15px !important;

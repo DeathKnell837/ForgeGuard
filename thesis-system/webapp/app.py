@@ -678,6 +678,7 @@ from premium_components import (
     render_live_scanner_standby_hub,
     render_exhibit_metadata_bar,
     render_panoramic_incident_cockpit,
+    render_interactive_split_slider,
     render_sophos_benchmark_summary_tiles,
     render_sophos_segmented_donut,
     render_sophos_hatched_bars,
@@ -1075,33 +1076,50 @@ if "Live" in app_mode:
                 # Interactive Layer Switcher (Pure Typography & SVG Masks, Zero Emojis)
                 layer_choice = st.radio(
                     "Forensic Layer",
-                    options=["Original Receipt", "ELA Noise Matrix", "Splicing Heatmap"],
+                    options=["Split Comparison", "Original Receipt", "ELA Noise Matrix", "Splicing Heatmap"],
                     horizontal=True,
                     label_visibility="collapsed",
                     key="layer_switcher_radio"
                 )
                 
-                # Active Image Selection
-                if "ELA" in layer_choice:
-                    active_img = ela_img
-                    layer_tag = "90Q / 15x Amplification"
-                    layer_color = "#7C6FF0"
-                elif "Heatmap" in layer_choice:
-                    active_img = overlay
-                    layer_tag = "Splicing Differential"
-                    layer_color = "#2DD4BF"
-                else:
-                    active_img = pil_img
-                    layer_tag = "Raster Screenshot"
-                    layer_color = "#9CA3AF"
-                
-                # Encode active image as base64 for seamless single-block container rendering
-                buf_hud = io.BytesIO()
-                active_img.save(buf_hud, format="JPEG", quality=92)
-                active_img_b64 = base64.b64encode(buf_hud.getvalue()).decode("utf-8")
+                # Base64 encodings for raster graphics
+                buf_orig = io.BytesIO()
+                pil_img.save(buf_orig, format="JPEG", quality=92)
+                orig_b64 = base64.b64encode(buf_orig.getvalue()).decode("utf-8")
 
-                # Cyber Scanner HUD Frame: Clean Centered Evidence View with Target Reticles
-                hud_html = f"""<div style="margin-bottom: 6px;">
+                buf_ela = io.BytesIO()
+                ela_img.save(buf_ela, format="JPEG", quality=92)
+                ela_b64 = base64.b64encode(buf_ela.getvalue()).decode("utf-8")
+
+                buf_overlay = io.BytesIO()
+                overlay.save(buf_overlay, format="JPEG", quality=92)
+                overlay_b64 = base64.b64encode(buf_overlay.getvalue()).decode("utf-8")
+
+                if "Split" in layer_choice:
+                    split_slider_html = f"""<div style="margin-bottom: 6px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
+<span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Interactive Forensic Wipe Slider</span>
+<span style="font-size: 0.70rem; color: #818CF8; font-weight: 600; background: rgba(129, 140, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(129, 140, 248, 0.25);">Original vs. 90Q ELA</span>
+</div>
+{render_interactive_split_slider(orig_b64, ela_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX")}
+</div>"""
+                    st.markdown(split_slider_html, unsafe_allow_html=True)
+                else:
+                    # Active Image Selection for single-layer inspection
+                    if "ELA" in layer_choice:
+                        active_b64 = ela_b64
+                        layer_tag = "90Q / 15x Amplification"
+                        layer_color = "#7C6FF0"
+                    elif "Heatmap" in layer_choice:
+                        active_b64 = overlay_b64
+                        layer_tag = "Splicing Differential"
+                        layer_color = "#2DD4BF"
+                    else:
+                        active_b64 = orig_b64
+                        layer_tag = "Raster Screenshot"
+                        layer_color = "#9CA3AF"
+                    
+                    hud_html = f"""<div style="margin-bottom: 6px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'Inter', sans-serif;">
 <span style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">Live Optical Forensic View</span>
 <span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
@@ -1112,11 +1130,11 @@ if "Live" in app_mode:
 <div class="cyber-corner-tr"></div>
 <div class="cyber-corner-bl"></div>
 <div class="cyber-corner-br"></div>
-<img src="data:image/jpeg;base64,{active_img_b64}" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
+<img src="data:image/jpeg;base64,{active_b64}" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
 </div>
 </div>
 </div>"""
-                st.markdown(hud_html, unsafe_allow_html=True)
+                    st.markdown(hud_html, unsafe_allow_html=True)
 
             with col_cockpit:
                 # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
