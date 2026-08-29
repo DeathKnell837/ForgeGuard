@@ -751,13 +751,6 @@ with st.sidebar:
     ela_quality = 90
     ela_scale = 15.0
 
-    st.markdown("<hr style='border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 1.2rem 0 0.6rem 0;'>", unsafe_allow_html=True)
-    st.markdown("<div class='rail-section-header'>Forensic Engine Pulse</div>", unsafe_allow_html=True)
-    cyber_anim = load_lottie_file("cyber_security.json")
-    if cyber_anim:
-        render_lottie(cyber_anim, height=85, key="sidebar_lottie_pulse")
-        st.markdown("<div style='text-align: center; font-family: \"JetBrains Mono\", monospace; font-size: 0.65rem; color: #10B981; font-weight: 700; letter-spacing: 0.5px; margin-top: -6px;'>3-ENGINE ACTIVE</div>", unsafe_allow_html=True)
-
 app_mode = st.session_state["app_mode"]
 
 # ============================================================
