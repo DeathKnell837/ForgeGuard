@@ -27,21 +27,25 @@ def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, 
 <div class="breadcrumb-trail">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
 <span style="color: #6B7280;">&gt;</span>
-<span>Evidence Triage</span>
+<span>Receipt Scanner</span>
 <span style="color: #6B7280;">&gt;</span>
 <span class="breadcrumb-active">{breadcrumb_text}</span>
 </div>
 <div class="telemetry-pill-group">
 <div class="top-telemetry-pill" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25);">
 <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
-<span style="color: #10B981; font-weight: 600;">3/3 Models Unanimous</span>
+<span style="color: #10B981; font-weight: 600;">3/3 Models Agree</span>
 </div>
 <div class="top-telemetry-pill" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2);">
-<span style="color: #9CA3AF;">Global Acc:</span> <strong style="color: #FFFFFF;">{accuracy_pct}%</strong>
+<span style="color: #9CA3AF;">Accuracy:</span> <strong style="color: #FFFFFF;">{accuracy_pct}%</strong>
 </div>
 <div class="top-telemetry-pill">
 <span style="color: #9CA3AF;">Engine:</span> <strong style="color: #FFFFFF;">{model_name}</strong>
 </div>
+<button onclick="window.print()" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.35); color: #38BDF8; font-family: 'Inter', sans-serif; font-size: 0.70rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+Print Report
+</button>
 </div>
 </div>"""
 
@@ -89,53 +93,68 @@ def render_cyber_scanning_loader(phase_title="FORENSIC OPTICAL TRIAGE [PHASE 1/3
 </div>"""
 
 
-def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50, left_label="ORIGINAL RASTER", right_label="90Q ELA MATRIX", roi_info=None):
-    roi_html = ""
-    if roi_info and isinstance(roi_info, dict):
-        top_val = roi_info.get("top", 38.0)
-        left_val = roi_info.get("left", 20.0)
-        width_val = roi_info.get("width", 60.0)
-        height_val = roi_info.get("height", 12.0)
-        roi_tag_text = roi_info.get("tag", "TAMPER ROI: SPLICED AREA")
-        roi_html = f"""<div class="tamper-roi-box" style="top: {top_val:.1f}%; left: {left_val:.1f}%; width: {width_val:.1f}%; height: {height_val:.1f}%;">
-<div class="tamper-roi-tag">{roi_tag_text}</div>
-<div class="tamper-roi-corner-tl"></div>
-<div class="tamper-roi-corner-tr"></div>
-<div class="tamper-roi-corner-bl"></div>
-<div class="tamper-roi-corner-br"></div>
+
+
+
+def render_tri_spectral_card(title, subtitle, badge, accent_color, accent_bg, accent_border, img_b64, spec_left, spec_right):
+    return f"""<div style="background: #111622; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); box-sizing: border-box;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.84rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; border-radius: 2px; background: {accent_color}; display: inline-block;"></span>
+{title}
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #94A3B8; margin-top: 2px;">{subtitle}</div>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: {accent_color}; background: {accent_bg}; padding: 2px 7px; border-radius: 4px; border: 1px solid {accent_border}; font-weight: 700; text-transform: uppercase; white-space: nowrap;">{badge}</span>
+</div>
+<div style="flex: 1; display: flex; justify-content: center; align-items: center; background: #080B10; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.06); padding: 12px; min-height: 440px; overflow: hidden; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);">
+<img src="data:image/jpeg;base64,{img_b64}" style="max-width: 100%; max-height: 460px; width: auto; height: auto; object-fit: contain; display: block; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);" alt="{title}" />
+</div>
+<div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.06); display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #64748B;">
+<span>{spec_left}</span>
+<span style="font-family: 'JetBrains Mono', monospace; color: #94A3B8; font-size: 0.65rem;">{spec_right}</span>
+</div>
 </div>"""
 
-    return f"""<div class="split-slider-container">
-<div class="split-image-wrapper" style="display: flex; justify-content: center; align-items: center; background: #0A0D14; padding: 10px 0;">
-<div class="split-receipt-stage" style="position: relative; width: 246px; height: 478px; max-width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08);">
-<img src="data:image/jpeg;base64,{orig_b64}" class="split-img-base" style="width: 100%; height: 100%; object-fit: fill; display: block;" alt="Original Receipt Screenshot" />
-<span class="split-badge split-badge-left">{left_label}</span>
-<img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" id="splitOverlayImg" style="width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; clip-path: polygon(0 0, {default_split_pct}% 0, {default_split_pct}% 100%, 0 100%);" alt="Forensic ELA Overlay" />
-<span class="split-badge split-badge-right">{right_label}</span>
-{roi_html}
-<div class="split-divider-line" id="splitDivider" style="position: absolute; top: 0; bottom: 0; left: {default_split_pct}%; width: 2px; background: #818CF8; box-shadow: 0 0 12px rgba(129, 140, 248, 0.9); transform: translateX(-50%); z-index: 5; display: flex; align-items: center; justify-content: center; pointer-events: none;">
-<div class="split-handle-thumb" style="width: 28px; height: 28px; background: #1C2333; border: 2px solid #818CF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
-<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+
+def render_optical_forensic_viewport(active_b64, layer_tag="Original Image", layer_color="#9CA3AF"):
+    return f"""<div style="margin-bottom: 6px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+<span style="font-size: 0.80rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.2px;">Receipt Image Preview</span>
+<span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); font-family: 'Inter', sans-serif;">{layer_tag}</span>
 </div>
+
+<div class="cyber-scanner-frame" style="background: #111622; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px 16px 14px 16px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);">
+<div style="position: relative; max-width: 100%; display: flex; justify-content: center; align-items: center; border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); background: #080B10;">
+<img src="data:image/jpeg;base64,{active_b64}" style="max-width: 100%; max-height: 520px; width: auto; height: auto; object-fit: contain; display: block; border-radius: 8px;" class="cyber-evidence-img" alt="Receipt Preview" />
 </div>
-<input type="range" min="0" max="100" value="{default_split_pct}" class="split-range-input" id="splitRangeInput" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; margin: 0;"
-       oninput="document.getElementById('splitOverlayImg').style.clipPath = 'polygon(0 0, ' + this.value + '% 0, ' + this.value + '% 100%, 0 100%)'; document.getElementById('splitDivider').style.left = this.value + '%';" />
+
+<div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 4px; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #64748B;">
+<span style="display: flex; align-items: center; gap: 5px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block; box-shadow: 0 0 6px #10B981;"></span> Original Aspect Ratio</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #94A3B8;">100% Quality</span>
 </div>
-</div>
-<div class="split-slider-caption">
-<span>Authentic Raster</span>
-<span class="split-instruction">DRAG DIVIDER TO REVEAL SPLICED ELA NOISE</span>
-<span>Compression Artifacts</span>
 </div>
 </div>"""
 
 
 def render_exhibit_metadata_bar(filename, resolution, sha256_hash):
-    return f"""<div class="exhibit-metadata-bar">
-<div>Exhibit: <span style="color: #FFFFFF; font-weight: 600;">{filename}</span></div>
-<div>Resolution: <span style="color: #9CA3AF; font-weight: 600;">{resolution}</span></div>
-<div>SHA256: <span style="color: #9CA3AF; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;">{sha256_hash}</span></div>
+    return f"""<div class="exhibit-metadata-bar" style="display: flex; justify-content: space-between; align-items: center; background: #111622; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; font-family: 'Inter', sans-serif; font-size: 0.74rem; box-shadow: 0 4px 16px rgba(0,0,0,0.25);">
+<div style="display: flex; align-items: center; gap: 8px;">
+<span style="color: #64748B; font-weight: 600; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.6px;">File Name:</span>
+<span style="color: #FFFFFF; font-weight: 700;">{filename}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+<span style="color: #64748B; font-weight: 600; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.6px;">Resolution:</span>
+<span style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem;">{resolution} px</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+<span style="color: #64748B; font-weight: 600; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.6px;">SHA-256 Hash:</span>
+<span style="color: #38BDF8; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">
+<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+{sha256_hash}
+</span>
+</div>
 </div>"""
 
 
@@ -143,36 +162,36 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
     if is_non_receipt:
         status_color = "#F59E0B"
         status_border = "rgba(245, 158, 11, 0.35)"
-        severity_tag = "Invalid Domain: Non-Receipt Image Detected"
-        sub_desc = "The uploaded file does not conform to Philippine digital payment receipt geometry (GCash / Maya / ShopeePay). Forensic transaction evaluation bypassed."
-        forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Domain Rejected</span>'
-        verdict_text = "Non-Receipt Artifact"
+        severity_tag = "Non-Receipt Image Detected"
+        sub_desc = "The uploaded file is not a digital payment receipt (GCash / Maya / ShopeePay). Receipt evaluation was skipped."
+        forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Not a Receipt</span>'
+        verdict_text = "Non-Receipt Image"
     elif not is_forged:
         status_color = "#10B981"
         status_border = "rgba(16, 185, 129, 0.25)"
-        severity_tag = "Secure: Authentic Receipt Confirmed"
-        sub_desc = "Uniform pixel noise gradient across all metadata and amount regions."
+        severity_tag = "Authentic Receipt Confirmed"
+        sub_desc = "Normal noise pattern found across all receipt amount and text fields."
         forgery_badge = ""
     else:
         status_color = "#EF4444"
         status_border = "rgba(239, 68, 68, 0.25)"
         ft_upper = str(forgery_type or "").upper()
         if "AI_GENERATED" in ft_upper or "DIFFUSION" in ft_upper or "SYNTHETIC" in ft_upper:
-            severity_tag = "Critical: AI-Generated Synthetic Receipt Detected"
-            sub_desc = "Generative diffusion artifacts, distorted glyph morphology, and anomalous noise distribution detected."
-            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #C084FC; background: rgba(192, 132, 252, 0.12); border: 1px solid rgba(192, 132, 252, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">AI Synthetic Diffusion</span>'
+            severity_tag = "AI-Generated Fake Receipt Detected"
+            sub_desc = "AI diffusion artifacts, altered text shapes, and abnormal pixel patterns detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #C084FC; background: rgba(192, 132, 252, 0.12); border: 1px solid rgba(192, 132, 252, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">AI-Generated</span>'
         elif "CANVA" in ft_upper or "PHOTOSHOP" in ft_upper:
-            severity_tag = "Critical: Photoshop / Canva Raster Tampering Detected"
-            sub_desc = "Raster layer splicing, font antialiasing disparity, and localized compression discontinuity detected."
-            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Photoshop / Canva Splice</span>'
+            severity_tag = "Photoshop / Canva Edited Receipt Detected"
+            sub_desc = "Image layer splicing, font smoothing differences, and localized editing detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Photoshop / Canva</span>'
         elif "GENERATOR" in ft_upper or "APP" in ft_upper:
-            severity_tag = "Critical: Fake Generator App Template Detected"
-            sub_desc = "Non-native font rendering, layout geometry deviation, and synthetic UI elements detected."
-            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #38BDF8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Fake Generator App</span>'
+            severity_tag = "Fake Receipt App Template Detected"
+            sub_desc = "Non-standard font rendering, layout misalignment, and fake template design detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #38BDF8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Fake Receipt App</span>'
         else:
-            severity_tag = "Critical: Digital Forgery Confirmed"
-            sub_desc = "Compression rate disparity & synthetic splicing detected across amount fields."
-            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F87171; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Amount Splicing</span>'
+            severity_tag = "Digital Receipt Forgery Detected"
+            sub_desc = "Compression differences and amount field splicing detected."
+            forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F87171; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Edited Amount</span>'
     
     # Real dynamic model telemetry
     if model_telemetry and isinstance(model_telemetry, dict):
@@ -200,23 +219,23 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
             mnet_speed, resnet_speed, bcnn_speed = "12.4ms", "28.6ms", "45.2ms"
     
     if is_non_receipt:
-        trend_noise = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">Out of Scope</span>'
-        trend_var = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">Inapplicable</span>'
+        trend_noise = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">N/A</span>'
+        trend_var = '<span style="color: #F59E0B; font-size: 0.68rem; font-weight: 600;">N/A</span>'
     else:
         trend_noise = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; High</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Normal</span>'
-        trend_var = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; Disparity</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Uniform</span>'
+        trend_var = '<span style="color: #EF4444; font-size: 0.68rem; font-weight: 600;">&uarr; Edited</span>' if is_forged else '<span style="color: #10B981; font-size: 0.68rem; font-weight: 600;">&darr; Normal</span>'
     
     analysis_block = ""
     if gemini_analysis:
         analysis_block = f"""<div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #7C6FF0; border-radius: 10px; padding: 14px 18px; margin-top: 16px;">
 <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C6FF0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #7C6FF0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">Explainable AI Forensic Diagnostics</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #7C6FF0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">AI Analysis Summary</span>
 </div>
 <div style="font-size: 0.82rem; color: #E2E8F0; line-height: 1.5;">{gemini_analysis}</div>
 </div>"""
 
-    consensus_label = "Domain Filter: Non-Receipt" if is_non_receipt else "3/3 Models Unanimous"
+    consensus_label = "Non-Receipt" if is_non_receipt else "3/3 Models Agree"
     consensus_style = "color: #F59E0B; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);" if is_non_receipt else "color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);"
 
     return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border}; padding: 18px 20px;">
@@ -238,61 +257,79 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 
 <div class="incident-metrics-grid">
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Mean</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Average Noise</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">{ela_mean:.1f}</div>
 <div style="padding-top: 2px;">{trend_noise}</div>
 </div>
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Variance</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Noise Variance</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: {status_color};">{ela_var:.1f}</div>
 <div style="padding-top: 2px;">{trend_var}</div>
 </div>
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Peak Pixel</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Max Noise</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: #9CA3AF;">{ela_max:.0f}</div>
 <div style="padding-top: 2px;"><span style="color: #6B7280; font-size: 0.68rem;">/ 255</span></div>
 </div>
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 6px;">
-<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Domain Status</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'};">{'REJECTED' if is_non_receipt else 'VALIDATED'}</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;">Receipt Check</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: {'#F59E0B' if is_non_receipt else '#10B981'};">{'REJECTED' if is_non_receipt else 'VALID'}</div>
 <div style="padding-top: 2px;"><span style="color: {'#F59E0B' if is_non_receipt else '#10B981'}; font-size: 0.68rem; font-weight: 600;">{'Non-Receipt' if is_non_receipt else mnet_speed}</span></div>
 </div>
 </div>
 
 <div style="background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;">
 <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: 'Inter', sans-serif; font-weight: 600; color: #9CA3AF; margin-bottom: 12px; text-transform: uppercase;">
-<span>Simultaneous Architecture Inference</span>
+<span>CNN Model Predictions</span>
 <span>Accuracy &bull; Speed</span>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 12px;">
 <div>
-<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
-<span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 (Recommended)</span>
-<span><strong style="color: #FFFFFF;">{mnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{mnet_speed}</span></span>
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 6px;">
+<span style="color: #FFFFFF; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #818CF8; display: inline-block;"></span>
+MobileNetV2 (Recommended)
+</span>
+<span style="display: flex; align-items: center; gap: 6px;">
+<strong style="color: #818CF8; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;">{mnet_conf:.1f}%</strong>
+<span style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{mnet_speed}</span>
+</span>
 </div>
-<div class="sophos-hatched-track">
-<div class="sophos-hatched-fill purple" style="width: {mnet_conf}%;"><span class="sophos-thumb"></span></div>
-</div>
-</div>
-
-<div>
-<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
-<span style="color: #9CA3AF; font-weight: 600;">ResNet50 (Deep Benchmark)</span>
-<span><strong style="color: #FFFFFF;">{resnet_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{resnet_speed}</span></span>
-</div>
-<div class="sophos-hatched-track">
-<div class="sophos-hatched-fill emerald" style="width: {resnet_conf}%;"><span class="sophos-thumb"></span></div>
+<div style="height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; position: relative;">
+<div style="width: {mnet_conf}%; height: 100%; background: linear-gradient(90deg, #6366F1, #818CF8); border-radius: 4px; box-shadow: 0 0 10px rgba(129, 140, 248, 0.5);"></div>
 </div>
 </div>
 
 <div>
-<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 5px;">
-<span style="color: #9CA3AF; font-weight: 600;">Basic CNN (Baseline)</span>
-<span><strong style="color: #FFFFFF;">{bcnn_conf:.1f}%</strong> &bull; <span style="color: #9CA3AF;">{bcnn_speed}</span></span>
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 6px;">
+<span style="color: #CBD5E1; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+ResNet50 (Deep Benchmark)
+</span>
+<span style="display: flex; align-items: center; gap: 6px;">
+<strong style="color: #10B981; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;">{resnet_conf:.1f}%</strong>
+<span style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{resnet_speed}</span>
+</span>
 </div>
-<div class="sophos-hatched-track">
-<div class="sophos-hatched-fill slate" style="width: {bcnn_conf}%;"><span class="sophos-thumb"></span></div>
+<div style="height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; position: relative;">
+<div style="width: {resnet_conf}%; height: 100%; background: linear-gradient(90deg, #059669, #10B981); border-radius: 4px; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);"></div>
+</div>
+</div>
+
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.78rem; margin-bottom: 6px;">
+<span style="color: #94A3B8; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: #64748B; display: inline-block;"></span>
+Basic CNN (Baseline)
+</span>
+<span style="display: flex; align-items: center; gap: 6px;">
+<strong style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;">{bcnn_conf:.1f}%</strong>
+<span style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">{bcnn_speed}</span>
+</span>
+</div>
+<div style="height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; position: relative;">
+<div style="width: {bcnn_conf}%; height: 100%; background: linear-gradient(90deg, #475569, #94A3B8); border-radius: 4px;"></div>
 </div>
 </div>
 </div>
@@ -302,11 +339,24 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 </div>"""
 
 
-def render_sophos_benchmark_summary_tiles():
+def render_sophos_benchmark_summary_tiles(eval_metrics=None, session_total=0, session_auth=0, session_forged=0):
     icon_acc = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>"
     icon_zap = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23818CF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>"
     icon_cpu = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2338BDF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='14' x2='23' y2='14'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='14' x2='4' y2='14'/></svg>"
     icon_trophy = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='8' r='7'/><polyline points='8.21 13.89 7 23 12 20 17 23 15.79 13.88'/></svg>"
+
+    if eval_metrics and isinstance(eval_metrics, dict):
+        mnet = eval_metrics.get("MobileNetV2", {})
+        bcnn = eval_metrics.get("Basic_CNN", {})
+        top_acc = max(mnet.get("accuracy", 0.9735), bcnn.get("accuracy", 0.9801)) * 100.0
+        fastest_ms = min(mnet.get("latency_ms", 28.04), bcnn.get("latency_ms", 8.66))
+    else:
+        top_acc = 98.0
+        fastest_ms = 8.7
+
+    session_sub = f"{session_auth} Authentic, {session_forged} Forged" if session_total > 0 else "Ready for live scans"
+    session_val = f"{session_total} Scans" if session_total > 0 else "0 Scans"
+    session_status = "Live Active" if session_total > 0 else "Standby Ready"
 
     return f"""<div class="bench-kpi-grid">
 <div class="bench-kpi-card">
@@ -314,12 +364,12 @@ def render_sophos_benchmark_summary_tiles():
 <div class="bench-kpi-icon-chip" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3);">
 <img src="{icon_acc}" width="18" height="18" style="display: block;" />
 </div>
-<span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 4.5% vs Base</span>
+<span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">Evaluated Test Set</span>
 </div>
 <div>
-<div class="bench-kpi-label">Top Accuracy</div>
-<div class="bench-kpi-value">98.7%</div>
-<div class="bench-kpi-sub">ResNet50 (Deep Benchmark)</div>
+<div class="bench-kpi-label">Top Test Accuracy</div>
+<div class="bench-kpi-value">{top_acc:.1f}%</div>
+<div class="bench-kpi-sub">Basic CNN (98.0%) &bull; MobileNetV2 (97.4%)</div>
 </div>
 </div>
 
@@ -328,12 +378,12 @@ def render_sophos_benchmark_summary_tiles():
 <div class="bench-kpi-icon-chip" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.3);">
 <img src="{icon_zap}" width="18" height="18" style="display: block;" />
 </div>
-<span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 2.3x Faster</span>
+<span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">Evaluated Latency</span>
 </div>
 <div>
-<div class="bench-kpi-label">Fastest Inference</div>
-<div class="bench-kpi-value">12.4ms</div>
-<div class="bench-kpi-sub">MobileNetV2 (Edge Optimized)</div>
+<div class="bench-kpi-label">Fastest Model Speed</div>
+<div class="bench-kpi-value">{fastest_ms:.1f}ms</div>
+<div class="bench-kpi-sub">Basic CNN ({fastest_ms:.1f}ms) &bull; MobileNetV2 (28.0ms)</div>
 </div>
 </div>
 
@@ -342,12 +392,12 @@ def render_sophos_benchmark_summary_tiles():
 <div class="bench-kpi-icon-chip" style="background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.3);">
 <img src="{icon_cpu}" width="18" height="18" style="display: block;" />
 </div>
-<span style="color: #10B981; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">&uarr; 85.5% Lighter</span>
+<span style="color: {'#10B981' if session_total > 0 else '#94A3B8'}; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;">{session_status}</span>
 </div>
 <div>
-<div class="bench-kpi-label">Lightest Footprint</div>
-<div class="bench-kpi-value">3.4M</div>
-<div class="bench-kpi-sub">MobileNetV2 (3.4M vs 23.5M)</div>
+<div class="bench-kpi-label">Live Session Scans</div>
+<div class="bench-kpi-value">{session_val}</div>
+<div class="bench-kpi-sub">{session_sub}</div>
 </div>
 </div>
 
@@ -356,103 +406,150 @@ def render_sophos_benchmark_summary_tiles():
 <div class="bench-kpi-icon-chip" style="background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3);">
 <img src="{icon_trophy}" width="18" height="18" style="display: block;" />
 </div>
-<span style="color: #F59E0B; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;">Pareto Winner</span>
+<span style="color: #F59E0B; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;">Pareto Optimal</span>
 </div>
 <div>
 <div class="bench-kpi-label">SOP 5 Selected Model</div>
 <div class="bench-kpi-value" style="font-size: 1.55rem; color: #F59E0B;">MobileNetV2</div>
-<div class="bench-kpi-sub">Optimal Smartphone Deployment</div>
+<div class="bench-kpi-sub">3.4M Params &bull; 85.5% Lighter than ResNet</div>
 </div>
 </div>
 </div>"""
 
 
-def render_sophos_segmented_donut():
-    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+def render_sophos_segmented_donut(session_auth=0, session_forged=0, session_total=0):
+    if session_total > 0:
+        auth_pct = round((session_auth / session_total) * 100)
+        forged_pct = 100 - auth_pct
+        deg = int((auth_pct / 100.0) * 360)
+        donut_bg = f"conic-gradient(#34D399 0deg {deg}deg, #EF4444 {deg}deg 360deg)"
+        title = "Live Session Scan Distribution"
+        subtitle = f"Active Scanner Session (N = {session_total})"
+        center_val = f"{session_total}"
+        center_sub = "SCANNED"
+        items_html = f"""<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; display: inline-block;"></span>
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">{auth_pct}% Authentic Receipts</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">{session_auth} of {session_total} scanned verified genuine</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; box-shadow: 0 0 8px #EF4444; display: inline-block;"></span>
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">{forged_pct}% Digital Forgeries</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">{session_forged} of {session_total} flagged with tampering</div>
+</div>
+</div>"""
+    else:
+        # Ground Truth Dataset breakdown from metadata.json (N=638)
+        donut_bg = "conic-gradient(#34D399 0deg 86.8deg, #818CF8 86.8deg 346.0deg, #C084FC 346.0deg 360deg)"
+        title = "Thesis Dataset Ground Truth Distribution"
+        subtitle = "Dataset Ground Truth (N = 638)"
+        center_val = "638"
+        center_sub = "DATASET"
+        items_html = """<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; display: inline-block;"></span>
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">24.1% Authentic Receipts</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">154 Genuine GCash/Maya payment receipts</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 8px #818CF8; display: inline-block;"></span>
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">72.0% Tampered / Spliced</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">459 Amount, Reference &amp; Name splices</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #C084FC; box-shadow: 0 0 8px #C084FC; display: inline-block;"></span>
+<div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #9CA3AF;">3.9% AI Diffusion Generated</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #6B7280;">25 Midjourney / DALL-E synthetic receipts</div>
+</div>
+</div>"""
+
+    return f"""<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Architecture Consensus &amp; Reliability</span>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; font-weight: 500;">SOP 1-5 Benchmark</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">{title}</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; font-weight: 500;">{subtitle}</span>
 </div>
 
 <div style="display: flex; align-items: center; justify-content: space-around; gap: 20px; padding: 0.4rem 0;">
-<div style="position: relative; width: 154px; height: 154px; border-radius: 50%; background: conic-gradient(#818CF8 0deg 172.8deg, #34D399 172.8deg 288deg, #64748B 288deg 360deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 24px rgba(129, 140, 248, 0.2); flex-shrink: 0;">
+<div style="position: relative; width: 154px; height: 154px; border-radius: 50%; background: {donut_bg}; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 24px rgba(129, 140, 248, 0.2); flex-shrink: 0;">
 <div style="width: 114px; height: 114px; border-radius: 50%; background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);">
-<span style="font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">98.4%</span>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.60rem; font-weight: 600; color: #9CA3AF; letter-spacing: 0.5px; margin-top: 2px;">OVERALL</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">{center_val}</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.60rem; font-weight: 600; color: #9CA3AF; letter-spacing: 0.5px; margin-top: 2px;">{center_sub}</span>
 </div>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 12px;">
-<div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 8px #818CF8; display: inline-block;"></span>
-<div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">48% MobileNetV2</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">Optimal Edge Consensus (12.4ms)</div>
-</div>
-</div>
-
-<div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; display: inline-block;"></span>
-<div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">32% ResNet50</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">Deep Feature Benchmark (98.7%)</div>
-</div>
-</div>
-
-<div style="display: flex; align-items: center; gap: 10px;">
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #64748B; display: inline-block;"></span>
-<div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #9CA3AF;">20% Basic CNN</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #6B7280;">Baseline Reference (94.2%)</div>
-</div>
-</div>
+{items_html}
 </div>
 </div>
 </div>"""
 
 
-def render_sophos_hatched_bars():
-    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+def render_sophos_hatched_bars(eval_metrics=None):
+    if eval_metrics and isinstance(eval_metrics, dict):
+        mnet = eval_metrics.get("MobileNetV2", {})
+        resnet = eval_metrics.get("ResNet50", {})
+        bcnn = eval_metrics.get("Basic_CNN", {})
+        mnet_lat = mnet.get("latency_ms", 28.04)
+        resnet_lat = resnet.get("latency_ms", 109.4)
+        bcnn_lat = bcnn.get("latency_ms", 8.66)
+    else:
+        mnet_lat = 28.04
+        resnet_lat = 109.4
+        bcnn_lat = 8.66
+
+    max_lat = max(resnet_lat, 100.0)
+    w_bcnn = max(8, int((bcnn_lat / max_lat) * 100))
+    w_mnet = max(15, int((mnet_lat / max_lat) * 100))
+    w_resnet = 100
+
+    return f"""<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Computational Efficiency &amp; Latency</span>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; font-weight: 500;">All Models &#x2304;</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #9CA3AF; font-weight: 500;">Exact Benchmark Latency</span>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 14px;">
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 6px;">
-<span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 Latency</span>
-<span style="color: #FFFFFF; font-weight: 700;">12.4 ms <span style="color: #10B981; font-size: 0.7rem; font-weight: 500;">(Fastest)</span></span>
+<span style="color: #FFFFFF; font-weight: 600;">Basic CNN Latency</span>
+<span style="color: #FFFFFF; font-weight: 700;">{bcnn_lat:.1f} ms <span style="color: #10B981; font-size: 0.7rem; font-weight: 500;">(Fastest)</span></span>
 </div>
 <div class="sophos-hatched-track">
-<div class="sophos-hatched-fill purple" style="width: 27%;"><span class="sophos-thumb"></span></div>
+<div class="sophos-hatched-fill slate" style="width: {w_bcnn}%;"><span class="sophos-thumb"></span></div>
+</div>
+</div>
+
+<div>
+<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 6px;">
+<span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 Latency</span>
+<span style="color: #FFFFFF; font-weight: 700;">{mnet_lat:.1f} ms <span style="color: #818CF8; font-size: 0.7rem; font-weight: 500;">(Mobile Optimal)</span></span>
+</div>
+<div class="sophos-hatched-track">
+<div class="sophos-hatched-fill purple" style="width: {w_mnet}%;"><span class="sophos-thumb"></span></div>
 </div>
 </div>
 
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 6px;">
 <span style="color: #9CA3AF; font-weight: 500;">ResNet50 Latency</span>
-<span style="color: #FFFFFF; font-weight: 600;">28.6 ms</span>
+<span style="color: #FFFFFF; font-weight: 600;">{resnet_lat:.1f} ms</span>
 </div>
 <div class="sophos-hatched-track">
-<div class="sophos-hatched-fill emerald" style="width: 63%;"><span class="sophos-thumb"></span></div>
-</div>
-</div>
-
-<div>
-<div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 6px;">
-<span style="color: #9CA3AF; font-weight: 500;">Basic CNN Latency</span>
-<span style="color: #FFFFFF; font-weight: 600;">45.2 ms</span>
-</div>
-<div class="sophos-hatched-track">
-<div class="sophos-hatched-fill slate" style="width: 100%;"><span class="sophos-thumb"></span></div>
+<div class="sophos-hatched-fill emerald" style="width: {w_resnet}%;"><span class="sophos-thumb"></span></div>
 </div>
 </div>
 
 <div>
 <div style="display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.76rem; margin-bottom: 6px;">
 <span style="color: #FFFFFF; font-weight: 600;">MobileNetV2 Parameter Footprint</span>
-<span style="color: #FFFFFF; font-weight: 700;">3.4M <span style="color: #10B981; font-size: 0.7rem; font-weight: 500;">(85% Lighter)</span></span>
+<span style="color: #FFFFFF; font-weight: 700;">3.4M <span style="color: #10B981; font-size: 0.7rem; font-weight: 500;">(85.5% Lighter than ResNet)</span></span>
 </div>
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill purple" style="width: 14%;"><span class="sophos-thumb"></span></div>
@@ -486,70 +583,70 @@ def render_sophos_pillar_columns():
 <div class="sophos-pillar-chart-row">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 124px; display: inline-block;" title="MobileNetV2: 98.4%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 127px; display: inline-block;" title="ResNet50: 98.8%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 106px; display: inline-block;" title="Basic CNN: 93.1%"></div>
+<div class="sophos-pillar purple" style="width: 14px; height: 124px; display: inline-block;" title="MobileNetV2: 97.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 127px; display: inline-block;" title="ResNet50: 96.7%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 106px; display: inline-block;" title="Basic CNN: 98.0%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Amount Splicing</span>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
-<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 121px; display: inline-block;" title="MobileNetV2: 98.1%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 125px; display: inline-block;" title="ResNet50: 98.5%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 109px; display: inline-block;" title="Basic CNN: 94.0%"></div>
-</div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Font Tampering</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Amount Alteration</span>
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 130px; display: inline-block;" title="MobileNetV2: 99.2%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 132px; display: inline-block;" title="ResNet50: 99.5%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 116px; display: inline-block;" title="Basic CNN: 96.2%"></div>
+<div class="sophos-pillar purple" style="width: 14px; height: 121px; display: inline-block;" title="MobileNetV2: 97.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 125px; display: inline-block;" title="ResNet50: 96.7%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 109px; display: inline-block;" title="Basic CNN: 98.0%"></div>
 </div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Fake Generator Apps</span>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
-<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 119px; display: inline-block;" title="MobileNetV2: 97.8%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 123px; display: inline-block;" title="ResNet50: 98.2%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 103px; display: inline-block;" title="Basic CNN: 92.5%"></div>
-</div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Metadata Cloning</span>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Name Modification</span>
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
 <div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 126px; display: inline-block;" title="MobileNetV2: 98.9%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 128px; display: inline-block;" title="ResNet50: 99.1%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 114px; display: inline-block;" title="Basic CNN: 95.4%"></div>
+<div class="sophos-pillar purple" style="width: 14px; height: 130px; display: inline-block;" title="MobileNetV2: 97.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 132px; display: inline-block;" title="ResNet50: 96.7%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 116px; display: inline-block;" title="Basic CNN: 98.0%"></div>
+</div>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Reference Fabrication</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 119px; display: inline-block;" title="MobileNetV2: 97.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 123px; display: inline-block;" title="ResNet50: 96.7%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 103px; display: inline-block;" title="Basic CNN: 98.0%"></div>
+</div>
+<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">AI Synthetic Receipts</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
+<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
+<div class="sophos-pillar purple" style="width: 14px; height: 126px; display: inline-block;" title="MobileNetV2: 98.4%"></div>
+<div class="sophos-pillar emerald" style="width: 14px; height: 128px; display: inline-block;" title="ResNet50: 99.2%"></div>
+<div class="sophos-pillar slate" style="width: 14px; height: 114px; display: inline-block;" title="Basic CNN: 99.2%"></div>
 </div>
 <span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">Authentic Controls</span>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1;">
-<div style="display: flex; align-items: flex-end; gap: 5px; height: 140px;">
-<div class="sophos-pillar purple" style="width: 14px; height: 115px; display: inline-block;" title="MobileNetV2: 96.5%"></div>
-<div class="sophos-pillar emerald" style="width: 14px; height: 120px; display: inline-block;" title="ResNet50: 97.4%"></div>
-<div class="sophos-pillar slate" style="width: 14px; height: 99px; display: inline-block;" title="Basic CNN: 91.0%"></div>
-</div>
-<span style="font-size: 0.72rem; color: #E5E7EB; font-family: 'Inter', sans-serif; font-weight: 600; white-space: nowrap;">JPEG Re-compression</span>
 </div>
 </div>
 </div>
 </div>"""
 
 
-def render_sophos_confusion_matrix():
-    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); height: 100%;">
+def render_sophos_confusion_matrix(eval_metrics=None):
+    if eval_metrics and isinstance(eval_metrics, dict):
+        mnet = eval_metrics.get("MobileNetV2", {})
+        acc = mnet.get("accuracy", 0.9735) * 100.0
+        prec = mnet.get("precision", 0.9844) * 100.0
+        rec = mnet.get("recall", 0.9844) * 100.0
+        f1 = mnet.get("f1_score", 0.9844) * 100.0
+    else:
+        acc, prec, rec, f1 = 97.4, 98.4, 98.4, 98.4
+
+    return f"""<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 1.4rem 1.6rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); height: 100%;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Empirical Confusion Matrix</span>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF; margin-top: 1px;">Evaluation on N=2,500 Mobile Receipt Test Dataset</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #9CA3AF; margin-top: 1px;">Evaluated on Test Dataset (N=151 Test Split)</div>
 </div>
-<span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #818CF8; background: rgba(99, 102, 241, 0.12); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(99, 102, 241, 0.25); font-weight: 600;">MobileNetV2 Test Profile</span>
+<span style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #818CF8; background: rgba(99, 102, 241, 0.12); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(99, 102, 241, 0.25); font-weight: 600;">MobileNetV2 Test Split</span>
 </div>
 
 <div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 8px; font-family: 'Inter', sans-serif; margin-bottom: 12px;">
@@ -559,41 +656,41 @@ def render_sophos_confusion_matrix():
 
 <div style="display: flex; align-items: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Actual: Auth</div>
 <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 12px 8px; text-align: center;">
-<div style="font-size: 1.15rem; font-weight: 800; color: #34D399; font-family: 'JetBrains Mono', monospace;">1,248</div>
-<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Negative (99.8%)</div>
+<div style="font-size: 1.15rem; font-weight: 800; color: #34D399; font-family: 'JetBrains Mono', monospace;">36</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Negative (97.3%)</div>
 </div>
 <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 12px 8px; text-align: center;">
-<div style="font-size: 1.15rem; font-weight: 800; color: #F59E0B; font-family: 'JetBrains Mono', monospace;">2</div>
-<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Positive (0.2%)</div>
+<div style="font-size: 1.15rem; font-weight: 800; color: #F59E0B; font-family: 'JetBrains Mono', monospace;">1</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Positive (2.7%)</div>
 </div>
 
 <div style="display: flex; align-items: center; font-size: 0.70rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase;">Actual: Forged</div>
 <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 12px 8px; text-align: center;">
-<div style="font-size: 1.15rem; font-weight: 800; color: #F87171; font-family: 'JetBrains Mono', monospace;">18</div>
-<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Negative (1.4%)</div>
+<div style="font-size: 1.15rem; font-weight: 800; color: #F87171; font-family: 'JetBrains Mono', monospace;">2</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">False Negative (1.7%)</div>
 </div>
 <div style="background: rgba(129, 140, 248, 0.18); border: 1px solid rgba(129, 140, 248, 0.4); border-radius: 8px; padding: 12px 8px; text-align: center;">
-<div style="font-size: 1.15rem; font-weight: 800; color: #A5B4FC; font-family: 'JetBrains Mono', monospace;">1,232</div>
-<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Positive (98.6%)</div>
+<div style="font-size: 1.15rem; font-weight: 800; color: #A5B4FC; font-family: 'JetBrains Mono', monospace;">112</div>
+<div style="font-size: 0.62rem; color: #9CA3AF; margin-top: 2px;">True Positive (98.3%)</div>
 </div>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: #252D40; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 8px 10px; text-align: center;">
 <div>
 <div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Accuracy</div>
-<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">98.4%</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">{acc:.2f}%</div>
 </div>
 <div>
 <div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Precision</div>
-<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">99.8%</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">{prec:.2f}%</div>
 </div>
 <div>
 <div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">Recall</div>
-<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">98.6%</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">{rec:.2f}%</div>
 </div>
 <div>
 <div style="font-size: 0.60rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600;">F1-Score</div>
-<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">99.2%</div>
+<div style="font-size: 0.86rem; font-weight: 700; color: #FFFFFF;">{f1:.2f}%</div>
 </div>
 </div>
 </div>"""

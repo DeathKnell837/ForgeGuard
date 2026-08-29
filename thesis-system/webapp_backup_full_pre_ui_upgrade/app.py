@@ -698,7 +698,6 @@ from premium_components import (
     render_saas_model_card,
     executive_sop5_recommendation_card,
     render_tri_spectral_card,
-    render_optical_forensic_viewport,
     svg_radial_dial
 )
 
@@ -1096,7 +1095,7 @@ if "Live" in app_mode:
             res_str = f"{pil_img.width}x{pil_img.height}"
             sample_label = (getattr(uploaded_file, 'name', None) or st.session_state.get('loaded_sample_name', 'UPLOADED_EVIDENCE.JPG')).upper()
             
-            st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>Receipt Analysis Results</div>", unsafe_allow_html=True)
+            st.markdown("<div class='eyebrow-label' style='margin: 0.4rem 0 0.2rem 0;'>Real-Time Cyber Forensic Inspection & Incident Cockpit</div>", unsafe_allow_html=True)
             st.markdown(render_exhibit_metadata_bar(sample_label, res_str, sha256_short), unsafe_allow_html=True)
             
             # SIDE-BY-SIDE FORENSIC WORKBENCH (CYBER SCANNER ON LEFT, COCKPIT ON RIGHT)
@@ -1106,7 +1105,7 @@ if "Live" in app_mode:
                 # Interactive Layer Switcher (Pure Typography & SVG Masks, Zero Emojis)
                 layer_choice = st.radio(
                     "Forensic Layer",
-                    options=["Original Receipt", "ELA Noise", "Heatmap Overlay"],
+                    options=["Original Receipt", "ELA Noise Matrix", "Splicing Heatmap"],
                     horizontal=True,
                     label_visibility="collapsed",
                     key="layer_switcher_radio"
@@ -1128,18 +1127,33 @@ if "Live" in app_mode:
                 # Active Image Selection for single-layer inspection
                 if "ELA" in layer_choice:
                     active_b64 = ela_b64
-                    layer_tag = "ELA Noise (90Q Quality)"
+                    layer_tag = "90Q / 15x Amplification"
                     layer_color = "#7C6FF0"
                 elif "Heatmap" in layer_choice:
                     active_b64 = overlay_b64
-                    layer_tag = "Heatmap Overlay"
+                    layer_tag = "Splicing Differential"
                     layer_color = "#2DD4BF"
                 else:
                     active_b64 = orig_b64
-                    layer_tag = "Original Image"
+                    layer_tag = "Raster Screenshot"
                     layer_color = "#9CA3AF"
                 
-                render_html(render_optical_forensic_viewport(active_b64, layer_tag=layer_tag, layer_color=layer_color))
+                hud_html = f"""<div style="margin-bottom: 6px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: 'Inter', sans-serif;">
+<span style="font-size: 0.80rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.2px;">Live Optical Forensic View</span>
+<span style="font-size: 0.70rem; color: {layer_color}; font-weight: 600; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">{layer_tag}</span>
+</div>
+<div class="cyber-scanner-frame" style="background: #111622; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px 16px 14px 16px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);">
+<div style="position: relative; max-width: 100%; display: flex; justify-content: center; align-items: center; border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); background: #080B10;">
+<img src="data:image/jpeg;base64,{active_b64}" style="max-width: 100%; max-height: 520px; width: auto; height: auto; object-fit: contain; display: block; border-radius: 8px;" class="cyber-evidence-img" alt="Forensic Evidence Raster" />
+</div>
+<div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 4px; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #64748B;">
+<span style="display: flex; align-items: center; gap: 5px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block; box-shadow: 0 0 6px #10B981;"></span> Native Aspect Ratio</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #94A3B8;">Lossless Optical Inspection</span>
+</div>
+</div>
+</div>"""
+                st.markdown(hud_html, unsafe_allow_html=True)
             
             with col_cockpit:
                 # WIDE-ANGLE 3-ENGINE CONSENSUS & INCIDENT INTELLIGENCE COCKPIT
@@ -1148,7 +1162,7 @@ if "Live" in app_mode:
                 
                 # Determine verdict text
                 if is_non_receipt:
-                    final_verdict_text = "Non-Receipt Image"
+                    final_verdict_text = "Non-Receipt Artifact"
                 elif is_forged and ai_forensics_result.get("is_ai_generated", False):
                     final_verdict_text = "AI-Generated Forgery Detected"
                 elif is_forged:
@@ -1180,33 +1194,33 @@ if "Live" in app_mode:
 
             # TRI-SPECTRAL COMPARATIVE FORENSIC INSPECTION GALLERY (SIDE-BY-SIDE)
             st.markdown("<hr style='border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 1.6rem 0 1.2rem 0;'>", unsafe_allow_html=True)
-            st.markdown("<div class='eyebrow-label' style='margin-bottom: 0.8rem;'>Side-by-Side Image Comparison</div>", unsafe_allow_html=True)
+            st.markdown("<div class='eyebrow-label' style='margin-bottom: 0.8rem;'>Tri-Spectral Comparative Forensic Evidence Gallery</div>", unsafe_allow_html=True)
             
             gal_col1, gal_col2, gal_col3 = st.columns(3)
             with gal_col1:
                 card_orig = render_tri_spectral_card(
-                    title="Original Receipt",
-                    subtitle="Uploaded receipt image",
-                    badge="Original",
+                    title="Original Screenshot",
+                    subtitle="Mobile transaction receipt raster",
+                    badge="Exhibit A",
                     accent_color="#38BDF8",
                     accent_bg="rgba(56, 189, 248, 0.12)",
                     accent_border="rgba(56, 189, 248, 0.3)",
                     img_b64=orig_b64,
-                    spec_left="Source: Uploaded File",
-                    spec_right="Original Quality"
+                    spec_left="Raw Sensor Capture",
+                    spec_right="Lossless 1:1"
                 )
                 render_html(card_orig)
 
             with gal_col2:
                 card_ela = render_tri_spectral_card(
                     title="Error Level Analysis (ELA)",
-                    subtitle="JPEG compression noise analysis",
-                    badge="ELA Noise",
+                    subtitle="90Q compression noise matrix",
+                    badge="Exhibit B",
                     accent_color="#A855F7",
                     accent_bg="rgba(168, 85, 247, 0.12)",
                     accent_border="rgba(168, 85, 247, 0.3)",
                     img_b64=ela_b64,
-                    spec_left="Method: ELA (90Q)",
+                    spec_left="Compression Delta",
                     spec_right="15x Amplified"
                 )
                 render_html(card_ela)
@@ -1214,14 +1228,14 @@ if "Live" in app_mode:
             with gal_col3:
                 card_overlay = render_tri_spectral_card(
                     title="Splicing Heatmap Overlay",
-                    subtitle="Detected edited regions",
-                    badge="Heatmap",
+                    subtitle="Explainable AI tampering hotspot map",
+                    badge="Exhibit C",
                     accent_color="#2DD4BF",
                     accent_bg="rgba(45, 212, 191, 0.12)",
                     accent_border="rgba(45, 212, 191, 0.3)",
                     img_b64=overlay_b64,
-                    spec_left="Method: Heatmap Overlay",
-                    spec_right="42% Opacity"
+                    spec_left="Class Activation Map",
+                    spec_right="α=0.42 Blend"
                 )
                 render_html(card_overlay)
         except Exception as e:
@@ -1231,6 +1245,31 @@ if "Live" in app_mode:
         render_html(render_live_scanner_standby_hub())
 
 else:
+    # ============================================================
+    # PAGE 2: MODEL COMPARISON & BENCHMARK SUITE
+    # ============================================================
+    render_html(render_sophos_benchmark_summary_tiles())
+    
+    # 1. Sophos Visual Charts (Segmented Donut & Hatched Horizontal Bars)
+    c_donut, c_hatched = st.columns(2)
+    with c_donut:
+        render_html(render_sophos_segmented_donut())
+    with c_hatched:
+        render_html(render_sophos_hatched_bars())
+        
+    # 2. Empirical Statistical Validation (Confusion Matrix & ROC-AUC Curves)
+    c_cm, c_roc = st.columns(2)
+    with c_cm:
+        render_html(render_sophos_confusion_matrix())
+    with c_roc:
+        render_html(render_sophos_roc_curves())
+
+    # 3. Sophos Comparative Column Chart Across Forgery Categories
+    render_html(render_sophos_pillar_columns())
+
+    # 3. 3-Column Side-by-Side Sophos Model Benchmark Cards
+    render_html("<div class='eyebrow-label' style='margin: 1.4rem 0 0.6rem 0;'>Head-to-Head Architecture Benchmark Matrix</div>")
+    
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
     if not os.path.exists(eval_metrics_path):
@@ -1245,38 +1284,6 @@ else:
                 dyn_metrics = json.load(f)
         except Exception:
             pass
-
-    session_scans = st.session_state.get("dash_total_scans", 0)
-    session_auth = st.session_state.get("dash_authenticated", 0)
-    session_forged = st.session_state.get("dash_forged", 0)
-
-    render_html(render_sophos_benchmark_summary_tiles(
-        eval_metrics=dyn_metrics,
-        session_total=session_scans,
-        session_auth=session_auth,
-        session_forged=session_forged
-    ))
-    
-    # 1. Sophos Visual Charts (Segmented Donut & Hatched Horizontal Bars)
-    c_donut, c_hatched = st.columns(2)
-    with c_donut:
-        render_html(render_sophos_segmented_donut(
-            session_auth=session_auth,
-            session_forged=session_forged,
-            session_total=session_scans
-        ))
-    with c_hatched:
-        render_html(render_sophos_hatched_bars(eval_metrics=dyn_metrics))
-        
-    # 2. Empirical Statistical Validation (Confusion Matrix & ROC-AUC Curves)
-    c_cm, c_roc = st.columns(2)
-    with c_cm:
-        render_html(render_sophos_confusion_matrix(eval_metrics=dyn_metrics))
-    with c_roc:
-        render_html(render_sophos_roc_curves())
-
-    # 3. Sophos Comparative Column Chart Across Forgery Categories
-    render_html(render_sophos_pillar_columns())
 
     mnet_m = dyn_metrics.get("MobileNetV2", {})
     resnet_m = dyn_metrics.get("ResNet50", {})

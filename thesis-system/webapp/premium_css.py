@@ -826,6 +826,40 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
     cursor: ew-resize;
     z-index: 10;
     -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+.split-range-input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    cursor: ew-resize;
+    background: transparent;
+}
+
+.split-range-input::-moz-range-track {
+    width: 100%;
+    height: 100%;
+    cursor: ew-resize;
+    background: transparent;
+}
+
+.split-range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 48px;
+    height: 100%;
+    cursor: ew-resize;
+    opacity: 0;
+    background: transparent;
+}
+
+.split-range-input::-moz-range-thumb {
+    width: 48px;
+    height: 100%;
+    cursor: ew-resize;
+    opacity: 0;
+    background: transparent;
 }
 
 .split-badge {
