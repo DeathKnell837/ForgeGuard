@@ -850,27 +850,48 @@ def svg_radial_dial(percent, color="#6366F1", label="ACCURACY", size=110):
 
 
 def render_live_scanner_standby_hub():
-    return """<div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem;">
+    return """<div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0;">
+
 <div class="standby-hub-container">
-<div class="standby-radar-left">
+
+<div class="hero-headline">Detect Digital Receipt Forgery Instantly</div>
+<div class="hero-tagline">Upload a GCash or Maya mobile payment screenshot to activate multi-engine CNN forensic analysis with real-time ELA noise profiling.</div>
+
+<div class="radar-hero-block">
+
+<div class="radar-annotation-line radar-line-tr"></div>
+<div class="radar-annotation-line radar-line-bl"></div>
+<div class="radar-annotation-line radar-line-l"></div>
+
+<div class="radar-annotation-pill radar-pill-pos-tr">
+<span class="radar-pill-dot"></span>ELA ENGINE ACTIVE
+</div>
+<div class="radar-annotation-pill radar-annotation-pill--gold radar-pill-pos-bl">
+<span class="radar-pill-dot"></span>HASH VERIFIED
+</div>
+<div class="radar-annotation-pill radar-annotation-pill--emerald radar-pill-pos-l">
+<span class="radar-pill-dot"></span>CONSENSUS PENDING
+</div>
+
 <div class="radar-chassis">
 <div class="radar-sweep-blade"></div>
-<div class="radar-ring" style="width: 140px; height: 140px;"></div>
-<div class="radar-ring" style="width: 90px; height: 90px;"></div>
-<div class="radar-ring" style="width: 40px; height: 40px;"></div>
-<div style="position: absolute; width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
-<div style="position: absolute; height: 100%; width: 1px; background: rgba(255,255,255,0.06);"></div>
-<div style="position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF; box-shadow: 0 0 12px #2DD4BF; animation: beacon-ping 2s infinite;"></div>
+<div class="radar-ring radar-ring-1"></div>
+<div class="radar-ring radar-ring-2"></div>
+<div class="radar-ring radar-ring-3"></div>
+<div class="radar-ring radar-ring-4"></div>
+<div class="radar-ring radar-ring-5"></div>
+<div class="radar-crosshair-h"></div>
+<div class="radar-crosshair-v"></div>
+<div class="radar-center-beacon"></div>
 </div>
-<div class="standby-radar-info">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+
+</div>
+
+<div style="display: flex; align-items: center; gap: 8px; margin-top: 0.8rem; flex-wrap: wrap; justify-content: center;">
 <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
 </div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; max-width: 420px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
-</div>
-</div>
+
 <div class="standby-telemetry-right">
 <div class="telemetry-bar-unit">
 <div class="telemetry-bar-header">
@@ -900,9 +921,10 @@ def render_live_scanner_standby_hub():
 </div>
 </div>
 </div>
+
 </div>
 
-<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
+<div style="margin-top: 2.4rem; background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 8px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Standard Operating Procedure (SOP 1-5 Forensic Dataflow)</span>
@@ -936,7 +958,7 @@ def render_live_scanner_standby_hub():
 </div>
 </div>
 </div>
-<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
+<div style="margin-top: 1.6rem; background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 8px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Digital Receipt Forgery Threat Scope &amp; Target Classes</span>
