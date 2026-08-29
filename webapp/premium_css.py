@@ -761,41 +761,30 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
 .split-image-wrapper {
     position: relative;
     width: 100%;
-    max-height: 480px;
+    height: 480px;
+    background: #0B0E14;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     user-select: none;
-    background: #0D111A;
 }
 
-.split-img-base {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 480px;
-    object-fit: contain;
-}
-
-.split-img-overlay-wrap {
+.split-img-base,
+.split-img-overlay {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
-    border-right: 2px solid #818CF8;
-    box-shadow: 2px 0 14px rgba(129, 140, 248, 0.6);
-    background: #0D111A;
+    object-fit: contain;
+    display: block;
+    user-select: none;
     pointer-events: none;
 }
 
 .split-img-overlay {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-height: 480px;
-    object-fit: contain;
+    z-index: 2;
 }
 
 .split-divider-line {
@@ -804,7 +793,7 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
     bottom: 0;
     width: 2px;
     background: #818CF8;
-    box-shadow: 0 0 12px rgba(129, 140, 248, 0.9);
+    box-shadow: 0 0 14px rgba(129, 140, 248, 0.95);
     pointer-events: none;
     transform: translateX(-50%);
     z-index: 5;

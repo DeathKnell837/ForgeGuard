@@ -94,10 +94,8 @@ def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50,
 <div class="split-image-wrapper">
 <img src="data:image/jpeg;base64,{orig_b64}" class="split-img-base" alt="Original Receipt Screenshot" />
 <span class="split-badge split-badge-left">{left_label}</span>
-<div class="split-img-overlay-wrap" id="splitOverlayWrap" style="width: {default_split_pct}%;">
-<img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" alt="Forensic ELA Overlay" />
+<img src="data:image/jpeg;base64,{overlay_b64}" class="split-img-overlay" id="splitOverlayImg" style="clip-path: polygon(0 0, {default_split_pct}% 0, {default_split_pct}% 100%, 0 100%);" alt="Forensic ELA Overlay" />
 <span class="split-badge split-badge-right">{right_label}</span>
-</div>
 <div class="split-divider-line" id="splitDivider" style="left: {default_split_pct}%;">
 <div class="split-handle-thumb">
 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -105,7 +103,7 @@ def render_interactive_split_slider(orig_b64, overlay_b64, default_split_pct=50,
 </div>
 </div>
 <input type="range" min="0" max="100" value="{default_split_pct}" class="split-range-input" id="splitRangeInput" 
-       oninput="document.getElementById('splitOverlayWrap').style.width = this.value + '%'; document.getElementById('splitDivider').style.left = this.value + '%';" />
+       oninput="document.getElementById('splitOverlayImg').style.clipPath = 'polygon(0 0, ' + this.value + '% 0, ' + this.value + '% 100%, 0 100%)'; document.getElementById('splitDivider').style.left = this.value + '%';" />
 </div>
 <div class="split-slider-caption">
 <span>Authentic Raster</span>
