@@ -700,6 +700,7 @@ from premium_components import (
     executive_sop5_recommendation_card,
     render_tri_spectral_card,
     render_optical_forensic_viewport,
+    render_sidebar_cybersecurity_status,
     svg_radial_dial
 )
 
@@ -734,6 +735,9 @@ with st.sidebar:
     if selected_mode != st.session_state["app_mode"]:
         st.session_state["app_mode"] = selected_mode
         st.rerun()
+
+    # Render Cybersecurity System Telemetry & Forensic Defense Modules
+    render_html(render_sidebar_cybersecurity_status())
     
     model_key = "mobilenetv2"
     model_display_name = "MobileNetV2"
