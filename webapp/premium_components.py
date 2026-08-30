@@ -238,21 +238,6 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
     consensus_label = "Non-Receipt" if is_non_receipt else "3/3 Models Agree"
     consensus_style = "color: #F59E0B; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);" if is_non_receipt else "color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);"
 
-    # Micro dynamic verdict status badge
-    lottie_badge = ""
-    if is_non_receipt:
-        lottie_badge = """<div style="flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-</div>"""
-    elif not is_forged:
-        lottie_badge = """<div style="flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-</div>"""
-    else:
-        lottie_badge = """<div style="flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-</div>"""
-
     return f"""<div class="incident-cockpit-card" style="border: 1px solid {status_border}; padding: 18px 20px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
 <div style="display: flex; align-items: center; gap: 8px;">
@@ -265,12 +250,9 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
 </div>
 </div>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px;">
-<div>
+<div style="margin-bottom: 14px;">
 <div style="font-family: 'Inter', sans-serif; font-size: 1.32rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px; margin-bottom: 3px;">{verdict_text}</div>
 <div style="font-size: 0.78rem; color: #9CA3AF; line-height: 1.4;">{sub_desc}</div>
-</div>
-{lottie_badge}
 </div>
 
 <div class="incident-metrics-grid">
