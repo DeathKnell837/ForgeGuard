@@ -22,6 +22,27 @@ import textwrap
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter, ImageChops, ImageFont, ImageDraw
 import streamlit as st
+from streamlit_lottie import st_lottie
+
+def load_lottie_file(filename):
+    for candidate_dir in [
+        r"c:\Users\USER\Desktop\THESIS\thesis-system\webapp\assets\lottie_stickers",
+        r"c:\Users\USER\Desktop\THESIS\assets\lottie_stickers",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "lottie_stickers"),
+        "assets/lottie_stickers"
+    ]:
+        p = os.path.join(candidate_dir, filename)
+        if os.path.isfile(p):
+            try:
+                with open(p, "r", encoding="utf-8") as fp:
+                    return json.load(fp)
+            except Exception:
+                pass
+    return None
+
+lottie_workstation = load_lottie_file("10_cyber_fingerprint.json") # Picture 1: Dev Workstation
+lottie_servers = load_lottie_file("05_threat_alert.json")        # Picture 2: Datacenter Servers
+lottie_laptop = load_lottie_file("07_receipt_scan.json")         # Picture 3: Forensic Laptop
 
 # Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -689,6 +710,7 @@ from premium_components import (
     render_top_command_bar,
     render_cyber_scanning_loader,
     render_live_scanner_standby_hub,
+    render_live_scanner_standby_body,
     render_exhibit_metadata_bar,
     render_panoramic_incident_cockpit,
     render_sophos_benchmark_summary_tiles,
@@ -1180,7 +1202,20 @@ if "Live" in app_mode:
 
             # TRI-SPECTRAL COMPARATIVE FORENSIC INSPECTION GALLERY (SIDE-BY-SIDE)
             st.markdown("<hr style='border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 1.6rem 0 1.2rem 0;'>", unsafe_allow_html=True)
-            st.markdown("<div class='eyebrow-label' style='margin-bottom: 0.8rem;'>Side-by-Side Image Comparison</div>", unsafe_allow_html=True)
+            
+            # Spot 3: Forensic Laptop with Real-Time Waveform Monitor
+            spec_anim_col, spec_text_col = st.columns([1.0, 5.0])
+            with spec_anim_col:
+                if lottie_laptop:
+                    st_lottie(lottie_laptop, height=110, key="spec_laptop_lottie")
+            with spec_text_col:
+                render_html("""<div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+<div class='eyebrow-label' style='margin-bottom: 2px;'>Side-by-Side Image Comparison</div>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: #FFFFFF;">Tri-Spectral Forensic Image &amp; ELA Decomposition</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #9CA3AF; margin-top: 2px;">
+    Simultaneous comparative inspection of Raw Receipt Image, Error Level Analysis (90Q) Residuals, and Heatmap Overlay Localization.
+</div>
+</div>""")
             
             gal_col1, gal_col2, gal_col3 = st.columns(3)
             with gal_col1:
@@ -1228,9 +1263,68 @@ if "Live" in app_mode:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
-        render_html(render_live_scanner_standby_hub())
+        # Spot 1: Multi-Monitor Workstation + Mobile Phone Code Animation Hero
+        sb_col_card, sb_col_telem = st.columns([3.4, 2.6], gap="medium")
+        with sb_col_card:
+            inner_anim, inner_info = st.columns([1.2, 2.2])
+            with inner_anim:
+                if lottie_workstation:
+                    st_lottie(lottie_workstation, height=140, key="standby_workstation_lottie")
+            with inner_info:
+                render_html("""<div style="display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 4px 0;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+    <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
+</div>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
+</div>""")
+        with sb_col_telem:
+            render_html("""<div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%;">
+<div class="telemetry-bar-unit">
+    <div class="telemetry-bar-header">
+        <span class="telemetry-bar-label">Active Neural Engine: <strong style="color: #818CF8;">MobileNetV2</strong></span>
+        <span class="telemetry-bar-val" style="color: #818CF8;">12.4ms &bull; 3.4M Params</span>
+    </div>
+    <div class="sophos-hatched-track"><div class="sophos-hatched-fill purple" style="width: 98%;"><span class="sophos-thumb"></span></div></div>
+</div>
+<div class="telemetry-bar-unit">
+    <div class="telemetry-bar-header">
+        <span class="telemetry-bar-label">Forensic Pipeline: <strong style="color: #34D399;">90Q ELA Matrix</strong></span>
+        <span class="telemetry-bar-val" style="color: #34D399;">15.0x Gain Multiplier</span>
+    </div>
+    <div class="sophos-hatched-track"><div class="sophos-hatched-fill emerald" style="width: 90%;"><span class="sophos-thumb"></span></div></div>
+</div>
+<div class="telemetry-bar-unit">
+    <div class="telemetry-bar-header">
+        <span class="telemetry-bar-label">Multimodal Reasoning: <strong style="color: #2DD4BF;">Gemini 2.0 Flash XAI</strong></span>
+        <span class="telemetry-bar-val" style="color: #2DD4BF;">1M Context Active</span>
+    </div>
+    <div class="sophos-hatched-track"><div class="sophos-hatched-fill purple" style="width: 100%;"><span class="sophos-thumb"></span></div></div>
+</div>
+</div>""")
+        
+        # Standard Operating Procedure & Threat Scope Taxonomy Cards
+        render_html(render_live_scanner_standby_body())
 
-elif "Benchmark" in app_mode:
+else:
+    # Spot 2: Datacenter Server Rack & Telemetry Charts Animation Banner
+    b_col_text, b_col_anim = st.columns([3.8, 1.2])
+    with b_col_text:
+        render_html("""<div style="background: linear-gradient(180deg, #1C2333 0%, #151A26 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #6366F1; border-radius: 14px; padding: 18px 22px; height: 100%; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: #FFFFFF;">Neural Architecture Evaluation &amp; Empirical Dataset Telemetry</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #94A3B8; margin-top: 5px; line-height: 1.45;">
+    Comparative performance analysis across 3 CNN architectures (MobileNetV2, ResNet50, Basic CNN) trained on 800+ authentic &amp; forged mobile payment receipts.
+</div>
+<div style="display: flex; gap: 12px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; flex-wrap: wrap;">
+    <span style="color: #10B981; background: rgba(16,185,129,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.25); font-weight: 600;">Core: MobileNetV2 (97.4%)</span>
+    <span style="color: #818CF8; background: rgba(129,140,248,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(129,140,248,0.25); font-weight: 600;">Baseline: Basic CNN (98.0%)</span>
+    <span style="color: #C084FC; background: rgba(192,132,252,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(192,132,252,0.25); font-weight: 600;">Deep: ResNet50 (96.7%)</span>
+</div>
+</div>""")
+    with b_col_anim:
+        if lottie_servers:
+            st_lottie(lottie_servers, height=140, key="benchmark_servers_lottie")
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
     if not os.path.exists(eval_metrics_path):

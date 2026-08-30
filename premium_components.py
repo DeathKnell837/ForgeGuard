@@ -898,11 +898,11 @@ def render_live_scanner_standby_hub():
 <div class="sophos-hatched-track">
 <div class="sophos-hatched-fill purple" style="width: 100%;"><span class="sophos-thumb"></span></div>
 </div>
-</div>
-</div>
-</div>
+</div>"""
 
-<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
+
+def render_live_scanner_standby_body():
+    return """<div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 16px; padding: 1.4rem 1.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25); margin-top: 1.2rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 8px;">
 <div>
 <span style="font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">Standard Operating Procedure (SOP 1-5 Forensic Dataflow)</span>
