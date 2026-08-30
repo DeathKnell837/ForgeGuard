@@ -1239,6 +1239,21 @@ if "Live" in app_mode:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
+        r_col_anim, r_col_info = st.columns([0.16, 0.84])
+        with r_col_anim:
+            shield_anim = load_lottie_file("security_shield.json")
+            if shield_anim:
+                render_lottie(shield_anim, height=120, key="standby_shield_lottie")
+        with r_col_info:
+            render_html("""<div style="background: linear-gradient(180deg, #182030 0%, #111622 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #2DD4BF; border-radius: 14px; padding: 18px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981; display: inline-block;"></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
+</div>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar &amp; Forensics Bus</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #94A3B8; margin-top: 4px;">Upload a GCash or Maya payment screenshot above, or click any sample exhibit to trigger 3-CNN comparative analysis &amp; ELA noise decomposition.</div>
+</div>""")
+
         render_html(render_live_scanner_standby_hub())
 
 else:
