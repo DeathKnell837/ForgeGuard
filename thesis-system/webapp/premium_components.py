@@ -42,10 +42,6 @@ def render_top_command_bar(breadcrumb_text, latency_ms=12.4, accuracy_pct=98.4, 
 <div class="top-telemetry-pill">
 <span style="color: #9CA3AF;">Engine:</span> <strong style="color: #FFFFFF;">{model_name}</strong>
 </div>
-<button onclick="window.print()" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.35); color: #38BDF8; font-family: 'Inter', sans-serif; font-size: 0.70rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;">
-<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-Print Report
-</button>
 </div>
 </div>"""
 

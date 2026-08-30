@@ -40,9 +40,8 @@ def load_lottie_file(filename):
                 pass
     return None
 
-lottie_workstation = load_lottie_file("10_cyber_fingerprint.json") # Picture 1: Dev Workstation
-lottie_servers = load_lottie_file("05_threat_alert.json")        # Picture 2: Datacenter Servers
-lottie_laptop = load_lottie_file("07_receipt_scan.json")         # Picture 3: Forensic Laptop
+lottie_radar = load_lottie_file("radar_sonar.json") or load_lottie_file("radar_somax.json")
+lottie_servers = load_lottie_file("05_threat_alert.json")        # Datacenter Servers in Benchmark Suite
 
 # Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1203,16 +1202,10 @@ if "Live" in app_mode:
             # TRI-SPECTRAL COMPARATIVE FORENSIC INSPECTION GALLERY (SIDE-BY-SIDE)
             st.markdown("<hr style='border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 1.6rem 0 1.2rem 0;'>", unsafe_allow_html=True)
             
-            # Spot 3: Forensic Laptop with Real-Time Waveform Monitor
-            spec_anim_col, spec_text_col = st.columns([1.0, 5.0])
-            with spec_anim_col:
-                if lottie_laptop:
-                    st_lottie(lottie_laptop, height=110, key="spec_laptop_lottie")
-            with spec_text_col:
-                render_html("""<div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+            render_html("""<div style="margin-bottom: 0.8rem;">
 <div class='eyebrow-label' style='margin-bottom: 2px;'>Side-by-Side Image Comparison</div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: #FFFFFF;">Tri-Spectral Forensic Image &amp; ELA Decomposition</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #9CA3AF; margin-top: 2px;">
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #FFFFFF;">Tri-Spectral Forensic Image &amp; ELA Decomposition</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 2px;">
     Simultaneous comparative inspection of Raw Receipt Image, Error Level Analysis (90Q) Residuals, and Heatmap Overlay Localization.
 </div>
 </div>""")
@@ -1263,13 +1256,13 @@ if "Live" in app_mode:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
-        # Spot 1: Multi-Monitor Workstation + Mobile Phone Code Animation Hero
+        # High-Tech Cybersecurity Radar Scanner Animation Hero
         sb_col_card, sb_col_telem = st.columns([3.4, 2.6], gap="medium")
         with sb_col_card:
-            inner_anim, inner_info = st.columns([1.2, 2.2])
+            inner_anim, inner_info = st.columns([1.0, 2.4])
             with inner_anim:
-                if lottie_workstation:
-                    st_lottie(lottie_workstation, height=140, key="standby_workstation_lottie")
+                if lottie_radar:
+                    st_lottie(lottie_radar, height=135, key="standby_radar_lottie")
             with inner_info:
                 render_html("""<div style="display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 4px 0;">
 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
