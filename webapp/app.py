@@ -40,9 +40,6 @@ def load_lottie_file(filename):
                 pass
     return None
 
-lottie_radar = load_lottie_file("radar_sonar.json") or load_lottie_file("radar_somax.json")
-lottie_servers = load_lottie_file("05_threat_alert.json")        # Datacenter Servers in Benchmark Suite
-
 # Ensure user site packages, thesis-system, and project root directory are in sys.path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 if os.path.exists(os.path.join(APP_DIR, "thesis-system")):
@@ -1256,55 +1253,11 @@ if "Live" in app_mode:
             st.error(f"Error analyzing evidence: {str(e)}")
     else:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
-        # High-Tech Cybersecurity Radar Scanner Animation Hero
-        sb_col_card, sb_col_telem = st.columns([3.4, 2.6], gap="medium")
-        with sb_col_card:
-            inner_anim, inner_info = st.columns([1.0, 2.4])
-            with inner_anim:
-                if lottie_radar:
-                    st_lottie(lottie_radar, height=135, key="standby_radar_lottie")
-            with inner_info:
-                render_html("""<div style="display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 4px 0;">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
-    <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
-</div>
-<div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; line-height: 1.45;">Upload a GCash mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
-</div>""")
-        with sb_col_telem:
-            render_html("""<div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%;">
-<div class="telemetry-bar-unit">
-    <div class="telemetry-bar-header">
-        <span class="telemetry-bar-label">Active Neural Engine: <strong style="color: #818CF8;">MobileNetV2</strong></span>
-        <span class="telemetry-bar-val" style="color: #818CF8;">12.4ms &bull; 3.4M Params</span>
-    </div>
-    <div class="sophos-hatched-track"><div class="sophos-hatched-fill purple" style="width: 98%;"><span class="sophos-thumb"></span></div></div>
-</div>
-<div class="telemetry-bar-unit">
-    <div class="telemetry-bar-header">
-        <span class="telemetry-bar-label">Forensic Pipeline: <strong style="color: #34D399;">90Q ELA Matrix</strong></span>
-        <span class="telemetry-bar-val" style="color: #34D399;">15.0x Gain Multiplier</span>
-    </div>
-    <div class="sophos-hatched-track"><div class="sophos-hatched-fill emerald" style="width: 90%;"><span class="sophos-thumb"></span></div></div>
-</div>
-<div class="telemetry-bar-unit">
-    <div class="telemetry-bar-header">
-        <span class="telemetry-bar-label">Multimodal Reasoning: <strong style="color: #2DD4BF;">Gemini 2.0 Flash XAI</strong></span>
-        <span class="telemetry-bar-val" style="color: #2DD4BF;">1M Context Active</span>
-    </div>
-    <div class="sophos-hatched-track"><div class="sophos-hatched-fill purple" style="width: 100%;"><span class="sophos-thumb"></span></div></div>
-</div>
-</div>""")
-        
-        # Standard Operating Procedure & Threat Scope Taxonomy Cards
+        render_html(render_live_scanner_standby_hub())
         render_html(render_live_scanner_standby_body())
 
 else:
-    # Spot 2: Datacenter Server Rack & Telemetry Charts Animation Banner
-    b_col_text, b_col_anim = st.columns([3.8, 1.2])
-    with b_col_text:
-        render_html("""<div style="background: linear-gradient(180deg, #1C2333 0%, #151A26 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #6366F1; border-radius: 14px; padding: 18px 22px; height: 100%; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
+    render_html("""<div style="background: linear-gradient(180deg, #1C2333 0%, #151A26 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #6366F1; border-radius: 14px; padding: 18px 22px; margin-bottom: 1.2rem; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
 <div style="font-family: 'Spectral', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: #FFFFFF;">Neural Architecture Evaluation &amp; Empirical Dataset Telemetry</div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 5px; line-height: 1.45;">
     Comparative performance analysis across 3 CNN architectures (MobileNetV2, ResNet50, Basic CNN) trained on 800+ authentic &amp; forged GCash payment receipts.
@@ -1315,9 +1268,6 @@ else:
     <span style="color: #C084FC; background: rgba(192,132,252,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(192,132,252,0.25); font-weight: 600;">Deep: ResNet50 (96.7%)</span>
 </div>
 </div>""")
-    with b_col_anim:
-        if lottie_servers:
-            st_lottie(lottie_servers, height=140, key="benchmark_servers_lottie")
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
     if not os.path.exists(eval_metrics_path):

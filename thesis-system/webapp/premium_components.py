@@ -846,8 +846,7 @@ def svg_radial_dial(percent, color="#6366F1", label="ACCURACY", size=110):
 
 
 def render_live_scanner_standby_hub():
-    return """<div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem;">
-<div class="standby-hub-container">
+    return """<div class="standby-hub-container">
 <div class="standby-radar-left">
 <div class="radar-chassis">
 <div class="radar-sweep-blade"></div>
