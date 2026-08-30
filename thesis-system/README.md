@@ -5,7 +5,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.13+-FF6F00?style=for-the-badge&logo=tensorflow)](https://tensorflow.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit)](https://streamlit.io)
 
-**ForgeGuard** is an AI-powered image forensic application that detects digital tampering and forgery in mobile wallet receipt screenshots (GCash and Maya). It combines **Error Level Analysis (ELA)** image preprocessing with a real-time comparative evaluation of **three Convolutional Neural Network (CNN) architectures** (Basic CNN, MobileNetV2, ResNet50).
+**ForgeGuard** is an AI-powered image forensic application that detects digital tampering and forgery in GCash mobile wallet receipt screenshots. It combines **Error Level Analysis (ELA)** image preprocessing with a real-time comparative evaluation of **three Convolutional Neural Network (CNN) architectures** (Basic CNN, MobileNetV2, ResNet50).
 
 ---
 
@@ -21,7 +21,7 @@
 
 ## 🖼️ Dataset v2.2.0 Summary (777 Labeled Images)
 
-- **Authentic Receipts (153 Images):** 51 real original GCash/Maya screenshots + 102 clean augmented receipts.
+- **Authentic Receipts (153 Images):** 51 real original GCash screenshots + 102 clean augmented receipts.
 - **Forged Receipts (624 Images):**
   - `amount_alteration`: 153 images (Flawless Karla-Bold digital edits in GCash `#1972F9` blue)
   - `ref_fabrication`: 153 images (Flawless Karla-Regular 13-digit ref edits)

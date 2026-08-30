@@ -79,7 +79,7 @@ This workspace customizations file provides context and instructions to the Anti
 * **Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery*
 * **System Name:** ForgeGuard
 * **Domain:** Image Forensics / Cybersecurity & Mobile Payment Security
-* **Scope:** Upload GCash/Maya mobile wallet receipt screenshots → compute Error Level Analysis (ELA) → classify as authentic or forged using three CNN architectures (Basic CNN, ResNet50, MobileNetV2) → display comparative confidence scores, latency, and forensic heatmaps.
+* **Scope:** Upload GCash mobile wallet receipt screenshots → compute Error Level Analysis (ELA) → classify as authentic or forged using three CNN architectures (Basic CNN, ResNet50, MobileNetV2) → display comparative confidence scores, latency, and forensic heatmaps.
 * **Live Demo:** [forgeguard.streamlit.app](https://forgeguard.streamlit.app/)
 
 ---

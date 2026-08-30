@@ -202,7 +202,7 @@ def call_gemini_vision(pil_img):
     img_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
     prompt = """CRITICAL DOMAIN & FORENSIC RECEIPT CLASSIFICATION:
-You are a senior digital image forensics scientist specialized in Philippine mobile transaction receipts (GCash, Maya, ShopeePay, GrabPay).
+You are a senior digital image forensics scientist specialized in GCash mobile transaction receipts.
 
 Examine this image thoroughly using multi-level optical forensic criteria:
 
@@ -210,7 +210,7 @@ Examine this image thoroughly using multi-level optical forensic criteria:
    - If the image is a desktop screen, browser, code editor, scenery, person, selfie, or non-receipt document:
      Set is_receipt = false, verdict = "NOT_A_RECEIPT", forgery_type = "NON_RECEIPT", confidence = 0.99, and explain what the image contains.
 
-2. FORENSIC CLASSIFICATION (GCash / Maya):
+2. FORENSIC CLASSIFICATION (GCash):
    Examine optical anomalies to categorize the image into one of these types:
 
    A) AI_GENERATED_RECEIPT (Synthetic / Diffusion Model Output):
@@ -227,8 +227,8 @@ Examine this image thoroughly using multi-level optical forensic criteria:
       - Missing official masked phone dot patterns (+63 9•• ••• ••••).
       - Invalid or malformed 13-digit transaction reference numbers.
 
-   D) AUTHENTIC (Genuine Philippine Mobile Wallet Receipt):
-      - Official GCash blue (#005CEE / #0066FF) or Maya emerald palette.
+   D) AUTHENTIC (Genuine Philippine GCash Mobile Wallet Receipt):
+      - Official GCash blue (#005CEE / #0066FF) palette.
       - Exact brand typography and correct spacing.
       - Consistent JPEG compression noise without localized splicing boundaries.
 
@@ -820,7 +820,7 @@ if "Live" in app_mode:
 
     curr_key = f"file_uploader_{st.session_state['uploader_key']}"
     uploaded_file = st.file_uploader(
-        "Drag and drop mobile wallet receipt screenshot (GCash or Maya)",
+        "Drag and drop GCash mobile receipt screenshot",
         type=["png", "jpg", "jpeg", "webp"],
         key=curr_key,
         label_visibility="collapsed"
@@ -1277,7 +1277,7 @@ if "Live" in app_mode:
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
 </div>
 <div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; line-height: 1.45;">Upload a GCash mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
 </div>""")
         with sb_col_telem:
             render_html("""<div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%;">
@@ -1313,8 +1313,8 @@ else:
     with b_col_text:
         render_html("""<div style="background: linear-gradient(180deg, #1C2333 0%, #151A26 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #6366F1; border-radius: 14px; padding: 18px 22px; height: 100%; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
 <div style="font-family: 'Spectral', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: #FFFFFF;">Neural Architecture Evaluation &amp; Empirical Dataset Telemetry</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #94A3B8; margin-top: 5px; line-height: 1.45;">
-    Comparative performance analysis across 3 CNN architectures (MobileNetV2, ResNet50, Basic CNN) trained on 800+ authentic &amp; forged mobile payment receipts.
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 5px; line-height: 1.45;">
+    Comparative performance analysis across 3 CNN architectures (MobileNetV2, ResNet50, Basic CNN) trained on 800+ authentic &amp; forged GCash payment receipts.
 </div>
 <div style="display: flex; gap: 12px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; flex-wrap: wrap;">
     <span style="color: #10B981; background: rgba(16,185,129,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.25); font-weight: 600;">Core: MobileNetV2 (97.4%)</span>

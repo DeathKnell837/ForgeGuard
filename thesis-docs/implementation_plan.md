@@ -36,7 +36,7 @@ thesis-system/dataset/
 ```
 
 1. **Authentic Class (104 samples):**
-   - 52 real GCash/Maya transaction receipt screenshots.
+   - 52 real GCash transaction receipt screenshots.
    - 52 augmented authentic receipts (subtle brightness, contrast, and noise adjustments).
 2. **Forged Class (304 samples):**
    - **104 Digitally Edited Forgeries:** Simulated Photoshop, Gallery markup, and text alteration.
@@ -62,7 +62,7 @@ thesis-system/dataset/
 - [x] Background of the Study (Local online sellers, screenshot fraud, compression challenges)
 - [x] Statement of the Problem (SOP Questions 1-5 covering accuracy by forgery type, metrics, latency, compression impact, and best model)
 - [x] Significance of the Study (Sellers, small business owners in Midsayap, student entrepreneurs, wallet providers, researchers)
-- [x] Scope & Limitations (GCash/Maya receipts, 3 CNN models, GPU-free web deployment)
+- [x] Scope & Limitations (GCash digital receipts, 3 CNN models, GPU-free web deployment)
 
 ### Chapter 2 (Review of Related Literature & Studies)
 - [ ] **Structured RRL Flow:**

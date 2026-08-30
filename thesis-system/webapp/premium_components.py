@@ -163,7 +163,7 @@ def render_panoramic_incident_cockpit(verdict_text, is_forged, confidence, ela_m
         status_color = "#F59E0B"
         status_border = "rgba(245, 158, 11, 0.35)"
         severity_tag = "Non-Receipt Image Detected"
-        sub_desc = "The uploaded file is not a digital payment receipt (GCash / Maya / ShopeePay). Receipt evaluation was skipped."
+        sub_desc = "The uploaded file is not a valid GCash digital payment receipt. Receipt evaluation was skipped."
         forgery_badge = '<span style="font-family: \'Inter\', sans-serif; font-size: 0.70rem; color: #F59E0B; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase;">Not a Receipt</span>'
         verdict_text = "Non-Receipt Image"
     elif not is_forged:
@@ -452,7 +452,7 @@ def render_sophos_segmented_donut(session_auth=0, session_forged=0, session_tota
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; display: inline-block;"></span>
 <div>
 <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">24.1% Authentic Receipts</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">154 Genuine GCash/Maya payment receipts</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.68rem; color: #9CA3AF;">154 Genuine GCash payment receipts</div>
 </div>
 </div>
 <div style="display: flex; align-items: center; gap: 10px;">
@@ -868,7 +868,7 @@ def render_live_scanner_standby_hub():
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 700; color: #10B981; letter-spacing: 0.5px;">STANDBY &bull; AWAITING EVIDENCE INGESTION</span>
 </div>
 <div style="font-family: 'Spectral', Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 700; color: #FFFFFF; line-height: 1.2;">Live Optical Threat Radar</div>
-<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; max-width: 420px; line-height: 1.45;">Upload a GCash or Maya mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.80rem; color: #9CA3AF; margin-top: 4px; max-width: 420px; line-height: 1.45;">Upload a GCash mobile payment screenshot above, or trigger a 1-click test exhibit to activate live raster forensics.</div>
 </div>
 </div>
 <div class="standby-telemetry-right">
@@ -978,7 +978,7 @@ def render_live_scanner_standby_body():
 <span style="font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; color: #10B981;">Authentic Transaction Baseline</span>
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #10B981; background: rgba(16, 185, 129, 0.12); padding: 2px 6px; border-radius: 4px;">SECURE</span>
 </div>
-<div style="font-size: 0.72rem; color: #9CA3AF; line-height: 1.4;">Official GCash / Maya app screenshots with authentic uniform compression noise.</div>
+<div style="font-size: 0.72rem; color: #9CA3AF; line-height: 1.4;">Official GCash app screenshots with authentic uniform compression noise.</div>
 </div>
 <div style="background: #252D40; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 14px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">

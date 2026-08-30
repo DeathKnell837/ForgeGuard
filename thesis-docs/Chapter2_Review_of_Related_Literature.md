@@ -8,7 +8,7 @@ This chapter presents a comprehensive synthesis of local and international liter
 
 ### 2.1 Digital Payment Fraud and Mobile Wallet Ecosystem
 
-The rapid acceleration of financial technology (FinTech) in Southeast Asia has transformed mobile wallets—such as GCash and Maya in the Philippines—into primary instruments for everyday commercial transactions. According to the Bangko Sentral ng Pilipinas (BSP) Digital Payments Transformation Roadmap, digital transaction volume in the Philippines expanded significantly, reaching over 42% of total retail payments by 2023 [1]. However, this rapid digitization has exacerbated cybersecurity vulnerabilities, specifically transaction slip manipulation and digital receipt forgery.
+The rapid acceleration of financial technology (FinTech) in Southeast Asia has transformed mobile wallets—most prominently GCash in the Philippines—into primary instruments for everyday commercial transactions. According to the Bangko Sentral ng Pilipinas (BSP) Digital Payments Transformation Roadmap, digital transaction volume in the Philippines expanded significantly, reaching over 42% of total retail payments by 2023 [1]. However, this rapid digitization has exacerbated cybersecurity vulnerabilities, specifically transaction slip manipulation and digital receipt forgery.
 
 Mobile transaction receipts act as primary visual proofs of payment in peer-to-peer (P2P) and peer-to-merchant (P2M) commerce. Unlike traditional point-of-sale (POS) terminal receipts generated on thermal paper, mobile wallet receipts are soft-copy digital images rendered on smartphone display screens and captured as raster images (e.g., PNG or JPEG screenshots). Fraudulent actors exploit this soft-copy format by creating fake transaction slips or modifying authentic receipt screenshots using photo-editing software, markup applications, or automated web templates [2]. 
 
@@ -94,7 +94,7 @@ Recent advancements in model optimization—such as TensorFlow Lite (TFLite) qua
 
 | Research Dimension | Existing Literature Focus | Identified Research Gap | ForgeGuard Proposed Contribution |
 |:---|:---|:---|:---|
-| **Forensic Domain** | Natural scenes, face manipulation, photographic splicing [3]-[6] | Minimal research focused specifically on mobile wallet receipts (GCash/Maya) | Establishes dedicated benchmark dataset for mobile receipt forensic analysis |
+| **Forensic Domain** | Natural scenes, face manipulation, photographic splicing [3]-[6] | Minimal research focused specifically on GCash mobile wallet receipts | Establishes dedicated benchmark dataset for mobile receipt forensic analysis |
 | **Forensic Input** | Raw RGB pixel classification [11]-[12] | High susceptibility to semantic overfitting and background color variance | Integrates standardized ELA pre-processing engine ($Q=90$, scale=15.0) |
 | **Model Evaluation** | Single-model performance evaluation [13] | Lack of comparative latency vs. accuracy trade-off analysis across CNN architectures | Comparative evaluation of Basic CNN, MobileNetV2, and ResNet50 metrics |
 | **Deployment** | Offline desktop batch processing [9]-[10] | Inability to provide real-time verification for micro-merchants | Deploys real-time Streamlit web system (`forgeguard.streamlit.app`) |

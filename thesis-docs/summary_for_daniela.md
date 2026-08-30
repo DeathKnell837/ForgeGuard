@@ -31,7 +31,7 @@
 ---
 
 ### 3. 🖼️ Dataset v2.2.0 Breakdown (777 Total Images)
-- **153 Authentic Receipts:** 51 real original GCash/Maya screenshots + 102 augmented receipts.
+- **153 Authentic Receipts:** 51 real original GCash screenshots + 102 augmented receipts.
 - **624 Forged Receipts:**
   - `amount_alteration`: 153 images (Karla-Bold in GCash `#1972F9` blue)
   - `ref_fabrication`: 153 images (Karla-Regular for 13-digit reference numbers)

@@ -35,7 +35,7 @@
 
 ## 🖼️ Dataset v2.2.0 Summary (777 Labeled Images)
 
-* **Authentic Receipts:** **153 Images** (51 real original GCash/Maya screenshots + 102 clean augmented)
+* **Authentic Receipts:** **153 Images** (51 real original GCash screenshots + 102 clean augmented)
 * **Forged Receipts:** **624 Images**
   * **`amount_alteration`:** 153 images (Flawless Karla-Bold digital edits in GCash `#1972F9` blue)
   * **`ref_fabrication`:** 153 images (Flawless Karla-Regular 13-digit ref edits)
