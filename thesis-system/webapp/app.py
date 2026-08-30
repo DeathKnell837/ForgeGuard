@@ -12,6 +12,7 @@ Adviser: Ms. Doris Ann Mariano
 
 import os
 import sys
+import json
 import site
 import time
 import io
@@ -719,8 +720,12 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 if "app_mode" not in st.session_state:
     st.session_state["app_mode"] = "Live Threat Scanner"
 
-nav_options = ["Live Threat Scanner", "Model Benchmark Suite"]
-current_idx = 0 if st.session_state["app_mode"] == "Live Threat Scanner" else 1
+nav_options = ["Live Threat Scanner", "Model Benchmark Suite", "Stickers Catalog (Preview)"]
+current_idx = 0
+if st.session_state["app_mode"] == "Model Benchmark Suite":
+    current_idx = 1
+elif "Sticker" in st.session_state["app_mode"]:
+    current_idx = 2
 
 with st.sidebar:
     render_html(render_sophos_brand_sidebar())
@@ -747,10 +752,12 @@ with st.sidebar:
 
 app_mode = st.session_state["app_mode"]
 
-# ============================================================
-# TOP BRAND COMMAND BAR & GLOBAL TELEMETRY
-# ============================================================
-breadcrumb_label = "Live Threat Scanner" if "Live" in app_mode else "Model Benchmark Suite"
+if "Live" in app_mode:
+    breadcrumb_label = "Live Threat Scanner"
+elif "Benchmark" in app_mode:
+    breadcrumb_label = "Model Benchmark Suite"
+else:
+    breadcrumb_label = "Stickers Catalog (Preview)"
 latency_val = 12.4
 render_html(render_top_command_bar(breadcrumb_label, latency_ms=latency_val, accuracy_pct=98.4, model_name=model_display_name))
 
@@ -1235,7 +1242,7 @@ if "Live" in app_mode:
         # STANDBY STATE: Render full forensic readiness telemetry, protocol workflow, and threat taxonomy
         render_html(render_live_scanner_standby_hub())
 
-else:
+elif "Benchmark" in app_mode:
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     eval_metrics_path = os.path.join(root_dir, "models", "evaluation_metrics.json")
     if not os.path.exists(eval_metrics_path):
@@ -1336,3 +1343,157 @@ else:
 
     # 4. Formal Executive SOP Recommendation
     render_html(executive_sop5_recommendation_card())
+
+else:
+    # ============================================================
+    # PAGE 3: MOVING STICKERS & MICRO-ANIMATIONS CATALOG (PREVIEW)
+    # ============================================================
+    from streamlit_lottie import st_lottie
+
+    render_html("""<div style="background: linear-gradient(180deg, #182030 0%, #111622 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid #7C6FF0; border-radius: 14px; padding: 18px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 24px;">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <div>
+        <div style="font-family: 'Spectral', Georgia, serif; font-size: 1.45rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.2px;">Moving Cyber Forensics Stickers Showcase</div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #94A3B8; margin-top: 4px; line-height: 1.45;">
+            Preview all 10 curated moving vector micro-animations below. Take a screenshot or copy the <strong>[ID]</strong> of any sticker you like and tell the assistant where to place it!
+        </div>
+    </div>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #7C6FF0; background: rgba(124, 111, 240, 0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(124, 111, 240, 0.3); font-weight: 600;">10 Live Stickers Active</span>
+</div>
+</div>""")
+
+    stickers_list = [
+        {
+            "id": "01",
+            "file": "01_cyber_shield.json",
+            "title": "Cyber Defense Shield Pulse",
+            "tag": "CYBER DEFENSE",
+            "tag_color": "#818CF8",
+            "desc": "Glowing violet-cyan shield with pulsating electromagnetic defense rings.",
+            "placement": "Sidebar Telemetry / Top Header Bar / Benchmark Suite Header"
+        },
+        {
+            "id": "02",
+            "file": "02_radar_scanner.json",
+            "title": "Holographic Optical Radar",
+            "tag": "OPTICAL DETECTION",
+            "tag_color": "#2DD4BF",
+            "desc": "360-degree rotating radar scan beam with target blips and forensic sweep.",
+            "placement": "Standby Hub Optical Threat Radar (Center Screen Hero)"
+        },
+        {
+            "id": "03",
+            "file": "03_neural_ai.json",
+            "title": "AI Deep Neural Core",
+            "tag": "DEEP LEARNING",
+            "tag_color": "#C084FC",
+            "desc": "Pulsating neural network synaptic nodes and interconnected tensor dataflow.",
+            "placement": "MobileNetV2 / ResNet50 Engine Cards / SOP 5 Recommendation"
+        },
+        {
+            "id": "04",
+            "file": "04_verified_badge.json",
+            "title": "Verified Authentic Seal",
+            "tag": "GENUINE VERDICT",
+            "tag_color": "#34D399",
+            "desc": "Emerald checkmark with kinetic particle burst and outer ring expansion.",
+            "placement": "Authentic Receipt Verified Incident Cockpit Banner"
+        },
+        {
+            "id": "05",
+            "file": "05_threat_alert.json",
+            "title": "Critical Tamper Threat Alert",
+            "tag": "SPLICING ALERT",
+            "tag_color": "#EF4444",
+            "desc": "Pulsing crimson warning crosshairs indicating digital forgery disparity.",
+            "placement": "Digital Forgery Detected Incident Cockpit Banner"
+        },
+        {
+            "id": "07",
+            "file": "07_receipt_scan.json",
+            "title": "Receipt Document Laser Ingestion",
+            "tag": "DOCUMENT ANALYSIS",
+            "tag_color": "#38BDF8",
+            "desc": "Digital receipt being actively scanned with a high-tech laser bar.",
+            "placement": "Upload Dropzone / Standby Evidence Triage Stage"
+        },
+        {
+            "id": "08",
+            "file": "08_biometric_id.json",
+            "title": "Biometric & Reference Verifier",
+            "tag": "ID CHECKSUM",
+            "tag_color": "#F59E0B",
+            "desc": "Holographic target brackets scanning reference checksums and account data.",
+            "placement": "Receipt Metadata Bar / GCash 13-Digit Checksum Validator"
+        },
+        {
+            "id": "09",
+            "file": "09_optical_laser.json",
+            "title": "Laser ELA Grid Decomposition",
+            "tag": "SPECTRAL FORENSICS",
+            "tag_color": "#A855F7",
+            "desc": "High-precision laser grid scanning raster image pixels for JPEG noise.",
+            "placement": "Tri-Spectral Comparison Gallery / ELA Noise Viewer"
+        },
+        {
+            "id": "10",
+            "file": "10_cyber_fingerprint.json",
+            "title": "Cryptographic SHA-256 Fingerprint",
+            "tag": "HASH INTEGRITY",
+            "tag_color": "#06B6D4",
+            "desc": "Glowing biometric fingerprint with cryptographic scan waves.",
+            "placement": "Metadata Bar (SHA-256 Hash / Resolution Readout)"
+        },
+        {
+            "id": "11",
+            "file": "11_server_database.json",
+            "title": "Cloud Forensic Node & Database",
+            "tag": "INFRASTRUCTURE",
+            "tag_color": "#6366F1",
+            "desc": "Secure datacenter server racks with active network communication blinks.",
+            "placement": "Model Benchmark Suite / Ground Truth Dataset Donut Tile"
+        }
+    ]
+
+    from streamlit_lottie import st_lottie
+
+    def get_lottie_dict(filename):
+        for candidate_dir in [
+            r"c:\Users\USER\Desktop\THESIS\thesis-system\webapp\assets\lottie_stickers",
+            r"c:\Users\USER\Desktop\THESIS\assets\lottie_stickers",
+            os.path.join(APP_DIR, "assets", "lottie_stickers"),
+            os.path.join(SYS_DIR, "assets", "lottie_stickers"),
+            "assets/lottie_stickers"
+        ]:
+            p = os.path.join(candidate_dir, filename)
+            if os.path.isfile(p):
+                try:
+                    with open(p, "r", encoding="utf-8") as fp:
+                        return json.load(fp)
+                except Exception as ex:
+                    st.error(f"JSON load error for {filename}: {ex}")
+        return None
+
+    for i in range(0, len(stickers_list), 2):
+        s_row = st.columns(2)
+        for j in range(2):
+            if i + j < len(stickers_list):
+                stk = stickers_list[i + j]
+                with s_row[j]:
+                    stk_data = get_lottie_dict(stk["file"])
+                    
+                    render_html(f"""<div style="background: linear-gradient(180deg, #1C2333 0%, #151A26 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid {stk['tag_color']}; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.25);">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 800; color: #FFFFFF;">[{stk['id']}] {stk['title']}</span>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; color: {stk['tag_color']}; background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 700;">{stk['tag']}</span>
+</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.74rem; color: #9CA3AF; line-height: 1.35; margin-bottom: 6px;">{stk['desc']}</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.70rem; color: #818CF8; background: rgba(129, 140, 248, 0.08); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(129, 140, 248, 0.18);">
+    <strong>Best for:</strong> {stk['placement']}
+</div>
+</div>""")
+                    if stk_data:
+                        st_lottie(stk_data, height=180, key=f"preview_stk_{stk['id']}")
+                    else:
+                        st.info(f"Animation [{stk['id']}] asset ready")
+
