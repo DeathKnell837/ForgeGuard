@@ -485,11 +485,28 @@ div[data-testid="stVerticalBlock"] {
     }
 }
 
-/* Streamlit Toolbar and Status Widget Clean Elimination */
+/* Streamlit Toolbar - Keep container alive so stExpandSidebarButton renders */
 [data-testid="stToolbar"],
-[data-testid="stDecoration"],
-[data-testid="stStatusWidget"],
 header[data-testid="stHeader"] [data-testid="stToolbar"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: 0px !important;
+    width: 100% !important;
+    pointer-events: none !important;
+    background: transparent !important;
+}
+
+[data-testid="stToolbar"] * {
+    visibility: visible !important;
+}
+
+/* Eliminate 3-dots Main Menu, deploy buttons, and status widget cleanly */
+[data-testid="stToolbarActions"],
+[data-testid="stMainMenu"],
+[data-testid="stMainMenu"] *,
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
