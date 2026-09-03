@@ -1,0 +1,174 @@
+================================================================================
+FORGEGUARD SYSTEM ARCHITECTURE - LUCIDCHART IMPORT INSTRUCTIONS & CODE
+================================================================================
+
+HOW TO IMPORT INTO LUCIDCHART (3 EASY CLICKS):
+--------------------------------------------------------------------------------
+1. Log into your Lucidchart account (https://lucid.app).
+2. Create a new blank document.
+3. In the top menu, go to:
+   File > Import Data > PlantUML  (OR Insert > Data > Mermaid)
+4. Copy and paste the PlantUML code or Mermaid code below into the import box.
+5. Click 'Generate' or 'Insert'. Lucidchart will automatically draw, arrange,
+   and color-code your complete architectural diagram with editable cards and arrows!
+
+You can also directly drag-and-drop the ready-made vector diagram into Lucidchart:
+	hesis-docs/forgeguard_system_architecture.svg
+
+================================================================================
+OPTION A: PLANTUML CODE FOR LUCIDCHART (RECOMMENDED FOR CLEANEST LAYOUT)
+================================================================================
+
+@startuml ForgeGuard_System_Architecture
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 10
+skinparam defaultFontName 'Segoe UI'
+skinparam defaultFontSize 11
+skinparam defaultFontColor #0F172A
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #CBD5E1
+    BorderThickness 1.2
+}
+
+skinparam package {
+    BorderThickness 1.5
+    FontStyle bold
+    FontSize 12
+}
+
+package '1. Presentation Layer (Streamlit Web Application)' #F0F9FF {
+    actor 'User / Merchant' as User #E0F2FE
+    rectangle 'ForgeGuard Web Cockpit
+(forgeguard.streamlit.app)' as UI #FFFFFF
+    rectangle 'Tri-Spectral Exhibit Viewer
+(Original, ELA Residuals, Heatmap)' as Viewer #FFFFFF
+    rectangle 'Model Benchmark Suite
+(Accuracy, Latency, Params & Confusion Matrix)' as Bench #FFFFFF
+}
+
+package '2. Forensic Preprocessing Layer (Pillow, OpenCV, NumPy)' #F0FDF4 {
+    rectangle 'Image Ingestion & Structural Verification
+(Format Check: PNG/JPG/WEBP)' as Ingest #FFFFFF
+    rectangle 'Error Level Analysis (ELA) Engine
+(JPEG Resave Q=90 | 15.0x Difference Multiplier)' as ELA #DCFCE7
+    rectangle 'Standardized ELA Tensor
+(Dimensions: 128 x 128 x 3 | Normalized [0, 1])' as Tensor #FFFFFF
+    rectangle 'Tamper Heatmap & ROI Generator
+(OpenCV COLORMAP_JET + Splicing Box)' as Heatmap #FFFFFF
+}
+
+package '3. Comparative CNN Inference Layer (TensorFlow / Keras)' #F5F3FF {
+    rectangle 'Basic CNN (Custom 4-Layer Baseline)
+~2.1M Parameters | 100.0% Test Acc | 8.61 ms' as CNN_Basic #FFFFFF
+    rectangle '**MobileNetV2 (SOP-5 Selected Model)**
+~3.4M Parameters | 95.74% Test Acc | 28.04 ms' as CNN_Mobile #EDE9FE
+    rectangle 'ResNet50 (Deep Residual Architecture)
+~23.5M Parameters | 75.53% Test Acc | 109.34 ms' as CNN_ResNet #FFFFFF
+    rectangle 'Consensus & Soft-Voting Engine
+(3/3 Agreement & Confidence Thresholding)' as Voting #FFFFFF
+}
+
+package '4. Data & Model Repository Layer' #FFFBEB {
+    database 'GCash Empirical Dataset (v2.2)
+(153 Authentic + 624 Forged = 777 Samples)' as Dataset #FFFFFF
+    rectangle 'Google Colab GPU Pipeline
+(NVIDIA T4 Acceleration | Train-Test Split)' as Colab #FFFFFF
+    artifact 'Trained Model Weights
+(basic_cnn, mobilenetv2, resnet50 .keras)' as Weights #FFFFFF
+    artifact 'Evaluation Metrics Registry
+(evaluation_metrics.json)' as Metrics #FFFFFF
+}
+
+package '5. Results & Forensic Decision Layer' #F0FDFA {
+    rectangle 'Authenticity Classification
+(AUTHENTIC VERIFIED vs. FORGED ALERT)' as Verdict #FFFFFF
+    rectangle 'Comparative Confidence & Latency Readout
+(Side-by-Side Model Scores)' as Scores #FFFFFF
+    rectangle 'Localized Tamper Overlay
+(Spatial Heatmap & Spliced Amount Bounding Box)' as Overlay #FFFFFF
+    rectangle 'Explainable AI (XAI) Tamper Audit
+(Typography Kerning & 13-Digit Checksum Validation)' as XAI #FFFFFF
+}
+
+User -down-> UI : Uploads GCash Receipt
+UI -down-> Ingest : Dispatches Image
+Ingest -down-> ELA : Preprocessing Bus
+ELA -down-> Tensor : Normalized Array
+ELA -down-> Heatmap : Compression Gradient
+
+Tensor -right-> CNN_Basic : 128x128x3 Input
+Tensor -right-> CNN_Mobile : 128x128x3 Input
+Tensor -right-> CNN_ResNet : 128x128x3 Input
+
+CNN_Basic -down-> Voting
+CNN_Mobile -down-> Voting
+CNN_ResNet -down-> Voting
+
+Dataset ..> Colab : 80/20 Stratified Training
+Colab ..> Weights : Saved .keras Weights
+Weights -up-> CNN_Basic
+Weights -up-> CNN_Mobile
+Weights -up-> CNN_ResNet
+Metrics -up-> Bench : Live Telemetry
+
+Voting -down-> Verdict : Binary Decision
+Voting -down-> Scores : Telemetry Metrics
+Heatmap -down-> Overlay : Spatial Coordinates
+Voting -down-> XAI : Anomaly Flag
+
+Verdict -up-> Viewer : Renders Stamp
+Scores -up-> Viewer : Renders Gauges
+Overlay -up-> Viewer : Renders Exhibit
+XAI -up-> Viewer : Forensic Justification
+
+@enduml
+
+================================================================================
+OPTION B: MERMAID CODE FOR LUCIDCHART
+================================================================================
+
+flowchart TD
+    subgraph L1 [1. Presentation Layer - Streamlit Web UI]
+        User[User / Merchant] --> UI[ForgeGuard Web Dashboard]
+        UI --> Mod_Viewer[Tri-Spectral Exhibit Viewer]
+        UI --> Mod_Bench[Model Benchmark Suite]
+    end
+
+    subgraph L2 [2. Forensic Preprocessing Layer]
+        UI --> P1[Image Ingestion & Format Check]
+        P1 --> P2[Error Level Analysis Engine
+JPEG Resave Q=90 | 15.0x Multiplier]
+        P2 --> P3[Standardized ELA Tensor
+128 x 128 x 3]
+        P2 --> P4[Tamper Heatmap & ROI Generator
+OpenCV JET Colormap]
+    end
+
+    subgraph L3 [3. Comparative CNN Inference Layer]
+        P3 --> M1[Basic CNN 4-Layer Baseline
+2.1M Params | 100.0% Acc | 8.61 ms]
+        P3 --> M2[MobileNetV2 SOP-5 Selected
+3.4M Params | 95.74% Acc | 28.04 ms]
+        P3 --> M3[ResNet50 Deep Residual
+23.5M Params | 75.53% Acc | 109.34 ms]
+        M1 & M2 & M3 --> CONS[Consensus & Voting Engine]
+    end
+
+    subgraph L4 [4. Data & Storage Layer]
+        DS[(GCash Dataset N=777)] -.-> GPU[Google Colab GPU Training]
+        GPU -.-> MW[(Trained Model Weights .keras)]
+        MW --> M1 & M2 & M3
+        EM[(Evaluation Metrics .json)] --> Mod_Bench
+    end
+
+    subgraph L5 [5. Results & Decision Layer]
+        CONS --> R1[Authenticity Verdict Pass/Alert]
+        CONS --> R2[Comparative Confidence & Latency]
+        P4 --> R3[Localized Tamper Heatmap Overlay]
+        CONS --> R4[Explainable AI XAI Audit]
+        
+        R1 & R2 & R3 & R4 --> Mod_Viewer
+    end

@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 860" width="1320" height="860" style="background-color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+      <feOffset dx="0" dy="2" />
+      <feComponentTransfer><feFuncA type="linear" slope="0.07" /></feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+      <feOffset dx="0" dy="1.5" />
+      <feComponentTransfer><feFuncA type="linear" slope="0.06" /></feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7C3AED" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1320" height="860" fill="#F8FAFC" />
+
+  <!-- Diagram Title Header Bar -->
+  <rect x="30" y="24" width="1260" height="54" rx="8" fill="#0F172A" filter="url(#shadow)" />
+  <text x="50" y="52" fill="#F8FAFC" font-size="17" font-weight="700" letter-spacing="0.5">FORGEGUARD: SYSTEM ARCHITECTURE &amp; FORENSIC DATAFLOW PIPELINE</text>
+  <text x="1265" y="52" fill="#94A3B8" font-size="12" font-weight="500" text-anchor="end">NDMC BSCS THESIS RESEARCH &bull; A COMPARATIVE EVALUATION OF CNN ARCHITECTURES</text>
+
+  <!-- ==================== 1. PRESENTATION LAYER ==================== -->
+  <g transform="translate(30, 96)">
+    <rect width="360" height="420" rx="10" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1.5" filter="url(#shadow)" />
+    <!-- Header Pill -->
+    <rect x="14" y="14" width="332" height="34" rx="6" fill="#E0F2FE" stroke="#7DD3FC" stroke-width="1" />
+    <text x="24" y="36" fill="#0369A1" font-size="12" font-weight="700">1. PRESENTATION LAYER (Streamlit Web UI)</text>
+
+    <!-- Actor: User / Merchant -->
+    <rect x="24" y="62" width="312" height="64" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <circle cx="56" cy="94" r="18" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5" />
+    <path d="M 56 84 A 5 5 0 1 0 56 94 A 5 5 0 1 0 56 84 M 46 104 C 46 98 66 98 66 104" stroke="#0284C7" stroke-width="1.5" fill="none" />
+    <text x="86" y="88" fill="#0F172A" font-size="13" font-weight="700">User / Online Merchant</text>
+    <text x="86" y="106" fill="#64748B" font-size="11">Uploads GCash payment receipt image</text>
+
+    <!-- Component: Web Cockpit -->
+    <rect x="24" y="146" width="312" height="74" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="158" width="36" height="36" rx="6" fill="#0284C7" />
+    <path d="M 44 176 L 54 166 L 64 176 M 44 184 L 64 184" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" />
+    <text x="84" y="174" fill="#0F172A" font-size="13" font-weight="700">ForgeGuard Interactive UI</text>
+    <text x="84" y="192" fill="#64748B" font-size="11">Multi-tab telemetry, controls &amp; presets</text>
+    <text x="84" y="208" fill="#0284C7" font-size="10" font-weight="600">forgeguard.streamlit.app</text>
+
+    <!-- Component: Tri-Spectral Viewer -->
+    <rect x="24" y="238" width="312" height="74" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="250" width="36" height="36" rx="6" fill="#0EA5E9" />
+    <rect x="42" y="258" width="10" height="20" rx="2" fill="#E0F2FE" />
+    <rect x="56" y="258" width="10" height="20" rx="2" fill="#E0F2FE" />
+    <text x="84" y="266" fill="#0F172A" font-size="13" font-weight="700">Tri-Spectral Exhibit Viewer</text>
+    <text x="84" y="284" fill="#64748B" font-size="11">Original &bull; ELA Matrix &bull; Heatmap</text>
+    <text x="84" y="300" fill="#64748B" font-size="10">Pixel-synchronized inspection gallery</text>
+
+    <!-- Component: Benchmark Dashboard -->
+    <rect x="24" y="330" width="312" height="74" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="342" width="36" height="36" rx="6" fill="#6366F1" />
+    <path d="M 44 366 L 50 358 L 56 362 L 64 352" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" />
+    <text x="84" y="358" fill="#0F172A" font-size="13" font-weight="700">Model Benchmark Suite</text>
+    <text x="84" y="376" fill="#64748B" font-size="11">Accuracy, latency, params &amp; confusion matrix</text>
+    <text x="84" y="392" fill="#6366F1" font-size="10" font-weight="600">Empirical evaluation metrics (N=777)</text>
+
+    <!-- Flow Arrows inside Presentation -->
+    <line x1="180" y1="126" x2="180" y2="146" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- ==================== 2. PREPROCESSING LAYER ==================== -->
+  <g transform="translate(410, 96)">
+    <rect width="440" height="420" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" filter="url(#shadow)" />
+    <!-- Header Pill -->
+    <rect x="14" y="14" width="412" height="34" rx="6" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1" />
+    <text x="24" y="36" fill="#15803D" font-size="12" font-weight="700">2. FORENSIC PREPROCESSING LAYER (Pillow, OpenCV, NumPy)</text>
+
+    <!-- Step 2.1: Ingestion & Validation -->
+    <rect x="24" y="62" width="392" height="66" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="40" y="86" fill="#0F172A" font-size="13" font-weight="700">Image Ingestion &amp; Layout Verification</text>
+    <text x="40" y="104" fill="#64748B" font-size="11">RGB conversion, aspect ratio check &amp; receipt structural validation</text>
+    <text x="40" y="118" fill="#16A34A" font-size="10" font-weight="600">Format: PNG / JPEG / WEBP (Max 200 MB)</text>
+
+    <!-- Step 2.2: ELA Engine -->
+    <rect x="24" y="146" width="392" height="114" rx="8" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.5" filter="url(#card-shadow)" />
+    <rect x="36" y="156" width="60" height="20" rx="4" fill="#DCFCE7" />
+    <text x="42" y="170" fill="#15803D" font-size="10" font-weight="700">CORE ELA</text>
+    <text x="106" y="171" fill="#0F172A" font-size="13" font-weight="700">Error Level Analysis (ELA) Engine</text>
+    <text x="36" y="196" fill="#334155" font-size="11">1. Re-saves receipt at known JPEG quality (<tspan font-weight="700" fill="#15803D">Q = 90</tspan>)</text>
+    <text x="36" y="214" fill="#334155" font-size="11">2. Computes absolute pixel residual: <tspan font-weight="600" font-family="monospace">|Orig - Resaved|</tspan></text>
+    <text x="36" y="232" fill="#334155" font-size="11">3. Amplifies compression gradient by scale factor (<tspan font-weight="700" fill="#15803D">15.0&times;</tspan>)</text>
+    <text x="36" y="250" fill="#64748B" font-size="10">Exposes digital splices as anomalous bright error artifacts</text>
+
+    <!-- Split Outputs: Tensor & Heatmap -->
+    <rect x="24" y="280" width="186" height="124" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="34" y="302" fill="#0F172A" font-size="12" font-weight="700">Standardized ELA Tensor</text>
+    <text x="34" y="322" fill="#64748B" font-size="11">Dimensions: <tspan font-weight="700" fill="#0F172A">128&times;128&times;3</tspan></text>
+    <text x="34" y="340" fill="#64748B" font-size="11">Normalized: <tspan font-family="monospace">[0.0, 1.0]</tspan></text>
+    <text x="34" y="362" fill="#475569" font-size="10">Input format required by all 3 CNN architectures</text>
+
+    <rect x="230" y="280" width="186" height="124" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="240" y="302" fill="#0F172A" font-size="12" font-weight="700">Tamper Heatmap &amp; ROI</text>
+    <text x="240" y="322" fill="#64748B" font-size="11">OpenCV <tspan font-weight="600">COLORMAP_JET</tspan></text>
+    <text x="240" y="340" fill="#64748B" font-size="11">Gaussian smoothing filter</text>
+    <text x="240" y="362" fill="#475569" font-size="10">Bounding box localization on spliced amount / text</text>
+
+    <!-- Preprocessing Connectors -->
+    <line x1="220" y1="128" x2="220" y2="146" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M 160 260 L 160 270 L 117 270 L 117 280" stroke="#94A3B8" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M 280 260 L 280 270 L 323 270 L 323 280" stroke="#94A3B8" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- Inter-Layer Arrow: Presentation -> Preprocessing -->
+  <path d="M 336 210 L 434 210" stroke="#0284C7" stroke-width="2" fill="none" marker-end="url(#arrow-blue)" />
+  <rect x="348" y="196" width="76" height="20" rx="4" fill="#FFFFFF" stroke="#BAE6FD" />
+  <text x="386" y="210" fill="#0284C7" font-size="10" font-weight="700" text-anchor="middle">Receipt Img</text>
+
+  <!-- ==================== 3. CNN BENCHMARK LAYER ==================== -->
+  <g transform="translate(870, 96)">
+    <rect width="420" height="420" rx="10" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1.5" filter="url(#shadow)" />
+    <!-- Header Pill -->
+    <rect x="14" y="14" width="392" height="34" rx="6" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1" />
+    <text x="24" y="36" fill="#6D28D9" font-size="12" font-weight="700">3. DEEP LEARNING COMPARATIVE CNN LAYER (TensorFlow)</text>
+
+    <!-- CNN Model 1: Basic CNN -->
+    <rect x="24" y="62" width="372" height="66" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="72" width="6" height="46" rx="3" fill="#6366F1" />
+    <text x="52" y="84" fill="#0F172A" font-size="13" font-weight="700">Basic CNN (Custom 4-Layer Baseline)</text>
+    <text x="52" y="102" fill="#64748B" font-size="11">Parameters: <tspan font-weight="600">~2.1M</tspan> &bull; Conv2D + MaxPool + Dense</text>
+    <text x="52" y="118" fill="#4F46E5" font-size="10" font-weight="700">Colab: 100.0% Acc &bull; 8.61 ms Latency &bull; Fast Baseline</text>
+
+    <!-- CNN Model 2: MobileNetV2 -->
+    <rect x="24" y="140" width="372" height="74" rx="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.5" filter="url(#card-shadow)" />
+    <rect x="36" y="150" width="6" height="54" rx="3" fill="#8B5CF6" />
+    <rect x="300" y="148" width="86" height="18" rx="4" fill="#EDE9FE" />
+    <text x="343" y="161" fill="#6D28D9" font-size="9" font-weight="700" text-anchor="middle">SOP-5 SELECTED</text>
+    <text x="52" y="164" fill="#0F172A" font-size="13" font-weight="700">MobileNetV2 (Lightweight Inverted Residual)</text>
+    <text x="52" y="182" fill="#64748B" font-size="11">Parameters: <tspan font-weight="600">~3.4M</tspan> &bull; Depthwise Separable Convolutions</text>
+    <text x="52" y="198" fill="#7C3AED" font-size="10" font-weight="700">Colab: 95.74% Acc &bull; 28.04 ms &bull; 85.5% lighter than ResNet</text>
+
+    <!-- CNN Model 3: ResNet50 -->
+    <rect x="24" y="226" width="372" height="66" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="236" width="6" height="46" rx="3" fill="#A855F7" />
+    <text x="52" y="248" fill="#0F172A" font-size="13" font-weight="700">ResNet50 (Deep Residual Architecture)</text>
+    <text x="52" y="266" fill="#64748B" font-size="11">Parameters: <tspan font-weight="600">~23.5M</tspan> &bull; 50 Layers with Skip Connections</text>
+    <text x="52" y="282" fill="#9333EA" font-size="10" font-weight="700">Colab: 75.53% Acc &bull; 109.34 ms &bull; High Computational Cost</text>
+
+    <!-- Consensus & Voting Engine -->
+    <rect x="24" y="306" width="372" height="98" rx="8" fill="#FFFFFF" stroke="#DDD6FE" stroke-width="1.2" filter="url(#card-shadow)" />
+    <text x="40" y="330" fill="#0F172A" font-size="13" font-weight="700">Consensus &amp; Decision Voting Engine</text>
+    <text x="40" y="350" fill="#475569" font-size="11">&bull; Multi-model agreement telemetry (<tspan font-weight="700">3/3 or 2/3 Consensus</tspan>)</text>
+    <text x="40" y="368" fill="#475569" font-size="11">&bull; Soft voting confidence aggregation &amp; thresholding (0.50)</text>
+    <text x="40" y="386" fill="#475569" font-size="11">&bull; Optional Gemini 2.0 Flash XAI optical font &amp; checksum verification</text>
+  </g>
+
+  <!-- Inter-Layer Arrow: Preprocessing Tensor -> CNN Models -->
+  <path d="M 620 342 L 870 342" stroke="#7C3AED" stroke-width="2" fill="none" marker-end="url(#arrow-purple)" />
+  <rect x="696" y="328" width="114" height="20" rx="4" fill="#FFFFFF" stroke="#DDD6FE" />
+  <text x="753" y="342" fill="#7C3AED" font-size="10" font-weight="700" text-anchor="middle">128x128x3 Tensor</text>
+
+  <!-- ==================== 4. DATA & STORAGE LAYER ==================== -->
+  <g transform="translate(30, 536)">
+    <rect width="600" height="294" rx="10" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" filter="url(#shadow)" />
+    <!-- Header Pill -->
+    <rect x="14" y="14" width="572" height="34" rx="6" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1" />
+    <text x="24" y="36" fill="#B45309" font-size="12" font-weight="700">4. DATA &amp; MODEL REPOSITORY LAYER (Storage &amp; Training Pipeline)</text>
+
+    <!-- Box 4.1: Dataset -->
+    <rect x="24" y="60" width="268" height="106" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="36" y="82" fill="#0F172A" font-size="13" font-weight="700">GCash Empirical Dataset (v2.2)</text>
+    <text x="36" y="100" fill="#15803D" font-size="11" font-weight="600">&bull; 153 Authentic GCash Receipts</text>
+    <text x="36" y="118" fill="#DC2626" font-size="11" font-weight="600">&bull; 624 Forged Receipts (4 Attack Vectors)</text>
+    <text x="36" y="136" fill="#64748B" font-size="10">Amount splice, ref clone, font tampering, AI synth</text>
+    <text x="36" y="152" fill="#B45309" font-size="10" font-weight="600">Total: 777 Samples &bull; metadata.json</text>
+
+    <!-- Box 4.2: Colab Training -->
+    <rect x="308" y="60" width="278" height="106" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="320" y="82" fill="#0F172A" font-size="13" font-weight="700">Google Colab GPU Pipeline</text>
+    <text x="320" y="100" fill="#475569" font-size="11">&bull; NVIDIA T4 GPU Cloud Acceleration</text>
+    <text x="320" y="118" fill="#475569" font-size="11">&bull; 80/20 Train-Test Stratified Split</text>
+    <text x="320" y="136" fill="#475569" font-size="11">&bull; Adam Optimizer &bull; Binary Crossentropy</text>
+    <text x="320" y="152" fill="#B45309" font-size="10" font-weight="600">ForgeGuard_Model_Training.ipynb</text>
+
+    <!-- Box 4.3: Model Weights -->
+    <rect x="24" y="180" width="268" height="96" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="36" y="202" fill="#0F172A" font-size="13" font-weight="700">Trained Model Weights (.keras)</text>
+    <text x="36" y="222" fill="#475569" font-size="11">&bull; <tspan font-family="monospace">basic_cnn.keras</tspan> (2.1M params)</text>
+    <text x="36" y="240" fill="#475569" font-size="11">&bull; <tspan font-family="monospace">mobilenetv2.keras</tspan> (3.4M params)</text>
+    <text x="36" y="258" fill="#475569" font-size="11">&bull; <tspan font-family="monospace">resnet50.keras</tspan> (23.5M params)</text>
+
+    <!-- Box 4.4: Benchmarks JSON -->
+    <rect x="308" y="180" width="278" height="96" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="320" y="202" fill="#0F172A" font-size="13" font-weight="700">Evaluation Metrics &amp; Registry</text>
+    <text x="320" y="222" fill="#475569" font-size="11">&bull; <tspan font-family="monospace">evaluation_metrics.json</tspan></text>
+    <text x="320" y="240" fill="#475569" font-size="11">&bull; Confusion matrix cells (TP, TN, FP, FN)</text>
+    <text x="320" y="258" fill="#475569" font-size="11">&bull; Precision, Recall, F1, ROC-AUC</text>
+  </g>
+
+  <!-- ==================== 5. OUTPUT & DECISION LAYER ==================== -->
+  <g transform="translate(650, 536)">
+    <rect width="640" height="294" rx="10" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1.5" filter="url(#shadow)" />
+    <!-- Header Pill -->
+    <rect x="14" y="14" width="612" height="34" rx="6" fill="#CCFBF1" stroke="#5EEAD4" stroke-width="1" />
+    <text x="24" y="36" fill="#0F766E" font-size="12" font-weight="700">5. RESULTS &amp; FORENSIC DECISION LAYER (Real-Time Outputs)</text>
+
+    <!-- Output 5.1: Verdict Stamp -->
+    <rect x="24" y="60" width="288" height="106" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <rect x="36" y="70" width="80" height="20" rx="4" fill="#FEE2E2" />
+    <text x="76" y="84" fill="#DC2626" font-size="10" font-weight="700" text-anchor="middle">VERDICT</text>
+    <text x="124" y="85" fill="#0F172A" font-size="13" font-weight="700">Authenticity Classification</text>
+    <text x="36" y="110" fill="#15803D" font-size="11" font-weight="600">&bull; AUTHENTIC VERIFIED (Pass)</text>
+    <text x="36" y="128" fill="#DC2626" font-size="11" font-weight="600">&bull; FORGED / SPLICED DETECTED (Alert)</text>
+    <text x="36" y="146" fill="#64748B" font-size="10">Immediate visual indicator for online merchants</text>
+
+    <!-- Output 5.2: Tri-Model Readout -->
+    <rect x="328" y="60" width="288" height="106" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="340" y="82" fill="#0F172A" font-size="13" font-weight="700">Tri-Model Confidence &amp; Latency</text>
+    <text x="340" y="104" fill="#475569" font-size="11">&bull; Basic CNN: <tspan font-weight="700">Confidence % &bull; 8.6ms</tspan></text>
+    <text x="340" y="122" fill="#475569" font-size="11">&bull; MobileNetV2: <tspan font-weight="700">Confidence % &bull; 28.0ms</tspan></text>
+    <text x="340" y="140" fill="#475569" font-size="11">&bull; ResNet50: <tspan font-weight="700">Confidence % &bull; 109.3ms</tspan></text>
+    <text x="340" y="156" fill="#0F766E" font-size="10" font-weight="600">Comparative side-by-side performance cards</text>
+
+    <!-- Output 5.3: Visual Heatmap -->
+    <rect x="24" y="180" width="288" height="96" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="36" y="202" fill="#0F172A" font-size="13" font-weight="700">Localized Tamper Heatmap</text>
+    <text x="36" y="222" fill="#475569" font-size="11">&bull; 42% opacity JET colormap overlay</text>
+    <text x="36" y="240" fill="#475569" font-size="11">&bull; Bounding box around altered amount/text</text>
+    <text x="36" y="258" fill="#0F766E" font-size="10" font-weight="600">Spatial localization of fraudulent pixel clusters</text>
+
+    <!-- Output 5.4: XAI Audit -->
+    <rect x="328" y="180" width="288" height="96" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#card-shadow)" />
+    <text x="340" y="202" fill="#0F172A" font-size="13" font-weight="700">Explainable AI (XAI) Audit</text>
+    <text x="340" y="222" fill="#475569" font-size="11">&bull; Typography kerning &amp; baseline check</text>
+    <text x="340" y="240" fill="#475569" font-size="11">&bull; 13-digit reference checksum validation</text>
+    <text x="340" y="258" fill="#0F766E" font-size="10" font-weight="600">Forensic justification for non-technical users</text>
+  </g>
+
+  <!-- Connecting Arrows: CNN -> Decision Layer -->
+  <path d="M 1080 516 L 1080 536" stroke="#0D9488" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+
+  <!-- Connecting Arrows: Weights -> CNN Layer -->
+  <path d="M 300 756 L 634 756 L 634 526 L 880 526 L 880 516" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4 4" fill="none" marker-end="url(#arrow)" />
+
+  <!-- Connecting Arrows: Preprocessing Heatmap -> Output Heatmap -->
+  <path d="M 527 404 L 527 500 L 794 500 L 794 536" stroke="#059669" stroke-width="1.8" fill="none" marker-end="url(#arrow-emerald)" />
+
+  <!-- Return Flow: Output -> Presentation Viewer -->
+  <path d="M 650 683 L 180 683 L 180 516" stroke="#0284C7" stroke-width="1.8" stroke-dasharray="4 4" fill="none" marker-end="url(#arrow-blue)" />
+  <rect x="250" y="672" width="160" height="20" rx="4" fill="#FFFFFF" stroke="#BAE6FD" />
+  <text x="330" y="686" fill="#0284C7" font-size="10" font-weight="700" text-anchor="middle">Render in Exhibit Viewer</text>
+
+</svg>
