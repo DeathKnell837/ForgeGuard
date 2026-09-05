@@ -288,7 +288,7 @@ div[data-testid="stSidebarCollapsedControl"] button:hover::after {
     background-color: #FFFFFF !important;
 }
 
-/* --- 6. Sidebar Navigation Items --- */
+/* --- 6. Sidebar Navigation Items with Clean SVG Vector Icons --- */
 div[data-testid="stSidebarContent"] {
     padding: 1.2rem 1.2rem 1.5rem 1.2rem !important;
 }
@@ -304,22 +304,29 @@ div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
 }
 
 div[data-testid="stRadio"] input[type="radio"],
+div[data-testid="stRadio"] label div[class*="etak9234"],
+div[data-testid="stRadio"] label div:has(> [data-testid="stMarkdownContainer"]) > div:first-child,
 div[data-testid="stRadio"] [data-testid="stRadioDot"] {
     display: none !important;
     opacity: 0 !important;
     width: 0px !important;
     height: 0px !important;
+    visibility: hidden !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
     background: #1C2333 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 8px !important;
     padding: 12px 14px !important;
     margin: 0 !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     cursor: pointer !important;
     width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover {
@@ -332,6 +339,41 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked)
     background: #222B3D !important;
     border-color: #7C6FF0 !important;
     box-shadow: 0 0 12px rgba(124, 111, 240, 0.25) !important;
+}
+
+/* Icon 1: Classify a Receipt (Receipt Document Scan Vector Icon) */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(1)::before {
+    content: '' !important;
+    display: inline-block !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    background-color: #94A3B8 !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z'/%3E%3Cpath d='M16 8h-8'/%3E%3Cpath d='M16 12h-8'/%3E%3Cpath d='M12 16h-4'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z'/%3E%3Cpath d='M16 8h-8'/%3E%3Cpath d='M16 12h-8'/%3E%3Cpath d='M12 16h-4'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    transition: background-color 0.2s ease !important;
+}
+
+/* Icon 2: Model Comparison (Analytics Bar Chart Vector Icon) */
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(2)::before {
+    content: '' !important;
+    display: inline-block !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    background-color: #94A3B8 !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    transition: background-color 0.2s ease !important;
+}
+
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:hover::before {
+    background-color: #FFFFFF !important;
+}
+
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][aria-checked="true"]::before,
+div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked)::before {
+    background-color: #2DD4BF !important;
 }
 
 div[data-testid="stRadio"] label[data-testid="stRadioOption"] p {
@@ -382,28 +424,40 @@ div[data-testid="stFileUploader"] button:hover {
     color: #FFFFFF !important;
 }
 
-/* --- 8. Model Result Cards --- */
+/* --- 8. Model Result Cards (Elevated Interactive Widgets) --- */
 .fg-result-card {
-    background-color: #1C2333;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    background: linear-gradient(180deg, #20293D 0%, #182030 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .fg-result-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .fg-verdict-authentic {
     border-left: 4px solid #10B981 !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(16, 185, 129, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.fg-verdict-authentic:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 22px rgba(16, 185, 129, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .fg-verdict-forged {
     border-left: 4px solid #EF4444 !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(239, 68, 68, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.fg-verdict-forged:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 22px rgba(239, 68, 68, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .fg-model-name {
@@ -414,9 +468,21 @@ div[data-testid="stFileUploader"] button:hover {
     margin-bottom: 2px;
 }
 
+.fg-model-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    color: #94A3B8;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-top: 4px;
+}
+
 .fg-confidence {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.1;
 }
@@ -428,7 +494,114 @@ div[data-testid="stFileUploader"] button:hover {
     margin-top: 4px;
 }
 
-/* --- 9. Metrics Table (Model Comparison) --- */
+/* --- 9. Metrics Table & Graphical Performance Visualizer --- */
+/* Graphical Visualizer Card */
+.fg-chart-card {
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.fg-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .fg-chart-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.fg-chart-subpanel {
+    background: rgba(18, 22, 32, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+
+.fg-chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fg-bar-row {
+    margin-bottom: 12px;
+}
+
+.fg-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.fg-bar-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #CBD5E1;
+}
+
+.fg-bar-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+.fg-bar-track {
+    width: 100%;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.fg-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.fg-chart-insight {
+    font-size: 11px;
+    color: #64748B;
+    line-height: 1.5;
+    margin-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+}
+
+/* Strategic Top-Metric Accents */
+.fg-metric-top {
+    display: inline-block;
+    color: #2DD4BF !important;
+    font-weight: 700 !important;
+    background: rgba(45, 212, 191, 0.12) !important;
+    border: 1px solid rgba(45, 212, 191, 0.28) !important;
+    border-radius: 5px !important;
+    padding: 2px 8px !important;
+}
+
+.fg-metric-fast {
+    display: inline-block;
+    color: #10B981 !important;
+    font-weight: 700 !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.28) !important;
+    border-radius: 5px !important;
+    padding: 2px 8px !important;
+}
+
+/* Metrics Table */
 .fg-metrics-table {
     width: 100%;
     border-collapse: separate;

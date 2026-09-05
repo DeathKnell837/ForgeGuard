@@ -363,7 +363,9 @@ if page == 'Classify a Receipt':
                     results = run_universal_inference(image, models_bundle)
                     
                     for model_name, res in results.items():
-                        arch_description = model_info.get(model_name, {}).get('arch', '')
+                        meta = model_info.get(model_name, {})
+                        arch_description = meta.get('arch', '')
+                        params_description = meta.get('params', '')
                         verdict = res['verdict']
                         confidence = res['confidence']
                         latency = res['latency_ms']
@@ -377,11 +379,11 @@ if page == 'Classify a Receipt':
                               <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
                                   <div class="fg-model-name">{model_name}</div>
-                                  <div style="font-size: 12px; color: #94A3B8;">{arch_description}</div>
+                                  <div class="fg-model-badge">{arch_description} &bull; {params_description}</div>
                                 </div>
                                 <div style="text-align: right;">
-                                  <div style="color: {verdict_color}; font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px;">{verdict}</div>
-                                  <div class="fg-confidence" style="color: {verdict_color}; font-size: 26px; font-weight: 700;">{confidence:.1f}%</div>
+                                  <div style="color: {verdict_color}; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.8px;">{verdict}</div>
+                                  <div class="fg-confidence" style="color: {verdict_color}; font-size: 28px; font-weight: 700;">{confidence:.1f}%</div>
                                   <div class="fg-latency">{latency:.1f} ms</div>
                                 </div>
                               </div>
@@ -423,6 +425,110 @@ elif page == 'Model Comparison':
     if not metrics:
         st.info('Evaluation metrics data not found.')
     else:
+        # Graphical Performance Visualizer (Accuracy vs. Latency Trade-Off)
+        render_html(
+            '''
+            <div class="fg-chart-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <div>
+                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Performance Trade-Off Analysis</div>
+                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures</div>
+                </div>
+                <div style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
+                  <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF;"></span>Accuracy (%)</span>
+                  <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>Latency (ms)</span>
+                </div>
+              </div>
+              
+              <div class="fg-chart-grid">
+                <!-- Accuracy Subpanel -->
+                <div class="fg-chart-subpanel">
+                  <div class="fg-chart-title">
+                    <span>Classification Accuracy</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Baseline: 90% - 100%</span>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">Basic CNN</span>
+                      <span class="fg-bar-val" style="color: #2DD4BF;">98.01%</span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 80.1%; background: linear-gradient(90deg, #14B8A6, #2DD4BF);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">MobileNetV2</span>
+                      <span class="fg-bar-val" style="color: #A5B4FC;">97.35%</span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 73.5%; background: linear-gradient(90deg, #6366F1, #818CF8);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">ResNet50</span>
+                      <span class="fg-bar-val" style="color: #94A3B8;">96.69%</span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 66.9%; background: linear-gradient(90deg, #475569, #64748B);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-chart-insight">
+                    Basic CNN achieves the highest empirical test accuracy (98.01%) and F1-score (98.82%), demonstrating superior feature extraction on ELA high-frequency residuals.
+                  </div>
+                </div>
+                
+                <!-- Latency Subpanel -->
+                <div class="fg-chart-subpanel">
+                  <div class="fg-chart-title">
+                    <span>Inference Latency</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #10B981;">Lower is Faster</span>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">Basic CNN</span>
+                      <span class="fg-bar-val" style="color: #10B981;">8.66 ms <span style="font-size: 10px; font-weight: 500; color: #34D399;">(Real-time)</span></span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 7.9%; background: linear-gradient(90deg, #059669, #10B981);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">MobileNetV2</span>
+                      <span class="fg-bar-val" style="color: #2DD4BF;">28.04 ms <span style="font-size: 10px; font-weight: 500; color: #5EEAD4;">(Edge Ready)</span></span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 25.6%; background: linear-gradient(90deg, #0D9488, #2DD4BF);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-bar-row">
+                    <div class="fg-bar-header">
+                      <span class="fg-bar-label">ResNet50</span>
+                      <span class="fg-bar-val" style="color: #F59E0B;">109.40 ms <span style="font-size: 10px; font-weight: 500; color: #FBBF24;">(Heavyweight)</span></span>
+                    </div>
+                    <div class="fg-bar-track">
+                      <div class="fg-bar-fill" style="width: 100%; background: linear-gradient(90deg, #D97706, #F59E0B);"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="fg-chart-insight">
+                    Basic CNN operates at 8.66 ms per receipt (12.6x faster than ResNet50), establishing optimal throughput for real-time mobile payment forgery verification.
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        )
+
         st.markdown('<div style="font-size: 16px; font-weight: 600; color: #E2E8F0; margin-bottom: 14px;">Overall Architecture Benchmark</div>', unsafe_allow_html=True)
         
         table_html = '''
@@ -446,16 +552,27 @@ elif page == 'Model Comparison':
             model_name = raw_model_name.replace('_', ' ')
             params = model_info.get(model_name, {}).get('params', 'N/A')
             
+            acc = data.get('accuracy', 0) * 100.0
+            prec = data.get('precision', 0) * 100.0
+            rec = data.get('recall', 0) * 100.0
+            f1 = data.get('f1_score', 0) * 100.0
+            lat = data.get('latency_ms', 0)
+            
+            # Strategic accents for top-performing metrics
+            acc_html = f'<span class="fg-metric-top">{acc:.2f}%</span>' if acc >= 98.0 else f'{acc:.2f}%'
+            f1_html = f'<span class="fg-metric-top">{f1:.2f}%</span>' if f1 >= 98.8 else f'{f1:.2f}%'
+            lat_html = f'<span class="fg-metric-fast">{lat:.2f} ms</span>' if lat < 10.0 else f'{lat:.2f} ms'
+            
             # Standard Condition
             table_html += f'''
             <tr>
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Standard</td>
-                <td>{data.get('accuracy', 0)*100:.2f}%</td>
-                <td>{data.get('precision', 0)*100:.2f}%</td>
-                <td>{data.get('recall', 0)*100:.2f}%</td>
-                <td>{data.get('f1_score', 0)*100:.2f}%</td>
-                <td>{data.get('latency_ms', 0):.2f} ms</td>
+                <td>{acc_html}</td>
+                <td>{prec:.2f}%</td>
+                <td>{rec:.2f}%</td>
+                <td>{f1_html}</td>
+                <td>{lat_html}</td>
                 <td>{params}</td>
             </tr>
             '''
