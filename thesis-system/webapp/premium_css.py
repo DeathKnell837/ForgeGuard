@@ -96,15 +96,6 @@ footer {
         transform: translateX(-110%) !important;
         overflow: hidden !important;
     }
-    
-    section[data-testid="stSidebar"] .stSidebarHeader {
-        height: 52px !important;
-        background: transparent !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        display: flex !important;
-        align-items: center !important;
-        padding: 0 1.2rem !important;
-    }
 }
 
 @media (max-width: 768px) {
@@ -126,48 +117,101 @@ footer {
     }
 }
 
-/* Sidebar collapse/close button inside open sidebar */
-section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"],
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"],
+/* Sidebar Header and Collapse Button inside open sidebar */
+section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+    padding-top: 10px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+}
+
+section[data-testid="stSidebar"] .stSidebarHeader,
+section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] {
+    height: 60px !important;
+    min-height: 60px !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 0 4px !important;
+    margin: 0 0 12px 0 !important;
+    box-sizing: border-box !important;
+}
+
 section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
-    background-color: #22293A !important;
-    width: 36px !important;
-    height: 36px !important;
-    border-radius: 8px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Make the collapse button 100% visible, perfectly sized, and interactive */
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button,
+section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"],
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    background-color: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
     cursor: pointer !important;
-    transition: background-color 0.2s ease, border-color 0.2s ease !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"]:hover,
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"]:hover,
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]:hover {
-    background-color: #2E384D !important;
-    border-color: rgba(124, 111, 240, 0.5) !important;
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button:hover,
+section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]:hover,
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"]:hover {
+    background-color: #252D40 !important;
+    border-color: rgba(124, 111, 240, 0.6) !important;
+    box-shadow: 0 0 12px rgba(124, 111, 240, 0.3) !important;
 }
 
-/* Hide native icon inside collapse button */
-section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"] *,
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] *,
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] * {
+/* Hide ALL child nodes inside the button (spans, text, SVGs, Material Icons) */
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button *,
+section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"] *,
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"] * {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
 }
 
-/* Custom 3-line icon inside sidebar collapse button */
-section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"]::after,
-section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"]::after,
-section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"]::after {
+/* Clean 3-line hamburger icon on the button itself */
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button::after,
+section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]::after,
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"]::after {
     content: '' !important;
     display: block !important;
-    width: 18px !important;
-    height: 18px !important;
-    background-color: #94A3B8 !important;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #CBD5E1 !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain !important;
+    transition: background-color 0.2s ease !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button:hover::after,
+section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]:hover::after,
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"]:hover::after {
+    background-color: #FFFFFF !important;
 }
 
 /* --- 5. Floating Sidebar Expand Button (3 Lines Hamburger Icon) --- */
@@ -184,8 +228,8 @@ header[data-testid="stHeader"] [data-testid="stExpandSidebarButton"] {
     opacity: 1 !important;
     pointer-events: auto !important;
     position: fixed !important;
-    top: 22px !important;
-    left: 24px !important;
+    top: 20px !important;
+    left: 20px !important;
     z-index: 999999 !important;
     background-color: #1C2333 !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;

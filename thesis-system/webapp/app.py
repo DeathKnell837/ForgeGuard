@@ -32,9 +32,17 @@ for p in [APP_DIR, SYS_DIR]:
 
 # --- CSS ---
 try:
-    from premium_css import PREMIUM_CSS
-except ImportError:
-    PREMIUM_CSS = ''
+    import importlib.util
+    css_path = os.path.join(APP_DIR, 'premium_css.py')
+    spec = importlib.util.spec_from_file_location('local_premium_css', css_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    PREMIUM_CSS = mod.PREMIUM_CSS
+except Exception as e:
+    try:
+        from premium_css import PREMIUM_CSS
+    except Exception:
+        PREMIUM_CSS = ''
 
 # --- Page Config ---
 st.set_page_config(
