@@ -53,21 +53,47 @@ def render_html(html_str):
 # --- Model Loading ---
 @st.cache_resource
 def load_tf_model(path):
-    """Load a .keras model file using TensorFlow."""
+    """Load a .keras model file using TensorFlow or Keras."""
+    if not os.path.isfile(path):
+        st.error(f'Model file not found: {os.path.basename(path)}')
+        return None
     try:
         import tensorflow as tf
         tf.get_logger().setLevel('ERROR')
         return tf.keras.models.load_model(path, compile=False)
+    except ModuleNotFoundError:
+        try:
+            import keras
+            return keras.models.load_model(path, compile=False)
+        except Exception:
+            st.error(f'TensorFlow runtime is installing/initializing on Streamlit Cloud. Please wait a moment and refresh.')
+            return None
     except Exception as e:
-        st.error(f'Failed to load model: {e}')
-        return None
+        try:
+            import keras
+            return keras.models.load_model(path, compile=False)
+        except Exception:
+            st.error(f'Failed to load model {os.path.basename(path)}: {e}')
+            return None
 
 def get_model_paths():
-    """Find the model files."""
-    models_dir = os.path.join(SYS_DIR, 'models')
-    if not os.path.isdir(models_dir):
-        # Try parent
-        models_dir = os.path.join(os.path.dirname(SYS_DIR), 'models')
+    """Find the model files across candidate directory locations."""
+    candidates = [
+        os.path.join(SYS_DIR, 'models'),
+        os.path.join(APP_DIR, 'models'),
+        os.path.join(os.path.dirname(SYS_DIR), 'models'),
+        os.path.join(os.path.dirname(APP_DIR), 'models'),
+        os.path.join(os.path.dirname(os.path.dirname(APP_DIR)), 'models'),
+        os.path.join(os.path.dirname(os.path.dirname(APP_DIR)), 'thesis-system', 'models'),
+    ]
+    models_dir = None
+    for cand in candidates:
+        if os.path.isdir(cand) and os.path.isfile(os.path.join(cand, 'basic_cnn.keras')):
+            models_dir = cand
+            break
+    if not models_dir:
+        models_dir = os.path.join(SYS_DIR, 'models')
+
     return {
         'Basic CNN': os.path.join(models_dir, 'basic_cnn.keras'),
         'ResNet50': os.path.join(models_dir, 'resnet50.keras'),
