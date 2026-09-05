@@ -24,3 +24,4 @@ with open(canonical_app, "r", encoding="utf-8") as f:
     code = f.read()
 
 exec(compile(code, canonical_app, "exec"))
+
