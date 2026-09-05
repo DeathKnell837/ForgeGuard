@@ -45,6 +45,11 @@ st.set_page_config(
 )
 st.markdown(PREMIUM_CSS, unsafe_allow_html=True)
 
+def render_html(html_str):
+    """Strip leading and trailing whitespace from every line so Markdown parser renders raw HTML instead of code blocks."""
+    cleaned = "".join(line.strip() for line in html_str.splitlines() if line.strip())
+    st.markdown(cleaned, unsafe_allow_html=True)
+
 # --- Model Loading ---
 @st.cache_resource
 def load_tf_model(path):
@@ -209,15 +214,13 @@ if page == 'Classify a Receipt':
         try:
             image = Image.open(uploaded).convert('RGB')
             col1, col2 = st.columns([0.35, 0.65])
-            
             with col1:
-                st.image(image, use_column_width=True)
-                st.markdown(
+                st.image(image, use_container_width=True)
+                render_html(
                     '<div style="margin-top: 12px; font-family: \'JetBrains Mono\', monospace; font-size: 12px; color: #94A3B8;">'
                     '<div>Input resolution: 128 x 128 px (ELA-transformed)</div>'
                     '<div>Decision threshold: 0.5 (sigmoid)</div>'
-                    '</div>',
-                    unsafe_allow_html=True
+                    '</div>'
                 )
                 
             with col2:
@@ -242,7 +245,7 @@ if page == 'Classify a Receipt':
                         verdict_lower = verdict.lower()
                         verdict_color = '#10B981' if verdict == 'Authentic' else '#EF4444'
                         
-                        st.markdown(
+                        render_html(
                             f'''
                             <div class="fg-result-card fg-verdict-{verdict_lower}" style="background-color: #1C2333; padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid {verdict_color};">
                               <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -257,17 +260,15 @@ if page == 'Classify a Receipt':
                                 </div>
                               </div>
                             </div>
-                            ''',
-                            unsafe_allow_html=True
+                            '''
                         )
                         
             if check_out_of_domain(image):
-                st.markdown(
+                render_html(
                     '<div class="fg-advisory" style="margin-top: 24px; padding: 12px; background-color: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; color: #E2E8F0; font-size: 14px;">'
                     'Note: This image deviates from standard GCash downloadable receipt '
                     'characteristics. Evaluated under standard binary classification.'
-                    '</div>',
-                    unsafe_allow_html=True
+                    '</div>'
                 )
                 
         except Exception as e:
@@ -336,15 +337,14 @@ elif page == 'Model Comparison':
             '''
             
         table_html += '</tbody></table>'
-        st.markdown(table_html, unsafe_allow_html=True)
+        render_html(table_html)
         
     st.markdown('<h3 style="font-size: 18px; margin-bottom: 16px;">Confusion Matrix</h3>', unsafe_allow_html=True)
     selected_model = st.selectbox('Select Architecture', ['Basic CNN', 'ResNet50', 'MobileNetV2'])
-    st.markdown(
+    render_html(
         '<div style="padding: 32px; text-align: center; background-color: #1C2333; border-radius: 8px; color: #94A3B8; margin-bottom: 32px;">'
         'Confusion matrix data will be available after five-seed evaluation is complete.'
-        '</div>',
-        unsafe_allow_html=True
+        '</div>'
     )
     
     st.markdown('<h3 style="font-size: 18px; margin-bottom: 16px;">Dataset Composition (Table 1)</h3>', unsafe_allow_html=True)
@@ -379,4 +379,4 @@ elif page == 'Model Comparison':
     Note: Each base image is also evaluated under a Messenger-compressed condition.
     </div>
     '''
-    st.markdown(dataset_html, unsafe_allow_html=True)
+    render_html(dataset_html)
