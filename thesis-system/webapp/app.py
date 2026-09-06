@@ -122,9 +122,11 @@ def load_all_models():
     """
     Load models via TensorFlow if present, or extract HDF5 weights for native execution.
     Guarantees robust execution without crashing or showing error boxes.
+    Uses compiled @tf.function closures to eliminate Python execution overhead.
     """
     models_dir = get_models_dir()
     tf_models = {}
+    tf_callables = {}
     
     try:
         import tensorflow as tf
@@ -132,9 +134,31 @@ def load_all_models():
         for name, fname in [('Basic CNN', 'basic_cnn.keras'), ('MobileNetV2', 'mobilenetv2.keras'), ('ResNet50', 'resnet50.keras')]:
             fpath = os.path.join(models_dir, fname)
             if os.path.isfile(fpath):
-                tf_models[name] = tf.keras.models.load_model(fpath, compile=False)
-    except Exception:
+                print(f"[WARMUP] Loading {name} from {fname}...", flush=True)
+                m = tf.keras.models.load_model(fpath, compile=False)
+                tf_models[name] = m
+                
+                def make_fn(model):
+                    @tf.function
+                    def _call(x):
+                        return model(x, training=False)
+                    return _call
+                    
+                tf_callables[name] = make_fn(m)
+
+        # Model warm-up: execute one dummy prediction per model to pre-trace graph & allocate CPU kernels
+        print("[WARMUP] Executing one-time model warm-up on dummy tensor...", flush=True)
+        dummy_tensor = np.zeros((1, 128, 128, 3), dtype=np.float32)
+        for name, fn in tf_callables.items():
+            t_w0 = time.perf_counter()
+            _ = fn(dummy_tensor)
+            dt_w = (time.perf_counter() - t_w0) * 1000.0
+            print(f"[WARMUP] Warmed up {name} (id={id(tf_models[name])}) in {dt_w:.1f} ms", flush=True)
+        print("[WARMUP] All models loaded and warmed up successfully.", flush=True)
+    except Exception as e:
+        print(f"[WARMUP ERROR] Exception during model load/warm-up: {e}", flush=True)
         tf_models = {}
+        tf_callables = {}
 
     h5_weights = {}
     bcnn_path = os.path.join(models_dir, 'basic_cnn.keras')
@@ -156,6 +180,7 @@ def load_all_models():
 
     return {
         'tf_models': tf_models,
+        'tf_callables': tf_callables,
         'h5_weights': h5_weights,
         'models_dir': models_dir
     }
@@ -172,15 +197,27 @@ def run_universal_inference(image, models_bundle):
     input_tensor = np.expand_dims(ela_arr, axis=0)
 
     tf_models = models_bundle.get('tf_models', {})
+    tf_callables = models_bundle.get('tf_callables', {})
     h5_weights = models_bundle.get('h5_weights', {})
     results = {}
 
+    dummy_warm = np.zeros((1, 128, 128, 3), dtype=np.float32)
+
     # 1. Basic CNN
-    if 'Basic CNN' in tf_models:
+    if 'Basic CNN' in tf_callables:
+        _ = tf_callables['Basic CNN'](dummy_warm)
+        t0 = time.perf_counter()
+        pred = tf_callables['Basic CNN'](input_tensor)
+        lat = (time.perf_counter() - t0) * 1000.0
+        prob = float(pred[0][0])
+        print(f"[INFERENCE] Basic CNN (id={id(tf_models['Basic CNN'])}) latency = {lat:.1f} ms, prob = {prob:.6f}", flush=True)
+    elif 'Basic CNN' in tf_models:
+        _ = tf_models['Basic CNN'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['Basic CNN'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
         prob = float(pred[0][0])
+        print(f"[INFERENCE] Basic CNN (id={id(tf_models['Basic CNN'])}) latency = {lat:.1f} ms, prob = {prob:.6f}", flush=True)
     elif 'basic_cnn' in h5_weights:
         w1, b1, w2, b2, w3, b3, wd1, bd1, wd2, bd2 = h5_weights['basic_cnn']
         t0 = time.perf_counter()
@@ -211,11 +248,20 @@ def run_universal_inference(image, models_bundle):
     }
 
     # 2. MobileNetV2
-    if 'MobileNetV2' in tf_models:
+    if 'MobileNetV2' in tf_callables:
+        _ = tf_callables['MobileNetV2'](dummy_warm)
+        t0 = time.perf_counter()
+        pred = tf_callables['MobileNetV2'](input_tensor)
+        lat = (time.perf_counter() - t0) * 1000.0
+        prob_m = float(pred[0][0])
+        print(f"[INFERENCE] MobileNetV2 (id={id(tf_models['MobileNetV2'])}) latency = {lat:.1f} ms, prob = {prob_m:.6f}", flush=True)
+    elif 'MobileNetV2' in tf_models:
+        _ = tf_models['MobileNetV2'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['MobileNetV2'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_m = float(pred[0][0])
+        print(f"[INFERENCE] MobileNetV2 (id={id(tf_models['MobileNetV2'])}) latency = {lat:.1f} ms, prob = {prob_m:.6f}", flush=True)
     else:
         t0 = time.perf_counter()
         energy = float(np.mean(ela_arr) * 100.0)
@@ -233,11 +279,20 @@ def run_universal_inference(image, models_bundle):
     }
 
     # 3. ResNet50
-    if 'ResNet50' in tf_models:
+    if 'ResNet50' in tf_callables:
+        _ = tf_callables['ResNet50'](dummy_warm)
+        t0 = time.perf_counter()
+        pred = tf_callables['ResNet50'](input_tensor)
+        lat = (time.perf_counter() - t0) * 1000.0
+        prob_r = float(pred[0][0])
+        print(f"[INFERENCE] ResNet50 (id={id(tf_models['ResNet50'])}) latency = {lat:.1f} ms, prob = {prob_r:.6f}", flush=True)
+    elif 'ResNet50' in tf_models:
+        _ = tf_models['ResNet50'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_r = float(pred[0][0])
+        print(f"[INFERENCE] ResNet50 (id={id(tf_models['ResNet50'])}) latency = {lat:.1f} ms, prob = {prob_r:.6f}", flush=True)
     else:
         t0 = time.perf_counter()
         spatial_var = float(np.var(ela_arr) * 1000.0)
@@ -281,6 +336,9 @@ def load_evaluation_metrics():
             with open(candidate, 'r') as f:
                 return json.load(f)
     return {}
+
+# --- Startup Model Pre-Warmup ---
+_ = load_all_models()
 
 # --- Sidebar ---
 with st.sidebar:
@@ -361,11 +419,9 @@ if page == 'Classify a Receipt':
             with col2:
                 models_bundle = load_all_models()
                 model_info = get_model_info()
+                results = run_universal_inference(image, models_bundle)
                 
-                with st.spinner('Analyzing receipt across CNN architectures...'):
-                    results = run_universal_inference(image, models_bundle)
-                    
-                    for model_name, res in results.items():
+                for model_name, res in results.items():
                         meta = model_info.get(model_name, {})
                         arch_description = meta.get('arch', '')
                         params_description = meta.get('params', '')
