@@ -74,6 +74,12 @@ This workspace customizations file provides context and instructions to the Anti
 > * Always use **clean pure typography** or **custom SVG vector line icons** (Lucide / Feather style SVG masks) for all visual UI elements.
 > * Maintain a formal, high-tech, enterprise cybersecurity and image forensics aesthetic matching Sophos / Behance standards.
 
+> [!CRITICAL]
+> **Rule 8: UI-Only Polish & Anti-Complexity Policy (No Scope Creep / No Feature Inventions)**
+> * **NEVER** add new features, extra buttons, artificial logic, marketing text, or unapproved features to the system.
+> * When asked to improve the UI or design, focus **strictly on CSS visual refinement** (alignment, centering, spacing, surface contrast, clean typography, responsive layout).
+> * Keep all UI text, labels, and operational flows strictly identical to the approved thesis scope so that the system remains simple, robust, and directly defensible without adding unnecessary complexity to the thesis defense.
+
 ---
 
 ## 3. Approved Thesis Title

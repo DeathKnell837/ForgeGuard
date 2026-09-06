@@ -392,37 +392,80 @@ div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked)
 /* --- 7. File Uploader Styling --- */
 div[data-testid="stFileUploader"] {
     background: #1C2333 !important;
-    border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 12px !important;
-    padding: 1.5rem !important;
+    padding: 20px 24px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 div[data-testid="stFileUploader"]:hover {
-    border-color: rgba(124, 111, 240, 0.5) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(124, 111, 240, 0.3) !important;
 }
 
-div[data-testid="stFileUploader"] section {
-    background: transparent !important;
-    padding: 0 !important;
+div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] {
+    margin-bottom: 12px !important;
+    display: block !important;
 }
 
-div[data-testid="stFileUploader"] button {
-    background-color: #252D40 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] p {
+    font-size: 14px !important;
+    font-weight: 600 !important;
     color: #E2E8F0 !important;
-    border-radius: 6px !important;
-    font-weight: 500 !important;
+    letter-spacing: -0.2px !important;
+}
+
+div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"] {
+    background: rgba(18, 22, 32, 0.6) !important;
+    border: 1px dashed rgba(124, 111, 240, 0.3) !important;
+    border-radius: 10px !important;
+    padding: 32px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    text-align: center !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: #7C6FF0 !important;
+    background: rgba(124, 111, 240, 0.05) !important;
+    box-shadow: 0 0 16px rgba(124, 111, 240, 0.15) !important;
+}
+
+div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"] {
+    background-color: #252D40 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+    border-radius: 8px !important;
+    padding: 8px 24px !important;
+    font-weight: 600 !important;
     font-size: 13px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     transition: all 0.2s ease !important;
 }
 
-div[data-testid="stFileUploader"] button:hover {
+div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"]:hover {
     background-color: #7C6FF0 !important;
     border-color: #7C6FF0 !important;
-    color: #FFFFFF !important;
+    box-shadow: 0 0 12px rgba(124, 111, 240, 0.4) !important;
 }
+
+div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstructions"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstructions"] span {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+    color: #94A3B8 !important;
+    letter-spacing: 0.5px !important;
+}
+
 
 /* --- 8. Model Result Cards (Elevated Interactive Widgets) --- */
 .fg-result-card {
