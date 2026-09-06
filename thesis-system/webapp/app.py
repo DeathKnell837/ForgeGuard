@@ -338,19 +338,22 @@ if page == 'Classify a Receipt':
             image = Image.open(uploaded).convert('RGB')
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
-                render_html(
-                    '''
-                    <div style="background: #1C2333; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px; margin-bottom: 14px;">
-                    '''
-                )
                 st.image(image, width='stretch')
-                render_html('</div>')
                 render_html(
                     '''
-                    <div style="padding: 12px 14px; background: #161D27; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94A3B8; line-height: 1.8;">
-                      <div>Input Resolution: 128 x 128 px (ELA 90Q / 15x)</div>
-                      <div>Decision Threshold: 0.50 (Sigmoid)</div>
-                      <div>Inference Pipeline: Neural Forward Pass</div>
+                    <div class="fg-tech-specs">
+                      <div class="fg-spec-row">
+                        <span class="fg-spec-label">Input Resolution</span>
+                        <span class="fg-spec-value">128 × 128 px (ELA 90Q / 15x)</span>
+                      </div>
+                      <div class="fg-spec-row">
+                        <span class="fg-spec-label">Decision Threshold</span>
+                        <span class="fg-spec-value">0.50 (Sigmoid)</span>
+                      </div>
+                      <div class="fg-spec-row" style="border-bottom: none;">
+                        <span class="fg-spec-label">Inference Pipeline</span>
+                        <span class="fg-spec-value">Neural Forward Pass</span>
+                      </div>
                     </div>
                     '''
                 )
@@ -371,7 +374,6 @@ if page == 'Classify a Receipt':
                         latency = res['latency_ms']
                         
                         verdict_lower = verdict.lower()
-                        verdict_color = '#10B981' if verdict == 'Authentic' else '#EF4444'
                         
                         render_html(
                             f'''
@@ -382,8 +384,8 @@ if page == 'Classify a Receipt':
                                   <div class="fg-model-badge">{arch_description} &bull; {params_description}</div>
                                 </div>
                                 <div style="text-align: right;">
-                                  <div style="color: {verdict_color}; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.8px;">{verdict}</div>
-                                  <div class="fg-confidence" style="color: {verdict_color}; font-size: 28px; font-weight: 700;">{confidence:.1f}%</div>
+                                  <div><span class="fg-verdict-pill fg-verdict-pill-{verdict_lower}">{verdict}</span></div>
+                                  <div class="fg-confidence fg-conf-{verdict_lower}">{confidence:.1f}%</div>
                                   <div class="fg-latency">{latency:.1f} ms</div>
                                 </div>
                               </div>

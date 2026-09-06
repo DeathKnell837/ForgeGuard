@@ -467,12 +467,64 @@ div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstruc
 }
 
 
-/* --- 8. Model Result Cards (Elevated Interactive Widgets) --- */
+/* --- 8. Receipt Image Exhibit & Technical Specs --- */
+div[data-testid="stImage"] {
+    background: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 14px !important;
+}
+
+div[data-testid="stImage"] img {
+    border-radius: 8px !important;
+    display: block !important;
+    width: 100% !important;
+    object-fit: contain !important;
+}
+
+div[data-testid="stImage"] button,
+div[data-testid="stImageToolbar"] {
+    display: none !important;
+}
+
+.fg-tech-specs {
+    background: #1C2333;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.fg-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fg-spec-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #94A3B8;
+}
+
+.fg-spec-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #CBD5E1;
+}
+
+/* --- 8b. Model Result Cards (Elevated Interactive Widgets) --- */
 .fg-result-card {
     background: linear-gradient(180deg, #20293D 0%, #182030 100%);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
-    padding: 18px 22px;
+    padding: 22px 24px;
     margin-bottom: 16px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
@@ -481,8 +533,9 @@ div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstruc
 }
 
 .fg-result-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .fg-verdict-authentic {
@@ -506,7 +559,7 @@ div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstruc
 .fg-model-name {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 17px;
     color: #FFFFFF;
     margin-bottom: 2px;
 }
@@ -523,11 +576,43 @@ div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstruc
     margin-top: 4px;
 }
 
+.fg-verdict-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.fg-verdict-pill-authentic {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10B981;
+}
+
+.fg-verdict-pill-forged {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #EF4444;
+}
+
 .fg-confidence {
     font-family: 'JetBrains Mono', monospace;
     font-size: 28px;
-    font-weight: 700;
-    line-height: 1.1;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 4px 0 2px 0;
+}
+
+.fg-conf-authentic {
+    color: #10B981;
+}
+
+.fg-conf-forged {
+    color: #EF4444;
 }
 
 .fg-latency {
@@ -536,6 +621,7 @@ div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstruc
     color: #94A3B8;
     margin-top: 4px;
 }
+
 
 /* --- 9. Metrics Table & Graphical Performance Visualizer --- */
 /* Graphical Visualizer Card */
