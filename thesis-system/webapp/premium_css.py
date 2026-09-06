@@ -215,6 +215,9 @@ div[data-testid="stFileUploader"] {
 div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] p { color: var(--fg-paper) !important; font-size: 14px !important; font-weight: 650 !important; }
 div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"] {
     min-height: 132px !important; border: 1px dashed rgba(91,191,207,.42) !important; border-radius: 7px !important;
+    padding: 26px 20px !important; box-sizing: border-box !important;
+    display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
+    gap: 12px !important; text-align: center !important;
     background: rgba(4,14,23,.37) !important; transition: .2s ease !important;
 }
 div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"]:hover {
@@ -248,7 +251,7 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
     box-shadow: 0 10px 26px rgba(0,0,0,.19), inset 0 1px 0 rgba(255,255,255,.025) !important;
     transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease !important;
 }
-.fg-result-card::after { content:""; position:absolute; width: 130px; height: 130px; right:-55px; top:-65px; border:1px solid rgba(152,209,220,.08); border-radius:50%; }
+.fg-result-card::after { display: none; }
 .fg-result-card:hover { transform: translateY(-2px); border-color: rgba(143,208,218,.35) !important; box-shadow: 0 15px 32px rgba(0,0,0,.27) !important; }
 .fg-verdict-authentic { border-left-color: var(--fg-green) !important; }
 .fg-verdict-forged { border-left-color: var(--fg-red) !important; }
@@ -266,7 +269,7 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
     background: linear-gradient(135deg, #102233, #0e1d2b) !important; border: 1px solid var(--fg-line) !important;
     border-radius: 10px !important; padding: 24px !important; box-shadow: 0 16px 38px rgba(0,0,0,.2) !important;
 }
-.fg-chart-grid { gap: 18px; }
+.fg-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
 .fg-chart-subpanel { background: rgba(5,16,25,.43); border: 1px solid rgba(164,208,221,.1); border-radius: 7px; padding: 17px; }
 .fg-chart-title { color: #dcebee; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .fg-bar-row { margin-bottom: 13px; }
@@ -280,10 +283,10 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-section-gap { margin-top: 38px; margin-bottom: 15px; }
 .fg-section-title { color: #e3f0f2; font-size: 15px; font-weight: 650; letter-spacing: -.1px; }
 .fg-section-title::before { content:""; display:inline-block; width: 5px; height: 5px; margin: 0 9px 2px 0; border-radius:50%; background: var(--fg-cyan); box-shadow: 0 0 10px rgba(66,216,205,.6); }
-.fg-metrics-table { background: #0f202f; border: 1px solid var(--fg-line); border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,.14); }
+.fg-metrics-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; background: #0f202f; border: 1px solid var(--fg-line); border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,.14); }
 .fg-metrics-table thead tr { background: #152b3d; }
-.fg-metrics-table th { color: #a9c7d1; font-size: 11px; letter-spacing: .75px; border-bottom: 1px solid var(--fg-line); }
-.fg-metrics-table td { color: #dcebed; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; }
+.fg-metrics-table th { padding: 13px 14px; color: #a9c7d1; font-size: 11px; letter-spacing: .75px; border-bottom: 1px solid var(--fg-line); white-space: nowrap; }
+.fg-metrics-table td { padding: 13px 14px; color: #dcebed; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; white-space: nowrap; }
 .fg-metrics-table td.arch-cell { color: var(--fg-paper); }.fg-metrics-table tbody tr:nth-child(even) { background: rgba(115,168,255,.025); }
 .fg-metrics-table tbody tr:hover { background: rgba(66,216,205,.055) !important; }
 .fg-pending { color: var(--fg-dim); }.fg-metrics-table tbody tr:has(td.fg-pending) { background: rgba(144,163,174,.035) !important; }
