@@ -179,3 +179,9 @@ thesis-system/webapp_backup_*/
 # Antigravity
 .agents/
 ForgeGuard/
+
+# Virtual Environments & Scratch
+.venv*/
+**/venv*/
+*.venv*
+scratch_*.png
