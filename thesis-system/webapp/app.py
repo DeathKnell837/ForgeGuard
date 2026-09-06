@@ -529,7 +529,7 @@ elif page == 'Model Comparison':
             '''
         )
 
-        st.markdown('<div style="font-size: 16px; font-weight: 600; color: #E2E8F0; margin-bottom: 14px;">Overall Architecture Benchmark</div>', unsafe_allow_html=True)
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Overall Architecture Benchmark</div></div>', unsafe_allow_html=True)
         
         table_html = '''
         <table class="fg-metrics-table">
@@ -594,7 +594,7 @@ elif page == 'Model Comparison':
         render_html(table_html)
         
         # Confusion Matrix Section
-        st.markdown('<div style="font-size: 16px; font-weight: 600; color: #E2E8F0; margin-top: 24px; margin-bottom: 12px;">Confusion Matrix</div>', unsafe_allow_html=True)
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Confusion Matrix</div></div>', unsafe_allow_html=True)
         selected_model = st.selectbox('Select Architecture', list(model_info.keys()), label_visibility='collapsed')
         
         cm_data = {
@@ -671,7 +671,7 @@ elif page == 'Model Comparison':
         )
         
         # Dataset Composition Panel (Table 1 from Paper)
-        st.markdown('<div style="font-size: 16px; font-weight: 600; color: #E2E8F0; margin-top: 24px; margin-bottom: 12px;">Dataset Composition (Table 1)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Dataset Composition (Table 1)</div></div>', unsafe_allow_html=True)
         
         dataset_table_html = '''
         <table class="fg-metrics-table">

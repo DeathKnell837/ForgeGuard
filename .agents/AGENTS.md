@@ -46,19 +46,21 @@ This workspace customizations file provides context and instructions to the Anti
 > All thesis titles must contain the specific algorithms or mathematical models directly in the text (e.g., *Explainable Transfer Learning*, *Hybrid Neural Networks*, *Multi-Engine Neural Networks*, *Steganography*, *Genetic Algorithms*). This ensures that the topic is classified as **100% Computer Science** rather than Information Technology (IT) capstones. Avoid generic prefixes like "Automated System" or "Monitoring".
 
 > [!CRITICAL]
-> **Rule 5: Single Workspace (`c:\Users\USER\Desktop\THESIS`) with Dual Remotes**
+> **Rule 5: Dual Remotes & Repository Boundary Non-Interference Policy**
 > The single local workspace is `c:\Users\USER\Desktop\THESIS`. Never create separate clones on Desktop.
 >
-> | Remote Name | Target Repository | Purpose |
-> |:------------|:------------------|:--------|
-> | `origin` | `DeathKnell837/NDMC-BSCS-THESIS-PREP` | Primary thesis workspace repository (`thesis-docs/`, `thesis-system/`, `README.md`) |
-> | `forgeguard` | `DeathKnell837/ForgeGuard` | Live Streamlit Cloud deployment target (`forgeguard.streamlit.app`) |
+> | Remote Name | Target Repository | Purpose & Content Scope | Root README Identity |
+> |:------------|:------------------|:------------------------|:---------------------|
+> | `origin` | `DeathKnell837/NDMC-BSCS-THESIS-PREP` | **Primary Thesis Research Workspace.** Houses all proposal manuscripts (`THESIS1UNGAB_BACANTO.docx`/`.md`), guidelines, literature reviews, defense slides, research outlines, and full codebase backup. | **Master Academic Thesis Workspace Hub** (`README.md` at root on `main`) |
+> | `forgeguard` | `DeathKnell837/ForgeGuard` | **Software System & Deployment Repository.** Dedicated host for Streamlit Cloud deployment (`forgeguard.streamlit.app`), Python runtime, models, dataset, ELA engine, and webapp. | **ForgeGuard Software Engineering Guide** (`thesis-system/README.md`) |
 >
-> **MANDATORY RULES:**
-> * All work is conducted inside `c:\Users\USER\Desktop\THESIS`.
-> * Thesis documentation and writing stay inside `thesis-docs/`.
-> * System implementation, dataset, models, and webapp stay inside `thesis-system/` and `webapp/`.
-> * Push to `origin` for thesis prep sync; push to `forgeguard` when deploying webapp changes to Streamlit Cloud.
+> **MANDATORY PUSH & SYNCHRONIZATION RULES (NO INTERFERENCE):**
+> * **Thesis Documentation & Academic Writing:** All thesis documentation, manuscripts, and writing stay inside `thesis-docs/`. Commit on `main` and push to `origin`.
+> * **System Implementation & Webapp:** System implementation, dataset, models, and webapp stay inside `thesis-system/` and `webapp/`.
+> * **Pushing without README Interference:**
+>   - When pushing thesis prep changes: Push to `origin main`. The root `README.md` in `origin` must ALWAYS be the Academic Thesis Workspace Hub.
+>   - When deploying to Streamlit Cloud: Run `.\deploy-forgeguard.ps1` (or temporarily set root `README.md` to `thesis-system/README.md` for the `forgeguard` push, then restore the academic README for `origin`).
+>   - NEVER push the software system README directly to `origin/main` root.
 
 > [!IMPORTANT]
 > **Rule 6: Approved Title is Final**

@@ -683,6 +683,88 @@ div[data-testid="stFileUploader"] button:hover {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #3B4763;
+    border-radius: 3px;
+}
+
+/* --- 12. Selectbox Dark Theme (Confusion Matrix Dropdown) --- */
+div[data-testid="stSelectbox"] {
+    max-width: 340px !important;
+}
+
+div[data-testid="stSelectbox"] > div > div {
+    background-color: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 8px !important;
+    color: #E2E8F0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+div[data-testid="stSelectbox"] > div > div:hover {
+    border-color: rgba(124, 111, 240, 0.5) !important;
+}
+
+div[data-testid="stSelectbox"] > div > div:focus-within {
+    border-color: #7C6FF0 !important;
+    box-shadow: 0 0 0 2px rgba(124, 111, 240, 0.2) !important;
+}
+
+div[data-testid="stSelectbox"] svg {
+    fill: #94A3B8 !important;
+}
+
+/* Dropdown listbox */
+ul[data-testid="stSelectboxOptionsList"],
+div[data-baseweb="popover"] > div,
+div[data-baseweb="menu"] {
+    background-color: #1C2333 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 8px !important;
+}
+
+li[role="option"] {
+    color: #E2E8F0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+}
+
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"] {
+    background-color: rgba(124, 111, 240, 0.15) !important;
+}
+
+/* --- 13. Table Row Alternating Backgrounds --- */
+.fg-metrics-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.fg-metrics-table tbody tr:nth-child(odd) {
+    background-color: transparent;
+}
+
+/* Pending evaluation rows: distinct muted style */
+.fg-metrics-table tbody tr:has(td.fg-pending) {
+    background-color: rgba(100, 116, 139, 0.06) !important;
+    border-left: 3px solid rgba(100, 116, 139, 0.25);
+}
+
+.fg-metrics-table tbody tr:has(td.fg-pending):hover {
+    background-color: rgba(100, 116, 139, 0.10) !important;
+}
+
+/* --- 14. Section Spacing Normalization --- */
+.fg-section-gap {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.fg-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 14px;
 }
 </style>
 """
