@@ -277,7 +277,7 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-bar-row { margin-bottom: 13px; }
 .fg-bar-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px; font-size: 12px; }
 .fg-bar-label { color: #c6d8de; }.fg-bar-val { font-family: var(--fg-mono); font-weight: 700; white-space: nowrap; }.fg-bar-track { height: 6px; background: rgba(159,198,208,.12); border-radius: 99px; }
-.fg-bar-fill { border-radius: 99px; box-shadow: 0 0 12px rgba(66,216,205,.18); transform-origin: left; animation: fg-bar-grow .9s cubic-bezier(.2,.8,.2,1) both; }
+.fg-bar-fill { display: block; height: 100%; border-radius: 99px; box-shadow: 0 0 12px rgba(66,216,205,.18); transform-origin: left; animation: fg-bar-grow .9s cubic-bezier(.2,.8,.2,1) both; }
 .fg-bar-row:nth-child(3) .fg-bar-fill { animation-delay: .08s; }.fg-bar-row:nth-child(4) .fg-bar-fill { animation-delay: .16s; }.fg-bar-row:nth-child(5) .fg-bar-fill { animation-delay: .24s; }
 .fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(2) .fg-bar-fill { background: linear-gradient(90deg, #159c96, #42d8cd) !important; }
 .fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(3) .fg-bar-fill { background: linear-gradient(90deg, #5b73d8, #8aa2ff) !important; }
