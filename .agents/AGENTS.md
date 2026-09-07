@@ -80,6 +80,13 @@ This workspace customizations file provides context and instructions to the Anti
 > * When asked to improve the UI or design, focus **strictly on CSS visual refinement** (alignment, centering, spacing, surface contrast, clean typography, responsive layout).
 > * Keep all UI text, labels, and operational flows strictly identical to the approved thesis scope so that the system remains simple, robust, and directly defensible without adding unnecessary complexity to the thesis defense.
 
+> [!CRITICAL]
+> **Rule 9: Canonical Manuscript Ground Truth (`THESIS1UNGAB_BACANTO`)**
+> * The **ONLY** authoritative, living source of truth for all thesis methodology, research questions, scope, dataset specifications, experimental design, and citations is the newest proposal manuscript:
+>   - [`thesis-docs/THESIS1UNGAB_BACANTO.docx`](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/THESIS1UNGAB_BACANTO.docx) / [`thesis-docs/THESIS1UNGAB_BACANTO.md`](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/THESIS1UNGAB_BACANTO.md).
+> * **NEVER** consult, extract requirements from, or treat old standalone draft documents (such as `Chapter1_Digital_Deception_Mobile_Wallet.*`, `Chapter2_Review_of_Related_Literature.*`, or older candidate/scratch files) as reference material.
+> * If any contradiction arises between `THESIS1UNGAB_BACANTO` and any other document in this workspace, `THESIS1UNGAB_BACANTO` **ALWAYS** takes absolute precedence.
+
 ---
 
 ## 3. Approved Thesis Title
@@ -94,6 +101,8 @@ This workspace customizations file provides context and instructions to the Anti
 
 ## 4. Key Project Files
 Refer to these files in the workspace for details:
+* [THESIS1UNGAB_BACANTO.md](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/THESIS1UNGAB_BACANTO.md) — **Canonical Thesis Proposal Manuscript (Latest Living Document & Ground Truth)**
+* [THESIS1UNGAB_BACANTO.docx](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/THESIS1UNGAB_BACANTO.docx) — Formal Word proposal manuscript for submission
 * [student_info.md](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/student_info.md) — Student profile and schedule
 * [bscs_thesis_guidelines.md](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/bscs_thesis_guidelines.md) — Formatted BSCS thesis outline and formatting rules
 * [implementation_plan.md](file:///c:/Users/USER/Desktop/THESIS/thesis-docs/implementation_plan.md) — Complete 10-phase thesis preparation plan
