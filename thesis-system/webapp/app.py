@@ -446,29 +446,6 @@ if page == 'Classify a Receipt':
                         </div>
                         '''
                     )
-
-                render_html(
-                    '''
-                    <div class="fg-tech-specs">
-                      <div class="fg-spec-header">
-                        <span class="fg-spec-dot"></span>
-                        <span>Technical Specifications</span>
-                      </div>
-                      <div class="fg-spec-row">
-                        <span class="fg-spec-label">Input Resolution</span>
-                        <span class="fg-spec-value">128 × 128 px (ELA 90Q / 15x)</span>
-                      </div>
-                      <div class="fg-spec-row">
-                        <span class="fg-spec-label">Decision Threshold</span>
-                        <span class="fg-spec-value">0.50 (Sigmoid)</span>
-                      </div>
-                      <div class="fg-spec-row" style="border-bottom: none;">
-                        <span class="fg-spec-label">Inference Pipeline</span>
-                        <span class="fg-spec-value">Neural Forward Pass</span>
-                      </div>
-                    </div>
-                    '''
-                )
                 
         except Exception as e:
             st.error(f'Error processing image: {str(e)}')
