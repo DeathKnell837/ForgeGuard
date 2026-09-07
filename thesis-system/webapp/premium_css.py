@@ -451,13 +451,13 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 }
 .fg-result-card::after { display: none; }
 .fg-result-card:hover { transform: translateY(-2px); border-color: rgba(143,208,218,.35) !important; box-shadow: 0 15px 32px rgba(0,0,0,.27) !important; }
-.fg-verdict-authentic { border-left-color: var(--fg-green) !important; }
-.fg-verdict-forged { border-left-color: var(--fg-red) !important; }
+.fg-verdict-authentic { border-left-color: var(--fg-green) !important; background: linear-gradient(135deg, rgba(18,58,54,.7), rgba(12,26,38,.98)) !important; }
+.fg-verdict-forged { border-left-color: var(--fg-red) !important; background: linear-gradient(135deg, rgba(65,30,38,.62), rgba(12,26,38,.98)) !important; }
 .fg-model-name { color: var(--fg-paper); font-size: 17px; letter-spacing: -.2px; }
 .fg-model-badge { color: #a9c0ca; background: rgba(137,187,200,.08); border-color: rgba(137,187,200,.16); border-radius: 4px; }
-.fg-verdict-pill { border-radius: 4px; font-family: var(--fg-mono); font-size: 11px; letter-spacing: .65px; }
-.fg-verdict-pill-authentic { color: var(--fg-green); background: rgba(84,210,155,.09); border-color: rgba(84,210,155,.3); }
-.fg-verdict-pill-forged { color: var(--fg-red); background: rgba(255,101,116,.09); border-color: rgba(255,101,116,.3); }
+.fg-verdict-pill { display: inline-block; padding: 5px 8px; border: 1px solid; border-radius: 4px; font-family: var(--fg-mono); font-size: 11px; font-weight: 750; letter-spacing: .75px; }
+.fg-verdict-pill-authentic { color: #8cf0bd; background: rgba(84,210,155,.15); border-color: rgba(84,210,155,.48); }
+.fg-verdict-pill-forged { color: #ff9ba5; background: rgba(255,101,116,.15); border-color: rgba(255,101,116,.48); }
 .fg-confidence { font-family: var(--fg-mono); font-size: 27px; }
 .fg-conf-authentic { color: var(--fg-green); }.fg-conf-forged { color: var(--fg-red); }
 .fg-latency { color: #99b7c3; font-family: var(--fg-mono); }
@@ -479,12 +479,13 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-chart-title { color: #dcebee; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .fg-bar-row { margin-bottom: 13px; }
 .fg-bar-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px; font-size: 12px; }
-.fg-bar-label { color: #c6d8de; }.fg-bar-val { font-family: var(--fg-mono); font-weight: 700; white-space: nowrap; }.fg-bar-track { height: 6px; background: rgba(159,198,208,.12); border-radius: 99px; }
-.fg-bar-fill { display: block; height: 100%; border-radius: 99px; box-shadow: 0 0 12px rgba(66,216,205,.18); transform-origin: left; animation: fg-bar-grow .9s cubic-bezier(.2,.8,.2,1) both; }
+.fg-bar-label { color: #d8e8ed; font-weight: 600; }.fg-bar-val { font-family: var(--fg-mono); font-weight: 750; white-space: nowrap; }.fg-bar-track { height: 7px; background: rgba(159,198,208,.17); border-radius: 99px; }
+.fg-bar-fill { display: block; height: 100%; border-radius: 99px; box-shadow: 0 0 14px rgba(66,216,205,.28); transform-origin: left; animation: fg-bar-grow .9s cubic-bezier(.2,.8,.2,1) both; }
 .fg-bar-row:nth-child(3) .fg-bar-fill { animation-delay: .08s; }.fg-bar-row:nth-child(4) .fg-bar-fill { animation-delay: .16s; }.fg-bar-row:nth-child(5) .fg-bar-fill { animation-delay: .24s; }
-.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(2) .fg-bar-fill { background: linear-gradient(90deg, #159c96, #42d8cd) !important; }
-.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(3) .fg-bar-fill { background: linear-gradient(90deg, #5b73d8, #8aa2ff) !important; }
-.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #4b6174, #7892a8) !important; }
+.fg-chart-subpanel:first-child .fg-bar-val { color: #57ebe0 !important; }
+.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(2) .fg-bar-fill,
+.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(3) .fg-bar-fill,
+.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #149f98, #57ebe0) !important; }
 .fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(2) .fg-bar-fill { background: linear-gradient(90deg, #159c96, #42d8cd) !important; }
 .fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(3) .fg-bar-fill { background: linear-gradient(90deg, #268f9a, #49c7d1) !important; }
 .fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #bd7d2d, #f5b94f) !important; }
