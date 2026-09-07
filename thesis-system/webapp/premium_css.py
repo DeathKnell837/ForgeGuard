@@ -384,24 +384,9 @@ div[data-testid="stImage"] {
     padding: 10px !important; margin-bottom: 15px !important; border: 1px solid var(--fg-line) !important;
     border-radius: 9px !important; background: #0f202e !important;
     box-shadow: 0 14px 32px rgba(0,0,0,.23) !important;
-    position: relative !important; overflow: hidden !important;
 }
-div[data-testid="stImage"] img { position: relative !important; z-index: 1 !important; border-radius: 5px !important; width: 100% !important; }
+div[data-testid="stImage"] img { border-radius: 5px !important; width: 100% !important; }
 div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: none !important; }
-div[data-testid="stImage"]::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: 10px;
-    bottom: 10px;
-    width: 42%;
-    pointer-events: none;
-    opacity: 0;
-    background: linear-gradient(90deg, transparent, rgba(87,235,224,.09) 42%, rgba(87,235,224,.58) 50%, rgba(87,235,224,.09) 58%, transparent);
-    border-right: 1px solid rgba(87,235,224,.76);
-    box-shadow: 12px 0 28px rgba(66,216,205,.22);
-    animation: fg-receipt-scan 1.55s ease-in-out .12s 2;
-}
 
 /* Model findings: intentionally strong only when a decision is present. */
 .fg-result-card {
@@ -553,7 +538,6 @@ li[role="option"]:hover, li[role="option"][aria-selected="true"] { background: r
 @keyframes fg-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fg-bar-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes fg-loading-sweep { 0% { background-position: -42% 0; } 100% { background-position: 142% 0; } }
-@keyframes fg-receipt-scan { 0% { left: -44%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 102%; opacity: 0; } }
 @keyframes fg-verdict-reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fg-card-signal { 0% { opacity: 0; transform: translateX(-120%); } 22% { opacity: 1; } 100% { opacity: 0; transform: translateX(120%); } }
 @keyframes fg-authentic-glow { 0%,100% { box-shadow: 0 0 0 rgba(84,210,155,0); } 45% { box-shadow: 0 0 0 4px rgba(84,210,155,.16), 0 0 20px rgba(84,210,155,.28); } }
