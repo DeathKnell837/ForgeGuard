@@ -397,6 +397,24 @@ if page == 'Classify a Receipt':
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
                 st.image(image, width='stretch')
+                render_html(
+                    '''
+                    <div class="fg-tech-specs">
+                      <div class="fg-spec-row">
+                        <span class="fg-spec-label">Input Resolution</span>
+                        <span class="fg-spec-value">128 × 128 px (ELA 90Q / 15x)</span>
+                      </div>
+                      <div class="fg-spec-row">
+                        <span class="fg-spec-label">Decision Threshold</span>
+                        <span class="fg-spec-value">0.50 (Sigmoid)</span>
+                      </div>
+                      <div class="fg-spec-row" style="border-bottom: none;">
+                        <span class="fg-spec-label">Inference Pipeline</span>
+                        <span class="fg-spec-value">Neural Forward Pass</span>
+                      </div>
+                    </div>
+                    '''
+                )
                 
             with col2:
                 models_bundle = load_all_models()
@@ -430,25 +448,6 @@ if page == 'Classify a Receipt':
                             </div>
                             '''
                         )
-                
-                render_html(
-                    '''
-                    <div class="fg-tech-specs" style="margin-top: 6px;">
-                      <div class="fg-spec-row">
-                        <span class="fg-spec-label">Input Resolution</span>
-                        <span class="fg-spec-value">128 × 128 px (ELA 90Q / 15x)</span>
-                      </div>
-                      <div class="fg-spec-row">
-                        <span class="fg-spec-label">Decision Threshold</span>
-                        <span class="fg-spec-value">0.50 (Sigmoid)</span>
-                      </div>
-                      <div class="fg-spec-row" style="border-bottom: none;">
-                        <span class="fg-spec-label">Inference Pipeline</span>
-                        <span class="fg-spec-value">Neural Forward Pass</span>
-                      </div>
-                    </div>
-                    '''
-                )
                         
             if check_out_of_domain(image):
                 render_html(
