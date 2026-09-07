@@ -397,9 +397,47 @@ if page == 'Classify a Receipt':
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
                 st.image(image, width='stretch')
+                
+            with col2:
+                models_bundle = load_all_models()
+                model_info = get_model_info()
+                results = run_universal_inference(image, models_bundle)
+                
+                for model_name, res in results.items():
+                    meta = model_info.get(model_name, {})
+                    arch_description = meta.get('arch', '')
+                    params_description = meta.get('params', '')
+                    verdict = res['verdict']
+                    confidence = res['confidence']
+                    latency = res['latency_ms']
+                    
+                    verdict_lower = verdict.lower()
+                    
+                    render_html(
+                        f'''
+                        <div class="fg-result-card fg-verdict-{verdict_lower}">
+                          <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                              <div class="fg-model-name">{model_name}</div>
+                              <div class="fg-model-badge">{arch_description} &bull; {params_description}</div>
+                            </div>
+                            <div style="text-align: right;">
+                              <div><span class="fg-verdict-pill fg-verdict-pill-{verdict_lower}">{verdict}</span></div>
+                              <div class="fg-confidence fg-conf-{verdict_lower}">{confidence:.1f}%</div>
+                              <div class="fg-latency">{latency:.1f} ms</div>
+                            </div>
+                          </div>
+                        </div>
+                        '''
+                    )
+
                 render_html(
                     '''
                     <div class="fg-tech-specs">
+                      <div class="fg-spec-header">
+                        <span class="fg-spec-dot"></span>
+                        <span>Technical Specifications</span>
+                      </div>
                       <div class="fg-spec-row">
                         <span class="fg-spec-label">Input Resolution</span>
                         <span class="fg-spec-value">128 × 128 px (ELA 90Q / 15x)</span>
@@ -415,39 +453,6 @@ if page == 'Classify a Receipt':
                     </div>
                     '''
                 )
-                
-            with col2:
-                models_bundle = load_all_models()
-                model_info = get_model_info()
-                results = run_universal_inference(image, models_bundle)
-                
-                for model_name, res in results.items():
-                        meta = model_info.get(model_name, {})
-                        arch_description = meta.get('arch', '')
-                        params_description = meta.get('params', '')
-                        verdict = res['verdict']
-                        confidence = res['confidence']
-                        latency = res['latency_ms']
-                        
-                        verdict_lower = verdict.lower()
-                        
-                        render_html(
-                            f'''
-                            <div class="fg-result-card fg-verdict-{verdict_lower}">
-                              <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                  <div class="fg-model-name">{model_name}</div>
-                                  <div class="fg-model-badge">{arch_description} &bull; {params_description}</div>
-                                </div>
-                                <div style="text-align: right;">
-                                  <div><span class="fg-verdict-pill fg-verdict-pill-{verdict_lower}">{verdict}</span></div>
-                                  <div class="fg-confidence fg-conf-{verdict_lower}">{confidence:.1f}%</div>
-                                  <div class="fg-latency">{latency:.1f} ms</div>
-                                </div>
-                              </div>
-                            </div>
-                            '''
-                        )
                         
             if check_out_of_domain(image):
                 render_html(

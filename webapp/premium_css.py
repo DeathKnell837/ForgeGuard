@@ -238,10 +238,59 @@ div[data-testid="stImage"] {
 }
 div[data-testid="stImage"] img { border-radius: 5px !important; width: 100% !important; }
 div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: none !important; }
-.fg-tech-specs { background: #0e1d2a; border: 1px solid var(--fg-line); border-radius: 8px; padding: 13px 16px; }
-.fg-spec-row { padding: 8px 0; border-color: rgba(167,196,214,.11); }
-.fg-spec-label { color: var(--fg-muted); font-size: 11px; }
-.fg-spec-value { color: #d9e9ed; font-family: var(--fg-mono); font-size: 11px; }
+.fg-tech-specs {
+    background: linear-gradient(135deg, rgba(16, 31, 45, 0.95), rgba(11, 23, 35, 0.95)) !important;
+    border: 1px solid var(--fg-line) !important;
+    border-radius: 9px !important;
+    padding: 16px 20px !important;
+    margin-top: 10px !important;
+    box-shadow: 0 10px 26px rgba(0,0,0,.19), inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+.fg-spec-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(167,196,214,.11) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: var(--fg-cyan) !important;
+}
+.fg-spec-dot {
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: var(--fg-cyan) !important;
+    box-shadow: 0 0 8px rgba(66,216,205,.6) !important;
+}
+.fg-spec-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 9px 0 !important;
+    border-bottom: 1px solid rgba(167,196,214,.11) !important;
+}
+.fg-spec-row:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+.fg-spec-label {
+    color: var(--fg-muted) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+.fg-spec-value {
+    color: #d9e9ed !important;
+    font-family: var(--fg-mono) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
 
 /* Model findings: intentionally strong only when a decision is present. */
 .fg-result-card {
