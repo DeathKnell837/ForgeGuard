@@ -394,6 +394,19 @@ if page == 'Classify a Receipt':
     if uploaded is not None:
         try:
             image = Image.open(uploaded).convert('RGB')
+            
+            if check_out_of_domain(image):
+                render_html(
+                    '''
+                    <div class="fg-advisory">
+                      <div class="fg-advisory-inner">
+                        <span class="fg-advisory-tag">ADVISORY</span>
+                        <span class="fg-advisory-text">This image deviates from standard GCash downloadable receipt characteristics (aspect ratio / resolution). Evaluated under standard binary classification.</span>
+                      </div>
+                    </div>
+                    '''
+                )
+            
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
                 st.image(image, width='stretch')
@@ -450,15 +463,6 @@ if page == 'Classify a Receipt':
                         <span class="fg-spec-label">Inference Pipeline</span>
                         <span class="fg-spec-value">Neural Forward Pass</span>
                       </div>
-                    </div>
-                    '''
-                )
-                        
-            if check_out_of_domain(image):
-                render_html(
-                    '''
-                    <div class="fg-advisory">
-                      Note: This image deviates from standard GCash downloadable receipt characteristics. Evaluated under standard binary classification.
                     </div>
                     '''
                 )

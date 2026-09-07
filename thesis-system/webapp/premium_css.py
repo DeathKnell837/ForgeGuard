@@ -365,7 +365,42 @@ td[style*="rgba(239, 68, 68"] { background: rgba(255,101,116,.08) !important; bo
 td div[style*="color: #10B981"] { color: var(--fg-green) !important; }
 td div[style*="color: #EF4444"] { color: var(--fg-red) !important; }
 
-.fg-advisory { background: rgba(245,189,104,.08); border-left-color: var(--fg-amber); border-radius: 0 7px 7px 0; color: #e6eff0; }
+.fg-advisory {
+    background: rgba(245, 189, 104, 0.08) !important;
+    border: 1px solid rgba(245, 189, 104, 0.28) !important;
+    border-left: 4px solid var(--fg-amber) !important;
+    border-radius: 8px !important;
+    padding: 12px 18px !important;
+    margin: 18px 0 22px 0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+.fg-advisory-inner {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+.fg-advisory-tag {
+    display: inline-block !important;
+    padding: 3px 8px !important;
+    background: rgba(245, 189, 104, 0.16) !important;
+    border: 1px solid rgba(245, 189, 104, 0.38) !important;
+    border-radius: 4px !important;
+    font-family: var(--fg-mono) !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    color: var(--fg-amber) !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+}
+.fg-advisory-text {
+    color: #e6eff0 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    font-weight: 450 !important;
+}
 
 /* Select and popover controls */
 div[data-testid="stSelectbox"] { max-width: 340px !important; }
