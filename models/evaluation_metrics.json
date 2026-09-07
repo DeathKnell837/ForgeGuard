@@ -22,5 +22,53 @@
     "f1_score": 0.9802,
     "latency_ms": 109.4,
     "train_duration_s": 390.19
+  },
+  "Basic_CNN_Compressed": {
+    "accuracy": 0.9243,
+    "precision": 0.9961,
+    "recall": 0.914,
+    "f1_score": 0.9533,
+    "latency_ms": 13.49,
+    "confusion": {
+      "tp": 776,
+      "tn": 152,
+      "fp": 3,
+      "fn": 73
+    },
+    "dataset_size": 1004,
+    "authentic_count": 155,
+    "forged_count": 849
+  },
+  "MobileNetV2_Compressed": {
+    "accuracy": 0.9004,
+    "precision": 0.9057,
+    "recall": 0.9847,
+    "f1_score": 0.9436,
+    "latency_ms": 129.75,
+    "confusion": {
+      "tp": 836,
+      "tn": 68,
+      "fp": 87,
+      "fn": 13
+    },
+    "dataset_size": 1004,
+    "authentic_count": 155,
+    "forged_count": 849
+  },
+  "ResNet50_Compressed": {
+    "accuracy": 0.8456,
+    "precision": 0.8456,
+    "recall": 1.0,
+    "f1_score": 0.9164,
+    "latency_ms": 202.14,
+    "confusion": {
+      "tp": 849,
+      "tn": 0,
+      "fp": 155,
+      "fn": 0
+    },
+    "dataset_size": 1004,
+    "authentic_count": 155,
+    "forged_count": 849
   }
 }

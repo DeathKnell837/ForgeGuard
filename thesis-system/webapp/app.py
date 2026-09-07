@@ -405,15 +405,16 @@ if page == 'Classify a Receipt':
                     '''
                 )
             
+            models_bundle = load_all_models()
+            model_info = get_model_info()
+            with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
+                results = run_universal_inference(image, models_bundle)
+            
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
                 st.image(image, width='stretch')
                 
             with col2:
-                models_bundle = load_all_models()
-                model_info = get_model_info()
-                with st.spinner("Extracting forensic ELA & executing multi-CNN inference..."):
-                    results = run_universal_inference(image, models_bundle)
                 
                 for model_name, res in results.items():
                     meta = model_info.get(model_name, {})
@@ -614,7 +615,9 @@ elif page == 'Model Comparison':
             <tbody>
         '''
         
-        for raw_model_name, data in metrics.items():
+        standard_keys = [k for k in metrics.keys() if not k.endswith('_Compressed')]
+        for raw_model_name in standard_keys:
+            data = metrics[raw_model_name]
             model_name = raw_model_name.replace('_', ' ')
             params = model_info.get(model_name, {}).get('params', 'N/A')
             
@@ -643,15 +646,39 @@ elif page == 'Model Comparison':
             </tr>
             '''
             
-            # Compressed Condition (Pending evaluation)
-            table_html += f'''
+            # Compressed Condition (read from metrics if available)
+            comp_key = f"{raw_model_name}_Compressed"
+            comp_data = metrics.get(comp_key, None)
+            if comp_data:
+                c_acc = comp_data.get('accuracy', 0) * 100.0
+                c_prec = comp_data.get('precision', 0) * 100.0
+                c_rec = comp_data.get('recall', 0) * 100.0
+                c_f1 = comp_data.get('f1_score', 0) * 100.0
+                c_lat = comp_data.get('latency_ms', 0)
+                c_acc_html = f'<span class="fg-metric-top">{c_acc:.2f}%</span>' if c_acc >= 98.0 else f'{c_acc:.2f}%'
+                c_f1_html = f'<span class="fg-metric-top">{c_f1:.2f}%</span>' if c_f1 >= 98.8 else f'{c_f1:.2f}%'
+                c_lat_html = f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0 else f'{c_lat:.2f} ms'
+                table_html += f'''
+            <tr>
+                <td class="arch-cell">{model_name}</td>
+                <td style="font-family: Inter, sans-serif;">Compressed</td>
+                <td>{c_acc_html}</td>
+                <td>{c_prec:.2f}%</td>
+                <td>{c_rec:.2f}%</td>
+                <td>{c_f1_html}</td>
+                <td>{c_lat_html}</td>
+                <td>{params}</td>
+            </tr>
+                '''
+            else:
+                table_html += f'''
             <tr>
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Compressed</td>
                 <td class="fg-pending" colspan="5">Not yet evaluated</td>
                 <td>{params}</td>
             </tr>
-            '''
+                '''
             
         table_html += '''
             </tbody>

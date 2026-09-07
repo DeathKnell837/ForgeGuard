@@ -304,9 +304,6 @@ button[data-testid="stBaseButton-borderlessIcon"] span[data-testid="stIconMateri
 
 /* Real-time forensic neural inference loading indicator */
 div[data-testid="stSpinner"] {
-    display: flex !important;
-    align-items: center !important;
-    gap: 14px !important;
     background: linear-gradient(135deg, rgba(16, 34, 50, 0.96), rgba(11, 23, 35, 0.96)) !important;
     border: 1px solid rgba(66, 216, 205, 0.35) !important;
     border-left: 4px solid var(--fg-cyan) !important;
@@ -315,20 +312,26 @@ div[data-testid="stSpinner"] {
     margin: 10px 0 18px 0 !important;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3), 0 0 16px rgba(66, 216, 205, 0.08) !important;
 }
-div[data-testid="stSpinner"] > div:first-child {
+div[data-testid="stSpinner"] > div {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+div[data-testid="stSpinner"] > div > i {
     border-color: rgba(66, 216, 205, 0.2) !important;
     border-top-color: var(--fg-cyan) !important;
     width: 22px !important;
     height: 22px !important;
+    min-width: 22px !important;
 }
-div[data-testid="stSpinner"] span,
-div[data-testid="stSpinner"] p,
-div[data-testid="stSpinner"] div {
+div[data-testid="stSpinner"] > div > span {
     color: var(--fg-paper) !important;
     font-family: var(--fg-sans) !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     letter-spacing: 0.3px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
 }
 
 /* Receipt exhibit and acquisition metadata */
