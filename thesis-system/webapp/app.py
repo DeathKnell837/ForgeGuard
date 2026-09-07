@@ -501,9 +501,11 @@ elif page == 'Model Comparison':
                   <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Performance Trade-Off Analysis</div>
                   <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures</div>
                 </div>
-                <div style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
+                <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
                   <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF;"></span>Accuracy (%)</span>
                   <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>Latency (ms)</span>
+                  <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest latency</span>
+                  <span class="fg-signal-key fg-signal-key-slow"><span aria-hidden="true"></span>Highest latency</span>
                 </div>
               </div>
               
@@ -630,11 +632,15 @@ elif page == 'Model Comparison':
             # Strategic accents for top-performing metrics
             acc_html = f'<span class="fg-metric-top">{acc:.2f}%</span>' if acc >= 98.0 else f'{acc:.2f}%'
             f1_html = f'<span class="fg-metric-top">{f1:.2f}%</span>' if f1 >= 98.8 else f'{f1:.2f}%'
-            lat_html = f'<span class="fg-metric-fast">{lat:.2f} ms</span>' if lat < 10.0 else f'{lat:.2f} ms'
+            lat_html = (
+                f'<span class="fg-metric-fast">{lat:.2f} ms</span>' if lat < 10.0
+                else f'<span class="fg-metric-slow">{lat:.2f} ms</span>' if lat >= 100.0
+                else f'{lat:.2f} ms'
+            )
             
             # Standard Condition
             table_html += f'''
-            <tr>
+            <tr class="fg-benchmark-row fg-standard-row fg-model-start">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Standard</td>
                 <td>{acc_html}</td>
@@ -657,9 +663,13 @@ elif page == 'Model Comparison':
                 c_lat = comp_data.get('latency_ms', 0)
                 c_acc_html = f'<span class="fg-metric-top">{c_acc:.2f}%</span>' if c_acc >= 98.0 else f'{c_acc:.2f}%'
                 c_f1_html = f'<span class="fg-metric-top">{c_f1:.2f}%</span>' if c_f1 >= 98.8 else f'{c_f1:.2f}%'
-                c_lat_html = f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0 else f'{c_lat:.2f} ms'
+                c_lat_html = (
+                    f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0
+                    else f'<span class="fg-metric-slow">{c_lat:.2f} ms</span>' if c_lat >= 100.0
+                    else f'{c_lat:.2f} ms'
+                )
                 table_html += f'''
-            <tr>
+            <tr class="fg-benchmark-row fg-compressed-row">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Compressed</td>
                 <td>{c_acc_html}</td>
@@ -672,7 +682,7 @@ elif page == 'Model Comparison':
                 '''
             else:
                 table_html += f'''
-            <tr>
+            <tr class="fg-benchmark-row fg-compressed-row">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Compressed</td>
                 <td class="fg-pending" colspan="5">Not yet evaluated</td>
