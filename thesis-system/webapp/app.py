@@ -266,7 +266,6 @@ def run_universal_inference(image, models_bundle):
         t0 = time.perf_counter()
         energy = float(np.mean(ela_arr) * 100.0)
         prob_m = float(np.clip(prob * 0.985 + (0.008 if energy > 5.0 else -0.008), 0.0001, 0.9999))
-        time.sleep(0.018)
         lat = (time.perf_counter() - t0) * 1000.0
 
     is_forged_m = prob_m >= 0.5
@@ -297,7 +296,6 @@ def run_universal_inference(image, models_bundle):
         t0 = time.perf_counter()
         spatial_var = float(np.var(ela_arr) * 1000.0)
         prob_r = float(np.clip(prob * 0.978 + (0.012 if spatial_var > 10.0 else -0.012), 0.0001, 0.9999))
-        time.sleep(0.088)
         lat = (time.perf_counter() - t0) * 1000.0
 
     is_forged_r = prob_r >= 0.5
@@ -414,7 +412,8 @@ if page == 'Classify a Receipt':
             with col2:
                 models_bundle = load_all_models()
                 model_info = get_model_info()
-                results = run_universal_inference(image, models_bundle)
+                with st.spinner("Extracting forensic ELA & executing multi-CNN inference..."):
+                    results = run_universal_inference(image, models_bundle)
                 
                 for model_name, res in results.items():
                     meta = model_info.get(model_name, {})

@@ -230,6 +230,107 @@ div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"] {
 div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"]:hover { background: #205169 !important; border-color: var(--fg-cyan) !important; }
 div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstructions"] span { color: #95b1be !important; font-family: var(--fg-mono) !important; }
 
+/* Uploaded file exhibit chip / badge (no broken preview) */
+div[data-testid="stFileChip"] {
+    background: linear-gradient(135deg, rgba(16, 34, 50, 0.95), rgba(11, 23, 35, 0.95)) !important;
+    border: 1px solid rgba(66, 216, 205, 0.3) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+    padding: 6px 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+div[data-testid="stFileChip"] > div:first-child {
+    background: rgba(66, 216, 205, 0.12) !important;
+    border: 1px solid rgba(66, 216, 205, 0.35) !important;
+    border-radius: 6px !important;
+    color: var(--fg-cyan) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+}
+div[data-testid="stFileChip"] > div:first-child svg {
+    fill: var(--fg-cyan) !important;
+    color: var(--fg-cyan) !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+div[data-testid="stFileChipName"] {
+    color: var(--fg-paper) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.2px !important;
+}
+div[data-testid="stFileChip"] .stFileChipName + div,
+div[data-testid="stFileChip"] > div:nth-child(2) > div:last-child {
+    color: var(--fg-dim) !important;
+    font-family: var(--fg-mono) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+}
+div[data-testid="stFileChip"] small button,
+div[data-testid="stFileChipDeleteBtn"] button {
+    background: transparent !important;
+    border: none !important;
+    color: #8fa5b5 !important;
+    transition: color 0.15s ease, transform 0.15s ease !important;
+}
+div[data-testid="stFileChip"] small button svg,
+div[data-testid="stFileChipDeleteBtn"] button svg {
+    fill: #8fa5b5 !important;
+}
+div[data-testid="stFileChip"] small button:hover svg,
+div[data-testid="stFileChipDeleteBtn"] button:hover svg {
+    fill: var(--fg-red) !important;
+    transform: scale(1.1) !important;
+}
+button[data-testid="stBaseButton-borderlessIcon"] {
+    background: rgba(16, 34, 50, 0.7) !important;
+    border: 1px solid rgba(66, 216, 205, 0.25) !important;
+    border-radius: 6px !important;
+    color: var(--fg-cyan) !important;
+    transition: background 0.15s ease !important;
+}
+button[data-testid="stBaseButton-borderlessIcon"]:hover {
+    background: rgba(66, 216, 205, 0.15) !important;
+    border-color: var(--fg-cyan) !important;
+}
+button[data-testid="stBaseButton-borderlessIcon"] span[data-testid="stIconMaterial"] {
+    color: var(--fg-cyan) !important;
+}
+
+/* Real-time forensic neural inference loading indicator */
+div[data-testid="stSpinner"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    background: linear-gradient(135deg, rgba(16, 34, 50, 0.96), rgba(11, 23, 35, 0.96)) !important;
+    border: 1px solid rgba(66, 216, 205, 0.35) !important;
+    border-left: 4px solid var(--fg-cyan) !important;
+    border-radius: 9px !important;
+    padding: 16px 20px !important;
+    margin: 10px 0 18px 0 !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3), 0 0 16px rgba(66, 216, 205, 0.08) !important;
+}
+div[data-testid="stSpinner"] > div:first-child {
+    border-color: rgba(66, 216, 205, 0.2) !important;
+    border-top-color: var(--fg-cyan) !important;
+    width: 22px !important;
+    height: 22px !important;
+}
+div[data-testid="stSpinner"] span,
+div[data-testid="stSpinner"] p,
+div[data-testid="stSpinner"] div {
+    color: var(--fg-paper) !important;
+    font-family: var(--fg-sans) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
 /* Receipt exhibit and acquisition metadata */
 div[data-testid="stImage"] {
     padding: 10px !important; margin-bottom: 15px !important; border: 1px solid var(--fg-line) !important;
