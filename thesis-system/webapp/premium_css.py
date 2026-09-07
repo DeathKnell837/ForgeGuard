@@ -303,6 +303,25 @@ button[data-testid="stBaseButton-borderlessIcon"] span[data-testid="stIconMateri
 }
 
 /* Real-time forensic neural inference loading indicator */
+.fg-boot-loader {
+    position: relative;
+    width: min(360px, 70vw);
+    height: 4px;
+    margin: 31vh auto 0;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(66,216,205,.12);
+    box-shadow: inset 0 0 0 1px rgba(66,216,205,.1), 0 0 18px rgba(66,216,205,.08);
+}
+.fg-boot-loader > span {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, transparent, var(--fg-cyan), transparent);
+    background-size: 42% 100%;
+    background-repeat: no-repeat;
+    animation: fg-loading-sweep 1.2s ease-in-out infinite;
+}
 div[data-testid="stSpinner"] {
     background: linear-gradient(135deg, rgba(16, 34, 50, 0.96), rgba(11, 23, 35, 0.96)) !important;
     border: 1px solid rgba(66, 216, 205, 0.35) !important;

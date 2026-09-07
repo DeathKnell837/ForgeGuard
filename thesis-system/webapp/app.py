@@ -336,7 +336,10 @@ def load_evaluation_metrics():
     return {}
 
 # --- Startup Model Pre-Warmup ---
+_boot_loader = st.empty()
+_boot_loader.markdown('<div class="fg-boot-loader" aria-label="Loading"><span></span></div>', unsafe_allow_html=True)
 _ = load_all_models()
+_boot_loader.empty()
 
 # --- Sidebar ---
 with st.sidebar:
