@@ -742,7 +742,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Steady-state CPU inference latency. Basic CNN (4.13 ms) is fastest, MobileNetV2 (9.34 ms) intermediate, and ResNet50 (26.19 ms) scales with 23.5M parameters.
+                    Steady-state CPU inference latency. Basic CNN ({b_lat:.2f} ms) is fastest, MobileNetV2 ({m_lat:.2f} ms) intermediate, and ResNet50 ({r_lat:.2f} ms) scales with 23.5M parameters.
                   </div>
                 </div>
               </div>
