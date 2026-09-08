@@ -326,13 +326,6 @@ def check_out_of_domain(image):
 # --- Sample Receipts Loader ---
 def get_sample_receipt_path(sample_type):
     """Resolve absolute path to pre-loaded benchmark sample receipts."""
-    candidates = [
-        os.path.join(SYS_DIR, 'dataset'),
-        os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'dataset'),
-        os.path.join(os.path.dirname(SYS_DIR), 'dataset'),
-        os.path.join(APP_DIR, 'dataset'),
-        os.path.join(os.path.dirname(APP_DIR), 'dataset'),
-    ]
     subpaths = {
         'authentic': os.path.join('authentic', 'compressed', 'authentic_0001.jpg'),
         'edited': os.path.join('forged', 'compressed', 'amount_alteration', 'forged_amount_0001.jpg'),
@@ -341,10 +334,37 @@ def get_sample_receipt_path(sample_type):
     rel = subpaths.get(sample_type)
     if not rel:
         return None
+        
+    cwd = os.getcwd()
+    candidates = [
+        os.path.join(SYS_DIR, 'dataset'),
+        os.path.join(SYS_DIR, 'thesis-system', 'dataset'),
+        os.path.join(APP_DIR, 'dataset'),
+        os.path.join(APP_DIR, 'thesis-system', 'dataset'),
+        os.path.join(cwd, 'thesis-system', 'dataset'),
+        os.path.join(cwd, 'dataset'),
+        os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'dataset'),
+        os.path.join(os.path.dirname(SYS_DIR), 'dataset'),
+        os.path.join(os.path.dirname(APP_DIR), 'thesis-system', 'dataset'),
+        os.path.join(os.path.dirname(APP_DIR), 'dataset'),
+    ]
     for cand in candidates:
-        full_path = os.path.join(cand, rel)
+        full_path = os.path.normpath(os.path.join(cand, rel))
         if os.path.isfile(full_path):
             return full_path
+            
+    # Fallback recursive search if directory tree differs on cloud host
+    for root_dir in [SYS_DIR, APP_DIR, cwd]:
+        target = os.path.basename(rel)
+        for dirpath, _, filenames in os.walk(root_dir):
+            if target in filenames:
+                candidate_file = os.path.join(dirpath, target)
+                if sample_type == 'authentic' and 'authentic' in candidate_file:
+                    return candidate_file
+                elif sample_type == 'edited' and 'amount' in candidate_file:
+                    return candidate_file
+                elif sample_type == 'generated' and 'template' in candidate_file:
+                    return candidate_file
     return None
 
 # --- Metrics Loading ---
