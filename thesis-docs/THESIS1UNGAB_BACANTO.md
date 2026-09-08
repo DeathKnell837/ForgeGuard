@@ -1,4 +1,4 @@
-Receipt or Deceit? A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts
+Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts
 
 Daniela S. Ungab
 
