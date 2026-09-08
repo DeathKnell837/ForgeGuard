@@ -323,6 +323,30 @@ def check_out_of_domain(image):
         return True
     return False
 
+# --- Sample Receipts Loader ---
+def get_sample_receipt_path(sample_type):
+    """Resolve absolute path to pre-loaded benchmark sample receipts."""
+    candidates = [
+        os.path.join(SYS_DIR, 'dataset'),
+        os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'dataset'),
+        os.path.join(os.path.dirname(SYS_DIR), 'dataset'),
+        os.path.join(APP_DIR, 'dataset'),
+        os.path.join(os.path.dirname(APP_DIR), 'dataset'),
+    ]
+    subpaths = {
+        'authentic': os.path.join('authentic', 'compressed', 'authentic_0001.jpg'),
+        'edited': os.path.join('forged', 'compressed', 'amount_alteration', 'forged_amount_0001.jpg'),
+        'generated': os.path.join('forged', 'compressed', 'full_template', 'forged_full_template_0001.jpg'),
+    }
+    rel = subpaths.get(sample_type)
+    if not rel:
+        return None
+    for cand in candidates:
+        full_path = os.path.join(cand, rel)
+        if os.path.isfile(full_path):
+            return full_path
+    return None
+
 # --- Metrics Loading ---
 def load_evaluation_metrics():
     """Load evaluation_metrics.json."""
@@ -372,30 +396,95 @@ with st.sidebar:
 
 # --- Screens ---
 if page == 'Classify a Receipt':
-    st.markdown(
+    render_html(
         '''
-        <div style="margin-bottom: 28px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; background: rgba(124, 111, 240, 0.1); border: 1px solid rgba(124, 111, 240, 0.25); border-radius: 9999px; margin-bottom: 12px;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #A5B4FC; letter-spacing: 1px; text-transform: uppercase;">NDMC BSCS Thesis 2026</span>
+        <div style="margin-bottom: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+            <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">NDMC BSCS Thesis 2026</div>
           </div>
-          <div style="font-size: 36px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;">ForgeGuard</div>
-          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 6px;">CNN Receipt Classification System</div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.5; max-width: 760px;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
-          <div style="height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(124, 111, 240, 0.25), rgba(255,255,255,0.08)); margin-top: 20px;"></div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
-        ''',
-        unsafe_allow_html=True
+        '''
     )
     
     uploaded = st.file_uploader(
         'Upload a GCash downloadable transaction receipt',
-        type=['png', 'jpg', 'jpeg', 'webp']
+        type=['png', 'jpg', 'jpeg', 'webp'],
+        help='Drag and drop or browse for a downloadable GCash transaction receipt.'
     )
     
+    render_html(
+        '''
+        <div style="font-size: 11.5px; color: #64748B; margin-top: -6px; margin-bottom: 14px; line-height: 1.4;">
+          Scope Delimitation: Accepts downloadable GCash transaction receipts only (JPEG, PNG, WebP). Mobile phone screenshots containing status bars and OS navigation chrome are out of scope per Section 1.4.
+        </div>
+        '''
+    )
+    
+    # 3 Sample Demo Buttons
+    col_s1, col_s2, col_s3 = st.columns(3)
+    with col_s1:
+        if st.button('Authentic Sample', use_container_width=True, help='Load authentic GCash transaction receipt benchmark sample'):
+            st.session_state['active_sample'] = 'authentic'
+            st.rerun()
+    with col_s2:
+        if st.button('Edited Sample', use_container_width=True, help='Load digitally edited receipt sample (Amount Alteration)'):
+            st.session_state['active_sample'] = 'edited'
+            st.rerun()
+    with col_s3:
+        if st.button('Generated Sample', use_container_width=True, help='Load programmatically generated receipt sample (Full Template)'):
+            st.session_state['active_sample'] = 'generated'
+            st.rerun()
+            
+    # Resolve active image (uploaded file has priority over sample)
+    image = None
+    source_label = None
+    is_sample = False
+    
     if uploaded is not None:
+        st.session_state['active_sample'] = None
         try:
             image = Image.open(uploaded).convert('RGB')
+            source_label = f"Uploaded Receipt: {uploaded.name}"
+        except Exception as e:
+            st.error(f"Error opening uploaded image: {e}")
+    elif st.session_state.get('active_sample'):
+        sample_key = st.session_state['active_sample']
+        sample_path = get_sample_receipt_path(sample_key)
+        if sample_path and os.path.isfile(sample_path):
+            try:
+                image = Image.open(sample_path).convert('RGB')
+                sample_names = {
+                    'authentic': 'Authentic Transaction Receipt (authentic_0001.jpg)',
+                    'edited': 'Digitally Edited Tampering (forged_amount_0001.jpg)',
+                    'generated': 'Programmatically Generated Template (forged_full_template_0001.jpg)'
+                }
+                source_label = sample_names.get(sample_key, 'Benchmark Demo Sample')
+                is_sample = True
+            except Exception as e:
+                st.error(f"Error opening sample image: {e}")
+        else:
+            st.warning(f"Sample receipt file for '{sample_key}' not found on filesystem.")
             
+    if image is not None:
+        if is_sample:
+            col_b1, col_b2 = st.columns([0.80, 0.20])
+            with col_b1:
+                render_html(
+                    f'''
+                    <div class="fg-sample-banner">
+                      <span><strong>Active Benchmark Sample:</strong> {source_label}</span>
+                    </div>
+                    '''
+                )
+            with col_b2:
+                if st.button('Clear Sample', use_container_width=True, help='Reset view to file upload state'):
+                    st.session_state['active_sample'] = None
+                    st.rerun()
+                    
+        try:
             if check_out_of_domain(image):
                 render_html(
                     '''
@@ -416,9 +505,16 @@ if page == 'Classify a Receipt':
             col1, col2 = st.columns([0.42, 0.58], gap="large")
             with col1:
                 st.image(image, width='stretch')
+                render_html(
+                    '''
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; margin-top: 8px; line-height: 1.5;">
+                      <div>Input Target: 128 &times; 128 px (ELA Transform)</div>
+                      <div>Decision Threshold: 0.50 (Sigmoid &ge; 0.5 &rarr; Forged)</div>
+                    </div>
+                    '''
+                )
                 
             with col2:
-                
                 for model_name, res in results.items():
                     meta = model_info.get(model_name, {})
                     arch_description = meta.get('arch', '')
@@ -446,24 +542,69 @@ if page == 'Classify a Receipt':
                         </div>
                         '''
                     )
+                    
+            render_html(
+                '''
+                <div class="fg-scope-disclaimer">
+                  Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+                </div>
+                '''
+            )
                 
         except Exception as e:
             st.error(f'Error processing image: {str(e)}')
+            
+    else:
+        # Informative guide card when no image is selected (fixes empty viewport)
+        render_html(
+            '''
+            <div class="fg-guide-card">
+              <div style="font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Awaiting Transaction Receipt Input</div>
+              <div style="font-size: 12px; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
+                Upload a digital GCash receipt screenshot or select one of the pre-loaded benchmark samples above to execute multi-architecture forensic evaluation.
+              </div>
+              <div class="fg-guide-grid">
+                <div class="fg-guide-step">
+                  <div class="fg-guide-step-num">STEP 01</div>
+                  <div class="fg-guide-step-title">Receipt Ingestion</div>
+                  <div class="fg-guide-step-desc">Accepts downloadable JPEG/PNG receipts. Pre-screened for dimensional validity per Section 1.4.</div>
+                </div>
+                <div class="fg-guide-step">
+                  <div class="fg-guide-step-num">STEP 02</div>
+                  <div class="fg-guide-step-title">Error Level Analysis</div>
+                  <div class="fg-guide-step-desc">Extracts JPEG re-compression discrepancies (quality 90, scale 15.0) normalized to 128&times;128 array.</div>
+                </div>
+                <div class="fg-guide-step">
+                  <div class="fg-guide-step-num">STEP 03</div>
+                  <div class="fg-guide-step-title">Comparative Inference</div>
+                  <div class="fg-guide-step-desc">Evaluates against Basic CNN, MobileNetV2, and ResNet50 with live per-image latency profiling.</div>
+                </div>
+              </div>
+              <div class="fg-guide-footer">
+                <span>Target: 128&times;128 ELA</span> &bull; 
+                <span>Decision Threshold: 0.50</span> &bull; 
+                <span>Classes: Authentic vs Forged</span> &bull; 
+                <span>Replication: 5-Seed Evaluation</span>
+              </div>
+            </div>
+            <div class="fg-scope-disclaimer">
+              Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+            </div>
+            '''
+        )
 
 elif page == 'Model Comparison':
-    st.markdown(
+    render_html(
         '''
-        <div style="margin-bottom: 28px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; background: rgba(124, 111, 240, 0.1); border: 1px solid rgba(124, 111, 240, 0.25); border-radius: 9999px; margin-bottom: 12px;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #A5B4FC; letter-spacing: 1px; text-transform: uppercase;">NDMC BSCS Thesis 2026</span>
+        <div style="margin-bottom: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+            <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Model Benchmark Suite</div>
           </div>
-          <div style="font-size: 36px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;">ForgeGuard</div>
-          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 6px;">Model Performance Comparison</div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.5; max-width: 760px;">Empirical Evaluation Matrix of CNN Architectures for Digital Receipt Forgery Detection</div>
-          <div style="height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(124, 111, 240, 0.25), rgba(255,255,255,0.08)); margin-top: 20px;"></div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
-        ''',
-        unsafe_allow_html=True
+        '''
     )
     
     metrics = load_evaluation_metrics()
@@ -518,7 +659,7 @@ elif page == 'Model Comparison':
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
                     <span>Classification Accuracy</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Baseline: 0% - 100% (Unbiased)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Scale: 0% - 100% Baseline</span>
                   </div>
                   
                   <div class="fg-bar-row">
@@ -552,7 +693,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Empirical mean classification accuracy across 5 random seeds on the balanced 25% test partition (N = 150: 75 Authentic, 75 Forged). Basic CNN demonstrates the highest stability on uncompressed ELA high-frequency residuals. Between-group significance (one-way ANOVA and Tukey HSD) is documented in Chapter 4.
+                    Mean accuracy across 5 seeds on balanced test partition (N = 150: 75 Authentic, 75 Forged). Basic CNN demonstrates highest stability on uncompressed ELA residuals.
                   </div>
                 </div>
                 
@@ -594,7 +735,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Per-image steady-state inference latency profiled using compiled execution. Basic CNN (4.13 ms) exhibits lowest latency, followed by MobileNetV2 (9.34 ms) and ResNet50 (26.19 ms), scaling monotonically with parameter count (~2.1M vs ~3.4M vs ~23.5M).
+                    Steady-state CPU inference latency. Basic CNN (4.13 ms) is fastest, MobileNetV2 (9.34 ms) intermediate, and ResNet50 (26.19 ms) scales with 23.5M parameters.
                   </div>
                 </div>
               </div>
@@ -611,6 +752,7 @@ elif page == 'Model Comparison':
                     <th>Architecture</th>
                     <th>Condition</th>
                     <th>Accuracy (%)</th>
+                    <th>Compression Delta (&Delta;Acc)</th>
                     <th>Precision (%)</th>
                     <th>Recall (%)</th>
                     <th>F1-Score (%)</th>
@@ -654,6 +796,7 @@ elif page == 'Model Comparison':
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Standard</td>
                 <td>{s_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_acc_sd:.2f}</span></td>
+                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Baseline</td>
                 <td>{s_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_prec_sd:.2f}</span></td>
                 <td>{s_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_rec_sd:.2f}</span></td>
                 <td>{s_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_f1_sd:.2f}</span></td>
@@ -686,11 +829,20 @@ elif page == 'Model Comparison':
                 else f'{c_lat:.2f} ms'
             )
             
+            delta_acc = c_acc - s_acc
+            if delta_acc > 0:
+                delta_html = f'<span class="fg-delta-pos">+{delta_acc:.2f}%</span>'
+            elif delta_acc == 0:
+                delta_html = '<span class="fg-delta-zero">0.00%</span>'
+            else:
+                delta_html = f'<span class="fg-delta-zero">{delta_acc:.2f}%</span>'
+            
             table_html += f'''
             <tr class="fg-benchmark-row fg-compressed-row">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Compressed</td>
                 <td>{c_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_acc_sd:.2f}</span></td>
+                <td>{delta_html}</td>
                 <td>{c_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_prec_sd:.2f}</span></td>
                 <td>{c_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_rec_sd:.2f}</span></td>
                 <td>{c_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_f1_sd:.2f}</span></td>
@@ -704,7 +856,7 @@ elif page == 'Model Comparison':
             </tbody>
         </table>
         <div style="font-size: 12px; color: #64748B; margin-top: 10px; margin-bottom: 28px; line-height: 1.5;">
-          Note: Metrics represent empirical 5-seed replication means &plusmn; standard deviations (&mu; &plusmn; &sigma;, seeds: 42, 101, 202, 303, 404) evaluated on the fixed 25% stratified balanced test partition (N = 150: 75 Authentic, 75 Forged) per Section 2.7. Peak Memory measures resident set size (RSS) during compiled batch execution to address hypothesis H<sub>0</sub>3.
+          Note: Metrics represent empirical 5-seed replication means &plusmn; standard deviations (&mu; &plusmn; &sigma;, seeds: 42, 101, 202, 303, 404) evaluated on the fixed 25% stratified balanced test partition (N = 150: 75 Authentic, 75 Forged) per Section 2.7. Compression Delta (&Delta;Acc) quantifies performance shift under social media re-compression addressing hypothesis H<sub>0</sub>2. Latency highlighting: Green (< 10.0 ms) denotes real-time mobile deployability; amber (&ge; 100.0 ms) denotes latency bottlenecks. Peak Memory measures resident set size (RSS) during compiled batch execution to address hypothesis H<sub>0</sub>3.
         </div>
         '''
         render_html(table_html)
@@ -856,3 +1008,13 @@ elif page == 'Model Comparison':
         </div>
         '''
         render_html(dataset_table_html)
+        
+        render_html(
+            '''
+            <div class="fg-scope-disclaimer">
+              Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+            </div>
+            '''
+        )
+
+
