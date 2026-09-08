@@ -482,8 +482,8 @@ elif page == 'Model Comparison':
                   <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures</div>
                 </div>
                 <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
-                  <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2DD4BF;"></span>Accuracy (%)</span>
-                  <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>Latency (ms)</span>
+                  <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
+                  <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Intermediate latency</span>
                   <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest latency</span>
                   <span class="fg-signal-key fg-signal-key-slow"><span aria-hidden="true"></span>Highest latency</span>
                 </div>

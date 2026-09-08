@@ -430,8 +430,10 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-chart-legend { align-items: center; flex-wrap: wrap; }
 .fg-signal-key { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-muted); white-space: nowrap; }
 .fg-signal-key > span { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-.fg-signal-key-fast > span { background: var(--fg-green); box-shadow: 0 0 8px rgba(84,210,155,.42); }
-.fg-signal-key-slow > span { background: var(--fg-amber); box-shadow: 0 0 8px rgba(245,189,104,.42); }
+.fg-signal-key-accuracy > span { background: #8294ff; box-shadow: 0 0 8px rgba(130,148,255,.46); }
+.fg-signal-key-mid > span { background: #2dd4df; box-shadow: 0 0 8px rgba(45,212,223,.46); }
+.fg-signal-key-fast > span { background: #4ade80; box-shadow: 0 0 8px rgba(74,222,128,.46); }
+.fg-signal-key-slow > span { background: #ffc45a; box-shadow: 0 0 8px rgba(255,196,90,.46); }
 .fg-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
 .fg-chart-subpanel { background: rgba(5,16,25,.43); border: 1px solid rgba(164,208,221,.1); border-radius: 7px; padding: 17px; animation: fg-enter .55s cubic-bezier(.2,.8,.2,1) both; }
 .fg-chart-subpanel:nth-child(2) { animation-delay: .08s; }
@@ -441,13 +443,19 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-bar-label { color: #d8e8ed; font-weight: 600; }.fg-bar-val { font-family: var(--fg-mono); font-weight: 750; white-space: nowrap; }.fg-bar-track { height: 7px; background: rgba(159,198,208,.17); border-radius: 99px; }
 .fg-bar-fill { display: block; height: 100%; border-radius: 99px; box-shadow: 0 0 14px rgba(66,216,205,.28); transform-origin: left; animation: fg-bar-grow .9s cubic-bezier(.2,.8,.2,1) both; }
 .fg-bar-row:nth-child(3) .fg-bar-fill { animation-delay: .08s; }.fg-bar-row:nth-child(4) .fg-bar-fill { animation-delay: .16s; }.fg-bar-row:nth-child(5) .fg-bar-fill { animation-delay: .24s; }
-.fg-chart-subpanel:first-child .fg-bar-val { color: #57ebe0 !important; }
+.fg-chart-subpanel:first-child .fg-bar-val { color: #9cabff !important; }
 .fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(2) .fg-bar-fill,
 .fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(3) .fg-bar-fill,
-.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #149f98, #57ebe0) !important; }
-.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(2) .fg-bar-fill { background: linear-gradient(90deg, #159c96, #42d8cd) !important; }
-.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(3) .fg-bar-fill { background: linear-gradient(90deg, #268f9a, #49c7d1) !important; }
-.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #bd7d2d, #f5b94f) !important; }
+.fg-chart-subpanel:first-child .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #586ad9, #9cabff) !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(2) .fg-bar-fill { background: linear-gradient(90deg, #12ae68, #4ade80) !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(3) .fg-bar-fill { background: linear-gradient(90deg, #159da8, #2dd4df) !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(4) .fg-bar-fill { background: linear-gradient(90deg, #d58310, #ffc45a) !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(2) .fg-bar-val,
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(2) .fg-bar-val span { color: #63e999 !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(3) .fg-bar-val,
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(3) .fg-bar-val span { color: #56e2ea !important; }
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(4) .fg-bar-val,
+.fg-chart-subpanel:nth-child(2) .fg-bar-row:nth-of-type(4) .fg-bar-val span { color: #ffd27f !important; }
 .fg-chart-insight { color: var(--fg-dim); border-color: rgba(164,208,221,.1); }
 .fg-metric-top { color: var(--fg-cyan) !important; background: rgba(66,216,205,.09) !important; border-color: rgba(66,216,205,.28) !important; border-radius: 4px !important; }
 .fg-metric-fast { color: var(--fg-green) !important; background: rgba(84,210,155,.09) !important; border-color: rgba(84,210,155,.27) !important; border-radius: 4px !important; }
