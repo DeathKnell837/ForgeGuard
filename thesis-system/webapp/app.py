@@ -472,19 +472,43 @@ elif page == 'Model Comparison':
     if not metrics:
         st.info('Evaluation metrics data not found.')
     else:
+        # Extract Standard Condition Metrics for Trade-Off Visualization
+        b_std = metrics.get('Basic_CNN', {})
+        m_std = metrics.get('MobileNetV2', {})
+        r_std = metrics.get('ResNet50', {})
+        
+        b_acc = b_std.get('accuracy', 0.7560) * 100.0
+        b_acc_sd = b_std.get('accuracy_std', 0.0033) * 100.0
+        m_acc = m_std.get('accuracy', 0.6760) * 100.0
+        m_acc_sd = m_std.get('accuracy_std', 0.0200) * 100.0
+        r_acc = r_std.get('accuracy', 0.5000) * 100.0
+        r_acc_sd = r_std.get('accuracy_std', 0.0000) * 100.0
+        
+        b_lat = b_std.get('latency_ms', 4.13)
+        b_lat_sd = b_std.get('latency_ms_std', 0.03)
+        m_lat = m_std.get('latency_ms', 9.34)
+        m_lat_sd = m_std.get('latency_ms_std', 0.15)
+        r_lat = r_std.get('latency_ms', 26.19)
+        r_lat_sd = r_std.get('latency_ms_std', 0.48)
+        
+        max_lat = max(r_lat, 1.0)
+        b_lat_pct = min(100.0, (b_lat / max_lat) * 100.0)
+        m_lat_pct = min(100.0, (m_lat / max_lat) * 100.0)
+        r_lat_pct = 100.0
+
         # Graphical Performance Visualizer (Accuracy vs. Latency Trade-Off)
         render_html(
-            '''
+            f'''
             <div class="fg-chart-card">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <div>
                   <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Performance Trade-Off Analysis</div>
-                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures</div>
+                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures (Standard Condition)</div>
                 </div>
                 <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
                   <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
-                  <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Intermediate latency</span>
                   <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest latency</span>
+                  <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Intermediate latency</span>
                   <span class="fg-signal-key fg-signal-key-slow"><span aria-hidden="true"></span>Highest latency</span>
                 </div>
               </div>
@@ -494,41 +518,41 @@ elif page == 'Model Comparison':
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
                     <span>Classification Accuracy</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Baseline: 90% - 100%</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Baseline: 0% - 100% (Unbiased)</span>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">Basic CNN</span>
-                      <span class="fg-bar-val" style="color: #2DD4BF;">98.01%</span>
+                      <span class="fg-bar-val" style="color: #2DD4BF;">{b_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{b_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 80.1%; background: linear-gradient(90deg, #14B8A6, #2DD4BF);"></div>
+                      <div class="fg-bar-fill" style="width: {b_acc:.1f}%; background: linear-gradient(90deg, #14B8A6, #2DD4BF);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">MobileNetV2</span>
-                      <span class="fg-bar-val" style="color: #A5B4FC;">97.35%</span>
+                      <span class="fg-bar-val" style="color: #A5B4FC;">{m_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{m_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 73.5%; background: linear-gradient(90deg, #6366F1, #818CF8);"></div>
+                      <div class="fg-bar-fill" style="width: {m_acc:.1f}%; background: linear-gradient(90deg, #6366F1, #818CF8);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">ResNet50</span>
-                      <span class="fg-bar-val" style="color: #94A3B8;">96.69%</span>
+                      <span class="fg-bar-val" style="color: #94A3B8;">{r_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{r_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 66.9%; background: linear-gradient(90deg, #475569, #64748B);"></div>
+                      <div class="fg-bar-fill" style="width: {r_acc:.1f}%; background: linear-gradient(90deg, #475569, #64748B);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Basic CNN achieves the highest empirical test accuracy (98.01%) and F1-score (98.82%), demonstrating superior feature extraction on ELA high-frequency residuals.
+                    Empirical mean classification accuracy across 5 random seeds on the balanced 25% test partition (N = 150: 75 Authentic, 75 Forged). Basic CNN demonstrates the highest stability on uncompressed ELA high-frequency residuals. Between-group significance (one-way ANOVA and Tukey HSD) is documented in Chapter 4.
                   </div>
                 </div>
                 
@@ -542,35 +566,35 @@ elif page == 'Model Comparison':
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">Basic CNN</span>
-                      <span class="fg-bar-val" style="color: #10B981;">8.66 ms <span style="font-size: 10px; font-weight: 500; color: #34D399;">(Real-time)</span></span>
+                      <span class="fg-bar-val" style="color: #10B981;">{b_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{b_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 7.9%; background: linear-gradient(90deg, #059669, #10B981);"></div>
+                      <div class="fg-bar-fill" style="width: {b_lat_pct:.1f}%; background: linear-gradient(90deg, #059669, #10B981);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">MobileNetV2</span>
-                      <span class="fg-bar-val" style="color: #2DD4BF;">28.04 ms <span style="font-size: 10px; font-weight: 500; color: #5EEAD4;">(Edge Ready)</span></span>
+                      <span class="fg-bar-val" style="color: #2DD4BF;">{m_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{m_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 25.6%; background: linear-gradient(90deg, #0D9488, #2DD4BF);"></div>
+                      <div class="fg-bar-fill" style="width: {m_lat_pct:.1f}%; background: linear-gradient(90deg, #0D9488, #2DD4BF);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">ResNet50</span>
-                      <span class="fg-bar-val" style="color: #F59E0B;">109.40 ms <span style="font-size: 10px; font-weight: 500; color: #FBBF24;">(Heavyweight)</span></span>
+                      <span class="fg-bar-val" style="color: #F59E0B;">{r_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{r_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: 100%; background: linear-gradient(90deg, #D97706, #F59E0B);"></div>
+                      <div class="fg-bar-fill" style="width: {r_lat_pct:.1f}%; background: linear-gradient(90deg, #D97706, #F59E0B);"></div>
                     </div>
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Basic CNN operates at 8.66 ms per receipt (12.6x faster than ResNet50), establishing optimal throughput for real-time mobile payment forgery verification.
+                    Per-image steady-state inference latency profiled using compiled execution. Basic CNN (4.13 ms) exhibits lowest latency, followed by MobileNetV2 (9.34 ms) and ResNet50 (26.19 ms), scaling monotonically with parameter count (~2.1M vs ~3.4M vs ~23.5M).
                   </div>
                 </div>
               </div>
@@ -586,129 +610,165 @@ elif page == 'Model Comparison':
                 <tr>
                     <th>Architecture</th>
                     <th>Condition</th>
-                    <th>Accuracy</th>
-                    <th>Precision</th>
-                    <th>Recall</th>
-                    <th>F1</th>
+                    <th>Accuracy (%)</th>
+                    <th>Precision (%)</th>
+                    <th>Recall (%)</th>
+                    <th>F1-Score (%)</th>
                     <th>Latency (ms)</th>
+                    <th>Peak Memory (MB)</th>
                     <th>Params</th>
                 </tr>
             </thead>
             <tbody>
         '''
         
-        standard_keys = [k for k in metrics.keys() if not k.endswith('_Compressed')]
-        for raw_model_name in standard_keys:
-            data = metrics[raw_model_name]
-            model_name = raw_model_name.replace('_', ' ')
+        model_order = ['Basic CNN', 'MobileNetV2', 'ResNet50']
+        for model_name in model_order:
+            raw_model_name = model_name.replace(' ', '_')
             params = model_info.get(model_name, {}).get('params', 'N/A')
             
-            acc = data.get('accuracy', 0) * 100.0
-            prec = data.get('precision', 0) * 100.0
-            rec = data.get('recall', 0) * 100.0
-            f1 = data.get('f1_score', 0) * 100.0
-            lat = data.get('latency_ms', 0)
+            # Standard Condition
+            s_data = metrics.get(raw_model_name, {})
+            s_acc = s_data.get('accuracy', 0) * 100.0
+            s_acc_sd = s_data.get('accuracy_std', 0) * 100.0
+            s_prec = s_data.get('precision', 0) * 100.0
+            s_prec_sd = s_data.get('precision_std', 0) * 100.0
+            s_rec = s_data.get('recall', 0) * 100.0
+            s_rec_sd = s_data.get('recall_std', 0) * 100.0
+            s_f1 = s_data.get('f1_score', 0) * 100.0
+            s_f1_sd = s_data.get('f1_std', 0) * 100.0
+            s_lat = s_data.get('latency_ms', 0)
+            s_lat_sd = s_data.get('latency_ms_std', 0)
+            s_mem = s_data.get('peak_memory_mb', 0)
+            s_mem_sd = s_data.get('peak_memory_mb_std', 0)
             
-            # Strategic accents for top-performing metrics
-            acc_html = f'<span class="fg-metric-top">{acc:.2f}%</span>' if acc >= 98.0 else f'{acc:.2f}%'
-            f1_html = f'<span class="fg-metric-top">{f1:.2f}%</span>' if f1 >= 98.8 else f'{f1:.2f}%'
-            lat_html = (
-                f'<span class="fg-metric-fast">{lat:.2f} ms</span>' if lat < 10.0
-                else f'<span class="fg-metric-slow">{lat:.2f} ms</span>' if lat >= 100.0
-                else f'{lat:.2f} ms'
+            s_acc_html = f'<span class="fg-metric-top">{s_acc:.2f}%</span>' if s_acc >= 75.0 else f'{s_acc:.2f}%'
+            s_lat_html = (
+                f'<span class="fg-metric-fast">{s_lat:.2f} ms</span>' if s_lat < 10.0
+                else f'<span class="fg-metric-slow">{s_lat:.2f} ms</span>' if s_lat >= 100.0
+                else f'{s_lat:.2f} ms'
             )
             
-            # Standard Condition
             table_html += f'''
             <tr class="fg-benchmark-row fg-standard-row fg-model-start">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Standard</td>
-                <td>{acc_html}</td>
-                <td>{prec:.2f}%</td>
-                <td>{rec:.2f}%</td>
-                <td>{f1_html}</td>
-                <td>{lat_html}</td>
+                <td>{s_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_acc_sd:.2f}</span></td>
+                <td>{s_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_prec_sd:.2f}</span></td>
+                <td>{s_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_rec_sd:.2f}</span></td>
+                <td>{s_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_f1_sd:.2f}</span></td>
+                <td>{s_lat_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_lat_sd:.2f}</span></td>
+                <td>{s_mem:.1f} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_mem_sd:.2f}</span></td>
                 <td>{params}</td>
             </tr>
             '''
             
-            # Compressed Condition (read from metrics if available)
+            # Compressed Condition
             comp_key = f"{raw_model_name}_Compressed"
-            comp_data = metrics.get(comp_key, None)
-            if comp_data:
-                c_acc = comp_data.get('accuracy', 0) * 100.0
-                c_prec = comp_data.get('precision', 0) * 100.0
-                c_rec = comp_data.get('recall', 0) * 100.0
-                c_f1 = comp_data.get('f1_score', 0) * 100.0
-                c_lat = comp_data.get('latency_ms', 0)
-                c_acc_html = f'<span class="fg-metric-top">{c_acc:.2f}%</span>' if c_acc >= 98.0 else f'{c_acc:.2f}%'
-                c_f1_html = f'<span class="fg-metric-top">{c_f1:.2f}%</span>' if c_f1 >= 98.8 else f'{c_f1:.2f}%'
-                c_lat_html = (
-                    f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0
-                    else f'<span class="fg-metric-slow">{c_lat:.2f} ms</span>' if c_lat >= 100.0
-                    else f'{c_lat:.2f} ms'
-                )
-                table_html += f'''
+            c_data = metrics.get(comp_key, {})
+            c_acc = c_data.get('accuracy', 0) * 100.0
+            c_acc_sd = c_data.get('accuracy_std', 0) * 100.0
+            c_prec = c_data.get('precision', 0) * 100.0
+            c_prec_sd = c_data.get('precision_std', 0) * 100.0
+            c_rec = c_data.get('recall', 0) * 100.0
+            c_rec_sd = c_data.get('recall_std', 0) * 100.0
+            c_f1 = c_data.get('f1_score', 0) * 100.0
+            c_f1_sd = c_data.get('f1_std', 0) * 100.0
+            c_lat = c_data.get('latency_ms', 0)
+            c_lat_sd = c_data.get('latency_ms_std', 0)
+            c_mem = c_data.get('peak_memory_mb', 0)
+            c_mem_sd = c_data.get('peak_memory_mb_std', 0)
+            
+            c_acc_html = f'<span class="fg-metric-top">{c_acc:.2f}%</span>' if c_acc >= 90.0 else f'{c_acc:.2f}%'
+            c_lat_html = (
+                f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0
+                else f'<span class="fg-metric-slow">{c_lat:.2f} ms</span>' if c_lat >= 100.0
+                else f'{c_lat:.2f} ms'
+            )
+            
+            table_html += f'''
             <tr class="fg-benchmark-row fg-compressed-row">
                 <td class="arch-cell">{model_name}</td>
                 <td style="font-family: Inter, sans-serif;">Compressed</td>
-                <td>{c_acc_html}</td>
-                <td>{c_prec:.2f}%</td>
-                <td>{c_rec:.2f}%</td>
-                <td>{c_f1_html}</td>
-                <td>{c_lat_html}</td>
+                <td>{c_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_acc_sd:.2f}</span></td>
+                <td>{c_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_prec_sd:.2f}</span></td>
+                <td>{c_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_rec_sd:.2f}</span></td>
+                <td>{c_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_f1_sd:.2f}</span></td>
+                <td>{c_lat_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_lat_sd:.2f}</span></td>
+                <td>{c_mem:.1f} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_mem_sd:.2f}</span></td>
                 <td>{params}</td>
             </tr>
-                '''
-            else:
-                table_html += f'''
-            <tr class="fg-benchmark-row fg-compressed-row">
-                <td class="arch-cell">{model_name}</td>
-                <td style="font-family: Inter, sans-serif;">Compressed</td>
-                <td class="fg-pending" colspan="5">Not yet evaluated</td>
-                <td>{params}</td>
-            </tr>
-                '''
+            '''
             
         table_html += '''
             </tbody>
         </table>
+        <div style="font-size: 12px; color: #64748B; margin-top: 10px; margin-bottom: 28px; line-height: 1.5;">
+          Note: Metrics represent empirical 5-seed replication means &plusmn; standard deviations (&mu; &plusmn; &sigma;, seeds: 42, 101, 202, 303, 404) evaluated on the fixed 25% stratified balanced test partition (N = 150: 75 Authentic, 75 Forged) per Section 2.7. Peak Memory measures resident set size (RSS) during compiled batch execution to address hypothesis H<sub>0</sub>3.
+        </div>
         '''
         render_html(table_html)
         
         # Confusion Matrix Section
-        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Confusion Matrix</div></div>', unsafe_allow_html=True)
-        selected_model = st.selectbox('Select Architecture', list(model_info.keys()), label_visibility='collapsed')
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Empirical Confusion Matrix</div></div>', unsafe_allow_html=True)
+        col_cm1, col_cm2 = st.columns(2)
+        with col_cm1:
+            selected_model = st.selectbox('Select Architecture', ['Basic CNN', 'MobileNetV2', 'ResNet50'], key='cm_arch')
+        with col_cm2:
+            selected_condition = st.selectbox('Select Condition', ['Standard (High-Resolution)', 'Compressed (Messenger / Social Media)'], key='cm_cond')
         
-        cm_data = {
-            'Basic CNN': {
-                'tn': 22, 'fp': 1, 'fn': 2, 'tp': 126,
-                'note': 'Optimal balance between precision (99.21%) and recall (98.44%) on the 151 test partition samples.'
-            },
-            'MobileNetV2': {
-                'tn': 21, 'fp': 2, 'fn': 2, 'tp': 126,
-                'note': 'Efficient inverted residual blocks maintaining 97.35% overall accuracy with 2 false alarms.'
-            },
-            'ResNet50': {
-                'tn': 22, 'fp': 1, 'fn': 4, 'tp': 124,
-                'note': 'Deep bottleneck feature extraction achieving 99.20% precision with 4 false negatives.'
-            }
-        }
+        is_comp = 'Compressed' in selected_condition
+        cond_label = 'Compressed' if is_comp else 'Standard'
+        raw_name = selected_model.replace(' ', '_')
+        metric_key = f"{raw_name}_Compressed" if is_comp else raw_name
         
-        cm = cm_data.get(selected_model, cm_data['Basic CNN'])
-        tn, fp, fn, tp = cm['tn'], cm['fp'], cm['fn'], cm['tp']
-        note = cm['note']
+        target_metrics = metrics.get(metric_key, {})
+        cm = target_metrics.get('confusion', {'tn': 0, 'fp': 0, 'fn': 0, 'tp': 0})
+        tn = cm.get('tn', 0)
+        fp = cm.get('fp', 0)
+        fn = cm.get('fn', 0)
+        tp = cm.get('tp', 0)
+        
+        if selected_model == 'ResNet50':
+            cm_note = (
+                "Empirical finding: Demonstrates complete single-class collapse (TN = 0, FP = 75, TP = 75, FN = 0), "
+                "classifying 100% of samples as forged. Under the balanced 50/50 test partition (75 authentic, 75 forged), "
+                "this yields an exact random-guess baseline accuracy of 50.00%. This illustrates why class balance is essential "
+                "per Section 2.9, as an imbalanced partition would falsely inflate accuracy to 85%+."
+            )
+        elif selected_model == 'Basic CNN':
+            if not is_comp:
+                cm_note = (
+                    "Empirical finding: Achieves perfect precision (100.00%, FP = 0, zero false alarms on authentic receipts) "
+                    "with moderate sensitivity (Recall = 51.20%, FN = 37) on subtle uncompressed high-resolution edits."
+                )
+            else:
+                cm_note = (
+                    "Empirical finding: Reaches 95.73% overall accuracy under compression (TP = 71, TN = 73, FP = 2, FN = 4), "
+                    "demonstrating that ELA high-frequency residual features remain highly discriminative after social media recompression."
+                )
+        else: # MobileNetV2
+            if not is_comp:
+                cm_note = (
+                    "Empirical finding: Demonstrates high sensitivity (Recall = 94.13%, TP = 71, FN = 4) detecting forged receipts, "
+                    "but generates 44 false alarms on authentic receipts (TN = 31, FP = 44, Precision = 61.51%)."
+                )
+            else:
+                cm_note = (
+                    "Empirical finding: Exhibits near-perfect recall (99.47%, TP = 75, FN = 0) on compressed receipts, but retains "
+                    "42 false alarms on authentic receipts (TN = 33, FP = 42, Precision = 63.88%)."
+                )
         
         render_html(
             f'''
             <div style="background-color: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">{selected_model} Empirical Test Matrix</div>
-                  <div style="font-size: 12px; color: #94A3B8;">Evaluated on N = 151 test receipt samples (15% stratified test partition)</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">{selected_model} Empirical Test Matrix ({cond_label})</div>
+                  <div style="font-size: 12px; color: #94A3B8;">Evaluated on N = 150 balanced test receipt samples (25% stratified test partition: 75 Authentic, 75 Forged across 5 random seeds)</div>
                 </div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2DD4BF; background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.25); border-radius: 6px; padding: 4px 10px;">
-                  Threshold: 0.50
+                  Decision Threshold: 0.50
                 </div>
               </div>
               
@@ -746,8 +806,8 @@ elif page == 'Model Comparison':
                 </tbody>
               </table>
               
-              <div style="margin-top: 14px; font-size: 12px; color: #64748B; line-height: 1.5; padding: 0 4px;">
-                {note}
+              <div style="margin-top: 14px; font-size: 12px; color: #94A3B8; line-height: 1.5; padding: 0 4px;">
+                {cm_note}
               </div>
             </div>
             '''
@@ -763,6 +823,7 @@ elif page == 'Model Comparison':
                     <th>Category</th>
                     <th>Type / Technique</th>
                     <th>Base Samples</th>
+                    <th>Stratified Split (60 / 15 / 25)</th>
                 </tr>
             </thead>
             <tbody>
@@ -770,24 +831,28 @@ elif page == 'Model Comparison':
                     <td class="arch-cell">Authentic</td>
                     <td style="font-family: Inter, sans-serif;">Downloadable GCash Receipts</td>
                     <td>300</td>
+                    <td style="font-family: Inter, sans-serif;">Train: 180 &bull; Val: 45 &bull; Test: 75</td>
                 </tr>
                 <tr>
                     <td class="arch-cell" rowspan="2">Forged</td>
                     <td style="font-family: Inter, sans-serif;">Digitally Edited (Amount, Name, Ref, Font)</td>
                     <td>150</td>
+                    <td style="font-family: Inter, sans-serif;">Train: 90 &bull; Val: 22 &bull; Test: 38</td>
                 </tr>
                 <tr>
                     <td style="font-family: Inter, sans-serif;">Programmatically Generated (Template Engine)</td>
                     <td>150</td>
+                    <td style="font-family: Inter, sans-serif;">Train: 90 &bull; Val: 23 &bull; Test: 37</td>
                 </tr>
                 <tr style="background-color: #22293A; font-weight: 700;">
                     <td class="arch-cell" colspan="2">Total Base Images</td>
                     <td style="color: #2DD4BF;">600</td>
+                    <td style="color: #2DD4BF; font-family: Inter, sans-serif;">Train: 360 &bull; Val: 90 &bull; Test: 150 (50/50 Balanced)</td>
                 </tr>
             </tbody>
         </table>
-        <div style="font-size: 12px; color: #64748B; margin-top: -16px; margin-bottom: 32px;">
-          Note: Each base image is also evaluated under a Messenger-compressed condition (1,200 total experimental evaluations).
+        <div style="font-size: 12px; color: #64748B; margin-top: 10px; margin-bottom: 32px; line-height: 1.5;">
+          Note: Each base image is also evaluated under a Messenger-compressed condition (1,200 total experimental evaluations) across 5 predetermined random seeds [42, 101, 202, 303, 404] per Section 2.7.
         </div>
         '''
         render_html(dataset_table_html)
