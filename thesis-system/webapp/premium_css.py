@@ -53,7 +53,7 @@ header[data-testid="stHeader"] > * { pointer-events: auto !important; }
 
 .block-container {
     max-width: 1120px !important;
-    padding: 5.8rem 2.75rem 5rem !important;
+    padding: 2.2rem 2.5rem 3.5rem !important;
     margin: 0 auto !important;
 }
 
@@ -73,7 +73,7 @@ header[data-testid="stHeader"] > * { pointer-events: auto !important; }
 }
 
 @media (max-width: 768px) {
-    .block-container { padding: 4.8rem 1.15rem 3rem !important; }
+    .block-container { padding: 1.8rem 1.15rem 2.5rem !important; }
     section[data-testid="stSidebar"] {
         position: fixed !important; z-index: 999999 !important;
         width: 288px !important; max-width: 84% !important;

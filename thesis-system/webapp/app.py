@@ -437,8 +437,13 @@ if page == 'Classify a Receipt':
     
     render_html(
         '''
-        <div style="font-size: 11.5px; color: #64748B; margin-top: -6px; margin-bottom: 14px; line-height: 1.4;">
-          Scope Delimitation: Accepts downloadable GCash transaction receipts only (JPEG, PNG, WebP). Mobile phone screenshots containing status bars and OS navigation chrome are out of scope per Section 1.4.
+        <div style="text-align: center; font-size: 11px; color: #64748B; margin-top: -6px; margin-bottom: 18px; line-height: 1.5;">
+          Scope: Downloadable GCash receipts (JPEG, PNG, WebP) &bull; Screenshots with OS status bars out of scope per Section 1.4
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
+          <div style="height: 1px; flex: 1; background: rgba(255, 255, 255, 0.08);"></div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #64748B;">Or evaluate benchmark sample</div>
+          <div style="height: 1px; flex: 1; background: rgba(255, 255, 255, 0.08);"></div>
         </div>
         '''
     )
@@ -446,15 +451,15 @@ if page == 'Classify a Receipt':
     # 3 Sample Demo Buttons
     col_s1, col_s2, col_s3 = st.columns(3)
     with col_s1:
-        if st.button('Authentic Sample', use_container_width=True, help='Load authentic GCash transaction receipt benchmark sample'):
+        if st.button('Authentic Receipt', use_container_width=True, help='Load authentic GCash transaction receipt benchmark sample'):
             st.session_state['active_sample'] = 'authentic'
             st.rerun()
     with col_s2:
-        if st.button('Edited Sample', use_container_width=True, help='Load digitally edited receipt sample (Amount Alteration)'):
+        if st.button('Edited Tampering', use_container_width=True, help='Load digitally edited receipt sample (Amount Alteration)'):
             st.session_state['active_sample'] = 'edited'
             st.rerun()
     with col_s3:
-        if st.button('Generated Sample', use_container_width=True, help='Load programmatically generated receipt sample (Full Template)'):
+        if st.button('Generated Template', use_container_width=True, help='Load programmatically generated receipt sample (Full Template)'):
             st.session_state['active_sample'] = 'generated'
             st.rerun()
             
@@ -575,40 +580,22 @@ if page == 'Classify a Receipt':
             st.error(f'Error processing image: {str(e)}')
             
     else:
-        # Informative guide card when no image is selected (fixes empty viewport)
+        # Sleek forensic engine placeholder when no receipt is loaded
         render_html(
             '''
-            <div class="fg-guide-card">
-              <div style="font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Awaiting Transaction Receipt Input</div>
-              <div style="font-size: 12px; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
-                Upload a digital GCash receipt screenshot or select one of the pre-loaded benchmark samples above to execute multi-architecture forensic evaluation.
+            <div style="margin-top: 24px; padding: 32px 20px; background: rgba(16, 32, 48, 0.35); border: 1px dashed rgba(66, 216, 205, 0.25); border-radius: 10px; text-align: center;">
+              <div style="font-size: 14px; font-weight: 600; color: #E2E8F0; letter-spacing: -0.2px; margin-bottom: 6px;">Forensic Analysis Engine Ready</div>
+              <div style="font-size: 12px; color: #64748B; max-width: 480px; margin: 0 auto 16px auto; line-height: 1.5;">
+                Upload a GCash transaction receipt above or select a benchmark sample to execute multi-architecture CNN evaluation.
               </div>
-              <div class="fg-guide-grid">
-                <div class="fg-guide-step">
-                  <div class="fg-guide-step-num">STEP 01</div>
-                  <div class="fg-guide-step-title">Receipt Ingestion</div>
-                  <div class="fg-guide-step-desc">Accepts downloadable JPEG/PNG receipts. Pre-screened for dimensional validity per Section 1.4.</div>
-                </div>
-                <div class="fg-guide-step">
-                  <div class="fg-guide-step-num">STEP 02</div>
-                  <div class="fg-guide-step-title">Error Level Analysis</div>
-                  <div class="fg-guide-step-desc">Extracts JPEG re-compression discrepancies (quality 90, scale 15.0) normalized to 128&times;128 array.</div>
-                </div>
-                <div class="fg-guide-step">
-                  <div class="fg-guide-step-num">STEP 03</div>
-                  <div class="fg-guide-step-title">Comparative Inference</div>
-                  <div class="fg-guide-step-desc">Evaluates against Basic CNN, MobileNetV2, and ResNet50 with live per-image latency profiling.</div>
-                </div>
-              </div>
-              <div class="fg-guide-footer">
-                <span>Target: 128&times;128 ELA</span> &bull; 
-                <span>Decision Threshold: 0.50</span> &bull; 
-                <span>Classes: Authentic vs Forged</span> &bull; 
-                <span>Replication: 5-Seed Evaluation</span>
+              <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-wrap: wrap;">
+                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">128&times;128 ELA Target</span>
+                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">0.50 Decision Threshold</span>
+                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">Basic CNN &bull; MobileNetV2 &bull; ResNet50</span>
               </div>
             </div>
-            <div class="fg-scope-disclaimer">
-              Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+            <div style="margin-top: 18px; text-align: center; font-size: 11px; color: #475569; line-height: 1.5;">
+              Forensic Delimitation: Classifies image manipulation artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash servers.
             </div>
             '''
         )
