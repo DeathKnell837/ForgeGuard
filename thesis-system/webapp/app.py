@@ -380,7 +380,7 @@ if page == 'Classify a Receipt':
           </div>
           <div style="font-size: 36px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;">ForgeGuard</div>
           <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 6px;">CNN Receipt Classification System</div>
-          <div style="font-size: 13px; color: #64748B; line-height: 1.5; max-width: 760px;">Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery</div>
+          <div style="font-size: 13px; color: #64748B; line-height: 1.5; max-width: 760px;">‘Receipt or Deceit?’: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
           <div style="height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(124, 111, 240, 0.25), rgba(255,255,255,0.08)); margin-top: 20px;"></div>
         </div>
         ''',
