@@ -48,8 +48,33 @@ header[data-testid="stHeader"] {
 }
 header[data-testid="stHeader"] > * { pointer-events: auto !important; }
 .stAppDeployButton, div[data-testid="stAppDeployButton"], [data-testid="stToolbarActions"],
-[data-testid="stMainMenu"], [data-testid="stDecoration"], [data-testid="stStatusWidget"],
+[data-testid="stMainMenu"], [data-testid="stDecoration"],
 #MainMenu, footer { display: none !important; visibility: hidden !important; }
+
+/* Real-time execution status indicator */
+div[data-testid="stStatusWidget"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    position: fixed !important;
+    top: 14px !important;
+    right: 18px !important;
+    z-index: 999999 !important;
+    background: rgba(13, 25, 38, 0.94) !important;
+    border: 1px solid rgba(66, 216, 205, 0.35) !important;
+    border-radius: 20px !important;
+    padding: 5px 14px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(66, 216, 205, 0.18) !important;
+    backdrop-filter: blur(8px) !important;
+}
+div[data-testid="stStatusWidget"] svg {
+    fill: var(--fg-cyan) !important;
+    color: var(--fg-cyan) !important;
+}
+div[data-testid="stStatusWidget"] * {
+    color: #CBD5E1 !important;
+    font-family: var(--fg-mono) !important;
+    font-size: 11px !important;
+}
 
 .block-container {
     max-width: 1120px !important;
