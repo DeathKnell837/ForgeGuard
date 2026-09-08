@@ -525,7 +525,6 @@ if page == 'Classify a Receipt':
             models_bundle = load_all_models()
             model_info = get_model_info()
             with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
-                time.sleep(0.35)
                 results = run_universal_inference(image, models_bundle)
             
             col1, col2 = st.columns([0.42, 0.58], gap="large")
