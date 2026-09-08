@@ -650,14 +650,14 @@ elif page == 'Model Comparison':
             <div class="fg-chart-card">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Performance Trade-Off Analysis</div>
-                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Empirical Accuracy vs. Computational Latency Across Architectures (Standard Condition)</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Accuracy vs. Speed Comparison</div>
+                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Comparing classification accuracy and processing speed across all three models (Standard Condition)</div>
                 </div>
                 <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
                   <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
-                  <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest latency</span>
-                  <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Intermediate latency</span>
-                  <span class="fg-signal-key fg-signal-key-slow"><span aria-hidden="true"></span>Highest latency</span>
+                  <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest speed</span>
+                  <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Moderate speed</span>
+                  <span class="fg-signal-key fg-signal-key-slow"><span aria-hidden="true"></span>Slower speed</span>
                 </div>
               </div>
               
@@ -666,7 +666,7 @@ elif page == 'Model Comparison':
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
                     <span>Classification Accuracy</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Scale: 0% - 100% Baseline</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Higher is Better</span>
                   </div>
                   
                   <div class="fg-bar-row">
@@ -700,14 +700,14 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Mean accuracy across 5 seeds on balanced test partition (N = 150: 75 Authentic, 75 Forged). Basic CNN demonstrates highest stability on uncompressed ELA residuals.
+                    Tested across 5 runs on 150 receipts (75 real, 75 fake). Basic CNN achieved the highest accuracy on uncompressed receipts.
                   </div>
                 </div>
                 
                 <!-- Latency Subpanel -->
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
-                    <span>Inference Latency</span>
+                    <span>Processing Speed</span>
                     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #10B981;">Lower is Faster</span>
                   </div>
                   
@@ -742,7 +742,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Steady-state CPU inference latency. Basic CNN ({b_lat:.2f} ms) is fastest, MobileNetV2 ({m_lat:.2f} ms) intermediate, and ResNet50 ({r_lat:.2f} ms) scales with 23.5M parameters.
+                    Speed per receipt: Basic CNN ({b_lat:.2f} ms) is fastest, MobileNetV2 ({m_lat:.2f} ms) is moderate, and ResNet50 ({r_lat:.2f} ms) is slower due to its larger 23.5M model size.
                   </div>
                 </div>
               </div>
@@ -862,14 +862,18 @@ elif page == 'Model Comparison':
         table_html += '''
             </tbody>
         </table>
-        <div style="font-size: 12px; color: #64748B; margin-top: 10px; margin-bottom: 28px; line-height: 1.5;">
-          Note: Metrics represent empirical 5-seed replication means &plusmn; standard deviations (&mu; &plusmn; &sigma;, seeds: 42, 101, 202, 303, 404) evaluated on the fixed 25% stratified balanced test partition (N = 150: 75 Authentic, 75 Forged) per Section 2.7. Compression Delta (&Delta;Acc) quantifies performance shift under social media re-compression addressing hypothesis H<sub>0</sub>2. Latency highlighting: Green (< 10.0 ms) denotes real-time mobile deployability; amber (&ge; 100.0 ms) denotes latency bottlenecks. Peak Memory measures resident set size (RSS) during compiled batch execution to address hypothesis H<sub>0</sub>3.
+        <div style="font-size: 12px; color: #94A3B8; margin-top: 10px; margin-bottom: 28px; line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-weight: 600; color: #E2E8F0; margin-bottom: 4px;">How to Read This Benchmark:</div>
+          <div>&bull; <strong>5 Test Runs:</strong> Each model was evaluated across 5 separate random runs on 150 receipts (75 real, 75 fake) for fair, repeatable results.</div>
+          <div>&bull; <strong>Format:</strong> <em>Standard</em> is original high-resolution; <em>Compressed</em> simulates sending via chat apps like Messenger.</div>
+          <div>&bull; <strong>Speed:</strong> Processing time per receipt (green indicates real-time speed under 10 ms).</div>
+          <div>&bull; <strong>Precision vs. Recall:</strong> High precision means zero false alarms against honest customers; high recall means no fake receipts slip through.</div>
         </div>
         '''
         render_html(table_html)
         
         # Confusion Matrix Section
-        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Empirical Confusion Matrix</div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Detailed Test Matrix Breakdown</div></div>', unsafe_allow_html=True)
         col_cm1, col_cm2 = st.columns(2)
         with col_cm1:
             selected_model = st.selectbox('Select Architecture', ['Basic CNN', 'MobileNetV2', 'ResNet50'], key='cm_arch')
@@ -890,29 +894,29 @@ elif page == 'Model Comparison':
         
         if selected_model == 'ResNet50':
             cm_note = (
-                f"<b>In Plain English:</b> ResNet50 caught every single fake receipt ({tp} of 75), but it is overly paranoid—it also mistakenly flagged {fp} genuine receipts as fake. "
+                f"<b>Key Takeaway:</b> ResNet50 caught every single fake receipt ({tp} of 75), but it is overly paranoid—it also mistakenly flagged {fp} genuine receipts as fake. "
                 "This proves the thesis hypothesis: heavy 50-layer neural networks over-analyze normal compression noise, whereas simpler models like Basic CNN perform much better."
             )
         elif selected_model == 'Basic CNN':
             if not is_comp:
                 cm_note = (
-                    f"<b>In Plain English:</b> Basic CNN correctly verified {tn} of 75 real receipts and caught {tp} of 75 fake receipts with zero false accusations. "
+                    f"<b>Key Takeaway:</b> Basic CNN correctly verified {tn} of 75 real receipts and caught {tp} of 75 fake receipts with zero false accusations. "
                     "It is the most balanced and dependable model for uncompressed receipts."
                 )
             else:
                 cm_note = (
-                    f"<b>In Plain English:</b> Basic CNN is the top-performing model for receipts sent through chat apps like Messenger. "
+                    f"<b>Key Takeaway:</b> Basic CNN is the top-performing model for receipts sent through chat apps like Messenger. "
                     f"It caught {tp} of 75 fake receipts and verified {tn} of 75 real receipts, making only {fp + fn} total mistakes out of 150 tests."
                 )
         else: # MobileNetV2
             if not is_comp:
                 cm_note = (
-                    f"<b>In Plain English:</b> MobileNetV2 caught {tp} of 75 fake receipts ({target_metrics.get('recall', 0)*100:.1f}% detection rate), "
+                    f"<b>Key Takeaway:</b> MobileNetV2 caught {tp} of 75 fake receipts ({target_metrics.get('recall', 0)*100:.1f}% detection rate), "
                     f"but it was slightly overly cautious and flagged {fp} real receipts as suspicious."
                 )
             else:
                 cm_note = (
-                    f"<b>In Plain English:</b> Under Messenger compression, MobileNetV2 performed strongly—catching {tp} of 75 fake receipts and verifying {tn} of 75 real receipts. "
+                    f"<b>Key Takeaway:</b> Under Messenger compression, MobileNetV2 performed strongly—catching {tp} of 75 fake receipts and verifying {tn} of 75 real receipts. "
                     "Its small size makes it an excellent candidate for running directly on mobile phones."
                 )
         
@@ -921,8 +925,8 @@ elif page == 'Model Comparison':
             <div style="background-color: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">{selected_model} Empirical Test Matrix ({cond_label})</div>
-                  <div style="font-size: 12px; color: #94A3B8;">Evaluated on N = 150 balanced test receipt samples (25% stratified test partition: 75 Authentic, 75 Forged across 5 random seeds)</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">{selected_model} Test Results Breakdown ({cond_label})</div>
+                  <div style="font-size: 12px; color: #94A3B8;">Tested on 150 total receipts: 75 real receipts and 75 fake receipts across 5 test runs</div>
                 </div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2DD4BF; background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.25); border-radius: 6px; padding: 4px 10px;">
                   Decision Threshold: 0.50
