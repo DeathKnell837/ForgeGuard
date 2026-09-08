@@ -379,46 +379,6 @@ def load_evaluation_metrics():
                 return json.load(f)
     return {}
 
-@st.cache_data(ttl=60)
-def get_live_dataset_counts():
-    """Dynamically count actual receipt images currently in the repository."""
-    import glob
-    ds_dir = None
-    for cand in [
-        os.path.join(SYS_DIR, 'dataset'),
-        os.path.join(APP_DIR, 'dataset'),
-        os.path.join(os.path.dirname(SYS_DIR), 'dataset'),
-        os.path.join(os.path.dirname(APP_DIR), 'dataset'),
-        os.path.join(os.getcwd(), 'thesis-system', 'dataset'),
-        os.path.join(os.getcwd(), 'dataset'),
-    ]:
-        if os.path.isdir(cand) and os.path.isdir(os.path.join(cand, 'authentic')):
-            ds_dir = cand
-            break
-            
-    if not ds_dir:
-        return {'auth': 228, 'forg_edit': 659, 'forg_gen': 191, 'total': 1078}
-        
-    auth_cnt = len(glob.glob(os.path.join(ds_dir, 'authentic', 'compressed', '*.*')))
-    forg_edit = (
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'amount_alteration', '*.*'))) +
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'font_tampering', '*.*'))) +
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'name_modification', '*.*'))) +
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'ref_fabrication', '*.*')))
-    )
-    forg_gen = (
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'ai_diffusion_generated', '*.*'))) +
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'ai_generated_template', '*.*'))) +
-        len(glob.glob(os.path.join(ds_dir, 'forged', 'compressed', 'full_template', '*.*')))
-    )
-    
-    total = auth_cnt + forg_edit + forg_gen
-    return {
-        'auth': auth_cnt if auth_cnt > 0 else 228,
-        'forg_edit': forg_edit if forg_edit > 0 else 659,
-        'forg_gen': forg_gen if forg_gen > 0 else 191,
-        'total': total if total > 0 else 1078
-    }
 
 
 # --- Startup Model Pre-Warmup ---
@@ -1020,36 +980,8 @@ elif page == 'Model Comparison':
             '''
         )
         
-        # Dataset Composition Panel (Real Authentic + Max Target Forged)
-        live_ds = get_live_dataset_counts()
-        auth_cnt = live_ds['auth']
-        auth_pct = (auth_cnt / 300.0) * 100.0
-        forged_total_pool = live_ds['forg_edit'] + live_ds['forg_gen']
-        forged_display = min(300, forged_total_pool)
-
-        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Dataset Composition &amp; Repository Status</div></div>', unsafe_allow_html=True)
-        
-        render_html(
-            f'''
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px;">
-              <div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
-                <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Authentic Receipts</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: #10B981; margin: 4px 0;">{auth_cnt} <span style="font-size: 14px; color: #64748B;">/ 300</span></div>
-                <div style="font-size: 11px; color: #94A3B8;">{auth_pct:.1f}% Collected ({auth_cnt} of 300 Target)</div>
-              </div>
-              <div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
-                <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Forged Receipts</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: #EF4444; margin: 4px 0;">{forged_display} <span style="font-size: 14px; color: #64748B;">/ 300</span></div>
-                <div style="font-size: 11px; color: #94A3B8;">100% Max Target Met (150 Tampered &bull; 150 Generated)</div>
-              </div>
-              <div style="background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
-                <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Total Ingested Dataset</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: #2DD4BF; margin: 4px 0;">{live_ds['total']}</div>
-                <div style="font-size: 11px; color: #94A3B8;">Physical files in repository ({auth_cnt} Real &bull; {forged_total_pool} Forged)</div>
-              </div>
-            </div>
-            '''
-        )
+        # Dataset Composition Panel (Table 1 from Paper)
+        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Dataset Composition (Table 1)</div></div>', unsafe_allow_html=True)
         
         dataset_table_html = '''
         <div style="font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 10px;">Formal Thesis Protocol Specification (Table 1 Target: 600 Base Receipts)</div>
