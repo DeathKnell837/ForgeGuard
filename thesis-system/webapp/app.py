@@ -379,8 +379,12 @@ if page == 'Classify a Receipt':
             <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #A5B4FC; letter-spacing: 1px; text-transform: uppercase;">NDMC BSCS Thesis 2026</span>
           </div>
           <div style="font-size: 36px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;">ForgeGuard</div>
-          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 6px;">CNN Receipt Classification System</div>
-          <div style="font-size: 13px; color: #64748B; line-height: 1.5; max-width: 760px;">‘Receipt or Deceit?’: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 8px;">CNN Receipt Classification System</div>
+          <div style="font-size: 13px; line-height: 1.6; max-width: 820px;">
+            <span style="color: #2DD4BF; font-weight: 600; letter-spacing: 0.2px;">Receipt or Deceit?</span>
+            <span style="color: #475569; margin: 0 6px;">&mdash;</span>
+            <span style="color: #CBD5E1;">A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</span>
+          </div>
           <div style="height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(124, 111, 240, 0.25), rgba(255,255,255,0.08)); margin-top: 20px;"></div>
         </div>
         ''',
@@ -458,8 +462,12 @@ elif page == 'Model Comparison':
             <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #A5B4FC; letter-spacing: 1px; text-transform: uppercase;">NDMC BSCS Thesis 2026</span>
           </div>
           <div style="font-size: 36px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;">ForgeGuard</div>
-          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 6px;">Model Performance Comparison</div>
-          <div style="font-size: 13px; color: #64748B; line-height: 1.5; max-width: 760px;">Empirical Evaluation Matrix of CNN Architectures for Digital Receipt Forgery Detection</div>
+          <div style="font-size: 16px; font-weight: 500; color: #94A3B8; margin-bottom: 8px;">Model Performance Comparison</div>
+          <div style="font-size: 13px; line-height: 1.6; max-width: 820px;">
+            <span style="color: #2DD4BF; font-weight: 600; letter-spacing: 0.2px;">Receipt or Deceit?</span>
+            <span style="color: #475569; margin: 0 6px;">&mdash;</span>
+            <span style="color: #CBD5E1;">Empirical Evaluation Matrix of CNN Architectures for Digital Receipt Forgery Detection</span>
+          </div>
           <div style="height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(124, 111, 240, 0.25), rgba(255,255,255,0.08)); margin-top: 20px;"></div>
         </div>
         ''',
