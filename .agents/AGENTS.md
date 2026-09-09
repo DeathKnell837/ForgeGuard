@@ -14,10 +14,11 @@ This workspace customizations file provides context and instructions to the Anti
 * **Current Subject:** CS Thesis Writing 1 (Enrolled, June 2026)
 
 ### Timeline & Milestones
-* **Current Date:** July 26, 2026
-* **Current Stage:** **Week 5+ — Proposal Writing & System Implementation (Chapters 1 & 2)**
+* **Current Date:** September 2026
+* **Academic Year:** 1st Semester, A.Y. 2026–2027
+* **Current Stage:** **System Implementation & Empirical Evaluation (Chapters 1, 2, & Benchmark Complete)**
 * **Title Defense Status:** **PASSED / COMPLETED (July 2026)**
-* **Approved Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery* (ForgeGuard System)
+* **Approved Canonical Title:** *Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts* (ForgeGuard System)
 
 ---
 
@@ -63,10 +64,10 @@ This workspace customizations file provides context and instructions to the Anti
 >   - NEVER push the software system README directly to `origin/main` root.
 
 > [!IMPORTANT]
-> **Rule 6: Approved Title is Final**
-> The title defense is **PASSED**. The single approved title is:
-> *"Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery"*
-> (ForgeGuard System). Do NOT reference or propose the 3 old pre-defense candidate titles (Concrete Crack, Phishing URL, Deepfake Detection) in any new documents. They may remain in archival files only.
+> **Rule 6: Canonical Approved Title is Final**
+> The title defense is **PASSED**. The single approved canonical title (as strictly recorded in `THESIS1UNGAB_BACANTO.md`) is:
+> *"Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts"*
+> (ForgeGuard System). NEVER revert to the older candidate title ("Securing Mobile Transaction..."). Do NOT reference the 3 old pre-defense candidate titles (Concrete Crack, Phishing URL, Deepfake Detection) in any new documents. They may remain in archival files only.
 
 > [!CRITICAL]
 > **Rule 7: Strict Zero-Emoji Policy (Professional Enterprise UI & Academic Standards)**
@@ -96,12 +97,12 @@ This workspace customizations file provides context and instructions to the Anti
 
 ---
 
-## 3. Approved Thesis Title
+## 3. Approved Thesis Title & System Profile
 
-* **Title:** *Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery*
+* **Canonical Title:** *Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts*
 * **System Name:** ForgeGuard
 * **Domain:** Image Forensics / Cybersecurity & Mobile Payment Security
-* **Scope:** Upload GCash mobile wallet receipt screenshots → compute Error Level Analysis (ELA) → classify as authentic or forged using three CNN architectures (Basic CNN, ResNet50, MobileNetV2) → display comparative confidence scores, latency, and forensic heatmaps.
+* **Scope:** Upload GCash downloadable transaction receipts (screenshots excluded per Section 1.4) → compute Error Level Analysis (ELA 90Q / 15x) → classify as authentic or forged using three CNN architectures (Basic CNN, ResNet50, MobileNetV2) → display comparative confidence scores, real inference latency, and forensic heatmaps.
 * **Live Demo:** [forgeguard.streamlit.app](https://forgeguard.streamlit.app/)
 
 ---
