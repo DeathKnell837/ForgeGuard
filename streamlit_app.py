@@ -2,7 +2,7 @@
 ForgeGuard — Streamlit Cloud Entrypoint
 ========================================
 Redirects execution to canonical application in thesis-system/webapp/app.py
-BSCS Thesis: "Securing Mobile Transaction: A Comparative Evaluation of
+BSCS Thesis: "Receipt or Deceit: A Cross-Architecture Analysis of
 CNN Architectures in Detecting Digital Receipt Forgery"
 Notre Dame of Midsayap College (NDMC) | CITE
 Authors: Ungab and Bacanto | Adviser: Ms. Doris Ann Mariano

@@ -1,7 +1,7 @@
 """
 ForgeGuard — CNN Receipt Classification Demo
 =============================================
-BSCS Thesis: "Securing Mobile Transaction: A Comparative Evaluation of
+BSCS Thesis: "Receipt or Deceit: A Cross-Architecture Analysis of
 CNN Architectures in Detecting Digital Receipt Forgery"
 Notre Dame of Midsayap College (NDMC) | CITE
 Authors: Ungab & Bacanto | Adviser: Ms. Doris Ann Mariano
@@ -466,7 +466,7 @@ if page == 'Classify a Receipt':
             <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">NDMC BSCS Thesis 2026</div>
           </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery</div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
           <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
         '''
@@ -651,7 +651,7 @@ elif page == 'Model Comparison':
             <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Model Benchmark Suite</div>
           </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery</div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
           <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
         '''
