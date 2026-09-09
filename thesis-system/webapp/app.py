@@ -117,7 +117,7 @@ def _maxpool2d_fast(x, pool_size=2):
     return reshaped.max(axis=(1, 3))
 
 # --- Universal Model Loader ---
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def load_all_models():
     """
     Load models via TensorFlow if present, or extract HDF5 weights for native execution.
@@ -382,10 +382,35 @@ def load_evaluation_metrics():
 
 
 # --- Startup Model Pre-Warmup ---
-_boot_loader = st.empty()
-_boot_loader.markdown('<div class="fg-boot-loader" aria-label="Loading"><span></span></div>', unsafe_allow_html=True)
-_ = load_all_models()
-_boot_loader.empty()
+if not st.session_state.get('models_loaded', False):
+    _boot_loader = st.empty()
+    _boot_loader.markdown(
+        '''
+        <div class="fg-splash-overlay">
+          <div class="fg-splash-card">
+            <div class="fg-splash-icon-wrapper">
+              <div class="fg-splash-spinner"></div>
+              <div class="fg-splash-core-dot"></div>
+            </div>
+            <div class="fg-splash-brand">FORGEGUARD FORENSIC ENGINE</div>
+            <div class="fg-splash-title">Initializing Neural Networks</div>
+            <div class="fg-splash-track">
+              <div class="fg-splash-bar"></div>
+            </div>
+            <div class="fg-splash-status">
+              <span>Basic CNN</span> &bull; <span>MobileNetV2</span> &bull; <span>ResNet50</span>
+            </div>
+            <div class="fg-splash-sub">Loading weights and pre-warming tensor inference graphs...</div>
+          </div>
+        </div>
+        ''',
+        unsafe_allow_html=True
+    )
+    _ = load_all_models()
+    st.session_state['models_loaded'] = True
+    _boot_loader.empty()
+else:
+    _ = load_all_models()
 
 # --- Sidebar ---
 with st.sidebar:

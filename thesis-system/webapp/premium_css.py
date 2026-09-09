@@ -352,25 +352,121 @@ div[data-testid="stButton"] > button:active {
     transform: translateY(0) !important;
 }
 
-/* Real-time forensic neural inference loading indicator */
-.fg-boot-loader {
-    position: relative;
-    width: min(360px, 70vw);
-    height: 4px;
-    margin: 31vh auto 0;
-    overflow: hidden;
-    border-radius: 999px;
-    background: rgba(66,216,205,.12);
-    box-shadow: inset 0 0 0 1px rgba(66,216,205,.1), 0 0 18px rgba(66,216,205,.08);
+/* Enterprise Forensic Splash Boot Loader */
+.fg-splash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0D111A;
+    background: radial-gradient(circle at 50% 40%, #151D2A 0%, #0D111A 85%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999999;
 }
-.fg-boot-loader > span {
+.fg-splash-card {
+    background: rgba(28, 35, 51, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    border-radius: 16px;
+    padding: 38px 44px;
+    width: min(480px, 90vw);
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 32px rgba(45, 212, 191, 0.08);
+}
+.fg-splash-icon-wrapper {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fg-splash-spinner {
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(90deg, transparent, var(--fg-cyan), transparent);
-    background-size: 42% 100%;
-    background-repeat: no-repeat;
-    animation: fg-loading-sweep 1.2s ease-in-out infinite;
+    border-radius: 50%;
+    border: 3px solid rgba(45, 212, 191, 0.15);
+    border-top-color: #2DD4BF;
+    border-right-color: #2DD4BF;
+    animation: fg-splash-spin 0.9s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+.fg-splash-core-dot {
+    width: 12px;
+    height: 12px;
+    background: #2DD4BF;
+    border-radius: 50%;
+    box-shadow: 0 0 14px #2DD4BF;
+    animation: fg-splash-pulse 1.4s ease-in-out infinite alternate;
+}
+@keyframes fg-splash-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes fg-splash-pulse {
+    from { transform: scale(0.8); opacity: 0.55; }
+    to { transform: scale(1.25); opacity: 1; }
+}
+.fg-splash-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #2DD4BF;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.fg-splash-title {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 22px;
+    letter-spacing: -0.3px;
+}
+.fg-splash-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 18px;
+}
+.fg-splash-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(90deg, #2DD4BF, #7C6FF0);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(45, 212, 191, 0.65);
+    animation: fg-splash-sweep 1.3s ease-in-out infinite;
+}
+@keyframes fg-splash-sweep {
+    0% { left: -45%; }
+    50% { left: 45%; }
+    100% { left: 100%; }
+}
+.fg-splash-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: #E2E8F0;
+    margin-bottom: 8px;
+}
+.fg-splash-status span {
+    color: #2DD4BF;
+}
+.fg-splash-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #94A3B8;
+    line-height: 1.5;
 }
 div[data-testid="stSpinner"] {
     background: linear-gradient(135deg, rgba(16, 34, 50, 0.96), rgba(11, 23, 35, 0.96)) !important;
