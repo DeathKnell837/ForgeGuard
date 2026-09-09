@@ -472,9 +472,17 @@ if page == 'Classify a Receipt':
         '''
     )
     
+    if 'uploader_version' not in st.session_state:
+        st.session_state['uploader_version'] = 0
+    if 'active_sample' not in st.session_state:
+        st.session_state['active_sample'] = None
+
+    uploader_key = f"receipt_uploader_{st.session_state['uploader_version']}"
+    
     uploaded = st.file_uploader(
         'Upload a GCash downloadable transaction receipt',
         type=['png', 'jpg', 'jpeg', 'webp'],
+        key=uploader_key,
         help='Drag and drop or browse for a downloadable GCash transaction receipt.'
     )
     
@@ -496,17 +504,20 @@ if page == 'Classify a Receipt':
     with col_s1:
         if st.button('Authentic Receipt', use_container_width=True, help='Load authentic GCash transaction receipt benchmark sample'):
             st.session_state['active_sample'] = 'authentic'
+            st.session_state['uploader_version'] += 1
             st.rerun()
     with col_s2:
         if st.button('Edited Tampering', use_container_width=True, help='Load digitally edited receipt sample (Amount Alteration)'):
             st.session_state['active_sample'] = 'edited'
+            st.session_state['uploader_version'] += 1
             st.rerun()
     with col_s3:
         if st.button('Generated Template', use_container_width=True, help='Load programmatically generated receipt sample (Full Template)'):
             st.session_state['active_sample'] = 'generated'
+            st.session_state['uploader_version'] += 1
             st.rerun()
             
-    # Resolve active image (uploaded file has priority over sample)
+    # Resolve active image
     image = None
     source_label = None
     is_sample = False
@@ -550,6 +561,20 @@ if page == 'Classify a Receipt':
             with col_b2:
                 if st.button('Clear Sample', use_container_width=True, help='Reset view to file upload state'):
                     st.session_state['active_sample'] = None
+                    st.rerun()
+        elif uploaded is not None:
+            col_b1, col_b2 = st.columns([0.80, 0.20])
+            with col_b1:
+                render_html(
+                    f'''
+                    <div class="fg-sample-banner" style="border-left-color: #A5B4FC;">
+                      <span><strong>Active Upload:</strong> {source_label}</span>
+                    </div>
+                    '''
+                )
+            with col_b2:
+                if st.button('Clear Upload', use_container_width=True, help='Clear uploaded file and reset view'):
+                    st.session_state['uploader_version'] += 1
                     st.rerun()
                     
         try:
