@@ -1,19 +1,22 @@
 """
 ForgeGuard — Model Training & Comparative Benchmark Pipeline
 ========================================================================
-BSCS Thesis: "Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery"
+BSCS Thesis: "Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts"
+Notre Dame of Midsayap College (NDMC) | CITE
+Authors: Rogie P. Bacanto, Daniela S. Ungab | Adviser: Ms. Doris Ann Mariano
 
 This script:
-1. Loads all 1,003 labeled receipt images across all authentic & forged categories
-   (including all 25 AI diffusion and 153 AI template generated receipts).
-2. Computes Error Level Analysis (ELA 90Q / 15x) for every sample.
-3. Performs a stratified 70% Train / 15% Val / 15% Test split with class weighting.
-4. Trains and evaluates the three CNN architectures:
+1. Loads the balanced 1:1 dataset: 228 Authentic vs. 228 Stratified Forged receipts
+   (114 digitally edited + 114 generated across all subcategories).
+2. Holds back the remaining 621 forged receipts as an Unseen Holdout Stress Test.
+3. Computes Error Level Analysis (ELA 90Q / 15x) for every sample.
+4. Performs a stratified 70% Train / 15% Val / 15% Test split on the 456 base receipts.
+5. Trains and evaluates the three CNN architectures:
    - Basic CNN (Custom 3-layer Convolutional Network, ~2.1M params)
    - MobileNetV2 (Inverted Residual Depthwise Separable CNN, ~3.4M params)
    - ResNet50 (Deep Residual Bottleneck Network, ~23.5M params)
-5. Exports evaluation metrics (Accuracy, Precision, Recall, F1-Score, Latency)
-   to thesis-system/models/evaluation_metrics.json.
+6. Evaluates both the balanced test partition and the 621 holdout unseen forgeries.
+7. Exports evaluation metrics to thesis-system/models/evaluation_metrics.json.
 """
 
 import os
@@ -32,12 +35,8 @@ BATCH_SIZE = 16
 EPOCHS = 20
 IMAGE_EXTENSIONS = ('*.jpg', '*.jpeg', '*.png', '*.webp')
 
-def load_and_preprocess_dataset(dataset_dir):
-    print("=== 1. Loading & Preprocessing Full Dataset via ELA ===")
-    
-    X = []
-    y = []
-    filepaths = []
+def load_and_preprocess_balanced_dataset(dataset_dir):
+    print("=== 1. Loading Balanced Dataset (228 Authentic vs. 228 Stratified Forged) ===")
     
     auth_dir = os.path.join(dataset_dir, 'authentic', 'compressed')
     forged_dir = os.path.join(dataset_dir, 'forged', 'compressed')
@@ -48,47 +47,63 @@ def load_and_preprocess_dataset(dataset_dir):
         auth_files.extend(glob.glob(os.path.join(auth_dir, ext)))
         auth_files.extend(glob.glob(os.path.join(auth_dir, ext.upper())))
     auth_files = sorted(list(set(auth_files)))
+    print(f"[1/3] Found {len(auth_files)} Authentic receipts.")
     
-    print(f"Loading {len(auth_files)} Authentic receipt images...")
-    for fpath in auth_files:
-        try:
-            with Image.open(fpath) as img:
-                ela_img = compute_ela(img, quality=90, scale=15.0)
-                ela_resized = ela_img.resize(IMG_SIZE)
-                arr = np.array(ela_resized, dtype=np.float32) / 255.0
-                X.append(arr)
-                y.append(0)
-                filepaths.append(fpath)
-        except Exception as e:
-            print(f"Error loading {fpath}: {e}")
+    # 2. Stratified Sampling of exactly 228 Forged Receipts (114 Edited + 114 Generated)
+    quotas = {
+        'amount_alteration': 29,
+        'name_modification': 29,
+        'ref_fabrication': 29,
+        'font_tampering': 27,
+        'ai_generated_template': 81,
+        'ai_diffusion_generated': 25,
+        'full_template': 8
+    }
+    
+    balanced_forged_files = []
+    holdout_forged_files = []
+    for subcat, q in quotas.items():
+        sub_files = []
+        for ext in IMAGE_EXTENSIONS:
+            sub_files.extend(glob.glob(os.path.join(forged_dir, subcat, ext)))
+            sub_files.extend(glob.glob(os.path.join(forged_dir, subcat, ext.upper())))
+        sub_files = sorted(list(set(sub_files)))
+        balanced_forged_files.extend(sub_files[:q])
+        holdout_forged_files.extend(sub_files[q:])
+        print(f"      - {subcat:25s}: Selected={min(q, len(sub_files)):2d} | Holdout Reserve={max(0, len(sub_files)-q):3d}")
+    
+    print(f"[2/3] Balanced Training Set: {len(auth_files)} Authentic vs. {len(balanced_forged_files)} Forged (Total: {len(auth_files)+len(balanced_forged_files)})")
+    print(f"[3/3] Holdout Stress-Test Set: {len(holdout_forged_files)} Unseen Forgeries")
+    
+    # Preprocess Balanced Dataset using ELA
+    X, y = [], []
+    print("\nExtracting ELA features for Balanced Dataset...")
+    for f in auth_files:
+        with Image.open(f) as img:
+            ela = compute_ela(img, quality=90, scale=15.0).resize(IMG_SIZE)
+            X.append(np.array(ela, dtype=np.float32) / 255.0)
+            y.append(0)
 
-    # 2. Load Forged samples (Label: 1) across all subcategories
-    forged_files = []
-    for ext in IMAGE_EXTENSIONS:
-        forged_files.extend(glob.glob(os.path.join(forged_dir, '**', ext), recursive=True))
-        forged_files.extend(glob.glob(os.path.join(forged_dir, '**', ext.upper()), recursive=True))
-    forged_files = sorted(list(set(forged_files)))
-    
-    print(f"Loading {len(forged_files)} Forged receipt images (including AI diffusion & template fakes)...")
-    for fpath in forged_files:
-        try:
-            with Image.open(fpath) as img:
-                ela_img = compute_ela(img, quality=90, scale=15.0)
-                ela_resized = ela_img.resize(IMG_SIZE)
-                arr = np.array(ela_resized, dtype=np.float32) / 255.0
-                X.append(arr)
-                y.append(1)
-                filepaths.append(fpath)
-        except Exception as e:
-            print(f"Error loading {fpath}: {e}")
+    for f in balanced_forged_files:
+        with Image.open(f) as img:
+            ela = compute_ela(img, quality=90, scale=15.0).resize(IMG_SIZE)
+            X.append(np.array(ela, dtype=np.float32) / 255.0)
+            y.append(1)
 
     X = np.array(X, dtype=np.float32)
     y = np.array(y, dtype=np.int32)
+
+    # Preprocess Holdout Stress-Test Set using ELA
+    print("Extracting ELA features for Unseen Holdout Set...")
+    X_holdout = []
+    for f in holdout_forged_files:
+        with Image.open(f) as img:
+            ela = compute_ela(img, quality=90, scale=15.0).resize(IMG_SIZE)
+            X_holdout.append(np.array(ela, dtype=np.float32) / 255.0)
+    X_holdout = np.array(X_holdout, dtype=np.float32)
+    y_holdout = np.ones(len(X_holdout), dtype=np.int32)
     
-    print(f"\nDataset Ready! Total Samples: {len(X)} | Input Tensor Shape: {X.shape}")
-    print(f"Authentic Samples (0): {np.sum(y == 0)} | Forged Samples (1): {np.sum(y == 1)}")
-    
-    return X, y
+    return X, y, X_holdout, y_holdout
 
 
 def train_and_evaluate():
@@ -97,7 +112,7 @@ def train_and_evaluate():
     models_dir = os.path.join(base_dir, 'models')
     os.makedirs(models_dir, exist_ok=True)
     
-    X, y = load_and_preprocess_dataset(dataset_dir)
+    X, y, X_holdout, y_holdout = load_and_preprocess_balanced_dataset(dataset_dir)
     
     # Stratified Train (70%) / Val (15%) / Test (15%) Split
     from sklearn.model_selection import train_test_split
@@ -111,6 +126,7 @@ def train_and_evaluate():
     print(f"\nData Splits: Train={len(X_train)} | Val={len(X_val)} | Test={len(X_test)}")
     print(f"Train Class Balance: Auth={np.sum(y_train == 0)}, Forged={np.sum(y_train == 1)}")
     print(f"Test Class Balance:  Auth={np.sum(y_test == 0)}, Forged={np.sum(y_test == 1)}")
+    print(f"Holdout Stress Test: {len(X_holdout)} Unseen Forgeries")
 
     try:
         import tensorflow as tf
@@ -118,16 +134,6 @@ def train_and_evaluate():
         
         print("\n=== 2. Building & Training CNN Architectures (TensorFlow/Keras) ===")
         
-        # Calculate class weights for imbalance handling
-        total_samples = len(y_train)
-        n_auth = max(1, np.sum(y_train == 0))
-        n_forged = max(1, np.sum(y_train == 1))
-        class_weights = {
-            0: float(total_samples / (2.0 * n_auth)),
-            1: float(total_samples / (2.0 * n_forged))
-        }
-        print(f"Computed Class Weights: {class_weights}")
-
         # 1. Basic CNN Architecture (~2.1M params)
         def build_basic_cnn():
             model = models.Sequential([
@@ -189,7 +195,6 @@ def train_and_evaluate():
                 validation_data=(X_val, y_val),
                 epochs=EPOCHS,
                 batch_size=BATCH_SIZE,
-                class_weight=class_weights,
                 verbose=1
             )
             train_duration = time.time() - start_time
@@ -199,27 +204,51 @@ def train_and_evaluate():
             y_pred_prob = model.predict(X_test, verbose=0)
             latency_ms = ((time.time() - lat_start) / max(1, len(X_test))) * 1000.0
             
-            y_pred = (y_pred_prob > 0.5).astype(int).flatten()
+            y_pred = (y_pred_prob >= 0.5).astype(int).flatten()
             
-            from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+            from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
             acc = accuracy_score(y_test, y_pred)
             prec = precision_score(y_test, y_pred, zero_division=0)
             rec = recall_score(y_test, y_pred, zero_division=0)
             f1 = f1_score(y_test, y_pred, zero_division=0)
+            cm = confusion_matrix(y_test, y_pred)
+            tn, fp, fn, tp = cm.ravel()
+            
+            # Evaluate on Holdout Stress Test
+            y_holdout_prob = model.predict(X_holdout, verbose=0)
+            y_holdout_pred = (y_holdout_prob >= 0.5).astype(int).flatten()
+            stress_rec = recall_score(y_holdout, y_holdout_pred, zero_division=0)
+            stress_caught = int(np.sum(y_holdout_pred == 1))
             
             results[name] = {
+                'architecture': name.replace('_', ' '),
+                'condition': 'Standard',
                 'accuracy': float(acc),
                 'precision': float(prec),
                 'recall': float(rec),
                 'f1_score': float(f1),
                 'latency_ms': float(latency_ms),
-                'train_duration_s': float(train_duration)
+                'train_duration_s': float(train_duration),
+                'test_size': len(X_test),
+                'authentic_test_count': int(np.sum(y_test == 0)),
+                'forged_test_count': int(np.sum(y_test == 1)),
+                'confusion': {
+                    'tp': int(tp),
+                    'tn': int(tn),
+                    'fp': int(fp),
+                    'fn': int(fn)
+                },
+                'stress_test': {
+                    'holdout_total': len(X_holdout),
+                    'fakes_caught': stress_caught,
+                    'detection_rate': float(stress_rec)
+                }
             }
             
             # Save model
             model_path = os.path.join(models_dir, f"{name.lower()}.keras")
             model.save(model_path)
-            print(f"Saved {name} to {model_path} | Accuracy: {acc*100:.2f}% | F1: {f1:.4f} | Latency: {latency_ms:.2f}ms")
+            print(f"Saved {name} to {model_path} | Accuracy: {acc*100:.2f}% | F1: {f1:.4f} | Latency: {latency_ms:.2f}ms | Stress Rec: {stress_rec*100:.2f}%")
 
         # Save evaluation summary JSON
         with open(os.path.join(models_dir, 'evaluation_metrics.json'), 'w') as f:

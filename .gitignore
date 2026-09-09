@@ -175,6 +175,7 @@ thesis-system/dataset/
 
 # Thesis - Backup directories (local only)
 thesis-system/webapp_backup_*/
+models_backup_*/
 
 # Antigravity
 .agents/
