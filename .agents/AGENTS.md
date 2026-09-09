@@ -87,6 +87,13 @@ This workspace customizations file provides context and instructions to the Anti
 > * **NEVER** consult, extract requirements from, or treat old standalone draft documents (such as `Chapter1_Digital_Deception_Mobile_Wallet.*`, `Chapter2_Review_of_Related_Literature.*`, or older candidate/scratch files) as reference material.
 > * If any contradiction arises between `THESIS1UNGAB_BACANTO` and any other document in this workspace, `THESIS1UNGAB_BACANTO` **ALWAYS** takes absolute precedence.
 
+> [!CRITICAL]
+> **Rule 10: Strict Explicit Consent Policy (No Autonomous File Edits)**
+> * **NEVER** edit, modify, replace, create, delete, or push any code, configuration, models, or documents unless the user has **EXPLICITLY** commanded and confirmed the action.
+> * Presenting proposals, options, or asking questions does NOT grant permission to execute.
+> * Before making ANY file modification, the assistant MUST outline the exact proposed changes in chat and wait for explicit confirmation from the user.
+> * Jumping the gun, making premature assumptions, or applying unauthorized edits is strictly prohibited under all circumstances.
+
 ---
 
 ## 3. Approved Thesis Title
