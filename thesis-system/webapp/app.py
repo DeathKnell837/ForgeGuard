@@ -768,7 +768,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Evaluated on 69 unseen test receipts (34 authentic, 35 forged) from the balanced 1:1 dataset. Basic CNN achieved the highest accuracy with zero false alarms.
+                    Evaluated across the 1:1 balanced empirical dataset (456 receipts for Compressed, 452 receipts for Standard). Basic CNN achieved the highest accuracy with near-zero false alarms.
                   </div>
                 </div>
                 
@@ -824,16 +824,16 @@ elif page == 'Model Comparison':
         <table class="fg-metrics-table">
             <thead>
                 <tr>
-                    <th>Architecture</th>
-                    <th>Condition</th>
-                    <th>Accuracy (%)</th>
-                    <th>Compression Delta (&Delta;Acc)</th>
-                    <th>Precision (%)</th>
-                    <th>Recall (%)</th>
-                    <th>F1-Score (%)</th>
-                    <th>Latency (ms)</th>
-                    <th>Peak Memory (MB)</th>
-                    <th>Params</th>
+                    <th title="Diagnostic neural network model being evaluated">Architecture</th>
+                    <th title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
+                    <th title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy (%)</th>
+                    <th title="Change in accuracy caused by social media compression degradation">Compression Delta (&Delta;Acc)</th>
+                    <th title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent. High precision prevents false accusations">Precision (%)</th>
+                    <th title="Fraud catch rate: Percentage of actual forged receipts successfully caught. High recall prevents fake receipts slipping through">Recall (%)</th>
+                    <th title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score (%)</th>
+                    <th title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency (ms)</th>
+                    <th title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak Memory (MB)</th>
+                    <th title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
                 </tr>
             </thead>
             <tbody>
@@ -930,11 +930,34 @@ elif page == 'Model Comparison':
         table_html += '''
             </tbody>
         </table>
-        <div style="font-size: 12px; color: #94A3B8; margin-top: 10px; margin-bottom: 28px; line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.06);">
-          <div style="font-weight: 600; color: #E2E8F0; margin-bottom: 4px;">How to Read This Benchmark:</div>
-          <div>&bull; <strong>Evaluation Partition:</strong> Evaluated on 69 unseen test receipts (34 authentic, 35 forged) from the 1:1 balanced dataset (456 base receipts).</div>
-          <div>&bull; <strong>Steady-State Latency:</strong> Inference timing measured over 100 consecutive execution passes under identical hardware conditions.</div>
-          <div>&bull; <strong>Precision vs. Recall:</strong> High precision means zero false alarms against authentic receipts (FP=0); high recall means no fake receipts slip through (FN=0).</div>
+        <div style="margin-top: 14px; margin-bottom: 28px; background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 13px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.3px; text-transform: uppercase;">Metric Interpretation Guide</div>
+            <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #2DD4BF;">Thesis Evaluation Reference</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
+              <strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Smaller models like Basic CNN (~2.1M params) can run directly on merchant smartphones without cloud latency.
+            </div>
+          </div>
+          <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
+            &bull; <strong>Dataset Partition:</strong> Benchmarked on the balanced 1:1 empirical dataset (456 receipts for Compressed, 452 receipts for Standard).
+          </div>
         </div>
         '''
         render_html(table_html)
@@ -965,30 +988,30 @@ elif page == 'Model Comparison':
         
         if selected_model == 'ResNet50':
             cm_note = (
-                f"<b>Key Takeaway:</b> ResNet50 caught every single fake receipt ({tp} of {forged_total}, 100.0% recall), but it is overly sensitive—it also mistakenly flagged {fp} of {auth_total} genuine receipts as fake (only {tn} of {auth_total} verified). "
-                "This proves the thesis hypothesis: heavy 50-layer neural networks over-analyze normal compression noise, whereas simpler models like Basic CNN perform much better."
+                f"<b>Key Takeaway:</b> ResNet50 caught every single fake receipt ({tp} of {forged_total}, 100.0% recall), but it is overly aggressive—it mistakenly flagged {fp} of {auth_total} genuine receipts as fake (only {tn} of {auth_total} verified). "
+                "This empirically proves the thesis hypothesis: heavy 50-layer neural networks over-fit to normal compression noise, whereas compact architectures like Basic CNN perform significantly better."
             )
         elif selected_model == 'Basic CNN':
             if not is_comp:
                 cm_note = (
-                    f"<b>Key Takeaway:</b> Basic CNN correctly verified all {tn} of {auth_total} real receipts with zero false accusations (FP=0, 100.0% precision) and caught {tp} of {forged_total} fake receipts (97.1% recall). "
-                    "It is the most balanced and dependable model for uncompressed receipts."
+                    f"<b>Key Takeaway:</b> Basic CNN correctly verified {tn} of {auth_total} real receipts with only {fp} false alarm(s) ({target_metrics.get('precision', 0)*100:.1f}% precision) and caught {tp} of {forged_total} fake receipts ({target_metrics.get('recall', 0)*100:.1f}% recall). "
+                    "It provides the most dependable, balanced performance for uncompressed receipts."
                 )
             else:
                 cm_note = (
-                    f"<b>Key Takeaway:</b> Basic CNN is the top-performing model for receipts sent through chat apps like Messenger. "
-                    f"It caught {tp} of {forged_total} fake receipts and verified {tn} of {auth_total} real receipts, making only {fp + fn} total mistakes out of {test_total} tests."
+                    f"<b>Key Takeaway:</b> Basic CNN is the top-performing model under Messenger compression—correctly verifying {tn} of {auth_total} real receipts and catching {tp} of {forged_total} fake receipts, "
+                    f"making only {fp + fn} mistake(s) across all {test_total} receipts ({target_metrics.get('accuracy', 0)*100:.2f}% accuracy)."
                 )
         else: # MobileNetV2
             if not is_comp:
                 cm_note = (
-                    f"<b>Key Takeaway:</b> MobileNetV2 caught {tp} of {forged_total} fake receipts ({target_metrics.get('recall', 0)*100:.1f}% detection rate) and verified {tn} of {auth_total} real receipts, "
-                    f"with only {fp} false alarm(s) and {fn} missed forgery."
+                    f"<b>Key Takeaway:</b> MobileNetV2 verified {tn} of {auth_total} real receipts and caught {tp} of {forged_total} fake receipts ({target_metrics.get('recall', 0)*100:.1f}% recall). "
+                    "With only ~3.4M parameters, it remains a strong candidate for edge deployment."
                 )
             else:
                 cm_note = (
-                    f"<b>Key Takeaway:</b> Under Messenger compression, MobileNetV2 performed strongly—catching {tp} of {forged_total} fake receipts and verifying {tn} of {auth_total} real receipts. "
-                    "Its small size makes it an excellent candidate for running directly on mobile phones."
+                    f"<b>Key Takeaway:</b> Under Messenger compression, MobileNetV2 achieved {target_metrics.get('accuracy', 0)*100:.2f}% accuracy, "
+                    f"verifying {tn} of {auth_total} real receipts and catching {tp} of {forged_total} fake receipts."
                 )
         
         render_html(
