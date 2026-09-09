@@ -821,6 +821,7 @@ elif page == 'Model Comparison':
         st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Overall Architecture Benchmark</div></div>', unsafe_allow_html=True)
         
         table_html = '''
+        <div style="display: inline-block; min-width: 100%;">
         <table class="fg-metrics-table">
             <thead>
                 <tr>
@@ -930,34 +931,35 @@ elif page == 'Model Comparison':
         table_html += '''
             </tbody>
         </table>
-        <div style="margin-top: 14px; margin-bottom: 28px; background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
+        <div style="margin-top: 14px; margin-bottom: 28px; background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px; box-sizing: border-box; width: 100%;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
             <div style="font-size: 13px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.3px; text-transform: uppercase;">Metric Interpretation Guide</div>
             <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #2DD4BF;">Thesis Evaluation Reference</div>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.</div>
             </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.</div>
             </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.</div>
             </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.</div>
             </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
             </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px;">
-              <strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Smaller models like Basic CNN (~2.1M params) can run directly on merchant smartphones without cloud latency.
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+              <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Smaller models like Basic CNN (~2.1M params) can run directly on merchant smartphones without cloud latency.</div>
             </div>
           </div>
           <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
             &bull; <strong>Dataset Partition:</strong> Benchmarked on the balanced 1:1 empirical dataset (456 receipts for Compressed, 452 receipts for Standard).
           </div>
+        </div>
         </div>
         '''
         render_html(table_html)
