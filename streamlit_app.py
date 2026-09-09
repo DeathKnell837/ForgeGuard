@@ -23,4 +23,4 @@ canonical_app = os.path.join(WEBAPP_DIR, "app.py")
 with open(canonical_app, "r", encoding="utf-8") as f:
     code = f.read()
 
-exec(compile(code, canonical_app, "exec"))
+exec(compile(code, canonical_app, "exec"), {"__file__": canonical_app, "__name__": "__main__"})

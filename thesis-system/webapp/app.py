@@ -31,14 +31,30 @@ for p in [APP_DIR, SYS_DIR]:
         sys.path.insert(0, p)
 
 # --- CSS ---
-try:
-    import importlib.util
-    css_path = os.path.join(APP_DIR, 'premium_css.py')
-    spec = importlib.util.spec_from_file_location('local_premium_css', css_path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    PREMIUM_CSS = mod.PREMIUM_CSS
-except Exception as e:
+PREMIUM_CSS = ''
+css_candidates = [
+    os.path.join(APP_DIR, 'premium_css.py'),
+    os.path.join(SYS_DIR, 'webapp', 'premium_css.py'),
+    os.path.join(os.path.dirname(APP_DIR), 'webapp', 'premium_css.py'),
+    os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'webapp', 'premium_css.py'),
+    os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'premium_css.py'),
+    os.path.join(os.getcwd(), 'webapp', 'premium_css.py'),
+    os.path.join(os.getcwd(), 'premium_css.py'),
+]
+for cp in css_candidates:
+    if os.path.isfile(cp):
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('local_premium_css', cp)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            if hasattr(mod, 'PREMIUM_CSS') and len(mod.PREMIUM_CSS) > 100:
+                PREMIUM_CSS = mod.PREMIUM_CSS
+                break
+        except Exception:
+            continue
+
+if not PREMIUM_CSS:
     try:
         from premium_css import PREMIUM_CSS
     except Exception:
@@ -450,7 +466,7 @@ if page == 'Classify a Receipt':
             <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">NDMC BSCS Thesis 2026</div>
           </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery</div>
           <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
         '''
@@ -635,7 +651,7 @@ elif page == 'Model Comparison':
             <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Model Benchmark Suite</div>
           </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Securing Mobile Transaction: A Comparative Evaluation of CNN Architectures in Detecting Digital Receipt Forgery</div>
           <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
         </div>
         '''
