@@ -933,7 +933,6 @@ elif page == 'Model Comparison':
         <div style="font-size: 12px; color: #94A3B8; margin-top: 10px; margin-bottom: 28px; line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.06);">
           <div style="font-weight: 600; color: #E2E8F0; margin-bottom: 4px;">How to Read This Benchmark:</div>
           <div>&bull; <strong>Evaluation Partition:</strong> Evaluated on 69 unseen test receipts (34 authentic, 35 forged) from the 1:1 balanced dataset (456 base receipts).</div>
-          <div>&bull; <strong>Holdout Stress Testing:</strong> An additional 621 unseen forged receipts across all 7 attack categories were evaluated to test out-of-distribution resilience.</div>
           <div>&bull; <strong>Steady-State Latency:</strong> Inference timing measured over 100 consecutive execution passes under identical hardware conditions.</div>
           <div>&bull; <strong>Precision vs. Recall:</strong> High precision means zero false alarms against authentic receipts (FP=0); high recall means no fake receipts slip through (FN=0).</div>
         </div>
@@ -1050,83 +1049,6 @@ elif page == 'Model Comparison':
             '''
         )
         
-        # Unseen Holdout Stress Test Panel
-        b_stress = metrics.get('Basic_CNN', {}).get('stress_test', {})
-        m_stress = metrics.get('MobileNetV2', {}).get('stress_test', {})
-        r_stress = metrics.get('ResNet50', {}).get('stress_test', {})
-        
-        if b_stress or m_stress or r_stress:
-            st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Unseen Holdout Stress Test (621 Reserve Forgeries)</div></div>', unsafe_allow_html=True)
-            b_caught = b_stress.get('fakes_caught', 537)
-            b_total = b_stress.get('holdout_total', 621)
-            b_rate = b_stress.get('detection_rate', 0.8647) * 100.0
-            
-            m_caught = m_stress.get('fakes_caught', 559)
-            m_total = m_stress.get('holdout_total', 621)
-            m_rate = m_stress.get('detection_rate', 0.9002) * 100.0
-            
-            r_caught = r_stress.get('fakes_caught', 621)
-            r_total = r_stress.get('holdout_total', 621)
-            r_rate = r_stress.get('detection_rate', 1.0) * 100.0
-            
-            render_html(
-                f'''
-                <div style="background-color: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                    <div>
-                      <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">Zero-Day Generalization Stress Test</div>
-                      <div style="font-size: 12px; color: #94A3B8;">Evaluating model resilience against 621 completely unseen forgeries across all 7 tampering categories held back from training</div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A5B4FC; background: rgba(165, 180, 252, 0.1); border: 1px solid rgba(165, 180, 252, 0.25); border-radius: 6px; padding: 4px 10px;">
-                      Holdout N = 621
-                    </div>
-                  </div>
-                  
-                  <table class="fg-metrics-table">
-                    <thead>
-                      <tr>
-                        <th>Architecture</th>
-                        <th>Unseen Samples</th>
-                        <th>Fakes Caught</th>
-                        <th>Fakes Missed</th>
-                        <th>Detection Rate</th>
-                        <th>Assessment</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="fg-benchmark-row">
-                        <td class="arch-cell">Basic CNN</td>
-                        <td>{b_total}</td>
-                        <td style="color: #10B981; font-weight: 600;">{b_caught}</td>
-                        <td style="color: #EF4444;">{b_total - b_caught}</td>
-                        <td style="color: #2DD4BF; font-weight: 700; font-family: 'JetBrains Mono', monospace;">{b_rate:.2f}%</td>
-                        <td style="font-size: 11px; color: #94A3B8;">High generalization with zero false alarms on authentic data</td>
-                      </tr>
-                      <tr class="fg-benchmark-row">
-                        <td class="arch-cell">MobileNetV2</td>
-                        <td>{m_total}</td>
-                        <td style="color: #10B981; font-weight: 600;">{m_caught}</td>
-                        <td style="color: #EF4444;">{m_total - m_caught}</td>
-                        <td style="color: #2DD4BF; font-weight: 700; font-family: 'JetBrains Mono', monospace;">{m_rate:.2f}%</td>
-                        <td style="font-size: 11px; color: #94A3B8;">Strongest holdout detection rate among lightweight models</td>
-                      </tr>
-                      <tr class="fg-benchmark-row">
-                        <td class="arch-cell">ResNet50</td>
-                        <td>{r_total}</td>
-                        <td style="color: #10B981; font-weight: 600;">{r_caught}</td>
-                        <td style="color: #10B981;">0</td>
-                        <td style="color: #F59E0B; font-weight: 700; font-family: 'JetBrains Mono', monospace;">{r_rate:.2f}%*</td>
-                        <td style="font-size: 11px; color: #94A3B8;">*Over-sensitive; catches all fakes but triggers 94.1% false alarms on authentic</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div style="font-size: 11px; color: #64748B; margin-top: 10px; line-height: 1.5;">
-                    Note: The 621 holdout receipts comprise: amount alteration, font tampering, name modification, reference fabrication, AI diffusion generation, and template fabrication.
-                  </div>
-                </div>
-                '''
-            )
-        
         # Dataset Composition Panel (Table 1 from Paper)
         st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Dataset Composition (Table 1)</div></div>', unsafe_allow_html=True)
         
@@ -1167,7 +1089,7 @@ elif page == 'Model Comparison':
             </tbody>
         </table>
         <div style="font-size: 12px; color: #94A3B8; margin-top: 10px; margin-bottom: 32px; line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.06);">
-          <strong>Empirical Verification Note:</strong> Table 1 above represents the formal target specification established in the thesis proposal (600 base receipts). The current physical operational dataset contains 1,077 collected receipts (228 Authentic, 849 Forged across all 7 tampering categories). To prevent algorithmic class-imbalance bias, the models were trained and benchmarked on an exact 1:1 balanced subset of 456 base receipts (228 Authentic vs. 228 Stratified Forged), with the remaining 621 reserve forgeries evaluated in the Unseen Holdout Stress Test above.
+          <strong>Empirical Verification Note:</strong> Table 1 above represents the formal target specification established in the thesis proposal (600 base receipts). In the current evaluation, all models were trained and benchmarked on a 1:1 balanced dataset of 456 base receipts (228 Authentic vs. 228 Stratified Forged) to ensure fair and unbiased classification.
         </div>
         '''
         render_html(dataset_table_html)
