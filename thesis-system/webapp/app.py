@@ -33,31 +33,25 @@ for p in [APP_DIR, SYS_DIR]:
 # --- CSS ---
 @st.cache_data
 def get_cached_css():
-    css_candidates = [
-        os.path.join(APP_DIR, 'premium_css.py'),
-        os.path.join(SYS_DIR, 'webapp', 'premium_css.py'),
-        os.path.join(os.path.dirname(APP_DIR), 'webapp', 'premium_css.py'),
-        os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'webapp', 'premium_css.py'),
-        os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'premium_css.py'),
-        os.path.join(os.getcwd(), 'webapp', 'premium_css.py'),
-        os.path.join(os.getcwd(), 'premium_css.py'),
-    ]
-    for cp in css_candidates:
-        if os.path.isfile(cp):
-            try:
-                import importlib.util
-                spec = importlib.util.spec_from_file_location('local_premium_css', cp)
-                mod = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(mod)
-                if hasattr(mod, 'PREMIUM_CSS') and len(mod.PREMIUM_CSS) > 100:
-                    return mod.PREMIUM_CSS
-            except Exception:
-                continue
     try:
         from premium_css import PREMIUM_CSS
-        return PREMIUM_CSS
+        if PREMIUM_CSS:
+            return PREMIUM_CSS
     except Exception:
-        return ''
+        pass
+    css_file = os.path.join(APP_DIR, 'premium_css.py')
+    if os.path.isfile(css_file):
+        try:
+            with open(css_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                start = content.find('"""')
+                if start != -1:
+                    end = content.find('"""', start + 3)
+                    if end != -1:
+                        return content[start+3:end]
+        except Exception:
+            pass
+    return ''
 
 PREMIUM_CSS = get_cached_css()
 
@@ -263,18 +257,14 @@ def run_universal_inference(image, models_bundle):
     h5_weights = models_bundle.get('h5_weights', {})
     results = {}
 
-    dummy_warm = np.zeros((1, 128, 128, 3), dtype=np.float32)
-
     # 1. Basic CNN
     if 'Basic CNN' in tf_callables:
-        _ = tf_callables['Basic CNN'](dummy_warm)
         t0 = time.perf_counter()
         pred = tf_callables['Basic CNN'](input_tensor)
         lat = (time.perf_counter() - t0) * 1000.0
         prob = float(pred[0][0])
         print(f"[INFERENCE] Basic CNN (id={id(tf_models['Basic CNN'])}) latency = {lat:.1f} ms, prob = {prob:.6f}", flush=True)
     elif 'Basic CNN' in tf_models:
-        _ = tf_models['Basic CNN'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['Basic CNN'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
@@ -311,14 +301,12 @@ def run_universal_inference(image, models_bundle):
 
     # 2. MobileNetV2
     if 'MobileNetV2' in tf_callables:
-        _ = tf_callables['MobileNetV2'](dummy_warm)
         t0 = time.perf_counter()
         pred = tf_callables['MobileNetV2'](input_tensor)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_m = float(pred[0][0])
         print(f"[INFERENCE] MobileNetV2 (id={id(tf_models['MobileNetV2'])}) latency = {lat:.1f} ms, prob = {prob_m:.6f}", flush=True)
     elif 'MobileNetV2' in tf_models:
-        _ = tf_models['MobileNetV2'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['MobileNetV2'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
@@ -341,14 +329,12 @@ def run_universal_inference(image, models_bundle):
 
     # 3. ResNet50
     if 'ResNet50' in tf_callables:
-        _ = tf_callables['ResNet50'](dummy_warm)
         t0 = time.perf_counter()
         pred = tf_callables['ResNet50'](input_tensor)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_r = float(pred[0][0])
         print(f"[INFERENCE] ResNet50 (id={id(tf_models['ResNet50'])}) latency = {lat:.1f} ms, prob = {prob_r:.6f}", flush=True)
     elif 'ResNet50' in tf_models:
-        _ = tf_models['ResNet50'].predict(dummy_warm, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
@@ -608,6 +594,8 @@ if page == 'Classify a Receipt':
             with col_b2:
                 if st.button('Clear Sample', use_container_width=True, help='Reset view to file upload state'):
                     st.session_state['active_sample'] = None
+                    st.session_state.pop('_cached_img_sig', None)
+                    st.session_state.pop('_cached_analysis', None)
                     st.rerun()
         elif uploaded is not None:
             col_b1, col_b2 = st.columns([0.80, 0.20])
@@ -622,6 +610,8 @@ if page == 'Classify a Receipt':
             with col_b2:
                 if st.button('Clear Upload', use_container_width=True, help='Clear uploaded file and reset view'):
                     st.session_state['uploader_version'] += 1
+                    st.session_state.pop('_cached_img_sig', None)
+                    st.session_state.pop('_cached_analysis', None)
                     st.rerun()
                     
         try:
@@ -637,12 +627,22 @@ if page == 'Classify a Receipt':
                     '''
                 )
             
-            models_bundle = load_all_models()
+            # Fast session-state cache: Prevents re-running 3 neural inferences and ELA when switching between pages
+            img_sig = getattr(uploaded, 'name', None) or st.session_state.get('active_sample') or id(image)
+            cached_sig = st.session_state.get('_cached_img_sig')
+            
+            if cached_sig == img_sig and '_cached_analysis' in st.session_state:
+                results, ela_img, overlay, heat_img, ela_metrics = st.session_state['_cached_analysis']
+            else:
+                models_bundle = load_all_models()
+                with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
+                    results = run_universal_inference(image, models_bundle)
+                    ela_img = compute_ela(image)
+                    heat_img, overlay, ela_metrics = compute_forensic_heatmap(image, ela_img)
+                    st.session_state['_cached_img_sig'] = img_sig
+                    st.session_state['_cached_analysis'] = (results, ela_img, overlay, heat_img, ela_metrics)
+            
             model_info = get_model_info()
-            with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
-                results = run_universal_inference(image, models_bundle)
-                ela_img = compute_ela(image)
-                heat_img, overlay, ela_metrics = compute_forensic_heatmap(image, ela_img)
             
             col1, col2 = st.columns([0.44, 0.56], gap="large")
             with col1:
