@@ -95,6 +95,13 @@ This workspace customizations file provides context and instructions to the Anti
 > * Before making ANY file modification, the assistant MUST outline the exact proposed changes in chat and wait for explicit confirmation from the user.
 > * Jumping the gun, making premature assumptions, or applying unauthorized edits is strictly prohibited under all circumstances.
 
+> [!CRITICAL]
+> **Rule 11: Mandatory GitHub README Synchronization on System Updates**
+> * Whenever any update, modification, or bug fix is made to the system (`thesis-system/`, models, webapp, preprocessing, or evaluation metrics), the corresponding README files in GitHub MUST be updated immediately to accurately reflect the latest system state.
+> * **Root README (`README.md`)**: Update system status, benchmark tables, and architecture details for `origin/main` (Academic Thesis Hub).
+> * **Software System README (`thesis-system/README.md`)**: Update feature descriptions, empirical metrics tables, and deployment notes for `forgeguard/main` (Streamlit Cloud).
+> * Never leave GitHub READMEs describing obsolete metrics, removed features, or conflicting dataset counts when the underlying codebase has changed.
+
 ---
 
 ## 3. Approved Thesis Title & System Profile
