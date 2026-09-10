@@ -822,10 +822,153 @@ div[data-testid="stButton"] > button:active {
 ::-webkit-scrollbar-thumb { background: #29475a; border: 2px solid #08111b; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #46748a; }
 
+/* Tri-Spectral Forensic Evidence Decomposition System */
+.fg-spectral-container {
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+.fg-spectral-header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.fg-spectral-card {
+    background: #111B27;
+    border: 1px solid rgba(167, 196, 214, 0.14);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.fg-spectral-card:hover {
+    border-color: rgba(104, 223, 214, 0.35);
+    transform: translateY(-2px);
+}
+.fg-spectral-channel-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.fg-spectral-tag {
+    font-family: var(--fg-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+.fg-spectral-badge {
+    font-family: var(--fg-mono);
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.fg-spectral-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.1px;
+}
+.fg-spectral-desc {
+    font-size: 10.5px;
+    color: #87A1B0;
+    margin-top: 2px;
+    line-height: 1.35;
+}
+.fg-spectral-img-case {
+    background: #08111B;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+    padding: 4px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* AI Analysis Telemetry & Explanation System */
+.fg-analysis-panel {
+    margin-top: 28px;
+    background: #101F2D;
+    border: 1px solid rgba(167, 196, 214, 0.16);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.fg-telemetry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+.fg-telemetry-box {
+    background: #0B1723;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+}
+.fg-telemetry-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #87A1B0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+.fg-telemetry-val {
+    font-family: var(--fg-mono);
+    font-size: 20px;
+    font-weight: 700;
+}
+.fg-telemetry-desc {
+    font-size: 10px;
+    color: #64748B;
+    margin-top: 2px;
+}
+.fg-analysis-step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 14px;
+}
+.fg-analysis-step-card {
+    background: rgba(11, 23, 35, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 14px 16px;
+    line-height: 1.55;
+    font-size: 11.5px;
+    color: #CBD5E1;
+}
+.fg-analysis-step-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 12px;
+}
+.fg-step-num {
+    font-family: var(--fg-mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
 @media (max-width: 768px) {
     .fg-chart-grid { grid-template-columns: 1fr; gap: 14px; }
     .fg-metrics-table { display: block; overflow-x: auto; white-space: nowrap; }
     .fg-result-card { padding: 18px !important; }
+    .fg-telemetry-grid { grid-template-columns: 1fr; }
+    .fg-spectral-header-wrap { flex-direction: column; align-items: flex-start; }
 }
 </style>
 """
