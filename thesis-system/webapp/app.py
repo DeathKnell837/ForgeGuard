@@ -14,7 +14,7 @@ import io
 import time
 import zipfile
 import numpy as np
-from PIL import Image, ImageChops, ImageEnhance, ImageFilter
+from PIL import Image, ImageChops, ImageEnhance
 import streamlit as st
 
 # --- Path Setup ---
@@ -118,32 +118,21 @@ def compute_forensic_heatmap(image, ela_image):
     var_val = float(np.var(gray))
     max_val = float(np.max(gray))
     
-    # Smooth residual field to generate clean continuous thermal contours rather than pixel grit
-    ela_smooth = ela_image.convert('L').filter(ImageFilter.GaussianBlur(radius=2.2))
-    smooth_arr = np.array(ela_smooth, dtype=np.float32)
+    # Noise floor normalization
+    p20 = float(np.percentile(gray, 25))
+    p98 = float(np.percentile(gray, 99.5))
+    span = max(p98 - p20, 1.0)
+    norm = np.clip((gray - p20) / span, 0.0, 1.0)
     
-    # Adaptive noise floor normalization: Percentile 60 isolates uniform background canvas
-    p60 = float(np.percentile(smooth_arr, 60))
-    p99 = float(np.percentile(smooth_arr, 99.2))
-    span = max(p99 - p60, 4.0)
-    norm = np.clip((smooth_arr - p60) / span, 0.0, 1.0)
+    # Thermal colormap: low noise -> transparent/clean; high noise -> vivid orange-red
+    r = np.clip((norm - 0.20) * 2.2, 0.0, 1.0)
+    g = np.clip(1.2 - np.abs(norm - 0.50) * 2.5, 0.0, 1.0)
+    b = np.clip((0.45 - norm) * 2.5, 0.0, 1.0)
     
-    # S-curve to isolate genuine anomalies and prevent wash over unedited text
-    curved = norm ** 1.65
+    # Dynamic alpha: quiet background gets 0 alpha (no blue tint over white receipts)
+    local_alpha = np.clip((norm - 0.18) * 1.6, 0.0, 0.70)[..., np.newaxis]
     
-    # High-contrast thermal gradient:
-    # Quiet background -> transparent / untouched natural document
-    # Moderate anomaly -> Warm Amber (#F59E0B)
-    # High anomaly -> Neon Orange (#F97316)
-    # Peak discontinuity -> Intense Crimson (#EF4444)
-    r = np.clip(curved * 2.3, 0.0, 1.0)
-    g = np.clip(curved * 1.4 - (curved ** 2) * 1.1, 0.0, 1.0)
-    b_col = np.clip((curved - 0.75) * 1.2, 0.0, 1.0)
-    
-    # Dynamic alpha: Zero alpha below noise threshold; max 0.72 for localized hotspots
-    local_alpha = np.clip((curved - 0.10) * 1.6, 0.0, 0.72)[..., np.newaxis]
-    
-    heat_rgb = (np.stack([r, g, b_col], axis=-1) * 255.0).astype(np.float32)
+    heat_rgb = (np.stack([r, g, b], axis=-1) * 255.0).astype(np.float32)
     orig_np = np.array(orig, dtype=np.float32)
     
     blended = orig_np * (1.0 - local_alpha) + heat_rgb * local_alpha
@@ -154,7 +143,7 @@ def compute_forensic_heatmap(image, ela_image):
         'mean_energy': mean_val,
         'variance': var_val,
         'max_peak': max_val,
-        'discontinuity': float((p99 - p60) / (mean_val + 1e-6))
+        'discontinuity': float((p98 - p20) / (mean_val + 1e-6))
     }
     return heat_only, overlay, metrics
 
@@ -709,17 +698,8 @@ if page == 'Classify a Receipt':
             # Tri-Spectral Comparative Forensic Evidence Gallery
             render_html(
                 '''
-                <div class="fg-spectral-container">
-                  <div class="fg-spectral-header-wrap">
-                    <div>
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #2DD4BF; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px;">Multi-Spectral Evidence Inspection</div>
-                      <div style="font-size: 15px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.2px;">Tri-Spectral Forensic Evidence Decomposition</div>
-                      <div style="font-size: 11.5px; color: #87A1B0; margin-top: 2px;">Synchronized pixel-plane comparison across spatial, compression residual, and thermal variance domains</div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 6px;">
-                      Synchronized Spectral Planes
-                    </div>
-                  </div>
+                <div style="margin-top: 28px; margin-bottom: 12px;">
+                  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #E2E8F0; font-weight: 700;">Tri-Spectral Forensic Evidence Decomposition</div>
                 </div>
                 '''
             )
@@ -727,13 +707,9 @@ if page == 'Classify a Receipt':
             with gcol1:
                 render_html(
                     '''
-                    <div class="fg-spectral-card" style="border-top: 3px solid #38BDF8;">
-                      <div class="fg-spectral-channel-bar">
-                        <span class="fg-spectral-tag" style="color: #38BDF8;">CH-01 // SPATIAL</span>
-                        <span class="fg-spectral-badge" style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.25);">RAW RASTER</span>
-                      </div>
-                      <div class="fg-spectral-title">Original Document</div>
-                      <div class="fg-spectral-desc">Input transaction receipt in native RGB color space</div>
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #E2E8F0;">Original Document</div>
+                      <div style="font-size: 10px; color: #94A3B8;">Raw input raster</div>
                     </div>
                     '''
                 )
@@ -741,13 +717,9 @@ if page == 'Classify a Receipt':
             with gcol2:
                 render_html(
                     '''
-                    <div class="fg-spectral-card" style="border-top: 3px solid #818CF8;">
-                      <div class="fg-spectral-channel-bar">
-                        <span class="fg-spectral-tag" style="color: #818CF8;">CH-02 // RESIDUAL</span>
-                        <span class="fg-spectral-badge" style="background: rgba(129, 140, 248, 0.12); color: #818CF8; border: 1px solid rgba(129, 140, 248, 0.25);">90Q &bull; 15.0&times;</span>
-                      </div>
-                      <div class="fg-spectral-title">ELA Compression Matrix</div>
-                      <div class="fg-spectral-desc">Amplified JPEG quantization residual error field</div>
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #7C6FF0;">ELA Compression Matrix</div>
+                      <div style="font-size: 10px; color: #94A3B8;">90Q residual noise (15.0&times;)</div>
                     </div>
                     '''
                 )
@@ -755,13 +727,9 @@ if page == 'Classify a Receipt':
             with gcol3:
                 render_html(
                     '''
-                    <div class="fg-spectral-card" style="border-top: 3px solid #2DD4BF;">
-                      <div class="fg-spectral-channel-bar">
-                        <span class="fg-spectral-tag" style="color: #2DD4BF;">CH-03 // THERMAL</span>
-                        <span class="fg-spectral-badge" style="background: rgba(45, 212, 191, 0.12); color: #2DD4BF; border: 1px solid rgba(45, 212, 191, 0.25);">HOTSPOT MAP</span>
-                      </div>
-                      <div class="fg-spectral-title">Tamper Heatmap Overlay</div>
-                      <div class="fg-spectral-desc">Localized compression variance hotspot localization</div>
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #2DD4BF;">Tamper Heatmap Overlay</div>
+                      <div style="font-size: 10px; color: #94A3B8;">Forensic hotspot localization</div>
                     </div>
                     '''
                 )
@@ -772,63 +740,33 @@ if page == 'Classify a Receipt':
             var_e = ela_metrics['variance']
             peak_e = ela_metrics['max_peak']
             
-            is_suspicious_variance = var_e >= 160.0 or peak_e >= 220.0
-            status_color = "#EF4444" if is_suspicious_variance else "#10B981"
-            status_text = "ELEVATED RESIDUAL SPIKES DETECTED" if is_suspicious_variance else "UNIFORM COMPRESSION RESIDUALS"
-            
             render_html(
                 f'''
-                <div class="fg-analysis-panel">
-                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                <div style="margin-top: 24px; background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
                     <div>
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #818CF8; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px;">Algorithmic Diagnostics</div>
-                      <div style="font-size: 15px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.2px;">How the AI Analyzes This Receipt</div>
-                      <div style="font-size: 11.5px; color: #87A1B0; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
+                      <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">How the AI Analyzes This Receipt</div>
+                      <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
                     </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 5px 12px; border-radius: 6px; background: rgba({239 if is_suspicious_variance else 16}, {68 if is_suspicious_variance else 185}, {68 if is_suspicious_variance else 129}, 0.12); border: 1px solid {status_color}; color: {status_color}; font-weight: 700; letter-spacing: 0.5px;">
-                      {status_text}
-                    </div>
-                  </div>
-
-                  <div class="fg-telemetry-grid">
-                    <div class="fg-telemetry-box" style="border-top: 2px solid #2DD4BF;">
-                      <div class="fg-telemetry-label">Mean Noise Energy</div>
-                      <div class="fg-telemetry-val" style="color: #2DD4BF;">{mean_e:.2f} <span style="font-size: 11px; font-weight: 400; color: #64748B;">px</span></div>
-                      <div class="fg-telemetry-desc">Average residual difference across canvas</div>
-                    </div>
-                    <div class="fg-telemetry-box" style="border-top: 2px solid #818CF8;">
-                      <div class="fg-telemetry-label">Spatial Variance</div>
-                      <div class="fg-telemetry-val" style="color: #818CF8;">{var_e:.1f} <span style="font-size: 11px; font-weight: 400; color: #64748B;">&sigma;&sup2;</span></div>
-                      <div class="fg-telemetry-desc">Compression error fluctuation across blocks</div>
-                    </div>
-                    <div class="fg-telemetry-box" style="border-top: 2px solid #F59E0B;">
-                      <div class="fg-telemetry-label">Peak Residual Spike</div>
-                      <div class="fg-telemetry-val" style="color: #F59E0B;">{peak_e:.1f} <span style="font-size: 11px; font-weight: 400; color: #64748B;">max</span></div>
-                      <div class="fg-telemetry-desc">Highest localized anomaly amplitude</div>
+                    <div style="display: flex; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Mean Noise: <strong style="color: #2DD4BF;">{mean_e:.2f}</strong></span>
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Spatial Var: <strong style="color: #7C6FF0;">{var_e:.1f}</strong></span>
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Peak Residual: <strong style="color: #F59E0B;">{peak_e:.1f}</strong></span>
                     </div>
                   </div>
                   
-                  <div class="fg-analysis-step-grid">
-                    <div class="fg-analysis-step-card">
-                      <div class="fg-analysis-step-header" style="color: #818CF8;">
-                        <span class="fg-step-num" style="background: rgba(129, 140, 248, 0.15); color: #818CF8;">01</span>
-                        <span>ELA Compression Physics</span>
-                      </div>
-                      <div>The receipt is re-encoded at Q=90 JPEG quality in memory. In authentic receipts, the compression error is uniform across the entire surface. When text or amounts are modified, altered pixels have different error potentials, creating high-frequency residual spikes.</div>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; font-size: 11.5px; line-height: 1.6; color: #CBD5E1;">
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #7C6FF0; margin-bottom: 4px;">1. ELA Compression Physics</div>
+                      <div>The receipt is re-encoded at Q=90 JPEG quality. In authentic receipts, the compression error is uniform across the entire surface. When text or amounts are modified, altered pixels have different error potentials, creating high-frequency residual spikes.</div>
                     </div>
-                    <div class="fg-analysis-step-card">
-                      <div class="fg-analysis-step-header" style="color: #2DD4BF;">
-                        <span class="fg-step-num" style="background: rgba(45, 212, 191, 0.15); color: #2DD4BF;">02</span>
-                        <span>Thermal Heatmap Localization</span>
-                      </div>
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #2DD4BF; margin-bottom: 4px;">2. Thermal Heatmap Localization</div>
                       <div>The thermal overlay dynamically isolates residuals exceeding the noise floor. Clean, unedited areas remain natural without heavy tint, while localized regions with anomalous compression gradients glow in warm contours to show where tampering occurred.</div>
                     </div>
-                    <div class="fg-analysis-step-card">
-                      <div class="fg-analysis-step-header" style="color: #F59E0B;">
-                        <span class="fg-step-num" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B;">03</span>
-                        <span>Multi-CNN Classification</span>
-                      </div>
-                      <div>The 128&times;128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #F59E0B; margin-bottom: 4px;">3. Multi-CNN Classification</div>
+                      <div>The 128x128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
                     </div>
                   </div>
                 </div>
