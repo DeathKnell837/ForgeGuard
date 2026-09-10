@@ -851,24 +851,24 @@ elif page == 'Model Comparison':
     if not metrics:
         st.info('Evaluation metrics data not found.')
     else:
-        # Extract Standard Condition Metrics for Trade-Off Visualization
-        b_std = metrics.get('Basic_CNN', {})
-        m_std = metrics.get('MobileNetV2', {})
-        r_std = metrics.get('ResNet50', {})
+        # Extract Compressed Condition Metrics for Trade-Off Visualization (Matching active deployment)
+        comp_b = metrics.get('Basic_CNN_Compressed', {})
+        comp_m = metrics.get('MobileNetV2_Compressed', {})
+        comp_r = metrics.get('ResNet50_Compressed', {})
         
-        b_acc = b_std.get('accuracy', 0.9292) * 100.0
-        b_acc_sd = b_std.get('accuracy_std', 0.0033) * 100.0
-        m_acc = m_std.get('accuracy', 0.8606) * 100.0
-        m_acc_sd = m_std.get('accuracy_std', 0.0150) * 100.0
-        r_acc = r_std.get('accuracy', 0.5354) * 100.0
-        r_acc_sd = r_std.get('accuracy_std', 0.0100) * 100.0
+        b_acc = comp_b.get('accuracy', 0.9956) * 100.0
+        b_acc_sd = comp_b.get('accuracy_std', 0.0100) * 100.0
+        m_acc = comp_m.get('accuracy', 0.9342) * 100.0
+        m_acc_sd = comp_m.get('accuracy_std', 0.0308) * 100.0
+        r_acc = comp_r.get('accuracy', 0.5395) * 100.0
+        r_acc_sd = comp_r.get('accuracy_std', 0.0050) * 100.0
         
-        b_lat = b_std.get('latency_ms', 22.51)
-        b_lat_sd = b_std.get('latency_ms_std', 0.05)
-        m_lat = m_std.get('latency_ms', 215.75)
-        m_lat_sd = m_std.get('latency_ms_std', 0.15)
-        r_lat = r_std.get('latency_ms', 395.03)
-        r_lat_sd = r_std.get('latency_ms_std', 0.25)
+        b_lat = comp_b.get('latency_ms', 24.12)
+        b_lat_sd = comp_b.get('latency_ms_std', 0.05)
+        m_lat = comp_m.get('latency_ms', 221.40)
+        m_lat_sd = comp_m.get('latency_ms_std', 0.10)
+        r_lat = comp_r.get('latency_ms', 405.18)
+        r_lat_sd = comp_r.get('latency_ms_std', 0.13)
         
         max_lat = max(r_lat, 1.0)
         b_lat_pct = min(100.0, (b_lat / max_lat) * 100.0)
@@ -882,7 +882,7 @@ elif page == 'Model Comparison':
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <div>
                   <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Accuracy vs. Speed Comparison</div>
-                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Comparing classification accuracy and processing speed across all three models (Standard Condition)</div>
+                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Comparing classification accuracy and processing speed across all three models (Compressed Condition)</div>
                 </div>
                 <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
                   <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
