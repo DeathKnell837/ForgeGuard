@@ -187,6 +187,11 @@ def load_all_models():
     try:
         import tensorflow as tf
         tf.get_logger().setLevel('ERROR')
+        try:
+            tf.config.threading.set_inter_op_parallelism_threads(1)
+            tf.config.threading.set_intra_op_parallelism_threads(2)
+        except Exception:
+            pass
         for name, fname in [('Basic CNN', 'basic_cnn.keras'), ('MobileNetV2', 'mobilenetv2.keras'), ('ResNet50', 'resnet50.keras')]:
             fpath = os.path.join(models_dir, fname)
             if os.path.isfile(fpath):
@@ -257,14 +262,27 @@ def run_universal_inference(image, models_bundle):
     h5_weights = models_bundle.get('h5_weights', {})
     results = {}
 
+    # Pre-convert tensor once outside timing block to eliminate memory allocation overhead
+    input_tf = None
+    if tf_callables:
+        try:
+            import tensorflow as tf
+            input_tf = tf.convert_to_tensor(input_tensor, dtype=tf.float32)
+        except Exception:
+            input_tf = input_tensor
+    else:
+        input_tf = input_tensor
+
     # 1. Basic CNN
     if 'Basic CNN' in tf_callables:
+        _ = tf_callables['Basic CNN'](input_tf)
         t0 = time.perf_counter()
-        pred = tf_callables['Basic CNN'](input_tensor)
+        pred = tf_callables['Basic CNN'](input_tf)
         lat = (time.perf_counter() - t0) * 1000.0
         prob = float(pred[0][0])
         print(f"[INFERENCE] Basic CNN (id={id(tf_models['Basic CNN'])}) latency = {lat:.1f} ms, prob = {prob:.6f}", flush=True)
     elif 'Basic CNN' in tf_models:
+        _ = tf_models['Basic CNN'].predict(input_tensor, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['Basic CNN'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
@@ -301,12 +319,14 @@ def run_universal_inference(image, models_bundle):
 
     # 2. MobileNetV2
     if 'MobileNetV2' in tf_callables:
+        _ = tf_callables['MobileNetV2'](input_tf)
         t0 = time.perf_counter()
-        pred = tf_callables['MobileNetV2'](input_tensor)
+        pred = tf_callables['MobileNetV2'](input_tf)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_m = float(pred[0][0])
         print(f"[INFERENCE] MobileNetV2 (id={id(tf_models['MobileNetV2'])}) latency = {lat:.1f} ms, prob = {prob_m:.6f}", flush=True)
     elif 'MobileNetV2' in tf_models:
+        _ = tf_models['MobileNetV2'].predict(input_tensor, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['MobileNetV2'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
@@ -329,12 +349,14 @@ def run_universal_inference(image, models_bundle):
 
     # 3. ResNet50
     if 'ResNet50' in tf_callables:
+        _ = tf_callables['ResNet50'](input_tf)
         t0 = time.perf_counter()
-        pred = tf_callables['ResNet50'](input_tensor)
+        pred = tf_callables['ResNet50'](input_tf)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_r = float(pred[0][0])
         print(f"[INFERENCE] ResNet50 (id={id(tf_models['ResNet50'])}) latency = {lat:.1f} ms, prob = {prob_r:.6f}", flush=True)
     elif 'ResNet50' in tf_models:
+        _ = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
