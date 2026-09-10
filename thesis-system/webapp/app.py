@@ -109,26 +109,49 @@ def compute_ela(image, quality=90, scale=15.0):
     ela_diff = ImageChops.difference(image, resaved)
     return ImageEnhance.Brightness(ela_diff).enhance(scale)
 
-def compute_forensic_heatmap(image, ela_image, alpha=0.45):
+def compute_forensic_heatmap(image, ela_image):
     """
-    Generate a pseudo-color Jet heatmap from ELA residuals and blend with the original image.
-    Highlights tampering and compression variance hotspots.
+    Generate a dynamic thermal overlay from ELA residuals.
+    Quiet background areas retain original natural appearance without heavy blue tint,
+    while elevated compression anomalies glow vivid orange-red.
+    Returns: (heat_only_img, overlay_img, metrics_dict)
     """
+    orig = image.convert('RGB')
     gray = np.array(ela_image.convert('L'), dtype=np.float32)
-    min_v, max_v = gray.min(), gray.max()
-    norm = (gray - min_v) / (max_v - min_v + 1e-6)
     
-    # Jet colormap in pure NumPy (blue -> cyan -> green -> yellow -> red)
-    r = np.clip(1.5 - np.abs(norm * 4.0 - 3.0), 0.0, 1.0)
-    g = np.clip(1.5 - np.abs(norm * 4.0 - 2.0), 0.0, 1.0)
-    b = np.clip(1.5 - np.abs(norm * 4.0 - 1.0), 0.0, 1.0)
+    mean_val = float(np.mean(gray))
+    var_val = float(np.var(gray))
+    max_val = float(np.max(gray))
     
-    heat_np = (np.stack([r, g, b], axis=-1) * 255.0).astype(np.uint8)
-    heat_img = Image.fromarray(heat_np, mode='RGB')
-    if heat_img.size != image.size:
-        heat_img = heat_img.resize(image.size, Image.Resampling.BILINEAR)
-    overlay = Image.blend(image.convert('RGB'), heat_img, alpha=alpha)
-    return heat_img, overlay
+    # Noise floor normalization
+    p20 = float(np.percentile(gray, 25))
+    p98 = float(np.percentile(gray, 99.5))
+    span = max(p98 - p20, 1.0)
+    norm = np.clip((gray - p20) / span, 0.0, 1.0)
+    
+    # Thermal colormap: low noise -> transparent/clean; high noise -> vivid orange-red
+    r = np.clip((norm - 0.20) * 2.2, 0.0, 1.0)
+    g = np.clip(1.2 - np.abs(norm - 0.50) * 2.5, 0.0, 1.0)
+    b = np.clip((0.45 - norm) * 2.5, 0.0, 1.0)
+    
+    # Dynamic alpha: quiet background gets 0 alpha (no blue tint over white receipts)
+    local_alpha = np.clip((norm - 0.18) * 1.6, 0.0, 0.70)[..., np.newaxis]
+    
+    heat_rgb = (np.stack([r, g, b], axis=-1) * 255.0).astype(np.float32)
+    orig_np = np.array(orig, dtype=np.float32)
+    
+    blended = orig_np * (1.0 - local_alpha) + heat_rgb * local_alpha
+    overlay = Image.fromarray(np.clip(blended, 0, 255).astype(np.uint8), mode='RGB')
+    heat_only = Image.fromarray((heat_rgb).astype(np.uint8), mode='RGB')
+    
+    metrics = {
+        'mean_energy': mean_val,
+        'variance': var_val,
+        'max_peak': max_val,
+        'discontinuity': float((p98 - p20) / (mean_val + 1e-6))
+    }
+    return heat_only, overlay, metrics
+
 
 
 # --- Fast Neural Layers for Pure NumPy Forward Pass ---
@@ -617,7 +640,7 @@ if page == 'Classify a Receipt':
             with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
                 results = run_universal_inference(image, models_bundle)
                 ela_img = compute_ela(image)
-                heat_img, overlay = compute_forensic_heatmap(image, ela_img)
+                heat_img, overlay, ela_metrics = compute_forensic_heatmap(image, ela_img)
             
             col1, col2 = st.columns([0.44, 0.56], gap="large")
             with col1:
@@ -682,7 +705,7 @@ if page == 'Classify a Receipt':
             with gcol1:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
                       <div style="font-size: 12px; font-weight: 600; color: #E2E8F0;">Original Document</div>
                       <div style="font-size: 10px; color: #94A3B8;">Raw input raster</div>
                     </div>
@@ -692,7 +715,7 @@ if page == 'Classify a Receipt':
             with gcol2:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
                       <div style="font-size: 12px; font-weight: 600; color: #7C6FF0;">ELA Compression Matrix</div>
                       <div style="font-size: 10px; color: #94A3B8;">90Q residual noise (15.0&times;)</div>
                     </div>
@@ -702,13 +725,51 @@ if page == 'Classify a Receipt':
             with gcol3:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
                       <div style="font-size: 12px; font-weight: 600; color: #2DD4BF;">Tamper Heatmap Overlay</div>
                       <div style="font-size: 10px; color: #94A3B8;">Forensic hotspot localization</div>
                     </div>
                     '''
                 )
                 st.image(overlay, width='stretch')
+
+            # How the AI Analyzes This Receipt Panel
+            mean_e = ela_metrics['mean_energy']
+            var_e = ela_metrics['variance']
+            peak_e = ela_metrics['max_peak']
+            
+            render_html(
+                f'''
+                <div style="margin-top: 24px; background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">How the AI Analyzes This Receipt</div>
+                      <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
+                    </div>
+                    <div style="display: flex; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Mean Noise: <strong style="color: #2DD4BF;">{mean_e:.2f}</strong></span>
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Spatial Var: <strong style="color: #7C6FF0;">{var_e:.1f}</strong></span>
+                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Peak Residual: <strong style="color: #F59E0B;">{peak_e:.1f}</strong></span>
+                    </div>
+                  </div>
+                  
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; font-size: 11.5px; line-height: 1.6; color: #CBD5E1;">
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #7C6FF0; margin-bottom: 4px;">1. ELA Compression Physics</div>
+                      <div>The receipt is re-encoded at Q=90 JPEG quality. In authentic receipts, the compression error is uniform across the entire surface. When text or amounts are modified, altered pixels have different error potentials, creating high-frequency residual spikes.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #2DD4BF; margin-bottom: 4px;">2. Thermal Heatmap Localization</div>
+                      <div>The thermal overlay dynamically isolates residuals exceeding the noise floor. Clean, unedited areas remain natural without heavy tint, while localized regions with anomalous compression gradients glow in warm contours to show where tampering occurred.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
+                      <div style="font-weight: 600; color: #F59E0B; margin-bottom: 4px;">3. Multi-CNN Classification</div>
+                      <div>The 128x128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
+                    </div>
+                  </div>
+                </div>
+                '''
+            )
                     
             render_html(
                 '''
