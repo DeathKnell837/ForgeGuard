@@ -349,12 +349,14 @@ def run_universal_inference(image, models_bundle):
 
     # 3. ResNet50
     if 'ResNet50' in tf_callables:
+        _ = tf_callables['ResNet50'](input_tf)
         t0 = time.perf_counter()
         pred = tf_callables['ResNet50'](input_tf)
         lat = (time.perf_counter() - t0) * 1000.0
         prob_r = float(pred[0][0])
         print(f"[INFERENCE] ResNet50 (id={id(tf_models['ResNet50'])}) latency = {lat:.1f} ms, prob = {prob_r:.6f}", flush=True)
     elif 'ResNet50' in tf_models:
+        _ = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         t0 = time.perf_counter()
         pred = tf_models['ResNet50'].predict(input_tensor, verbose=0)
         lat = (time.perf_counter() - t0) * 1000.0
