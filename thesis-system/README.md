@@ -37,7 +37,7 @@ ForgeGuard resolves this verification challenge by combining mathematical **Erro
   * **MobileNetV2 (Efficient):** Inverted residual depthwise separable CNN (~3.4M parameters) achieving **86.06%** standard accuracy (215.75 ms latency) and **93.42%** compressed accuracy (221.40 ms latency).
   * **ResNet50 (Deep Residual):** 50-layer deep network (~23.5M parameters) exhibiting 53.54% standard accuracy (395.03 ms latency), demonstrating the empirical limits of deep feature extractors on compression residual artifacts.
 * **Two-Screen Operational Workflow:**
-  * **Classify a Receipt:** Real-time upload interface displaying side-by-side original and ELA exhibits, parallel multi-model classification cards, raw confidence readouts, and execution latencies.
+  * **Classify a Receipt:** Real-time upload interface featuring tabbed forensic inspection (Original Exhibit, ELA Residual Matrix, and Tamper Heatmap Overlay), synchronized Tri-Spectral Forensic Evidence Decomposition gallery, parallel multi-model classification cards, raw confidence readouts, and execution latencies.
   * **Model Benchmark Suite:** Empirical performance table across both standard and compressed conditions, interactive confusion matrix breakdown, dataset distribution overview, and comprehensive metric interpretation guide.
 * **Zero-Emoji Enterprise Interface:**
   Adheres to strict institutional cybersecurity design standards with deep navy foundations (`#121620`), frosted glass panels (`#1C2333`), SVG line iconography, and typography powered by Inter and JetBrains Mono.

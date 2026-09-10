@@ -97,7 +97,7 @@ def get_model_info():
         'ResNet50': {'params': '~23.5M', 'arch': '50-layer deep residual network'},
     }
 
-# --- ELA Functions ---
+# --- ELA & Forensic Visualizer Functions ---
 def compute_ela(image, quality=90, scale=15.0):
     """Compute Error Level Analysis."""
     if image.mode != 'RGB':
@@ -108,6 +108,28 @@ def compute_ela(image, quality=90, scale=15.0):
     resaved = Image.open(buf).convert('RGB')
     ela_diff = ImageChops.difference(image, resaved)
     return ImageEnhance.Brightness(ela_diff).enhance(scale)
+
+def compute_forensic_heatmap(image, ela_image, alpha=0.45):
+    """
+    Generate a pseudo-color Jet heatmap from ELA residuals and blend with the original image.
+    Highlights tampering and compression variance hotspots.
+    """
+    gray = np.array(ela_image.convert('L'), dtype=np.float32)
+    min_v, max_v = gray.min(), gray.max()
+    norm = (gray - min_v) / (max_v - min_v + 1e-6)
+    
+    # Jet colormap in pure NumPy (blue -> cyan -> green -> yellow -> red)
+    r = np.clip(1.5 - np.abs(norm * 4.0 - 3.0), 0.0, 1.0)
+    g = np.clip(1.5 - np.abs(norm * 4.0 - 2.0), 0.0, 1.0)
+    b = np.clip(1.5 - np.abs(norm * 4.0 - 1.0), 0.0, 1.0)
+    
+    heat_np = (np.stack([r, g, b], axis=-1) * 255.0).astype(np.uint8)
+    heat_img = Image.fromarray(heat_np, mode='RGB')
+    if heat_img.size != image.size:
+        heat_img = heat_img.resize(image.size, Image.Resampling.BILINEAR)
+    overlay = Image.blend(image.convert('RGB'), heat_img, alpha=alpha)
+    return heat_img, overlay
+
 
 # --- Fast Neural Layers for Pure NumPy Forward Pass ---
 def _im2col(x, kh, kw):
@@ -594,13 +616,25 @@ if page == 'Classify a Receipt':
             model_info = get_model_info()
             with st.spinner("Executing forensic ELA extraction and multi-CNN inference..."):
                 results = run_universal_inference(image, models_bundle)
+                ela_img = compute_ela(image)
+                heat_img, overlay = compute_forensic_heatmap(image, ela_img)
             
-            col1, col2 = st.columns([0.42, 0.58], gap="large")
+            col1, col2 = st.columns([0.44, 0.56], gap="large")
             with col1:
-                st.image(image, width='stretch')
+                tab_orig, tab_ela, tab_heat = st.tabs(["Original Exhibit", "ELA Residual Matrix", "Tamper Heatmap"])
+                with tab_orig:
+                    st.image(image, width='stretch')
+                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Source transaction receipt exhibit</div>')
+                with tab_ela:
+                    st.image(ela_img, width='stretch')
+                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Q=90 Error Level Analysis (15.0&times; difference amplification)</div>')
+                with tab_heat:
+                    st.image(overlay, width='stretch')
+                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Forensic variance hotspot localization overlay</div>')
+
                 render_html(
                     '''
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; margin-top: 8px; line-height: 1.5;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; margin-top: 10px; line-height: 1.5; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
                       <div>Input Target: 128 &times; 128 px (ELA Transform)</div>
                       <div>Decision Threshold: 0.50 (Sigmoid &ge; 0.5 &rarr; Forged)</div>
                     </div>
@@ -635,10 +669,50 @@ if page == 'Classify a Receipt':
                         </div>
                         '''
                     )
+
+            # Tri-Spectral Comparative Forensic Evidence Gallery
+            render_html(
+                '''
+                <div style="margin-top: 28px; margin-bottom: 12px;">
+                  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #E2E8F0; font-weight: 700;">Tri-Spectral Forensic Evidence Decomposition</div>
+                </div>
+                '''
+            )
+            gcol1, gcol2, gcol3 = st.columns(3)
+            with gcol1:
+                render_html(
+                    '''
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #E2E8F0;">Original Document</div>
+                      <div style="font-size: 10px; color: #94A3B8;">Raw input raster</div>
+                    </div>
+                    '''
+                )
+                st.image(image, width='stretch')
+            with gcol2:
+                render_html(
+                    '''
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #7C6FF0;">ELA Compression Matrix</div>
+                      <div style="font-size: 10px; color: #94A3B8;">90Q residual noise (15.0&times;)</div>
+                    </div>
+                    '''
+                )
+                st.image(ela_img, width='stretch')
+            with gcol3:
+                render_html(
+                    '''
+                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px;">
+                      <div style="font-size: 12px; font-weight: 600; color: #2DD4BF;">Tamper Heatmap Overlay</div>
+                      <div style="font-size: 10px; color: #94A3B8;">Forensic hotspot localization</div>
+                    </div>
+                    '''
+                )
+                st.image(overlay, width='stretch')
                     
             render_html(
                 '''
-                <div class="fg-scope-disclaimer">
+                <div class="fg-scope-disclaimer" style="margin-top: 20px;">
                   Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
                 </div>
                 '''
@@ -1073,51 +1147,7 @@ elif page == 'Model Comparison':
             </div>
             '''
         )
-        
-        # Dataset Composition Panel (Table 1 from Paper)
-        st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Dataset Composition (Table 1)</div></div>', unsafe_allow_html=True)
-        
-        dataset_table_html = '''
-        <div style="font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 10px;">Formal Thesis Protocol Specification (Table 1 Target: 600 Base Receipts)</div>
-        <table class="fg-metrics-table">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Type / Technique</th>
-                    <th>Target Samples</th>
-                    <th>Stratified Split (60 / 15 / 25)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="arch-cell">Authentic</td>
-                    <td style="font-family: Inter, sans-serif;">Downloadable GCash Receipts</td>
-                    <td>300</td>
-                    <td style="font-family: Inter, sans-serif;">Train: 180 &bull; Val: 45 &bull; Test: 75</td>
-                </tr>
-                <tr>
-                    <td class="arch-cell" rowspan="2">Forged</td>
-                    <td style="font-family: Inter, sans-serif;">Digitally Edited (Amount, Name, Ref, Font)</td>
-                    <td>150</td>
-                    <td style="font-family: Inter, sans-serif;">Train: 90 &bull; Val: 22 &bull; Test: 38</td>
-                </tr>
-                <tr>
-                    <td style="font-family: Inter, sans-serif;">Programmatically Generated (Template Engine)</td>
-                    <td>150</td>
-                    <td style="font-family: Inter, sans-serif;">Train: 90 &bull; Val: 23 &bull; Test: 37</td>
-                </tr>
-                <tr style="background-color: #22293A; font-weight: 700;">
-                    <td class="arch-cell" colspan="2">Total Base Target</td>
-                    <td style="color: #2DD4BF;">600</td>
-                    <td style="color: #2DD4BF; font-family: Inter, sans-serif;">Train: 360 &bull; Val: 90 &bull; Test: 150 (50/50 Balanced)</td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="font-size: 12px; color: #94A3B8; margin-top: 10px; margin-bottom: 32px; line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.06);">
-          <strong>Empirical Verification Note:</strong> Table 1 above represents the formal target specification established in the thesis proposal (600 base receipts). In the current evaluation, all models were trained and benchmarked on a 1:1 balanced dataset of 456 base receipts (228 Authentic vs. 228 Stratified Forged) to ensure fair and unbiased classification.
-        </div>
-        '''
-        render_html(dataset_table_html)
+
         
         render_html(
             '''
