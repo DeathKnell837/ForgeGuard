@@ -140,6 +140,8 @@ THESIS/
 
 ## Key Academic Thesis Documents
 
+* **[Master Defense Study & System Guide (PDF)](thesis-docs/FORGEGUARD_MASTER_DEFENSE_GUIDE.pdf)** — All-in-One comprehensive study guide, plain-English translator, proposal ground truth, system guide, and presentation script.
+* **[Master Defense Study & System Guide (Markdown)](thesis-docs/FORGEGUARD_MASTER_DEFENSE_GUIDE.md)** — Readable Markdown edition of the all-in-one master defense guide for instant viewing in code editors.
 * **[Official Thesis Manuscript (Word)](thesis-docs/THESIS1UNGAB_BACANTO.docx)** — Complete Chapters 1 and 2 manuscript submitted for review (September 2026).
 * **[Official Thesis Manuscript (Markdown)](thesis-docs/THESIS1UNGAB_BACANTO.md)** — Accessible Markdown version of the compiled manuscript.
 * **[Chapter 1: Background & Problem Statement](thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md)** — Detailed introduction, research gap, SOP, and SDG alignment.
