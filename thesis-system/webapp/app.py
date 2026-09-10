@@ -851,50 +851,29 @@ elif page == 'Model Comparison':
     if not metrics:
         st.info('Evaluation metrics data not found.')
     else:
-        # Condition Selector for Performance Visualizer
-        cond_mode = st.radio(
-            "Evaluation Condition Selector",
-            options=["Compressed Condition (Social Media / Messenger)", "Standard Condition (Direct Download)"],
-            index=0,
-            horizontal=True,
-            label_visibility="collapsed"
-        )
-        is_comp = "Compressed" in cond_mode
-        prefix = "_Compressed" if is_comp else ""
-        cond_sub = f"Comparing classification accuracy and processing speed across all three models ({'Compressed Condition' if is_comp else 'Standard Condition'})"
-
-        b_key = f"Basic_CNN{prefix}"
-        m_key = f"MobileNetV2{prefix}"
-        r_key = f"ResNet50{prefix}"
-
-        b_data = metrics.get(b_key, metrics.get('Basic_CNN', {}))
-        m_data = metrics.get(m_key, metrics.get('MobileNetV2', {}))
-        r_data = metrics.get(r_key, metrics.get('ResNet50', {}))
-
-        b_acc = b_data.get('accuracy', 0.9956 if is_comp else 0.9292) * 100.0
-        b_acc_sd = b_data.get('accuracy_std', 0.0100 if is_comp else 0.0033) * 100.0
-        m_acc = m_data.get('accuracy', 0.9342 if is_comp else 0.8606) * 100.0
-        m_acc_sd = m_data.get('accuracy_std', 0.0308 if is_comp else 0.0150) * 100.0
-        r_acc = r_data.get('accuracy', 0.5395 if is_comp else 0.5354) * 100.0
-        r_acc_sd = r_data.get('accuracy_std', 0.0050 if is_comp else 0.0100) * 100.0
-
-        b_lat = b_data.get('latency_ms', 24.12 if is_comp else 22.51)
-        b_lat_sd = b_data.get('latency_ms_std', 0.05)
-        m_lat = m_data.get('latency_ms', 221.40 if is_comp else 215.75)
-        m_lat_sd = m_data.get('latency_ms_std', 0.10 if is_comp else 0.15)
-        r_lat = r_data.get('latency_ms', 405.18 if is_comp else 395.03)
-        r_lat_sd = r_data.get('latency_ms_std', 0.13 if is_comp else 0.25)
-
+        # Extract Standard Condition Metrics for Trade-Off Visualization
+        b_std = metrics.get('Basic_CNN', {})
+        m_std = metrics.get('MobileNetV2', {})
+        r_std = metrics.get('ResNet50', {})
+        
+        b_acc = b_std.get('accuracy', 0.9292) * 100.0
+        b_acc_sd = b_std.get('accuracy_std', 0.0033) * 100.0
+        m_acc = m_std.get('accuracy', 0.8606) * 100.0
+        m_acc_sd = m_std.get('accuracy_std', 0.0150) * 100.0
+        r_acc = r_std.get('accuracy', 0.5354) * 100.0
+        r_acc_sd = r_std.get('accuracy_std', 0.0100) * 100.0
+        
+        b_lat = b_std.get('latency_ms', 22.51)
+        b_lat_sd = b_std.get('latency_ms_std', 0.05)
+        m_lat = m_std.get('latency_ms', 215.75)
+        m_lat_sd = m_std.get('latency_ms_std', 0.15)
+        r_lat = r_std.get('latency_ms', 395.03)
+        r_lat_sd = r_std.get('latency_ms_std', 0.25)
+        
         max_lat = max(r_lat, 1.0)
         b_lat_pct = min(100.0, (b_lat / max_lat) * 100.0)
         m_lat_pct = min(100.0, (m_lat / max_lat) * 100.0)
         r_lat_pct = 100.0
-
-        insight_acc = (
-            "Evaluated on social media compressed receipts (456 samples, 15.0x ELA). Basic CNN achieved 99.56% accuracy with near-zero false alarms, matching live demo classification."
-            if is_comp else
-            "Evaluated across the 1:1 balanced empirical dataset (452 samples for Standard). Basic CNN achieved highest accuracy with near-zero false alarms."
-        )
 
         # Graphical Performance Visualizer (Accuracy vs. Latency Trade-Off)
         render_html(
@@ -903,7 +882,7 @@ elif page == 'Model Comparison':
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <div>
                   <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Accuracy vs. Speed Comparison</div>
-                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">{cond_sub}</div>
+                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Comparing classification accuracy and processing speed across all three models (Standard Condition)</div>
                 </div>
                 <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
                   <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
@@ -952,7 +931,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    {insight_acc}
+                    Evaluated across the 1:1 balanced empirical dataset (456 receipts for Compressed, 452 receipts for Standard). Basic CNN achieved the highest accuracy with near-zero false alarms.
                   </div>
                 </div>
                 
