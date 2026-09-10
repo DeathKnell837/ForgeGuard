@@ -31,34 +31,35 @@ for p in [APP_DIR, SYS_DIR]:
         sys.path.insert(0, p)
 
 # --- CSS ---
-PREMIUM_CSS = ''
-css_candidates = [
-    os.path.join(APP_DIR, 'premium_css.py'),
-    os.path.join(SYS_DIR, 'webapp', 'premium_css.py'),
-    os.path.join(os.path.dirname(APP_DIR), 'webapp', 'premium_css.py'),
-    os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'webapp', 'premium_css.py'),
-    os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'premium_css.py'),
-    os.path.join(os.getcwd(), 'webapp', 'premium_css.py'),
-    os.path.join(os.getcwd(), 'premium_css.py'),
-]
-for cp in css_candidates:
-    if os.path.isfile(cp):
-        try:
-            import importlib.util
-            spec = importlib.util.spec_from_file_location('local_premium_css', cp)
-            mod = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(mod)
-            if hasattr(mod, 'PREMIUM_CSS') and len(mod.PREMIUM_CSS) > 100:
-                PREMIUM_CSS = mod.PREMIUM_CSS
-                break
-        except Exception:
-            continue
-
-if not PREMIUM_CSS:
+@st.cache_data
+def get_cached_css():
+    css_candidates = [
+        os.path.join(APP_DIR, 'premium_css.py'),
+        os.path.join(SYS_DIR, 'webapp', 'premium_css.py'),
+        os.path.join(os.path.dirname(APP_DIR), 'webapp', 'premium_css.py'),
+        os.path.join(os.path.dirname(SYS_DIR), 'thesis-system', 'webapp', 'premium_css.py'),
+        os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'premium_css.py'),
+        os.path.join(os.getcwd(), 'webapp', 'premium_css.py'),
+        os.path.join(os.getcwd(), 'premium_css.py'),
+    ]
+    for cp in css_candidates:
+        if os.path.isfile(cp):
+            try:
+                import importlib.util
+                spec = importlib.util.spec_from_file_location('local_premium_css', cp)
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                if hasattr(mod, 'PREMIUM_CSS') and len(mod.PREMIUM_CSS) > 100:
+                    return mod.PREMIUM_CSS
+            except Exception:
+                continue
     try:
         from premium_css import PREMIUM_CSS
+        return PREMIUM_CSS
     except Exception:
-        PREMIUM_CSS = ''
+        return ''
+
+PREMIUM_CSS = get_cached_css()
 
 # --- Page Config ---
 st.set_page_config(
@@ -429,11 +430,13 @@ def get_sample_receipt_path(sample_type):
     return None
 
 # --- Metrics Loading ---
+@st.cache_data
 def load_evaluation_metrics():
-    """Load evaluation_metrics.json."""
+    """Load evaluation_metrics.json with memory caching."""
     for candidate in [
         os.path.join(SYS_DIR, 'models', 'evaluation_metrics.json'),
         os.path.join(os.path.dirname(SYS_DIR), 'models', 'evaluation_metrics.json'),
+        os.path.join(APP_DIR, 'models', 'evaluation_metrics.json'),
     ]:
         if os.path.isfile(candidate):
             with open(candidate, 'r') as f:
@@ -470,8 +473,7 @@ if not st.session_state.get('models_loaded', False):
     _ = load_all_models()
     st.session_state['models_loaded'] = True
     _boot_loader.empty()
-else:
-    _ = load_all_models()
+
 
 # --- Sidebar ---
 with st.sidebar:
