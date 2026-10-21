@@ -9,17 +9,27 @@ echo.
 cd /d "%~dp0"
 
 where python >nul 2>nul
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERROR] Python was not found in your system PATH.
-    echo Please install Python 3.10 - 3.12 and ensure it is added to PATH.
-    pause
-    exit /b 1
+if %ERRORLEVEL% EQU 0 (
+    set "PY_CMD=python"
+    goto :found_python
 )
 
+where py >nul 2>nul
+if %ERRORLEVEL% EQU 0 (
+    set "PY_CMD=py"
+    goto :found_python
+)
+
+echo [ERROR] Python was not found in your system PATH.
+echo Please install Python 3.10 - 3.12 and ensure it is added to PATH.
+pause
+exit /b 1
+
+:found_python
 echo [1/2] Verifying Python dependencies...
-python -m pip install -q -r requirements.txt
+%PY_CMD% -m pip install -q -r requirements.txt
 
 echo [2/2] Launching ForgeGuard webapp...
-python -m streamlit run src/app.py --server.headless false
+%PY_CMD% -m streamlit run src/app.py --server.headless false --browser.gatherUsageStats false
 
 pause

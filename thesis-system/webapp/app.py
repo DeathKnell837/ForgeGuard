@@ -84,6 +84,23 @@ def get_models_dir():
             return cand
     return os.path.join(SYS_DIR, 'models')
 
+def get_records_path():
+    """Resolve path to persistent benchmark transaction records log."""
+    candidates = [
+        os.path.join(SYS_DIR, 'database', 'benchmark_records_log.json'),
+        os.path.join(APP_DIR, 'database', 'benchmark_records_log.json'),
+        os.path.join(APP_DIR, '..', 'database', 'benchmark_records_log.json'),
+        os.path.join(get_models_dir(), 'benchmark_records_log.json'),
+        os.path.join(SYS_DIR, 'models', 'benchmark_records_log.json'),
+    ]
+    for cand in candidates:
+        if os.path.isfile(cand):
+            return cand
+    db_dir = os.path.join(SYS_DIR, 'database')
+    if os.path.isdir(db_dir):
+        return os.path.join(db_dir, 'benchmark_records_log.json')
+    return os.path.join(get_models_dir(), 'benchmark_records_log.json')
+
 def get_model_info():
     """Architecture metadata."""
     return {
@@ -878,7 +895,7 @@ if page == 'Classify a Receipt':
                     
             # --- Benchmark Records (Logs and Records) — Figure 4 Database Layer ---
             if 'benchmark_records' not in st.session_state:
-                records_path = os.path.join(get_models_dir(), 'benchmark_records_log.json')
+                records_path = get_records_path()
                 if os.path.isfile(records_path):
                     try:
                         with open(records_path, 'r', encoding='utf-8') as rf:
@@ -907,9 +924,18 @@ if page == 'Classify a Receipt':
 
             # Persist latest records
             try:
-                records_path = os.path.join(get_models_dir(), 'benchmark_records_log.json')
+                records_path = get_records_path()
+                os.makedirs(os.path.dirname(records_path), exist_ok=True)
                 with open(records_path, 'w', encoding='utf-8') as rf:
                     json.dump(st.session_state['benchmark_records'][-100:], rf, indent=2)
+                # Keep database and models mirror copies in sync if both directories exist
+                for mirror_candidate in [os.path.join(SYS_DIR, 'database', 'benchmark_records_log.json'), os.path.join(get_models_dir(), 'benchmark_records_log.json')]:
+                    if mirror_candidate != records_path and os.path.isdir(os.path.dirname(mirror_candidate)):
+                        try:
+                            with open(mirror_candidate, 'w', encoding='utf-8') as mf:
+                                json.dump(st.session_state['benchmark_records'][-100:], mf, indent=2)
+                        except Exception:
+                            pass
             except Exception:
                 pass
 

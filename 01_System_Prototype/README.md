@@ -36,6 +36,8 @@ The system integrates mathematical **Error Level Analysis (ELA)** signal decompo
 ├── requirements.txt               # Python package dependencies
 ├── runtime.txt                    # Target Python runtime specification (python-3.12.10)
 ├── run_system.bat                 # One-click Windows launch script
+├── .streamlit/                    # Streamlit runtime & theme configuration
+│   └── config.toml
 ├── src/                           # Clean system source code
 │   ├── app.py                     # Primary Streamlit web application
 │   ├── premium_css.py             # Cyber-forensics CSS design system
@@ -55,9 +57,10 @@ The system integrates mathematical **Error Level Analysis (ELA)** signal decompo
 │   ├── mobilenetv2.keras          # Trained MobileNetV2 model weights
 │   ├── resnet50.keras             # Trained ResNet50 model weights
 │   ├── evaluation_metrics.json    # Full empirical benchmark metrics (5 seeds)
-│   └── pure_empirical_benchmark.json
+│   ├── pure_empirical_benchmark.json
+│   └── benchmark_records_log.json # Model directory transaction log
 ├── database/                      # Persistent records & audit logs
-│   └── benchmark_records_log.json # JSON transaction verification log
+│   └── benchmark_records_log.json # Primary JSON transaction verification log
 └── screenshots/                   # Prototype visual documentation
     ├── 01_home_dashboard.png
     ├── 02_authentic_receipt_analysis.png
