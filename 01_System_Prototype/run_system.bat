@@ -27,9 +27,13 @@ exit /b 1
 
 :found_python
 echo [1/2] Verifying Python dependencies...
-%PY_CMD% -m pip install -q -r requirements.txt
+if exist "02_Project_Files\requirements.txt" (
+    %PY_CMD% -m pip install -q -r "02_Project_Files\requirements.txt"
+) else if exist "requirements.txt" (
+    %PY_CMD% -m pip install -q -r "requirements.txt"
+)
 
 echo [2/2] Launching ForgeGuard webapp...
-%PY_CMD% -m streamlit run src/app.py --server.headless false --browser.gatherUsageStats false
+%PY_CMD% -m streamlit run 01_Source_Code\app.py --server.headless false --browser.gatherUsageStats false
 
 pause

@@ -125,6 +125,15 @@ THESIS/
 │   ├── bscs_thesis_guidelines.md       # NDMC CITE BSCS Thesis formatting standards
 │   ├── student_info.md                 # Student profiles & thesis timeline
 │   └── forgeguard_system_architecture.svg
+├── 01_System_Prototype/                # NDMC Section III.1 Submission Package (6 Ordered Subfolders)
+│   ├── README.md                       # Syllabus mapping & execution guide
+│   ├── run_system.bat                  # One-click Windows offline launcher
+│   ├── 01_Source_Code/                 # 1. Clean application source code & web engine
+│   ├── 02_Project_Files/               # 2. Project dependencies, runtime & config
+│   ├── 03_Prototype_Files/             # 3. Serialized Keras models & 5-seed metrics
+│   ├── 04_Database_Files/              # 4. JSON persistent verification audit ledger
+│   ├── 05_Other_Development_Files/     # 5. Training scripts, 5-seed harnesses & samples
+│   └── 06_Screenshots_with_Descriptions/ # 6. 8 exhibits, descriptions & Word docx
 └── thesis-system/                      # SYSTEM IMPLEMENTATION & EXPERIMENTAL PIPELINE
     ├── README.md                       # ForgeGuard Software System Guide
     ├── dataset/                        # Empirical Dataset (1:1 balanced evaluation: 456 base receipts)
@@ -149,6 +158,7 @@ THESIS/
 * **[Chapter 3: System Architecture & Methodology](thesis-docs/Chapter3_System_Architecture_and_Methodology.md)** — Five-tier forensic pipeline and CNN evaluation framework.
 * **[BSCS Thesis Guidelines](thesis-docs/bscs_thesis_guidelines.md)** — NDMC CITE formatting and defense specifications.
 * **[Student Information & Schedule](thesis-docs/student_info.md)** — Team contact details and academic schedule.
+* **[01_System_Prototype Submission Package](01_System_Prototype/README.md)** — Complete NDMC Section III.1 submission package structured into the 6 syllabus subfolders with one-click launcher.
 
 ---
 

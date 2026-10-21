@@ -19,15 +19,15 @@ import streamlit as st
 
 # --- Path Setup ---
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
-if os.path.exists(os.path.join(APP_DIR, 'models')):
+if os.path.exists(os.path.join(APP_DIR, 'models')) or os.path.exists(os.path.join(APP_DIR, '03_Prototype_Files')):
     SYS_DIR = APP_DIR
-elif os.path.exists(os.path.join(APP_DIR, '..', 'models')):
+elif os.path.exists(os.path.join(APP_DIR, '..', 'models')) or os.path.exists(os.path.join(APP_DIR, '..', '03_Prototype_Files')):
     SYS_DIR = os.path.abspath(os.path.join(APP_DIR, '..'))
 else:
     SYS_DIR = os.path.abspath(os.path.join(APP_DIR, '..'))
 
-for p in [APP_DIR, SYS_DIR]:
-    if p not in sys.path:
+for p in [APP_DIR, SYS_DIR, os.path.join(SYS_DIR, '01_Source_Code'), os.path.join(SYS_DIR, 'src')]:
+    if os.path.isdir(p) and p not in sys.path:
         sys.path.insert(0, p)
 
 # --- CSS ---
@@ -72,6 +72,11 @@ def render_html(html_str):
 # --- Model Paths & Metadata ---
 def get_models_dir():
     candidates = [
+        os.path.join(APP_DIR, '03_Prototype_Files'),
+        os.path.join(APP_DIR, '..', '03_Prototype_Files'),
+        os.path.join(SYS_DIR, '03_Prototype_Files'),
+        os.path.join(os.getcwd(), '03_Prototype_Files'),
+        os.path.join(os.getcwd(), '01_System_Prototype', '03_Prototype_Files'),
         os.path.join(SYS_DIR, 'models'),
         os.path.join(APP_DIR, 'models'),
         os.path.join(os.path.dirname(SYS_DIR), 'models'),
@@ -87,6 +92,11 @@ def get_models_dir():
 def get_records_path():
     """Resolve path to persistent benchmark transaction records log."""
     candidates = [
+        os.path.join(APP_DIR, '04_Database_Files', 'benchmark_records_log.json'),
+        os.path.join(APP_DIR, '..', '04_Database_Files', 'benchmark_records_log.json'),
+        os.path.join(SYS_DIR, '04_Database_Files', 'benchmark_records_log.json'),
+        os.path.join(os.getcwd(), '04_Database_Files', 'benchmark_records_log.json'),
+        os.path.join(os.getcwd(), '01_System_Prototype', '04_Database_Files', 'benchmark_records_log.json'),
         os.path.join(SYS_DIR, 'database', 'benchmark_records_log.json'),
         os.path.join(APP_DIR, 'database', 'benchmark_records_log.json'),
         os.path.join(APP_DIR, '..', 'database', 'benchmark_records_log.json'),
@@ -96,9 +106,17 @@ def get_records_path():
     for cand in candidates:
         if os.path.isfile(cand):
             return cand
-    db_dir = os.path.join(SYS_DIR, 'database')
-    if os.path.isdir(db_dir):
-        return os.path.join(db_dir, 'benchmark_records_log.json')
+    for db_cand in [
+        os.path.join(APP_DIR, '04_Database_Files'),
+        os.path.join(APP_DIR, '..', '04_Database_Files'),
+        os.path.join(SYS_DIR, '04_Database_Files'),
+        os.path.join(os.getcwd(), '04_Database_Files'),
+        os.path.join(os.getcwd(), '01_System_Prototype', '04_Database_Files'),
+        os.path.join(SYS_DIR, 'database'),
+        os.path.join(APP_DIR, 'database'),
+    ]:
+        if os.path.isdir(db_cand):
+            return os.path.join(db_cand, 'benchmark_records_log.json')
     return os.path.join(get_models_dir(), 'benchmark_records_log.json')
 
 def get_model_info():
@@ -489,6 +507,14 @@ def get_sample_receipt_path(sample_type):
     bundled_name = sample_type + '.jpg'
     for samples_dir in [
         os.path.join(APP_DIR, 'samples'),
+        os.path.join(APP_DIR, '..', '05_Other_Development_Files', 'samples'),
+        os.path.join(APP_DIR, '..', '05_Other_Development_Files'),
+        os.path.join(SYS_DIR, '05_Other_Development_Files', 'samples'),
+        os.path.join(SYS_DIR, '05_Other_Development_Files'),
+        os.path.join(os.getcwd(), '05_Other_Development_Files', 'samples'),
+        os.path.join(os.getcwd(), '05_Other_Development_Files'),
+        os.path.join(os.getcwd(), '01_System_Prototype', '05_Other_Development_Files', 'samples'),
+        os.path.join(os.getcwd(), '01_System_Prototype', '05_Other_Development_Files'),
         os.path.join(APP_DIR, 'thesis-system', 'webapp', 'samples'),
         os.path.join(SYS_DIR, 'webapp', 'samples'),
         os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'samples'),
@@ -534,6 +560,10 @@ def get_sample_receipt_path(sample_type):
 def load_evaluation_metrics():
     """Load evaluation_metrics.json with memory caching."""
     for candidate in [
+        os.path.join(get_models_dir(), 'evaluation_metrics.json'),
+        os.path.join(APP_DIR, '03_Prototype_Files', 'evaluation_metrics.json'),
+        os.path.join(APP_DIR, '..', '03_Prototype_Files', 'evaluation_metrics.json'),
+        os.path.join(SYS_DIR, '03_Prototype_Files', 'evaluation_metrics.json'),
         os.path.join(SYS_DIR, 'models', 'evaluation_metrics.json'),
         os.path.join(os.path.dirname(SYS_DIR), 'models', 'evaluation_metrics.json'),
         os.path.join(APP_DIR, 'models', 'evaluation_metrics.json'),
@@ -917,8 +947,13 @@ if page == 'Classify a Receipt':
                 os.makedirs(os.path.dirname(records_path), exist_ok=True)
                 with open(records_path, 'w', encoding='utf-8') as rf:
                     json.dump(st.session_state['benchmark_records'][-100:], rf, indent=2)
-                # Keep database and models mirror copies in sync if both directories exist
-                for mirror_candidate in [os.path.join(SYS_DIR, 'database', 'benchmark_records_log.json'), os.path.join(get_models_dir(), 'benchmark_records_log.json')]:
+                # Keep database, 04_Database_Files, and models mirror copies in sync if directories exist
+                for mirror_candidate in [
+                    os.path.join(APP_DIR, '..', '04_Database_Files', 'benchmark_records_log.json'),
+                    os.path.join(SYS_DIR, '04_Database_Files', 'benchmark_records_log.json'),
+                    os.path.join(SYS_DIR, 'database', 'benchmark_records_log.json'),
+                    os.path.join(get_models_dir(), 'benchmark_records_log.json'),
+                ]:
                     if mirror_candidate != records_path and os.path.isdir(os.path.dirname(mirror_candidate)):
                         try:
                             with open(mirror_candidate, 'w', encoding='utf-8') as mf:
