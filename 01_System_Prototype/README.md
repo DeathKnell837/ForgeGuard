@@ -80,6 +80,7 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
     ├── 08_benchmark_records_telemetry.png # Exhibit 8: Real-time audit ledger telemetry
     ├── SCREENSHOT_DESCRIPTIONS.md          # Comprehensive academic annotations for each exhibit
     └── System_Prototype_Screenshots.docx  # Formal Word exhibit document with captions
+    │   └── System_Prototype_Screenshots.pdf   # Formal print-ready PDF exhibit with embedded screenshots
 ```
 
 ---
