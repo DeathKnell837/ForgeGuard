@@ -8,6 +8,19 @@ echo.
 
 cd /d "%~dp0"
 
+if exist "%~dp0venv\Scripts\python.exe" (
+    set "PY_CMD=%~dp0venv\Scripts\python.exe"
+    goto :found_python
+)
+if exist "%~dp0..\venv\Scripts\python.exe" (
+    set "PY_CMD=%~dp0..\venv\Scripts\python.exe"
+    goto :found_python
+)
+if exist "%~dp0..\.venv312\Scripts\python.exe" (
+    set "PY_CMD=%~dp0..\.venv312\Scripts\python.exe"
+    goto :found_python
+)
+
 where python >nul 2>nul
 if %ERRORLEVEL% EQU 0 (
     set "PY_CMD=python"
@@ -26,14 +39,15 @@ pause
 exit /b 1
 
 :found_python
-echo [1/2] Verifying Python dependencies...
+echo [1/2] Verifying Python dependencies from 02_Project_Files...
 if exist "02_Project_Files\requirements.txt" (
     %PY_CMD% -m pip install -q -r "02_Project_Files\requirements.txt"
 ) else if exist "requirements.txt" (
     %PY_CMD% -m pip install -q -r "requirements.txt"
 )
 
-echo [2/2] Launching ForgeGuard webapp...
-%PY_CMD% -m streamlit run 01_Source_Code\app.py --server.headless false --browser.gatherUsageStats false
+echo [2/2] Launching ForgeGuard webapp from 01_Source_Code...
+cd /d "%~dp001_Source_Code"
+%PY_CMD% -m streamlit run app.py --server.headless false --browser.gatherUsageStats false
 
 pause

@@ -25,10 +25,6 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
 01_System_Prototype/
 ├── README.md                              # Master prototype documentation and folder index
 ├── run_system.bat                         # One-click Windows offline launcher
-├── requirements.txt                       # Primary package dependency specifications
-├── runtime.txt                            # Target Python runtime (python-3.12.10)
-├── .streamlit/                            # Streamlit theme & UI layout configuration
-│   └── config.toml
 │
 ├── 01_Source_Code/                        # Content Item 1: Source code
 │   ├── app.py                             # Canonical Streamlit application
@@ -38,7 +34,9 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
 │   │   ├── __init__.py
 │   │   ├── ela.py                         # Error Level Analysis (Q=90, 15.0x scale)
 │   │   └── ai_forensics.py                # Anomaly statistics and thermal colormaps
-│   └── samples/                           # Bundled verification receipts for offline demos
+│   ├── samples/                           # Bundled verification receipts for offline demos
+│   └── .streamlit/
+│       └── config.toml                    # Local application UI and dark theme configuration
 │
 ├── 02_Project_Files/                      # Content Item 2: Project files
 │   ├── requirements.txt                   # Complete pinned pip dependency manifest
