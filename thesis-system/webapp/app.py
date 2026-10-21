@@ -292,6 +292,15 @@ def load_all_models():
     }
 
 # --- Multi-Model Inference ---
+def _current_rss_mb():
+    """Peak working-set memory of this process in MB (0.0 if psutil is unavailable)."""
+    try:
+        import psutil
+        return float(psutil.Process(os.getpid()).memory_info().rss / (1024 * 1024))
+    except Exception:
+        return 0.0
+
+
 def run_universal_inference(image, models_bundle):
     """
     Run inference across all three CNN architectures with end-to-end processing time timing harness.
@@ -347,11 +356,7 @@ def run_universal_inference(image, models_bundle):
         prob = 0.9995 if energy > 6.0 else 0.0005
         lat = (time.perf_counter() - t0) * 1000.0
 
-    try:
-        import psutil
-        current_rss_mb = float(psutil.Process(os.getpid()).memory_info().rss / (1024 * 1024))
-    except Exception:
-        current_rss_mb = 0.0
+    current_rss_mb = _current_rss_mb()
     ts_now = time.strftime('%Y-%m-%d %H:%M:%S')
 
     is_forged = prob >= 0.5
@@ -388,7 +393,7 @@ def run_universal_inference(image, models_bundle):
         prob_m = float(np.clip(prob * 0.985 + (0.008 if energy > 5.0 else -0.008), 0.0001, 0.9999))
         lat_m = (time.perf_counter() - t0_m) * 1000.0
 
-    current_rss_m = float(process.memory_info().rss / (1024 * 1024))
+    current_rss_m = _current_rss_mb()
     is_forged_m = prob_m >= 0.5
     results['MobileNetV2'] = {
         'verdict': 'Forged' if is_forged_m else 'Authentic',
@@ -423,7 +428,7 @@ def run_universal_inference(image, models_bundle):
         prob_r = float(np.clip(prob * 0.978 + (0.012 if spatial_var > 10.0 else -0.012), 0.0001, 0.9999))
         lat_r = (time.perf_counter() - t0_r) * 1000.0
 
-    current_rss_r = float(process.memory_info().rss / (1024 * 1024))
+    current_rss_r = _current_rss_mb()
     is_forged_r = prob_r >= 0.5
     results['ResNet50'] = {
         'verdict': 'Forged' if is_forged_r else 'Authentic',
@@ -462,7 +467,19 @@ def get_sample_receipt_path(sample_type):
     rel = subpaths.get(sample_type)
     if not rel:
         return None
-        
+
+    # Bundled samples ship with the repository (the full dataset is not deployed to the cloud host)
+    bundled_name = sample_type + '.jpg'
+    for samples_dir in [
+        os.path.join(APP_DIR, 'samples'),
+        os.path.join(APP_DIR, 'thesis-system', 'webapp', 'samples'),
+        os.path.join(SYS_DIR, 'webapp', 'samples'),
+        os.path.join(os.getcwd(), 'thesis-system', 'webapp', 'samples'),
+    ]:
+        bundled = os.path.join(samples_dir, bundled_name)
+        if os.path.isfile(bundled):
+            return bundled
+
     cwd = os.getcwd()
     candidates = [
         os.path.join(SYS_DIR, 'dataset'),

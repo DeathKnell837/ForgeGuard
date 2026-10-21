@@ -349,5 +349,86 @@
     "Processing time": "674.2 ms",
     "Memory load": "718.0 MB",
     "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:43",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "63.8 ms",
+    "Memory load": "672.7 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:43",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "409.6 ms",
+    "Memory load": "689.0 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:43",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "641.0 ms",
+    "Memory load": "693.7 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:44",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Forged",
+    "Confidence score": "100.0%",
+    "Processing time": "51.5 ms",
+    "Memory load": "709.0 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:44",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "98.4%",
+    "Processing time": "394.5 ms",
+    "Memory load": "716.9 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:44",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.4%",
+    "Processing time": "604.3 ms",
+    "Memory load": "726.6 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:46",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "99.7%",
+    "Processing time": "54.1 ms",
+    "Memory load": "706.8 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:46",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "73.7%",
+    "Processing time": "372.4 ms",
+    "Memory load": "714.3 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-21 18:52:46",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.7%",
+    "Processing time": "1030.1 ms",
+    "Memory load": "715.3 MB",
+    "Receipt": "Sample_generated"
   }
 ]
