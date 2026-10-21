@@ -44,10 +44,10 @@ def load_images_from_dir(directory, label):
                     print(f"  [WARN] Failed to load {fpath}: {e}")
     return pairs
 
-def preprocess_for_model(image):
-    """ELA -> resize 128x128 -> normalize -> batch dimension."""
+def preprocess_for_model(image, target_size=(224, 224)):
+    """ELA -> resize to target_size (default 224x224) -> normalize -> batch dimension."""
     ela = compute_ela(image)
-    ela_resized = ela.resize((128, 128), Image.Resampling.BILINEAR)
+    ela_resized = ela.resize(target_size, Image.Resampling.BILINEAR)
     arr = np.array(ela_resized, dtype=np.float32) / 255.0
     return np.expand_dims(arr, axis=0)
 
@@ -103,10 +103,12 @@ def main():
     
     # Warm up models
     print("\nWarming up models...")
-    dummy = np.zeros((1, 128, 128, 3), dtype=np.float32)
     for name, m in models.items():
+        in_shape = getattr(m, 'input_shape', None)
+        model_size = (in_shape[1], in_shape[2]) if (in_shape and len(in_shape) == 4 and in_shape[1]) else (224, 224)
+        dummy = np.zeros((1, model_size[0], model_size[1], 3), dtype=np.float32)
         _ = m(dummy, training=False)
-        print(f"  Warmed up {name}")
+        print(f"  Warmed up {name} (input size: {model_size})")
     
     # Evaluate each model
     results = {}
@@ -116,14 +118,17 @@ def main():
         print(f"Evaluating {model_name} on compressed dataset...")
         print(f"{'='*40}")
         
+        in_shape = getattr(model, 'input_shape', None)
+        model_size = (in_shape[1], in_shape[2]) if (in_shape and len(in_shape) == 4 and in_shape[1]) else (224, 224)
+        
         y_true = []
         y_pred = []
         latencies = []
         
         for idx, (img, label) in enumerate(all_pairs):
-            input_tensor = preprocess_for_model(img)
-            
+            # End-to-end processing time timing harness (ELA preprocessing to prediction)
             t0 = time.perf_counter()
+            input_tensor = preprocess_for_model(img, target_size=model_size)
             pred = model(input_tensor, training=False)
             dt = (time.perf_counter() - t0) * 1000.0
             

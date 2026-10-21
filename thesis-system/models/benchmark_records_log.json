@@ -1,0 +1,353 @@
+[
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "36.4 ms",
+    "Memory load": "696.0 MB",
+    "Receipt": "authentic_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "49.2 ms",
+    "Memory load": "701.2 MB",
+    "Receipt": "authentic_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "68.3 ms",
+    "Memory load": "706.4 MB",
+    "Receipt": "authentic_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Forged",
+    "Confidence score": "100.0%",
+    "Processing time": "30.9 ms",
+    "Memory load": "697.3 MB",
+    "Receipt": "forged_amount_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "98.4%",
+    "Processing time": "41.7 ms",
+    "Memory load": "702.4 MB",
+    "Receipt": "forged_amount_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:56",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.4%",
+    "Processing time": "68.7 ms",
+    "Memory load": "707.5 MB",
+    "Receipt": "forged_amount_0001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:57",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "99.7%",
+    "Processing time": "32.9 ms",
+    "Memory load": "692.1 MB",
+    "Receipt": "ai_diffusion_ref_001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:57",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "73.7%",
+    "Processing time": "44.8 ms",
+    "Memory load": "696.2 MB",
+    "Receipt": "ai_diffusion_ref_001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:00:57",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.7%",
+    "Processing time": "65.4 ms",
+    "Memory load": "700.3 MB",
+    "Receipt": "ai_diffusion_ref_001.jpg"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:28",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "81.8 ms",
+    "Memory load": "662.8 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:28",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "451.4 ms",
+    "Memory load": "677.7 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:28",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "674.8 ms",
+    "Memory load": "680.1 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:56",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "70.5 ms",
+    "Memory load": "665.5 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:56",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "407.5 ms",
+    "Memory load": "681.5 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:01:56",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "734.0 ms",
+    "Memory load": "684.9 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:23",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "69.0 ms",
+    "Memory load": "668.7 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:23",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "466.3 ms",
+    "Memory load": "684.2 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:23",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "602.4 ms",
+    "Memory load": "688.6 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:25",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Forged",
+    "Confidence score": "100.0%",
+    "Processing time": "59.8 ms",
+    "Memory load": "703.8 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:25",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "98.4%",
+    "Processing time": "468.2 ms",
+    "Memory load": "711.6 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:25",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.4%",
+    "Processing time": "622.2 ms",
+    "Memory load": "715.7 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:27",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "99.7%",
+    "Processing time": "50.6 ms",
+    "Memory load": "694.8 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:27",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "73.7%",
+    "Processing time": "403.4 ms",
+    "Memory load": "707.7 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-16 23:02:27",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.7%",
+    "Processing time": "608.7 ms",
+    "Memory load": "721.2 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-16 23:03:44",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "69.8 ms",
+    "Memory load": "672.0 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:03:44",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "423.9 ms",
+    "Memory load": "687.1 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:03:44",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "793.0 ms",
+    "Memory load": "690.7 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:29",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "68.8 ms",
+    "Memory load": "674.4 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:29",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "462.4 ms",
+    "Memory load": "687.8 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:29",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "671.7 ms",
+    "Memory load": "693.2 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:55",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "100.0%",
+    "Processing time": "67.6 ms",
+    "Memory load": "674.8 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:55",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Authentic",
+    "Confidence score": "92.7%",
+    "Processing time": "432.5 ms",
+    "Memory load": "688.8 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:55",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.2%",
+    "Processing time": "705.2 ms",
+    "Memory load": "692.4 MB",
+    "Receipt": "Sample_authentic"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:57",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Forged",
+    "Confidence score": "100.0%",
+    "Processing time": "55.4 ms",
+    "Memory load": "707.8 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:57",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "98.4%",
+    "Processing time": "474.1 ms",
+    "Memory load": "716.9 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:57",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.4%",
+    "Processing time": "607.9 ms",
+    "Memory load": "718.1 MB",
+    "Receipt": "Sample_edited"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:58",
+    "Architecture": "Basic CNN",
+    "Prediction result": "Authentic",
+    "Confidence score": "99.7%",
+    "Processing time": "55.9 ms",
+    "Memory load": "712.0 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:58",
+    "Architecture": "MobileNetV2",
+    "Prediction result": "Forged",
+    "Confidence score": "73.7%",
+    "Processing time": "388.9 ms",
+    "Memory load": "718.2 MB",
+    "Receipt": "Sample_generated"
+  },
+  {
+    "Date and time": "2026-10-16 23:13:58",
+    "Architecture": "ResNet50",
+    "Prediction result": "Forged",
+    "Confidence score": "50.7%",
+    "Processing time": "674.2 ms",
+    "Memory load": "718.0 MB",
+    "Receipt": "Sample_generated"
+  }
+]

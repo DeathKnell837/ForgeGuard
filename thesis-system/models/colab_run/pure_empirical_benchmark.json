@@ -1,0 +1,53 @@
+{
+  "Basic CNN": {
+    "accuracy": 0.9855,
+    "precision": 1.0,
+    "recall": 0.9714,
+    "f1_score": 0.9855,
+    "confusion": {
+      "tn": 34,
+      "fp": 0,
+      "fn": 1,
+      "tp": 34
+    },
+    "latency_mean_ms": 22.51,
+    "latency_std_ms": 5.92,
+    "latency_min_ms": 15.85,
+    "latency_p50_ms": 20.58,
+    "latency_p95_ms": 35.72
+  },
+  "MobileNetV2": {
+    "accuracy": 0.942,
+    "precision": 0.9429,
+    "recall": 0.9429,
+    "f1_score": 0.9429,
+    "confusion": {
+      "tn": 32,
+      "fp": 2,
+      "fn": 2,
+      "tp": 33
+    },
+    "latency_mean_ms": 215.75,
+    "latency_std_ms": 27.06,
+    "latency_min_ms": 178.04,
+    "latency_p50_ms": 212.61,
+    "latency_p95_ms": 258.26
+  },
+  "ResNet50": {
+    "accuracy": 0.5362,
+    "precision": 0.5224,
+    "recall": 1.0,
+    "f1_score": 0.6863,
+    "confusion": {
+      "tn": 2,
+      "fp": 32,
+      "fn": 0,
+      "tp": 35
+    },
+    "latency_mean_ms": 395.03,
+    "latency_std_ms": 51.16,
+    "latency_min_ms": 337.52,
+    "latency_p50_ms": 377.47,
+    "latency_p95_ms": 494.97
+  }
+}

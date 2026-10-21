@@ -16,38 +16,53 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'webapp')))
 
-from preprocessing.ela import compute_ela
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow as tf
+tf.get_logger().setLevel('ERROR')
+
+from preprocessing.ela import compute_ela, convert_ela_to_array
 from preprocessing.ai_forensics import detect_ai_generation
-from app import _fallback_ela_rule_based
+
+MODELS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models'))
+MODEL_PATH = os.path.join(MODELS_DIR, 'basic_cnn.keras')
+_cnn_model = None
+if os.path.isfile(MODEL_PATH):
+    _cnn_model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 def evaluate_sample(fpath, expected_verdict, category_name):
-    img = Image.open(fpath)
+    img = Image.open(fpath).convert('RGB')
     ela = compute_ela(img, quality=90, scale=15.0)
     ela_arr = np.array(ela, dtype=np.float32)
     v = float(np.var(ela_arr))
     m = float(np.mean(ela_arr))
     
     ai_res = detect_ai_generation(img)
-    rule_res = _fallback_ela_rule_based(img)
     
-    # Master consensus logic matching app.py
-    fname = os.path.basename(fpath).lower()
-    is_forged = False
-    
+    # Genuine multi-stage forensic evaluation:
+    # Stage 1: AI Diffusion and generative artifact detection
     if ai_res.get('is_ai_generated', False) and ai_res.get('ai_confidence', 0) >= 0.45:
         is_forged = True
-        detected_type = ai_res.get('ai_generation_type', 'AI_GENERATED_RECEIPT')
-    elif any(kw in fname for kw in ['forged', 'tampered', 'fake', 'alteration', 'modification', 'synthetic', 'diffusion', 'bing', 'copilot', 'dalle', 'dall-e', 'banana', 'generated']):
+        detected_type = ai_res.get('ai_generation_type', 'AI_GENERATED')
+    # Stage 2: Deep CNN forensic verification (Basic CNN)
+    elif _cnn_model is not None:
+        in_shape = getattr(_cnn_model, 'input_shape', None)
+        target_size = (in_shape[1], in_shape[2]) if (in_shape and len(in_shape) == 4 and in_shape[1]) else (128, 128)
+        arr = convert_ela_to_array(ela, target_size=target_size)
+        pred = float(_cnn_model(np.expand_dims(arr, 0), training=False)[0][0])
+        if pred >= 0.50:
+            is_forged = True
+            detected_type = f"CNN_FORGED ({pred*100:.1f}%)"
+        else:
+            is_forged = False
+            detected_type = f"CNN_AUTHENTIC ({(1.0-pred)*100:.1f}%)"
+    # Stage 3: Statistical ELA variance anomaly fallback
+    elif (v > 540.0) or (v < 200.0) or (m > 22.0):
         is_forged = True
-        detected_type = 'FORGERY_DETECTED'
-    elif rule_res.get('verdict') == 'FORGED':
-        is_forged = True
-        detected_type = rule_res.get('forgery_type', 'TAMPERED')
+        detected_type = "ELA_ANOMALY"
     else:
         is_forged = False
-        detected_type = 'AUTHENTIC'
+        detected_type = "AUTHENTIC"
         
     actual_verdict = 'FORGED' if is_forged else 'AUTHENTIC'
     passed = (actual_verdict == expected_verdict)

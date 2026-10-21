@@ -74,18 +74,18 @@ This research investigates the following specific research questions:
 
 ## Empirical Model Benchmark Results
 
-All architectures were benchmarked under identical hardware conditions on the balanced 1:1 empirical dataset across both Standard and Compressed conditions:
+All architectures were benchmarked under identical hardware conditions on the balanced 1:1 empirical test partition ($N = 225$ per seed: 112 Authentic, 56 Digitally Edited, 57 AI-Generated; 5 predetermined seeds) across both Standard and Compressed conditions:
 
-| Architecture | Condition | Accuracy (%) | Compression Delta (&Delta;Acc) | Precision (%) | Recall (%) | F1-Score (%) | Latency (ms) | Peak Memory (MB) | Params | Architectural Finding |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| **Basic CNN** | Standard | **92.92%** | Baseline | **98.99%** | **86.73%** | **92.45%** | **22.51 ms** | **626.5 MB** | **~2.1M** | Most balanced, dependable model for uncompressed receipts; near-zero false alarms (FP=2 of 226). |
-| **Basic CNN** | Compressed | **99.56%** | **+6.64%** | **99.56%** | **99.56%** | **99.56%** | **24.12 ms** | **638.3 MB** | **~2.1M** | Top-performing architecture under Messenger compression; only 2 errors across all 456 tested receipts. |
-| **MobileNetV2** | Standard | **86.06%** | Baseline | **89.76%** | **81.42%** | **85.38%** | **215.75 ms** | **632.2 MB** | **~3.4M** | Inverted residual mobile architecture; lightweight ~3.4M parameter footprint for mobile edge devices. |
-| **MobileNetV2** | Compressed | **93.42%** | **+7.36%** | **92.67%** | **94.30%** | **93.48%** | **221.40 ms** | **638.3 MB** | **~3.4M** | Strong resilience under compression with 94.30% fraud catch rate (TP=215 of 228). |
-| **ResNet50** | Standard | **53.54%** | Baseline | **51.83%** | **100.00%** | **68.28%** | **395.03 ms** | **638.0 MB** | **~23.5M** | 100% recall on forgeries, but excessive false alarms (FP=210 of 226) due to deep-layer noise overfitting. |
-| **ResNet50** | Compressed | **53.95%** | **+0.41%** | **52.05%** | **100.00%** | **68.47%** | **405.18 ms** | **638.8 MB** | **~23.5M** | Heavy 23.5M footprint; proves the hypothesis that excessive layer depth over-analyzes routine background noise. |
+| Architecture | Condition | Accuracy (%) | Compression Delta (&Delta;Acc) | Precision (%) | Recall (%) | F1-Score (%) | Latency (ms) | Peak Memory (MB) | Params | Composite Score | Architectural Finding |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| **Basic CNN** | Standard | **91.82% &plusmn; 1.77%** | Baseline | **98.16% &plusmn; 0.43%** | **85.31% &plusmn; 3.44%** | **91.25% &plusmn; 2.09%** | **86.27 &plusmn; 8.59 ms** | **659.8 MB** | **~2.1M** | **100.00%** | Most balanced, dependable model for uncompressed receipts; near-zero false alarms (mean FP=1.8 of 112 authentic). |
+| **Basic CNN** | Compressed | **91.73% &plusmn; 1.50%** | **-0.09%** | **98.57% &plusmn; 0.50%** | **84.78% &plusmn; 3.06%** | **91.12% &plusmn; 1.77%** | **74.25 &plusmn; 2.56 ms** | **671.7 MB** | **~2.1M** | **100.00%** | Top-performing architecture under Messenger compression; near-zero false alarms (mean FP=1.2) with 84.78% fraud detection rate. |
+| **MobileNetV2** | Standard | **82.22% &plusmn; 2.35%** | Baseline | **78.57% &plusmn; 3.03%** | **89.56% &plusmn; 1.42%** | **83.64% &plusmn; 1.98%** | **91.43 &plusmn; 2.79 ms** | **665.5 MB** | **~3.4M** | **71.50%** | Inverted residual mobile architecture; lightweight ~3.4M parameter footprint with 100% catch rate on AI diffusion fakes. |
+| **MobileNetV2** | Compressed | **87.82% &plusmn; 2.04%** | **+5.60%** | **88.50% &plusmn; 2.27%** | **87.26% &plusmn; 1.83%** | **87.78% &plusmn; 1.99%** | **84.63 &plusmn; 5.90 ms** | **672.0 MB** | **~3.4M** | **66.85%** | Strong resilience under compression with +5.60% accuracy gain and 94.4% catch rate on AI diffusion forgeries. |
+| **ResNet50** | Standard | **53.42% &plusmn; 0.99%** | Baseline | **51.88% &plusmn; 0.52%** | **100.00% &plusmn; 0.00%** | **68.32% &plusmn; 0.44%** | **128.08 &plusmn; 4.71 ms** | **670.9 MB** | **~23.5M** | **0.00%** | High recall on forgeries (100.00%), but elevated false alarms (mean FP=105 of 112 authentic) due to deep-layer noise overfitting. |
+| **ResNet50** | Compressed | **49.24% &plusmn; 0.91%** | **-4.18%** | **49.71% &plusmn; 0.44%** | **93.98% &plusmn; 1.70%** | **64.99% &plusmn; 0.77%** | **120.80 &plusmn; 5.34 ms** | **672.1 MB** | **~23.5M** | **0.00%** | Heavy 23.5M footprint; highest end-to-end latency, lowest specificity, and -4.18% degradation under Messenger compression. |
 
-> **Key Takeaway:** Simpler, compact convolutional architectures (Basic CNN and MobileNetV2) decisively outperform heavy 50-layer deep networks for ELA digital receipt verification, proving that excessive network depth over-fits to normal compression variance and produces untenable false-positive rates.
+> **Key Takeaway:** Simpler, compact convolutional architectures (Basic CNN and MobileNetV2) decisively outperform heavy 50-layer deep networks for ELA digital receipt verification, proving that excessive network depth over-fits to normal compression variance and produces untenable false-positive rates. Section 2.10 Composite Scoring ranks Basic CNN as the optimal architecture for local merchant deployment.
 
 ---
 

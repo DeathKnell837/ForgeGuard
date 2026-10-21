@@ -30,9 +30,9 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from preprocessing.ela import compute_ela
 
-IMG_SIZE = (128, 128)
+IMG_SIZE = (224, 224)
 BATCH_SIZE = 16
-EPOCHS = 20
+EPOCHS = 50  # 50-epoch maximum ceiling per revised manuscript
 IMAGE_EXTENSIONS = ('*.jpg', '*.jpeg', '*.png', '*.webp')
 
 def load_and_preprocess_balanced_dataset(dataset_dir):
@@ -137,7 +137,7 @@ def train_and_evaluate():
         # 1. Basic CNN Architecture (~2.1M params)
         def build_basic_cnn():
             model = models.Sequential([
-                layers.Input(shape=(128, 128, 3)),
+                layers.Input(shape=(224, 224, 3)),
                 layers.Conv2D(32, (3, 3), activation='relu'),
                 layers.MaxPooling2D((2, 2)),
                 layers.Conv2D(64, (3, 3), activation='relu'),
@@ -154,7 +154,7 @@ def train_and_evaluate():
 
         # 2. MobileNetV2 Architecture (~3.4M params)
         def build_mobilenetv2():
-            base = applications.MobileNetV2(input_shape=(128, 128, 3), include_top=False, weights='imagenet')
+            base = applications.MobileNetV2(input_shape=(224, 224, 3), include_top=False, weights='imagenet')
             base.trainable = False
             model = models.Sequential([
                 base,
@@ -168,7 +168,7 @@ def train_and_evaluate():
 
         # 3. ResNet50 Architecture (~23.5M params)
         def build_resnet50():
-            base = applications.ResNet50(input_shape=(128, 128, 3), include_top=False, weights='imagenet')
+            base = applications.ResNet50(input_shape=(224, 224, 3), include_top=False, weights='imagenet')
             base.trainable = False
             model = models.Sequential([
                 base,
