@@ -152,7 +152,7 @@ During your proposal defense, your results tables are presented as empty standar
 #### Test 3: Showing Telemetry & Forensic Decomposition
 * **Action:** Scroll down to the **'How the AI Analyzes This Receipt'** panel and Tri-Spectral decomposition.
 * **Daniela speaks:**  
-  "Below the classification stamps, ForgeGuard provides interpretable forensic telemetry. The system computes the live Mean Noise Energy, Spatial Variance, and Peak Residual. In altered receipts, the Spatial Variance spikes above 18.0, providing empirical evidence of localized manipulation."
+  "Below the classification cards, ForgeGuard presents the Tri-Spectral Forensic Evidence Decomposition—displaying the raw raster, the 90Q ELA compression matrix, and the dynamic Tamper Heatmap overlay alongside signal extraction mechanics."
 
 #### Test 4: Model Comparison & Benchmark Suite
 * **Action:** Click **'Model Comparison'** in the sidebar.

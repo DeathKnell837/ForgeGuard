@@ -951,7 +951,7 @@ if page == 'Classify a Receipt':
                       <div style="padding: 16px 18px 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <div>
                           <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">Benchmark Records (Logs and Records)</div>
-                          <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Figure 4 Database Layer: Prediction result, Confidence score, Processing time, Memory load, Date and time</div>
+                          <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Database Layer (Thesis Figure 4 &amp; Section 2.5.3): Prediction result, Confidence score, Processing time, Memory load, Date and time</div>
                         </div>
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #64748B; background: rgba(255,255,255,0.03); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
                           {len(records_list)} Records Logged
@@ -1168,17 +1168,17 @@ elif page == 'Model Comparison':
         <table class="fg-metrics-table">
             <thead>
                 <tr>
-                    <th style="text-align: center !important;" title="Diagnostic neural network model being evaluated">Architecture</th>
-                    <th style="text-align: center !important;" title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
-                    <th style="text-align: center !important;" title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
-                    <th style="text-align: center !important;" title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
-                    <th style="text-align: center !important;" title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
-                    <th style="text-align: center !important;" title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
-                    <th style="text-align: center !important;" title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
-                    <th style="text-align: center !important;" title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
-                    <th style="text-align: center !important;" title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
-                    <th style="text-align: center !important;" title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
-                    <th style="text-align: center !important;" title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Diagnostic neural network model being evaluated">Architecture</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
+                    <th style="text-align: center !important; vertical-align: middle !important;" title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -1429,20 +1429,22 @@ elif page == 'Model Comparison':
         # Empirical Dataset Composition (Table 1 Alignment)
         render_html(
             '''
-            <div style="background-color: #0f202f; border: 1px solid var(--fg-line, rgba(255,255,255,0.08)); border-radius: 8px; padding: 20px; margin-bottom: 24px; width: 100%; box-sizing: border-box; box-shadow: 0 10px 24px rgba(0,0,0,.14);">
-              <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Empirical Dataset Composition (Table 1 Alignment)</div>
-              <div style="font-size: 12px; color: #94A3B8; margin-bottom: 16px;">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
+            <div class="fg-table-card" style="margin-bottom: 28px;">
+              <div style="padding: 16px 18px 14px 18px; border-bottom: 1px solid var(--fg-line, rgba(255,255,255,0.08));">
+                <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Empirical Dataset Composition (Table 1 Alignment)</div>
+                <div style="font-size: 12px; color: #94A3B8;">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
+              </div>
               
               <div class="fg-table-scroll">
                 <table class="fg-metrics-table" style="width: 100%; border-collapse: collapse; border: none; background: transparent; box-shadow: none; margin: 0;">
                   <thead>
                     <tr>
-                      <th style="text-align: center !important;">Category</th>
-                      <th style="text-align: center !important;">Subcategory / Scope</th>
-                      <th style="text-align: center !important;">Base</th>
-                      <th style="text-align: center !important;">Train (60%)</th>
-                      <th style="text-align: center !important;">Val (15%)</th>
-                      <th style="text-align: center !important;">Test (25%)</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Category</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Subcategory / Scope</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Base</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Train (60%)</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Val (15%)</th>
+                      <th style="text-align: center !important; vertical-align: middle !important;">Test (25%)</th>
                     </tr>
                   </thead>
                   <tbody>
