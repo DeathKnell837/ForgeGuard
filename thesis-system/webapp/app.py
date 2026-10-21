@@ -856,23 +856,12 @@ if page == 'Classify a Receipt':
                 st.image(overlay, width='stretch')
 
             # How the AI Analyzes This Receipt Panel
-            mean_e = ela_metrics['mean_energy']
-            var_e = ela_metrics['variance']
-            peak_e = ela_metrics['max_peak']
-            
             render_html(
-                f'''
+                '''
                 <div style="margin-top: 24px; background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
-                    <div>
-                      <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">How the AI Analyzes This Receipt</div>
-                      <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
-                    </div>
-                    <div style="display: flex; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
-                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Mean Noise: <strong style="color: #2DD4BF;">{mean_e:.2f}</strong></span>
-                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Spatial Var: <strong style="color: #7C6FF0;">{var_e:.1f}</strong></span>
-                      <span style="background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #CBD5E1;">Peak Residual: <strong style="color: #F59E0B;">{peak_e:.1f}</strong></span>
-                    </div>
+                  <div style="margin-bottom: 14px;">
+                    <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">How the AI Analyzes This Receipt</div>
+                    <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
                   </div>
                   
                   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; font-size: 11.5px; line-height: 1.6; color: #CBD5E1;">
@@ -1174,21 +1163,22 @@ elif page == 'Model Comparison':
         st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Overall Architecture Benchmark</div></div>', unsafe_allow_html=True)
         
         table_html = '''
+        <div class="fg-table-card">
         <div class="fg-table-scroll">
         <table class="fg-metrics-table">
             <thead>
                 <tr>
-                    <th title="Diagnostic neural network model being evaluated">Architecture</th>
-                    <th title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
-                    <th title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
-                    <th title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
-                    <th title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
-                    <th title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
-                    <th title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
-                    <th title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
-                    <th title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
-                    <th title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
-                    <th title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
+                    <th style="text-align: center !important;" title="Diagnostic neural network model being evaluated">Architecture</th>
+                    <th style="text-align: center !important;" title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
+                    <th style="text-align: center !important;" title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
+                    <th style="text-align: center !important;" title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
+                    <th style="text-align: center !important;" title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
+                    <th style="text-align: center !important;" title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
+                    <th style="text-align: center !important;" title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
+                    <th style="text-align: center !important;" title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
+                    <th style="text-align: center !important;" title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
+                    <th style="text-align: center !important;" title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
+                    <th style="text-align: center !important;" title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -1224,17 +1214,17 @@ elif page == 'Model Comparison':
             
             table_html += f'''
             <tr class="fg-benchmark-row fg-standard-row fg-model-start">
-                <td class="arch-cell">{model_name}</td>
-                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Standard</td>
-                <td>{s_acc_html}<span class="fg-std">&plusmn;{s_acc_sd:.2f}%</span></td>
-                <td style="font-family: Inter, sans-serif; color: #64748B;">Baseline</td>
-                <td>{s_prec:.2f}%<span class="fg-std">&plusmn;{s_prec_sd:.2f}%</span></td>
-                <td>{s_rec:.2f}%<span class="fg-std">&plusmn;{s_rec_sd:.2f}%</span></td>
-                <td>{s_f1:.2f}%<span class="fg-std">&plusmn;{s_f1_sd:.2f}%</span></td>
-                <td>{s_lat_html}<span class="fg-std">&plusmn;{s_lat_sd:.1f}</span></td>
-                <td>{s_mem:.1f}<span class="fg-std">&plusmn;{s_mem_sd:.1f}</span></td>
-                <td style="color: #94A3B8;">{params}</td>
-                <td style="font-weight: 700; color: #2DD4BF;">{s_comp:.2f}%</td>
+                <td class="arch-cell" style="text-align: center !important;">{model_name}</td>
+                <td style="font-family: Inter, sans-serif; color: #94A3B8; text-align: center !important;">Standard</td>
+                <td style="text-align: center !important;">{s_acc_html}<span class="fg-std">&plusmn;{s_acc_sd:.2f}%</span></td>
+                <td style="font-family: Inter, sans-serif; color: #64748B; text-align: center !important;">Baseline</td>
+                <td style="text-align: center !important;">{s_prec:.2f}%<span class="fg-std">&plusmn;{s_prec_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{s_rec:.2f}%<span class="fg-std">&plusmn;{s_rec_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{s_f1:.2f}%<span class="fg-std">&plusmn;{s_f1_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{s_lat_html}<span class="fg-std">&plusmn;{s_lat_sd:.1f}</span></td>
+                <td style="text-align: center !important;">{s_mem:.1f}<span class="fg-std">&plusmn;{s_mem_sd:.1f}</span></td>
+                <td style="color: #94A3B8; text-align: center !important;">{params}</td>
+                <td style="font-weight: 700; color: #2DD4BF; text-align: center !important;">{s_comp:.2f}%</td>
             </tr>
             '''
             
@@ -1272,55 +1262,58 @@ elif page == 'Model Comparison':
             
             table_html += f'''
             <tr class="fg-benchmark-row fg-compressed-row">
-                <td class="arch-cell">{model_name}</td>
-                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Compressed</td>
-                <td>{c_acc_html}<span class="fg-std">&plusmn;{c_acc_sd:.2f}%</span></td>
-                <td>{delta_html}</td>
-                <td>{c_prec:.2f}%<span class="fg-std">&plusmn;{c_prec_sd:.2f}%</span></td>
-                <td>{c_rec:.2f}%<span class="fg-std">&plusmn;{c_rec_sd:.2f}%</span></td>
-                <td>{c_f1:.2f}%<span class="fg-std">&plusmn;{c_f1_sd:.2f}%</span></td>
-                <td>{c_lat_html}<span class="fg-std">&plusmn;{c_lat_sd:.1f}</span></td>
-                <td>{c_mem:.1f}<span class="fg-std">&plusmn;{c_mem_sd:.1f}</span></td>
-                <td style="color: #94A3B8;">{params}</td>
-                <td style="font-weight: 700; color: #2DD4BF;">{c_comp:.2f}%</td>
+                <td class="arch-cell" style="text-align: center !important;">{model_name}</td>
+                <td style="font-family: Inter, sans-serif; color: #94A3B8; text-align: center !important;">Compressed</td>
+                <td style="text-align: center !important;">{c_acc_html}<span class="fg-std">&plusmn;{c_acc_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{delta_html}</td>
+                <td style="text-align: center !important;">{c_prec:.2f}%<span class="fg-std">&plusmn;{c_prec_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{c_rec:.2f}%<span class="fg-std">&plusmn;{c_rec_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{c_f1:.2f}%<span class="fg-std">&plusmn;{c_f1_sd:.2f}%</span></td>
+                <td style="text-align: center !important;">{c_lat_html}<span class="fg-std">&plusmn;{c_lat_sd:.1f}</span></td>
+                <td style="text-align: center !important;">{c_mem:.1f}<span class="fg-std">&plusmn;{c_mem_sd:.1f}</span></td>
+                <td style="color: #94A3B8; text-align: center !important;">{params}</td>
+                <td style="font-weight: 700; color: #2DD4BF; text-align: center !important;">{c_comp:.2f}%</td>
             </tr>
             '''
             
         table_html += '''
             </tbody>
         </table>
-        <div style="margin-top: 14px; margin-bottom: 28px; background: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px; box-sizing: border-box; width: 100%;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-            <div style="font-size: 13px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.3px; text-transform: uppercase;">Metric Interpretation Guide</div>
-            <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #2DD4BF;">Thesis Evaluation Reference</div>
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.</div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.</div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.</div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.</div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-              <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
-            </div>
-          </div>
-          <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
-            &bull; <strong>Dataset Partition:</strong> Benchmarked on the balanced 1:1 empirical dataset (225-receipt test partition per seed, 5 seeds).
-          </div>
         </div>
         </div>
         '''
         render_html(table_html)
+        
+        with st.expander("Metric Interpretation Guide (Evaluation Reference)", expanded=False):
+            render_html(
+                '''
+                <div style="padding: 4px 2px 8px 2px;">
+                  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
+                      <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
+                    &bull; <strong>Dataset Partition:</strong> Benchmarked on the balanced 1:1 empirical dataset (225-receipt test partition per seed, 5 seeds).
+                  </div>
+                </div>
+                '''
+            )
         
         # Confusion Matrix Section
         st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Detailed Test Matrix Breakdown</div></div>', unsafe_allow_html=True)
@@ -1436,62 +1429,62 @@ elif page == 'Model Comparison':
         # Empirical Dataset Composition (Table 1 Alignment)
         render_html(
             '''
-            <div style="background-color: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 24px;">
+            <div style="background-color: #0f202f; border: 1px solid var(--fg-line, rgba(255,255,255,0.08)); border-radius: 8px; padding: 20px; margin-bottom: 24px; width: 100%; box-sizing: border-box; box-shadow: 0 10px 24px rgba(0,0,0,.14);">
               <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Empirical Dataset Composition (Table 1 Alignment)</div>
               <div style="font-size: 12px; color: #94A3B8; margin-bottom: 16px;">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
               
               <div class="fg-table-scroll">
-                <table class="fg-metrics-table" style="width: 100%; border-collapse: collapse;">
+                <table class="fg-metrics-table" style="width: 100%; border-collapse: collapse; border: none; background: transparent; box-shadow: none; margin: 0;">
                   <thead>
                     <tr>
-                      <th style="text-align: center;">Category</th>
-                      <th style="text-align: center;">Subcategory / Scope</th>
-                      <th style="text-align: center;">Base</th>
-                      <th style="text-align: center;">Train (60%)</th>
-                      <th style="text-align: center;">Val (15%)</th>
-                      <th style="text-align: center;">Test (25%)</th>
+                      <th style="text-align: center !important;">Category</th>
+                      <th style="text-align: center !important;">Subcategory / Scope</th>
+                      <th style="text-align: center !important;">Base</th>
+                      <th style="text-align: center !important;">Train (60%)</th>
+                      <th style="text-align: center !important;">Val (15%)</th>
+                      <th style="text-align: center !important;">Test (25%)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="fg-benchmark-row fg-standard-row">
-                      <td class="arch-cell" style="color: #10B981; text-align: center;">Authentic</td>
-                      <td style="text-align: center;">Downloadable GCash Receipts<br><span style="font-size: 10px; color: #94A3B8;">Original in-app exports</span></td>
-                      <td style="text-align: center;">450</td>
-                      <td style="text-align: center;">270</td>
-                      <td style="text-align: center;">68</td>
-                      <td style="text-align: center;">112</td>
+                      <td class="arch-cell" style="color: #10B981; text-align: center !important;">Authentic</td>
+                      <td style="text-align: center !important;">Downloadable GCash Receipts<br><span style="font-size: 10px; color: #94A3B8;">Original in-app exports</span></td>
+                      <td style="text-align: center !important;">450</td>
+                      <td style="text-align: center !important;">270</td>
+                      <td style="text-align: center !important;">68</td>
+                      <td style="text-align: center !important;">112</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444; text-align: center;">Forged</td>
-                      <td style="text-align: center;">Digitally Edited Receipts<br><span style="font-size: 10px; color: #94A3B8;">Amount, Name, Ref, Font</span></td>
-                      <td style="text-align: center;">225</td>
-                      <td style="text-align: center;">135</td>
-                      <td style="text-align: center;">34</td>
-                      <td style="text-align: center;">56</td>
+                      <td class="arch-cell" style="color: #EF4444; text-align: center !important;">Forged</td>
+                      <td style="text-align: center !important;">Digitally Edited Receipts<br><span style="font-size: 10px; color: #94A3B8;">Amount, Name, Ref, Font</span></td>
+                      <td style="text-align: center !important;">225</td>
+                      <td style="text-align: center !important;">135</td>
+                      <td style="text-align: center !important;">34</td>
+                      <td style="text-align: center !important;">56</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444; text-align: center;">Forged</td>
-                      <td style="text-align: center;">Programmatically &amp; AI-Generated<br><span style="font-size: 10px; color: #94A3B8;">Synthetic canvas slips</span></td>
-                      <td style="text-align: center;">225</td>
-                      <td style="text-align: center;">135</td>
-                      <td style="text-align: center;">33</td>
-                      <td style="text-align: center;">57</td>
+                      <td class="arch-cell" style="color: #EF4444; text-align: center !important;">Forged</td>
+                      <td style="text-align: center !important;">Programmatically &amp; AI-Generated<br><span style="font-size: 10px; color: #94A3B8;">Synthetic canvas slips</span></td>
+                      <td style="text-align: center !important;">225</td>
+                      <td style="text-align: center !important;">135</td>
+                      <td style="text-align: center !important;">33</td>
+                      <td style="text-align: center !important;">57</td>
                     </tr>
                     <tr style="border-top: 1px solid rgba(255,255,255,0.12); font-weight: 600; background: rgba(255,255,255,0.02);">
-                      <td colspan="2" style="padding: 10px 12px; color: #E2E8F0; text-align: center;">Experimental Partitions Subtotal</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center;">900</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center;">540</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center;">135</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center;">225</td>
+                      <td colspan="2" style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">Experimental Partitions Subtotal</td>
+                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center !important;">900</td>
+                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">540</td>
+                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">135</td>
+                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center !important;">225</td>
                     </tr>
                     <tr style="background: rgba(255,255,255,0.01);">
-                      <td colspan="2" style="padding: 10px 12px; color: #94A3B8; text-align: center;">Unseen-Tool Holdout Validation Set (Phase 6)</td>
-                      <td style="padding: 10px 12px; color: #F59E0B; text-align: center;">100</td>
-                      <td colspan="3" style="padding: 10px 12px; color: #94A3B8; font-style: italic; text-align: center;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
+                      <td colspan="2" style="padding: 10px 12px; color: #94A3B8; text-align: center !important;">Unseen-Tool Holdout Validation Set (Phase 6)</td>
+                      <td style="padding: 10px 12px; color: #F59E0B; text-align: center !important;">100</td>
+                      <td colspan="3" style="padding: 10px 12px; color: #94A3B8; font-style: italic; text-align: center !important;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
                     </tr>
                     <tr style="border-top: 2px solid rgba(255,255,255,0.15); font-weight: 700; background: rgba(45, 212, 191, 0.05);">
-                      <td colspan="2" style="padding: 12px; color: #FFFFFF; text-align: center;">Total Dataset Corpus (Base Images)</td>
-                      <td colspan="4" style="padding: 12px; color: #2DD4BF; font-size: 13px; text-align: center;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
+                      <td colspan="2" style="padding: 12px; color: #FFFFFF; text-align: center !important;">Total Dataset Corpus (Base Images)</td>
+                      <td colspan="4" style="padding: 12px; color: #2DD4BF; font-size: 13px; text-align: center !important;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
                     </tr>
                   </tbody>
                 </table>

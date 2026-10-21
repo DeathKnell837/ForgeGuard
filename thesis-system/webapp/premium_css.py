@@ -612,10 +612,10 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-section-title::before { content:""; display:inline-block; width: 5px; height: 5px; margin: 0 9px 2px 0; border-radius:50%; background: var(--fg-cyan); box-shadow: 0 0 10px rgba(66,216,205,.6); }
 .fg-metrics-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; background: #0f202f; border: 1px solid var(--fg-line); border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,.14); animation: fg-enter .5s cubic-bezier(.2,.8,.2,1) .06s both; }
 .fg-metrics-table thead tr { background: linear-gradient(90deg, #183449, #142b3e); }
-.fg-metrics-table th { padding: 11px 9px; color: #C8E2EC; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; border-bottom: 1px solid var(--fg-line); white-space: normal; line-height: 1.3; vertical-align: bottom; text-align: center; }
+.fg-metrics-table th { padding: 11px 9px; color: #C8E2EC; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; border-bottom: 1px solid var(--fg-line); white-space: normal; line-height: 1.3; vertical-align: bottom; text-align: center !important; }
 .fg-metrics-table th:not(:last-child), .fg-metrics-table td:not(:last-child) { border-right: 1px solid rgba(164,208,221,.075); }
-.fg-metrics-table td { padding: 11px 9px; color: #E2E8F0; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; white-space: nowrap; vertical-align: middle; transition: background-color .18s ease, color .18s ease; text-align: center; }
-.fg-metrics-table td.arch-cell { color: var(--fg-paper); font-family: var(--fg-sans); font-weight: 700; font-size: 13px; white-space: normal; text-align: center; }
+.fg-metrics-table td { padding: 11px 9px; color: #E2E8F0; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; white-space: nowrap; vertical-align: middle; transition: background-color .18s ease, color .18s ease; text-align: center !important; }
+.fg-metrics-table td.arch-cell { color: var(--fg-paper); font-family: var(--fg-sans); font-weight: 700; font-size: 13px; white-space: normal; text-align: center !important; }
 .fg-metrics-table tbody tr.fg-standard-row { background: rgba(66,216,205,.03); }
 .fg-metrics-table tbody tr.fg-compressed-row { background: rgba(115,168,255,.022); }
 .fg-metrics-table tbody tr.fg-model-start td { border-top: 1px solid rgba(66,216,205,.28) !important; }
@@ -829,24 +829,32 @@ div[data-testid="stButton"] > button:active {
 }
 
 /* Benchmark table: fit the content column without page-level horizontal scroll */
-.fg-table-scroll { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.fg-table-scroll .fg-metrics-table { table-layout: auto; min-width: 0; }
-.fg-metrics-table td span[style*="font-size: 10px"] { display: block; margin-top: 2px; line-height: 1.2; }
-.block-container { overflow-x: hidden; }
-.block-container img, .block-container canvas { max-width: 100%; height: auto; }
-
-/* --- Compact & Responsive Table Styles --- */
+.fg-table-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 8px;
+    border: 1px solid var(--fg-line);
+    background: #0f202f;
+    box-shadow: 0 10px 24px rgba(0,0,0,.14);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
 .fg-table-scroll {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
-    border-radius: 8px;
-    border: 1px solid var(--fg-line);
-    background: #0f202f;
-    box-shadow: 0 10px 24px rgba(0,0,0,.14);
-    margin-bottom: 24px;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
+.fg-table-scroll .fg-metrics-table { table-layout: auto; min-width: 0; }
+.fg-metrics-table td span[style*="font-size: 10px"] { display: block; margin-top: 2px; line-height: 1.2; }
+.block-container { overflow-x: hidden; }
+.block-container img, .block-container canvas { max-width: 100%; height: auto; }
+
 .fg-table-scroll::-webkit-scrollbar {
     height: 6px;
 }
@@ -861,6 +869,49 @@ div[data-testid="stButton"] > button:active {
 .fg-table-scroll::-webkit-scrollbar-thumb:hover {
     background: rgba(66,216,205,0.8);
 }
+
+/* --- Streamlit Expander Dark Cyber-Forensics Styling --- */
+div[data-testid="stExpander"] {
+    background-color: #0f202f !important;
+    border: 1px solid var(--fg-line) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12) !important;
+    margin-top: 12px !important;
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+}
+div[data-testid="stExpander"] details {
+    border: none !important;
+    background: transparent !important;
+}
+div[data-testid="stExpander"] summary {
+    background: linear-gradient(90deg, #183449, #142b3e) !important;
+    padding: 10px 14px !important;
+    border-radius: 0 !important;
+    color: #C8E2EC !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid var(--fg-line) !important;
+    transition: background 0.18s ease, color 0.18s ease !important;
+}
+div[data-testid="stExpander"] details:not([open]) summary {
+    border-bottom: none !important;
+}
+div[data-testid="stExpander"] summary:hover {
+    color: #42D8CD !important;
+    background: linear-gradient(90deg, #1f425c, #183449) !important;
+}
+div[data-testid="stExpander"] summary svg {
+    color: #42D8CD !important;
+    fill: #42D8CD !important;
+}
+div[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
+    padding: 14px 16px !important;
+    background-color: #0f202f !important;
+}
+
 .fg-metrics-table {
     width: 100% !important;
     min-width: unset !important;
