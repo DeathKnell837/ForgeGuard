@@ -1414,58 +1414,58 @@ elif page == 'Model Comparison':
               <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Empirical Dataset Composition (Table 1 Alignment)</div>
               <div style="font-size: 12px; color: #94A3B8; margin-bottom: 16px;">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
               
-              <div style="overflow-x: auto;">
+              <div class="fg-table-scroll">
                 <table class="fg-metrics-table" style="width: 100%; border-collapse: collapse;">
                   <thead>
                     <tr>
-                      <th>Category</th>
-                      <th style="min-width:200px; text-align:left;">Subcategory / Scope</th>
-                      <th style="text-align:center;">Base</th>
-                      <th style="text-align:center;">Train (60%)</th>
-                      <th style="text-align:center;">Val (15%)</th>
-                      <th style="text-align:center;">Test (25%)</th>
+                      <th style="text-align: center;">Category</th>
+                      <th style="text-align: center;">Subcategory / Scope</th>
+                      <th style="text-align: center;">Base</th>
+                      <th style="text-align: center;">Train (60%)</th>
+                      <th style="text-align: center;">Val (15%)</th>
+                      <th style="text-align: center;">Test (25%)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="fg-benchmark-row fg-standard-row">
-                      <td class="arch-cell" style="color: #10B981;">Authentic</td>
-                      <td>Downloadable GCash receipts (Original in-app exports)</td>
-                      <td>450</td>
-                      <td>270</td>
-                      <td>68</td>
-                      <td>112</td>
+                      <td class="arch-cell" style="color: #10B981; text-align: center;">Authentic</td>
+                      <td style="text-align: center;">Downloadable GCash Receipts<br><span style="font-size: 10px; color: #94A3B8;">Original in-app exports</span></td>
+                      <td style="text-align: center;">450</td>
+                      <td style="text-align: center;">270</td>
+                      <td style="text-align: center;">68</td>
+                      <td style="text-align: center;">112</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444;">Forged</td>
-                      <td>Digitally edited receipts (Amount, Name, Ref, Font)</td>
-                      <td>225</td>
-                      <td>135</td>
-                      <td>34</td>
-                      <td>56</td>
+                      <td class="arch-cell" style="color: #EF4444; text-align: center;">Forged</td>
+                      <td style="text-align: center;">Digitally Edited Receipts<br><span style="font-size: 10px; color: #94A3B8;">Amount, Name, Ref, Font</span></td>
+                      <td style="text-align: center;">225</td>
+                      <td style="text-align: center;">135</td>
+                      <td style="text-align: center;">34</td>
+                      <td style="text-align: center;">56</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444;">Forged</td>
-                      <td>Programmatically &amp; AI-generated fake receipts</td>
-                      <td>225</td>
-                      <td>135</td>
-                      <td>33</td>
-                      <td>57</td>
+                      <td class="arch-cell" style="color: #EF4444; text-align: center;">Forged</td>
+                      <td style="text-align: center;">Programmatically &amp; AI-Generated<br><span style="font-size: 10px; color: #94A3B8;">Synthetic canvas slips</span></td>
+                      <td style="text-align: center;">225</td>
+                      <td style="text-align: center;">135</td>
+                      <td style="text-align: center;">33</td>
+                      <td style="text-align: center;">57</td>
                     </tr>
                     <tr style="border-top: 1px solid rgba(255,255,255,0.12); font-weight: 600; background: rgba(255,255,255,0.02);">
-                      <td colspan="2" style="padding: 10px 12px; color: #E2E8F0;">Experimental Partitions Subtotal</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF;">900</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0;">540</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0;">135</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF;">225</td>
+                      <td colspan="2" style="padding: 10px 12px; color: #E2E8F0; text-align: center;">Experimental Partitions Subtotal</td>
+                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center;">900</td>
+                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center;">540</td>
+                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center;">135</td>
+                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center;">225</td>
                     </tr>
                     <tr style="background: rgba(255,255,255,0.01);">
-                      <td colspan="2" style="padding: 10px 12px; color: #94A3B8;">Unseen-Tool Holdout Validation Set (Phase 6)</td>
-                      <td style="padding: 10px 12px; color: #F59E0B;">100</td>
-                      <td colspan="3" style="padding: 10px 12px; color: #94A3B8; font-style: italic;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
+                      <td colspan="2" style="padding: 10px 12px; color: #94A3B8; text-align: center;">Unseen-Tool Holdout Validation Set (Phase 6)</td>
+                      <td style="padding: 10px 12px; color: #F59E0B; text-align: center;">100</td>
+                      <td colspan="3" style="padding: 10px 12px; color: #94A3B8; font-style: italic; text-align: center;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
                     </tr>
                     <tr style="border-top: 2px solid rgba(255,255,255,0.15); font-weight: 700; background: rgba(45, 212, 191, 0.05);">
-                      <td colspan="2" style="padding: 12px; color: #FFFFFF;">Total Dataset Corpus (Base Images)</td>
-                      <td colspan="4" style="padding: 12px; color: #2DD4BF; font-size: 13px;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
+                      <td colspan="2" style="padding: 12px; color: #FFFFFF; text-align: center;">Total Dataset Corpus (Base Images)</td>
+                      <td colspan="4" style="padding: 12px; color: #2DD4BF; font-size: 13px; text-align: center;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
                     </tr>
                   </tbody>
                 </table>

@@ -612,10 +612,10 @@ div[data-testid="stImage"] button, div[data-testid="stImageToolbar"] { display: 
 .fg-section-title::before { content:""; display:inline-block; width: 5px; height: 5px; margin: 0 9px 2px 0; border-radius:50%; background: var(--fg-cyan); box-shadow: 0 0 10px rgba(66,216,205,.6); }
 .fg-metrics-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; background: #0f202f; border: 1px solid var(--fg-line); border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,.14); animation: fg-enter .5s cubic-bezier(.2,.8,.2,1) .06s both; }
 .fg-metrics-table thead tr { background: linear-gradient(90deg, #183449, #142b3e); }
-.fg-metrics-table th { padding: 11px 9px; color: #C8E2EC; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; border-bottom: 1px solid var(--fg-line); white-space: normal; line-height: 1.3; vertical-align: bottom; }
+.fg-metrics-table th { padding: 11px 9px; color: #C8E2EC; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; border-bottom: 1px solid var(--fg-line); white-space: normal; line-height: 1.3; vertical-align: bottom; text-align: center; }
 .fg-metrics-table th:not(:last-child), .fg-metrics-table td:not(:last-child) { border-right: 1px solid rgba(164,208,221,.075); }
-.fg-metrics-table td { padding: 11px 9px; color: #E2E8F0; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; white-space: nowrap; vertical-align: middle; transition: background-color .18s ease, color .18s ease; }
-.fg-metrics-table td.arch-cell { color: var(--fg-paper); font-family: var(--fg-sans); font-weight: 700; font-size: 13px; white-space: normal; }
+.fg-metrics-table td { padding: 11px 9px; color: #E2E8F0; border-bottom: 1px solid rgba(164,208,221,.09); font-family: var(--fg-mono); font-size: 12px; white-space: nowrap; vertical-align: middle; transition: background-color .18s ease, color .18s ease; text-align: center; }
+.fg-metrics-table td.arch-cell { color: var(--fg-paper); font-family: var(--fg-sans); font-weight: 700; font-size: 13px; white-space: normal; text-align: center; }
 .fg-metrics-table tbody tr.fg-standard-row { background: rgba(66,216,205,.03); }
 .fg-metrics-table tbody tr.fg-compressed-row { background: rgba(115,168,255,.022); }
 .fg-metrics-table tbody tr.fg-model-start td { border-top: 1px solid rgba(66,216,205,.28) !important; }
@@ -863,7 +863,7 @@ div[data-testid="stButton"] > button:active {
 }
 .fg-metrics-table {
     width: 100% !important;
-    min-width: 720px !important;
+    min-width: unset !important;
     border-collapse: separate !important;
     border-spacing: 0 !important;
     border: none !important;
@@ -872,9 +872,9 @@ div[data-testid="stButton"] > button:active {
     margin: 0 !important;
 }
 .fg-metrics-table th {
-    padding: 9px 6px !important;
+    padding: 8px 5px !important;
     color: #C8E2EC !important;
-    font-size: 10.5px !important;
+    font-size: 11px !important;
     font-weight: 700 !important;
     letter-spacing: .2px !important;
     border-bottom: 1px solid var(--fg-line) !important;
@@ -883,12 +883,8 @@ div[data-testid="stButton"] > button:active {
     text-align: center !important;
     vertical-align: bottom !important;
 }
-.fg-metrics-table th:first-child,
-.fg-metrics-table th:nth-child(2) {
-    text-align: left !important;
-}
 .fg-metrics-table td {
-    padding: 8px 6px !important;
+    padding: 8px 5px !important;
     color: #E2E8F0 !important;
     border-bottom: 1px solid rgba(164,208,221,.07) !important;
     font-family: var(--fg-mono) !important;
@@ -898,14 +894,11 @@ div[data-testid="stButton"] > button:active {
     white-space: nowrap !important;
 }
 .fg-metrics-table td.arch-cell {
-    text-align: left !important;
+    text-align: center !important;
     font-family: var(--fg-sans) !important;
     font-weight: 700 !important;
-    font-size: 12.5px !important;
+    font-size: 11.5px !important;
     color: var(--fg-paper) !important;
-}
-.fg-metrics-table td:nth-child(2) {
-    text-align: left !important;
 }
 .fg-std {
     display: block !important;

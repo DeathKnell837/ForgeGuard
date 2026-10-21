@@ -88,12 +88,10 @@ This workspace customizations file provides context and instructions to the Anti
 > * **NEVER** consult, extract requirements from, or treat old standalone draft documents (such as `Chapter1_Digital_Deception_Mobile_Wallet.*`, `Chapter2_Review_of_Related_Literature.*`, or older candidate/scratch files) as reference material.
 > * If any contradiction arises between `THESIS1UNGAB_BACANTO` and any other document in this workspace, `THESIS1UNGAB_BACANTO` **ALWAYS** takes absolute precedence.
 
-> [!CRITICAL]
-> **Rule 10: Strict Explicit Consent Policy (No Autonomous File Edits)**
-> * **NEVER** edit, modify, replace, create, delete, or push any code, configuration, models, or documents unless the user has **EXPLICITLY** commanded and confirmed the action.
-> * Presenting proposals, options, or asking questions does NOT grant permission to execute.
-> * Before making ANY file modification, the assistant MUST outline the exact proposed changes in chat and wait for explicit confirmation from the user.
-> * Jumping the gun, making premature assumptions, or applying unauthorized edits is strictly prohibited under all circumstances.
+> [!IMPORTANT]
+> **Rule 10: Full Autonomous Execution & Implementation Authority**
+> * The user has granted full autonomous execution authority for implementing, maintaining, compiling, testing, and deploying system updates, prototypes, and thesis artifacts cleanly and orderly.
+> * When a task or workflow is confirmed, proceed proactively and fix any errors immediately without requiring redundant permission prompts, while adhering strictly to thesis scope, paper guidelines, zero-emoji policy, and repository synchronization rules.
 
 > [!CRITICAL]
 > **Rule 11: Mandatory GitHub README Synchronization on System Updates**

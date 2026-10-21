@@ -186,3 +186,5 @@ ForgeGuard/
 **/venv*/
 *.venv*
 scratch_*.png
+*.zip
+
