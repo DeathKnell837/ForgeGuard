@@ -1137,7 +1137,7 @@ elif page == 'Model Comparison':
                   </div>
                   
                   <div class="fg-chart-insight">
-                    Speed per receipt: Basic CNN ({b_lat:.2f} ms) is fastest, MobileNetV2 ({m_lat:.2f} ms) is moderate, and ResNet50 ({r_lat:.2f} ms) is slower due to its larger 23.5M model size.
+                    Speed per receipt: Basic CNN ({b_lat:.2f} ms) is fastest, MobileNetV2 ({m_lat:.2f} ms) is moderate, and ResNet50 ({r_lat:.2f} ms) is slower due to its larger 24.1M-parameter model size.
                   </div>
                 </div>
               </div>
@@ -1148,21 +1148,21 @@ elif page == 'Model Comparison':
         st.markdown('<div class="fg-section-gap"><div class="fg-section-title">Overall Architecture Benchmark</div></div>', unsafe_allow_html=True)
         
         table_html = '''
-        <div style="display: inline-block; min-width: 100%;">
+        <div class="fg-table-scroll">
         <table class="fg-metrics-table">
             <thead>
                 <tr>
                     <th title="Diagnostic neural network model being evaluated">Architecture</th>
                     <th title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
-                    <th title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy (%)</th>
-                    <th title="Change in accuracy caused by social media compression degradation">Compression Delta (&Delta;Acc)</th>
-                    <th title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent. High precision prevents false accusations">Precision (%)</th>
-                    <th title="Fraud catch rate: Percentage of actual forged receipts successfully caught. High recall prevents fake receipts slipping through">Recall (%)</th>
-                    <th title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score (%)</th>
-                    <th title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency (ms)</th>
-                    <th title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak Memory (MB)</th>
+                    <th title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
+                    <th title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
+                    <th title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
+                    <th title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
+                    <th title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
+                    <th title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
+                    <th title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
                     <th title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
-                    <th title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite Score</th>
+                    <th title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -1191,23 +1191,23 @@ elif page == 'Model Comparison':
             
             s_acc_html = f'<span class="fg-metric-top">{s_acc:.2f}%</span>' if s_acc >= 75.0 else f'{s_acc:.2f}%'
             s_lat_html = (
-                f'<span class="fg-metric-fast">{s_lat:.2f} ms</span>' if s_lat < 10.0
-                else f'<span class="fg-metric-slow">{s_lat:.2f} ms</span>' if s_lat >= 100.0
-                else f'{s_lat:.2f} ms'
+                f'<span class="fg-metric-fast">{s_lat:.1f}</span>' if s_lat < 10.0
+                else f'<span class="fg-metric-slow">{s_lat:.1f}</span>' if s_lat >= 100.0
+                else f'{s_lat:.1f}'
             )
             
             table_html += f'''
             <tr class="fg-benchmark-row fg-standard-row fg-model-start">
                 <td class="arch-cell">{model_name}</td>
-                <td style="font-family: Inter, sans-serif;">Standard</td>
-                <td>{s_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_acc_sd:.2f}</span></td>
-                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Baseline</td>
-                <td>{s_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_prec_sd:.2f}</span></td>
-                <td>{s_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_rec_sd:.2f}</span></td>
-                <td>{s_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_f1_sd:.2f}</span></td>
-                <td>{s_lat_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_lat_sd:.2f}</span></td>
-                <td>{s_mem:.1f} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{s_mem_sd:.2f}</span></td>
-                <td>{params}</td>
+                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Standard</td>
+                <td>{s_acc_html}<span class="fg-std">&plusmn;{s_acc_sd:.2f}%</span></td>
+                <td style="font-family: Inter, sans-serif; color: #64748B;">Baseline</td>
+                <td>{s_prec:.2f}%<span class="fg-std">&plusmn;{s_prec_sd:.2f}%</span></td>
+                <td>{s_rec:.2f}%<span class="fg-std">&plusmn;{s_rec_sd:.2f}%</span></td>
+                <td>{s_f1:.2f}%<span class="fg-std">&plusmn;{s_f1_sd:.2f}%</span></td>
+                <td>{s_lat_html}<span class="fg-std">&plusmn;{s_lat_sd:.1f}</span></td>
+                <td>{s_mem:.1f}<span class="fg-std">&plusmn;{s_mem_sd:.1f}</span></td>
+                <td style="color: #94A3B8;">{params}</td>
                 <td style="font-weight: 700; color: #2DD4BF;">{s_comp:.2f}%</td>
             </tr>
             '''
@@ -1231,9 +1231,9 @@ elif page == 'Model Comparison':
             
             c_acc_html = f'<span class="fg-metric-top">{c_acc:.2f}%</span>' if c_acc >= 90.0 else f'{c_acc:.2f}%'
             c_lat_html = (
-                f'<span class="fg-metric-fast">{c_lat:.2f} ms</span>' if c_lat < 10.0
-                else f'<span class="fg-metric-slow">{c_lat:.2f} ms</span>' if c_lat >= 100.0
-                else f'{c_lat:.2f} ms'
+                f'<span class="fg-metric-fast">{c_lat:.1f}</span>' if c_lat < 10.0
+                else f'<span class="fg-metric-slow">{c_lat:.1f}</span>' if c_lat >= 100.0
+                else f'{c_lat:.1f}'
             )
             
             delta_acc = c_acc - s_acc
@@ -1247,15 +1247,15 @@ elif page == 'Model Comparison':
             table_html += f'''
             <tr class="fg-benchmark-row fg-compressed-row">
                 <td class="arch-cell">{model_name}</td>
-                <td style="font-family: Inter, sans-serif;">Compressed</td>
-                <td>{c_acc_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_acc_sd:.2f}</span></td>
+                <td style="font-family: Inter, sans-serif; color: #94A3B8;">Compressed</td>
+                <td>{c_acc_html}<span class="fg-std">&plusmn;{c_acc_sd:.2f}%</span></td>
                 <td>{delta_html}</td>
-                <td>{c_prec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_prec_sd:.2f}</span></td>
-                <td>{c_rec:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_rec_sd:.2f}</span></td>
-                <td>{c_f1:.2f}% <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_f1_sd:.2f}</span></td>
-                <td>{c_lat_html} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_lat_sd:.2f}</span></td>
-                <td>{c_mem:.1f} <span style="font-size: 10px; color: #87a1b0;">&plusmn;{c_mem_sd:.2f}</span></td>
-                <td>{params}</td>
+                <td>{c_prec:.2f}%<span class="fg-std">&plusmn;{c_prec_sd:.2f}%</span></td>
+                <td>{c_rec:.2f}%<span class="fg-std">&plusmn;{c_rec_sd:.2f}%</span></td>
+                <td>{c_f1:.2f}%<span class="fg-std">&plusmn;{c_f1_sd:.2f}%</span></td>
+                <td>{c_lat_html}<span class="fg-std">&plusmn;{c_lat_sd:.1f}</span></td>
+                <td>{c_mem:.1f}<span class="fg-std">&plusmn;{c_mem_sd:.1f}</span></td>
+                <td style="color: #94A3B8;">{params}</td>
                 <td style="font-weight: 700; color: #2DD4BF;">{c_comp:.2f}%</td>
             </tr>
             '''
@@ -1419,11 +1419,11 @@ elif page == 'Model Comparison':
                   <thead>
                     <tr>
                       <th>Category</th>
-                      <th>Subcategory / Description</th>
-                      <th>Base Images</th>
-                      <th>Training (60%)</th>
-                      <th>Validation (15%)</th>
-                      <th>Testing (25%)</th>
+                      <th style="min-width:200px; text-align:left;">Subcategory / Scope</th>
+                      <th style="text-align:center;">Base</th>
+                      <th style="text-align:center;">Train (60%)</th>
+                      <th style="text-align:center;">Val (15%)</th>
+                      <th style="text-align:center;">Test (25%)</th>
                     </tr>
                   </thead>
                   <tbody>
