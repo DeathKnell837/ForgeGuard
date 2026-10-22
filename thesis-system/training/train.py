@@ -30,9 +30,15 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from preprocessing.ela import compute_ela
 
+# Input resolution: 224 x 224 x 3, as specified in the approved manuscript (Figure 4 / Image
+# Preprocessing) to match the ImageNet-pretrained input of MobileNetV2 and ResNet50.
+# See docs/CHANGELOG_224.md for why this was changed from 128 x 128.
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 16
-EPOCHS = 50  # 50-epoch maximum ceiling per revised manuscript
+# 20 epochs = the exact setting used to train the deployed models (Colab run, Oct 16, 2026),
+# within the manuscript's 50-epoch maximum ceiling. Only the input size changed in the 224 retrain.
+EPOCHS = 20
+SEED = 42  # fixed seed for reproducible weights, shuffling and dropout
 IMAGE_EXTENSIONS = ('*.jpg', '*.jpeg', '*.png', '*.webp')
 
 def load_and_preprocess_balanced_dataset(dataset_dir):
@@ -131,6 +137,7 @@ def train_and_evaluate():
     try:
         import tensorflow as tf
         from tensorflow.keras import layers, models, applications
+        tf.keras.utils.set_random_seed(SEED)
         
         print("\n=== 2. Building & Training CNN Architectures (TensorFlow/Keras) ===")
         
@@ -248,6 +255,9 @@ def train_and_evaluate():
             # Save model
             model_path = os.path.join(models_dir, f"{name.lower()}.keras")
             model.save(model_path)
+            # Re-save without optimizer state: the web app loads with compile=False, and at 224x224
+            # the Basic CNN's optimizer state would push the file past GitHub's 100 MB limit.
+            tf.keras.models.load_model(model_path, compile=False).save(model_path)
             print(f"Saved {name} to {model_path} | Accuracy: {acc*100:.2f}% | F1: {f1:.4f} | Latency: {latency_ms:.2f}ms | Stress Rec: {stress_rec*100:.2f}%")
 
         # Save evaluation summary JSON

@@ -1,0 +1,74 @@
+{
+  "Basic_CNN": {
+    "architecture": "Basic CNN",
+    "condition": "Standard",
+    "accuracy": 0.9710144927536232,
+    "precision": 1.0,
+    "recall": 0.9428571428571428,
+    "f1_score": 0.9705882352941176,
+    "latency_ms": 9.095216142958488,
+    "train_duration_s": 131.04552340507507,
+    "test_size": 69,
+    "authentic_test_count": 34,
+    "forged_test_count": 35,
+    "confusion": {
+      "tp": 33,
+      "tn": 34,
+      "fp": 0,
+      "fn": 2
+    },
+    "stress_test": {
+      "holdout_total": 621,
+      "fakes_caught": 526,
+      "detection_rate": 0.8470209339774557
+    }
+  },
+  "MobileNetV2": {
+    "architecture": "MobileNetV2",
+    "condition": "Standard",
+    "accuracy": 0.9565217391304348,
+    "precision": 0.9705882352941176,
+    "recall": 0.9428571428571428,
+    "f1_score": 0.9565217391304348,
+    "latency_ms": 35.168212393055796,
+    "train_duration_s": 60.56965494155884,
+    "test_size": 69,
+    "authentic_test_count": 34,
+    "forged_test_count": 35,
+    "confusion": {
+      "tp": 33,
+      "tn": 33,
+      "fp": 1,
+      "fn": 2
+    },
+    "stress_test": {
+      "holdout_total": 621,
+      "fakes_caught": 449,
+      "detection_rate": 0.7230273752012882
+    }
+  },
+  "ResNet50": {
+    "architecture": "ResNet50",
+    "condition": "Standard",
+    "accuracy": 0.4927536231884058,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0,
+    "latency_ms": 63.743428907532625,
+    "train_duration_s": 190.03566241264343,
+    "test_size": 69,
+    "authentic_test_count": 34,
+    "forged_test_count": 35,
+    "confusion": {
+      "tp": 0,
+      "tn": 34,
+      "fp": 0,
+      "fn": 35
+    },
+    "stress_test": {
+      "holdout_total": 621,
+      "fakes_caught": 0,
+      "detection_rate": 0.0
+    }
+  }
+}

@@ -14,7 +14,7 @@
 
 ### Exhibit 01: System Landing Dashboard (`01_home_dashboard.png`)
 * **Component:** User Interface & Upload Zone (Figure 4, Layer 1)
-* **Description:** The primary entry point for ForgeGuard. Features a drag-and-drop receipt intake supporting JPEG, PNG, and WebP format transaction slips up to 200MB. Quick-evaluation benchmark buttons ("Authentic Receipt", "Edited Receipt", "Generated Receipt") allow immediate zero-upload forensic demonstration. The status badge confirms neural network graph compilation and target input dimensionality (128x128 ELA tensor). Adheres to NDMC zero-emoji cyber-forensics standards.
+* **Description:** The primary entry point for ForgeGuard. Features a drag-and-drop receipt intake supporting JPEG, PNG, and WebP format transaction slips up to 200MB. Quick-evaluation benchmark buttons ("Authentic Receipt", "Edited Receipt", "Generated Receipt") allow immediate zero-upload forensic demonstration. The status badge confirms neural network graph compilation and target input dimensionality (224x224 ELA tensor). Adheres to NDMC zero-emoji cyber-forensics standards.
 
 ### Exhibit 02: Authentic Receipt Multi-CNN Verification (`02_authentic_receipt_analysis.png`)
 * **Component:** Multi-Architecture Verification & Telemetry (Figure 4, Layers 2 & 3)

@@ -20,7 +20,7 @@ The ForgeGuard system is structured into five cohesive architectural layers that
 2. **Forensic Preprocessing Layer (Signal Processing Engine):**
    * **Dimension Normalization:** Verifies aspect ratios and standardizes input dimensions to ensure uniform tensor formatting.
    * **Error Level Analysis (ELA) Engine:** Implements lossy re-compression at quality factor Q = 90 and calculates the absolute difference matrix multiplied by a scale factor of 15.0x to isolate spliced pixels.
-   * **Tensor Formatting:** Formats the ELA residual into a normalized 128 x 128 x 3 floating-point tensor ([0.0, 1.0]) for model ingestion.
+   * **Tensor Formatting:** Formats the ELA residual into a normalized 224 x 224 x 3 floating-point tensor ([0.0, 1.0]) for model ingestion.
    * **Tamper Heatmap Generator:** Employs OpenCV COLORMAP_JET and Gaussian spatial smoothing to localize the fraudulent Region of Interest (ROI), such as altered currency amounts or reference strings.
 
 3. **Comparative Deep Learning Inference Layer (TensorFlow / Keras):**

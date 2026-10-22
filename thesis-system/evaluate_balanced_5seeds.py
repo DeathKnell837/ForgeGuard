@@ -119,7 +119,7 @@ def evaluate():
 
     # 1. Load Models with @tf.function graph compilation
     model_definitions = [
-        ('Basic_CNN', 'basic_cnn.keras', '~2.1M'),
+        ('Basic_CNN', 'basic_cnn.keras', '~11.2M'),
         ('MobileNetV2', 'mobilenetv2.keras', '~3.4M'),
         ('ResNet50', 'resnet50.keras', '~23.5M'),
     ]

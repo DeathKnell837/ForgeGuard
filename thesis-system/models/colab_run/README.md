@@ -1,5 +1,8 @@
 # Google Colab T4 Live Empirical Training Run
 
+> **Superseded (Oct 22, 2026):** this run used 128 x 128 inputs. The deployed models in `thesis-system/models/` were retrained at 224 x 224 to match the approved manuscript. See `docs/CHANGELOG_224.md` at the repository root. This folder is kept only as a historical record of the 128 x 128 run.
+
+
 This directory stores the serialized neural network models and empirical evaluation metrics trained during the live Google Colab run on **October 16, 2026** using an NVIDIA T4 GPU with High RAM.
 
 ---

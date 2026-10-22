@@ -5,8 +5,8 @@
 [![Live Application](https://img.shields.io/badge/Live_System-forgeguard.streamlit.app-8B5CF6?style=for-the-badge&logo=streamlit)](https://forgeguard.streamlit.app/)
 [![Python Version](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python)](https://python.org)
 [![TensorFlow Engine](https://img.shields.io/badge/TensorFlow-2.13+-FF6F00?style=for-the-badge&logo=tensorflow)](https://tensorflow.org)
-[![Peak Accuracy](https://img.shields.io/badge/Peak_Accuracy-91.82%25-10B981?style=for-the-badge)](https://forgeguard.streamlit.app/)
-[![Fastest Latency](https://img.shields.io/badge/Fastest_Latency-74.25ms-06B6D4?style=for-the-badge)](https://forgeguard.streamlit.app/)
+[![Peak Accuracy](https://img.shields.io/badge/Peak_Accuracy-94.58%25-10B981?style=for-the-badge)](https://forgeguard.streamlit.app/)
+[![Fastest Latency](https://img.shields.io/badge/Fastest_Latency-34.25ms-06B6D4?style=for-the-badge)](https://forgeguard.streamlit.app/)
 [![License](https://img.shields.io/badge/License-Academic_Research-64748B?style=for-the-badge)](LICENSE)
 
 **Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts**
@@ -33,9 +33,9 @@ ForgeGuard resolves this verification challenge by combining mathematical **Erro
   Re-compresses incoming receipt images at a calibrated JPEG quality factor ($Q = 90$) and amplifies pixel residual discrepancies by a $15.0\times$ difference multiplier, exposing altered or re-saved regions as localized compression variance spikes.
 * **Cross-Architecture CNN Evaluation:**
   Evaluates three benchmarked deep learning models in parallel without synthetic score overrides or rule-based bypasses:
-  * **Basic CNN (Baseline):** Custom 3-block convolutional network (~2.1M parameters) achieving **91.82%** standard accuracy (86.27 ms latency) and **91.73%** compressed accuracy (74.25 ms latency), achieving top Section 2.10 Composite Score (100.00%).
-  * **MobileNetV2 (Efficient):** Inverted residual depthwise separable CNN (~3.4M parameters) achieving **82.22%** standard accuracy (91.43 ms latency) and **87.82%** compressed accuracy (84.63 ms latency), with strong compression resilience (+5.60% delta).
-  * **ResNet50 (Deep Residual):** 50-layer deep network (~23.5M parameters) exhibiting 53.42% standard accuracy (128.08 ms latency) and 49.24% compressed accuracy (120.80 ms latency), demonstrating the empirical limits of deep feature extractors on compression residual artifacts.
+  * **Basic CNN (Baseline):** Custom 3-block convolutional network (~11.2M parameters at 224 x 224 input) achieving **94.58%** standard accuracy (52.28 ms latency) and **96.36%** compressed accuracy (34.25 ms latency), achieving top Section 2.10 Composite Score (100.00%).
+  * **MobileNetV2 (Efficient):** Inverted residual depthwise separable CNN (~2.4M parameters) achieving **82.93%** standard accuracy (56.21 ms latency) and **89.87%** compressed accuracy (38.48 ms latency); it catches every AI-generated receipt but misses many digitally edited ones.
+  * **ResNet50 (Deep Residual):** 50-layer deep network (~24.1M parameters, frozen ImageNet base) at 49.78% standard and compressed accuracy (79.11 ms / 61.34 ms latency): it labels every receipt Authentic, showing the limits of a frozen deep feature extractor on ELA residuals.
 * **Two-Screen Operational Workflow:**
   * **Classify a Receipt:** Real-time upload interface featuring tabbed forensic inspection (Original Exhibit, ELA Residual Matrix, and Tamper Heatmap Overlay), synchronized Tri-Spectral Forensic Evidence Decomposition gallery, parallel multi-model classification cards, raw confidence readouts, execution latencies, peak memory tracking, and persistent Benchmark Records (Logs and Records) table.
   * **Model Benchmark Suite:** Empirical performance table across both standard and compressed conditions, Section 2.10 Composite Scores, 3x2 ANOVA and Friedman statistical test analysis, Table 1 dataset composition overview, and comprehensive metric interpretation guide.
@@ -60,9 +60,9 @@ The ForgeGuard system operates across a five-tier forensic pipeline:
          │
          ▼
 [2. Parallel CNN Inference Engine]
-  ├── Basic CNN (~2.1M params, 86.27 ms standard, 74.25 ms compressed)
-  ├── MobileNetV2 (~3.4M params, 91.43 ms standard, 84.63 ms compressed)
-  └── ResNet50 (~23.5M params, 128.08 ms standard, 120.80 ms compressed)
+  ├── Basic CNN (~11.2M params, 52.28 ms standard, 34.25 ms compressed)
+  ├── MobileNetV2 (~2.4M params, 56.21 ms standard, 38.48 ms compressed)
+  └── ResNet50 (~24.1M params, 79.11 ms standard, 61.34 ms compressed)
          │
          ▼
 [3. Result Processing & Telemetry Layer]
@@ -88,6 +88,8 @@ The ForgeGuard system operates across a five-tier forensic pipeline:
 
 ## Empirical Benchmark Evaluation
 
+> **Input size change (Oct 22, 2026):** the system now uses **224 x 224** ELA inputs, as the approved manuscript specifies, and all three models were retrained at 224. The numbers below are from the 224 models. What changed and why: [docs/CHANGELOG_224.md](../docs/CHANGELOG_224.md).
+
 All architectures were evaluated on the balanced 1:1 empirical test partition ($N = 225$ per seed: 112 Authentic, 56 Digitally Edited, 57 AI-Generated; 5 predetermined seeds: `[42, 101, 202, 303, 404]`) across both Standard and Compressed conditions:
 
 ### Standard Evaluation Condition (Uncompressed PNG)
@@ -95,20 +97,20 @@ All architectures were evaluated on the balanced 1:1 empirical test partition ($
 
 | Architecture | Condition | Accuracy | Precision | Recall | F1-Score | End-to-End Latency | Peak Memory | Composite Score |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Basic CNN** | Standard | **91.82% &plusmn; 1.77%** | **98.16% &plusmn; 0.43%** | **85.31% &plusmn; 3.39%** | **91.25% &plusmn; 2.03%** | **86.27 &plusmn; 8.59 ms** | **659.8 MB** | **100.00%** |
-| **MobileNetV2** | Standard | **82.22% &plusmn; 2.35%** | **78.57% &plusmn; 3.03%** | **89.56% &plusmn; 1.42%** | **83.64% &plusmn; 1.98%** | **91.43 &plusmn; 2.79 ms** | **665.5 MB** | **71.50%** |
-| **ResNet50** | Standard | **53.42% &plusmn; 0.99%** | **51.88% &plusmn; 0.52%** | **100.00% &plusmn; 0.00%** | **68.32% &plusmn; 0.44%** | **128.08 &plusmn; 4.71 ms** | **670.9 MB** | **0.00%** |
+| **Basic CNN** | Standard | **94.58% &plusmn; 0.99%** | **100.00% &plusmn; 0.00%** | **89.20% &plusmn; 1.97%** | **94.28% &plusmn; 1.09%** | **52.28 &plusmn; 0.90 ms** | **1004.9 MB** | **100.00%** |
+| **MobileNetV2** | Standard | **82.93% &plusmn; 1.53%** | **94.53% &plusmn; 1.73%** | **70.09% &plusmn; 2.53%** | **80.47% &plusmn; 1.93%** | **56.21 &plusmn; 0.89 ms** | **1010.0 MB** | **73.11%** |
+| **ResNet50** | Standard | **49.78% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **79.11 &plusmn; 2.91 ms** | **1017.4 MB** | **0.00%** |
 
 ### Compressed Evaluation Condition (Simulated Transmission Compression)
 *Partition Size: N = 225 per seed (112 Authentic, 56 Digitally Edited, 57 AI-Generated)*
 
 | Architecture | Condition | Accuracy | Delta | Precision | Recall | F1-Score | End-to-End Latency | Peak Memory | Composite Score |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Basic CNN** | Compressed | **91.73% &plusmn; 1.50%** | **-0.09%** | **98.57% &plusmn; 0.50%** | **84.78% &plusmn; 3.06%** | **91.12% &plusmn; 1.77%** | **74.25 &plusmn; 2.56 ms** | **671.7 MB** | **100.00%** |
-| **MobileNetV2** | Compressed | **87.82% &plusmn; 2.04%** | **+5.60%** | **88.50% &plusmn; 2.27%** | **87.26% &plusmn; 1.83%** | **87.78% &plusmn; 1.99%** | **84.63 &plusmn; 5.90 ms** | **672.0 MB** | **66.85%** |
-| **ResNet50** | Compressed | **49.24% &plusmn; 0.91%** | **-4.18%** | **49.71% &plusmn; 0.44%** | **93.98% &plusmn; 1.70%** | **64.99% &plusmn; 0.77%** | **120.80 &plusmn; 5.34 ms** | **672.1 MB** | **0.00%** |
+| **Basic CNN** | Compressed | **96.36% &plusmn; 1.03%** | **+1.78%** | **100.00% &plusmn; 0.00%** | **92.74% &plusmn; 2.05%** | **96.22% &plusmn; 1.10%** | **34.25 &plusmn; 2.38 ms** | **1019.1 MB** | **100.00%** |
+| **MobileNetV2** | Compressed | **89.87% &plusmn; 1.33%** | **+6.94%** | **100.00% &plusmn; 0.00%** | **79.82% &plusmn; 2.65%** | **88.76% &plusmn; 1.64%** | **38.48 &plusmn; 1.05 ms** | **1021.0 MB** | **72.85%** |
+| **ResNet50** | Compressed | **49.78% &plusmn; 0.00%** | **+0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **61.34 &plusmn; 1.47 ms** | **1022.1 MB** | **0.00%** |
 
-> **Key Research Finding:** The compact custom Basic CNN demonstrated superior accuracy (91.82% standard, 91.73% compressed) and lowest end-to-end latency (74.25 ms compressed) compared to heavier transfer-learning architectures, with near-zero false alarms (mean FP = 1.8 of 112 authentic receipts). MobileNetV2 showed exceptional resilience under Messenger compression (+5.60% accuracy increase) with high recall on diffusion-generated fakes. ResNet50 over-fitted to background compression noise, generating high false positive rates (mean FP = 105 of 112 authentic), confirming that excessive network depth degrades ELA residual signal discrimination for digital transaction receipts.
+> **Key Research Finding (224 x 224 retrain, Oct 22, 2026):** The compact custom Basic CNN had the highest accuracy (94.58% standard, 96.36% compressed) and the lowest end-to-end latency, with zero false alarms (mean FP = 0 of 112 authentic receipts). MobileNetV2 reached 82.93% standard and 89.87% compressed, catching every AI-generated receipt but missing many digitally edited ones (edited recall 39.64%). ResNet50 (frozen ImageNet base) did not learn the ELA signal and labels every receipt Authentic (49.78%). Latencies were measured on the retraining machine (CPU) and are not directly comparable with earlier runs. See [docs/CHANGELOG_224.md](../docs/CHANGELOG_224.md).
 
 ---
 

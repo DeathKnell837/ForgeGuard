@@ -122,7 +122,7 @@ def get_records_path():
 def get_model_info():
     """Architecture metadata."""
     return {
-        'Basic CNN': {'params': '~3.3M', 'arch': 'Custom 3-layer sequential CNN'},
+        'Basic CNN': {'params': '~11.2M', 'arch': 'Custom 3-layer sequential CNN'},
         'MobileNetV2': {'params': '~2.4M', 'arch': 'Lightweight inverted residual blocks'},
         'ResNet50': {'params': '~24.1M', 'arch': '50-layer deep residual network'},
     }
@@ -804,7 +804,7 @@ if page == 'Classify a Receipt':
                 render_html(
                     '''
                     <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; margin-top: 10px; line-height: 1.5; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
-                      <div>Input Target: 128 &times; 128 px (ELA Transform)</div>
+                      <div>Input Target: 224 &times; 224 px (ELA Transform)</div>
                       <div>Decision Threshold: 0.50 (Sigmoid &ge; 0.5 &rarr; Forged)</div>
                     </div>
                     '''
@@ -905,7 +905,7 @@ if page == 'Classify a Receipt':
                     </div>
                     <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
                       <div style="font-weight: 600; color: #F59E0B; margin-bottom: 4px;">3. Multi-CNN Classification</div>
-                      <div>The 128x128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
+                      <div>The 224x224 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
                     </div>
                   </div>
                 </div>
@@ -1034,7 +1034,7 @@ if page == 'Classify a Receipt':
                 Upload a GCash transaction receipt above or select a benchmark sample to execute multi-architecture CNN evaluation.
               </div>
               <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-wrap: wrap;">
-                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">128&times;128 ELA Target</span>
+                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">224&times;224 ELA Target</span>
                 <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">0.50 Decision Threshold</span>
                 <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">Basic CNN &bull; MobileNetV2 &bull; ResNet50</span>
               </div>
@@ -1340,7 +1340,7 @@ elif page == 'Model Comparison':
                       <div><strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
+                      <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~11.2M params) can run directly on merchant smartphones without cloud latency.</div>
                     </div>
                   </div>
                   <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
