@@ -62,12 +62,22 @@ st.set_page_config(
     layout='wide',
     initial_sidebar_state='collapsed'
 )
-st.markdown(PREMIUM_CSS, unsafe_allow_html=True)
 
 def render_html(html_str):
     """Strip leading and trailing whitespace from every line so Markdown parser renders raw HTML instead of code blocks."""
     cleaned = "".join(line.strip() for line in html_str.splitlines() if line.strip())
     st.markdown(cleaned, unsafe_allow_html=True)
+
+st.markdown(
+    '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+    '<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">',
+    unsafe_allow_html=True,
+)
+st.markdown(
+    " ".join(line.strip() for line in PREMIUM_CSS.splitlines() if line.strip()),
+    unsafe_allow_html=True,
+)
 
 # --- Model Paths & Metadata ---
 def get_models_dir():
@@ -605,50 +615,37 @@ if not st.session_state.get('models_loaded', False):
     _boot_loader.empty()
 
 
-# --- Sidebar ---
-with st.sidebar:
-    st.markdown(
-        '''
-        <div style="padding: 16px 14px 8px 14px;">
-          <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 2px; color: #94A3B8; margin-bottom: 14px;">System Navigation</div>
+# --- Shared Top Header & Segmented Navigation ---
+render_html(
+    '''
+    <div class="fg-topbar">
+      <div class="fg-topbar-row">
+        <div class="fg-brand-wrap">
+          <div class="fg-brand-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="fg-brand-title">ForgeGuard</div>
         </div>
-        ''',
-        unsafe_allow_html=True
-    )
-    page = st.radio(
-        'Select page',
-        ['Classify a Receipt', 'Model Comparison'],
-        label_visibility='collapsed'
-    )
-    
-    st.markdown('<hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 14px;">', unsafe_allow_html=True)
-    
-    st.markdown(
-        '''
-        <div style="padding: 8px 14px; font-size: 11px; color: #64748B; line-height: 1.6;">
-          <div style="color: #94A3B8; font-weight: 600; margin-bottom: 4px;">NDMC BSCS Thesis 2026</div>
-          <div>Ungab &amp; Bacanto</div>
-          <div>Adviser: Ms. Doris Ann Mariano</div>
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
+        <div class="fg-topbar-badge">NDMC BSCS Thesis 2026</div>
+      </div>
+      <div class="fg-topbar-subtitle">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
+    </div>
+    '''
+)
+
+page = st.radio(
+    'Select page',
+    ['Classify a Receipt', 'Model Comparison'],
+    horizontal=True,
+    label_visibility='collapsed',
+    key='fg_top_nav'
+)
 
 # --- Screens ---
 if page == 'Classify a Receipt':
-    render_html(
-        '''
-        <div style="margin-bottom: 18px;">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
-            <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">NDMC BSCS Thesis 2026</div>
-          </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
-          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
-        </div>
-        '''
-    )
-    
     if 'uploader_version' not in st.session_state:
         st.session_state['uploader_version'] = 0
     if 'active_sample' not in st.session_state:
@@ -665,13 +662,13 @@ if page == 'Classify a Receipt':
     
     render_html(
         '''
-        <div style="text-align: center; font-size: 11px; color: #64748B; margin-top: -6px; margin-bottom: 18px; line-height: 1.5;">
+        <div class="fg-scope-note">
           Scope: Downloadable GCash receipts (JPEG, PNG, WebP) &bull; Screenshots with OS status bars out of scope per Section 1.4
         </div>
-        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
-          <div style="height: 1px; flex: 1; background: rgba(255, 255, 255, 0.08);"></div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #64748B;">Or evaluate benchmark sample</div>
-          <div style="height: 1px; flex: 1; background: rgba(255, 255, 255, 0.08);"></div>
+        <div class="fg-divider-label">
+          <div class="fg-divider-line"></div>
+          <div class="fg-divider-text">Or evaluate benchmark sample</div>
+          <div class="fg-divider-line"></div>
         </div>
         '''
     )
@@ -746,7 +743,7 @@ if page == 'Classify a Receipt':
             with col_b1:
                 render_html(
                     f'''
-                    <div class="fg-sample-banner" style="border-left-color: #A5B4FC;">
+                    <div class="fg-sample-banner fg-sample-banner-upload">
                       <span><strong>Active Upload:</strong> {source_label}</span>
                     </div>
                     '''
@@ -793,17 +790,17 @@ if page == 'Classify a Receipt':
                 tab_orig, tab_ela, tab_heat = st.tabs(["Original Exhibit", "ELA Residual Matrix", "Tamper Heatmap"])
                 with tab_orig:
                     st.image(image, width='stretch')
-                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Source transaction receipt exhibit</div>')
+                    render_html('<div class="fg-img-caption">Source transaction receipt exhibit</div>')
                 with tab_ela:
                     st.image(ela_img, width='stretch')
-                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Q=90 Error Level Analysis (15.0&times; difference amplification)</div>')
+                    render_html('<div class="fg-img-caption">Q=90 Error Level Analysis (15.0&times; difference amplification)</div>')
                 with tab_heat:
                     st.image(overlay, width='stretch')
-                    render_html('<div style="font-size: 11px; color: #94A3B8; margin-top: 4px; text-align: center;">Forensic variance hotspot localization overlay</div>')
+                    render_html('<div class="fg-img-caption">Forensic variance hotspot localization overlay</div>')
 
                 render_html(
                     '''
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B; margin-top: 10px; line-height: 1.5; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="fg-exhibit-meta">
                       <div>Input Target: 128 &times; 128 px (ELA Transform)</div>
                       <div>Decision Threshold: 0.50 (Sigmoid &ge; 0.5 &rarr; Forged)</div>
                     </div>
@@ -823,43 +820,41 @@ if page == 'Classify a Receipt':
                     
                     memory_load = res.get('memory_mb', 0.0)
                     ts_record = res.get('timestamp', '')
+                    conf_clamped = max(0.0, min(100.0, float(confidence)))
                     
                     render_html(
                         f'''
                         <div class="fg-result-card fg-verdict-{verdict_lower}">
-                          <div style="display: flex; justify-content: space-between; align-items: center;">
+                          <div class="fg-result-head">
                             <div>
                               <div class="fg-model-name">{model_name}</div>
                               <div class="fg-model-badge">{arch_description} &bull; {params_description}</div>
-                              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94A3B8; margin-top: 6px;">
-                                Processing: <span style="color: #2DD4BF;">{latency:.1f} ms</span> &bull; Memory Load: <span style="color: #7C6FF0;">{memory_load:.1f} MB</span>
-                              </div>
                             </div>
-                            <div style="text-align: right;">
+                            <div class="fg-result-score-col">
                               <div><span class="fg-verdict-pill fg-verdict-pill-{verdict_lower}">{verdict}</span></div>
                               <div class="fg-confidence fg-conf-{verdict_lower}">{confidence:.1f}%</div>
-                              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #64748B; margin-top: 3px;">{ts_record}</div>
                             </div>
+                          </div>
+                          <div class="fg-conf-track">
+                            <div class="fg-conf-fill fg-conf-fill-{verdict_lower}" style="width: {conf_clamped:.1f}%;"></div>
+                          </div>
+                          <div class="fg-result-meta-row">
+                            <span>Processing: <span class="fg-meta-accent-lat">{latency:.1f} ms</span> &bull; Memory Load: <span class="fg-meta-accent-mem">{memory_load:.1f} MB</span></span>
+                            <span>{ts_record}</span>
                           </div>
                         </div>
                         '''
                     )
 
             # Tri-Spectral Comparative Forensic Evidence Gallery
-            render_html(
-                '''
-                <div style="margin-top: 28px; margin-bottom: 12px;">
-                  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #E2E8F0; font-weight: 700;">Tri-Spectral Forensic Evidence Decomposition</div>
-                </div>
-                '''
-            )
+            render_html('<div class="fg-subhead-kicker">Tri-Spectral Forensic Evidence Decomposition</div>')
             gcol1, gcol2, gcol3 = st.columns(3)
             with gcol1:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #64748B; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
-                      <div style="font-size: 12px; font-weight: 600; color: #E2E8F0;">Original Document</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Raw input raster</div>
+                    <div class="fg-tri-header fg-tri-orig">
+                      <div class="fg-tri-title">Original Document</div>
+                      <div class="fg-tri-sub">Raw input raster</div>
                     </div>
                     '''
                 )
@@ -867,9 +862,9 @@ if page == 'Classify a Receipt':
             with gcol2:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #7C6FF0; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
-                      <div style="font-size: 12px; font-weight: 600; color: #7C6FF0;">ELA Compression Matrix</div>
-                      <div style="font-size: 10px; color: #94A3B8;">90Q residual noise (15.0&times;)</div>
+                    <div class="fg-tri-header fg-tri-ela">
+                      <div class="fg-tri-title">ELA Compression Matrix</div>
+                      <div class="fg-tri-sub">90Q residual noise (15.0&times;)</div>
                     </div>
                     '''
                 )
@@ -877,9 +872,9 @@ if page == 'Classify a Receipt':
             with gcol3:
                 render_html(
                     '''
-                    <div style="background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid #2DD4BF; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; min-height: 52px;">
-                      <div style="font-size: 12px; font-weight: 600; color: #2DD4BF;">Tamper Heatmap Overlay</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Forensic hotspot localization</div>
+                    <div class="fg-tri-header fg-tri-heat">
+                      <div class="fg-tri-title">Tamper Heatmap Overlay</div>
+                      <div class="fg-tri-sub">Forensic hotspot localization</div>
                     </div>
                     '''
                 )
@@ -888,23 +883,25 @@ if page == 'Classify a Receipt':
             # How the AI Analyzes This Receipt Panel
             render_html(
                 '''
-                <div style="margin-top: 24px; background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 20px;">
-                  <div style="margin-bottom: 14px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">How the AI Analyzes This Receipt</div>
-                    <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Signal decomposition and convolutional feature extraction mechanics</div>
+                <div class="fg-panel">
+                  <div class="fg-panel-header">
+                    <div>
+                      <div class="fg-panel-title">How the AI Analyzes This Receipt</div>
+                      <div class="fg-panel-subtitle">Signal decomposition and convolutional feature extraction mechanics</div>
+                    </div>
                   </div>
                   
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; font-size: 11.5px; line-height: 1.6; color: #CBD5E1;">
-                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
-                      <div style="font-weight: 600; color: #7C6FF0; margin-bottom: 4px;">1. ELA Compression Physics</div>
+                  <div class="fg-how-grid">
+                    <div class="fg-how-step">
+                      <div class="fg-how-step-title fg-how-ela">1. ELA Compression Physics</div>
                       <div>The receipt is re-encoded at Q=90 JPEG quality. In authentic receipts, the compression error is uniform across the entire surface. When text or amounts are modified, altered pixels have different error potentials, creating high-frequency residual spikes.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
-                      <div style="font-weight: 600; color: #2DD4BF; margin-bottom: 4px;">2. Thermal Heatmap Localization</div>
+                    <div class="fg-how-step">
+                      <div class="fg-how-step-title fg-how-heat">2. Thermal Heatmap Localization</div>
                       <div>The thermal overlay dynamically isolates residuals exceeding the noise floor. Clean, unedited areas remain natural without heavy tint, while localized regions with anomalous compression gradients glow in warm contours to show where tampering occurred.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04);">
-                      <div style="font-weight: 600; color: #F59E0B; margin-bottom: 4px;">3. Multi-CNN Classification</div>
+                    <div class="fg-how-step">
+                      <div class="fg-how-step-title fg-how-cnn">3. Multi-CNN Classification</div>
                       <div>The 128x128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
                     </div>
                   </div>
@@ -968,40 +965,40 @@ if page == 'Classify a Receipt':
             if records_list:
                 rows_html = ""
                 for r in reversed(records_list[-9:]):
-                    v_col = "#10B981" if r['Prediction result'] == 'Authentic' else "#EF4444"
+                    v_cls = "fg-verdict-text-authentic" if r['Prediction result'] == 'Authentic' else "fg-verdict-text-forged"
                     rows_html += f"""
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono', monospace; font-size: 11px;">
-                      <td style="padding: 10px 14px; color: #94A3B8;">{r['Date and time']}</td>
-                      <td style="padding: 10px 14px; color: #E2E8F0; font-weight: 600;">{r['Architecture']}</td>
-                      <td style="padding: 10px 14px; color: {v_col}; font-weight: 700;">{r['Prediction result']}</td>
-                      <td style="padding: 10px 14px; color: {v_col}; font-weight: 600;">{r['Confidence score']}</td>
-                      <td style="padding: 10px 14px; color: #2DD4BF;">{r['Processing time']}</td>
-                      <td style="padding: 10px 14px; color: #7C6FF0;">{r['Memory load']}</td>
+                    <tr>
+                      <td>{r['Date and time']}</td>
+                      <td class="fg-log-arch">{r['Architecture']}</td>
+                      <td class="{v_cls}">{r['Prediction result']}</td>
+                      <td class="{v_cls}">{r['Confidence score']}</td>
+                      <td class="fg-log-lat">{r['Processing time']}</td>
+                      <td class="fg-log-mem">{r['Memory load']}</td>
                     </tr>
                     """
 
                 render_html(
                     f'''
-                    <div style="margin-top: 28px; background: #181D2A; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;">
-                      <div style="padding: 16px 18px 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div class="fg-table-card" style="margin-top: 24px;">
+                      <div class="fg-table-card-head">
                         <div>
-                          <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;">Benchmark Records (Logs and Records)</div>
-                          <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Database Layer (Thesis Figure 4 &amp; Section 2.5.3): Prediction result, Confidence score, Processing time, Memory load, Date and time</div>
+                          <div class="fg-panel-title">Benchmark Records (Logs and Records)</div>
+                          <div class="fg-panel-subtitle">Database Layer (Thesis Figure 4 &amp; Section 2.5.3): Prediction result, Confidence score, Processing time, Memory load, Date and time</div>
                         </div>
-                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #64748B; background: rgba(255,255,255,0.03); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <div class="fg-records-count">
                           {len(records_list)} Records Logged
                         </div>
                       </div>
-                      <div style="overflow-x: auto;">
-                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                      <div class="fg-table-scroll">
+                        <table class="fg-log-table">
                           <thead>
-                            <tr style="background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #94A3B8;">
-                              <th style="padding: 10px 14px;">Date and time</th>
-                              <th style="padding: 10px 14px;">Architecture</th>
-                              <th style="padding: 10px 14px;">Prediction result</th>
-                              <th style="padding: 10px 14px;">Confidence score</th>
-                              <th style="padding: 10px 14px;">Processing time</th>
-                              <th style="padding: 10px 14px;">Memory load</th>
+                            <tr>
+                              <th>Date and time</th>
+                              <th>Architecture</th>
+                              <th>Prediction result</th>
+                              <th>Confidence score</th>
+                              <th>Processing time</th>
+                              <th>Memory load</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -1015,8 +1012,11 @@ if page == 'Classify a Receipt':
                     
             render_html(
                 '''
-                <div class="fg-scope-disclaimer" style="margin-top: 20px;">
-                  Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+                <div class="fg-footer">
+                  <div class="fg-scope-disclaimer">
+                    Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+                  </div>
+                  <div class="fg-credit-line">NDMC BSCS Thesis 2026 &bull; Ungab &amp; Bacanto &bull; Adviser: Ms. Doris Ann Mariano</div>
                 </div>
                 '''
             )
@@ -1025,39 +1025,30 @@ if page == 'Classify a Receipt':
             st.error(f'Error processing image: {str(e)}')
             
     else:
-        # Sleek forensic engine placeholder when no receipt is loaded
+        # Clean fintech readiness card when no receipt is loaded
         render_html(
             '''
-            <div style="margin-top: 24px; padding: 32px 20px; background: rgba(16, 32, 48, 0.35); border: 1px dashed rgba(66, 216, 205, 0.25); border-radius: 10px; text-align: center;">
-              <div style="font-size: 14px; font-weight: 600; color: #E2E8F0; letter-spacing: -0.2px; margin-bottom: 6px;">Forensic Analysis Engine Ready</div>
-              <div style="font-size: 12px; color: #64748B; max-width: 480px; margin: 0 auto 16px auto; line-height: 1.5;">
+            <div class="fg-ready-card">
+              <div class="fg-ready-title">Forensic Analysis Engine Ready</div>
+              <div class="fg-ready-desc">
                 Upload a GCash transaction receipt above or select a benchmark sample to execute multi-architecture CNN evaluation.
               </div>
-              <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-wrap: wrap;">
-                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">128&times;128 ELA Target</span>
-                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">0.50 Decision Threshold</span>
-                <span style="padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #94A3B8;">Basic CNN &bull; MobileNetV2 &bull; ResNet50</span>
+              <div class="fg-spec-row">
+                <span class="fg-spec-chip">128&times;128 ELA Target</span>
+                <span class="fg-spec-chip">0.50 Decision Threshold</span>
+                <span class="fg-spec-chip">Basic CNN &bull; MobileNetV2 &bull; ResNet50</span>
               </div>
             </div>
-            <div style="margin-top: 18px; text-align: center; font-size: 11px; color: #475569; line-height: 1.5;">
-              Forensic Delimitation: Classifies image manipulation artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash servers.
+            <div class="fg-footer">
+              <div class="fg-scope-disclaimer">
+                Forensic Delimitation: Classifies image manipulation artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash servers.
+              </div>
+              <div class="fg-credit-line">NDMC BSCS Thesis 2026 &bull; Ungab &amp; Bacanto &bull; Adviser: Ms. Doris Ann Mariano</div>
             </div>
             '''
         )
 
 elif page == 'Model Comparison':
-    render_html(
-        '''
-        <div style="margin-bottom: 18px;">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
-            <div style="font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FFFFFF; letter-spacing: -0.5px;">ForgeGuard</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Model Benchmark Suite</div>
-          </div>
-          <div style="font-size: 13px; color: #94A3B8; line-height: 1.4;">Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts</div>
-          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-top: 14px;"></div>
-        </div>
-        '''
-    )
     
     metrics = load_evaluation_metrics()
     model_info = get_model_info()
@@ -1093,12 +1084,12 @@ elif page == 'Model Comparison':
         render_html(
             f'''
             <div class="fg-chart-card">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+              <div class="fg-panel-header">
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.2px;">Accuracy vs. Speed Comparison</div>
-                  <div style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Comparing classification accuracy and processing speed across all three models (Standard Condition)</div>
+                  <div class="fg-panel-title">Accuracy vs. Speed Comparison</div>
+                  <div class="fg-panel-subtitle">Comparing classification accuracy and processing speed across all three models (Standard Condition)</div>
                 </div>
-                <div class="fg-chart-legend" style="display: flex; gap: 16px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94A3B8;">
+                <div class="fg-chart-legend">
                   <span class="fg-signal-key fg-signal-key-accuracy"><span aria-hidden="true"></span>Accuracy (%)</span>
                   <span class="fg-signal-key fg-signal-key-fast"><span aria-hidden="true"></span>Fastest speed</span>
                   <span class="fg-signal-key fg-signal-key-mid"><span aria-hidden="true"></span>Moderate speed</span>
@@ -1111,36 +1102,36 @@ elif page == 'Model Comparison':
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
                     <span>Classification Accuracy</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2DD4BF;">Higher is Better</span>
+                    <span class="fg-chart-hint-acc">Higher is Better</span>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">Basic CNN</span>
-                      <span class="fg-bar-val" style="color: #2DD4BF;">{b_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{b_acc_sd:.2f}%)</span></span>
+                      <span class="fg-bar-val fg-val-acc">{b_acc:.2f}% <span class="fg-bar-sd">(&plusmn;{b_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {b_acc:.1f}%; background: linear-gradient(90deg, #14B8A6, #2DD4BF);"></div>
+                      <div class="fg-bar-fill fg-fill-acc" style="width: {b_acc:.1f}%;"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">MobileNetV2</span>
-                      <span class="fg-bar-val" style="color: #A5B4FC;">{m_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{m_acc_sd:.2f}%)</span></span>
+                      <span class="fg-bar-val fg-val-acc">{m_acc:.2f}% <span class="fg-bar-sd">(&plusmn;{m_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {m_acc:.1f}%; background: linear-gradient(90deg, #6366F1, #818CF8);"></div>
+                      <div class="fg-bar-fill fg-fill-acc-mid" style="width: {m_acc:.1f}%;"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">ResNet50</span>
-                      <span class="fg-bar-val" style="color: #94A3B8;">{r_acc:.2f}% <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{r_acc_sd:.2f}%)</span></span>
+                      <span class="fg-bar-val fg-val-acc">{r_acc:.2f}% <span class="fg-bar-sd">(&plusmn;{r_acc_sd:.2f}%)</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {r_acc:.1f}%; background: linear-gradient(90deg, #475569, #64748B);"></div>
+                      <div class="fg-bar-fill fg-fill-acc-low" style="width: {r_acc:.1f}%;"></div>
                     </div>
                   </div>
                   
@@ -1153,36 +1144,36 @@ elif page == 'Model Comparison':
                 <div class="fg-chart-subpanel">
                   <div class="fg-chart-title">
                     <span>Processing Speed</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #10B981;">Lower is Faster</span>
+                    <span class="fg-chart-hint-lat">Lower is Faster</span>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">Basic CNN</span>
-                      <span class="fg-bar-val" style="color: #10B981;">{b_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{b_lat_sd:.2f})</span></span>
+                      <span class="fg-bar-val fg-val-fast">{b_lat:.2f} ms <span class="fg-bar-sd">(&plusmn;{b_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {b_lat_pct:.1f}%; background: linear-gradient(90deg, #059669, #10B981);"></div>
+                      <div class="fg-bar-fill fg-fill-fast" style="width: {b_lat_pct:.1f}%;"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">MobileNetV2</span>
-                      <span class="fg-bar-val" style="color: #2DD4BF;">{m_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{m_lat_sd:.2f})</span></span>
+                      <span class="fg-bar-val fg-val-mid">{m_lat:.2f} ms <span class="fg-bar-sd">(&plusmn;{m_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {m_lat_pct:.1f}%; background: linear-gradient(90deg, #0D9488, #2DD4BF);"></div>
+                      <div class="fg-bar-fill fg-fill-mid" style="width: {m_lat_pct:.1f}%;"></div>
                     </div>
                   </div>
                   
                   <div class="fg-bar-row">
                     <div class="fg-bar-header">
                       <span class="fg-bar-label">ResNet50</span>
-                      <span class="fg-bar-val" style="color: #F59E0B;">{r_lat:.2f} ms <span style="font-size: 10px; color: #94A3B8;">(&plusmn;{r_lat_sd:.2f})</span></span>
+                      <span class="fg-bar-val fg-val-slow">{r_lat:.2f} ms <span class="fg-bar-sd">(&plusmn;{r_lat_sd:.2f})</span></span>
                     </div>
                     <div class="fg-bar-track">
-                      <div class="fg-bar-fill" style="width: {r_lat_pct:.1f}%; background: linear-gradient(90deg, #D97706, #F59E0B);"></div>
+                      <div class="fg-bar-fill fg-fill-slow" style="width: {r_lat_pct:.1f}%;"></div>
                     </div>
                   </div>
                   
@@ -1203,17 +1194,17 @@ elif page == 'Model Comparison':
         <table class="fg-metrics-table">
             <thead>
                 <tr>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Diagnostic neural network model being evaluated">Architecture</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
-                    <th style="text-align: center !important; vertical-align: middle !important;" title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
+                    <th title="Diagnostic neural network model being evaluated">Architecture</th>
+                    <th title="Receipt encoding condition: Standard (original downloadable) vs. Compressed (Messenger / social media)">Condition</th>
+                    <th title="Overall percentage of receipts correctly classified out of all receipts tested">Accuracy</th>
+                    <th title="Change in accuracy caused by social media compression degradation">Compression<br>Delta (&Delta;)</th>
+                    <th title="False alarm resistance: Percentage of fraud flags that were genuinely fraudulent">Precision</th>
+                    <th title="Fraud catch rate: Percentage of actual forged receipts successfully caught">Recall</th>
+                    <th title="Harmonic balance between Precision and Recall into a single overall performance score">F1-Score</th>
+                    <th title="Execution time in milliseconds to analyze a single receipt. Lower is faster">Latency<br>(ms)</th>
+                    <th title="Peak RAM consumption during analysis in Megabytes. Lower uses fewer system resources">Peak RAM<br>(MB)</th>
+                    <th title="Total learnable parameters. Smaller parameter count enables deployment on mobile devices">Params</th>
+                    <th title="Section 2.10 Multi-criteria Composite Score (0.50 Accuracy + 0.25 Latency + 0.25 Memory)">Composite<br>Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -1249,17 +1240,17 @@ elif page == 'Model Comparison':
             
             table_html += f'''
             <tr class="fg-benchmark-row fg-standard-row fg-model-start">
-                <td class="arch-cell" style="text-align: center !important;">{model_name}</td>
-                <td style="font-family: Inter, sans-serif; color: #94A3B8; text-align: center !important;">Standard</td>
-                <td style="text-align: center !important;">{s_acc_html}<span class="fg-std">&plusmn;{s_acc_sd:.2f}%</span></td>
-                <td style="font-family: Inter, sans-serif; color: #64748B; text-align: center !important;">Baseline</td>
-                <td style="text-align: center !important;">{s_prec:.2f}%<span class="fg-std">&plusmn;{s_prec_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{s_rec:.2f}%<span class="fg-std">&plusmn;{s_rec_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{s_f1:.2f}%<span class="fg-std">&plusmn;{s_f1_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{s_lat_html}<span class="fg-std">&plusmn;{s_lat_sd:.1f}</span></td>
-                <td style="text-align: center !important;">{s_mem:.1f}<span class="fg-std">&plusmn;{s_mem_sd:.1f}</span></td>
-                <td style="color: #94A3B8; text-align: center !important;">{params}</td>
-                <td style="font-weight: 700; color: #2DD4BF; text-align: center !important;">{s_comp:.2f}%</td>
+                <td class="arch-cell">{model_name}</td>
+                <td class="fg-cond-cell">Standard</td>
+                <td>{s_acc_html}<span class="fg-std">&plusmn;{s_acc_sd:.2f}%</span></td>
+                <td class="fg-cond-cell">Baseline</td>
+                <td>{s_prec:.2f}%<span class="fg-std">&plusmn;{s_prec_sd:.2f}%</span></td>
+                <td>{s_rec:.2f}%<span class="fg-std">&plusmn;{s_rec_sd:.2f}%</span></td>
+                <td>{s_f1:.2f}%<span class="fg-std">&plusmn;{s_f1_sd:.2f}%</span></td>
+                <td>{s_lat_html}<span class="fg-std">&plusmn;{s_lat_sd:.1f}</span></td>
+                <td>{s_mem:.1f}<span class="fg-std">&plusmn;{s_mem_sd:.1f}</span></td>
+                <td class="fg-cond-cell">{params}</td>
+                <td class="fg-comp-score">{s_comp:.2f}%</td>
             </tr>
             '''
             
@@ -1297,17 +1288,17 @@ elif page == 'Model Comparison':
             
             table_html += f'''
             <tr class="fg-benchmark-row fg-compressed-row">
-                <td class="arch-cell" style="text-align: center !important;">{model_name}</td>
-                <td style="font-family: Inter, sans-serif; color: #94A3B8; text-align: center !important;">Compressed</td>
-                <td style="text-align: center !important;">{c_acc_html}<span class="fg-std">&plusmn;{c_acc_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{delta_html}</td>
-                <td style="text-align: center !important;">{c_prec:.2f}%<span class="fg-std">&plusmn;{c_prec_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{c_rec:.2f}%<span class="fg-std">&plusmn;{c_rec_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{c_f1:.2f}%<span class="fg-std">&plusmn;{c_f1_sd:.2f}%</span></td>
-                <td style="text-align: center !important;">{c_lat_html}<span class="fg-std">&plusmn;{c_lat_sd:.1f}</span></td>
-                <td style="text-align: center !important;">{c_mem:.1f}<span class="fg-std">&plusmn;{c_mem_sd:.1f}</span></td>
-                <td style="color: #94A3B8; text-align: center !important;">{params}</td>
-                <td style="font-weight: 700; color: #2DD4BF; text-align: center !important;">{c_comp:.2f}%</td>
+                <td class="arch-cell">{model_name}</td>
+                <td class="fg-cond-cell">Compressed</td>
+                <td>{c_acc_html}<span class="fg-std">&plusmn;{c_acc_sd:.2f}%</span></td>
+                <td>{delta_html}</td>
+                <td>{c_prec:.2f}%<span class="fg-std">&plusmn;{c_prec_sd:.2f}%</span></td>
+                <td>{c_rec:.2f}%<span class="fg-std">&plusmn;{c_rec_sd:.2f}%</span></td>
+                <td>{c_f1:.2f}%<span class="fg-std">&plusmn;{c_f1_sd:.2f}%</span></td>
+                <td>{c_lat_html}<span class="fg-std">&plusmn;{c_lat_sd:.1f}</span></td>
+                <td>{c_mem:.1f}<span class="fg-std">&plusmn;{c_mem_sd:.1f}</span></td>
+                <td class="fg-cond-cell">{params}</td>
+                <td class="fg-comp-score">{c_comp:.2f}%</td>
             </tr>
             '''
             
@@ -1322,28 +1313,28 @@ elif page == 'Model Comparison':
         with st.expander("Metric Interpretation Guide (Evaluation Reference)", expanded=False):
             render_html(
                 '''
-                <div style="padding: 4px 2px 8px 2px;">
-                  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; font-size: 12px; line-height: 1.5; color: #CBD5E1;">
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #2DD4BF;">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.</div>
+                <div>
+                  <div class="fg-guide-metrics-grid">
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-how-ela">Accuracy:</strong> Overall percentage of correct classifications (both authentic and forged) across all tested receipts.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #2DD4BF;">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.</div>
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-how-ela">Compression Delta (&Delta;Acc):</strong> Measures whether social media re-compression (Facebook Messenger) degrades or improves detection performance.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #10B981;">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.</div>
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-verdict-text-authentic">Precision (False Alarm Defense):</strong> Out of all receipts flagged as fake, how many were truly fake. High precision ensures <em>innocent customers are not wrongly accused</em>.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #10B981;">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.</div>
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-verdict-text-authentic">Recall (Fraud Detection Rate):</strong> Out of all fraudulent receipts, how many were caught. High recall ensures <em>fake receipts do not slip through undetected</em>.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #A5B4FC;">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-how-heat">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;">
-                      <div><strong style="color: #F59E0B;">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
+                    <div class="fg-guide-item">
+                      <div><strong class="fg-how-cnn">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
                     </div>
                   </div>
-                  <div style="margin-top: 10px; font-size: 11px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
+                  <div class="fg-guide-foot">
                     &bull; <strong>Dataset Partition:</strong> Benchmarked on the balanced 1:1 empirical dataset (225-receipt test partition per seed, 5 seeds).
                   </div>
                 </div>
@@ -1404,56 +1395,56 @@ elif page == 'Model Comparison':
         
         render_html(
             f'''
-            <div style="background-color: #1C2333; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+            <div class="fg-panel" style="margin-top: 14px; margin-bottom: 24px;">
+              <div class="fg-panel-header">
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">{selected_model} Test Results Breakdown ({cond_label})</div>
-                  <div style="font-size: 12px; color: #94A3B8;">Tested on {test_total} total receipts: {auth_total} real receipts and {forged_total} fake receipts</div>
+                  <div class="fg-panel-title">{selected_model} Test Results Breakdown ({cond_label})</div>
+                  <div class="fg-panel-subtitle">Tested on {test_total} total receipts: {auth_total} real receipts and {forged_total} fake receipts</div>
                 </div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2DD4BF; background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.25); border-radius: 6px; padding: 4px 10px;">
+                <div class="fg-threshold-pill">
                   Decision Threshold: 0.50
                 </div>
               </div>
               
-              <table style="width: 100%; border-collapse: separate; border-spacing: 8px; text-align: center;">
+              <table class="fg-cm-table">
                 <thead>
                   <tr>
-                    <th style="background: transparent; width: 25%;"></th>
-                    <th style="padding: 8px; font-size: 12px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Predicted Authentic</th>
-                    <th style="padding: 8px; font-size: 12px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Predicted Forged</th>
+                    <th></th>
+                    <th class="fg-cm-th">Predicted Authentic</th>
+                    <th class="fg-cm-th">Predicted Forged</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td style="padding: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; text-align: right; text-transform: uppercase;">Actual Authentic</td>
-                    <td style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 16px;">
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #10B981;">{tn}</div>
-                      <div style="font-size: 11px; font-weight: 600; color: #10B981; margin-top: 2px;">Real Verified (TN)</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Authentic receipt confirmed</div>
+                    <td class="fg-cm-row-label">Actual Authentic</td>
+                    <td class="fg-cm-cell-good">
+                      <div class="fg-cm-num-good">{tn}</div>
+                      <div class="fg-cm-tag-good">Real Verified (TN)</div>
+                      <div class="fg-cm-desc">Authentic receipt confirmed</div>
                     </td>
-                    <td style="background: rgba(239, 68, 68, 0.10); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 16px;">
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #EF4444;">{fp}</div>
-                      <div style="font-size: 11px; font-weight: 600; color: #EF4444; margin-top: 2px;">False Alarm (FP)</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Real receipt mistaken as fake</div>
+                    <td class="fg-cm-cell-bad">
+                      <div class="fg-cm-num-bad">{fp}</div>
+                      <div class="fg-cm-tag-bad">False Alarm (FP)</div>
+                      <div class="fg-cm-desc">Real receipt mistaken as fake</div>
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; text-align: right; text-transform: uppercase;">Actual Forged</td>
-                    <td style="background: rgba(239, 68, 68, 0.10); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 16px;">
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #EF4444;">{fn}</div>
-                      <div style="font-size: 11px; font-weight: 600; color: #EF4444; margin-top: 2px;">Missed Scam (FN)</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Fake receipt slipped through</div>
+                    <td class="fg-cm-row-label">Actual Forged</td>
+                    <td class="fg-cm-cell-bad">
+                      <div class="fg-cm-num-bad">{fn}</div>
+                      <div class="fg-cm-tag-bad">Missed Scam (FN)</div>
+                      <div class="fg-cm-desc">Fake receipt slipped through</div>
                     </td>
-                    <td style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 16px;">
-                      <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #10B981;">{tp}</div>
-                      <div style="font-size: 11px; font-weight: 600; color: #10B981; margin-top: 2px;">Fake Caught (TP)</div>
-                      <div style="font-size: 10px; color: #94A3B8;">Fake receipt blocked</div>
+                    <td class="fg-cm-cell-good">
+                      <div class="fg-cm-num-good">{tp}</div>
+                      <div class="fg-cm-tag-good">Fake Caught (TP)</div>
+                      <div class="fg-cm-desc">Fake receipt blocked</div>
                     </td>
                   </tr>
                 </tbody>
               </table>
               
-              <div style="margin-top: 14px; font-size: 12px; color: #94A3B8; line-height: 1.5; padding: 0 4px;">
+              <div class="fg-cm-note">
                 {cm_note}
               </div>
             </div>
@@ -1464,64 +1455,66 @@ elif page == 'Model Comparison':
         # Empirical Dataset Composition (Table 1 Alignment)
         render_html(
             '''
-            <div class="fg-table-card" style="margin-bottom: 28px;">
-              <div style="padding: 16px 18px 14px 18px; border-bottom: 1px solid var(--fg-line, rgba(255,255,255,0.08));">
-                <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Empirical Dataset Composition (Table 1 Alignment)</div>
-                <div style="font-size: 12px; color: #94A3B8;">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
+            <div class="fg-table-card" style="margin-bottom: 24px;">
+              <div class="fg-table-card-head">
+                <div>
+                  <div class="fg-panel-title">Empirical Dataset Composition (Table 1 Alignment)</div>
+                  <div class="fg-panel-subtitle">Stratified 1,000 base image corpus: 900 experimental images (60% Train, 15% Val, 25% Test) + 100 holdout validation images</div>
+                </div>
               </div>
               
               <div class="fg-table-scroll">
-                <table class="fg-metrics-table" style="width: 100%; border-collapse: collapse; border: none; background: transparent; box-shadow: none; margin: 0;">
+                <table class="fg-metrics-table">
                   <thead>
                     <tr>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Category</th>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Subcategory / Scope</th>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Base</th>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Train (60%)</th>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Val (15%)</th>
-                      <th style="text-align: center !important; vertical-align: middle !important;">Test (25%)</th>
+                      <th>Category</th>
+                      <th>Subcategory / Scope</th>
+                      <th>Base</th>
+                      <th>Train (60%)</th>
+                      <th>Val (15%)</th>
+                      <th>Test (25%)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="fg-benchmark-row fg-standard-row">
-                      <td class="arch-cell" style="color: #10B981; text-align: center !important;">Authentic</td>
-                      <td style="text-align: center !important;">Downloadable GCash Receipts<br><span style="font-size: 10px; color: #94A3B8;">Original in-app exports</span></td>
-                      <td style="text-align: center !important;">450</td>
-                      <td style="text-align: center !important;">270</td>
-                      <td style="text-align: center !important;">68</td>
-                      <td style="text-align: center !important;">112</td>
+                      <td class="arch-cell fg-verdict-text-authentic">Authentic</td>
+                      <td class="fg-cond-cell">Downloadable GCash Receipts<span class="fg-sub-note">Original in-app exports</span></td>
+                      <td>450</td>
+                      <td>270</td>
+                      <td>68</td>
+                      <td>112</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444; text-align: center !important;">Forged</td>
-                      <td style="text-align: center !important;">Digitally Edited Receipts<br><span style="font-size: 10px; color: #94A3B8;">Amount, Name, Ref, Font</span></td>
-                      <td style="text-align: center !important;">225</td>
-                      <td style="text-align: center !important;">135</td>
-                      <td style="text-align: center !important;">34</td>
-                      <td style="text-align: center !important;">56</td>
+                      <td class="arch-cell fg-verdict-text-forged">Forged</td>
+                      <td class="fg-cond-cell">Digitally Edited Receipts<span class="fg-sub-note">Amount, Name, Ref, Font</span></td>
+                      <td>225</td>
+                      <td>135</td>
+                      <td>34</td>
+                      <td>56</td>
                     </tr>
                     <tr class="fg-benchmark-row fg-compressed-row">
-                      <td class="arch-cell" style="color: #EF4444; text-align: center !important;">Forged</td>
-                      <td style="text-align: center !important;">Programmatically &amp; AI-Generated<br><span style="font-size: 10px; color: #94A3B8;">Synthetic canvas slips</span></td>
-                      <td style="text-align: center !important;">225</td>
-                      <td style="text-align: center !important;">135</td>
-                      <td style="text-align: center !important;">33</td>
-                      <td style="text-align: center !important;">57</td>
+                      <td class="arch-cell fg-verdict-text-forged">Forged</td>
+                      <td class="fg-cond-cell">Programmatically &amp; AI-Generated<span class="fg-sub-note">Synthetic canvas slips</span></td>
+                      <td>225</td>
+                      <td>135</td>
+                      <td>33</td>
+                      <td>57</td>
                     </tr>
-                    <tr style="border-top: 1px solid rgba(255,255,255,0.12); font-weight: 600; background: rgba(255,255,255,0.02);">
-                      <td colspan="2" style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">Experimental Partitions Subtotal</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center !important;">900</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">540</td>
-                      <td style="padding: 10px 12px; color: #E2E8F0; text-align: center !important;">135</td>
-                      <td style="padding: 10px 12px; color: #2DD4BF; text-align: center !important;">225</td>
+                    <tr class="fg-subtotal-row">
+                      <td colspan="2" class="fg-cond-cell">Experimental Partitions Subtotal</td>
+                      <td class="fg-comp-score">900</td>
+                      <td>540</td>
+                      <td>135</td>
+                      <td class="fg-comp-score">225</td>
                     </tr>
-                    <tr style="background: rgba(255,255,255,0.01);">
-                      <td colspan="2" style="padding: 10px 12px; color: #94A3B8; text-align: center !important;">Unseen-Tool Holdout Validation Set (Phase 6)</td>
-                      <td style="padding: 10px 12px; color: #F59E0B; text-align: center !important;">100</td>
-                      <td colspan="3" style="padding: 10px 12px; color: #94A3B8; font-style: italic; text-align: center !important;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
+                    <tr class="fg-holdout-row">
+                      <td colspan="2" class="fg-cond-cell">Unseen-Tool Holdout Validation Set (Phase 6)</td>
+                      <td style="color: var(--fg-warning); font-weight: 700;">100</td>
+                      <td colspan="3" class="fg-cond-cell" style="font-style: italic;">50 Authentic + 50 Forged (Reserved for blind generalizability testing)</td>
                     </tr>
-                    <tr style="border-top: 2px solid rgba(255,255,255,0.15); font-weight: 700; background: rgba(45, 212, 191, 0.05);">
-                      <td colspan="2" style="padding: 12px; color: #FFFFFF; text-align: center !important;">Total Dataset Corpus (Base Images)</td>
-                      <td colspan="4" style="padding: 12px; color: #2DD4BF; font-size: 13px; text-align: center !important;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
+                    <tr class="fg-total-row">
+                      <td colspan="2" class="fg-cond-cell" style="color: var(--fg-ink);">Total Dataset Corpus (Base Images)</td>
+                      <td colspan="4" class="fg-cond-cell" style="color: var(--fg-accent); font-weight: 700;">1,000 Base Receipts &bull; Replicated under Messenger Compression (2,000 evaluations total)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1532,8 +1525,11 @@ elif page == 'Model Comparison':
 
         render_html(
             '''
-            <div class="fg-scope-disclaimer">
-              Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+            <div class="fg-footer">
+              <div class="fg-scope-disclaimer">
+                Forensic Delimitation: Classifies image manipulation and compression artifacts using Error Level Analysis (ELA) and Convolutional Neural Networks. Does not connect to or verify financial records on GCash or banking servers.
+              </div>
+              <div class="fg-credit-line">NDMC BSCS Thesis 2026 &bull; Ungab &amp; Bacanto &bull; Adviser: Ms. Doris Ann Mariano</div>
             </div>
             '''
         )

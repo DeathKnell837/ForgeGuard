@@ -40,7 +40,7 @@ ForgeGuard resolves this verification challenge by combining mathematical **Erro
   * **Classify a Receipt:** Real-time upload interface featuring tabbed forensic inspection (Original Exhibit, ELA Residual Matrix, and Tamper Heatmap Overlay), synchronized Tri-Spectral Forensic Evidence Decomposition gallery, parallel multi-model classification cards, raw confidence readouts, execution latencies, peak memory tracking, and persistent Benchmark Records (Logs and Records) table.
   * **Model Benchmark Suite:** Empirical performance table across both standard and compressed conditions, Section 2.10 Composite Scores, 3x2 ANOVA and Friedman statistical test analysis, Table 1 dataset composition overview, and comprehensive metric interpretation guide.
 * **Zero-Emoji Enterprise Interface:**
-  Adheres to strict institutional cybersecurity design standards with deep navy foundations (`#121620`), frosted glass panels (`#1C2333`), SVG line iconography, and typography powered by Inter and JetBrains Mono.
+  Adheres to institutional fintech and cybersecurity standards with a responsive Crisp Fintech Light design system (`#F5F7FB` canvas, `#FFFFFF` elevated cards, `#1D4ED8` cobalt accents), SVG line iconography, top segmented page navigation for PC/laptop/mobile, and typography powered by Plus Jakarta Sans and JetBrains Mono.
 
 ---
 
@@ -175,7 +175,7 @@ Open your browser and navigate to `http://localhost:8501`.
 ```
 ForgeGuard/
 ├── app.py                      # Root Streamlit deployment entrypoint
-├── premium_css.py              # Dark forensic styling system & layout overrides
+├── premium_css.py              # Responsive fintech light styling system & layout overrides
 ├── requirements.txt            # System Python dependencies
 ├── models/                     # Serialized neural network weights & evaluation telemetry
 │   ├── basic_cnn.keras         # Serialized Basic CNN model weights

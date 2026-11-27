@@ -28,7 +28,7 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
 │
 ├── 01_Source_Code/                        # Content Item 1: Source code
 │   ├── app.py                             # Canonical Streamlit application
-│   ├── premium_css.py                     # High-contrast cyber-forensics design system
+│   ├── premium_css.py                     # Responsive fintech light design system
 │   ├── assets/                            # Brand logos, SVG icons, and telemetry graphics
 │   ├── preprocessing/                     # ELA mathematical engine and forensic heatmaps
 │   │   ├── __init__.py
@@ -36,14 +36,14 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
 │   │   └── ai_forensics.py                # Anomaly statistics and thermal colormaps
 │   ├── samples/                           # Bundled verification receipts for offline demos
 │   └── .streamlit/
-│       └── config.toml                    # Local application UI and dark theme configuration
+│       └── config.toml                    # Local application UI and fintech light theme configuration
 │
 ├── 02_Project_Files/                      # Content Item 2: Project files
 │   ├── requirements.txt                   # Complete pinned pip dependency manifest
 │   ├── runtime.txt                        # Python 3.12 runtime specification
 │   ├── PROJECT_CONFIGURATION.md           # Hardware & software environment guidelines
 │   └── .streamlit/
-│       └── config.toml                    # Server and dark forensic theme parameters
+│       └── config.toml                    # Server and fintech light theme parameters
 │
 ├── 03_Prototype_Files/                    # Content Item 3: Prototype files
 │   ├── basic_cnn.keras                    # Compiled Basic CNN model weights (~3.3M params)
