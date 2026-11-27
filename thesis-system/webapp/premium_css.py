@@ -57,11 +57,19 @@ html, body, [class*="css"] {
     text-rendering: optimizeLegibility;
 }
 
-html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+html, body, .stApp, [data-testid="stAppViewContainer"] {
     background-color: var(--fg-bg) !important;
     color: var(--fg-ink) !important;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw !important;
+}
+[data-testid="stMain"] {
+    background-color: var(--fg-bg) !important;
+    color: var(--fg-ink) !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: clip !important;
+    overflow-y: auto !important;
 }
 
 .stApp {
@@ -124,9 +132,11 @@ div[data-testid="stStatusWidget"] * {
 /* Main Layout Container */
 .block-container {
     max-width: 1160px !important;
-    padding: 1.5rem 2rem 3.5rem !important;
+    padding: 1.05rem 2rem 1.5rem !important;
     margin: 0 auto !important;
-    overflow-x: hidden !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 .block-container img,
 .block-container canvas,
@@ -140,8 +150,8 @@ div[data-testid="stMarkdownContainer"] {
 
 /* Top Brand Header */
 .fg-topbar {
-    padding: 4px 0 16px 0;
-    margin-bottom: 14px;
+    padding: 2px 0 12px 0;
+    margin-bottom: 10px;
     border-bottom: 1px solid var(--fg-border);
 }
 .fg-topbar-row {
@@ -205,7 +215,7 @@ div[data-testid="stMarkdownContainer"] {
 
 /* Segmented Top Navigation Switcher (st.radio horizontal) */
 div[data-testid="stRadio"] {
-    margin: 0 0 20px 0 !important;
+    margin: 0 0 14px 0 !important;
 }
 div[data-testid="stRadio"] > div[data-testid="stRadioGroup"],
 div[data-testid="stRadio"] div[role="radiogroup"] {
@@ -302,12 +312,16 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]::before {
     transition: background-color 180ms ease;
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(1)::before,
-div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(1)::before {
+div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(1)::before,
+div[data-testid="stRadio"] [data-testid="stRadioGroup"] > :nth-child(1) label::before,
+div[data-testid="stRadio"] div[role="radiogroup"] > :nth-child(1) label::before {
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 3h16v18l-3-2-2.5 2L12 19l-2.5 2L7 19l-3 2V3z'/%3E%3Cpath d='M8 8h8'/%3E%3Cpath d='M8 12h8'/%3E%3Cpath d='M8 16h5'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 3h16v18l-3-2-2.5 2L12 19l-2.5 2L7 19l-3 2V3z'/%3E%3Cpath d='M8 8h8'/%3E%3Cpath d='M8 12h8'/%3E%3Cpath d='M8 16h5'/%3E%3C/svg%3E");
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(2)::before,
-div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(2)::before {
+div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(2)::before,
+div[data-testid="stRadio"] [data-testid="stRadioGroup"] > :nth-child(2) label::before,
+div[data-testid="stRadio"] div[role="radiogroup"] > :nth-child(2) label::before {
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3v18h18'/%3E%3Crect x='7' y='10' width='3' height='7' rx='1'/%3E%3Crect x='12' y='6' width='3' height='11' rx='1'/%3E%3Crect x='17' y='13' width='3' height='4' rx='1'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3v18h18'/%3E%3Crect x='7' y='10' width='3' height='7' rx='1'/%3E%3Crect x='12' y='6' width='3' height='11' rx='1'/%3E%3Crect x='17' y='13' width='3' height='4' rx='1'/%3E%3C/svg%3E");
 }
@@ -323,7 +337,7 @@ div[data-testid="stFileUploader"] {
     background: var(--fg-surface) !important;
     border: 1px solid var(--fg-border) !important;
     border-radius: var(--fg-r-lg) !important;
-    padding: 20px 22px !important;
+    padding: 16px 20px !important;
     box-shadow: var(--fg-shadow-sm) !important;
 }
 div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] p {
@@ -334,17 +348,17 @@ div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] p {
     letter-spacing: -0.01em !important;
 }
 div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"] {
-    min-height: 118px !important;
+    min-height: 94px !important;
     background: var(--fg-surface-muted) !important;
     border: 1.5px dashed var(--fg-border-strong) !important;
     border-radius: var(--fg-r-md) !important;
-    padding: 18px 20px !important;
+    padding: 14px 18px !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
+    gap: 8px !important;
     text-align: center !important;
     transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease !important;
 }
@@ -436,14 +450,14 @@ div[data-testid="stFileChipDeleteBtn"] button:hover svg {
     text-align: center;
     font-size: 12px;
     color: var(--fg-subtle);
-    margin: 10px 0 18px 0;
+    margin: 6px 0 12px 0;
     line-height: 1.5;
 }
 .fg-divider-label {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin: 4px 0 12px 0;
+    margin: 2px 0 10px 0;
 }
 .fg-divider-line {
     height: 1px;
@@ -989,8 +1003,8 @@ div[data-testid="stElementToolbar"] {
 
 /* Empty State Readiness Card (Solid border — avoids double-dashed clutter) */
 .fg-ready-card {
-    margin-top: 20px;
-    padding: 28px 24px;
+    margin-top: 14px;
+    padding: 20px 22px;
     background: var(--fg-surface);
     border: 1px solid var(--fg-border);
     border-radius: var(--fg-r-md);
@@ -1594,8 +1608,8 @@ li[role="option"][aria-selected="true"] {
 
 /* Footer & Forensic Delimitation */
 .fg-footer {
-    margin-top: 28px;
-    padding-top: 16px;
+    margin-top: 16px;
+    padding-top: 12px;
     border-top: 1px solid var(--fg-border);
     text-align: center;
 }
@@ -1634,15 +1648,15 @@ li[role="option"][aria-selected="true"] {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 7px; height: 7px; }
-::-webkit-scrollbar-track { background: var(--fg-bg); }
-::-webkit-scrollbar-thumb { background: var(--fg-border-strong); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--fg-subtle); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--fg-border-strong); border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-subtle); border: 2px solid transparent; background-clip: content-box; }
 
 /* Laptop Breakpoint (<= 1366px) */
 @media (max-width: 1366px) {
     .block-container {
-        padding: 1.15rem 1.5rem 2.75rem !important;
+        padding: 0.9rem 1.5rem 1.25rem !important;
     }
 }
 
