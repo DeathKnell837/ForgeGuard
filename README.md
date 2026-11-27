@@ -1,174 +1,215 @@
-# NDMC BSCS Thesis Research Workspace
+# ForgeGuard: Cross-Architecture CNN Digital Receipt Forgery Detection System
 
 <div align="center">
 
-### **Notre Dame of Midsayap College**
-**College of Information Technology and Engineering (CITE)**  
-*Bachelor of Science in Computer Science (BSCS)*
+[![Live Application](https://img.shields.io/badge/Live_System-forgeguard.streamlit.app-8B5CF6?style=for-the-badge&logo=streamlit)](https://forgeguard.streamlit.app/)
+[![Python Version](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python)](https://python.org)
+[![TensorFlow Engine](https://img.shields.io/badge/TensorFlow-2.13+-FF6F00?style=for-the-badge&logo=tensorflow)](https://tensorflow.org)
+[![Peak Accuracy](https://img.shields.io/badge/Peak_Accuracy-94.58%25-10B981?style=for-the-badge)](https://forgeguard.streamlit.app/)
+[![Fastest Latency](https://img.shields.io/badge/Fastest_Latency-34.25ms-06B6D4?style=for-the-badge)](https://forgeguard.streamlit.app/)
+[![License](https://img.shields.io/badge/License-Academic_Research-64748B?style=for-the-badge)](LICENSE)
 
----
+**Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts**
 
-## **Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts**
-
-**System Name:** ForgeGuard  
-**Academic Subject:** CS Thesis Writing 1 (A.Y. 2026–2027)
-
----
-
-[![Thesis Status](https://img.shields.io/badge/Proposal-Chapters_1_%26_2_Completed-007ACC?style=for-the-badge)](thesis-docs/THESIS1UNGAB_BACANTO.md)
-[![Title Defense](https://img.shields.io/badge/Title_Defense-PASSED-10B981?style=for-the-badge)](thesis-docs/)
-[![Live System Demo](https://img.shields.io/badge/Live_System-forgeguard.streamlit.app-8B5CF6?style=for-the-badge&logo=streamlit)](https://forgeguard.streamlit.app/)
-[![System Repo](https://img.shields.io/badge/System_Repo-DeathKnell837%2FForgeGuard-1E293B?style=for-the-badge&logo=github)](https://github.com/DeathKnell837/ForgeGuard)
-[![Google Drive](https://img.shields.io/badge/Google_Drive-Thesis_Archive-F59E0B?style=for-the-badge&logo=googledrive)](https://drive.google.com/drive/folders/1bzRsI6Ywo2yRni5Ij7InCLh0CL0OO90_?usp=drive_link)
-
-[Latest Manuscript (Word)](thesis-docs/THESIS1UNGAB_BACANTO.docx) &bull; [Latest Manuscript (Markdown)](thesis-docs/THESIS1UNGAB_BACANTO.md) &bull; [System Architecture](thesis-docs/forgeguard_system_architecture.svg) &bull; [Live Demo](https://forgeguard.streamlit.app/)
+[Live Web Demo](https://forgeguard.streamlit.app/) &bull; [System Architecture](#system-architecture) &bull; [Empirical Benchmark](#empirical-benchmark-evaluation) &bull; [Dataset](#empirical-dataset-specifications) &bull; [Installation](#quickstart--local-deployment) &bull; [Academic Context](#academic-research-context)
 
 </div>
 
 ---
 
-## Research Group & Faculty Profile
+## Overview
 
-| Role | Name | Designation / Affiliation |
-|:---|:---|:---|
-| **Lead Researcher** | **Daniela S. Ungab** | BSCS-4 Student Candidate, NDMC CITE |
-| **Co-Researcher** | **Rogie P. Bacanto** | BSCS-4 Student Candidate, NDMC CITE |
-| **Thesis Adviser** | **Ms. Doris Ann Mariano** | Faculty Adviser, NDMC CITE |
-| **Research Teacher** | **Mr. Nero L. Hontiveros** | CS Thesis Writing 1 Instructor |
-| **Dean of CITE** | **Engr. Mark Bryan C. Tenebroso, PCPE, ME-CPE** | Dean, College of Information Technology & Engineering |
-| **Academic Term** | **Academic Year 2026–2027** | CS Thesis Writing 1 (Enrolled, June 2026) |
+**ForgeGuard** is an AI-powered image forensics platform engineered to detect raster tampering, digital amount splicing, font manipulation, and synthetic generation in mobile wallet payment confirmation receipts, focusing specifically on the Philippine **GCash** transaction ecosystem.
+
+Digital receipt fraud exploits the widespread reliance of peer-to-peer online merchants, micro-retailers, and transport operators on electronic payment confirmation slips. Fraudulent actors utilize graphic manipulation tools (such as Photoshop and Canva) or automated receipt generator applications to alter amounts, reference numbers, and recipient details without transferring funds.
+
+ForgeGuard resolves this verification challenge by combining mathematical **Error Level Analysis (ELA)** signal decomposition with a rigorous comparative evaluation of **three distinct Convolutional Neural Network (CNN) architectures** (Basic CNN, MobileNetV2, and ResNet50), delivering millisecond-level verification, authentic inference latency benchmarking, and reproducible empirical evidence.
 
 ---
 
-### Research Overview & Abstract
+## Core Capabilities & Features
 
-Digital payment channels account for over **57.4% of monthly retail transactions** in the Philippines (Bangko Sentral ng Pilipinas 2024 Report). However, peer-to-peer mobile wallet confirmation receipts (specifically within the **GCash** ecosystem) have become a primary attack surface for receipt-based fraud. Scammers utilize image editing tools and programmatic template generators to modify transaction amounts, reference numbers, and recipient names without transferring actual funds.
-
-Because proof-of-payment receipts shared over messaging platforms (Facebook Messenger) undergo lossy re-compression, conventional visual inspection and raw Error Level Analysis (ELA) frequently fail to expose subtle tampering. 
-
-This study addresses this challenge through a **cross-architecture comparative evaluation of three Convolutional Neural Network (CNN) architectures**:
-1. **Basic CNN (Custom sequential baseline, ~11.2M parameters at 224&times;224 input)**
-2. **MobileNetV2 (Inverted residual mobile architecture, ~2.4M parameters)**
-3. **ResNet50 (Deep 50-layer residual network, ~24.1M parameters)**
-
-Each architecture is evaluated across both **Standard (high-resolution downloadable)** and **Compressed (Facebook Messenger re-compressed)** conditions across accuracy, precision, recall, F1-score, steady-state latency, and peak memory footprint.
-
----
-
-## Statement of the Problem (SOP)
-
-This research investigates the following specific research questions:
-
-1. **Classification Performance:**
-   * What is the diagnostic performance of Basic CNN, ResNet50, and MobileNetV2 in terms of **Accuracy**, **Precision**, **Recall**, and **F1-score**?
-2. **Detection by Forgery Modality:**
-   * What is the accuracy of each architecture across digitally edited receipts (amount, recipient name, reference number, font tampering) versus programmatically generated fake receipts?
-3. **Computational Efficiency & Resource Footprint:**
-   * What is the difference in **inference speed (ms)**, **peak memory (MB)**, and model footprint among the three architectures?
-4. **Resilience to Messaging Platform Compression:**
-   * Does social media compression (Facebook Messenger transmission) degrade or alter the detection efficacy of the CNN models?
-5. **Practical Edge Deployability:**
-   * Which CNN architecture provides the optimal balance of classification accuracy and execution latency for real-time mobile payment verification?
+* **Error Level Analysis (ELA) Forensic Pipeline:**
+  Re-compresses incoming receipt images at a calibrated JPEG quality factor ($Q = 90$) and amplifies pixel residual discrepancies by a $15.0\times$ difference multiplier, exposing altered or re-saved regions as localized compression variance spikes.
+* **Cross-Architecture CNN Evaluation:**
+  Evaluates three benchmarked deep learning models in parallel without synthetic score overrides or rule-based bypasses:
+  * **Basic CNN (Baseline):** Custom 3-block convolutional network (~11.2M parameters at 224 x 224 input) achieving **94.58%** standard accuracy (52.28 ms latency) and **96.36%** compressed accuracy (34.25 ms latency), achieving top Section 2.10 Composite Score (100.00%).
+  * **MobileNetV2 (Efficient):** Inverted residual depthwise separable CNN (~2.4M parameters) achieving **82.93%** standard accuracy (56.21 ms latency) and **89.87%** compressed accuracy (38.48 ms latency); it catches every AI-generated receipt but misses many digitally edited ones.
+  * **ResNet50 (Deep Residual):** 50-layer deep network (~24.1M parameters, frozen ImageNet base) at 49.78% standard and compressed accuracy (79.11 ms / 61.34 ms latency): it labels every receipt Authentic, showing the limits of a frozen deep feature extractor on ELA residuals.
+* **Two-Screen Operational Workflow:**
+  * **Classify a Receipt:** Real-time upload interface featuring tabbed forensic inspection (Original Exhibit, ELA Residual Matrix, and Tamper Heatmap Overlay), synchronized Tri-Spectral Forensic Evidence Decomposition gallery, parallel multi-model classification cards, raw confidence readouts, execution latencies, peak memory tracking, and persistent Benchmark Records (Logs and Records) table.
+  * **Model Benchmark Suite:** Empirical performance table across both standard and compressed conditions, Section 2.10 Composite Scores, 3x2 ANOVA and Friedman statistical test analysis, Table 1 dataset composition overview, and comprehensive metric interpretation guide.
+* **Zero-Emoji Enterprise Interface:**
+  Adheres to institutional fintech and cybersecurity standards with a responsive Crisp Fintech Light design system (`#F5F7FB` canvas, `#FFFFFF` elevated cards, `#1D4ED8` cobalt accents), SVG line iconography, top segmented page navigation for PC/laptop/mobile, and typography powered by Plus Jakarta Sans and JetBrains Mono.
 
 ---
 
-## Empirical Model Benchmark Results
+## System Architecture
 
-All architectures were benchmarked under identical hardware conditions on the balanced 1:1 empirical test partition ($N = 225$ per seed: 112 Authentic, 56 Digitally Edited, 57 AI-Generated; 5 predetermined seeds; 224&times;224 ELA input per [docs/CHANGELOG_224.md](docs/CHANGELOG_224.md)) across both Standard and Compressed conditions:
-
-| Architecture | Condition | Accuracy (%) | Compression Delta (&Delta;Acc) | Precision (%) | Recall (%) | F1-Score (%) | Latency (ms) | Peak Memory (MB) | Params | Composite Score | Architectural Finding |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| **Basic CNN** | Standard | **94.58% &plusmn; 0.99%** | Baseline | **100.00% &plusmn; 0.00%** | **89.20% &plusmn; 1.97%** | **94.28% &plusmn; 1.09%** | **52.28 &plusmn; 0.90 ms** | **1004.9 MB** | **~11.2M** | **100.00%** | Most balanced, dependable model for uncompressed receipts; zero false alarms (mean FP=0 of 112 authentic). |
-| **Basic CNN** | Compressed | **96.36% &plusmn; 1.03%** | **+1.78%** | **100.00% &plusmn; 0.00%** | **92.74% &plusmn; 2.05%** | **96.22% &plusmn; 1.10%** | **34.25 &plusmn; 2.38 ms** | **1019.1 MB** | **~11.2M** | **100.00%** | Top-performing architecture under Messenger compression; zero false alarms with 92.74% fraud detection rate. |
-| **MobileNetV2** | Standard | **82.93% &plusmn; 1.53%** | Baseline | **94.53% &plusmn; 1.73%** | **70.09% &plusmn; 2.53%** | **80.47% &plusmn; 1.93%** | **56.21 &plusmn; 0.89 ms** | **1010.0 MB** | **~2.4M** | **73.11%** | Inverted residual mobile architecture; lightweight ~2.4M parameter footprint catching AI-generated fakes reliably. |
-| **MobileNetV2** | Compressed | **89.87% &plusmn; 1.33%** | **+6.94%** | **100.00% &plusmn; 0.00%** | **79.82% &plusmn; 2.65%** | **88.76% &plusmn; 1.64%** | **38.48 &plusmn; 1.05 ms** | **1021.0 MB** | **~2.4M** | **72.85%** | Strong resilience under compression with +6.94% accuracy gain and zero false alarms. |
-| **ResNet50** | Standard | **49.78% &plusmn; 0.00%** | Baseline | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **79.11 &plusmn; 2.91 ms** | **1017.4 MB** | **~24.1M** | **0.00%** | Frozen ImageNet base failed to learn ELA residual signal, classifying every receipt as Authentic. |
-| **ResNet50** | Compressed | **49.78% &plusmn; 0.00%** | **+0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **61.34 &plusmn; 1.47 ms** | **1022.1 MB** | **~24.1M** | **0.00%** | Heavy 24.1M footprint; highest end-to-end latency with zero forgery discrimination under frozen backbone. |
-
-> **Key Takeaway:** Simpler, compact convolutional architectures (Basic CNN and MobileNetV2) decisively outperform heavy 50-layer deep networks for 224&times;224 ELA digital receipt verification. Section 2.10 Composite Scoring ranks Basic CNN as the optimal architecture for local merchant deployment.
-
----
-
-## Dual Repository Architecture & Boundary Rules
-
-To ensure clean separation between academic thesis documentation and live software engineering deployment, this research maintains two synchronized Git remotes:
-
-| Remote | Target Repository | Scope & Purpose |
-|:---|:---|:---|
-| **`origin`** | [`DeathKnell837/NDMC-BSCS-THESIS-PREP`](https://github.com/DeathKnell837/NDMC-BSCS-THESIS-PREP) | **Academic Thesis Preparation Repository.** Contains all proposal documents (`thesis-docs/`), thesis manuscripts (`.docx` & `.md`), IEEE literature reviews, defense slides, guidelines, and research outlines. |
-| **`forgeguard`** | [`DeathKnell837/ForgeGuard`](https://github.com/DeathKnell837/ForgeGuard) | **Software Engineering & Deployment Repository.** Contains the production Streamlit web application (`app.py`), serialized `.keras` models, ELA preprocessing engine, dataset generator tools, and deployment configs for [forgeguard.streamlit.app](https://forgeguard.streamlit.app/). |
-
-### Non-Interference Push Policy
-1. **Thesis Documentation updates** (`thesis-docs/`, manuscripts, proposal writing) must always be committed and pushed to `origin`.
-2. **System & Webapp updates** (`thesis-system/`, models, UI components) are synced to `origin` (for complete archival) and pushed to `forgeguard` (for live Streamlit Cloud rebuilds).
-3. The root `README.md` in `origin` represents the **Academic Thesis Workspace Hub**, while the root `README.md` in `forgeguard` represents the **ForgeGuard Software System Guide**.
-
----
-
-## Workspace Directory Structure
+The ForgeGuard system operates across a five-tier forensic pipeline:
 
 ```
-THESIS/
-├── README.md                           # Master Academic Workspace Hub (this file)
-├── app.py                              # Streamlit Cloud deployment entrypoint
-├── requirements.txt                    # System Python runtime dependencies
-├── deploy-forgeguard.ps1               # Automated dual-remote deployment script
-├── .agents/                            # Antigravity assistant customization rules
-│   └── AGENTS.md                       # Canonical rules, boundary policies & thesis context
-├── thesis-docs/                        # ACADEMIC THESIS DOCUMENTATION (Manuscripts & Guidelines)
-│   ├── THESIS1UNGAB_BACANTO.docx       # Official compiled Chapters 1 & 2 Word Document
-│   ├── THESIS1UNGAB_BACANTO.md         # Full Markdown transcript of latest manuscript
-│   ├── Chapter1_Digital_Deception_Mobile_Wallet.md
-│   ├── Chapter2_Review_of_Related_Literature.md
-│   ├── Chapter3_System_Architecture_and_Methodology.md
-│   ├── SECURING MOBILE TRANSACTIONS (1).pptx # Defense presentation slides
-│   ├── bscs_thesis_guidelines.md       # NDMC CITE BSCS Thesis formatting standards
-│   ├── student_info.md                 # Student profiles & thesis timeline
-│   └── forgeguard_system_architecture.svg
-├── 01_System_Prototype/                # NDMC Section III.1 Submission Package (6 Ordered Subfolders)
-│   ├── README.md                       # Syllabus mapping & execution guide
-│   ├── run_system.bat                  # One-click Windows offline launcher
-│   ├── 01_Source_Code/                 # 1. Clean application source code & web engine
-│   ├── 02_Project_Files/               # 2. Project dependencies, runtime & config
-│   ├── 03_Prototype_Files/             # 3. Serialized Keras models & 5-seed metrics
-│   ├── 04_Database_Files/              # 4. JSON persistent verification audit ledger
-│   ├── 05_Other_Development_Files/     # 5. Training scripts, 5-seed harnesses & samples
-│   └── 06_Screenshots_with_Descriptions/ # 6. 8 exhibits, descriptions & Word docx
-└── thesis-system/                      # SYSTEM IMPLEMENTATION & EXPERIMENTAL PIPELINE
-    ├── README.md                       # ForgeGuard Software System Guide
-    ├── dataset/                        # Empirical Dataset (1:1 balanced evaluation: 456 base receipts)
-    │   ├── authentic/                  # 228 authentic receipts (highres & compressed)
-    │   └── forged/                     # 849 forged receipts (stratified attack vectors)
-    ├── models/                         # Serialized weights (.keras) & evaluation_metrics.json
-    ├── preprocessing/                  # Error Level Analysis (ELA) signal pipeline
-    ├── generator/                      # GCash template synthesis engine
-    └── webapp/                         # Streamlit application source & premium CSS
+[Uploaded GCash Receipt (JPG/PNG)]
+         │
+         ▼
+[1. User Interface & Preprocessing Layer]
+  • Mode Normalization (RGB)
+  • JPEG Re-compression (Q = 90) & Pixel Residual Amplification (15.0x)
+  • Preprocessing Resizing (224 x 224 x 3) & Normalization (/ 255.0)
+  • Dynamic Input Tensor Adaptation
+         │
+         ▼
+[2. Parallel CNN Inference Engine]
+  ├── Basic CNN (~11.2M params, 52.28 ms standard, 34.25 ms compressed)
+  ├── MobileNetV2 (~2.4M params, 56.21 ms standard, 38.48 ms compressed)
+  └── ResNet50 (~24.1M params, 79.11 ms standard, 61.34 ms compressed)
+         │
+         ▼
+[3. Result Processing & Telemetry Layer]
+  • Independent Sigmoid Verdicts (Authentic < 0.50 <= Forged)
+  • Probability Confidence Calculation
+  • High-Resolution Execution Timer (perf_counter latency in ms)
+  • Peak Working Set Memory Load (psutil RSS in MB)
+         │
+         ▼
+[4. Database & Logging Layer]
+  • Serialized Model Weights (HDF5 / Keras format)
+  • Benchmark Records (Logs and Records): Prediction result, Confidence score,
+    Processing time, Memory load, Date and time
+         │
+         ▼
+[5. Presentation Layer (Streamlit)]
+  • Synchronized Multi-Model Verdict Cards
+  • ELA Exhibit Display & Tri-Spectral Heatmap
+  • Full Empirical Benchmark Suite & Section 2.10 Composite Scores
 ```
 
 ---
 
-## Key Academic Thesis Documents
+## Empirical Benchmark Evaluation
 
-* **[Master Defense Study & System Guide (PDF)](thesis-docs/FORGEGUARD_MASTER_DEFENSE_GUIDE.pdf)** — All-in-One comprehensive study guide, plain-English translator, proposal ground truth, system guide, and presentation script.
-* **[Master Defense Study & System Guide (Markdown)](thesis-docs/FORGEGUARD_MASTER_DEFENSE_GUIDE.md)** — Readable Markdown edition of the all-in-one master defense guide for instant viewing in code editors.
-* **[Official Thesis Manuscript (Word)](thesis-docs/THESIS1UNGAB_BACANTO.docx)** — Complete Chapters 1 and 2 manuscript submitted for review (September 2026).
-* **[Official Thesis Manuscript (Markdown)](thesis-docs/THESIS1UNGAB_BACANTO.md)** — Accessible Markdown version of the compiled manuscript.
-* **[Chapter 1: Background & Problem Statement](thesis-docs/Chapter1_Digital_Deception_Mobile_Wallet.md)** — Detailed introduction, research gap, SOP, and SDG alignment.
-* **[Chapter 2: Review of Related Literature](thesis-docs/Chapter2_Review_of_Related_Literature.md)** — Comprehensive 7-stage thematic synthesis with IEEE citations.
-* **[Chapter 3: System Architecture & Methodology](thesis-docs/Chapter3_System_Architecture_and_Methodology.md)** — Five-tier forensic pipeline and CNN evaluation framework.
-* **[BSCS Thesis Guidelines](thesis-docs/bscs_thesis_guidelines.md)** — NDMC CITE formatting and defense specifications.
-* **[Student Information & Schedule](thesis-docs/student_info.md)** — Team contact details and academic schedule.
-* **[01_System_Prototype Submission Package](01_System_Prototype/README.md)** — Complete NDMC Section III.1 submission package structured into the 6 syllabus subfolders with one-click launcher.
+> **Input size change (Oct 22, 2026):** the system now uses **224 x 224** ELA inputs, as the approved manuscript specifies, and all three models were retrained at 224. The numbers below are from the 224 models. What changed and why: [docs/CHANGELOG_224.md](../docs/CHANGELOG_224.md).
+
+All architectures were evaluated on the balanced 1:1 empirical test partition ($N = 225$ per seed: 112 Authentic, 56 Digitally Edited, 57 AI-Generated; 5 predetermined seeds: `[42, 101, 202, 303, 404]`) across both Standard and Compressed conditions:
+
+### Standard Evaluation Condition (Uncompressed PNG)
+*Partition Size: N = 225 per seed (112 Authentic, 56 Digitally Edited, 57 AI-Generated)*
+
+| Architecture | Condition | Accuracy | Precision | Recall | F1-Score | End-to-End Latency | Peak Memory | Composite Score |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Basic CNN** | Standard | **94.58% &plusmn; 0.99%** | **100.00% &plusmn; 0.00%** | **89.20% &plusmn; 1.97%** | **94.28% &plusmn; 1.09%** | **52.28 &plusmn; 0.90 ms** | **1004.9 MB** | **100.00%** |
+| **MobileNetV2** | Standard | **82.93% &plusmn; 1.53%** | **94.53% &plusmn; 1.73%** | **70.09% &plusmn; 2.53%** | **80.47% &plusmn; 1.93%** | **56.21 &plusmn; 0.89 ms** | **1010.0 MB** | **73.11%** |
+| **ResNet50** | Standard | **49.78% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **79.11 &plusmn; 2.91 ms** | **1017.4 MB** | **0.00%** |
+
+### Compressed Evaluation Condition (Simulated Transmission Compression)
+*Partition Size: N = 225 per seed (112 Authentic, 56 Digitally Edited, 57 AI-Generated)*
+
+| Architecture | Condition | Accuracy | Delta | Precision | Recall | F1-Score | End-to-End Latency | Peak Memory | Composite Score |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Basic CNN** | Compressed | **96.36% &plusmn; 1.03%** | **+1.78%** | **100.00% &plusmn; 0.00%** | **92.74% &plusmn; 2.05%** | **96.22% &plusmn; 1.10%** | **34.25 &plusmn; 2.38 ms** | **1019.1 MB** | **100.00%** |
+| **MobileNetV2** | Compressed | **89.87% &plusmn; 1.33%** | **+6.94%** | **100.00% &plusmn; 0.00%** | **79.82% &plusmn; 2.65%** | **88.76% &plusmn; 1.64%** | **38.48 &plusmn; 1.05 ms** | **1021.0 MB** | **72.85%** |
+| **ResNet50** | Compressed | **49.78% &plusmn; 0.00%** | **+0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **0.00% &plusmn; 0.00%** | **61.34 &plusmn; 1.47 ms** | **1022.1 MB** | **0.00%** |
+
+> **Key Research Finding (224 x 224 retrain, Oct 22, 2026):** The compact custom Basic CNN had the highest accuracy (94.58% standard, 96.36% compressed) and the lowest end-to-end latency, with zero false alarms (mean FP = 0 of 112 authentic receipts). MobileNetV2 reached 82.93% standard and 89.87% compressed, catching every AI-generated receipt but missing many digitally edited ones (edited recall 39.64%). ResNet50 (frozen ImageNet base) did not learn the ELA signal and labels every receipt Authentic (49.78%). Latencies were measured on the retraining machine (CPU) and are not directly comparable with earlier runs. See [docs/CHANGELOG_224.md](../docs/CHANGELOG_224.md).
 
 ---
 
-## Live System & Public Resources
+## Empirical Dataset Specifications
 
-* **Live Forensic Web Application:** [https://forgeguard.streamlit.app/](https://forgeguard.streamlit.app/)
-* **Software System Repository:** [https://github.com/DeathKnell837/ForgeGuard](https://github.com/DeathKnell837/ForgeGuard)
-* **Master Thesis Workspace Repository:** [https://github.com/DeathKnell837/NDMC-BSCS-THESIS-PREP](https://github.com/DeathKnell837/NDMC-BSCS-THESIS-PREP)
-* **Google Drive Document Archive:** [NDMC BSCS Thesis Drive Folder](https://drive.google.com/drive/folders/1bzRsI6Ywo2yRni5Ij7InCLh0CL0OO90_?usp=drive_link)
+The benchmark dataset consists of a 1:1 balanced distribution of 1,000 base downloadable GCash transaction receipts (and their paired 1,000 Messenger-compressed versions):
+
+```
+Empirical Evaluation Dataset (N = 1,000 Base Receipts)
+├── Experimental Partition (N = 900 Images)
+│   ├── Authentic Receipts (450 Images, 50.0%)
+│   └── Forged Receipts (450 Images, 50.0%)
+│       ├── Digitally Edited (Photoshop / Pixelmator): 225 Images (25.0%)
+│       └── AI Diffusion Generated (Reference-Conditioned): 225 Images (25.0%)
+│   ├── Training Split (60%): 540 Images (270 Auth, 135 Edited, 135 Gen)
+│   ├── Validation Split (15%): 135 Images (67 Auth, 34 Edited, 34 Gen)
+│   └── Testing Split (25%): 225 Images (112 Auth, 56 Edited, 57 Gen)
+└── Holdout Evaluation Partition (N = 100 Images)
+    ├── Unseen Authentic Receipts: 50 Images
+    └── Unseen Third-Party Forgeries (Canva / Web Generators): 50 Images
+```
+
+*Scope Delimitation (Section 1.4):* The dataset strictly targets officially downloaded GCash transaction receipts. Screen captures containing operating system status bars, battery indicators, and mobile UI chrome are excluded to ensure controlled forensic evaluation.
 
 ---
 
-&copy; 2026 Daniela S. Ungab & Rogie P. Bacanto. Notre Dame of Midsayap College, CITE. All rights reserved.
+## Quickstart & Local Deployment
+
+### Prerequisites
+* Python 3.10, 3.11, or 3.12
+* Git
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/DeathKnell837/ForgeGuard.git
+cd ForgeGuard
+```
+
+### 2. Set Up Virtual Environment & Dependencies
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+# Linux/macOS:
+source venv/bin/activate
+
+# Install required dependencies
+pip install -r requirements.txt
+```
+
+### 3. Launch Local Forensic Webapp
+```bash
+streamlit run app.py
+```
+Open your browser and navigate to `http://localhost:8501`.
+
+---
+
+## Project Structure
+
+```
+ForgeGuard/
+├── app.py                      # Root Streamlit deployment entrypoint
+├── premium_css.py              # Responsive fintech light styling system & layout overrides
+├── requirements.txt            # System Python dependencies
+├── models/                     # Serialized neural network weights & evaluation telemetry
+│   ├── basic_cnn.keras         # Serialized Basic CNN model weights
+│   ├── mobilenetv2.keras       # Serialized MobileNetV2 model weights
+│   ├── resnet50.keras          # Serialized ResNet50 model weights
+│   └── evaluation_metrics.json # Empirical benchmark metrics
+├── preprocessing/              # Forensic processing tools
+│   └── ela.py                  # Error Level Analysis computation engine
+├── generator/                  # GCash receipt template synthesis engine
+└── dataset/                    # Labeled empirical receipt corpus
+    ├── authentic/              # Authentic receipts (highres & compressed)
+    └── forged/                 # Stratified forgery attack vectors
+```
+
+---
+
+## Academic Research Context
+
+This software system represents the practical implementation and artifact for the undergraduate thesis:
+
+* **Approved Canonical Title:** *Receipt or Deceit: A Cross-Architecture Analysis of Convolutional Neural Network Models in Detecting Forged Digital Transaction Receipts* (ForgeGuard System)
+* **Institution:** Notre Dame of Midsayap College (NDMC)
+* **College:** College of Information Technology and Engineering (CITE)
+* **Program:** Bachelor of Science in Computer Science (BSCS)
+* **Researchers:**
+  * **Rogie P. Bacanto** (BSCS-4)
+  * **Daniela S. Ungab** (BSCS-4)
+* **Adviser:** **Ms. Doris Ann Mariano**
+* **Live Deployment:** [forgeguard.streamlit.app](https://forgeguard.streamlit.app/)
+
+---
+
+## License
+
+This project is developed for academic research and educational evaluation under Notre Dame of Midsayap College. All rights reserved.
