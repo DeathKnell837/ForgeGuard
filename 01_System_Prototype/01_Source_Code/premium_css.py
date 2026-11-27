@@ -130,7 +130,8 @@ div[data-testid="stStatusWidget"] * {
 }
 
 /* Main Layout Container */
-.block-container {
+.block-container,
+[data-testid="stMainBlockContainer"] {
     max-width: 1160px !important;
     padding: 1.05rem 2rem 1.5rem !important;
     margin: 0 auto !important;
@@ -270,8 +271,10 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]:hover {
     color: var(--fg-ink) !important;
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][aria-checked="true"],
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"],
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked),
 div[data-testid="stRadio"] label[data-baseweb="radio"][aria-checked="true"],
+div[data-testid="stRadio"] label[data-baseweb="radio"][data-selected="true"],
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) {
     background: var(--fg-surface) !important;
     border-color: var(--fg-border) !important;
@@ -289,8 +292,10 @@ div[data-testid="stRadio"] label[data-baseweb="radio"] p {
     line-height: 1.25 !important;
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][aria-checked="true"] p,
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"] p,
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked) p,
 div[data-testid="stRadio"] label[data-baseweb="radio"][aria-checked="true"] p,
+div[data-testid="stRadio"] label[data-baseweb="radio"][data-selected="true"] p,
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) p {
     color: var(--fg-accent) !important;
     font-weight: 700 !important;
@@ -309,14 +314,9 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]::before {
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
-    transition: background-color 180ms ease;
-}
-div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(1)::before,
-div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(1)::before,
-div[data-testid="stRadio"] [data-testid="stRadioGroup"] > :nth-child(1) label::before,
-div[data-testid="stRadio"] div[role="radiogroup"] > :nth-child(1) label::before {
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 3h16v18l-3-2-2.5 2L12 19l-2.5 2L7 19l-3 2V3z'/%3E%3Cpath d='M8 8h8'/%3E%3Cpath d='M8 12h8'/%3E%3Cpath d='M8 16h5'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 3h16v18l-3-2-2.5 2L12 19l-2.5 2L7 19l-3 2V3z'/%3E%3Cpath d='M8 8h8'/%3E%3Cpath d='M8 12h8'/%3E%3Cpath d='M8 16h5'/%3E%3C/svg%3E");
+    transition: background-color 180ms ease;
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:nth-of-type(2)::before,
 div[data-testid="stRadio"] label[data-baseweb="radio"]:nth-of-type(2)::before,
@@ -326,8 +326,10 @@ div[data-testid="stRadio"] div[role="radiogroup"] > :nth-child(2) label::before 
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3v18h18'/%3E%3Crect x='7' y='10' width='3' height='7' rx='1'/%3E%3Crect x='12' y='6' width='3' height='11' rx='1'/%3E%3Crect x='17' y='13' width='3' height='4' rx='1'/%3E%3C/svg%3E");
 }
 div[data-testid="stRadio"] label[data-testid="stRadioOption"][aria-checked="true"]::before,
+div[data-testid="stRadio"] label[data-testid="stRadioOption"][data-selected="true"]::before,
 div[data-testid="stRadio"] label[data-testid="stRadioOption"]:has(input:checked)::before,
 div[data-testid="stRadio"] label[data-baseweb="radio"][aria-checked="true"]::before,
+div[data-testid="stRadio"] label[data-baseweb="radio"][data-selected="true"]::before,
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked)::before {
     background-color: var(--fg-accent) !important;
 }

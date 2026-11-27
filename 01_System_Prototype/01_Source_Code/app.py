@@ -32,25 +32,34 @@ for p in [APP_DIR, SYS_DIR, os.path.join(SYS_DIR, '01_Source_Code'), os.path.joi
 
 # --- CSS ---
 @st.cache_data
+def _read_css_file(css_path, mtime):
+    with open(css_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    start = content.find('"""')
+    if start != -1:
+        end = content.find('"""', start + 3)
+        if end != -1:
+            return content[start + 3:end]
+    return ''
+
 def get_cached_css():
+    for css_file in [
+        os.path.join(APP_DIR, 'premium_css.py'),
+        os.path.join(os.path.dirname(os.path.dirname(APP_DIR)), 'premium_css.py'),
+    ]:
+        if os.path.isfile(css_file):
+            try:
+                css_text = _read_css_file(css_file, os.path.getmtime(css_file))
+                if css_text:
+                    return css_text
+            except Exception:
+                pass
     try:
         from premium_css import PREMIUM_CSS
         if PREMIUM_CSS:
             return PREMIUM_CSS
     except Exception:
         pass
-    css_file = os.path.join(APP_DIR, 'premium_css.py')
-    if os.path.isfile(css_file):
-        try:
-            with open(css_file, 'r', encoding='utf-8') as f:
-                content = f.read()
-                start = content.find('"""')
-                if start != -1:
-                    end = content.find('"""', start + 3)
-                    if end != -1:
-                        return content[start+3:end]
-        except Exception:
-            pass
     return ''
 
 PREMIUM_CSS = get_cached_css()
