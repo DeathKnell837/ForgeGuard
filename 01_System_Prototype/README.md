@@ -115,7 +115,7 @@ In strict accordance with the NDMC BSCS Thesis Writing 1 Submission Guidelines (
 * **Task Domain:** Binary classification of downloadable GCash mobile transaction receipts into **Authentic** or **Forged** classes.
 * **Forensic Feature Transform:** Dual-stage Error Level Analysis (JPEG Q=90, 15.0x scale amplification) and spatial thermal gradient overlays.
 * **Architectures Evaluated:**
-  * **Basic CNN:** Custom 3-stage sequential baseline (~3.3M parameters). Lowest inference latency (18.2 ms) and highest clean accuracy (98.5%).
+  * **Basic CNN:** Custom 3-stage sequential baseline (~11.2M parameters at 224 x 224 input). Lowest latency and highest accuracy after the 224 x 224 retrain (94.58% standard, 96.36% compressed; see docs/CHANGELOG_224.md).
   * **MobileNetV2:** Inverted residual architecture (~2.4M parameters). Highest resilience under Facebook Messenger re-compression (-5.0% delta).
   * **ResNet50:** Benchmark 50-layer deep residual network (~24.1M parameters).
 * **Audit Trail:** Persistent local ledger (`04_Database_Files/benchmark_records_log.json`) recording timestamp, evaluated model, classification verdict, confidence percentage, processing latency, and memory load for every processed receipt.

@@ -47,7 +47,7 @@ def evaluate_sample(fpath, expected_verdict, category_name):
     # Stage 2: Deep CNN forensic verification (Basic CNN)
     elif _cnn_model is not None:
         in_shape = getattr(_cnn_model, 'input_shape', None)
-        target_size = (in_shape[1], in_shape[2]) if (in_shape and len(in_shape) == 4 and in_shape[1]) else (128, 128)
+        target_size = (in_shape[1], in_shape[2]) if (in_shape and len(in_shape) == 4 and in_shape[1]) else (224, 224)
         arr = convert_ela_to_array(ela, target_size=target_size)
         pred = float(_cnn_model(np.expand_dims(arr, 0), training=False)[0][0])
         if pred >= 0.50:

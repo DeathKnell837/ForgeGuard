@@ -132,7 +132,7 @@ def get_records_path():
 def get_model_info():
     """Architecture metadata."""
     return {
-        'Basic CNN': {'params': '~3.3M', 'arch': 'Custom 3-layer sequential CNN'},
+        'Basic CNN': {'params': '~11.2M', 'arch': 'Custom 3-layer sequential CNN'},
         'MobileNetV2': {'params': '~2.4M', 'arch': 'Lightweight inverted residual blocks'},
         'ResNet50': {'params': '~24.1M', 'arch': '50-layer deep residual network'},
     }
@@ -801,7 +801,7 @@ if page == 'Classify a Receipt':
                 render_html(
                     '''
                     <div class="fg-exhibit-meta">
-                      <div>Input Target: 128 &times; 128 px (ELA Transform)</div>
+                      <div>Input Target: 224 &times; 224 px (ELA Transform)</div>
                       <div>Decision Threshold: 0.50 (Sigmoid &ge; 0.5 &rarr; Forged)</div>
                     </div>
                     '''
@@ -902,7 +902,7 @@ if page == 'Classify a Receipt':
                     </div>
                     <div class="fg-how-step">
                       <div class="fg-how-step-title fg-how-cnn">3. Multi-CNN Classification</div>
-                      <div>The 128x128 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
+                      <div>The 224x224 normalized ELA tensor is evaluated in parallel by Basic CNN, MobileNetV2, and ResNet50. Each model applies convolutional kernels to detect texture anomalies and outputs an independent sigmoid probability (Authentic &lt; 0.50 &le; Forged).</div>
                     </div>
                   </div>
                 </div>
@@ -1034,7 +1034,7 @@ if page == 'Classify a Receipt':
                 Upload a GCash transaction receipt above or select a benchmark sample to execute multi-architecture CNN evaluation.
               </div>
               <div class="fg-spec-row">
-                <span class="fg-spec-chip">128&times;128 ELA Target</span>
+                <span class="fg-spec-chip">224&times;224 ELA Target</span>
                 <span class="fg-spec-chip">0.50 Decision Threshold</span>
                 <span class="fg-spec-chip">Basic CNN &bull; MobileNetV2 &bull; ResNet50</span>
               </div>
@@ -1331,7 +1331,7 @@ elif page == 'Model Comparison':
                       <div><strong class="fg-how-heat">F1-Score:</strong> The harmonic balance of Precision and Recall. Essential for proving the model is not artificially biased toward one class.</div>
                     </div>
                     <div class="fg-guide-item">
-                      <div><strong class="fg-how-cnn">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~3.3M params) can run directly on merchant smartphones without cloud latency.</div>
+                      <div><strong class="fg-how-cnn">Latency &amp; Params:</strong> Latency measures real per-receipt execution time (lower is faster). Compact models like MobileNetV2 (~2.4M params) and Basic CNN (~11.2M params) can run directly on merchant smartphones without cloud latency.</div>
                     </div>
                   </div>
                   <div class="fg-guide-foot">

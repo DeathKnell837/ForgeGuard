@@ -107,7 +107,7 @@ During your proposal defense, your results tables are presented as empty standar
 1. **Receipt Ingestion & Normalization:** Uploaded image is converted to standard RGB space.
 2. **Error Level Analysis (ELA) Extraction:** Re-saved at JPEG quality Q=90 in memory. Pixel difference between original and resaved image is amplified by a factor of 15.0x.
 3. **Dynamic Thermal Heatmap Overlay:** ELA residuals above the background floor are mapped to a transparent yellow-to-red thermal gradient, illuminating localized tampering while keeping untouched receipt paper natural and uncolored.
-4. **Parallel CNN Inference:** The ELA tensor is resized to 128 x 128 x 3, normalized to [0.0, 1.0], and processed by all three CNN models in parallel.
+4. **Parallel CNN Inference:** The ELA tensor is resized to 224 x 224 x 3, normalized to [0.0, 1.0], and processed by all three CNN models in parallel.
 5. **Multi-Model Forensic Readout:** Displays comparative confidence scores, actual inference latency, live signal telemetry, and architecture benchmark matrices.
 
 ### 2. Deep Comparison of the Three Architectures

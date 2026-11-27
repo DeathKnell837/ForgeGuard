@@ -55,7 +55,7 @@ package '2. Forensic Preprocessing Layer (Pillow, OpenCV, NumPy)' #F0FDF4 {
     rectangle 'Error Level Analysis (ELA) Engine
 (JPEG Resave Q=90 | 15.0x Difference Multiplier)' as ELA #DCFCE7
     rectangle 'Standardized ELA Tensor
-(Dimensions: 128 x 128 x 3 | Normalized [0, 1])' as Tensor #FFFFFF
+(Dimensions: 224 x 224 x 3 | Normalized [0, 1])' as Tensor #FFFFFF
     rectangle 'Tamper Heatmap & ROI Generator
 (OpenCV COLORMAP_JET + Splicing Box)' as Heatmap #FFFFFF
 }
@@ -99,9 +99,9 @@ Ingest -down-> ELA : Preprocessing Bus
 ELA -down-> Tensor : Normalized Array
 ELA -down-> Heatmap : Compression Gradient
 
-Tensor -right-> CNN_Basic : 128x128x3 Input
-Tensor -right-> CNN_Mobile : 128x128x3 Input
-Tensor -right-> CNN_ResNet : 128x128x3 Input
+Tensor -right-> CNN_Basic : 224x224x3 Input
+Tensor -right-> CNN_Mobile : 224x224x3 Input
+Tensor -right-> CNN_ResNet : 224x224x3 Input
 
 CNN_Basic -down-> Voting
 CNN_Mobile -down-> Voting
@@ -142,7 +142,7 @@ flowchart TD
         P1 --> P2[Error Level Analysis Engine
 JPEG Resave Q=90 | 15.0x Multiplier]
         P2 --> P3[Standardized ELA Tensor
-128 x 128 x 3]
+224 x 224 x 3]
         P2 --> P4[Tamper Heatmap & ROI Generator
 OpenCV JET Colormap]
     end

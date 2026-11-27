@@ -19,12 +19,12 @@ def run_multi_cnn_inference(ela_pil_img, original_pil_img=None, is_forged_ground
     
     Returns real, dynamic, image-specific probabilities and measured execution latencies.
     """
-    # Convert ELA image to 128x128x3 normalized tensor
-    ela_resized = ela_pil_img.resize((128, 128), Image.Resampling.BILINEAR)
-    ela_arr = np.array(ela_resized, dtype=np.float32) / 255.0  # (128, 128, 3)
+    # Convert ELA image to 224x224x3 normalized tensor
+    ela_resized = ela_pil_img.resize((224, 224), Image.Resampling.BILINEAR)
+    ela_arr = np.array(ela_resized, dtype=np.float32) / 255.0  # (224, 224, 3)
     
     # Extract authentic signal features from the ELA raster
-    ela_gray = np.mean(ela_arr, axis=2)  # (128, 128)
+    ela_gray = np.mean(ela_arr, axis=2)  # (224, 224)
     global_mean = float(np.mean(ela_gray))
     global_var = float(np.var(ela_gray))
     global_max = float(np.max(ela_gray))
